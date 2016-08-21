@@ -1,0 +1,22 @@
+name=acpid
+version=2.0.28
+deps=musl
+desc="The ACPI Daemon (acpid) With Netlink Support"
+source="http://downloads.sourceforge.net/project/acpid2/acpid-$version.tar.xz
+https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/acpid/patches/portability.patch
+https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/acpid/patches/disable-logging-to-console.patch
+anything
+handler.sh"
+
+build() {
+	cd $name-$version
+	patch -p0 < ../portability.patch 
+	patch -p0 < ../disable-logging-to-console.patch 
+	./configure --prefix= --disable-static --sbindir=/bin 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	mkdir -p "$pkgdir"/etc/acpi/events
+	cp "$srcdir"/anything "$pkgdir"/etc/acpi/events
+	install -Dm755 "$srcdir"/handler.sh "$pkgdir"/etc/acpi
+	rm -r "$pkgdir"/share/doc 
+}

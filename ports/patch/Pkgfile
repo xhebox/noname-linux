@@ -1,0 +1,12 @@
+name=patch
+version=2.7.5
+deps=musl
+desc="GNU patch"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ 
+	make  || die
+	make PREFIX= DESTDIR="$pkgdir" install  || die
+}

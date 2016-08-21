@@ -1,0 +1,15 @@
+name=libuv
+version=1.11.0
+deps="libtool"
+desc="Multi-platform support library with a focus on asynchronous I/O"
+source="http://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"
+
+build() {
+	cd libuv-v$version
+
+	NOCONFIGURE=1 ./autogen.sh 
+	./configure --prefix=/
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

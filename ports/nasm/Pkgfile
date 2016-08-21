@@ -1,0 +1,11 @@
+name=nasm
+version=2.13.01
+desc="80x86 assembler"
+source="http://www.nasm.us/pub/nasm/releasebuilds/$version/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static 
+	make  || die
+	make INSTALLROOT="$pkgdir" install  || die
+}

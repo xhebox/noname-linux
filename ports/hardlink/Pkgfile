@@ -1,0 +1,11 @@
+name=hardlink
+version=0.3.0
+deps="libpcre bash"
+desc="Replace file copies using hardlinks"
+source="http://jak-linux.org/projects/hardlink/hardlink_$version.tar.xz"
+
+build() {
+	cd hardlink-$version
+	make  || die
+	make PREFIX= DESTDIR="$pkgdir" install  || die
+}

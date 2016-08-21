@@ -1,0 +1,20 @@
+name=lm_sensors
+version=3.4.0
+_ver=`echo $version | sed 's/\./-/g'`
+desc="Collection of user space tools for general SMBus access and hardware monitoring"
+deps="perl flex sysfsutils rrdtool"
+source="https://github.com/groeck/lm-sensors/archive/V${_ver}.tar.gz
+lm_sensors-fancontrol.patch
+"
+
+build() {
+	cd lm-sensors-$_ver
+	sed -i prog/*/Module.mk \
+		     -e "/^MODULE_DIR :=/i LDFLAGS := ${LDFLAGS}" \
+		     -e 's;$(CC) $(EXLDFLAGS);$(CC) $(LDFLAGS) $(EXLDFLAGS);'
+	sed -i 's,asm/io.h,sys/io.h,g' prog/dump/*.c
+	patch -p0 -i "${srcdir}/lm_sensors-fancontrol.patch" || die
+	make PREFIX=/ || die
+	make DESTDIR=${pkgdir} PROG_EXTRA=sensord BUILD_STATIC_LIB=0 \
+		PREFIX=/ SBINDIR=/bin MANDIR=/share/man install || die
+}

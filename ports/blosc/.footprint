@@ -1,0 +1,10 @@
+include/blosc-export.h|644|0|0|regular file
+include/blosc.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libblosc.a|644|0|0|regular file
+lib/libblosc.so.1.11.3|755|0|0|regular file
+lib/libblosc.so.1|777|0|0|symbolic link
+lib/libblosc.so|777|0|0|symbolic link
+lib/pkgconfig/blosc.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

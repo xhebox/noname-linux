@@ -1,0 +1,13 @@
+name=xmlto
+version=0.0.28
+desc="Convert xml to many other formats"
+source="https://fedorahosted.org/releases/x/m/${name}/${name}-${version}.tar.bz2"
+deps="docbook-xsl libxslt"
+
+build() {
+	cd "$srcdir/${name}-${version}"
+
+	./configure BASH=/bin/bash --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

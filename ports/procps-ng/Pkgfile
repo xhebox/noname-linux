@@ -1,0 +1,25 @@
+name=procps-ng
+version=3.3.12
+deps="ncurses"
+desc="Utilities for monitoring your system and its processes"
+source="http://downloads.sourceforge.net/project/${name}/Production/${name}-${version}.tar.xz"
+
+build() {
+	cd $name-$version
+	PKG_NO_STRIP=yes
+	CFLAGS="$CFLAGS -g2"
+	sed 's:<ncursesw/:<:g' -i watch.c
+	./configure --prefix= \
+		--sbindir=/bin \
+		--libexecdir=/lib \
+		--disable-kill \
+		--disable-static \
+		--without-systemd \
+		--enable-nls \
+		--enable-debug \
+		--enable-watch8bit 
+	opt_regmo po
+	make  || die
+	make DESTDIR="$pkgdir" install   || die
+	rm -r "${pkgdir}/share/doc"
+}

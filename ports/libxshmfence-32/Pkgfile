@@ -1,0 +1,17 @@
+name=libxshmfence-32
+version=1.2
+desc="X shared memory fences"
+deps="util-macros xorg-proto libxshmfence"
+source="http://xorg.freedesktop.org/archive/individual/lib/libxshmfence-$version.tar.bz2"
+
+build() {
+	cd libxshmfence-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix= --disable-static --libdir=/lib32 --with-shared-memory-dir=/dev/shm
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/include
+}
+

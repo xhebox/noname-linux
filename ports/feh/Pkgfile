@@ -1,0 +1,11 @@
+name=feh
+version=2.18.3
+desc="Fast and light imlib2-based image viewer"
+deps="imlib2 curl libxinerama libexif libxt imagemagick"
+source="https://feh.finalrewind.org/${name}-${version}.tar.bz2"
+
+build() {
+	cd feh-$version
+	make PREFIX=/ exif=1 help=1 || die
+	make PREFIX=/ DESTDIR="$pkgdir" docsdir=/share/doc/giblib install || die
+}

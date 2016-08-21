@@ -1,0 +1,28 @@
+name=opencollada
+version=1.6.45
+desc="Stream based reader and writer library for COLLADA files"
+deps="libxml2 libpcre cmake git"
+source="https://github.com/KhronosGroup/OpenCOLLADA/archive/v$version.tar.gz
+001-fix-no_return_value.patch
+002-fix-stdint_h.patch
+003-musl-stdint_h.patch"
+
+build() {
+	cd OpenCOLLADA-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i || die;;
+		esac
+	done
+
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX= \
+	-DUSE_SHARED=ON \
+	-DUSE_STATIC=OFF
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

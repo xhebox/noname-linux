@@ -1,0 +1,21 @@
+name=curl
+version=7.54.0
+deps="libressl zlib libpsl libssh2 krb5 groff"
+desc="A tool for transfering files with URL syntax"
+source="http://curl.haxx.se/download/curl-$version.tar.bz2"
+
+build() {
+	cd curl-${version}
+	./configure \
+		--prefix=/ \
+		--with-gssapi \
+		--enable-ipv6 \
+		--enable-manual \
+		--enable-versioned-symbols \
+		--enable-threaded-resolver \
+		--disable-ldap \
+		--disable-static \
+		--with-random=/dev/urandom
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

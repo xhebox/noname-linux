@@ -1,0 +1,27 @@
+lib/libgif.so|777|0|0|symbolic link
+lib/libgif.so.7|777|0|0|symbolic link
+bin/giftext|755|0|0|regular file
+bin/giffix|755|0|0|regular file
+bin/gif2rgb|755|0|0|regular file
+bin/gifclrmp|755|0|0|regular file
+bin/gifecho|755|0|0|regular file
+bin/gifinto|755|0|0|regular file
+bin/giftool|755|0|0|regular file
+bin/gifbuild|755|0|0|regular file
+include/gif_lib.h|644|0|0|regular file
+lib/libgif.so.7.0.0|755|0|0|regular file
+share/man/man1/giffix.1.gz|644|0|0|regular file
+share/man/man1/giftext.1.gz|644|0|0|regular file
+share/man/man1/gifclrmp.1.gz|644|0|0|regular file
+share/man/man1/giflib.1.gz|644|0|0|regular file
+share/man/man1/gifbuild.1.gz|644|0|0|regular file
+share/man/man1/gifinto.1.gz|644|0|0|regular file
+share/man/man1/gifecho.1.gz|644|0|0|regular file
+share/man/man1/gif2rgb.1.gz|644|0|0|regular file
+share/man/man1/giftool.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

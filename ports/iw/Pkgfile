@@ -1,0 +1,11 @@
+name=iw
+version=4.9
+deps=libnl
+desc="nl80211 based CLI configuration utility for wireless devices"
+source="https://www.kernel.org/pub/software/network/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	make || die
+	make PREFIX= SBINDIR=/bin DESTDIR="$pkgdir" install  || die
+}

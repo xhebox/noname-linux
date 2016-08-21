@@ -1,0 +1,15 @@
+include/epoxy/common.h|644|0|0|regular file
+include/epoxy/egl.h|644|0|0|regular file
+include/epoxy/egl_generated.h|644|0|0|regular file
+include/epoxy/gl.h|644|0|0|regular file
+include/epoxy/gl_generated.h|644|0|0|regular file
+include/epoxy/glx.h|644|0|0|regular file
+include/epoxy/glx_generated.h|644|0|0|regular file
+include/epoxy|755|0|0|directory
+include|755|0|0|directory
+lib/libepoxy.so.0.0.0|755|0|0|regular file
+lib/libepoxy.so.0|777|0|0|symbolic link
+lib/libepoxy.so|777|0|0|symbolic link
+lib/pkgconfig/epoxy.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

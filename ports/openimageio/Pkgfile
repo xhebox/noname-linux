@@ -1,0 +1,26 @@
+name=openimageio
+version=1.7.13
+desc="A library for reading and writing images, including classes, utilities, and applications"
+deps="libressl boost openexr cmake libpng libjpeg-turbo opencolorio libtiff"
+source="https://github.com/OpenImageIO/oiio/archive/Release-${version}.tar.gz"
+
+build() {
+	cd oiio-Release-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i || die;;
+		esac
+	done
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX=/ \
+	-DUSE_OPENGL=0 -DUSE_QT=0 -DUSE_PYTHON=0 -DOIIO_BUILD_TESTS=0 \
+	-DCMAKE_SYSTEM_PROCESSOR=$TARGET \
+	-DUSE_SIMD=sse2 \
+	-DOIIO_BUILD_TOOLS=ON
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

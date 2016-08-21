@@ -1,0 +1,21 @@
+name=v4l-utils
+version=1.12.5
+desc="Userspace tools and conversion library for Video 4 Linux"
+deps="qt5-base alsa-lib sysfsutils libjpeg-turbo"
+source="http://linuxtv.org/downloads/v4l-utils/${name}-${version}.tar.bz2
+musl.patch"
+
+ext() {
+	cd v4l-utils-$version
+	patch -p0 < ../musl.patch || die
+	CFLAGS="-D__off_t=off_t -D__off64_t=off_t"
+	LDFLAGS="$LDFLAGS -largp"
+}
+
+build() {
+	cd $name-$version
+	./configure --prefix= --sysconfdir=/etc --sbindir=/bin
+	make || die
+	make -j1 install DESTDIR="${pkgdir}/" || die
+	rm "${pkgdir}/bin/ivtv-ctl"
+}

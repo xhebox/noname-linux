@@ -1,0 +1,16 @@
+name=intltool
+version=0.51.0
+desc="Internationalization tool collection."
+deps="p5-xml-parser gettext"
+source="http://edge.launchpad.net/$name/trunk/$version/+download/$name-$version.tar.gz"
+
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

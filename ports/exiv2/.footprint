@@ -1,0 +1,106 @@
+bin/exiv2|755|0|0|regular file
+bin|755|0|0|directory
+include/exiv2/asfvideo.hpp|644|0|0|regular file
+include/exiv2/basicio.hpp|644|0|0|regular file
+include/exiv2/bmpimage.hpp|644|0|0|regular file
+include/exiv2/config.h|644|0|0|regular file
+include/exiv2/convert.hpp|644|0|0|regular file
+include/exiv2/cr2image.hpp|644|0|0|regular file
+include/exiv2/crwimage.hpp|644|0|0|regular file
+include/exiv2/datasets.hpp|644|0|0|regular file
+include/exiv2/easyaccess.hpp|644|0|0|regular file
+include/exiv2/epsimage.hpp|644|0|0|regular file
+include/exiv2/error.hpp|644|0|0|regular file
+include/exiv2/exif.hpp|644|0|0|regular file
+include/exiv2/exiv2.hpp|644|0|0|regular file
+include/exiv2/exv_conf.h|644|0|0|regular file
+include/exiv2/exv_msvc.h|644|0|0|regular file
+include/exiv2/futils.hpp|644|0|0|regular file
+include/exiv2/gifimage.hpp|644|0|0|regular file
+include/exiv2/http.hpp|644|0|0|regular file
+include/exiv2/image.hpp|644|0|0|regular file
+include/exiv2/iptc.hpp|644|0|0|regular file
+include/exiv2/jp2image.hpp|644|0|0|regular file
+include/exiv2/jpgimage.hpp|644|0|0|regular file
+include/exiv2/matroskavideo.hpp|644|0|0|regular file
+include/exiv2/metadatum.hpp|644|0|0|regular file
+include/exiv2/mrwimage.hpp|644|0|0|regular file
+include/exiv2/orfimage.hpp|644|0|0|regular file
+include/exiv2/pgfimage.hpp|644|0|0|regular file
+include/exiv2/pngimage.hpp|644|0|0|regular file
+include/exiv2/preview.hpp|644|0|0|regular file
+include/exiv2/properties.hpp|644|0|0|regular file
+include/exiv2/psdimage.hpp|644|0|0|regular file
+include/exiv2/quicktimevideo.hpp|644|0|0|regular file
+include/exiv2/rafimage.hpp|644|0|0|regular file
+include/exiv2/riffvideo.hpp|644|0|0|regular file
+include/exiv2/rw2image.hpp|644|0|0|regular file
+include/exiv2/svn_version.h|644|0|0|regular file
+include/exiv2/tags.hpp|644|0|0|regular file
+include/exiv2/tgaimage.hpp|644|0|0|regular file
+include/exiv2/tiffimage.hpp|644|0|0|regular file
+include/exiv2/types.hpp|644|0|0|regular file
+include/exiv2/utilsvideo.hpp|644|0|0|regular file
+include/exiv2/value.hpp|644|0|0|regular file
+include/exiv2/version.hpp|644|0|0|regular file
+include/exiv2/xmp.hpp|644|0|0|regular file
+include/exiv2/xmpsidecar.hpp|644|0|0|regular file
+include/exiv2|755|0|0|directory
+include|755|0|0|directory
+lib/libexiv2.a|644|0|0|regular file
+lib/libexiv2.so.14.0.0|644|0|0|regular file
+lib/libexiv2.so.14|777|0|0|symbolic link
+lib/libexiv2.so|777|0|0|symbolic link
+lib/pkgconfig/exiv2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/locale/bs/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES|755|0|0|directory
+share/locale/bs|755|0|0|directory
+share/locale/de/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/es/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fi/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gl/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/ms/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES|755|0|0|directory
+share/locale/ms|755|0|0|directory
+share/locale/pl/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ru/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sk/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sv/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/ug/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/ug/LC_MESSAGES|755|0|0|directory
+share/locale/ug|755|0|0|directory
+share/locale/uk/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/exiv2.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/exiv2.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

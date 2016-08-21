@@ -1,0 +1,13 @@
+bin/listplugins|755|0|0|regular file
+bin/applyplugin|755|0|0|regular file
+bin/analyseplugin|755|0|0|regular file
+include/ladspa.h|644|0|0|regular file
+lib/ladspa/sine.so|755|0|0|regular file
+lib/ladspa/filter.so|755|0|0|regular file
+lib/ladspa/amp.so|755|0|0|regular file
+lib/ladspa/delay.so|755|0|0|regular file
+lib/ladspa/noise.so|755|0|0|regular file
+lib/ladspa|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

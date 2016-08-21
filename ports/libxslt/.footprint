@@ -1,0 +1,58 @@
+lib/libxslt.so.1|777|0|0|symbolic link
+lib/libexslt.so|777|0|0|symbolic link
+lib/libxslt.so|777|0|0|symbolic link
+lib/libexslt.so.0|777|0|0|symbolic link
+bin/xsltproc|755|0|0|regular file
+bin/xslt-config|755|0|0|regular file
+include/libxslt/xsltexports.h|644|0|0|regular file
+include/libxslt/pattern.h|644|0|0|regular file
+include/libxslt/variables.h|644|0|0|regular file
+include/libxslt/preproc.h|644|0|0|regular file
+include/libxslt/templates.h|644|0|0|regular file
+include/libxslt/keys.h|644|0|0|regular file
+include/libxslt/attributes.h|644|0|0|regular file
+include/libxslt/extensions.h|644|0|0|regular file
+include/libxslt/security.h|644|0|0|regular file
+include/libxslt/transform.h|644|0|0|regular file
+include/libxslt/numbersInternals.h|644|0|0|regular file
+include/libxslt/functions.h|644|0|0|regular file
+include/libxslt/xslt.h|644|0|0|regular file
+include/libxslt/xsltlocale.h|644|0|0|regular file
+include/libxslt/xsltutils.h|644|0|0|regular file
+include/libxslt/namespaces.h|644|0|0|regular file
+include/libxslt/xsltconfig.h|644|0|0|regular file
+include/libxslt/documents.h|644|0|0|regular file
+include/libxslt/imports.h|644|0|0|regular file
+include/libxslt/xsltInternals.h|644|0|0|regular file
+include/libxslt/extra.h|644|0|0|regular file
+include/libexslt/exsltconfig.h|644|0|0|regular file
+include/libexslt/exslt.h|644|0|0|regular file
+include/libexslt/exsltexports.h|644|0|0|regular file
+lib/libxslt.so.1.1.29|755|0|0|regular file
+lib/libexslt.so.0.8.17|755|0|0|regular file
+lib/pkgconfig/libexslt.pc|644|0|0|regular file
+lib/pkgconfig/libxslt.pc|644|0|0|regular file
+lib/libxslt.a|644|0|0|regular file
+lib/xsltConf.sh|644|0|0|regular file
+lib/python2.7/site-packages/libxsltmod.a|644|0|0|regular file
+lib/python2.7/site-packages/libxslt.py|644|0|0|regular file
+lib/python2.7/site-packages/libxsltmod.so|755|0|0|regular file
+lib/libexslt.a|644|0|0|regular file
+share/aclocal/libxslt.m4|644|0|0|regular file
+share/man/man3/libexslt.3.gz|644|0|0|regular file
+share/man/man3/libxslt.3.gz|644|0|0|regular file
+share/man/man1/xsltproc.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share/aclocal|755|0|0|directory
+share|755|0|0|directory
+lib/python2.7/site-packages|755|0|0|directory
+lib/python2.7|755|0|0|directory
+lib/libxslt-plugins|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/libexslt|755|0|0|directory
+include/libxslt|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

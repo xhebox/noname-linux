@@ -1,0 +1,11 @@
+name=xcb-proto
+version=1.12
+desc="XCB X protocol descriptions"
+deps="python"
+source="http://xcb.freedesktop.org/dist/xcb-proto-$version.tar.bz2"
+build() {
+	 cd xcb-proto-$version
+	 ./configure --prefix=/ 
+	 make 
+	 make DESTDIR="$pkgdir" install 
+}

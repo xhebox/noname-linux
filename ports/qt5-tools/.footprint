@@ -1,0 +1,365 @@
+lib/libQt5Help.so.5.8|777|0|0|symbolic link
+lib/libQt5DesignerComponents.so|777|0|0|symbolic link
+lib/libQt5DesignerComponents.so.5.8|777|0|0|symbolic link
+lib/libQt5DesignerComponents.so.5|777|0|0|symbolic link
+lib/libQt5Help.so|777|0|0|symbolic link
+lib/libQt5CLucene.so.5|777|0|0|symbolic link
+lib/libQt5Designer.so.5.8|777|0|0|symbolic link
+lib/libQt5CLucene.so|777|0|0|symbolic link
+lib/libQt5Designer.so|777|0|0|symbolic link
+lib/libQt5Designer.so.5|777|0|0|symbolic link
+lib/libQt5Help.so.5|777|0|0|symbolic link
+lib/libQt5CLucene.so.5.8|777|0|0|symbolic link
+bin/designer|755|0|0|regular file
+bin/qhelpconverter|755|0|0|regular file
+bin/linguist|755|0|0|regular file
+bin/qdoc|755|0|0|regular file
+bin/qdbusviewer|755|0|0|regular file
+bin/qtattributionsscanner|755|0|0|regular file
+bin/lrelease|755|0|0|regular file
+bin/pixeltool|755|0|0|regular file
+bin/qhelpgenerator|755|0|0|regular file
+bin/qdbus|755|0|0|regular file
+bin/qcollectiongenerator|755|0|0|regular file
+bin/qtplugininfo|755|0|0|regular file
+bin/qtpaths|755|0|0|regular file
+bin/lconvert|755|0|0|regular file
+bin/assistant|755|0|0|regular file
+bin/qtdiag|755|0|0|regular file
+bin/lupdate|755|0|0|regular file
+include/qt/QtHelp/QHelpGlobal|644|0|0|regular file
+include/qt/QtHelp/QHelpIndexModel|644|0|0|regular file
+include/qt/QtHelp/qhelpsearchquerywidget.h|644|0|0|regular file
+include/qt/QtHelp/QtHelpVersion|644|0|0|regular file
+include/qt/QtHelp/QtHelpDepends|644|0|0|regular file
+include/qt/QtHelp/QHelpContentModel|644|0|0|regular file
+include/qt/QtHelp/qhelpengine.h|644|0|0|regular file
+include/qt/QtHelp/QHelpSearchEngine|644|0|0|regular file
+include/qt/QtHelp/qhelpindexwidget.h|644|0|0|regular file
+include/qt/QtHelp/QHelpEngineCore|644|0|0|regular file
+include/qt/QtHelp/QtHelp|644|0|0|regular file
+include/qt/QtHelp/QHelpContentItem|644|0|0|regular file
+include/qt/QtHelp/QHelpSearchResultWidget|644|0|0|regular file
+include/qt/QtHelp/qhelpcontentwidget.h|644|0|0|regular file
+include/qt/QtHelp/qhelp_global.h|644|0|0|regular file
+include/qt/QtHelp/QHelpIndexWidget|644|0|0|regular file
+include/qt/QtHelp/QHelpSearchQueryWidget|644|0|0|regular file
+include/qt/QtHelp/qhelpsearchengine.h|644|0|0|regular file
+include/qt/QtHelp/QHelpSearchQuery|644|0|0|regular file
+include/qt/QtHelp/qhelpenginecore.h|644|0|0|regular file
+include/qt/QtHelp/qhelpsearchresultwidget.h|644|0|0|regular file
+include/qt/QtHelp/QHelpContentWidget|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindexreader_clucene_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindexwriter_default_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindexwriter_clucene_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindexreader_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpprojectdata_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qclucenefieldnames_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindex_default_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpengine_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpgenerator_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpdbreader_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpcollectionhandler_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpdatainterface_p.h|644|0|0|regular file
+include/qt/QtHelp/5.8.0/QtHelp/private/qhelpsearchindexreader_default_p.h|644|0|0|regular file
+include/qt/QtHelp/QHelpEngine|644|0|0|regular file
+include/qt/QtHelp/qthelpversion.h|644|0|0|regular file
+include/qt/QtUiTools/QtUiToolsDepends|644|0|0|regular file
+include/qt/QtUiTools/QUiLoader|644|0|0|regular file
+include/qt/QtUiTools/quiloader.h|644|0|0|regular file
+include/qt/QtUiTools/QtUiTools|644|0|0|regular file
+include/qt/QtUiTools/QtUiToolsVersion|644|0|0|regular file
+include/qt/QtUiTools/5.8.0/QtUiTools/private/quiloader_p.h|644|0|0|regular file
+include/qt/QtUiTools/qtuitoolsversion.h|644|0|0|regular file
+include/qt/QtDesigner/sdk_global.h|644|0|0|regular file
+include/qt/QtDesigner/QAbstractExtensionManager|644|0|0|regular file
+include/qt/QtDesigner/QDesignerWidgetDataBaseInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerPropertySheetExtension|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormEditorInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractdnditem.h|644|0|0|regular file
+include/qt/QtDesigner/QFormBuilder|644|0|0|regular file
+include/qt/QtDesigner/abstractwidgetbox.h|644|0|0|regular file
+include/qt/QtDesigner/abstractmetadatabase.h|644|0|0|regular file
+include/qt/QtDesigner/dynamicpropertysheet.h|644|0|0|regular file
+include/qt/QtDesigner/default_extensionfactory.h|644|0|0|regular file
+include/qt/QtDesigner/taskmenu.h|644|0|0|regular file
+include/qt/QtDesigner/abstractresourcebrowser.h|644|0|0|regular file
+include/qt/QtDesigner/container.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerWidgetFactoryInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerContainerExtension|644|0|0|regular file
+include/qt/QtDesigner/QDesignerWidgetBoxInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerSettingsInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormWindowCursorInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerIntegration|644|0|0|regular file
+include/qt/QtDesigner/qdesigner_components_global.h|644|0|0|regular file
+include/qt/QtDesigner/abstractformwindow.h|644|0|0|regular file
+include/qt/QtDesigner/abstractformeditorplugin.h|644|0|0|regular file
+include/qt/QtDesigner/abstractsettings.h|644|0|0|regular file
+include/qt/QtDesigner/QtDesignerDepends|644|0|0|regular file
+include/qt/QtDesigner/QDesignerDnDItemInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerCustomWidgetCollectionInterface|644|0|0|regular file
+include/qt/QtDesigner/qtdesignerversion.h|644|0|0|regular file
+include/qt/QtDesigner/qdesigner_components.h|644|0|0|regular file
+include/qt/QtDesigner/abstractformwindowtool.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerPropertyEditorInterface|644|0|0|regular file
+include/qt/QtDesigner/extrainfo.h|644|0|0|regular file
+include/qt/QtDesigner/abstractintegration.h|644|0|0|regular file
+include/qt/QtDesigner/abstractpropertyeditor.h|644|0|0|regular file
+include/qt/QtDesigner/abstractformwindowcursor.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerExtraInfoExtension|644|0|0|regular file
+include/qt/QtDesigner/abstractwidgetfactory.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerResourceBrowserInterface|644|0|0|regular file
+include/qt/QtDesigner/QtDesignerVersion|644|0|0|regular file
+include/qt/QtDesigner/extension.h|644|0|0|regular file
+include/qt/QtDesigner/uilib_global.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerExportWidget|644|0|0|regular file
+include/qt/QtDesigner/qdesignerexportwidget.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerPromotionInterface|644|0|0|regular file
+include/qt/QtDesigner/QtDesigner|644|0|0|regular file
+include/qt/QtDesigner/customwidget.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerWidgetDataBaseItemInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerComponents|644|0|0|regular file
+include/qt/QtDesigner/QDesignerMemberSheetExtension|644|0|0|regular file
+include/qt/QtDesigner/QDesignerCustomWidgetInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerLanguageExtension|644|0|0|regular file
+include/qt/QtDesigner/QDesignerTaskMenuExtension|644|0|0|regular file
+include/qt/QtDesigner/QExtensionManager|644|0|0|regular file
+include/qt/QtDesigner/QDesignerObjectInspectorInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractwidgetdatabase.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerMetaDataBaseItemInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractformwindowmanager.h|644|0|0|regular file
+include/qt/QtDesigner/propertysheet.h|644|0|0|regular file
+include/qt/QtDesigner/abstractoptionspage.h|644|0|0|regular file
+include/qt/QtDesigner/abstractpromotioninterface.h|644|0|0|regular file
+include/qt/QtDesigner/QAbstractExtensionFactory|644|0|0|regular file
+include/qt/QtDesigner/formbuilder.h|644|0|0|regular file
+include/qt/QtDesigner/membersheet.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerActionEditorInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormEditorPluginInterface|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/sheet_delegate_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/plaintexteditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_propertysheet_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_promotion_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/deviceprofile_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/abstractintrospection_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_dockwidget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_formwindowcommand_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_tabwidget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/abstractdialoggui_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/stylesheeteditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_qsettings_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_toolbox_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_introspection_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_command_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/resourcebuilder_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/shared_global_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_widgetitem_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/layoutinfo_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qsimpleresource_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/textbuilder_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/extensionfactory_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/grid_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_objectinspector_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_formwindowmanager_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/widgetfactory_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/plugindialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qlayout_widget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/signalslotdialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_formeditorcommand_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/shared_enums_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/formbuilderextra_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/rcc_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_menubar_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_widget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/morphmenu_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/richtexteditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_dnditem_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_taskmenu_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/layout_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/codedialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/actionprovider_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_stackedbox_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/invisible_widget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_utils_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_promotiondialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_propertycommand_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/gridpanel_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/shared_settings_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/propertylineedit_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/previewconfigurationwidget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/textpropertyeditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_widgetbox_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/lib_pch.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/properties_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/ui4_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qtresourceeditordialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/connectionedit_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_command2_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qtresourceview_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/actioneditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/formlayoutmenu_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_toolbar_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/promotiontaskmenu_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/promotionmodel_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/previewmanager_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/htmlhighlighter_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/widgetdatabase_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/pluginmanager_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qtresourcemodel_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/orderdialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/dialoggui_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/csshighlighter_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/newformwidget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/iconselector_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/spacer_widget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_menu_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_propertyeditor_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/iconloader_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_membersheet_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/qdesigner_formbuilder_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/newactiondialog_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/zoomwidget_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/actionrepository_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/formwindowbase_p.h|644|0|0|regular file
+include/qt/QtDesigner/5.8.0/QtDesigner/private/metadatabase_p.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormWindowToolInterface|644|0|0|regular file
+include/qt/QtDesigner/QAbstractFormBuilder|644|0|0|regular file
+include/qt/QtDesigner/QDesignerIntegrationInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractformbuilder.h|644|0|0|regular file
+include/qt/QtDesigner/layoutdecoration.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormWindowInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractlanguage.h|644|0|0|regular file
+include/qt/QtDesigner/abstractnewformwidget.h|644|0|0|regular file
+include/qt/QtDesigner/abstractformeditor.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerDynamicPropertySheetExtension|644|0|0|regular file
+include/qt/QtDesigner/qextensionmanager.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerFormWindowManagerInterface|644|0|0|regular file
+include/qt/QtDesigner/abstractobjectinspector.h|644|0|0|regular file
+include/qt/QtDesigner/QDesignerLayoutDecorationExtension|644|0|0|regular file
+include/qt/QtDesigner/abstractactioneditor.h|644|0|0|regular file
+include/qt/QtDesigner/extension_global.h|644|0|0|regular file
+include/qt/QtDesigner/QExtensionFactory|644|0|0|regular file
+include/qt/QtDesigner/QDesignerNewFormWidgetInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerOptionsPageInterface|644|0|0|regular file
+include/qt/QtDesigner/QDesignerMetaDataBaseInterface|644|0|0|regular file
+include/qt/QtDesignerComponents/QtDesignerComponentsVersion|644|0|0|regular file
+include/qt/QtDesignerComponents/qtdesignercomponentsversion.h|644|0|0|regular file
+include/qt/QtDesignerComponents/QtDesignerComponentsDepends|644|0|0|regular file
+include/qt/QtDesignerComponents/QtDesignerComponents|644|0|0|regular file
+include/qt/QtDesignerComponents/5.8.0/QtDesignerComponents/private/lib_pch.h|644|0|0|regular file
+include/qt/QtCLucene/QtCLuceneDepends|644|0|0|regular file
+include/qt/QtCLucene/qtcluceneversion.h|644|0|0|regular file
+include/qt/QtCLucene/QtCLuceneVersion|644|0|0|regular file
+include/qt/QtCLucene/QtCLucene|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qfilter_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qhits_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qclucene_global_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qreader_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qdocument_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qanalyzer_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qclucene-config_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qqueryparser_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qtokenstream_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qtoken_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qindexwriter_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qindexreader_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qsort_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qterm_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qquery_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qfield_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qtokenizer_p.h|644|0|0|regular file
+include/qt/QtCLucene/5.8.0/QtCLucene/private/qsearchable_p.h|644|0|0|regular file
+include/qt/QtUiPlugin/qtuipluginversion.h|644|0|0|regular file
+include/qt/QtUiPlugin/QDesignerCustomWidgetCollectionInterface|644|0|0|regular file
+include/qt/QtUiPlugin/QtUiPluginVersion|644|0|0|regular file
+include/qt/QtUiPlugin/QtUiPluginDepends|644|0|0|regular file
+include/qt/QtUiPlugin/QDesignerExportWidget|644|0|0|regular file
+include/qt/QtUiPlugin/qdesignerexportwidget.h|644|0|0|regular file
+include/qt/QtUiPlugin/customwidget.h|644|0|0|regular file
+include/qt/QtUiPlugin/QDesignerCustomWidgetInterface|644|0|0|regular file
+include/qt/QtUiPlugin/QtUiPlugin|644|0|0|regular file
+lib/cmake/Qt5Designer/Qt5DesignerConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5Designer/Qt5DesignerConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5UiPlugin/Qt5UiPluginConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5UiPlugin/Qt5UiPluginConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5Help/Qt5HelpConfigExtras.cmake|644|0|0|regular file
+lib/cmake/Qt5Help/Qt5HelpConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5Help/Qt5HelpConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5UiTools/Qt5UiToolsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5UiTools/Qt5UiToolsConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5LinguistTools/Qt5LinguistToolsMacros.cmake|644|0|0|regular file
+lib/libQt5DesignerComponents.so.5.8.0|755|0|0|regular file
+lib/libQt5CLucene.prl|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_designercomponents_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_designer.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_uitools_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_help_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_clucene_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_help.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_uiplugin.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_uitools.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_designer_private.pri|644|0|0|regular file
+lib/pkgconfig/Qt5Help.pc|644|0|0|regular file
+lib/pkgconfig/Qt5UiTools.pc|644|0|0|regular file
+lib/pkgconfig/Qt5Designer.pc|644|0|0|regular file
+lib/libQt5Help.so.5.8.0|755|0|0|regular file
+lib/libQt5CLucene.so.5.8.0|755|0|0|regular file
+lib/libQt5UiTools.prl|644|0|0|regular file
+lib/libQt5DesignerComponents.prl|644|0|0|regular file
+lib/libQt5UiTools.a|644|0|0|regular file
+lib/libQt5Help.prl|644|0|0|regular file
+lib/libQt5Designer.prl|644|0|0|regular file
+lib/libQt5Designer.so.5.8.0|755|0|0|regular file
+share/qt/phrasebooks/french.qph|644|0|0|regular file
+share/qt/phrasebooks/russian.qph|644|0|0|regular file
+share/qt/phrasebooks/german.qph|644|0|0|regular file
+share/qt/phrasebooks/dutch.qph|644|0|0|regular file
+share/qt/phrasebooks/danish.qph|644|0|0|regular file
+share/qt/phrasebooks/swedish.qph|644|0|0|regular file
+share/qt/phrasebooks/norwegian.qph|644|0|0|regular file
+share/qt/phrasebooks/hungarian.qph|644|0|0|regular file
+share/qt/phrasebooks/spanish.qph|644|0|0|regular file
+share/qt/phrasebooks/polish.qph|644|0|0|regular file
+share/qt/phrasebooks/japanese.qph|644|0|0|regular file
+share/qt/phrasebooks/finnish.qph|644|0|0|regular file
+share/qt/phrasebooks/italian.qph|644|0|0|regular file
+share/qt/phrasebooks|755|0|0|directory
+share/qt|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt|755|0|0|directory
+lib/cmake/Qt5LinguistTools|755|0|0|directory
+lib/cmake/Qt5UiTools|755|0|0|directory
+lib/cmake/Qt5Help|755|0|0|directory
+lib/cmake/Qt5UiPlugin|755|0|0|directory
+lib/cmake/Qt5Designer|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib|755|0|0|directory
+include/qt/QtUiPlugin|755|0|0|directory
+include/qt/QtCLucene/5.8.0/QtCLucene/private|755|0|0|directory
+include/qt/QtCLucene/5.8.0/QtCLucene|755|0|0|directory
+include/qt/QtCLucene/5.8.0|755|0|0|directory
+include/qt/QtCLucene|755|0|0|directory
+include/qt/QtDesignerComponents/5.8.0/QtDesignerComponents/private|755|0|0|directory
+include/qt/QtDesignerComponents/5.8.0/QtDesignerComponents|755|0|0|directory
+include/qt/QtDesignerComponents/5.8.0|755|0|0|directory
+include/qt/QtDesignerComponents|755|0|0|directory
+include/qt/QtDesigner/5.8.0/QtDesigner/private|755|0|0|directory
+include/qt/QtDesigner/5.8.0/QtDesigner|755|0|0|directory
+include/qt/QtDesigner/5.8.0|755|0|0|directory
+include/qt/QtDesigner|755|0|0|directory
+include/qt/QtUiTools/5.8.0/QtUiTools/private|755|0|0|directory
+include/qt/QtUiTools/5.8.0/QtUiTools|755|0|0|directory
+include/qt/QtUiTools/5.8.0|755|0|0|directory
+include/qt/QtUiTools|755|0|0|directory
+include/qt/QtHelp/5.8.0/QtHelp/private|755|0|0|directory
+include/qt/QtHelp/5.8.0/QtHelp|755|0|0|directory
+include/qt/QtHelp/5.8.0|755|0|0|directory
+include/qt/QtHelp|755|0|0|directory
+include/qt|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

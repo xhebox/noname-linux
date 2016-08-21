@@ -1,0 +1,51 @@
+bin/affixcompress|755|0|0|regular file
+bin/analyze|755|0|0|regular file
+bin/chmorph|755|0|0|regular file
+bin/hunspell|755|0|0|regular file
+bin/hunzip|755|0|0|regular file
+bin/hzip|755|0|0|regular file
+bin/ispellaff2myspell|755|0|0|regular file
+bin/makealias|755|0|0|regular file
+bin/munch|755|0|0|regular file
+bin/unmunch|755|0|0|regular file
+bin/wordforms|755|0|0|regular file
+bin/wordlist2hunspell|755|0|0|regular file
+bin|755|0|0|directory
+include/hunspell/atypes.hxx|644|0|0|regular file
+include/hunspell/csutil.hxx|644|0|0|regular file
+include/hunspell/htypes.hxx|644|0|0|regular file
+include/hunspell/hunspell.hxx|644|0|0|regular file
+include/hunspell/hunspell.h|644|0|0|regular file
+include/hunspell/hunvisapi.h|644|0|0|regular file
+include/hunspell/w_char.hxx|644|0|0|regular file
+include/hunspell|755|0|0|directory
+include|755|0|0|directory
+lib/libhunspell-1.6.so.0.0.1|755|0|0|regular file
+lib/libhunspell-1.6.so.0|777|0|0|symbolic link
+lib/libhunspell-1.6.so|777|0|0|symbolic link
+lib/libhunspell.so|777|0|0|symbolic link
+lib/pkgconfig/hunspell.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/tg/LC_MESSAGES|755|0|0|directory
+share/locale/tg|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/hu/man1/hunspell.1.gz|644|0|0|regular file
+share/man/hu/man1|755|0|0|directory
+share/man/hu|755|0|0|directory
+share/man/man1/hunspell.1.gz|644|0|0|regular file
+share/man/man1/hunzip.1.gz|644|0|0|regular file
+share/man/man1/hzip.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/hunspell.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man/man5/hunspell.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

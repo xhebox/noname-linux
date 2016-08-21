@@ -1,0 +1,16 @@
+include/graphite2/Font.h|644|0|0|regular file
+include/graphite2/Log.h|644|0|0|regular file
+include/graphite2/Segment.h|644|0|0|regular file
+include/graphite2/Types.h|644|0|0|regular file
+include/graphite2|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/graphite2/graphite2-release.cmake|644|0|0|regular file
+lib/cmake/graphite2/graphite2.cmake|644|0|0|regular file
+lib/cmake/graphite2|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libgraphite2.so.3.0.1|755|0|0|regular file
+lib/libgraphite2.so.3|777|0|0|symbolic link
+lib/libgraphite2.so|777|0|0|symbolic link
+lib/pkgconfig/graphite2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

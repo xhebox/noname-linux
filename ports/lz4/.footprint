@@ -1,0 +1,23 @@
+bin/lz4cat|777|0|0|symbolic link
+bin/lz4c|755|0|0|regular file
+bin/lz4|755|0|0|regular file
+bin/unlz4|777|0|0|symbolic link
+bin|755|0|0|directory
+include/lz4.h|644|0|0|regular file
+include/lz4frame.h|644|0|0|regular file
+include/lz4hc.h|644|0|0|regular file
+include|755|0|0|directory
+lib/liblz4.a|755|0|0|regular file
+lib/liblz4.so.1.7.5|755|0|0|regular file
+lib/liblz4.so.1|777|0|0|symbolic link
+lib/liblz4.so|777|0|0|symbolic link
+lib/pkgconfig/liblz4.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/lz4.1.gz|644|0|0|regular file
+share/man/man1/lz4c.1.gz|777|0|0|symbolic link
+share/man/man1/lz4cat.1.gz|777|0|0|symbolic link
+share/man/man1/unlz4.1.gz|777|0|0|symbolic link
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

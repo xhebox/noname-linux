@@ -1,0 +1,39 @@
+name=zynaddsubfx
+version=3.0.1
+desc="Opensource software synthesizer capable of making a countless number of instruments."
+source="https://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2"
+deps="cmake fltk liblo mxml alsa-lib zlib fftw"
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	CXXFLAGS="$CXXFLAGS -std=c++11"
+	sed -i -e 's/lash-1.0/lash_disabled/' src/CMakeLists.txt
+	sed -i '1,1i#include <unistd.h>' src/Nio/NulEngine.cpp
+
+	[ -d build ] || mkdir build && cd build
+	cmake \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DDefaultOutput=alsa \
+		-DDefaultInput=alsa \
+		-DGuiModule=fltk \
+		..
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	cd ../ExternalPrograms/Spliter && make || die
+	cd ../Controller && sed -i "s|Box\.h|Box\.H|" ControllerUI.fl && make || die
+	cd ..
+# install external programs
+	install -Dm755 ../ExternalPrograms/Spliter/spliter "$pkgdir/bin/spliter"
+	install -Dm755 ../ExternalPrograms/Controller/controller "$pkgdir/bin/controller"
+	install -Dm644 ../ExternalPrograms/Spliter/readme.txt "$pkgdir/share/doc/$name/SPLITER.txt"
+
+# banks and examples
+	install -d "$pkgdir/share/$name"
+	cp -a ../instruments/banks "$pkgdir/share/$name"
+	cp -a ../instruments/examples "$pkgdir/share/$name"
+}

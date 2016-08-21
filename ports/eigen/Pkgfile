@@ -1,0 +1,17 @@
+name=eigen
+version=3.3.3
+desc="Lightweight C++ template library for vector and matrix math, a.k.a. linear algebra."
+deps="cmake freeglut gcc fftw suitesparse boost"
+source="http://bitbucket.org/eigen/eigen/get/${version}.tar.bz2"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../eigen-eigen-* \
+		-DEIGEN_ROOT_DIR= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+                -DCMAKE_INSTALL_LIBDIR=lib
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

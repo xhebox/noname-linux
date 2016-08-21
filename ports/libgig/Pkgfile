@@ -1,0 +1,12 @@
+name=libgig
+version=4.0.0
+desc="C++ library for loading Gigasampler and DLS files"
+deps="util-linux libsndfile"
+source="http://download.linuxsampler.org/packages/$name-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

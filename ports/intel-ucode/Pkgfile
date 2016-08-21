@@ -1,0 +1,19 @@
+name=intel-ucode
+version=20161104
+_dlid=26400
+deps="libarchive"
+desc="Microcode update files for Intel CPUs"
+source="
+intel-microcode2ucode.c
+http://downloadmirror.intel.com/${_dlid}/eng/microcode-${version}.tgz
+"
+
+build() {
+	gcc -Wall ${CFLAGS} -o intel-microcode2ucode intel-microcode2ucode.c
+	./intel-microcode2ucode ./microcode.dat
+	install -d -m755 "${pkgdir}"/boot
+
+	mkdir -p kernel/x86/microcode
+	mv microcode.bin kernel/x86/microcode/GenuineIntel.bin
+	echo kernel/x86/microcode/GenuineIntel.bin | bsdcpio -o -H newc -R 0:0 > "${pkgdir}"/boot/intel-ucode.img
+}

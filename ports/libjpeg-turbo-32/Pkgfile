@@ -1,0 +1,19 @@
+name=libjpeg-turbo-32
+version=1.5.1
+deps=nasm
+desc="Library of JPEG support functions."
+source="http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$version.tar.gz"
+
+build() {
+	cd libjpeg-turbo-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	./configure --build=$TARGET32 --prefix= --disable-static --mandir=/share/man --libdir=/lib32
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/include
+}

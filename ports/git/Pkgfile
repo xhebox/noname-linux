@@ -1,0 +1,33 @@
+name=git
+version=2.13.0
+deps="curl libpcre expat perl perl-error xmlto asciidoc tcl tk"
+desc="Directory content manager"
+source="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	make \
+		bindir=/bin \
+		prefix= gitexecdir=/lib/git-core \
+		CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+		USE_LIBPCRE=1 \
+		NO_NSEC=YesPlease \
+		NO_SVN_TESTS=YesPlease \
+		NO_CROSS_DIRECTORY_HARDLINKS=1 \
+		MAN_BOLD_LITERAL=1 \
+		NO_REGEX=NeedsStartEnd \
+		NEEDS_SSL_WITH_CURL=1 \
+	all || die
+	make DESTDIR="$pkgdir" \
+		bindir=/bin \
+		prefix= gitexecdir=/lib/git-core \
+		CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+		USE_LIBPCRE=1 \
+		NO_NSEC=YesPlease \
+		NO_SVN_TESTS=YesPlease \
+		NO_CROSS_DIRECTORY_HARDLINKS=1 \
+		NO_REGEX=NeedsStartEnd \
+		MAN_BOLD_LITERAL=1 \
+		NEEDS_SSL_WITH_CURL=1 \
+	install || die
+}

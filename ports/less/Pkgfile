@@ -1,0 +1,15 @@
+name=less
+version=487
+deps=ncurses
+desc="File pager"
+source="http://www.greenwoodsoftware.com/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/share/info
+}

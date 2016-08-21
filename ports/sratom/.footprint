@@ -1,0 +1,10 @@
+include/sratom-0/sratom/sratom.h|644|0|0|regular file
+include/sratom-0/sratom|755|0|0|directory
+include/sratom-0|755|0|0|directory
+include|755|0|0|directory
+lib/libsratom-0.so.0.4.6|755|0|0|regular file
+lib/libsratom-0.so.0|777|0|0|symbolic link
+lib/libsratom-0.so|777|0|0|symbolic link
+lib/pkgconfig/sratom-0.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

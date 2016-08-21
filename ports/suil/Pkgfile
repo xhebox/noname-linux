@@ -1,0 +1,14 @@
+name=suil
+version=0.8.2
+desc="A lightweight C library for loading and wrapping LV2 plugin UIs"
+deps="libsndfile gtk python lv2"
+source="http://download.drobilla.net/suil-$version.tar.bz2"
+
+build() {
+	cd suil-$version
+
+	python waf configure --prefix=// --libdir=/lib
+	python waf build || die
+	python waf install --destdir="$pkgdir" || die
+}
+

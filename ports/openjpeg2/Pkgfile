@@ -1,0 +1,26 @@
+name=openjpeg2
+version=2.1.2
+desc="An open source JPEG 2000 codec, version ${version}"
+deps="cmake zlib libpng libtiff lcms2"
+source="https://github.com/uclouvain/openjpeg/archive/v$version.tar.gz
+https://github.com/szukw000/openjpeg/commit/cadff5fb.patch"
+
+ext() {
+	sed -i -e "s:DESTINATION\ share/doc:DESTINATION\ share/doc/${name}:" openjpeg-${version}/doc/CMakeLists.txt
+	cd ${srcdir}/openjpeg-$version
+	patch -Np1 -i  ../cadff5fb.patch || die
+}
+
+build() {
+	cd openjpeg-$version
+	mkdir build
+	cd build
+
+	cmake .. \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX= \
+	-DBUILD_DOC=on
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

@@ -1,0 +1,30 @@
+name=python-progressbar
+version=2.3
+deps="python-setuptools"
+source="https://pypi.io/packages/source/p/progressbar/progressbar-$version.tar.gz
+01-python33.patch"
+desc="Text progressbar library for python"
+
+build() {
+	cd progressbar-$version
+	chmod -R ug=rwX,o=rX .
+	cd -
+	cp -r progressbar-$version p3
+	cd progressbar-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../p3
+	patch -p1 < ../01-python33.patch || die
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}
+

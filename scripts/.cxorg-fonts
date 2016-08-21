@@ -1,0 +1,19 @@
+#!/bin/sh
+list=`proxychains curl -s http://www.linuxfromscratch.org/blfs/view/svn/x/x7font.html | grep -P 'literal">[a-z0-9]+  \w+' -A 33 | cut -d ' ' -f 3 | sed -e 's/<\/code>//g'`
+. ../ports/xorg-fonts/Pkgfile
+echo $list
+echo $source
+tfff=0
+for i in ${list%EOF*}; do
+	echo "$source" | grep -q -F "$i" || {
+		sed -i -r "/${i%-*}.+tar.+/d" ../ports/xorg-fonts/Pkgfile
+		sed -i "s/source=\"/&\n$i/g" ../ports/xorg-fonts/Pkgfile
+		rm ../ports/xorg-fonts/*${i%-*}*tar*
+		tfff=1
+	}
+done
+[ "$tfff" -eq 1 ] && {
+	pkg -Muf xorg-fonts
+	pkg -M xorg-fonts
+	pkg -S xorg-fonts
+}

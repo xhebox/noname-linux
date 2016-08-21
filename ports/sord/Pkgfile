@@ -1,0 +1,16 @@
+name=sord
+version=0.14.0
+desc="A lightweight C library for storing RDF data in memory"
+deps="serd libpcre"
+source="http://download.drobilla.net/sord-$version.tar.bz2"
+
+build() {
+	cd sord-$version
+
+	sed -i "/ldconfig/d" wscript
+
+	python ./waf configure --prefix=// --mandir=/share/man
+	python waf build || die
+	python waf install --destdir="$pkgdir" || die
+}
+

@@ -1,0 +1,19 @@
+name=linux-firmware
+conflicts=
+version=20170309.695f2d6
+desc="git"
+
+ext() {
+	git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+	cd $name
+	git reset --hard ${version#*.}
+}
+
+build() {
+	cd $name
+	make DESTDIR="${pkgdir}" FIRMWAREDIR=/lib/firmware install || die
+	rm "${pkgdir}/lib/firmware/"Makefile
+	rm "${pkgdir}/lib/firmware/"README
+	rm "${pkgdir}/lib/firmware/"configure
+	rm "${pkgdir}/lib/firmware/"GPL-3
+}

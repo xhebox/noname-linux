@@ -1,0 +1,20 @@
+name=libxaw
+version=1.0.13
+desc="libxaw"
+deps="libxmu libxpm"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXaw-$version.tar.bz2"
+
+build() {
+	cd libXaw-$version
+	./configure \
+		--prefix=/ \
+		--sysconfdir=/etc \
+		--mandir=/share/man \
+		--infodir=/share/info \
+		--localstatedir=/var \
+		--disable-xaw8 \
+		--disable-static \
+		--disable-xaw6
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

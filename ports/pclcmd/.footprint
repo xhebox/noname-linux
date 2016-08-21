@@ -1,0 +1,9 @@
+bin/pclcmd|777|0|0|symbolic link
+bin|755|0|0|directory
+share/doc/pclcmd/README.md|644|0|0|regular file
+share/doc/pclcmd/pclcmd.cfg|644|0|0|regular file
+share/doc/pclcmd|755|0|0|directory
+share/doc|755|0|0|directory
+share/pyshared/pclcmd.py|755|0|0|regular file
+share/pyshared|755|0|0|directory
+share|755|0|0|directory

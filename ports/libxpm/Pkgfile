@@ -1,0 +1,17 @@
+name=libxpm
+version=3.5.12
+deps="libxext libxt"
+desc="xorg lib libXpm"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXpm-$version.tar.bz2
+gettext.patch"
+
+build() {
+	cd libXpm-$version
+	patch -p1 < ../gettext.patch
+
+	./configure --prefix=/ --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

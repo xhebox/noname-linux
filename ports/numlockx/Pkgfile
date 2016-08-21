@@ -1,0 +1,16 @@
+name=numlockx
+version=1.2
+deps="libxtst"
+desc="Turns on the numlock key in X11."
+source="http://pkgs.fedoraproject.org/repo/pkgs/${name}/${name}-${version}.tar.gz/be9109370447eae23f6f3f8527bb1a67/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix= --disable-static \
+	x_includes=/include/X11 x_libraries=/lib
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

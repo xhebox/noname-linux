@@ -1,0 +1,24 @@
+name=ntfs-3g
+_pkgname=ntfs-3g_ntfsprogs
+version=2017.3.23
+desc='NTFS filesystem driver and utilities'
+deps="util-linux"
+source="http://tuxera.com/opensource/${_pkgname}-${version}.tgz"
+
+build() {
+	cd "${srcdir}/${_pkgname}-${version}"
+	sed 's|$(DESTDIR)/sbin|$(DESTDIR)/bin|' -i src/Makefile.in
+	sed 's|$(DESTDIR)/sbin|$(DESTDIR)/bin|' -i ntfsprogs/Makefile.in
+	CFLAGS="$CFLAGS -D_PATH_MOUNTED='\"/etc/mtab\"'"
+	./configure \
+		--prefix= \
+		--sbindir=/bin \
+		--disable-ldconfig \
+		--with-fuse=internal \
+		--disable-static \
+		--enable-posix-acls \
+		--enable-xattr-mappings 
+	make  || die
+	make DESTDIR="${pkgdir}" rootbindir=/bin rootsbindir=/bin rootlibdir=/lib install  || die
+	ln -s /bin/ntfs-3g "${pkgdir}/bin/mount.ntfs"
+}

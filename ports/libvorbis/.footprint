@@ -1,0 +1,25 @@
+lib/libvorbisfile.so|777|0|0|symbolic link
+lib/libvorbis.so|777|0|0|symbolic link
+lib/libvorbisenc.so|777|0|0|symbolic link
+lib/libvorbisfile.so.3|777|0|0|symbolic link
+lib/libvorbisenc.so.2|777|0|0|symbolic link
+lib/libvorbis.so.0|777|0|0|symbolic link
+include/vorbis/vorbisfile.h|644|0|0|regular file
+include/vorbis/vorbisenc.h|644|0|0|regular file
+include/vorbis/codec.h|644|0|0|regular file
+lib/libvorbisfile.a|644|0|0|regular file
+lib/libvorbisfile.so.3.3.7|755|0|0|regular file
+lib/libvorbisenc.a|644|0|0|regular file
+lib/libvorbis.a|644|0|0|regular file
+lib/libvorbis.so.0.4.8|755|0|0|regular file
+lib/pkgconfig/vorbisenc.pc|644|0|0|regular file
+lib/pkgconfig/vorbis.pc|644|0|0|regular file
+lib/pkgconfig/vorbisfile.pc|644|0|0|regular file
+lib/libvorbisenc.so.2.0.11|755|0|0|regular file
+share/aclocal/vorbis.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/vorbis|755|0|0|directory
+include|755|0|0|directory

@@ -1,0 +1,17 @@
+name=irssi
+version=1.0.2
+desc="Modular text mode IRC client with Perl scripting"
+deps="glib libressl ncurses"
+source="https://github.com/irssi/irssi/releases/download/$version/$name-$version.tar.xz
+"
+
+build() {
+	cd irssi-$version
+	./configure --prefix=/ \
+	     --enable-ipv6 \
+	     --with-proxy \
+	     --enable-true-color \
+	     --sysconfdir=/etc
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

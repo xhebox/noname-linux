@@ -1,0 +1,14 @@
+name=pthread-stubs
+version=0.3
+desc="pthread dummy implementation"
+source="http://xcb.freedesktop.org/dist/lib$name-$version.tar.bz2"
+
+build() {
+	cd lib$name-$version
+
+	./configure --prefix=
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

@@ -1,0 +1,78 @@
+bin/iconvert|755|0|0|regular file
+bin/idiff|755|0|0|regular file
+bin/igrep|755|0|0|regular file
+bin/iinfo|755|0|0|regular file
+bin/maketx|755|0|0|regular file
+bin/oiiotool|755|0|0|regular file
+bin|755|0|0|directory
+include/OpenImageIO/SHA1.h|644|0|0|regular file
+include/OpenImageIO/argparse.h|644|0|0|regular file
+include/OpenImageIO/array_view.h|644|0|0|regular file
+include/OpenImageIO/atomic.h|644|0|0|regular file
+include/OpenImageIO/color.h|644|0|0|regular file
+include/OpenImageIO/coordinate.h|644|0|0|regular file
+include/OpenImageIO/dassert.h|644|0|0|regular file
+include/OpenImageIO/deepdata.h|644|0|0|regular file
+include/OpenImageIO/errorhandler.h|644|0|0|regular file
+include/OpenImageIO/export.h|644|0|0|regular file
+include/OpenImageIO/filesystem.h|644|0|0|regular file
+include/OpenImageIO/filter.h|644|0|0|regular file
+include/OpenImageIO/fmath.h|644|0|0|regular file
+include/OpenImageIO/fstream_mingw.h|644|0|0|regular file
+include/OpenImageIO/hash.h|644|0|0|regular file
+include/OpenImageIO/image_view.h|644|0|0|regular file
+include/OpenImageIO/imagebuf.h|644|0|0|regular file
+include/OpenImageIO/imagebufalgo.h|644|0|0|regular file
+include/OpenImageIO/imagebufalgo_util.h|644|0|0|regular file
+include/OpenImageIO/imagecache.h|644|0|0|regular file
+include/OpenImageIO/imageio.h|644|0|0|regular file
+include/OpenImageIO/missing_math.h|644|0|0|regular file
+include/OpenImageIO/oiioversion.h|644|0|0|regular file
+include/OpenImageIO/optparser.h|644|0|0|regular file
+include/OpenImageIO/osdep.h|644|0|0|regular file
+include/OpenImageIO/paramlist.h|644|0|0|regular file
+include/OpenImageIO/platform.h|644|0|0|regular file
+include/OpenImageIO/plugin.h|644|0|0|regular file
+include/OpenImageIO/pugiconfig.hpp|644|0|0|regular file
+include/OpenImageIO/pugixml.cpp|644|0|0|regular file
+include/OpenImageIO/pugixml.hpp|644|0|0|regular file
+include/OpenImageIO/refcnt.h|644|0|0|regular file
+include/OpenImageIO/simd.h|644|0|0|regular file
+include/OpenImageIO/strided_ptr.h|644|0|0|regular file
+include/OpenImageIO/string_view.h|644|0|0|regular file
+include/OpenImageIO/strutil.h|644|0|0|regular file
+include/OpenImageIO/sysutil.h|644|0|0|regular file
+include/OpenImageIO/texture.h|644|0|0|regular file
+include/OpenImageIO/thread.h|644|0|0|regular file
+include/OpenImageIO/timer.h|644|0|0|regular file
+include/OpenImageIO/tinyformat.h|644|0|0|regular file
+include/OpenImageIO/typedesc.h|644|0|0|regular file
+include/OpenImageIO/unittest.h|644|0|0|regular file
+include/OpenImageIO/unordered_map_concurrent.h|644|0|0|regular file
+include/OpenImageIO/ustring.h|644|0|0|regular file
+include/OpenImageIO/varyingref.h|644|0|0|regular file
+include/OpenImageIO/version.h|644|0|0|regular file
+include/OpenImageIO|755|0|0|directory
+include|755|0|0|directory
+lib/libOpenImageIO.so.1.7.13|755|0|0|regular file
+lib/libOpenImageIO.so.1.7|777|0|0|symbolic link
+lib/libOpenImageIO.so|777|0|0|symbolic link
+lib/libOpenImageIO_Util.so.1.7.13|755|0|0|regular file
+lib/libOpenImageIO_Util.so.1.7|777|0|0|symbolic link
+lib/libOpenImageIO_Util.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/doc/OpenImageIO/CHANGES.md|644|0|0|regular file
+share/doc/OpenImageIO/LICENSE|644|0|0|regular file
+share/doc/OpenImageIO/openimageio.pdf|644|0|0|regular file
+share/doc/OpenImageIO|755|0|0|directory
+share/doc|755|0|0|directory
+share/fonts/oiio/DroidSans-Bold.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSans.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSansMono.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSerif-Bold.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSerif-BoldItalic.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSerif-Italic.ttf|644|0|0|regular file
+share/fonts/oiio/DroidSerif.ttf|644|0|0|regular file
+share/fonts/oiio|755|0|0|directory
+share/fonts|755|0|0|directory
+share|755|0|0|directory

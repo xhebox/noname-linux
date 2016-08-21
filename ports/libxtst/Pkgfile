@@ -1,0 +1,17 @@
+name=libxtst
+version=1.2.3
+deps="libxi"
+desc="X11 Testing resource extension library"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXtst-$version.tar.bz2"
+
+build() {
+	cd libXtst-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	rm -r "$pkgdir"/share/doc
+}
+

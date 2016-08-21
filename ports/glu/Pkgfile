@@ -1,0 +1,12 @@
+name=glu
+version=9.0.0
+deps=mesa
+desc="Mesa OpenGL Utility library"
+source="ftp://ftp.freedesktop.org/pub/mesa/$name/$name-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

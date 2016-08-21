@@ -1,0 +1,18 @@
+name=make
+version=4.2.1
+deps=musl
+desc="Controls the generation of executables and other compile-related tasks"
+source="http://mirrors.ustc.edu.cn/gnu/make/make-$version.tar.bz2
+fix-atexit-exit.patch"
+
+build() {
+	cd $name-$version
+	patch -p1 -i "$srcdir"/fix-atexit-exit.patch 
+	./configure \
+		--prefix= \
+		--mandir=/share/man \
+		--infodir=/share/info 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

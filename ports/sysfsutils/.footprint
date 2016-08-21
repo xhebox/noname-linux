@@ -1,0 +1,18 @@
+lib/libsysfs.so.2|777|0|0|symbolic link
+lib/libsysfs.so|777|0|0|symbolic link
+bin/systool|755|0|0|regular file
+bin/dlist_test|755|0|0|regular file
+bin/get_driver|755|0|0|regular file
+bin/get_module|755|0|0|regular file
+bin/get_device|755|0|0|regular file
+include/sysfs/libsysfs.h|644|0|0|regular file
+include/sysfs/dlist.h|644|0|0|regular file
+lib/libsysfs.so.2.0.1|755|0|0|regular file
+share/man/man1/systool.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib|755|0|0|directory
+include/sysfs|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

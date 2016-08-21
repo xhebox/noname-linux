@@ -1,0 +1,107 @@
+name=gcc
+version=6.3.0
+desc="The GNU Compiler Collection"
+_islversion=0.17.1
+source="
+http://mirrors.ustc.edu.cn/gnu/gcc/gcc-${version}/gcc-${version}.tar.bz2
+http://isl.gforge.inria.fr/isl-$_islversion.tar.bz2
+003_all_default-fortify-source.patch
+050_all_libiberty-asprintf.patch
+boehm-gc-musl.patch
+cilkrts.patch
+locale.patch
+cpu_indicator.patch
+gcc-4.9-musl-fortify.patch
+gcc-6.1-musl-libssp.patch
+libgcc-always-build-gcceh.a.patch
+linux_libc_has_function.patch
+posix_memalign.patch
+"
+deps="libmpc binutils"
+
+ext() {
+	cd "$srcdir"/gcc-$version
+	for i in $source; do
+		case "$i" in
+		*posix*.patch) msg $i;patch -p0 -i ../"$i" || die;;
+		*.patch) msg $i;patch -p1 -i ../"$i" || die;;
+		esac
+	done
+
+	export gcc_cv_prog_makeinfo_modern=no
+	export libat_cv_have_ifunc=no
+	sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
+	sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
+	ln -s ../isl-${_islversion} isl
+	echo ${version} > gcc/BASE-VER
+	export LDFLAGS="$LDFLAGS -Wl,--no-keep-memory"
+}
+
+build() {
+	cd "$srcdir"/gcc-$version
+
+	mkdir -p build
+	cd build
+	../configure \
+		--host=$TARGET \
+		--build=$TARGET \
+		--target=$TARGET \
+		--prefix=  \
+		--libexecdir=/lib \
+		--with-pkgversion=noname \
+		--with-isl \
+		--with-linker-hash-style=gnu \
+		--with-system-zlib \
+		--enable-cloog-backend \
+		--enable-checking=release \
+		--enable-__cxa_atexit \
+		--enable-languages=c,c++,lto,fortran \
+		--enable-multilib \
+		--enable-shared \
+		--enable-threads \
+		--enable-clocale=generic \
+		--disable-libsanitizer \
+		--disable-libmpx \
+		--disable-fixed-point \
+		--disable-libstdcxx-pch \
+		--disable-libunwind-exceptions \
+		--disable-libssp \
+		--disable-libmudflap \
+		--disable-werror \
+		--disable-symvers \
+		--enable-linker-build-id \
+		--enable-lto --enable-plugin \
+		--enable-nls \
+		--disable-bootstrap 
+		#--disable-gnu-indirect-function \
+		#--disable-gnu-unique-object \
+		#--with-build-config=bootstrap-lto \
+		#--enable-esp \
+		# do not enable it....we have no pax or grsecurity
+		#--enable-default-pie \
+		# still lack mpx
+
+	gcc_cv_libc_provides_ssp=yes \
+	make || die
+	make -j1 DESTDIR="${pkgdir}" install || die
+	make -C gcc DESTDIR="${pkgdir}" install-po || die
+
+	install -d $pkgdir/share/gdb/auto-load/lib
+	mv $pkgdir/lib/*-gdb.py \
+	$pkgdir/share/gdb/auto-load/lib/
+
+	ln -s gcc "$pkgdir"/bin/cc
+
+	find "$pkgdir" -name libgcj.a -o -name libgtkpeer.a \
+		-o -name libgjsmalsa.a -o -name libgcj-tools.a \
+		-o -name libjvm.a -o -name libgij.a -o -name libgcj_bc.a \
+		-o -name libjavamath.a \
+		| xargs rm -f
+
+	[ -e "$pkgdir"/lib/gcc/$TARGET/$version/liblto_plugin.so ] && {
+	        mkdir -p "$pkgdir"/lib/bfd-plugins
+	        ln -sf ../../lib/gcc/$TARGET/$version/liblto_plugin.so \
+        	"$pkgdir"/lib/bfd-plugins/liblto_plugin.so
+	}
+	rm -r "$pkgdir"/share/info
+}

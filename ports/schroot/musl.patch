@@ -1,0 +1,23 @@
+--- lib/bin-common/run.h
++++ lib/bin-common/run.h
+@@ -29,6 +29,8 @@
+ #include <iostream>
+ #include <string>
+
++#include <libintl.h>
++
+ namespace bin_common
+ {
+
+diff --git lib/sbuild/auth/pam.cc lib/sbuild/auth/pam.cc
+index 84663c2..feda6f0 100644
+--- lib/sbuild/auth/pam.cc
++++ lib/sbuild/auth/pam.cc
+@@ -30,6 +30,7 @@
+ #include <sstream>
+
+ #include <syslog.h>
++#include <libintl.h>
+
+ #include <boost/format.hpp>
+

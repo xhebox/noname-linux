@@ -1,0 +1,101 @@
+bin/xprop|755|0|0|regular file
+bin/xlsatoms|755|0|0|regular file
+bin/xkbbell|755|0|0|regular file
+bin/setxkbmap|755|0|0|regular file
+bin/x11perfcomp|755|0|0|regular file
+bin/xmessage|755|0|0|regular file
+bin/xkbevd|755|0|0|regular file
+bin/xkill|755|0|0|regular file
+bin/xdriinfo|755|0|0|regular file
+bin/xcursorgen|755|0|0|regular file
+bin/xwud|755|0|0|regular file
+bin/xkbwatch|755|0|0|regular file
+bin/xkbvleds|755|0|0|regular file
+bin/xbacklight|755|0|0|regular file
+bin/xset|755|0|0|regular file
+bin/sessreg|755|0|0|regular file
+bin/xdpr|755|0|0|regular file
+bin/xwininfo|755|0|0|regular file
+bin/xkbcomp|755|0|0|regular file
+bin/mkfontdir|755|0|0|regular file
+bin/xwd|755|0|0|regular file
+bin/xrandr|755|0|0|regular file
+bin/mkfontscale|755|0|0|regular file
+bin/xrefresh|755|0|0|regular file
+bin/smproxy|755|0|0|regular file
+bin/xauth|755|0|0|regular file
+bin/xdpyinfo|755|0|0|regular file
+bin/xev|755|0|0|regular file
+bin/xrdb|755|0|0|regular file
+bin/iceauth|755|0|0|regular file
+bin/xgamma|755|0|0|regular file
+bin/xinput|755|0|0|regular file
+bin/xvinfo|755|0|0|regular file
+bin/xpr|755|0|0|regular file
+bin/x11perf|755|0|0|regular file
+bin/xsetroot|755|0|0|regular file
+bin/xhost|755|0|0|regular file
+bin/xkeystone|755|0|0|regular file
+bin/luit|755|0|0|regular file
+bin/xlsclients|755|0|0|regular file
+bin/xmodmap|755|0|0|regular file
+bin/xcmsdb|755|0|0|regular file
+lib/X11/x11perfcomp/perfboth|755|0|0|regular file
+lib/X11/x11perfcomp/perfratio|755|0|0|regular file
+lib/X11/x11perfcomp/fillblnk|755|0|0|regular file
+lib/X11/x11perfcomp/Xmark|755|0|0|regular file
+lib/pkgconfig/xkbcomp.pc|644|0|0|regular file
+share/X11/app-defaults/Xmessage|644|0|0|regular file
+share/X11/app-defaults/Xmessage-color|644|0|0|regular file
+share/man/man1/xdpyinfo.1.gz|644|0|0|regular file
+share/man/man1/iceauth.1.gz|644|0|0|regular file
+share/man/man1/xdriinfo.1.gz|644|0|0|regular file
+share/man/man1/x11perfcomp.1.gz|644|0|0|regular file
+share/man/man1/xrandr.1.gz|644|0|0|regular file
+share/man/man1/sessreg.1.gz|644|0|0|regular file
+share/man/man1/xsetroot.1.gz|644|0|0|regular file
+share/man/man1/xdpr.1.gz|644|0|0|regular file
+share/man/man1/xwud.1.gz|644|0|0|regular file
+share/man/man1/luit.1.gz|644|0|0|regular file
+share/man/man1/xev.1.gz|644|0|0|regular file
+share/man/man1/xlsatoms.1.gz|644|0|0|regular file
+share/man/man1/x11perf.1.gz|644|0|0|regular file
+share/man/man1/mkfontdir.1.gz|644|0|0|regular file
+share/man/man1/xprop.1.gz|644|0|0|regular file
+share/man/man1/xgamma.1.gz|644|0|0|regular file
+share/man/man1/xbacklight.1.gz|644|0|0|regular file
+share/man/man1/xkill.1.gz|644|0|0|regular file
+share/man/man1/xwd.1.gz|644|0|0|regular file
+share/man/man1/xmessage.1.gz|644|0|0|regular file
+share/man/man1/xrdb.1.gz|644|0|0|regular file
+share/man/man1/xauth.1.gz|644|0|0|regular file
+share/man/man1/xhost.1.gz|644|0|0|regular file
+share/man/man1/smproxy.1.gz|644|0|0|regular file
+share/man/man1/xpr.1.gz|644|0|0|regular file
+share/man/man1/xkbcomp.1.gz|644|0|0|regular file
+share/man/man1/xcursorgen.1.gz|644|0|0|regular file
+share/man/man1/xinput.1.gz|644|0|0|regular file
+share/man/man1/xkbvleds.1.gz|644|0|0|regular file
+share/man/man1/xvinfo.1.gz|644|0|0|regular file
+share/man/man1/mkfontscale.1.gz|644|0|0|regular file
+share/man/man1/setxkbmap.1.gz|644|0|0|regular file
+share/man/man1/Xmark.1.gz|644|0|0|regular file
+share/man/man1/xkbwatch.1.gz|644|0|0|regular file
+share/man/man1/xcmsdb.1.gz|644|0|0|regular file
+share/man/man1/xrefresh.1.gz|644|0|0|regular file
+share/man/man1/xwininfo.1.gz|644|0|0|regular file
+share/man/man1/xkbevd.1.gz|644|0|0|regular file
+share/man/man1/xlsclients.1.gz|644|0|0|regular file
+share/man/man1/xmodmap.1.gz|644|0|0|regular file
+share/man/man1/xset.1.gz|644|0|0|regular file
+share/man/man1/xkbbell.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share/X11/app-defaults|755|0|0|directory
+share/X11|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib/X11/x11perfcomp|755|0|0|directory
+lib/X11|755|0|0|directory
+lib|755|0|0|directory
+bin|755|0|0|directory

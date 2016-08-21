@@ -1,0 +1,28 @@
+name="efivar"
+desc="Tools and library to manipulate EFI variables"
+version=31
+deps="popt"
+source="https://github.com/rhinstaller/efivar/releases/download/$version/efivar-$version.tar.bz2
+bswap_constant.h
+makeguids.patch
+musl-strndupa.patch
+"
+ext() {
+	cd "${srcdir}/efivar-$version"
+	cp ../bswap_constant.h src/include/efivar/ || die
+	patch -p0 < ../makeguids.patch || die
+	patch -p0 < ../musl-strndupa.patch || die
+}
+
+build() {
+	cd "${srcdir}/efivar-$version"
+	sed 's|-O0|-Os|g' -i Make.defaults || true
+	sed 's|-rpath,$(TOPDIR)/src|-rpath,$(libdir)|g' -i src/test/Makefile || true
+
+        make libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" V=1 -j1 || die
+        make -C src/test libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" V=1 -j1 || die
+	make -j1 V=1 DESTDIR="${pkgdir}/" libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" install || die
+	
+	install -d "${pkgdir}/bin"
+	install -D -m0755 "src/test/tester" "${pkgdir}/bin/efivar-tester"
+}

@@ -1,0 +1,14 @@
+name=nettle
+version=3.3
+deps=musl
+desc="Low-level cryptographic library"
+source="ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ --disable-static \
+	--disable-documentation
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,23 @@
+name=extra-cmake-modules
+desc="Extra modules and scripts for CMake."
+deps=cmake
+version=5.33.0
+source="http://download.kde.org/stable/frameworks/${version%.*}/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+
+	mkdir build; cd build
+	
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_HTML_DOCS=OFF \
+		-DBUILD_MAN_DOCS=ON \
+		-DBUILD_QTHELP_DOCS=OFF \
+		-DBUILD_TESTING=OFF
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+}

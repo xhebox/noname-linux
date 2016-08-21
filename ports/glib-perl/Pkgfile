@@ -1,0 +1,12 @@
+name=glib-perl
+version=1.324
+desc="Perl wrappers for glib 2.x, including GObject"
+deps="glib perl-extutils-pkgconfig perl-extutils-depends"
+source="http://downloads.sourceforge.net/sourceforge/gtk2-perl/Glib-${version}.tar.gz"
+
+build() {
+	cd Glib-$version
+	perl Makefile.PL INSTALLDIRS=vendor
+	make || die
+	make -j1 DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,22 @@
+name=ki18n
+version=5.33.0
+desc='Advanced internationalization framework'
+deps="qt5-script extra-cmake-modules qt5-declarative llvm"
+source="https://download.kde.org/stable/frameworks/${version%.*}/ki18n-${version}.tar.xz
+non-gnu.patch"
+
+build() {
+	cd ki18n-$version
+	patch -p1 < ../non-gnu.patch || die
+	cd ..
+
+	mkdir -p build
+	cd build
+	cmake ../ki18n-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

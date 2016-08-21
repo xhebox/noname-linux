@@ -1,0 +1,16 @@
+lib/libuev.so.1|777|0|0|symbolic link
+lib/libuev.so|777|0|0|symbolic link
+include/uev/uev.h|644|0|0|regular file
+include/uev/private.h|644|0|0|regular file
+include/uev/queue.h|644|0|0|regular file
+lib/libuev.so.1.0.2|755|0|0|regular file
+lib/pkgconfig/libuev.pc|644|0|0|regular file
+share/doc/libuev/LICENSE|644|0|0|regular file
+share/doc/libuev/README.md|644|0|0|regular file
+share/doc/libuev|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/uev|755|0|0|directory
+include|755|0|0|directory

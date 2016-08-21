@@ -1,0 +1,26 @@
+name=argp-standalone
+version=1.3
+source="http://www.lysator.liu.se/~nisse/misc/argp-standalone-${version}.tar.gz
+argp-standalone-1.3-shared.patch
+gnu89-inline.patch
+001-throw-in-funcdef.patch"
+desc="Implementation of ARGP"
+deps=musl
+
+ext() {
+	cd $name-$version
+	patch -p1 < ../001-throw-in-funcdef.patch
+	patch -p1 < ../gnu89-inline.patch
+	patch -p0 < ../argp-standalone-1.3-shared.patch
+}
+
+build(){
+	cd $name-$version
+	autoreconf -fi
+	./configure --prefix=/
+	make || die
+	install -Dm644 argp.h "$pkgdir"/include/argp.h
+	install -Dm755 .libs/libargp.a "$pkgdir"/lib/libargp.a
+	install -Dm755 .libs/libargp.so "$pkgdir"/lib/libargp.so
+	ln -s libargp.so "$pkgdir"/lib/libargp.so.0
+}

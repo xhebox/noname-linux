@@ -1,0 +1,23 @@
+lib/libjson-c.so|777|0|0|symbolic link
+lib/libjson-c.so.2|777|0|0|symbolic link
+include/json-c/json_inttypes.h|644|0|0|regular file
+include/json-c/json_config.h|644|0|0|regular file
+include/json-c/random_seed.h|644|0|0|regular file
+include/json-c/json_object_iterator.h|644|0|0|regular file
+include/json-c/json_c_version.h|644|0|0|regular file
+include/json-c/arraylist.h|644|0|0|regular file
+include/json-c/json.h|644|0|0|regular file
+include/json-c/printbuf.h|644|0|0|regular file
+include/json-c/debug.h|644|0|0|regular file
+include/json-c/linkhash.h|644|0|0|regular file
+include/json-c/json_object.h|644|0|0|regular file
+include/json-c/json_util.h|644|0|0|regular file
+include/json-c/json_tokener.h|644|0|0|regular file
+include/json-c/json_object_private.h|644|0|0|regular file
+include/json-c/bits.h|644|0|0|regular file
+lib/libjson-c.so.2.0.2|755|0|0|regular file
+lib/pkgconfig/json-c.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/json-c|755|0|0|directory
+include|755|0|0|directory

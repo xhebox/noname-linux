@@ -1,0 +1,20 @@
+lib/libICE.so.6|777|0|0|symbolic link
+lib/libICE.so|777|0|0|symbolic link
+include/X11/ICE/ICEutil.h|644|0|0|regular file
+include/X11/ICE/ICEconn.h|644|0|0|regular file
+include/X11/ICE/ICElib.h|644|0|0|regular file
+include/X11/ICE/ICE.h|644|0|0|regular file
+include/X11/ICE/ICEproto.h|644|0|0|regular file
+include/X11/ICE/ICEmsg.h|644|0|0|regular file
+lib/pkgconfig/ice.pc|644|0|0|regular file
+lib/libICE.so.6.3.0|755|0|0|regular file
+share/doc/libICE/ICElib.xml|644|0|0|regular file
+share/doc/libICE/ice.xml|644|0|0|regular file
+share/doc/libICE|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/ICE|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

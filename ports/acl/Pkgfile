@@ -1,0 +1,27 @@
+name=acl
+version=2.2.52
+desc="Access Control Lists library"
+source="http://download-mirror.savannah.gnu.org/releases/$name/$name-$version.src.tar.gz
+e98ce8acf84d12ea67a3ac76bf63c6d87d9af86d.patch"
+deps="attr"
+
+build() {
+	cd $name-$version
+	patch -p1 -i "$srcdir"/e98ce8acf84d12ea67a3ac76bf63c6d87d9af86d.patch 
+	sed -i \
+		-e "/^PKG_DOC_DIR/s:@pkg_name@:$name:" \
+		-e '/HAVE_ZIPPED_MANPAGES/s:=.*:=false:' \
+		include/builddefs.in 
+	unset PLATFORM
+	export DEBUG=-DNDEBUG
+	export OPTIMIZER="$CFLAGS"
+	./configure \
+		--prefix= \
+		--libexecdir=/lib \
+		--disable-static \
+		--disable-gettext \
+		--enable-shared 
+	make  || die
+	make -j1 DIST_ROOT="$pkgdir" install install-lib install-dev  || die
+	rm -r "$pkgdir"/share/doc 
+}

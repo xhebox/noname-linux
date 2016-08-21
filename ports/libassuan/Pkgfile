@@ -1,0 +1,12 @@
+name=libassuan
+version=2.4.3
+deps="libgpg-error"
+desc="Interprocess communication library used by some GnuPG components"
+source="https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

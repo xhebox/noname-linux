@@ -1,0 +1,15 @@
+name=libxft
+version=2.3.2
+desc="X font rendering client library"
+deps="libxrender fontconfig harfbuzz"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXft-$version.tar.bz2"
+
+build() {
+	cd libXft-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

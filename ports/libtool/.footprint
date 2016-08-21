@@ -1,0 +1,72 @@
+lib/libltdl.so|777|0|0|symbolic link
+lib/libltdl.so.7|777|0|0|symbolic link
+bin/libtool|755|0|0|regular file
+bin/libtoolize|755|0|0|regular file
+include/libltdl/lt_dlloader.h|644|0|0|regular file
+include/libltdl/lt_system.h|644|0|0|regular file
+include/libltdl/lt_error.h|644|0|0|regular file
+include/ltdl.h|644|0|0|regular file
+lib/libltdl.so.7.3.1|755|0|0|regular file
+share/libtool/lt__argz.c|644|0|0|regular file
+share/libtool/README|644|0|0|regular file
+share/libtool/slist.c|644|0|0|regular file
+share/libtool/COPYING.LIB|644|0|0|regular file
+share/libtool/config-h.in|644|0|0|regular file
+share/libtool/configure.ac|644|0|0|regular file
+share/libtool/lt__alloc.c|644|0|0|regular file
+share/libtool/lt__strl.c|644|0|0|regular file
+share/libtool/ltdl.mk|644|0|0|regular file
+share/libtool/configure|755|0|0|regular file
+share/libtool/ltdl.c|644|0|0|regular file
+share/libtool/loaders/dld_link.c|644|0|0|regular file
+share/libtool/loaders/loadlibrary.c|644|0|0|regular file
+share/libtool/loaders/dlopen.c|644|0|0|regular file
+share/libtool/loaders/dyld.c|644|0|0|regular file
+share/libtool/loaders/shl_load.c|644|0|0|regular file
+share/libtool/loaders/preopen.c|644|0|0|regular file
+share/libtool/loaders/load_add_on.c|644|0|0|regular file
+share/libtool/libltdl/lt__argz_.h|644|0|0|regular file
+share/libtool/libltdl/lt__glibc.h|644|0|0|regular file
+share/libtool/libltdl/lt_dlloader.h|644|0|0|regular file
+share/libtool/libltdl/lt__alloc.h|644|0|0|regular file
+share/libtool/libltdl/lt__dirent.h|644|0|0|regular file
+share/libtool/libltdl/slist.h|644|0|0|regular file
+share/libtool/libltdl/lt_system.h|644|0|0|regular file
+share/libtool/libltdl/lt__private.h|644|0|0|regular file
+share/libtool/libltdl/lt_error.h|644|0|0|regular file
+share/libtool/libltdl/lt__strl.h|644|0|0|regular file
+share/libtool/Makefile.in|644|0|0|regular file
+share/libtool/ltdl.h|644|0|0|regular file
+share/libtool/lt__dirent.c|644|0|0|regular file
+share/libtool/build-aux/depcomp|755|0|0|regular file
+share/libtool/build-aux/config.guess|755|0|0|regular file
+share/libtool/build-aux/config.sub|755|0|0|regular file
+share/libtool/build-aux/install-sh|755|0|0|regular file
+share/libtool/build-aux/ltmain.sh|644|0|0|regular file
+share/libtool/build-aux/compile|755|0|0|regular file
+share/libtool/build-aux/missing|755|0|0|regular file
+share/libtool/lt_dlloader.c|644|0|0|regular file
+share/libtool/lt_error.c|644|0|0|regular file
+share/libtool/aclocal.m4|644|0|0|regular file
+share/libtool/Makefile.am|644|0|0|regular file
+share/aclocal/ltsugar.m4|644|0|0|regular file
+share/aclocal/ltargz.m4|644|0|0|regular file
+share/aclocal/lt~obsolete.m4|644|0|0|regular file
+share/aclocal/ltoptions.m4|644|0|0|regular file
+share/aclocal/ltversion.m4|644|0|0|regular file
+share/aclocal/ltdl.m4|644|0|0|regular file
+share/aclocal/libtool.m4|644|0|0|regular file
+share/man/man1/libtoolize.1.gz|644|0|0|regular file
+share/man/man1/libtool.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share/aclocal|755|0|0|directory
+share/libtool/build-aux|755|0|0|directory
+share/libtool/libltdl|755|0|0|directory
+share/libtool/loaders|755|0|0|directory
+share/libtool|755|0|0|directory
+share|755|0|0|directory
+lib|755|0|0|directory
+include/libltdl|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

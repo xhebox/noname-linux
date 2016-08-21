@@ -1,0 +1,77 @@
+bin/p11-kit|755|0|0|regular file
+bin/trust|755|0|0|regular file
+bin|755|0|0|directory
+etc/pkcs11/pkcs11.conf.example|644|0|0|regular file
+etc/pkcs11|755|0|0|directory
+etc|755|0|0|directory
+include/p11-kit-1/p11-kit/deprecated.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/iter.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/p11-kit.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/pin.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/pkcs11.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/pkcs11x.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/remote.h|644|0|0|regular file
+include/p11-kit-1/p11-kit/uri.h|644|0|0|regular file
+include/p11-kit-1/p11-kit|755|0|0|directory
+include/p11-kit-1|755|0|0|directory
+include|755|0|0|directory
+lib/libnssckbi-p11-kit.so|755|0|0|regular file
+lib/libp11-kit.so.0.3.0|755|0|0|regular file
+lib/libp11-kit.so.0|777|0|0|symbolic link
+lib/libp11-kit.so|777|0|0|symbolic link
+lib/p11-kit-proxy.so|777|0|0|symbolic link
+lib/p11-kit/p11-kit-remote|755|0|0|regular file
+lib/p11-kit/p11-kit-server|755|0|0|regular file
+lib/p11-kit/trust-extract-compat|755|0|0|regular file
+lib/p11-kit|755|0|0|directory
+lib/pkcs11/p11-kit-client.so|755|0|0|regular file
+lib/pkcs11/p11-kit-trust.so|755|0|0|regular file
+lib/pkcs11|755|0|0|directory
+lib/pkgconfig/p11-kit-1.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/gtk-doc/html/p11-kit/config-example.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/config-files.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/config.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-building-style.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-building.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-commands.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-debugging.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-paths.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel-testing.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/devel.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/gtk-doc.css|644|0|0|regular file
+share/gtk-doc/html/p11-kit/home.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/index.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/left-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/left.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-Deprecated.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-Future.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-Modules.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-PIN-Callbacks.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-URIs.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit-Utilities.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit.devhelp2|644|0|0|regular file
+share/gtk-doc/html/p11-kit/p11-kit.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/pkcs11-conf.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/reference.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/right-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/right.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/sharing-managed.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/sharing.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/style.css|644|0|0|regular file
+share/gtk-doc/html/p11-kit/tools.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/trust-disable.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/trust-glib-networking.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/trust-module.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/trust-nss.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/trust.html|644|0|0|regular file
+share/gtk-doc/html/p11-kit/up-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit/up.png|644|0|0|regular file
+share/gtk-doc/html/p11-kit|755|0|0|directory
+share/gtk-doc/html|755|0|0|directory
+share/gtk-doc|755|0|0|directory
+share/p11-kit/modules/p11-kit-trust.module|644|0|0|regular file
+share/p11-kit/modules|755|0|0|directory
+share/p11-kit|755|0|0|directory
+share|755|0|0|directory

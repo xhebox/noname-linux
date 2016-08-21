@@ -1,0 +1,92 @@
+bin/lzcat|777|0|0|symbolic link
+bin/lzcmp|777|0|0|symbolic link
+bin/lzdiff|777|0|0|symbolic link
+bin/lzegrep|777|0|0|symbolic link
+bin/lzfgrep|777|0|0|symbolic link
+bin/lzgrep|777|0|0|symbolic link
+bin/lzless|777|0|0|symbolic link
+bin/lzmadec|755|0|0|regular file
+bin/lzmainfo|755|0|0|regular file
+bin/lzma|777|0|0|symbolic link
+bin/lzmore|777|0|0|symbolic link
+bin/unlzma|777|0|0|symbolic link
+bin/unxz|777|0|0|symbolic link
+bin/xzcat|777|0|0|symbolic link
+bin/xzcmp|777|0|0|symbolic link
+bin/xzdec|755|0|0|regular file
+bin/xzdiff|755|0|0|regular file
+bin/xzegrep|777|0|0|symbolic link
+bin/xzfgrep|777|0|0|symbolic link
+bin/xzgrep|755|0|0|regular file
+bin/xzless|755|0|0|regular file
+bin/xzmore|755|0|0|regular file
+bin/xz|755|0|0|regular file
+bin|755|0|0|directory
+include/lzma.h|644|0|0|regular file
+include/lzma/base.h|644|0|0|regular file
+include/lzma/bcj.h|644|0|0|regular file
+include/lzma/block.h|644|0|0|regular file
+include/lzma/check.h|644|0|0|regular file
+include/lzma/container.h|644|0|0|regular file
+include/lzma/delta.h|644|0|0|regular file
+include/lzma/filter.h|644|0|0|regular file
+include/lzma/hardware.h|644|0|0|regular file
+include/lzma/index.h|644|0|0|regular file
+include/lzma/index_hash.h|644|0|0|regular file
+include/lzma/lzma12.h|644|0|0|regular file
+include/lzma/stream_flags.h|644|0|0|regular file
+include/lzma/version.h|644|0|0|regular file
+include/lzma/vli.h|644|0|0|regular file
+include/lzma|755|0|0|directory
+include|755|0|0|directory
+lib/liblzma.so.5.2.3|755|0|0|regular file
+lib/liblzma.so.5|777|0|0|symbolic link
+lib/liblzma.so|777|0|0|symbolic link
+lib/pkgconfig/liblzma.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/locale/cs/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/de/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/fr/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/it/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/pl/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/vi/LC_MESSAGES/xz.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/lzcat.1.gz|777|0|0|symbolic link
+share/man/man1/lzcmp.1.gz|777|0|0|symbolic link
+share/man/man1/lzdiff.1.gz|777|0|0|symbolic link
+share/man/man1/lzegrep.1.gz|777|0|0|symbolic link
+share/man/man1/lzfgrep.1.gz|777|0|0|symbolic link
+share/man/man1/lzgrep.1.gz|777|0|0|symbolic link
+share/man/man1/lzless.1.gz|777|0|0|symbolic link
+share/man/man1/lzma.1.gz|777|0|0|symbolic link
+share/man/man1/lzmadec.1.gz|777|0|0|symbolic link
+share/man/man1/lzmainfo.1.gz|644|0|0|regular file
+share/man/man1/lzmore.1.gz|777|0|0|symbolic link
+share/man/man1/unlzma.1.gz|777|0|0|symbolic link
+share/man/man1/unxz.1.gz|777|0|0|symbolic link
+share/man/man1/xz.1.gz|644|0|0|regular file
+share/man/man1/xzcat.1.gz|777|0|0|symbolic link
+share/man/man1/xzcmp.1.gz|777|0|0|symbolic link
+share/man/man1/xzdec.1.gz|644|0|0|regular file
+share/man/man1/xzdiff.1.gz|644|0|0|regular file
+share/man/man1/xzegrep.1.gz|777|0|0|symbolic link
+share/man/man1/xzfgrep.1.gz|777|0|0|symbolic link
+share/man/man1/xzgrep.1.gz|644|0|0|regular file
+share/man/man1/xzless.1.gz|644|0|0|regular file
+share/man/man1/xzmore.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

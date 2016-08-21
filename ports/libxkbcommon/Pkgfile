@@ -1,0 +1,12 @@
+name=libxkbcommon
+version=0.7.1
+desc="xkbcommon is a library to handle keyboard descriptions, including loading them from disk, parsing them and handling their state"
+deps="libxcb"
+source="http://xkbcommon.org/download/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version/
+	./configure --prefix= --mandir=/share/man/ --disable-static
+	make || die
+	make -j1 DESTDIR="$pkgdir" PREFIX=/ install || die
+}

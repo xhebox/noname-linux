@@ -1,0 +1,11 @@
+--- a/include/lmms_math.h	2016-12-10 03:20:33.262213993 +0000
++++ b/include/lmms_math.h	2016-12-10 03:20:33.262213993 +0000
+@@ -34,7 +34,7 @@
+ #include <cmath>
+ using namespace std;
+ 
+-#if defined (LMMS_BUILD_WIN32) || defined (LMMS_BUILD_APPLE) || defined(LMMS_BUILD_HAIKU)  || defined (__FreeBSD__) || defined(__OpenBSD__)
++#if defined (LMMS_BUILD_WIN32) || defined (LMMS_BUILD_APPLE) || defined(LMMS_BUILD_HAIKU)  || defined (__FreeBSD__) || defined(__OpenBSD__) || !defined(__GLIBC__)
+ #ifndef isnanf
+ #define isnanf(x)	isnan(x)
+ #endif

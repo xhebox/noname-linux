@@ -1,0 +1,264 @@
+bin/esdcompat|755|0|0|regular file
+bin/pacat|755|0|0|regular file
+bin/pacmd|755|0|0|regular file
+bin/pactl|755|0|0|regular file
+bin/padsp|755|0|0|regular file
+bin/pamon|777|0|0|symbolic link
+bin/paplay|777|0|0|symbolic link
+bin/parecord|777|0|0|symbolic link
+bin/parec|777|0|0|symbolic link
+bin/pasuspender|755|0|0|regular file
+bin/pax11publish|755|0|0|regular file
+bin/pulseaudio|755|0|0|regular file
+bin/qpaeq|755|0|0|regular file
+bin/start-pulseaudio-x11|755|0|0|regular file
+bin|755|0|0|directory
+etc/pulse/client.conf|644|0|0|regular file
+etc/pulse/daemon.conf|644|0|0|regular file
+etc/pulse/default.pa|644|0|0|regular file
+etc/pulse/system.pa|644|0|0|regular file
+etc/pulse|755|0|0|directory
+etc/xdg/autostart/pulseaudio.desktop|644|0|0|regular file
+etc/xdg/autostart|755|0|0|directory
+etc/xdg|755|0|0|directory
+etc|755|0|0|directory
+include/pulse/cdecl.h|644|0|0|regular file
+include/pulse/channelmap.h|644|0|0|regular file
+include/pulse/context.h|644|0|0|regular file
+include/pulse/def.h|644|0|0|regular file
+include/pulse/direction.h|644|0|0|regular file
+include/pulse/error.h|644|0|0|regular file
+include/pulse/ext-device-manager.h|644|0|0|regular file
+include/pulse/ext-device-restore.h|644|0|0|regular file
+include/pulse/ext-stream-restore.h|644|0|0|regular file
+include/pulse/format.h|644|0|0|regular file
+include/pulse/gccmacro.h|644|0|0|regular file
+include/pulse/glib-mainloop.h|644|0|0|regular file
+include/pulse/introspect.h|644|0|0|regular file
+include/pulse/mainloop-api.h|644|0|0|regular file
+include/pulse/mainloop-signal.h|644|0|0|regular file
+include/pulse/mainloop.h|644|0|0|regular file
+include/pulse/operation.h|644|0|0|regular file
+include/pulse/proplist.h|644|0|0|regular file
+include/pulse/pulseaudio.h|644|0|0|regular file
+include/pulse/rtclock.h|644|0|0|regular file
+include/pulse/sample.h|644|0|0|regular file
+include/pulse/scache.h|644|0|0|regular file
+include/pulse/simple.h|644|0|0|regular file
+include/pulse/stream.h|644|0|0|regular file
+include/pulse/subscribe.h|644|0|0|regular file
+include/pulse/thread-mainloop.h|644|0|0|regular file
+include/pulse/timeval.h|644|0|0|regular file
+include/pulse/utf8.h|644|0|0|regular file
+include/pulse/util.h|644|0|0|regular file
+include/pulse/version.h|644|0|0|regular file
+include/pulse/volume.h|644|0|0|regular file
+include/pulse/xmalloc.h|644|0|0|regular file
+include/pulse|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/PulseAudio/PulseAudioConfig.cmake|644|0|0|regular file
+lib/cmake/PulseAudio/PulseAudioConfigVersion.cmake|644|0|0|regular file
+lib/cmake/PulseAudio|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libpulse-mainloop-glib.so.0.0.5|755|0|0|regular file
+lib/libpulse-mainloop-glib.so.0|777|0|0|symbolic link
+lib/libpulse-mainloop-glib.so|777|0|0|symbolic link
+lib/libpulse-simple.so.0.1.0|755|0|0|regular file
+lib/libpulse-simple.so.0|777|0|0|symbolic link
+lib/libpulse-simple.so|777|0|0|symbolic link
+lib/libpulse.so.0.20.1|755|0|0|regular file
+lib/libpulse.so.0|777|0|0|symbolic link
+lib/libpulse.so|777|0|0|symbolic link
+lib/pkgconfig/libpulse-mainloop-glib.pc|644|0|0|regular file
+lib/pkgconfig/libpulse-simple.pc|644|0|0|regular file
+lib/pkgconfig/libpulse.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/pulse-10.0/modules/libalsa-util.so|755|0|0|regular file
+lib/pulse-10.0/modules/libcli.so|755|0|0|regular file
+lib/pulse-10.0/modules/liboss-util.so|755|0|0|regular file
+lib/pulse-10.0/modules/libprotocol-cli.so|755|0|0|regular file
+lib/pulse-10.0/modules/libprotocol-esound.so|755|0|0|regular file
+lib/pulse-10.0/modules/libprotocol-http.so|755|0|0|regular file
+lib/pulse-10.0/modules/libprotocol-native.so|755|0|0|regular file
+lib/pulse-10.0/modules/libprotocol-simple.so|755|0|0|regular file
+lib/pulse-10.0/modules/libraop.so|755|0|0|regular file
+lib/pulse-10.0/modules/librtp.so|755|0|0|regular file
+lib/pulse-10.0/modules/libwebrtc-util.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-allow-passthrough.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-alsa-card.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-alsa-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-alsa-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-always-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-augment-properties.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-card-restore.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-cli-protocol-tcp.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-cli-protocol-unix.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-cli.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-combine-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-combine.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-console-kit.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-dbus-protocol.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-default-device-restore.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-detect.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-device-manager.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-device-restore.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-echo-cancel.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-equalizer-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-esound-compat-spawnfd.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-esound-compat-spawnpid.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-esound-protocol-tcp.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-esound-protocol-unix.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-esound-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-filter-apply.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-filter-heuristics.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-hal-detect.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-http-protocol-tcp.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-http-protocol-unix.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-intended-roles.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-ladspa-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-loopback.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-match.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-mmkbd-evdev.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-native-protocol-fd.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-native-protocol-tcp.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-native-protocol-unix.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-null-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-null-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-oss.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-pipe-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-pipe-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-position-event-sounds.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-raop-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-remap-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-remap-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-rescue-streams.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-role-cork.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-role-ducking.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-rtp-recv.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-rtp-send.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-rygel-media-server.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-simple-protocol-tcp.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-simple-protocol-unix.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-sine-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-sine.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-stream-restore.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-suspend-on-idle.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-switch-on-connect.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-switch-on-port-available.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-tunnel-sink-new.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-tunnel-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-tunnel-source-new.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-tunnel-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-udev-detect.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-virtual-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-virtual-source.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-virtual-surround-sink.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-volume-restore.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-x11-bell.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-x11-cork-request.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-x11-publish.so|755|0|0|regular file
+lib/pulse-10.0/modules/module-x11-xsmp.so|755|0|0|regular file
+lib/pulse-10.0/modules|755|0|0|directory
+lib/pulse-10.0|755|0|0|directory
+lib/pulseaudio/libpulsecommon-10.0.so|755|0|0|regular file
+lib/pulseaudio/libpulsecore-10.0.so|755|0|0|regular file
+lib/pulseaudio/libpulsedsp.so|755|0|0|regular file
+lib/pulseaudio|755|0|0|directory
+lib/udev/rules.d/90-pulseaudio.rules|644|0|0|regular file
+lib/udev/rules.d|755|0|0|directory
+lib/udev|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/pacat|777|0|0|symbolic link
+share/bash-completion/completions/pacmd|777|0|0|symbolic link
+share/bash-completion/completions/pactl|777|0|0|symbolic link
+share/bash-completion/completions/padsp|777|0|0|symbolic link
+share/bash-completion/completions/paplay|777|0|0|symbolic link
+share/bash-completion/completions/parecord|777|0|0|symbolic link
+share/bash-completion/completions/parec|777|0|0|symbolic link
+share/bash-completion/completions/pasuspender|777|0|0|symbolic link
+share/bash-completion/completions/pulseaudio|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/man/man1/esdcompat.1.gz|644|0|0|regular file
+share/man/man1/pacat.1.gz|644|0|0|regular file
+share/man/man1/pacmd.1.gz|644|0|0|regular file
+share/man/man1/pactl.1.gz|644|0|0|regular file
+share/man/man1/padsp.1.gz|644|0|0|regular file
+share/man/man1/pamon.1.gz|777|0|0|symbolic link
+share/man/man1/paplay.1.gz|777|0|0|symbolic link
+share/man/man1/parec.1.gz|777|0|0|symbolic link
+share/man/man1/parecord.1.gz|777|0|0|symbolic link
+share/man/man1/pasuspender.1.gz|644|0|0|regular file
+share/man/man1/pax11publish.1.gz|644|0|0|regular file
+share/man/man1/pulseaudio.1.gz|644|0|0|regular file
+share/man/man1/start-pulseaudio-x11.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/default.pa.5.gz|644|0|0|regular file
+share/man/man5/pulse-cli-syntax.5.gz|644|0|0|regular file
+share/man/man5/pulse-client.conf.5.gz|644|0|0|regular file
+share/man/man5/pulse-daemon.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share/pulseaudio/alsa-mixer/paths/analog-input-aux.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-dock-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-fm.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-front-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-headphone-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-headset-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-internal-mic-always.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-internal-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-linein.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-mic-line.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-mic.conf.common|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-rear-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-tvtuner.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input-video.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input.conf.common|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-input.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-headphones-2.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-headphones.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-lineout.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-mono.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-speaker-always.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output-speaker.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output.conf.common|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/analog-output.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-0.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-1.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-2.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-3.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-4.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-5.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-6.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/hdmi-output-7.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths/iec958-stereo-output.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/paths|755|0|0|directory
+share/pulseaudio/alsa-mixer/profile-sets/default.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/force-speaker-and-int-mic.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/force-speaker.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/kinect-audio.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/maudio-fasttrack-pro.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-audio4dj.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-audio8dj.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-korecontroller.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-traktor-audio10.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-traktor-audio2.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-traktor-audio6.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/native-instruments-traktorkontrol-s4.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets/sb-omni-surround-5.1.conf|644|0|0|regular file
+share/pulseaudio/alsa-mixer/profile-sets|755|0|0|directory
+share/pulseaudio/alsa-mixer|755|0|0|directory
+share/pulseaudio|755|0|0|directory
+share/vala/vapi/libpulse-mainloop-glib.deps|644|0|0|regular file
+share/vala/vapi/libpulse-mainloop-glib.vapi|644|0|0|regular file
+share/vala/vapi/libpulse-simple.deps|644|0|0|regular file
+share/vala/vapi/libpulse-simple.vapi|644|0|0|regular file
+share/vala/vapi/libpulse.deps|644|0|0|regular file
+share/vala/vapi/libpulse.vapi|644|0|0|regular file
+share/vala/vapi|755|0|0|directory
+share/vala|755|0|0|directory
+share/zsh/site-functions/_pulseaudio|644|0|0|regular file
+share/zsh/site-functions|755|0|0|directory
+share/zsh|755|0|0|directory
+share|755|0|0|directory

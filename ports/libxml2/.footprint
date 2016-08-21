@@ -1,0 +1,79 @@
+lib/libxml2.so.2|777|0|0|symbolic link
+lib/libxml2.so|777|0|0|symbolic link
+bin/xml2-config|755|0|0|regular file
+bin/xmllint|755|0|0|regular file
+bin/xmlcatalog|755|0|0|regular file
+include/libxml2/libxml/xmlIO.h|644|0|0|regular file
+include/libxml2/libxml/threads.h|644|0|0|regular file
+include/libxml2/libxml/list.h|644|0|0|regular file
+include/libxml2/libxml/entities.h|644|0|0|regular file
+include/libxml2/libxml/xpointer.h|644|0|0|regular file
+include/libxml2/libxml/xpathInternals.h|644|0|0|regular file
+include/libxml2/libxml/xmlstring.h|644|0|0|regular file
+include/libxml2/libxml/encoding.h|644|0|0|regular file
+include/libxml2/libxml/relaxng.h|644|0|0|regular file
+include/libxml2/libxml/xmlerror.h|644|0|0|regular file
+include/libxml2/libxml/xlink.h|644|0|0|regular file
+include/libxml2/libxml/xpath.h|644|0|0|regular file
+include/libxml2/libxml/xmlmemory.h|644|0|0|regular file
+include/libxml2/libxml/uri.h|644|0|0|regular file
+include/libxml2/libxml/xinclude.h|644|0|0|regular file
+include/libxml2/libxml/xmlsave.h|644|0|0|regular file
+include/libxml2/libxml/DOCBparser.h|644|0|0|regular file
+include/libxml2/libxml/tree.h|644|0|0|regular file
+include/libxml2/libxml/parser.h|644|0|0|regular file
+include/libxml2/libxml/xmlreader.h|644|0|0|regular file
+include/libxml2/libxml/pattern.h|644|0|0|regular file
+include/libxml2/libxml/xmlautomata.h|644|0|0|regular file
+include/libxml2/libxml/catalog.h|644|0|0|regular file
+include/libxml2/libxml/chvalid.h|644|0|0|regular file
+include/libxml2/libxml/dict.h|644|0|0|regular file
+include/libxml2/libxml/SAX2.h|644|0|0|regular file
+include/libxml2/libxml/nanoftp.h|644|0|0|regular file
+include/libxml2/libxml/parserInternals.h|644|0|0|regular file
+include/libxml2/libxml/xmlschemastypes.h|644|0|0|regular file
+include/libxml2/libxml/debugXML.h|644|0|0|regular file
+include/libxml2/libxml/globals.h|644|0|0|regular file
+include/libxml2/libxml/SAX.h|644|0|0|regular file
+include/libxml2/libxml/nanohttp.h|644|0|0|regular file
+include/libxml2/libxml/HTMLtree.h|644|0|0|regular file
+include/libxml2/libxml/xmlregexp.h|644|0|0|regular file
+include/libxml2/libxml/xmlschemas.h|644|0|0|regular file
+include/libxml2/libxml/xmlversion.h|644|0|0|regular file
+include/libxml2/libxml/schemasInternals.h|644|0|0|regular file
+include/libxml2/libxml/xmlmodule.h|644|0|0|regular file
+include/libxml2/libxml/c14n.h|644|0|0|regular file
+include/libxml2/libxml/HTMLparser.h|644|0|0|regular file
+include/libxml2/libxml/xmlunicode.h|644|0|0|regular file
+include/libxml2/libxml/schematron.h|644|0|0|regular file
+include/libxml2/libxml/hash.h|644|0|0|regular file
+include/libxml2/libxml/xmlexports.h|644|0|0|regular file
+include/libxml2/libxml/xmlwriter.h|644|0|0|regular file
+include/libxml2/libxml/valid.h|644|0|0|regular file
+lib/xml2Conf.sh|644|0|0|regular file
+lib/libxml2.so.2.9.4|755|0|0|regular file
+lib/cmake/libxml2/libxml2-config.cmake|644|0|0|regular file
+lib/pkgconfig/libxml-2.0.pc|644|0|0|regular file
+lib/python2.7/site-packages/libxml2mod.so|755|0|0|regular file
+lib/python2.7/site-packages/drv_libxml2.py|644|0|0|regular file
+lib/python2.7/site-packages/libxml2.py|644|0|0|regular file
+share/aclocal/libxml.m4|644|0|0|regular file
+share/man/man3/libxml.3.gz|644|0|0|regular file
+share/man/man1/xmlcatalog.1.gz|644|0|0|regular file
+share/man/man1/xmllint.1.gz|644|0|0|regular file
+share/man/man1/xml2-config.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share/aclocal|755|0|0|directory
+share|755|0|0|directory
+lib/python2.7/site-packages|755|0|0|directory
+lib/python2.7|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib/cmake/libxml2|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib|755|0|0|directory
+include/libxml2/libxml|755|0|0|directory
+include/libxml2|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

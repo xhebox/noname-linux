@@ -1,0 +1,17 @@
+lib32/libvorbisfile.so|777|0|0|symbolic link
+lib32/libvorbis.so|777|0|0|symbolic link
+lib32/libvorbisenc.so|777|0|0|symbolic link
+lib32/libvorbisfile.so.3|777|0|0|symbolic link
+lib32/libvorbisenc.so.2|777|0|0|symbolic link
+lib32/libvorbis.so.0|777|0|0|symbolic link
+lib32/libvorbisfile.a|644|0|0|regular file
+lib32/libvorbisfile.so.3.3.7|755|0|0|regular file
+lib32/libvorbisenc.a|644|0|0|regular file
+lib32/libvorbis.a|644|0|0|regular file
+lib32/libvorbis.so.0.4.8|755|0|0|regular file
+lib32/pkgconfig/vorbisenc.pc|644|0|0|regular file
+lib32/pkgconfig/vorbis.pc|644|0|0|regular file
+lib32/pkgconfig/vorbisfile.pc|644|0|0|regular file
+lib32/libvorbisenc.so.2.0.11|755|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

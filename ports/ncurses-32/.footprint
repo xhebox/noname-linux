@@ -1,0 +1,34 @@
+lib32/libncursesw.so|777|0|0|symbolic link
+lib32/libpanelw.so|777|0|0|symbolic link
+lib32/libpanelw.so.6|777|0|0|symbolic link
+lib32/libcurses.so|777|0|0|symbolic link
+lib32/libformw.so|777|0|0|symbolic link
+lib32/libformw.so.6|777|0|0|symbolic link
+lib32/libncursesw.so.6|777|0|0|symbolic link
+lib32/pkgconfig/ncurses++.pc|777|0|0|symbolic link
+lib32/pkgconfig/menu.pc|777|0|0|symbolic link
+lib32/pkgconfig/form.pc|777|0|0|symbolic link
+lib32/pkgconfig/panel.pc|777|0|0|symbolic link
+lib32/pkgconfig/ncurses.pc|777|0|0|symbolic link
+lib32/libmenuw.so.6|777|0|0|symbolic link
+lib32/libmenuw.so|777|0|0|symbolic link
+lib32/libpanelw.so.6.0|755|0|0|regular file
+lib32/libcursesw.so|644|0|0|regular file
+lib32/lib32ncurses++.so|644|0|0|regular file
+lib32/lib32panel.so|644|0|0|regular file
+lib32/libformw.a|644|0|0|regular file
+lib32/lib32ncurses.so|644|0|0|regular file
+lib32/libpanelw.a|644|0|0|regular file
+lib32/lib32menu.so|644|0|0|regular file
+lib32/pkgconfig/menuw.pc|644|0|0|regular file
+lib32/pkgconfig/panelw.pc|644|0|0|regular file
+lib32/pkgconfig/ncursesw.pc|644|0|0|regular file
+lib32/pkgconfig/formw.pc|644|0|0|regular file
+lib32/libmenuw.so.6.0|755|0|0|regular file
+lib32/lib32form.so|644|0|0|regular file
+lib32/libncursesw.a|644|0|0|regular file
+lib32/libformw.so.6.0|755|0|0|regular file
+lib32/libncursesw.so.6.0|755|0|0|regular file
+lib32/libmenuw.a|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

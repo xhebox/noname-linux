@@ -1,0 +1,27 @@
+name=python-nose
+version=1.3.7
+deps="python-setuptools"
+source="http://pypi.python.org/packages/source/n/nose/nose-${version}.tar.gz"
+desc="A discovery-based unittest extension"
+
+build() {
+	cp -r nose-$version nose3
+	cd nose-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../nose3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	mkdir "$pkgdir"/share
+	mv "$pkgdir"/man "$pkgdir"/share
+}
+

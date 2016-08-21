@@ -1,0 +1,14 @@
+lib/libXvMC.so.1|777|0|0|symbolic link
+lib/libXvMCW.so.1|777|0|0|symbolic link
+lib/libXvMCW.so|777|0|0|symbolic link
+lib/libXvMC.so|777|0|0|symbolic link
+include/X11/extensions/XvMClib.h|644|0|0|regular file
+lib/libXvMC.so.1.0.0|755|0|0|regular file
+lib/libXvMCW.so.1.0.0|755|0|0|regular file
+lib/pkgconfig/xvmc.pc|644|0|0|regular file
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/extensions|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

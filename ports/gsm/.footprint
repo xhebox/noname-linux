@@ -1,0 +1,21 @@
+bin/tcat|777|0|0|symbolic link
+bin/toast|755|0|0|regular file
+bin/untoast|777|0|0|symbolic link
+bin|755|0|0|directory
+include/gsm/gsm.h|444|0|0|regular file
+include/gsm|755|0|0|directory
+include|755|0|0|directory
+lib/libgsm.so.1.0.13|755|0|0|regular file
+lib/libgsm.so.1|777|0|0|symbolic link
+lib/libgsm.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/gsm|755|0|0|directory
+share/man/man1/toast.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/gsm.3.gz|644|0|0|regular file
+share/man/man3/gsm_explode.3.gz|644|0|0|regular file
+share/man/man3/gsm_option.3.gz|644|0|0|regular file
+share/man/man3/gsm_print.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

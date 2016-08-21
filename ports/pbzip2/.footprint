@@ -1,0 +1,8 @@
+bin/pbunzip2|777|0|0|symbolic link
+bin/pbzcat|777|0|0|symbolic link
+bin/pbzip2|755|0|0|regular file
+share/man/man1/pbzip2.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

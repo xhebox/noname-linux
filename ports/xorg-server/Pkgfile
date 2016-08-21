@@ -1,0 +1,59 @@
+name=xorg-server
+version=1.19.3
+desc="X Window System server"
+deps="mesa libressl libsm libepoxy pixman libx11 libxkbfile libxfont2 libxxf86vm xorg-proto libxres libxmu libxshmfence libxtst libxv xcb-util libva libva-intel-driver harfbuzz xcb-util-wm xcb-util-image xcb-util-cursor xcb-util-renderutil xcb-util-keysyms xkeyboard-config libxaw xorg-app xorg-fonts libtxc_dxtn libxinerama libgcrypt libvdpau-va-gl"
+source="http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-$version.tar.bz2
+https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/xorg-server/patches/musl-io.patch
+nvidia-add-modulepath-support.patch
+xserver-autobind-hotplug.patch
+"
+
+ext() {
+	cd xorg-server-$version
+	for i in $source;do
+		msg $i
+		case $i in
+		*musl*.patch) patch -p0 -i "$srcdir"/`basename $i` || die;;
+		*.patch) patch -p1 -i "$srcdir"/$i || die;;
+		esac
+	done
+}
+
+build() {
+	cd xorg-server-$version
+	export CFLAGS="$CFLAGS -D__uid_t=uid_t -D__gid_t=gid_t "
+
+	NOCONFIGURE=1 ./autogen.sh
+	./configure --prefix= \
+		--libdir=/lib \
+		--libexecdir=/lib \
+		--localstatedir=/var \
+		--with-fontrootdir=/share/fonts/X11 \
+		--with-xkb-output=/var/lib/xkb \
+		--disable-systemd-logind \
+		--disable-static \
+		--enable-config-udev \
+		--with-shared-memory-dir=/dev/shm \
+		--enable-config-udev-kms \
+		--enable-record \
+		--enable-glx \
+		--enable-ipv6 \
+		--enable-suid-wrapper \
+		--enable-composite \
+		--with-sha1=libgcrypt \
+		--without-systemd-daemon \
+		--enable-kdrive \
+		--enable-kdrive-kbd \
+		--enable-kdrive-mouse \
+		--enable-xnest \
+		--enable-xephyr \
+		--enable-xorg \
+		--disable-xfbdev \
+		--disable-xfake \
+		--disable-xwayland \
+		--enable-install-setuid \
+		--enable-glamor
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

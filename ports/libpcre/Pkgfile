@@ -1,0 +1,15 @@
+name=libpcre
+version=8.40
+desc="Perl Compatible Regular Expressions"
+deps=musl
+source="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$version.tar.bz2"
+
+build(){
+	cd pcre-$version
+	./configure \
+		--prefix= \
+		--disable-static --enable-jit --enable-utf  --enable-unicode-properties --enable-pcre16 --enable-pcre32 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/doc
+}

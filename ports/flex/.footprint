@@ -1,0 +1,14 @@
+bin/flex++|777|0|0|symbolic link
+bin/flex|755|0|0|regular file
+bin/lex|777|0|0|symbolic link
+bin|755|0|0|directory
+include/FlexLexer.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libfl.so.2.0.0|755|0|0|regular file
+lib/libfl.so.2|777|0|0|symbolic link
+lib/libfl.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/man/man1/flex.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

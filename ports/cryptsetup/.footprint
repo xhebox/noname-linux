@@ -1,0 +1,24 @@
+bin/cryptsetup-reencrypt|755|0|0|regular file
+bin/cryptsetup|755|0|0|regular file
+bin/veritysetup|755|0|0|regular file
+bin|755|0|0|directory
+include/libcryptsetup.h|644|0|0|regular file
+include|755|0|0|directory
+lib/initcpio/hooks/encrypt|644|0|0|regular file
+lib/initcpio/hooks|755|0|0|directory
+lib/initcpio/install/encrypt|644|0|0|regular file
+lib/initcpio/install/sd-encrypt|644|0|0|regular file
+lib/initcpio/install|755|0|0|directory
+lib/initcpio|755|0|0|directory
+lib/libcryptsetup.so.4.7.0|755|0|0|regular file
+lib/libcryptsetup.so.4|777|0|0|symbolic link
+lib/libcryptsetup.so|777|0|0|symbolic link
+lib/pkgconfig/libcryptsetup.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man8/cryptsetup-reencrypt.8.gz|644|0|0|regular file
+share/man/man8/cryptsetup.8.gz|644|0|0|regular file
+share/man/man8/veritysetup.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

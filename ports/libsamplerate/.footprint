@@ -1,0 +1,30 @@
+lib/libsamplerate.so|777|0|0|symbolic link
+lib/libsamplerate.so.0|777|0|0|symbolic link
+bin/sndfile-resample|755|0|0|regular file
+include/samplerate.h|644|0|0|regular file
+lib/libsamplerate.a|644|0|0|regular file
+lib/libsamplerate.so.0.1.8|755|0|0|regular file
+lib/pkgconfig/samplerate.pc|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/lists.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/api_full.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/index.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/license.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/win32.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/quality.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/api_simple.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/download.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/api_misc.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/SRC.png|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/faq.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/SRC.css|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/api_callback.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/api.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html/history.html|644|0|0|regular file
+share/doc/libsamplerate0-dev/html|755|0|0|directory
+share/doc/libsamplerate0-dev|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

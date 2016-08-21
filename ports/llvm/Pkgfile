@@ -1,0 +1,98 @@
+name=llvm
+version=4.0.0
+desc="LLVM compiler and its backend"
+deps="python cmake flex bison libffi libxml2"
+source="http://llvm.org/releases/$version/$name-$version.src.tar.xz
+http://www.llvm.org/releases/${version}/cfe-${version}.src.tar.xz
+http://www.llvm.org/releases/${version}/clang-tools-extra-${version}.src.tar.xz
+http://www.llvm.org/releases/${version}/compiler-rt-${version}.src.tar.xz
+cfe-001-fix-stdint.patch
+cfe-003-fix-unwind-chain-inclusion.patch
+cfe-004-add-musl-triples.patch
+cfe-007-musl-use-init-array.patch
+compiler-rt-002-musl-no-dlvsym.patch
+llvm-003-musl.patch
+llvm-config.h
+"
+
+build() {
+	cd cfe-$version.src
+	for i in $source;do
+		msg $i
+		case $i in
+		cfe*.patch) patch -p1 -i "$srcdir/$i" || die;;
+		esac
+	done
+	cd ..
+
+	cd compiler-rt-$version.src
+	for i in $source;do
+		msg $i
+		case $i in
+		compiler-rt*.patch) patch -p1 -i "$srcdir/$i" || die;;
+		esac
+	done
+	cd ..
+
+	local wrksrc="`pwd`/$name-$version.src"
+	if [ -d cfe-${version}.src ]; then
+		mv cfe-${version}.src ${wrksrc}/tools/clang
+	fi
+	if [ -d clang-tools-extra-${version}.src ]; then
+		mv clang-tools-extra-${version}.src ${wrksrc}/tools/clang/tools/extra
+	fi
+	if [ -d compiler-rt-${version}.src ]; then
+		mv compiler-rt-${version}.src ${wrksrc}/projects/compiler-rt
+	fi
+	sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' ${wrksrc}/projects/compiler-rt/cmake/config-ix.cmake
+
+	cd $name-$version.src
+	for i in $source;do
+		msg $i
+		case $i in
+		llvm*.patch) patch -p1 -i "$srcdir/$i" || die;;
+		esac
+	done
+	rm test/tools/llvm-objdump/macho-compact-unwind-x86_64.test \
+	test/tools/llvm-objdump/macho-compact-unwind-i386.test \
+	test/Transforms/GlobalOpt/alias-used.ll \
+	test/tools/llvm-symbolizer/print_context.c
+
+	mkdir -p build
+	cd build
+
+	cmake \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DLLVM_BINUTILS_INCDIR=/include \
+		-DLLVM_BUILD_DOCS=YES \
+		-DLLVM_BUILD_TESTS=OFF \
+		-DLLVM_BUILD_LLVM_DYLIB=ON \
+		-DLLVM_DYLIB_EXPORT_ALL=ON \
+		-DLLVM_ENABLE_FFI=YES \
+		-DLLVM_ENABLE_RTTI=YES \
+		-DLLVM_ENABLE_ZLIB=YES \
+		-DLLVM_LINK_LLVM_DYLIB=ON \
+		-DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl" \
+		-DLLVM_TARGETS_TO_BUILD='X86;AMDGPU;BPF' \
+		-DFFI_INCLUDE_DIR="$(pkg-config --cflags-only-I libffi | sed 's|^-I||g')" \
+		..
+	
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	find "$pkgdir" -name .dir -delete
+	rm -rf "$pkgdir"/docs
+
+	rm "$pkgdir"/lib/LLVMHello.so
+	install -d "$pkgdir"/lib/bfd-plugins
+	ln -s ../LLVMgold.so "$pkgdir"/lib/bfd-plugins/LLVMgold.so
+	mv "$pkgdir"/include/llvm/Config/llvm-config.h "$pkgdir"/include/llvm/Config/llvm-config-64.h
+	install -m 0644 "$srcdir"/llvm-config.h "$pkgdir"/include/llvm/Config/
+	chmod -x ${pkgdir}/lib/*.a
+
+	mv "$pkgdir"/libexec/ccc-analyzer "$pkgdir/lib/clang/"
+	mv "$pkgdir"/libexec/c++-analyzer "$pkgdir/lib/clang/"
+	rmdir "$pkgdir/libexec"
+	sed -i 's|libexec|lib/clang|' "$pkgdir/bin/scan-build"
+}

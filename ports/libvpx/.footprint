@@ -1,0 +1,22 @@
+lib/libvpx.so.4.1|777|0|0|symbolic link
+lib/libvpx.so|777|0|0|symbolic link
+lib/libvpx.so.4|777|0|0|symbolic link
+bin/vpxdec|755|0|0|regular file
+bin/vpxenc|755|0|0|regular file
+include/vpx/svc_context.h|664|0|0|regular file
+include/vpx/vpx_encoder.h|664|0|0|regular file
+include/vpx/vpx_frame_buffer.h|664|0|0|regular file
+include/vpx/vpx_decoder.h|664|0|0|regular file
+include/vpx/vpx_image.h|664|0|0|regular file
+include/vpx/vp8dx.h|664|0|0|regular file
+include/vpx/vpx_codec.h|664|0|0|regular file
+include/vpx/vpx_integer.h|664|0|0|regular file
+include/vpx/vp8.h|664|0|0|regular file
+include/vpx/vp8cx.h|664|0|0|regular file
+lib/libvpx.so.4.1.0|755|0|0|regular file
+lib/pkgconfig/vpx.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/vpx|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

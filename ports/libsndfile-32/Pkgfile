@@ -1,0 +1,20 @@
+. $PORTS/libsndfile/Pkgfile
+name=libsndfile-32
+deps="alsa-lib-32 libvorbis-32 flac-32 libsndfile"
+
+build() {
+	cd libsndfile-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	./configure --prefix= --libdir=/lib32
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+
+	rm -r $pkgdir/share
+	rm -r $pkgdir/include
+	rm -r $pkgdir/bin
+}
+

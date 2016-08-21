@@ -1,0 +1,40 @@
+name=readline
+_version=7.0
+_patch_ver=003
+version=${_version}.$_patch_ver
+desc="The GNU readline lib"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$_version.tar.gz
+inputrc
+"
+deps=ncurses
+
+ext() {
+	local url="http://ftp.gnu.org/gnu/$name/$name-$_version-patches"
+	cd $name-$_version
+	if [ "${_patch_ver}" -gt 000 ]; then
+		for p in $(seq -w 001 ${_patch_ver}); do
+			if [ -f readline63-${p} ]; then
+				continue
+			fi
+			curl -O -L ${url}/readline63-$p
+		done
+	fi
+	for p in $(seq -w 001 ${_patch_ver}); do
+		patch -p0 -i readline63-${p} 
+	done
+	sed -i 's|-Wl,-rpath,$(libdir) ||g' support/shobj-conf
+}
+
+build() {
+	cd $name-$_version
+	./configure --prefix= \
+                --libexecdir=/lib \
+		--with-curses --enable-multibyte \
+                --disable-static 
+	CFLAGS="$CFLAGS -fPIC"
+	make SHLIB_LIBS=-lncurses  || die
+	make DESTDIR="$pkgdir" install   || die
+	rm -r "$pkgdir"/share/info
+	rm -r "$pkgdir"/share/doc
+	install -Dm644 "$srcdir"/inputrc "$pkgdir"/etc/inputrc
+}

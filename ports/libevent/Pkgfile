@@ -1,0 +1,12 @@
+name=libevent
+version=2.0.22
+deps=musl
+desc="Event notification library"
+source="https://github.com/libevent/libevent/releases/download/release-$version-stable/$name-$version-stable.tar.gz"
+
+build() {
+	cd $name-$version-stable
+	./configure --prefix=/  --disable-static --disable-libevent-regress
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,71 @@
+bin/pango-view|755|0|0|regular file
+bin|755|0|0|directory
+include/pango-1.0/pango/pango-attributes.h|644|0|0|regular file
+include/pango-1.0/pango/pango-bidi-type.h|644|0|0|regular file
+include/pango-1.0/pango/pango-break.h|644|0|0|regular file
+include/pango-1.0/pango/pango-context.h|644|0|0|regular file
+include/pango-1.0/pango/pango-coverage.h|644|0|0|regular file
+include/pango-1.0/pango/pango-engine.h|644|0|0|regular file
+include/pango-1.0/pango/pango-enum-types.h|644|0|0|regular file
+include/pango-1.0/pango/pango-features.h|644|0|0|regular file
+include/pango-1.0/pango/pango-font.h|644|0|0|regular file
+include/pango-1.0/pango/pango-fontmap.h|644|0|0|regular file
+include/pango-1.0/pango/pango-fontset.h|644|0|0|regular file
+include/pango-1.0/pango/pango-glyph-item.h|644|0|0|regular file
+include/pango-1.0/pango/pango-glyph.h|644|0|0|regular file
+include/pango-1.0/pango/pango-gravity.h|644|0|0|regular file
+include/pango-1.0/pango/pango-item.h|644|0|0|regular file
+include/pango-1.0/pango/pango-language.h|644|0|0|regular file
+include/pango-1.0/pango/pango-layout.h|644|0|0|regular file
+include/pango-1.0/pango/pango-matrix.h|644|0|0|regular file
+include/pango-1.0/pango/pango-modules.h|644|0|0|regular file
+include/pango-1.0/pango/pango-ot.h|644|0|0|regular file
+include/pango-1.0/pango/pango-renderer.h|644|0|0|regular file
+include/pango-1.0/pango/pango-script.h|644|0|0|regular file
+include/pango-1.0/pango/pango-tabs.h|644|0|0|regular file
+include/pango-1.0/pango/pango-types.h|644|0|0|regular file
+include/pango-1.0/pango/pango-utils.h|644|0|0|regular file
+include/pango-1.0/pango/pango-version-macros.h|644|0|0|regular file
+include/pango-1.0/pango/pango.h|644|0|0|regular file
+include/pango-1.0/pango/pangocairo.h|644|0|0|regular file
+include/pango-1.0/pango/pangofc-decoder.h|644|0|0|regular file
+include/pango-1.0/pango/pangofc-font.h|644|0|0|regular file
+include/pango-1.0/pango/pangofc-fontmap.h|644|0|0|regular file
+include/pango-1.0/pango/pangoft2.h|644|0|0|regular file
+include/pango-1.0/pango/pangoxft-render.h|644|0|0|regular file
+include/pango-1.0/pango/pangoxft.h|644|0|0|regular file
+include/pango-1.0/pango|755|0|0|directory
+include/pango-1.0|755|0|0|directory
+include|755|0|0|directory
+lib/girepository-1.0/Pango-1.0.typelib|644|0|0|regular file
+lib/girepository-1.0/PangoCairo-1.0.typelib|644|0|0|regular file
+lib/girepository-1.0/PangoFT2-1.0.typelib|644|0|0|regular file
+lib/girepository-1.0/PangoXft-1.0.typelib|644|0|0|regular file
+lib/girepository-1.0|755|0|0|directory
+lib/libpango-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpango-1.0.so.0|777|0|0|symbolic link
+lib/libpango-1.0.so|777|0|0|symbolic link
+lib/libpangocairo-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangocairo-1.0.so.0|777|0|0|symbolic link
+lib/libpangocairo-1.0.so|777|0|0|symbolic link
+lib/libpangoft2-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangoft2-1.0.so.0|777|0|0|symbolic link
+lib/libpangoft2-1.0.so|777|0|0|symbolic link
+lib/libpangoxft-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangoxft-1.0.so.0|777|0|0|symbolic link
+lib/libpangoxft-1.0.so|777|0|0|symbolic link
+lib/pkgconfig/pango.pc|644|0|0|regular file
+lib/pkgconfig/pangocairo.pc|644|0|0|regular file
+lib/pkgconfig/pangoft2.pc|644|0|0|regular file
+lib/pkgconfig/pangoxft.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/gir-1.0/Pango-1.0.gir|644|0|0|regular file
+share/gir-1.0/PangoCairo-1.0.gir|644|0|0|regular file
+share/gir-1.0/PangoFT2-1.0.gir|644|0|0|regular file
+share/gir-1.0/PangoXft-1.0.gir|644|0|0|regular file
+share/gir-1.0|755|0|0|directory
+share/man/man1/pango-view.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

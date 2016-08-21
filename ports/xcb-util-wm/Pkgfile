@@ -1,0 +1,14 @@
+name=xcb-util-wm
+version=0.4.1
+deps=libxcb
+desc="XCB utilities library"
+source="http://xcb.freedesktop.org/dist/xcb-util-wm-$version.tar.bz2"
+
+build() {
+	cd xcb-util-wm-$version
+
+	./configure --prefix=/ --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

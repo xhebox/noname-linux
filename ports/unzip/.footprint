@@ -1,0 +1,14 @@
+bin/zipinfo|777|0|0|symbolic link
+bin/unzip|755|0|0|regular file
+bin/zipgrep|755|0|0|regular file
+bin/funzip|755|0|0|regular file
+bin/unzipsfx|755|0|0|regular file
+share/man/man1/funzip.1.gz|644|0|0|regular file
+share/man/man1/zipinfo.1.gz|644|0|0|regular file
+share/man/man1/unzip.1.gz|644|0|0|regular file
+share/man/man1/zipgrep.1.gz|644|0|0|regular file
+share/man/man1/unzipsfx.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

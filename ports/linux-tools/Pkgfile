@@ -1,0 +1,102 @@
+. $PORTS/linux/Pkgfile
+name=linux-tools
+desc="Linux kernel tools"
+conflicts=
+deps="flex perl python pciutils glib sysfsutils elfutils libunwind zlib eudev libressl binutils xz elfutils asciidoc"
+source="$source
+cpuid-i686.patch
+portable.patch"
+
+build() {
+	cd linux-${version%.*}
+	patch -p0 < ../cpuid-i686.patch || die
+	patch -p1 < ../portable.patch || die
+	sed -i 's/\$(LIBS)/& $(LDFLAGS)/' tools/power/cpupower/bench/Makefile
+	sed -i 's/SIGCLD/SIGCHLD/g' tools/usb/usbip/src/usbipd.c
+
+	msg 'tmon'
+	pushd tools/thermal/tmon
+	make || die
+	make install BINDIR=bin INSTALL_ROOT="$pkgdir" || die
+	popd
+
+	msg 'perf'
+	pushd tools/perf
+	make -f Makefile.perf \
+	prefix=/ \
+	lib=lib/perf \
+	perfexecdir=lib/perf \
+	WERROR=0 \
+	NO_SDT=1 \
+	all man || die
+
+	make -f Makefile.perf \
+	prefix=/ \
+	WERROR=0 \
+	lib=lib/perf \
+	perfexecdir=lib/perf \
+	NO_SDT=1 \
+	DESTDIR="$pkgdir" \
+	install install-man || die
+	cd "$pkgdir"
+	install -Dm644 etc/bash_completion.d/perf share/bash-completion/completions/perf
+	rm -r etc
+	find share -type f -exec chmod a-x {} \;
+	popd
+
+	msg 'libtraceevent'
+	pushd tools/lib/traceevent
+	make || die
+	install -dm 755 "$pkgdir/lib"
+	install -m 644 libtraceevent.so "$pkgdir/lib"
+	popd
+
+	msg 'cpupower'
+	pushd tools/power/cpupower
+	make VERSION=$version || die
+	make \
+	DESTDIR="$pkgdir" \
+	bindir='/bin' \
+	sbindir='/bin' \
+	libdir='/lib' \
+	includedir='/include' \
+	mandir='/share/man' \
+	localedir='/share/locale' \
+	docdir='/share/doc/cpupower' \
+	install install-man || die
+	popd
+
+	msg 'x86_energy_perf_policy'
+	pushd tools/power/x86/x86_energy_perf_policy
+	make || die
+	install -Dm 755 x86_energy_perf_policy "$pkgdir/bin/x86_energy_perf_policy"
+	install -Dm 644 x86_energy_perf_policy.8 "$pkgdir/share/man/man8/x86_energy_perf_policy.8"
+	popd
+
+	msg 'usbip'
+	pushd tools/usb/usbip
+	./autogen.sh
+	./configure --prefix=/ --sbindir=/bin
+	make || die
+	make install DESTDIR="$pkgdir" || die
+	popd
+
+	msg 'cgroup_event_listener'
+	pushd tools/cgroup
+	make || die
+	install -Dm755 cgroup_event_listener "$pkgdir/bin/cgroup_event_listener"
+	popd
+
+	msg 'turbostat'
+	sed '/time.h/a #include <limits.h>' -i tools/power/x86/turbostat/turbostat.c
+	pushd tools/power/x86/turbostat
+	make || die
+	make \
+	PREFIX= \
+	install DESTDIR="$pkgdir" || die
+	popd
+}
+
+post() {
+	true
+}

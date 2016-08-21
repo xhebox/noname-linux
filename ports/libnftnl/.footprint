@@ -1,0 +1,20 @@
+lib/libnftnl.so.4|777|0|0|symbolic link
+lib/libnftnl.so|777|0|0|symbolic link
+include/libnftnl/table.h|644|0|0|regular file
+include/libnftnl/batch.h|644|0|0|regular file
+include/libnftnl/object.h|644|0|0|regular file
+include/libnftnl/common.h|644|0|0|regular file
+include/libnftnl/udata.h|644|0|0|regular file
+include/libnftnl/trace.h|644|0|0|regular file
+include/libnftnl/set.h|644|0|0|regular file
+include/libnftnl/rule.h|644|0|0|regular file
+include/libnftnl/chain.h|644|0|0|regular file
+include/libnftnl/expr.h|644|0|0|regular file
+include/libnftnl/ruleset.h|644|0|0|regular file
+include/libnftnl/gen.h|644|0|0|regular file
+lib/libnftnl.so.4.2.0|755|0|0|regular file
+lib/pkgconfig/libnftnl.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/libnftnl|755|0|0|directory
+include|755|0|0|directory

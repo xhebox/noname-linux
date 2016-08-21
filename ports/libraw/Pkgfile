@@ -1,0 +1,13 @@
+name=libraw
+version=0.18.2
+desc="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
+deps="lcms2 jasper"
+source="http://www.libraw.org/data/LibRaw-${version}.tar.gz"
+
+build() {
+	cd LibRaw-$version
+	./configure --prefix= \
+		--disable-examples
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

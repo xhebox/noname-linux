@@ -1,0 +1,15 @@
+name=libxdmcp
+version=1.1.2
+deps=xorg-proto
+desc="xorg lib libXdmcp"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXdmcp-$version.tar.bz2"
+
+build() {
+	cd libXdmcp-$version
+
+	./configure --prefix= --sysconfdir=/etc \
+		--localstatedir=/var --disable-static 
+
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

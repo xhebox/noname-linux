@@ -1,0 +1,14 @@
+name=libc-dev
+version=0.2
+desc="BSD compatibility headers (cdefs, queue, tree)"
+source="
+http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-cdefs.h
+http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-queue.h
+http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-tree.h
+"
+
+build(){
+	install -D sys-cdefs.h "$pkgdir"/include/sys/cdefs.h
+	install -D sys-queue.h "$pkgdir"/include/sys/queue.h
+	install -D sys-tree.h "$pkgdir"/include/sys/tree.h
+}

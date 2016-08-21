@@ -1,0 +1,41 @@
+bin/cwebp|755|0|0|regular file
+bin/dwebp|755|0|0|regular file
+bin/gif2webp|755|0|0|regular file
+bin/img2webp|755|0|0|regular file
+bin/vwebp|755|0|0|regular file
+bin/webpmux|755|0|0|regular file
+bin|755|0|0|directory
+include/webp/decode.h|644|0|0|regular file
+include/webp/demux.h|644|0|0|regular file
+include/webp/encode.h|644|0|0|regular file
+include/webp/mux.h|644|0|0|regular file
+include/webp/mux_types.h|644|0|0|regular file
+include/webp/types.h|644|0|0|regular file
+include/webp|755|0|0|directory
+include|755|0|0|directory
+lib/libwebp.so.7.0.0|755|0|0|regular file
+lib/libwebp.so.7|777|0|0|symbolic link
+lib/libwebp.so|777|0|0|symbolic link
+lib/libwebpdecoder.so.3.0.0|755|0|0|regular file
+lib/libwebpdecoder.so.3|777|0|0|symbolic link
+lib/libwebpdecoder.so|777|0|0|symbolic link
+lib/libwebpdemux.so.2.0.2|755|0|0|regular file
+lib/libwebpdemux.so.2|777|0|0|symbolic link
+lib/libwebpdemux.so|777|0|0|symbolic link
+lib/libwebpmux.so.3.0.0|755|0|0|regular file
+lib/libwebpmux.so.3|777|0|0|symbolic link
+lib/libwebpmux.so|777|0|0|symbolic link
+lib/pkgconfig/libwebp.pc|644|0|0|regular file
+lib/pkgconfig/libwebpdecoder.pc|644|0|0|regular file
+lib/pkgconfig/libwebpdemux.pc|644|0|0|regular file
+lib/pkgconfig/libwebpmux.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/cwebp.1.gz|644|0|0|regular file
+share/man/man1/dwebp.1.gz|644|0|0|regular file
+share/man/man1/gif2webp.1.gz|644|0|0|regular file
+share/man/man1/vwebp.1.gz|644|0|0|regular file
+share/man/man1/webpmux.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

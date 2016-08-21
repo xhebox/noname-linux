@@ -1,0 +1,12 @@
+name=dmenu
+version=4.7
+desc="dmenu2 from bitbucket"
+deps="xorg-server"
+source="https://bitbucket.org/melek/dmenu2/downloads/dmenu2-0.2.tar.gz
+config.mk"
+
+build(){
+	cd ${name}2-*
+	cp -r ../config.mk .
+	make PREFIX=/ DESTDIR="$pkgdir" install || die
+}

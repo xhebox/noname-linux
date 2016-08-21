@@ -1,0 +1,12 @@
+deps="libxcb"
+name=xcb-util
+desc="XCB utilities library"
+version=0.4.0
+source="http://xcb.freedesktop.org/dist/xcb-util-$version.tar.bz2"
+
+build() {
+	cd xcb-util-$version
+        ./configure --prefix=/
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

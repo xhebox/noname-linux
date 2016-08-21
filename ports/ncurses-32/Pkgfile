@@ -1,0 +1,50 @@
+name=ncurses-32
+version=6.0
+desc="A SystemV Release4.0 cursese mulation library"
+source="http://mirrors.ustc.edu.cn/gnu/ncurses/ncurses-$version.tar.gz"
+deps=ncurses
+
+build() {
+	cd ncurses-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	./configure \
+		--prefix= \
+		--libdir=/lib32 \
+		--libexecdir=/lib32 \
+		--includedir=/include \
+		--mandir=/share/man \
+		--without-ada \
+		--with-pkg-config-libdir=/lib32/pkgconfig \
+		--without-cxx-binding \
+		--disable-static \
+		--with-shared \
+		--with-manpage-symlinks \
+		--with-manpage-format=normal \
+		--enable-ext-colors \
+		--enable-ext-mouse \
+		--without-debug \
+		--without-tests \
+		--with-normal \
+		--enable-pc-files \
+		--disable-overwrite \
+		--without-cxx \
+		--enable-widec
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	cd "$pkgdir"
+	cd lib32/pkgconfig
+	for lib in ncurses ncurses++ form panel menu;do
+		rm -rf ../lib32${lib}.so
+		echo "INPUT(-l${lib}w)" > ../lib32${lib}.so
+		ln -sf ${lib}w.pc ${lib}.pc
+	done
+	cd ..
+	echo "INPUT(-lncursesw)" > libcursesw.so
+	ln -sf libncurses.so libcurses.so
+	rm -rf "$pkgdir"/share
+	rm -rf "$pkgdir"/bin
+	rm -rf "$pkgdir"/include
+}

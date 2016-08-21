@@ -1,0 +1,40 @@
+. $PORTS/gsm/Pkgfile
+name=gsm-32
+deps=gsm
+
+ext() {
+	cd gsm-${version%.*}-pl${version##*.}
+	patch -Np0 -i ../gsm.patch || die
+}
+
+build() {
+	cd gsm-${version%.*}-pl${version##*.}
+
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	make \
+	CCFLAGS="${CFLAGS} -c -DNeedFunctionPrototypes=1" \
+	CC="gcc -ansi -pedantic -m32 -fPIC" \
+	|| die
+
+	install -m755 -d "${pkgdir}"/bin
+	install -m755 -d "${pkgdir}"/lib32
+	install -m755 -d "${pkgdir}"/include/gsm
+	install -m755 -d "${pkgdir}"/share/gsm
+	install -m755 -d "${pkgdir}"/share/man/man1
+	install -m755 -d "${pkgdir}"/share/man/man3
+
+	make -j1 INSTALL_ROOT="${pkgdir}" \
+		CC="gcc -ansi -pedantic -m32" \
+		GSM_INSTALL_LIB="$pkgdir/lib32" \
+	       GSM_INSTALL_INC="${pkgdir}/include/gsm" \
+	       GSM_INSTALL_MAN="${pkgdir}/share/man/man3" \
+	       TOAST_INSTALL_MAN="${pkgdir}/share/man/man1" \
+	install || die
+
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/bin
+}

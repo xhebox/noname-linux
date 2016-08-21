@@ -1,0 +1,14 @@
+name=potrace
+version=1.14
+desc='Utility for tracing a bitmap (input: PBM,PGM,PPM,BMP; output: EPS,PS,PDF,SVG,DXF,PGM,Gimppath,XFig)'
+source="http://potrace.sourceforge.net/download/${version}/potrace-${version}.tar.gz"
+
+build() {
+	cd potrace-$version
+	./configure \
+		--prefix= \
+		--mandir=/share/man \
+		--with-libpotrace
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

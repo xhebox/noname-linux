@@ -1,0 +1,13 @@
+name=p7zip
+version=16.02
+desc="Command-line version of the 7zip compressed file archive"
+deps="yasm nasm"
+source="https://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version}_src_all.tar.bz2"
+
+build() {
+	cd ${name}_$version
+	cp makefile.linux_amd64_asm makefile.machine
+	make all3 OPTFLAGS="$CFLAGS" $MAKEFLAGS || die
+	make DEST_DIR="$pkgdir" DEST_HOME=/ DEST_MAN=/share/man install || die
+	rm -r "$pkgdir"/share/doc
+}

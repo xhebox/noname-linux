@@ -1,0 +1,14 @@
+name=bc
+version=1.07.1
+deps="flex ed bison readline"
+desc="An arbitrary precision calculator language"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz
+"
+
+build() { 
+	cd $name-$version
+	./configure --prefix=/ --with-readline --disable-static
+	sed -i '/bc.info/d' doc/Makefile
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,60 @@
+bin/gcore|755|0|0|regular file
+bin/gdbserver|755|0|0|regular file
+bin/gdb|755|0|0|regular file
+bin|755|0|0|directory
+share/gdb/python/gdb/FrameDecorator.py|644|0|0|regular file
+share/gdb/python/gdb/FrameIterator.py|644|0|0|regular file
+share/gdb/python/gdb/__init__.py|644|0|0|regular file
+share/gdb/python/gdb/command/__init__.py|644|0|0|regular file
+share/gdb/python/gdb/command/explore.py|644|0|0|regular file
+share/gdb/python/gdb/command/frame_filters.py|644|0|0|regular file
+share/gdb/python/gdb/command/pretty_printers.py|644|0|0|regular file
+share/gdb/python/gdb/command/prompt.py|644|0|0|regular file
+share/gdb/python/gdb/command/type_printers.py|644|0|0|regular file
+share/gdb/python/gdb/command/unwinders.py|644|0|0|regular file
+share/gdb/python/gdb/command/xmethods.py|644|0|0|regular file
+share/gdb/python/gdb/command|755|0|0|directory
+share/gdb/python/gdb/frames.py|644|0|0|regular file
+share/gdb/python/gdb/function/__init__.py|644|0|0|regular file
+share/gdb/python/gdb/function/as_string.py|644|0|0|regular file
+share/gdb/python/gdb/function/caller_is.py|644|0|0|regular file
+share/gdb/python/gdb/function/strfns.py|644|0|0|regular file
+share/gdb/python/gdb/function|755|0|0|directory
+share/gdb/python/gdb/printer/__init__.py|644|0|0|regular file
+share/gdb/python/gdb/printer/bound_registers.py|644|0|0|regular file
+share/gdb/python/gdb/printer|755|0|0|directory
+share/gdb/python/gdb/printing.py|644|0|0|regular file
+share/gdb/python/gdb/prompt.py|644|0|0|regular file
+share/gdb/python/gdb/types.py|644|0|0|regular file
+share/gdb/python/gdb/unwinder.py|644|0|0|regular file
+share/gdb/python/gdb/xmethod.py|644|0|0|regular file
+share/gdb/python/gdb|755|0|0|directory
+share/gdb/python|755|0|0|directory
+share/gdb/syscalls/aarch64-linux.xml|644|0|0|regular file
+share/gdb/syscalls/amd64-linux.xml|644|0|0|regular file
+share/gdb/syscalls/arm-linux.xml|644|0|0|regular file
+share/gdb/syscalls/freebsd.xml|644|0|0|regular file
+share/gdb/syscalls/gdb-syscalls.dtd|644|0|0|regular file
+share/gdb/syscalls/i386-linux.xml|644|0|0|regular file
+share/gdb/syscalls/mips-n32-linux.xml|644|0|0|regular file
+share/gdb/syscalls/mips-n64-linux.xml|644|0|0|regular file
+share/gdb/syscalls/mips-o32-linux.xml|644|0|0|regular file
+share/gdb/syscalls/ppc-linux.xml|644|0|0|regular file
+share/gdb/syscalls/ppc64-linux.xml|644|0|0|regular file
+share/gdb/syscalls/s390-linux.xml|644|0|0|regular file
+share/gdb/syscalls/s390x-linux.xml|644|0|0|regular file
+share/gdb/syscalls/sparc-linux.xml|644|0|0|regular file
+share/gdb/syscalls/sparc64-linux.xml|644|0|0|regular file
+share/gdb/syscalls|755|0|0|directory
+share/gdb/system-gdbinit/elinos.py|644|0|0|regular file
+share/gdb/system-gdbinit/wrs-linux.py|644|0|0|regular file
+share/gdb/system-gdbinit|755|0|0|directory
+share/gdb|755|0|0|directory
+share/man/man1/gcore.1.gz|644|0|0|regular file
+share/man/man1/gdb.1.gz|644|0|0|regular file
+share/man/man1/gdbserver.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/gdbinit.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

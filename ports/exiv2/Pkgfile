@@ -1,0 +1,12 @@
+name=exiv2
+version=0.25
+desc="Exif, Iptc and XMP metadata manipulation library and tools"
+deps="zlib expat"
+source="http://www.exiv2.org/exiv2-${version}.tar.gz"
+
+build() {
+	cd exiv2-$version 
+	./configure --prefix= --enable-video
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

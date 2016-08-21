@@ -1,0 +1,19 @@
+lib32|755|0|0|directory
+lib32/libasprintf.so|777|0|0|symbolic link
+lib32/libgettextpo.a|644|0|0|regular file
+lib32/libgettextsrc-0.19.8.1.so|755|0|0|regular file
+lib32/libgettextpo.so|777|0|0|symbolic link
+lib32/libasprintf.so.0.0.0|755|0|0|regular file
+lib32/libgettextpo.so.0.5.4|755|0|0|regular file
+lib32/libgettextlib.so|777|0|0|symbolic link
+lib32/gettext|755|0|0|directory
+lib32/gettext/hostname|755|0|0|regular file
+lib32/gettext/cldr-plurals|755|0|0|regular file
+lib32/gettext/user-email|755|0|0|regular file
+lib32/gettext/urlget|755|0|0|regular file
+lib32/gettext/project-id|755|0|0|regular file
+lib32/libgettextlib-0.19.8.1.so|755|0|0|regular file
+lib32/libasprintf.so.0|777|0|0|symbolic link
+lib32/libgettextsrc.so|777|0|0|symbolic link
+lib32/libgettextpo.so.0|777|0|0|symbolic link
+lib32/libasprintf.a|644|0|0|regular file

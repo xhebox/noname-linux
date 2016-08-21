@@ -1,0 +1,20 @@
+name=libxcb
+version=1.12
+desc="X11 client-side library"
+deps="pthread-stubs xcb-proto libxdmcp libxau"
+source="http://xcb.freedesktop.org/dist/libxcb-$version.tar.bz2"
+
+build() {
+	cd libxcb-$version
+
+	./configure --prefix= --disable-static --without-doxygen \
+		--sysconfdir=/etc \
+		--disable-build-docs \
+		--enable-xinput \
+		--localstatedir=/var 
+
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/doc
+}
+

@@ -1,0 +1,16 @@
+name=gawk
+version=4.1.4
+deps="bash libmpfr"
+desc="The GNU awk utility"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+		--without-libsigsegv \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install   || die
+	rm -r "$pkgdir"/share/info
+}

@@ -1,0 +1,29 @@
+name=graphite2
+version=1.3.10
+desc="reimplementation of the SIL Graphite text processing engine"
+deps="harfbuzz python cmake"
+source="https://github.com/silnrsi/graphite/archive/$version.tar.gz
+cmake.patch
+graphite2-1.2.0-cmakepath.patch
+"
+
+build() {
+	cd "$srcdir"/graphite-$version
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/$i;;
+		esac
+	done
+
+	mkdir build && cd build
+	cmake -G "Unix Makefiles" .. \
+		-DCMAKE_C_FLAGS:STRING="${CFLAGS}" \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE:STRING=Release \
+		-DGRAPHITE2_COMPARE_RENDERER=OFF \
+		-DGRAPHITE2_NFILEFACE=ON \
+		-DGRAPHITE2_NSEGCACHE=ON
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

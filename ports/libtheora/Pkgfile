@@ -1,0 +1,18 @@
+name=libtheora
+version=1.1.1
+desc="An open video codec developed by the Xiph.org"
+deps="libogg libvorbis"
+source="http://downloads.xiph.org/releases/theora/libtheora-${version}.tar.bz2
+libtheora-1.1.1-libpng16.patch"
+
+ext() {
+	cd ${name}-${version}
+	patch -Np0 -i ../libtheora-1.1.1-libpng16.patch || die
+}
+
+build() {
+	cd ${name}-${version}
+	./configure --prefix= --enable-shared --disable-static
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

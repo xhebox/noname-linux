@@ -1,0 +1,27 @@
+name=gdb
+version=7.12.1
+deps="ncurses readline"
+desc="GNU Debugger"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--host=$TARGET \
+		--build=$TARGET \
+		--target=$TARGET \
+		--prefix=/ \
+		--disable-werror \
+		--with-system-readline \
+		--with-system-zlib \
+		--disable-static 
+	cd opcodes && ./configure --prefix=/ && cd ..
+	make  || die
+	sed -i 's/^exit $st/exit 0/g' missing
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/lib
+	rm -rf "$pkgdir"/include
+	rm -rf "$pkgdir"/share/info
+	rm -rf "$pkgdir"/share/locale
+}
+

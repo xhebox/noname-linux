@@ -1,0 +1,17 @@
+include/xorg/libinput-properties.h|644|0|0|regular file
+include/xorg|755|0|0|directory
+include|755|0|0|directory
+lib/pkgconfig/xorg-libinput.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/xorg/modules/input/libinput_drv.so|755|0|0|regular file
+lib/xorg/modules/input|755|0|0|directory
+lib/xorg/modules|755|0|0|directory
+lib/xorg|755|0|0|directory
+lib|755|0|0|directory
+share/X11/xorg.conf.d/40-libinput.conf|644|0|0|regular file
+share/X11/xorg.conf.d|755|0|0|directory
+share/X11|755|0|0|directory
+share/man/man4/libinput.4.gz|644|0|0|regular file
+share/man/man4|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

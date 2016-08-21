@@ -1,0 +1,36 @@
+name=pulseaudio
+version=10.0
+desc="A featureful, general-purpose sound server"
+source="http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$version.tar.xz
+0001-padsp-Make-it-compile-on-musl.patch"
+deps="libcap libressl eudev fftw libsndfile json-c intltool libtool glib speexdsp libxi libxtst libasyncns libxcb libsm orc webrtc-audio-processing tdb gtk3 libsamplerate check"
+
+build(){
+	cd $name-$version
+	patch -p0 < ../0001-padsp-Make-it-compile-on-musl.patch || die
+	./configure \
+	--prefix=  \
+	--sysconfdir=/etc \
+	--libexecdir=/lib \
+	--localstatedir=/var \
+	--with-udev-rules-dir=/lib/udev/rules.d \
+	--with-database=tdb \
+	--disable-tcpwrap \
+	--disable-bluez4 \
+	--enable-samplerate \
+	--enable-nls \
+	--disable-default-build-tests \
+	DATADIRNAME=share \
+	--disable-systemd --disable-systemd-journal \
+	--with-bash-completion-dir=/share/bash-completion/completions
+
+	sed -i '/seems to be moved/d' libtool
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || exit || die
+
+	sed '/console-kit/,+2d' -i "$pkgdir"/etc/pulse/default.pa
+	rm -rf ${pkgdir}/etc/dbus-1
+	rm -rf ${pkgdir}/share/locale
+	install -D -m755 src/start-pulseaudio-x11 $pkgdir/bin/start-pulseaudio-x11
+}

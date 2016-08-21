@@ -1,0 +1,18 @@
+name=opus
+version=1.1.4
+desc="codec designed for interactive speech and audio transmission over the internet"
+source="http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz"
+deps="musl"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+	    --sbindir=/bin \
+	    --enable-custom-modes \
+	    --disable-static \
+	    --enable-intrinsics \
+	    --enable-rtcd \
+	    --enable-ambisonics
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

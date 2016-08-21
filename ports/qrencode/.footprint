@@ -1,0 +1,14 @@
+bin/qrencode|755|0|0|regular file
+bin|755|0|0|directory
+include/qrencode.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libqrencode.so.3.4.4|755|0|0|regular file
+lib/libqrencode.so.3|777|0|0|symbolic link
+lib/libqrencode.so|777|0|0|symbolic link
+lib/pkgconfig/libqrencode.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/qrencode.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

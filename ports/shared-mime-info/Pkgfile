@@ -1,0 +1,13 @@
+name=shared-mime-info
+version=1.8
+desc="Freedesktop.org Shared MIME Info"
+deps="glib libxml2 intltool"
+source="http://freedesktop.org/~hadess/${name}-${version}.tar.xz"
+
+build() {
+	cd $name-$version
+	export ac_cv_func_fdatasync=no
+	./configure --prefix= --disable-update-mimedb
+	make SHELL=/bin/bash || die
+	make DESTDIR="${pkgdir}" install || die
+}

@@ -1,0 +1,17 @@
+name=libxcursor-32
+version=1.1.14
+deps="libxfixes-32 libxrender-32 libxcursor"
+desc="X cursor management library"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXcursor-$version.tar.bz2"
+
+build() {
+	cd libXcursor-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix= --disable-static --libdir=/lib32
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+}

@@ -1,0 +1,17 @@
+name=libaio
+version=0.3.110
+desc="Asynchronous input/output library"
+source="http://ftp.debian.org/debian/pool/main/liba/$name/${name}_${version}.orig.tar.gz"
+
+build() {
+	cd $name-$version
+	LDFLAGS="$LDFLAGS -lc"
+	make \
+	prefix="$pkgdir" \
+	sysconfdir="$pkgdir/etc" \
+	mandir="$pkgdir/share/man" \
+	infodir="$pkgdir/share/info" \
+	install || die
+	rm -rf "$pkgdir"/share/info
+}
+

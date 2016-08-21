@@ -1,0 +1,72 @@
+name=wine
+version=2.7
+d9version=$version
+_ver=`echo $version | sed 's/rc/-rc/g'`
+_d9ver=`echo $d9version | sed 's/rc/-rc/g'`
+desc="Based off wine-staging, including the gallium-nine patches and some more hacks"
+source="
+https://github.com/wine-compholio/${name}-patched/archive/staging-${_ver}.tar.gz
+https://github.com/sarnex/wine-d3d9-patches/archive/wine-d3d9-$_d9ver.tar.gz
+heap_perf.patch
+steam.patch
+keybindings.patch
+wbemprox_query_v2.patch
+wine-dlclose.patch"
+deps="autoconf automake attr-32 freetype-32 libsm-32 alsa-lib-32 libpng-32 libx11-32 libxau-32 gettext-32 libxi-32 libxrender-32 libxext-32 libxcb-32 zlib-32 mesa-32 libxml2-32 libxslt-32 libjpeg-turbo-32 fontconfig-32 glu-32 libpcap-32 desktop-file-utils libxcursor-32 libxrandr-32 libxcomposite-32 libva-32 ncurses-32 libxinerama-32 eudev-32 lcms2-32 libva-intel-driver-32 mpg123-32 alsa-plugins-32 libtxc_dxtn-32 ocl-icd-32 giflib-32 v4l-utils-32 libldap-32 openal gsm-32"
+
+ext() {
+	cd wine-patched-staging-$_ver
+	for i in $source;do
+		msg $i
+		case $i in
+		*keybindings.patch) patch -p1 -R < ../$i || die;;
+		*patch) patch -p1 < ../$i || die;;
+		esac
+	done
+	patch -p1 < "$srcdir/wine-d3d9-patches-wine-d3d9-$_d9ver/staging-helper.patch" #for wine-staging || die
+	patch -p1 < "$srcdir/wine-d3d9-patches-wine-d3d9-$_d9ver/wine-d3d9.patch" || die
+	autoreconf -fi
+	cd ..
+	mv wine-patched-staging-$_ver wine32
+	cp -r wine32 wine64
+}
+
+build() {
+	mkdir 64build
+	cd 64build
+	export PKG_CONFIG_PATH="/lib/pkgconfig"
+	../wine64/configure --prefix= \
+	--host=$TARGET \
+	--build=$TARGET \
+	--libdir=/lib \
+	--enable-win64 \
+	--with-x \
+	--disable-tests \
+	--without-hal \
+	--without-gtk3 \
+	--with-gsm \
+	--with-xattr
+	make || die
+	cd ..
+
+	mkdir 32build
+	cd 32build
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	../wine32/configure --prefix= \
+	--host=$TARGET \
+	--build=$TARGET \
+	--libdir=/lib32 \
+	--with-x \
+	--disable-tests \
+	--without-hal \
+	--without-gtk3 \
+	--with-wine64="`pwd`/../64build" \
+	--with-gsm \
+	--with-xattr
+	make || die
+	make -j1 prefix=/"$pkgdir/" libdir="$pkgdir"/lib32 dlldir="$pkgdir"/lib32/wine install || die
+	cd ..
+	cd 64build
+	make -j1 prefix=/"$pkgdir/" libdir="$pkgdir"/lib dlldir="$pkgdir"/lib/wine install || die
+	rm -fr "$pkgdir"/share/man/*.UTF-8
+}

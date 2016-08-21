@@ -1,0 +1,31 @@
+name=dbus
+version=1.10.18
+deps="expat python util-linux autoconf automake libtool xmlto"
+desc="Freedesktop.org message bus system"
+source="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz
+fix-int64-print.patch
+"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static \
+	--libdir=/lib \
+	--libexecdir=/lib \
+	--with-dbus-user=dbus \
+	--with-system-pid-file=/run/dbus/pid \
+	--with-system-socket=/run/dbus/system_bus_socket \
+	--with-console-auth-dir=/run/console/ \
+	--disable-verbose-mode \
+	--enable-user-session \
+	--enable-inotify \
+	--disable-dnotify \
+	--disable-tests \
+	--disable-asserts 
+	make  || die
+	make -j1 DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/doc
+	rm -r "$pkgdir"/var/run
+	rm -r "$pkgdir"/lib/systemd
+	chown dbus:dbus "$pkgdir"/lib/dbus-daemon-launch-helper
+	chmod 4750 "$pkgdir"/lib/dbus-daemon-launch-helper
+}

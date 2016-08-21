@@ -1,0 +1,23 @@
+bin/perli11ndoc|555|0|0|regular file
+bin|755|0|0|directory
+lib/perl5/core_perl|755|0|0|directory
+lib/perl5/vendor_perl/Glib/Object/Introspection.pm|444|0|0|regular file
+lib/perl5/vendor_perl/Glib/Object/Introspection/Install/Files.pm|444|0|0|regular file
+lib/perl5/vendor_perl/Glib/Object/Introspection/Install|755|0|0|directory
+lib/perl5/vendor_perl/Glib/Object/Introspection|755|0|0|directory
+lib/perl5/vendor_perl/Glib/Object|755|0|0|directory
+lib/perl5/vendor_perl/Glib|755|0|0|directory
+lib/perl5/vendor_perl/auto/Glib/Object/Introspection/.packlist|644|0|0|regular file
+lib/perl5/vendor_perl/auto/Glib/Object/Introspection/Introspection.so|555|0|0|regular file
+lib/perl5/vendor_perl/auto/Glib/Object/Introspection|755|0|0|directory
+lib/perl5/vendor_perl/auto/Glib/Object|755|0|0|directory
+lib/perl5/vendor_perl/auto/Glib|755|0|0|directory
+lib/perl5/vendor_perl/auto|755|0|0|directory
+lib/perl5/vendor_perl|755|0|0|directory
+lib/perl5|755|0|0|directory
+lib|755|0|0|directory
+share/man/man3/perl/Glib::Object::Introspection.3pm.gz|644|0|0|regular file
+share/man/man3/perl|755|0|0|directory
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

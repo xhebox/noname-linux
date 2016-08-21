@@ -1,0 +1,44 @@
+name=fontconfig
+version=2.12.1
+desc="A library for configuring and customizing font access"
+deps="harfbuzz expat autoconf automake libtool"
+source="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.bz2
+"
+
+ext() {
+	cd fontconfig-$version
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i ../"$i" || die;;
+		esac
+	done
+	aclocal
+	libtoolize -f
+	automake -afi
+}
+
+build() {
+	cd fontconfig-$version
+	./configure \
+		--prefix=/ \
+		--sysconfdir=/etc \
+		--with-templatedir=/etc/fonts/conf.avail \
+		--with-templateinfdir=/etc/fonts/conf.avail.infinality \
+		--with-xmldir=/etc/fonts \
+		--localstatedir=/var \
+		--disable-static \
+		--with-default-fonts=/share/fonts \
+		--with-add-fonts=/share/fonts \
+		--disable-docs 
+
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+
+	rm -f "$pkgdir"/etc/fonts/conf.d/README
+}
+
+post() {
+	if [ "$UPD" -eq 1 ]; then
+		pchroot "$ROOT" /bin/fc-cache -f || die
+	fi
+}

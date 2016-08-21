@@ -1,0 +1,211 @@
+bin/chage|4755|0|0|regular file
+bin/chfn|4755|0|0|regular file
+bin/chgpasswd|755|0|0|regular file
+bin/chpasswd|755|0|0|regular file
+bin/chsh|4755|0|0|regular file
+bin/expiry|4755|0|0|regular file
+bin/faillog|755|0|0|regular file
+bin/gpasswd|4755|0|0|regular file
+bin/groupadd|755|0|0|regular file
+bin/groupdel|755|0|0|regular file
+bin/groupmems|755|0|0|regular file
+bin/groupmod|755|0|0|regular file
+bin/groups|755|0|0|regular file
+bin/grpck|755|0|0|regular file
+bin/grpconv|755|0|0|regular file
+bin/grpunconv|755|0|0|regular file
+bin/lastlog|755|0|0|regular file
+bin/login|755|0|0|regular file
+bin/logoutd|755|0|0|regular file
+bin/newgidmap|755|0|0|regular file
+bin/newgrp|4755|0|0|regular file
+bin/newuidmap|755|0|0|regular file
+bin/newusers|755|0|0|regular file
+bin/nologin|755|0|0|regular file
+bin/passwd|4755|0|0|regular file
+bin/pwck|755|0|0|regular file
+bin/pwconv|755|0|0|regular file
+bin/pwunconv|755|0|0|regular file
+bin/sg|777|0|0|symbolic link
+bin/su|4755|0|0|regular file
+bin/useradd|755|0|0|regular file
+bin/userdel|755|0|0|regular file
+bin/usermod|755|0|0|regular file
+bin/vigr|777|0|0|symbolic link
+bin/vipw|755|0|0|regular file
+bin|755|0|0|directory
+etc/default/useradd|644|0|0|regular file
+etc/default|755|0|0|directory
+etc/limits|644|0|0|regular file
+etc/login.access|644|0|0|regular file
+etc/login.defs|644|0|0|regular file
+etc|755|0|0|directory
+share/locale/bs/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES|755|0|0|directory
+share/locale/bs|755|0|0|directory
+share/locale/ca/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/da/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/dz/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/dz/LC_MESSAGES|755|0|0|directory
+share/locale/dz|755|0|0|directory
+share/locale/el/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/es/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/eu/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES|755|0|0|directory
+share/locale/eu|755|0|0|directory
+share/locale/fi/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gl/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/he/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES|755|0|0|directory
+share/locale/he|755|0|0|directory
+share/locale/hu/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/id/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/it/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/kk/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/kk/LC_MESSAGES|755|0|0|directory
+share/locale/kk|755|0|0|directory
+share/locale/km/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/km/LC_MESSAGES|755|0|0|directory
+share/locale/km|755|0|0|directory
+share/locale/ko/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/nb/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/ne/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ne/LC_MESSAGES|755|0|0|directory
+share/locale/ne|755|0|0|directory
+share/locale/nl/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/nn/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES|755|0|0|directory
+share/locale/nn|755|0|0|directory
+share/locale/pl/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ro/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sk/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sq/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/sq/LC_MESSAGES|755|0|0|directory
+share/locale/sq|755|0|0|directory
+share/locale/sv/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tl/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/tl/LC_MESSAGES|755|0|0|directory
+share/locale/tl|755|0|0|directory
+share/locale/tr/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/shadow.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/chage.1.gz|644|0|0|regular file
+share/man/man1/chfn.1.gz|644|0|0|regular file
+share/man/man1/chsh.1.gz|644|0|0|regular file
+share/man/man1/expiry.1.gz|644|0|0|regular file
+share/man/man1/gpasswd.1.gz|644|0|0|regular file
+share/man/man1/groups.1.gz|644|0|0|regular file
+share/man/man1/login.1.gz|644|0|0|regular file
+share/man/man1/newgidmap.1.gz|644|0|0|regular file
+share/man/man1/newgrp.1.gz|644|0|0|regular file
+share/man/man1/newuidmap.1.gz|644|0|0|regular file
+share/man/man1/passwd.1.gz|644|0|0|regular file
+share/man/man1/sg.1.gz|644|0|0|regular file
+share/man/man1/su.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/getspnam.3.gz|644|0|0|regular file
+share/man/man3/shadow.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man/man5/faillog.5.gz|644|0|0|regular file
+share/man/man5/gshadow.5.gz|644|0|0|regular file
+share/man/man5/limits.5.gz|644|0|0|regular file
+share/man/man5/login.access.5.gz|644|0|0|regular file
+share/man/man5/login.defs.5.gz|644|0|0|regular file
+share/man/man5/passwd.5.gz|644|0|0|regular file
+share/man/man5/porttime.5.gz|644|0|0|regular file
+share/man/man5/shadow.5.gz|644|0|0|regular file
+share/man/man5/suauth.5.gz|644|0|0|regular file
+share/man/man5/subgid.5.gz|644|0|0|regular file
+share/man/man5/subuid.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/chgpasswd.8.gz|644|0|0|regular file
+share/man/man8/chpasswd.8.gz|644|0|0|regular file
+share/man/man8/faillog.8.gz|644|0|0|regular file
+share/man/man8/groupadd.8.gz|644|0|0|regular file
+share/man/man8/groupdel.8.gz|644|0|0|regular file
+share/man/man8/groupmems.8.gz|644|0|0|regular file
+share/man/man8/groupmod.8.gz|644|0|0|regular file
+share/man/man8/grpck.8.gz|644|0|0|regular file
+share/man/man8/grpconv.8.gz|644|0|0|regular file
+share/man/man8/grpunconv.8.gz|644|0|0|regular file
+share/man/man8/lastlog.8.gz|644|0|0|regular file
+share/man/man8/logoutd.8.gz|644|0|0|regular file
+share/man/man8/newusers.8.gz|644|0|0|regular file
+share/man/man8/nologin.8.gz|644|0|0|regular file
+share/man/man8/pwck.8.gz|644|0|0|regular file
+share/man/man8/pwconv.8.gz|644|0|0|regular file
+share/man/man8/pwunconv.8.gz|644|0|0|regular file
+share/man/man8/useradd.8.gz|644|0|0|regular file
+share/man/man8/userdel.8.gz|644|0|0|regular file
+share/man/man8/usermod.8.gz|644|0|0|regular file
+share/man/man8/vigr.8.gz|644|0|0|regular file
+share/man/man8/vipw.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,16 @@
+name=netcat
+version=0.7.1
+desc="Read and write data across network connections"
+source="http://download.sourceforge.net/netcat/netcat-0.7.1.tar.bz2"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/ \
+                    --mandir=/share/man
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+	rm -rf $pkgdir/share/locale
+	rm -rf $pkgdir/info
+}

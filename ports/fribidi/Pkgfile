@@ -1,0 +1,14 @@
+name=fribidi
+version=0.19.7
+desc="A Free Implementation of the Unicode Bidirectional Algorithm"
+deps="glib"
+source="http://fribidi.org/download/${name}-${version}.tar.bz2"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

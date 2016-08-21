@@ -1,0 +1,21 @@
+name=lmms
+version=1.2.0-rc2
+desc="The Linux MultiMedia Studio (Qt5 Version)."
+source="https://github.com/LMMS/lmms/archive/v$version.tar.gz
+musl.patch"
+deps="qt5-base pulseaudio fluidsynth libxft libvorbis libogg fftw libsamplerate libxinerama shared-mime-info qt5-tools zynaddsubfx stk libsndfile ladspa libgig shared-mime-info"
+
+build() {
+	cd lmms-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	cmake . -DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DWANT_QT5=ON \
+	-DWANT_VST_NOWINE=ON
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

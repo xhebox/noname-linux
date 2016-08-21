@@ -1,0 +1,29 @@
+name=icu
+version=59.1
+desc="International Components for Unicode library"
+ver=` echo $version | sed 's/\./_/g'`
+source="http://download.icu-project.org/files/icu4c/${version}/${name}4c-$ver-src.tgz
+icu-58.1-remove-bashisms.patch
+"
+
+build() {
+	cd icu/source
+	for x in ARFLAGS CFLAGS CPPFLAGS CXXFLAGS FFLAGS LDFLAGS; do
+		sed -i -e "/^${x} =.*/s:@${x}@::" "config/Makefile.inc.in"
+	done
+	sed -i -e 's,DU_HAVE_STRTOD_L=1,DU_HAVE_STRTOD_L=0,' configure.ac
+	sed -i -e 's,DU_HAVE_STRTOD_L=1,DU_HAVE_STRTOD_L=0,' configure
+	patch -p1 -i ${srcdir}/icu-58.1-remove-bashisms.patch || die
+
+	./configure \
+		--prefix= \
+		--sbindir=/bin \
+		--sysconfdir=/etc \
+		--with-data-packaging=library \
+		--disable-debug \
+		--disable-static \
+		--disable-samples
+	make || die
+	make -j1 DESTDIR="$pkgdir" install || die
+	chmod +x "$pkgdir"/bin/icu-config
+}

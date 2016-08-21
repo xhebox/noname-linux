@@ -1,0 +1,14 @@
+bin/itstool|755|0|0|regular file
+bin|755|0|0|directory
+share/itstool/its/docbook.its|644|0|0|regular file
+share/itstool/its/docbook5.its|644|0|0|regular file
+share/itstool/its/its.its|644|0|0|regular file
+share/itstool/its/mallard.its|644|0|0|regular file
+share/itstool/its/ttml.its|644|0|0|regular file
+share/itstool/its/xhtml.its|644|0|0|regular file
+share/itstool/its|755|0|0|directory
+share/itstool|755|0|0|directory
+share/man/man1/itstool.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,14 @@
+. $PORTS/linux/Pkgfile
+name=linux-x86_64
+setk
+
+ext() {
+	_ext
+	sed -i -e 's/# CONFIG_GENERIC_CPU is not set/CONFIG_GENERIC_CPU=y/g' \
+		-e 's/CONFIG_MNATIVE=y/# CONFIG_MNATIVE is not set/g' \
+	.config
+	sed -i 's/CONFIG_LOCALVERSION=".*"/CONFIG_LOCALVERSION=""/g' .config
+	sed -i "s/-zen/$_kernelname/g" ../linux.preset
+}
+
+

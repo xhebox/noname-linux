@@ -1,0 +1,16 @@
+lib/libglfw.so.3|777|0|0|symbolic link
+lib/libglfw.so|777|0|0|symbolic link
+include/GLFW/glfw3.h|644|0|0|regular file
+include/GLFW/glfw3native.h|644|0|0|regular file
+lib/libglfw.so.3.2|755|0|0|regular file
+lib/cmake/glfw3/glfw3ConfigVersion.cmake|644|0|0|regular file
+lib/cmake/glfw3/glfw3Targets-noconfig.cmake|644|0|0|regular file
+lib/cmake/glfw3/glfw3Config.cmake|644|0|0|regular file
+lib/cmake/glfw3/glfw3Targets.cmake|644|0|0|regular file
+lib/pkgconfig/glfw3.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/cmake/glfw3|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib|755|0|0|directory
+include/GLFW|755|0|0|directory
+include|755|0|0|directory

@@ -1,0 +1,25 @@
+name=profanity
+version=0.5.1
+desc="Console based XMPP client"
+deps="curl ncurses expat glib libotr libmesode libnotify gpgme python3"
+source="http://www.profanity.im/${name}-${version}.tar.gz"
+
+ext() {
+	cp -a ${name}-${version} gtk
+}
+
+build() {
+	msg "Building non-gtk variant..."
+	cd ${name}-${version}
+	/bin/bash ./configure \
+		 --prefix= \
+		 --disable-icons \
+		 --enable-notifications \
+		 --enable-python-plugins \
+		 --enable-c-plugins \
+		 --enable-plugins \
+		 --enable-otr \
+		 --enable-pgp
+	make SHELL=/bin/bash || die
+	make SHELL=/bin/bash DESTDIR="${pkgdir}" install || die
+}

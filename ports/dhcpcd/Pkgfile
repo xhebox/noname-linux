@@ -1,0 +1,20 @@
+name=dhcpcd
+version=6.11.5
+desc="RFC2131 compliant DHCP client daemon"
+deps="eudev bash musl"
+source="http://roy.marples.name/downloads/$name/$name-$version.tar.xz"
+
+build() {
+	cd ${name}-${version}
+
+	./configure \
+		--prefix=/ \
+		--sysconfdir=/etc \
+		--sbindir=/bin \
+		--libexecdir=/lib/dhcpcd \
+		--dbdir=/var/lib/dhcpcd \
+		--rundir=/run 
+
+	make  || die
+	make DESTDIR="${pkgdir}" install  || die
+}

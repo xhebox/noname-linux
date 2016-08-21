@@ -1,0 +1,15 @@
+name=slstatus
+version=git
+desc="dwm status"
+deps="xorg-server"
+source="config.h"
+
+ext() {
+	git clone --depth=1 http://github.com/drkhsh/slstatus $name-$version
+}
+
+build(){
+	cd $name-$version
+	cp -r "$srcdir"/config.h .
+	make PREFIX=/ DESTDIR="$pkgdir" install || die
+}

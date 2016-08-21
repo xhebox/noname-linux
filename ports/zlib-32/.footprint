@@ -1,0 +1,7 @@
+lib32/libz.so.1|777|0|0|symbolic link
+lib32/libz.so|777|0|0|symbolic link
+lib32/libz.so.1.2.11|755|0|0|regular file
+lib32/libz.a|644|0|0|regular file
+lib32/pkgconfig/zlib.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

@@ -1,0 +1,433 @@
+bin/addpart|755|0|0|regular file
+bin/agetty|755|0|0|regular file
+bin/blkdiscard|755|0|0|regular file
+bin/blkid|755|0|0|regular file
+bin/blockdev|755|0|0|regular file
+bin/cal|755|0|0|regular file
+bin/cfdisk|755|0|0|regular file
+bin/chcpu|755|0|0|regular file
+bin/chrt|755|0|0|regular file
+bin/colcrt|755|0|0|regular file
+bin/colrm|755|0|0|regular file
+bin/column|755|0|0|regular file
+bin/col|755|0|0|regular file
+bin/ctrlaltdel|755|0|0|regular file
+bin/delpart|755|0|0|regular file
+bin/dmesg|755|0|0|regular file
+bin/eject|755|0|0|regular file
+bin/fallocate|755|0|0|regular file
+bin/fdformat|755|0|0|regular file
+bin/fdisk|755|0|0|regular file
+bin/findfs|755|0|0|regular file
+bin/findmnt|755|0|0|regular file
+bin/flock|755|0|0|regular file
+bin/fsck.cramfs|755|0|0|regular file
+bin/fsck.minix|755|0|0|regular file
+bin/fsck|755|0|0|regular file
+bin/fsfreeze|755|0|0|regular file
+bin/fstrim|755|0|0|regular file
+bin/getopt|755|0|0|regular file
+bin/hexdump|755|0|0|regular file
+bin/hwclock|755|0|0|regular file
+bin/i386|777|0|0|symbolic link
+bin/ionice|755|0|0|regular file
+bin/ipcmk|755|0|0|regular file
+bin/ipcrm|755|0|0|regular file
+bin/ipcs|755|0|0|regular file
+bin/isosize|755|0|0|regular file
+bin/kill|755|0|0|regular file
+bin/lastb|777|0|0|symbolic link
+bin/last|755|0|0|regular file
+bin/ldattach|755|0|0|regular file
+bin/linux32|777|0|0|symbolic link
+bin/linux64|777|0|0|symbolic link
+bin/logger|755|0|0|regular file
+bin/look|755|0|0|regular file
+bin/losetup|755|0|0|regular file
+bin/lsblk|755|0|0|regular file
+bin/lscpu|755|0|0|regular file
+bin/lsipc|755|0|0|regular file
+bin/lslocks|755|0|0|regular file
+bin/lslogins|755|0|0|regular file
+bin/lsns|755|0|0|regular file
+bin/mcookie|755|0|0|regular file
+bin/mesg|755|0|0|regular file
+bin/mkfs.bfs|755|0|0|regular file
+bin/mkfs.cramfs|755|0|0|regular file
+bin/mkfs.minix|755|0|0|regular file
+bin/mkfs|755|0|0|regular file
+bin/mkswap|755|0|0|regular file
+bin/more|755|0|0|regular file
+bin/mountpoint|755|0|0|regular file
+bin/mount|4755|0|0|regular file
+bin/namei|755|0|0|regular file
+bin/nsenter|755|0|0|regular file
+bin/partx|755|0|0|regular file
+bin/pivot_root|755|0|0|regular file
+bin/prlimit|755|0|0|regular file
+bin/raw|755|0|0|regular file
+bin/readprofile|755|0|0|regular file
+bin/rename|755|0|0|regular file
+bin/renice|755|0|0|regular file
+bin/resizepart|755|0|0|regular file
+bin/rev|755|0|0|regular file
+bin/rtcwake|755|0|0|regular file
+bin/scriptreplay|755|0|0|regular file
+bin/script|755|0|0|regular file
+bin/setarch|755|0|0|regular file
+bin/setsid|755|0|0|regular file
+bin/setterm|755|0|0|regular file
+bin/sfdisk|755|0|0|regular file
+bin/sulogin|755|0|0|regular file
+bin/swaplabel|755|0|0|regular file
+bin/swapoff|755|0|0|regular file
+bin/swapon|755|0|0|regular file
+bin/switch_root|755|0|0|regular file
+bin/tailf|755|0|0|regular file
+bin/taskset|755|0|0|regular file
+bin/ul|755|0|0|regular file
+bin/umount|4755|0|0|regular file
+bin/uname26|777|0|0|symbolic link
+bin/unshare|755|0|0|regular file
+bin/utmpdump|755|0|0|regular file
+bin/uuidd|755|0|0|regular file
+bin/uuidgen|755|0|0|regular file
+bin/wall|755|0|5|regular file
+bin/wdctl|755|0|0|regular file
+bin/whereis|755|0|0|regular file
+bin/wipefs|755|0|0|regular file
+bin/write|755|0|5|regular file
+bin/x86_64|777|0|0|symbolic link
+bin/zramctl|755|0|0|regular file
+bin|755|0|0|directory
+include/blkid/blkid.h|644|0|0|regular file
+include/blkid|755|0|0|directory
+include/libfdisk/libfdisk.h|644|0|0|regular file
+include/libfdisk|755|0|0|directory
+include/libmount/libmount.h|644|0|0|regular file
+include/libmount|755|0|0|directory
+include/libsmartcols/libsmartcols.h|644|0|0|regular file
+include/libsmartcols|755|0|0|directory
+include/uuid/uuid.h|644|0|0|regular file
+include/uuid|755|0|0|directory
+include|755|0|0|directory
+lib/libblkid.a|644|0|0|regular file
+lib/libblkid.so.1.1.0|755|0|0|regular file
+lib/libblkid.so.1|777|0|0|symbolic link
+lib/libblkid.so|777|0|0|symbolic link
+lib/libfdisk.a|644|0|0|regular file
+lib/libfdisk.so.1.1.0|755|0|0|regular file
+lib/libfdisk.so.1|777|0|0|symbolic link
+lib/libfdisk.so|777|0|0|symbolic link
+lib/libmount.a|644|0|0|regular file
+lib/libmount.so.1.1.0|755|0|0|regular file
+lib/libmount.so.1|777|0|0|symbolic link
+lib/libmount.so|777|0|0|symbolic link
+lib/libsmartcols.a|644|0|0|regular file
+lib/libsmartcols.so.1.1.0|755|0|0|regular file
+lib/libsmartcols.so.1|777|0|0|symbolic link
+lib/libsmartcols.so|777|0|0|symbolic link
+lib/libuuid.a|644|0|0|regular file
+lib/libuuid.so.1.3.0|755|0|0|regular file
+lib/libuuid.so.1|777|0|0|symbolic link
+lib/libuuid.so|777|0|0|symbolic link
+lib/pkgconfig/blkid.pc|644|0|0|regular file
+lib/pkgconfig/fdisk.pc|644|0|0|regular file
+lib/pkgconfig/mount.pc|644|0|0|regular file
+lib/pkgconfig/smartcols.pc|644|0|0|regular file
+lib/pkgconfig/uuid.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/addpart|644|0|0|regular file
+share/bash-completion/completions/blkdiscard|644|0|0|regular file
+share/bash-completion/completions/blkid|644|0|0|regular file
+share/bash-completion/completions/blockdev|644|0|0|regular file
+share/bash-completion/completions/cal|644|0|0|regular file
+share/bash-completion/completions/cfdisk|644|0|0|regular file
+share/bash-completion/completions/chcpu|644|0|0|regular file
+share/bash-completion/completions/chrt|644|0|0|regular file
+share/bash-completion/completions/colcrt|644|0|0|regular file
+share/bash-completion/completions/colrm|644|0|0|regular file
+share/bash-completion/completions/column|644|0|0|regular file
+share/bash-completion/completions/col|644|0|0|regular file
+share/bash-completion/completions/ctrlaltdel|644|0|0|regular file
+share/bash-completion/completions/delpart|644|0|0|regular file
+share/bash-completion/completions/dmesg|644|0|0|regular file
+share/bash-completion/completions/eject|644|0|0|regular file
+share/bash-completion/completions/fallocate|644|0|0|regular file
+share/bash-completion/completions/fdformat|644|0|0|regular file
+share/bash-completion/completions/fdisk|644|0|0|regular file
+share/bash-completion/completions/findmnt|644|0|0|regular file
+share/bash-completion/completions/flock|644|0|0|regular file
+share/bash-completion/completions/fsck.cramfs|644|0|0|regular file
+share/bash-completion/completions/fsck.minix|644|0|0|regular file
+share/bash-completion/completions/fsck|644|0|0|regular file
+share/bash-completion/completions/fsfreeze|644|0|0|regular file
+share/bash-completion/completions/fstrim|644|0|0|regular file
+share/bash-completion/completions/getopt|644|0|0|regular file
+share/bash-completion/completions/hexdump|644|0|0|regular file
+share/bash-completion/completions/hwclock|644|0|0|regular file
+share/bash-completion/completions/ionice|644|0|0|regular file
+share/bash-completion/completions/ipcmk|644|0|0|regular file
+share/bash-completion/completions/ipcrm|644|0|0|regular file
+share/bash-completion/completions/ipcs|644|0|0|regular file
+share/bash-completion/completions/isosize|644|0|0|regular file
+share/bash-completion/completions/last|644|0|0|regular file
+share/bash-completion/completions/ldattach|644|0|0|regular file
+share/bash-completion/completions/logger|644|0|0|regular file
+share/bash-completion/completions/look|644|0|0|regular file
+share/bash-completion/completions/losetup|644|0|0|regular file
+share/bash-completion/completions/lsblk|644|0|0|regular file
+share/bash-completion/completions/lscpu|644|0|0|regular file
+share/bash-completion/completions/lsipc|644|0|0|regular file
+share/bash-completion/completions/lslocks|644|0|0|regular file
+share/bash-completion/completions/lslogins|644|0|0|regular file
+share/bash-completion/completions/lsns|644|0|0|regular file
+share/bash-completion/completions/mcookie|644|0|0|regular file
+share/bash-completion/completions/mesg|644|0|0|regular file
+share/bash-completion/completions/mkfs.bfs|644|0|0|regular file
+share/bash-completion/completions/mkfs.cramfs|644|0|0|regular file
+share/bash-completion/completions/mkfs.minix|644|0|0|regular file
+share/bash-completion/completions/mkfs|644|0|0|regular file
+share/bash-completion/completions/mkswap|644|0|0|regular file
+share/bash-completion/completions/more|644|0|0|regular file
+share/bash-completion/completions/mountpoint|644|0|0|regular file
+share/bash-completion/completions/mount|644|0|0|regular file
+share/bash-completion/completions/namei|644|0|0|regular file
+share/bash-completion/completions/nsenter|644|0|0|regular file
+share/bash-completion/completions/partx|644|0|0|regular file
+share/bash-completion/completions/pivot_root|644|0|0|regular file
+share/bash-completion/completions/prlimit|644|0|0|regular file
+share/bash-completion/completions/raw|644|0|0|regular file
+share/bash-completion/completions/readprofile|644|0|0|regular file
+share/bash-completion/completions/rename|644|0|0|regular file
+share/bash-completion/completions/renice|644|0|0|regular file
+share/bash-completion/completions/resizepart|644|0|0|regular file
+share/bash-completion/completions/rev|644|0|0|regular file
+share/bash-completion/completions/rtcwake|644|0|0|regular file
+share/bash-completion/completions/scriptreplay|644|0|0|regular file
+share/bash-completion/completions/script|644|0|0|regular file
+share/bash-completion/completions/setarch|644|0|0|regular file
+share/bash-completion/completions/setsid|644|0|0|regular file
+share/bash-completion/completions/setterm|644|0|0|regular file
+share/bash-completion/completions/sfdisk|644|0|0|regular file
+share/bash-completion/completions/swaplabel|644|0|0|regular file
+share/bash-completion/completions/swapoff|644|0|0|regular file
+share/bash-completion/completions/swapon|644|0|0|regular file
+share/bash-completion/completions/tailf|644|0|0|regular file
+share/bash-completion/completions/taskset|644|0|0|regular file
+share/bash-completion/completions/ul|644|0|0|regular file
+share/bash-completion/completions/umount|644|0|0|regular file
+share/bash-completion/completions/unshare|644|0|0|regular file
+share/bash-completion/completions/utmpdump|644|0|0|regular file
+share/bash-completion/completions/uuidd|644|0|0|regular file
+share/bash-completion/completions/uuidgen|644|0|0|regular file
+share/bash-completion/completions/wall|644|0|0|regular file
+share/bash-completion/completions/wdctl|644|0|0|regular file
+share/bash-completion/completions/whereis|644|0|0|regular file
+share/bash-completion/completions/wipefs|644|0|0|regular file
+share/bash-completion/completions/write|644|0|0|regular file
+share/bash-completion/completions/zramctl|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/locale/ca/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/da/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/es/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/et/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES|755|0|0|directory
+share/locale/et|755|0|0|directory
+share/locale/eu/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES|755|0|0|directory
+share/locale/eu|755|0|0|directory
+share/locale/fi/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gl/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/hr/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/id/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/it/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/nl/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/pl/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/ru/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sl/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sv/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tr/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/util-linux.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/cal.1.gz|644|0|0|regular file
+share/man/man1/chrt.1.gz|644|0|0|regular file
+share/man/man1/col.1.gz|644|0|0|regular file
+share/man/man1/colcrt.1.gz|644|0|0|regular file
+share/man/man1/colrm.1.gz|644|0|0|regular file
+share/man/man1/column.1.gz|644|0|0|regular file
+share/man/man1/dmesg.1.gz|644|0|0|regular file
+share/man/man1/eject.1.gz|644|0|0|regular file
+share/man/man1/fallocate.1.gz|644|0|0|regular file
+share/man/man1/flock.1.gz|644|0|0|regular file
+share/man/man1/getopt.1.gz|644|0|0|regular file
+share/man/man1/hexdump.1.gz|644|0|0|regular file
+share/man/man1/ionice.1.gz|644|0|0|regular file
+share/man/man1/ipcmk.1.gz|644|0|0|regular file
+share/man/man1/ipcrm.1.gz|644|0|0|regular file
+share/man/man1/ipcs.1.gz|644|0|0|regular file
+share/man/man1/kill.1.gz|644|0|0|regular file
+share/man/man1/last.1.gz|644|0|0|regular file
+share/man/man1/lastb.1.gz|644|0|0|regular file
+share/man/man1/logger.1.gz|644|0|0|regular file
+share/man/man1/look.1.gz|644|0|0|regular file
+share/man/man1/lscpu.1.gz|644|0|0|regular file
+share/man/man1/lsipc.1.gz|644|0|0|regular file
+share/man/man1/lslogins.1.gz|644|0|0|regular file
+share/man/man1/mcookie.1.gz|644|0|0|regular file
+share/man/man1/mesg.1.gz|644|0|0|regular file
+share/man/man1/more.1.gz|644|0|0|regular file
+share/man/man1/mountpoint.1.gz|644|0|0|regular file
+share/man/man1/namei.1.gz|644|0|0|regular file
+share/man/man1/nsenter.1.gz|644|0|0|regular file
+share/man/man1/prlimit.1.gz|644|0|0|regular file
+share/man/man1/rename.1.gz|644|0|0|regular file
+share/man/man1/renice.1.gz|644|0|0|regular file
+share/man/man1/rev.1.gz|644|0|0|regular file
+share/man/man1/script.1.gz|644|0|0|regular file
+share/man/man1/scriptreplay.1.gz|644|0|0|regular file
+share/man/man1/setsid.1.gz|644|0|0|regular file
+share/man/man1/setterm.1.gz|644|0|0|regular file
+share/man/man1/tailf.1.gz|644|0|0|regular file
+share/man/man1/taskset.1.gz|644|0|0|regular file
+share/man/man1/ul.1.gz|644|0|0|regular file
+share/man/man1/unshare.1.gz|644|0|0|regular file
+share/man/man1/utmpdump.1.gz|644|0|0|regular file
+share/man/man1/uuidgen.1.gz|644|0|0|regular file
+share/man/man1/wall.1.gz|644|0|0|regular file
+share/man/man1/whereis.1.gz|644|0|0|regular file
+share/man/man1/write.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/libblkid.3.gz|644|0|0|regular file
+share/man/man3/uuid.3.gz|644|0|0|regular file
+share/man/man3/uuid_clear.3.gz|644|0|0|regular file
+share/man/man3/uuid_compare.3.gz|644|0|0|regular file
+share/man/man3/uuid_copy.3.gz|644|0|0|regular file
+share/man/man3/uuid_generate.3.gz|644|0|0|regular file
+share/man/man3/uuid_generate_random.3.gz|644|0|0|regular file
+share/man/man3/uuid_generate_time.3.gz|644|0|0|regular file
+share/man/man3/uuid_generate_time_safe.3.gz|644|0|0|regular file
+share/man/man3/uuid_is_null.3.gz|644|0|0|regular file
+share/man/man3/uuid_parse.3.gz|644|0|0|regular file
+share/man/man3/uuid_time.3.gz|644|0|0|regular file
+share/man/man3/uuid_unparse.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man/man5/fstab.5.gz|644|0|0|regular file
+share/man/man5/terminal-colors.d.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/addpart.8.gz|644|0|0|regular file
+share/man/man8/agetty.8.gz|644|0|0|regular file
+share/man/man8/blkdiscard.8.gz|644|0|0|regular file
+share/man/man8/blkid.8.gz|644|0|0|regular file
+share/man/man8/blockdev.8.gz|644|0|0|regular file
+share/man/man8/cfdisk.8.gz|644|0|0|regular file
+share/man/man8/chcpu.8.gz|644|0|0|regular file
+share/man/man8/ctrlaltdel.8.gz|644|0|0|regular file
+share/man/man8/delpart.8.gz|644|0|0|regular file
+share/man/man8/fdformat.8.gz|644|0|0|regular file
+share/man/man8/fdisk.8.gz|644|0|0|regular file
+share/man/man8/findfs.8.gz|644|0|0|regular file
+share/man/man8/findmnt.8.gz|644|0|0|regular file
+share/man/man8/fsck.8.gz|644|0|0|regular file
+share/man/man8/fsck.cramfs.8.gz|644|0|0|regular file
+share/man/man8/fsck.minix.8.gz|644|0|0|regular file
+share/man/man8/fsfreeze.8.gz|644|0|0|regular file
+share/man/man8/fstrim.8.gz|644|0|0|regular file
+share/man/man8/hwclock.8.gz|644|0|0|regular file
+share/man/man8/i386.8.gz|644|0|0|regular file
+share/man/man8/isosize.8.gz|644|0|0|regular file
+share/man/man8/ldattach.8.gz|644|0|0|regular file
+share/man/man8/linux32.8.gz|644|0|0|regular file
+share/man/man8/linux64.8.gz|644|0|0|regular file
+share/man/man8/losetup.8.gz|644|0|0|regular file
+share/man/man8/lsblk.8.gz|644|0|0|regular file
+share/man/man8/lslocks.8.gz|644|0|0|regular file
+share/man/man8/lsns.8.gz|644|0|0|regular file
+share/man/man8/mkfs.8.gz|644|0|0|regular file
+share/man/man8/mkfs.bfs.8.gz|644|0|0|regular file
+share/man/man8/mkfs.cramfs.8.gz|644|0|0|regular file
+share/man/man8/mkfs.minix.8.gz|644|0|0|regular file
+share/man/man8/mkswap.8.gz|644|0|0|regular file
+share/man/man8/mount.8.gz|644|0|0|regular file
+share/man/man8/partx.8.gz|644|0|0|regular file
+share/man/man8/pivot_root.8.gz|644|0|0|regular file
+share/man/man8/raw.8.gz|644|0|0|regular file
+share/man/man8/readprofile.8.gz|644|0|0|regular file
+share/man/man8/resizepart.8.gz|644|0|0|regular file
+share/man/man8/rtcwake.8.gz|644|0|0|regular file
+share/man/man8/setarch.8.gz|644|0|0|regular file
+share/man/man8/sfdisk.8.gz|644|0|0|regular file
+share/man/man8/sulogin.8.gz|644|0|0|regular file
+share/man/man8/swaplabel.8.gz|644|0|0|regular file
+share/man/man8/swapoff.8.gz|644|0|0|regular file
+share/man/man8/swapon.8.gz|644|0|0|regular file
+share/man/man8/switch_root.8.gz|644|0|0|regular file
+share/man/man8/umount.8.gz|644|0|0|regular file
+share/man/man8/uname26.8.gz|644|0|0|regular file
+share/man/man8/uuidd.8.gz|644|0|0|regular file
+share/man/man8/wdctl.8.gz|644|0|0|regular file
+share/man/man8/wipefs.8.gz|644|0|0|regular file
+share/man/man8/x86_64.8.gz|644|0|0|regular file
+share/man/man8/zramctl.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,131 @@
+bin/clisp-link|755|0|0|regular file
+bin/clisp|755|0|0|regular file
+bin|755|0|0|directory
+lib/clisp-2.49/base/bogomips.o|644|0|0|regular file
+lib/clisp-2.49/base/calls.o|644|0|0|regular file
+lib/clisp-2.49/base/gettext.o|644|0|0|regular file
+lib/clisp-2.49/base/libgnu_cl.a|644|0|0|regular file
+lib/clisp-2.49/base/libgnu_rx.a|644|0|0|regular file
+lib/clisp-2.49/base/libgnu_sc.a|644|0|0|regular file
+lib/clisp-2.49/base/libnoreadline.a|644|0|0|regular file
+lib/clisp-2.49/base/lisp.a|644|0|0|regular file
+lib/clisp-2.49/base/lisp.run|755|0|0|regular file
+lib/clisp-2.49/base/lispinit.mem|644|0|0|regular file
+lib/clisp-2.49/base/makevars|644|0|0|regular file
+lib/clisp-2.49/base/modules.h|644|0|0|regular file
+lib/clisp-2.49/base/modules.o|644|0|0|regular file
+lib/clisp-2.49/base/readline.o|644|0|0|regular file
+lib/clisp-2.49/base/regexi.o|644|0|0|regular file
+lib/clisp-2.49/base|755|0|0|directory
+lib/clisp-2.49/build-aux/arg-nonnull.h|644|0|0|regular file
+lib/clisp-2.49/build-aux/c++defs.h|644|0|0|regular file
+lib/clisp-2.49/build-aux/config.guess|644|0|0|regular file
+lib/clisp-2.49/build-aux/config.rpath|644|0|0|regular file
+lib/clisp-2.49/build-aux/config.sub|644|0|0|regular file
+lib/clisp-2.49/build-aux/depcomp|644|0|0|regular file
+lib/clisp-2.49/build-aux/warn-on-use.h|644|0|0|regular file
+lib/clisp-2.49/build-aux|755|0|0|directory
+lib/clisp-2.49/data/Symbol-Table.text|644|0|0|regular file
+lib/clisp-2.49/data/UnicodeDataFull.txt|644|0|0|regular file
+lib/clisp-2.49/data|755|0|0|directory
+lib/clisp-2.49/full/bogomips.o|644|0|0|regular file
+lib/clisp-2.49/full/calls.o|644|0|0|regular file
+lib/clisp-2.49/full/gettext.o|644|0|0|regular file
+lib/clisp-2.49/full/libgnu_cl.a|644|0|0|regular file
+lib/clisp-2.49/full/libgnu_rx.a|644|0|0|regular file
+lib/clisp-2.49/full/libgnu_sc.a|644|0|0|regular file
+lib/clisp-2.49/full/libnoreadline.a|644|0|0|regular file
+lib/clisp-2.49/full/lisp.a|644|0|0|regular file
+lib/clisp-2.49/full/lisp.run|755|0|0|regular file
+lib/clisp-2.49/full/lispinit.mem|644|0|0|regular file
+lib/clisp-2.49/full/makevars|644|0|0|regular file
+lib/clisp-2.49/full/modules.h|644|0|0|regular file
+lib/clisp-2.49/full/modules.o|644|0|0|regular file
+lib/clisp-2.49/full/readline.o|644|0|0|regular file
+lib/clisp-2.49/full/regexi.o|644|0|0|regular file
+lib/clisp-2.49/full|755|0|0|directory
+lib/clisp-2.49/linkkit/clisp.h|644|0|0|regular file
+lib/clisp-2.49/linkkit/modprep.lisp|644|0|0|regular file
+lib/clisp-2.49/linkkit/modules.c|644|0|0|regular file
+lib/clisp-2.49/linkkit|755|0|0|directory
+lib/clisp-2.49|755|0|0|directory
+lib|755|0|0|directory
+share/aclocal/clisp.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/doc/clisp/ANNOUNCE|644|0|0|regular file
+share/doc/clisp/COPYRIGHT|644|0|0|regular file
+share/doc/clisp/GNU-GPL|644|0|0|regular file
+share/doc/clisp/MAGIC.add|644|0|0|regular file
+share/doc/clisp/NEWS|644|0|0|regular file
+share/doc/clisp/README.de|644|0|0|regular file
+share/doc/clisp/README.es|644|0|0|regular file
+share/doc/clisp/README|644|0|0|regular file
+share/doc/clisp/SUMMARY|644|0|0|regular file
+share/doc/clisp/clisp-link.html|644|0|0|regular file
+share/doc/clisp/clisp-link.pdf|644|0|0|regular file
+share/doc/clisp/clisp-link.ps|644|0|0|regular file
+share/doc/clisp/clisp.html|644|0|0|regular file
+share/doc/clisp/clisp.pdf|644|0|0|regular file
+share/doc/clisp/clisp.ps|644|0|0|regular file
+share/doc/clisp/doc/CLOS-guide.txt|644|0|0|regular file
+share/doc/clisp/doc/LISP-tutorial.txt|644|0|0|regular file
+share/doc/clisp/doc/clisp-link.1|644|0|0|regular file
+share/doc/clisp/doc/clisp-link.html|644|0|0|regular file
+share/doc/clisp/doc/clisp-link.pdf|644|0|0|regular file
+share/doc/clisp/doc/clisp-link.ps|644|0|0|regular file
+share/doc/clisp/doc/clisp.1|644|0|0|regular file
+share/doc/clisp/doc/clisp.html|644|0|0|regular file
+share/doc/clisp/doc/clisp.pdf|644|0|0|regular file
+share/doc/clisp/doc/clisp.png|644|0|0|regular file
+share/doc/clisp/doc/clisp.ps|644|0|0|regular file
+share/doc/clisp/doc/impnotes.css|644|0|0|regular file
+share/doc/clisp/doc/impnotes.html|644|0|0|regular file
+share/doc/clisp/doc|755|0|0|directory
+share/doc/clisp|755|0|0|directory
+share/doc|755|0|0|directory
+share/emacs/site-lisp/clhs.el|644|0|0|regular file
+share/emacs/site-lisp/clisp-coding.el|644|0|0|regular file
+share/emacs/site-lisp/clisp-ffi.el|644|0|0|regular file
+share/emacs/site-lisp/clisp-indent.el|644|0|0|regular file
+share/emacs/site-lisp/clisp-indent.lisp|644|0|0|regular file
+share/emacs/site-lisp|755|0|0|directory
+share/emacs|755|0|0|directory
+share/locale/da/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/en/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/en/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/en/LC_MESSAGES|755|0|0|directory
+share/locale/en|755|0|0|directory
+share/locale/es/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fr/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/nl/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/ru/LC_MESSAGES/clisp.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/clisplow.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/clisp-link.1.gz|644|0|0|regular file
+share/man/man1/clisp.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share/vim/vimfiles/after/syntax/lisp.vim|644|0|0|regular file
+share/vim/vimfiles/after/syntax|755|0|0|directory
+share/vim/vimfiles/after|755|0|0|directory
+share/vim/vimfiles|755|0|0|directory
+share/vim|755|0|0|directory
+share|755|0|0|directory

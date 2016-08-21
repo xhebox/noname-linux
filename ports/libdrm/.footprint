@@ -1,0 +1,87 @@
+include/libdrm/amdgpu.h|644|0|0|regular file
+include/libdrm/amdgpu_drm.h|644|0|0|regular file
+include/libdrm/drm.h|644|0|0|regular file
+include/libdrm/drm_fourcc.h|644|0|0|regular file
+include/libdrm/drm_mode.h|644|0|0|regular file
+include/libdrm/drm_sarea.h|644|0|0|regular file
+include/libdrm/i915_drm.h|644|0|0|regular file
+include/libdrm/intel_aub.h|644|0|0|regular file
+include/libdrm/intel_bufmgr.h|644|0|0|regular file
+include/libdrm/intel_debug.h|644|0|0|regular file
+include/libdrm/mach64_drm.h|644|0|0|regular file
+include/libdrm/mga_drm.h|644|0|0|regular file
+include/libdrm/nouveau/nouveau.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/cl0080.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/cl9097.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/class.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/if0002.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/if0003.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/ioctl.h|644|0|0|regular file
+include/libdrm/nouveau/nvif/unpack.h|644|0|0|regular file
+include/libdrm/nouveau/nvif|755|0|0|directory
+include/libdrm/nouveau_drm.h|644|0|0|regular file
+include/libdrm/nouveau|755|0|0|directory
+include/libdrm/qxl_drm.h|644|0|0|regular file
+include/libdrm/r128_drm.h|644|0|0|regular file
+include/libdrm/r600_pci_ids.h|644|0|0|regular file
+include/libdrm/radeon_bo.h|644|0|0|regular file
+include/libdrm/radeon_bo_gem.h|644|0|0|regular file
+include/libdrm/radeon_bo_int.h|644|0|0|regular file
+include/libdrm/radeon_cs.h|644|0|0|regular file
+include/libdrm/radeon_cs_gem.h|644|0|0|regular file
+include/libdrm/radeon_cs_int.h|644|0|0|regular file
+include/libdrm/radeon_drm.h|644|0|0|regular file
+include/libdrm/radeon_surface.h|644|0|0|regular file
+include/libdrm/savage_drm.h|644|0|0|regular file
+include/libdrm/sis_drm.h|644|0|0|regular file
+include/libdrm/tegra_drm.h|644|0|0|regular file
+include/libdrm/vc4_drm.h|644|0|0|regular file
+include/libdrm/via_drm.h|644|0|0|regular file
+include/libdrm/virtgpu_drm.h|644|0|0|regular file
+include/libdrm/vmwgfx_drm.h|644|0|0|regular file
+include/libdrm|755|0|0|directory
+include/libkms/libkms.h|644|0|0|regular file
+include/libkms|755|0|0|directory
+include/libsync.h|644|0|0|regular file
+include/xf86drm.h|644|0|0|regular file
+include/xf86drmMode.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libdrm.so.2.4.0|755|0|0|regular file
+lib/libdrm.so.2|777|0|0|symbolic link
+lib/libdrm.so|777|0|0|symbolic link
+lib/libdrm_amdgpu.so.1.0.0|755|0|0|regular file
+lib/libdrm_amdgpu.so.1|777|0|0|symbolic link
+lib/libdrm_amdgpu.so|777|0|0|symbolic link
+lib/libdrm_intel.so.1.0.0|755|0|0|regular file
+lib/libdrm_intel.so.1|777|0|0|symbolic link
+lib/libdrm_intel.so|777|0|0|symbolic link
+lib/libdrm_nouveau.so.2.0.0|755|0|0|regular file
+lib/libdrm_nouveau.so.2|777|0|0|symbolic link
+lib/libdrm_nouveau.so|777|0|0|symbolic link
+lib/libdrm_radeon.so.1.0.1|755|0|0|regular file
+lib/libdrm_radeon.so.1|777|0|0|symbolic link
+lib/libdrm_radeon.so|777|0|0|symbolic link
+lib/libkms.so.1.0.0|755|0|0|regular file
+lib/libkms.so.1|777|0|0|symbolic link
+lib/libkms.so|777|0|0|symbolic link
+lib/pkgconfig/libdrm.pc|644|0|0|regular file
+lib/pkgconfig/libdrm_amdgpu.pc|644|0|0|regular file
+lib/pkgconfig/libdrm_intel.pc|644|0|0|regular file
+lib/pkgconfig/libdrm_nouveau.pc|644|0|0|regular file
+lib/pkgconfig/libdrm_radeon.pc|644|0|0|regular file
+lib/pkgconfig/libkms.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man3/drmAvailable.3.gz|644|0|0|regular file
+share/man/man3/drmHandleEvent.3.gz|644|0|0|regular file
+share/man/man3/drmModeGetResources.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man/man7/drm-gem.7.gz|644|0|0|regular file
+share/man/man7/drm-kms.7.gz|644|0|0|regular file
+share/man/man7/drm-memory.7.gz|644|0|0|regular file
+share/man/man7/drm-mm.7.gz|644|0|0|regular file
+share/man/man7/drm-ttm.7.gz|644|0|0|regular file
+share/man/man7/drm.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

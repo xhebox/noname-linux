@@ -1,0 +1,35 @@
+bin/annotate|755|0|0|regular file
+bin/bdftogd|755|0|0|regular file
+bin/gd2copypal|755|0|0|regular file
+bin/gd2togif|755|0|0|regular file
+bin/gd2topng|755|0|0|regular file
+bin/gdcmpgif|755|0|0|regular file
+bin/gdlib-config|755|0|0|regular file
+bin/gdparttopng|755|0|0|regular file
+bin/gdtopng|755|0|0|regular file
+bin/giftogd2|755|0|0|regular file
+bin/pngtogd2|755|0|0|regular file
+bin/pngtogd|755|0|0|regular file
+bin/webpng|755|0|0|regular file
+bin|755|0|0|directory
+include/entities.h|644|0|0|regular file
+include/gd.h|644|0|0|regular file
+include/gd_color_map.h|644|0|0|regular file
+include/gd_errors.h|644|0|0|regular file
+include/gd_io.h|644|0|0|regular file
+include/gdcache.h|644|0|0|regular file
+include/gdfontg.h|644|0|0|regular file
+include/gdfontl.h|644|0|0|regular file
+include/gdfontmb.h|644|0|0|regular file
+include/gdfonts.h|644|0|0|regular file
+include/gdfontt.h|644|0|0|regular file
+include/gdfx.h|644|0|0|regular file
+include/gdpp.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libgd.a|644|0|0|regular file
+lib/libgd.so.3.0.4|755|0|0|regular file
+lib/libgd.so.3|777|0|0|symbolic link
+lib/libgd.so|777|0|0|symbolic link
+lib/pkgconfig/gdlib.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

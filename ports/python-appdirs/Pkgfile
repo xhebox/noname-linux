@@ -1,0 +1,24 @@
+name=python-appdirs
+version=1.4.3
+deps="python python3"
+desc="A small Python module for determining appropriate platform-specific dirs, e.g. a user data dir"
+source="https://pypi.io/packages/source/a/appdirs/appdirs-$version.tar.gz"
+
+build() {
+	cp -a appdirs-$version p3
+	cd p3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../appdirs-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}
+

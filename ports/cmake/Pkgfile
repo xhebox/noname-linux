@@ -1,0 +1,37 @@
+name=cmake
+version=3.8.0
+deps="ncurses expat curl zlib bzip2 xz libarchive"
+desc="CMake is a cross-platform open-source make system"
+case $version in
+*.*.*.*) _v=v${version%.*.*};;
+*.*.*) _v=v${version%.*};;
+esac
+source="http://www.cmake.org/files/$_v/cmake-${version}.tar.gz
+cmake-isystem.patch"
+
+parallel_opt(){
+    local i n
+    for i in $MAKEFLAGS;do
+        case "$i" in
+            -j*) n=${i#-j};;
+        esac;
+    done
+    [ -n "$n" ] && echo "--parallel=$n"
+}
+
+build() {
+	cd $name-$version
+	patch -p1 < ../cmake-isystem.patch || die
+	./configure \
+		--prefix= \
+		--system-curl \
+		--system-expat \
+		--no-system-jsoncpp \
+		--system-zlib \
+		--system-bzip2 \
+		--system-libarchive \
+		$(parallel_opt)
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/doc
+}

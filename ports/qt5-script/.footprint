@@ -1,0 +1,186 @@
+include/qt/QtScript/5.8.0/QtScript/private/qscriptable_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptactivationobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptast_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptastfwd_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptastvisitor_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptclassobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptcontext_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptdeclarativeclass_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptdeclarativeobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptengine_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptengineagent_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptfunction_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptglobalobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptgrammar_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptlexer_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptparser_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptprogram_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptqobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptstaticscopeobject_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptstring_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptsyntaxchecker_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptvalue_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private/qscriptvariant_p.h|644|0|0|regular file
+include/qt/QtScript/5.8.0/QtScript/private|755|0|0|directory
+include/qt/QtScript/5.8.0/QtScript|755|0|0|directory
+include/qt/QtScript/5.8.0|755|0|0|directory
+include/qt/QtScript/QScriptClassPropertyIterator|644|0|0|regular file
+include/qt/QtScript/QScriptClass|644|0|0|regular file
+include/qt/QtScript/QScriptContextInfoList|644|0|0|regular file
+include/qt/QtScript/QScriptContextInfo|644|0|0|regular file
+include/qt/QtScript/QScriptContext|644|0|0|regular file
+include/qt/QtScript/QScriptEngineAgent|644|0|0|regular file
+include/qt/QtScript/QScriptEngine|644|0|0|regular file
+include/qt/QtScript/QScriptExtensionInterface|644|0|0|regular file
+include/qt/QtScript/QScriptExtensionPlugin|644|0|0|regular file
+include/qt/QtScript/QScriptProgram|644|0|0|regular file
+include/qt/QtScript/QScriptString|644|0|0|regular file
+include/qt/QtScript/QScriptSyntaxCheckResult|644|0|0|regular file
+include/qt/QtScript/QScriptValueIterator|644|0|0|regular file
+include/qt/QtScript/QScriptValueList|644|0|0|regular file
+include/qt/QtScript/QScriptValue|644|0|0|regular file
+include/qt/QtScript/QScriptable|644|0|0|regular file
+include/qt/QtScript/QtScriptDepends|644|0|0|regular file
+include/qt/QtScript/QtScriptVersion|644|0|0|regular file
+include/qt/QtScript/QtScript|644|0|0|regular file
+include/qt/QtScript/qscriptable.h|644|0|0|regular file
+include/qt/QtScript/qscriptclass.h|644|0|0|regular file
+include/qt/QtScript/qscriptclasspropertyiterator.h|644|0|0|regular file
+include/qt/QtScript/qscriptcontext.h|644|0|0|regular file
+include/qt/QtScript/qscriptcontextinfo.h|644|0|0|regular file
+include/qt/QtScript/qscriptengine.h|644|0|0|regular file
+include/qt/QtScript/qscriptengineagent.h|644|0|0|regular file
+include/qt/QtScript/qscriptextensioninterface.h|644|0|0|regular file
+include/qt/QtScript/qscriptextensionplugin.h|644|0|0|regular file
+include/qt/QtScript/qscriptprogram.h|644|0|0|regular file
+include/qt/QtScript/qscriptstring.h|644|0|0|regular file
+include/qt/QtScript/qscriptvalue.h|644|0|0|regular file
+include/qt/QtScript/qscriptvalueiterator.h|644|0|0|regular file
+include/qt/QtScript/qtscriptglobal.h|644|0|0|regular file
+include/qt/QtScript/qtscriptversion.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptbreakpointdata_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptbreakpointsmodel_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptbreakpointswidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptbreakpointswidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptbreakpointswidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptcompletionproviderinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptcompletiontask_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptcompletiontaskinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptcompletiontaskinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebugger_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggeragent_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggeragent_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerbackend_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerbackend_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodefinderwidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodefinderwidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodefinderwidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodeview_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodeviewinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodeviewinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodewidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodewidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercodewidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommand_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommandexecutor_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommandschedulerfrontend_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommandschedulerinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommandschedulerjob_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggercommandschedulerjob_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsole_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommand_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommand_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommandgroupdata_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommandjob_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommandjob_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolecommandmanager_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsoleglobalobject_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolehistorianinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolewidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolewidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerconsolewidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerevent_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggereventhandlerinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerfrontend_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerfrontend_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerjob_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerjob_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerjobschedulerinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerlocalsmodel_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerlocalswidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerlocalswidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerlocalswidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerobjectsnapshotdelta_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerresponse_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerresponsehandlerinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerscriptedconsolecommand_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerscriptsmodel_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerscriptswidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerscriptswidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerscriptswidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerstackmodel_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerstackwidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerstackwidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerstackwidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerstandardwidgetfactory_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggervalue_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggervalueproperty_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebuggerwidgetfactoryinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebugoutputwidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebugoutputwidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptdebugoutputwidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptedit_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptenginedebuggerfrontend_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscripterrorlogwidget_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscripterrorlogwidgetinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscripterrorlogwidgetinterface_p_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptmessagehandlerinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptobjectsnapshot_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptscriptdata_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptstdmessagehandler_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptsyntaxhighlighter_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscripttooltipproviderinterface_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptvalueproperty_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private/qscriptxmlparser_p.h|644|0|0|regular file
+include/qt/QtScriptTools/5.8.0/QtScriptTools/private|755|0|0|directory
+include/qt/QtScriptTools/5.8.0/QtScriptTools|755|0|0|directory
+include/qt/QtScriptTools/5.8.0|755|0|0|directory
+include/qt/QtScriptTools/QScriptEngineDebugger|644|0|0|regular file
+include/qt/QtScriptTools/QtScriptToolsDepends|644|0|0|regular file
+include/qt/QtScriptTools/QtScriptToolsVersion|644|0|0|regular file
+include/qt/QtScriptTools/QtScriptTools|644|0|0|regular file
+include/qt/QtScriptTools/qscriptenginedebugger.h|644|0|0|regular file
+include/qt/QtScriptTools/qtscripttoolsversion.h|644|0|0|regular file
+include/qt/QtScriptTools|755|0|0|directory
+include/qt/QtScript|755|0|0|directory
+include/qt|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/Qt5Script/Qt5ScriptConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5Script/Qt5ScriptConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5ScriptTools/Qt5ScriptToolsConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5ScriptTools/Qt5ScriptToolsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5ScriptTools|755|0|0|directory
+lib/cmake/Qt5Script|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libQt5Script.prl|644|0|0|regular file
+lib/libQt5Script.so.5.8.0|755|0|0|regular file
+lib/libQt5Script.so.5.8|777|0|0|symbolic link
+lib/libQt5Script.so.5|777|0|0|symbolic link
+lib/libQt5Script.so|777|0|0|symbolic link
+lib/libQt5ScriptTools.prl|644|0|0|regular file
+lib/libQt5ScriptTools.so.5.8.0|755|0|0|regular file
+lib/libQt5ScriptTools.so.5.8|777|0|0|symbolic link
+lib/libQt5ScriptTools.so.5|777|0|0|symbolic link
+lib/libQt5ScriptTools.so|777|0|0|symbolic link
+lib/pkgconfig/Qt5Script.pc|644|0|0|regular file
+lib/pkgconfig/Qt5ScriptTools.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/qt/mkspecs/modules/qt_lib_script.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_script_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_scripttools.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_scripttools_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt|755|0|0|directory
+lib|755|0|0|directory

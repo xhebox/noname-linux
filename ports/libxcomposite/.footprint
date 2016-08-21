@@ -1,0 +1,25 @@
+lib/libXcomposite.so.1|777|0|0|symbolic link
+lib/libXcomposite.so|777|0|0|symbolic link
+include/X11/extensions/Xcomposite.h|644|0|0|regular file
+lib/libXcomposite.so.1.0.0|755|0|0|regular file
+lib/pkgconfig/xcomposite.pc|644|0|0|regular file
+share/man/man3/XCompositeReleaseOverlayWindow.3.gz|644|0|0|regular file
+share/man/man3/XCompositeQueryExtension.3.gz|644|0|0|regular file
+share/man/man3/Xcomposite.3.gz|644|0|0|regular file
+share/man/man3/XCompositeUnredirectWindow.3.gz|644|0|0|regular file
+share/man/man3/XCompositeGetOverlayWindow.3.gz|644|0|0|regular file
+share/man/man3/XCompositeUnredirectSubwindows.3.gz|644|0|0|regular file
+share/man/man3/XCompositeQueryVersion.3.gz|644|0|0|regular file
+share/man/man3/XCompositeVersion.3.gz|644|0|0|regular file
+share/man/man3/XCompositeRedirectSubwindows.3.gz|644|0|0|regular file
+share/man/man3/XCompositeCreateRegionFromBorderClip.3.gz|644|0|0|regular file
+share/man/man3/XCompositeNameWindowPixmap.3.gz|644|0|0|regular file
+share/man/man3/XCompositeRedirectWindow.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/extensions|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

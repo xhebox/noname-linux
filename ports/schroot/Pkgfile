@@ -1,0 +1,54 @@
+name=schroot
+desc="Allows users to execute commands in different chroots"
+deps="elfutils e2fsprogs boost gtest gettext lvm2"
+version=1.7.2
+source="http://ftp.debian.org/debian/pool/main/s/$name/${name}_${version}.orig.tar.xz
+arch
+copyfiles
+nssdatabases
+fstab
+0001-getent.patch
+0001-getmntent-fix.patch
+fix-bash-completion.patch
+musl.patch
+"
+
+ext() {
+	cd $name-$version
+	for i in $source; do
+		case $i in
+		*bash*) patch -p1 -i $srcdir/$i || die;;
+		*.patch) patch -p0 -i $srcdir/$i || die;;
+		esac
+	done
+	export LDFLAGS="$LDFLAGS -Wl,--no-as-needed -lboost_regex"
+	sed -i 's/warn/message/g' man/CMakeLists.txt
+	sed -i '/networks/d' \
+		etc/profile-templates/default/all/nssdatabases \
+		etc/profile-templates/desktop/all/nssdatabases \
+		etc/profile-templates/buildd/all/copyfiles
+}
+
+build() {
+	cd $name-$version
+	mkdir build
+	cd build
+	cmake \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+		-DCMAKE_INSTALL_LIBDIR=/lib \
+		-DCMAKE_INSTALL_LIBEXECDIR=/lib \
+		-DCMAKE_INSTALL_LOCALSTATEDIR=/var \
+		-Ddchroot=ON \
+		-Dbash_completion_dir=/share/bash-completion/completions \
+		-Dlvm-snapshot=ON \
+		..
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	install -Dm644 ../../arch "$pkgdir"/etc/schroot/chroot.d/arch.conf
+	install -Dm644 ../../fstab "$pkgdir"/etc/schroot/arch/fstab
+	install -Dm644 ../../nssdatabases "$pkgdir"/etc/schroot/arch/nssdatabases
+	install -Dm644 ../../copyfiles "$pkgdir"/etc/schroot/arch/copyfiles
+	chmod 4755 "$pkgdir"/bin/schroot
+	rm -r "$pkgdir"/etc/pam.d
+}

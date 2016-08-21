@@ -1,0 +1,44 @@
+name=blender
+version=2.78c
+desc="3D Creation/Animation/Publishing System"
+#deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo gettext libx11 libxi libxxf86vm mesa llvm openal openshadinglanguage"
+deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo gettext libx11 libxi libxxf86vm mesa llvm openal"
+source="http://download.blender.org/source/blender-${version}.tar.gz
+musl.patch"
+
+build() {
+	cd blender-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i || die;;
+		esac
+	done
+	sed -e "s|GENERATE_HTMLHELP      = YES|GENERATE_HTMLHELP      = NO|" \
+	-i doc/doxygen/Doxyfile
+	sed -i '/${LD_VERSION}" MATCHES "GNU gold"/,+5d' build_files/cmake/platform/platform_unix.cmake
+	mkdir build && cd build
+
+	cmake -C ../build_files/cmake/config/blender_release.cmake .. \
+	-DCMAKE_INSTALL_PREFIX=/ \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DWITH_INSTALL_PORTABLE=OFF \
+	-DWITH_PYTHON_INSTALL=OFF \
+	-DOPENIMAGEIO_ROOT_DIR=/ \
+	-DWITH_LLVM=ON \
+	-DWITH_SYSTEM_OPENJPEG=ON \
+	-DWITH_GL_PROFILE_CORE=OFF \
+	-DWITH_GL_PROFILE_ES20=OFF \
+	-DPYTHON_VERSION=3.6 \
+	-DPYTHON_LIBPATH=/lib \
+	-DPYTHON_LIBRARY=python3.6m \
+	-DPYTHON_INCLUDE_DIRS=/include/python3.6m \
+	-DWITH_INTERNATIONAL=ON
+
+	sed -i 's;#if !(defined(_ISOC99_SOURCE) || (defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L) || defined(_MSC_VER));#if 0;g' \
+	../source/blender/blenlib/BLI_math_base.h
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+	python3 -m compileall "${pkgdir}/share/blender" || die
+	python3 -O -m compileall "${pkgdir}/share/blender" || die
+}

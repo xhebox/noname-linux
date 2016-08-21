@@ -1,0 +1,232 @@
+bin/bashbug|555|0|0|regular file
+bin/bash|755|0|0|regular file
+bin|755|0|0|directory
+etc/bashrc|644|0|0|regular file
+etc/skel/.bash_logout|644|0|0|regular file
+etc/skel/.bash_profile|644|0|0|regular file
+etc/skel/.bashrc|644|0|0|regular file
+etc/skel|755|0|0|directory
+etc|755|0|0|directory
+include/bash/alias.h|644|0|0|regular file
+include/bash/array.h|644|0|0|regular file
+include/bash/arrayfunc.h|644|0|0|regular file
+include/bash/assoc.h|644|0|0|regular file
+include/bash/bashansi.h|644|0|0|regular file
+include/bash/bashintl.h|644|0|0|regular file
+include/bash/bashjmp.h|644|0|0|regular file
+include/bash/bashtypes.h|644|0|0|regular file
+include/bash/builtins.h|644|0|0|regular file
+include/bash/builtins/bashgetopt.h|644|0|0|regular file
+include/bash/builtins/builtext.h|644|0|0|regular file
+include/bash/builtins/common.h|644|0|0|regular file
+include/bash/builtins/getopt.h|644|0|0|regular file
+include/bash/builtins|755|0|0|directory
+include/bash/command.h|644|0|0|regular file
+include/bash/config-bot.h|644|0|0|regular file
+include/bash/config-top.h|644|0|0|regular file
+include/bash/config.h|644|0|0|regular file
+include/bash/conftypes.h|644|0|0|regular file
+include/bash/dispose_cmd.h|644|0|0|regular file
+include/bash/error.h|644|0|0|regular file
+include/bash/externs.h|644|0|0|regular file
+include/bash/general.h|644|0|0|regular file
+include/bash/hashlib.h|644|0|0|regular file
+include/bash/include/ansi_stdlib.h|644|0|0|regular file
+include/bash/include/chartypes.h|644|0|0|regular file
+include/bash/include/filecntl.h|644|0|0|regular file
+include/bash/include/gettext.h|644|0|0|regular file
+include/bash/include/maxpath.h|644|0|0|regular file
+include/bash/include/memalloc.h|644|0|0|regular file
+include/bash/include/ocache.h|644|0|0|regular file
+include/bash/include/posixdir.h|644|0|0|regular file
+include/bash/include/posixjmp.h|644|0|0|regular file
+include/bash/include/posixstat.h|644|0|0|regular file
+include/bash/include/posixtime.h|644|0|0|regular file
+include/bash/include/posixwait.h|644|0|0|regular file
+include/bash/include/shmbchar.h|644|0|0|regular file
+include/bash/include/shmbutil.h|644|0|0|regular file
+include/bash/include/shtty.h|644|0|0|regular file
+include/bash/include/stat-time.h|644|0|0|regular file
+include/bash/include/stdc.h|644|0|0|regular file
+include/bash/include/systimes.h|644|0|0|regular file
+include/bash/include/typemax.h|644|0|0|regular file
+include/bash/include/unionwait.h|644|0|0|regular file
+include/bash/include|755|0|0|directory
+include/bash/jobs.h|644|0|0|regular file
+include/bash/make_cmd.h|644|0|0|regular file
+include/bash/pathnames.h|644|0|0|regular file
+include/bash/quit.h|644|0|0|regular file
+include/bash/shell.h|644|0|0|regular file
+include/bash/sig.h|644|0|0|regular file
+include/bash/siglist.h|644|0|0|regular file
+include/bash/signames.h|644|0|0|regular file
+include/bash/subst.h|644|0|0|regular file
+include/bash/syntax.h|644|0|0|regular file
+include/bash/unwind_prot.h|644|0|0|regular file
+include/bash/variables.h|644|0|0|regular file
+include/bash/version.h|644|0|0|regular file
+include/bash/xmalloc.h|644|0|0|regular file
+include/bash/y.tab.h|644|0|0|regular file
+include/bash|755|0|0|directory
+include|755|0|0|directory
+lib/bash/Makefile.inc|644|0|0|regular file
+lib/bash/basename|755|0|0|regular file
+lib/bash/dirname|755|0|0|regular file
+lib/bash/finfo|755|0|0|regular file
+lib/bash/head|755|0|0|regular file
+lib/bash/id|755|0|0|regular file
+lib/bash/ln|755|0|0|regular file
+lib/bash/logname|755|0|0|regular file
+lib/bash/mkdir|755|0|0|regular file
+lib/bash/mypid|755|0|0|regular file
+lib/bash/pathchk|755|0|0|regular file
+lib/bash/printenv|755|0|0|regular file
+lib/bash/print|755|0|0|regular file
+lib/bash/push|755|0|0|regular file
+lib/bash/realpath|755|0|0|regular file
+lib/bash/rmdir|755|0|0|regular file
+lib/bash/setpgid|755|0|0|regular file
+lib/bash/sleep|755|0|0|regular file
+lib/bash/strftime|755|0|0|regular file
+lib/bash/sync|755|0|0|regular file
+lib/bash/tee|755|0|0|regular file
+lib/bash/truefalse|755|0|0|regular file
+lib/bash/tty|755|0|0|regular file
+lib/bash/uname|755|0|0|regular file
+lib/bash/unlink|755|0|0|regular file
+lib/bash/whoami|755|0|0|regular file
+lib/bash|755|0|0|directory
+lib/pkgconfig/bash.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/bash/CHANGES|644|0|0|regular file
+share/doc/bash/COMPAT|644|0|0|regular file
+share/doc/bash/FAQ|644|0|0|regular file
+share/doc/bash/INTRO|644|0|0|regular file
+share/doc/bash/NEWS|644|0|0|regular file
+share/doc/bash/POSIX|644|0|0|regular file
+share/doc/bash/RBASH|644|0|0|regular file
+share/doc/bash/README|644|0|0|regular file
+share/doc/bash/bash.html|644|0|0|regular file
+share/doc/bash/bashref.html|644|0|0|regular file
+share/doc/bash|755|0|0|directory
+share/doc|755|0|0|directory
+share/info/bash.info|644|0|0|regular file
+share/info|755|0|0|directory
+share/locale/af/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES|755|0|0|directory
+share/locale/af|755|0|0|directory
+share/locale/bg/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES|755|0|0|directory
+share/locale/bg|755|0|0|directory
+share/locale/ca/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/da/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/el/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en@boldquot/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/en@boldquot/LC_MESSAGES|755|0|0|directory
+share/locale/en@boldquot|755|0|0|directory
+share/locale/en@quot/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/en@quot/LC_MESSAGES|755|0|0|directory
+share/locale/en@quot|755|0|0|directory
+share/locale/eo/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES|755|0|0|directory
+share/locale/eo|755|0|0|directory
+share/locale/es/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/et/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES|755|0|0|directory
+share/locale/et|755|0|0|directory
+share/locale/fi/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/ga/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES|755|0|0|directory
+share/locale/ga|755|0|0|directory
+share/locale/gl/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/hr/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/id/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/it/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/lt/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/nb/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/nl/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/pl/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/ro/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sk/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sl/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sr/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tr/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/bash.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/bash.1.gz|644|0|0|regular file
+share/man/man1/bashbug.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

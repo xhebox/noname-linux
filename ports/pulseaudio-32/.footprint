@@ -1,0 +1,17 @@
+lib32|755|0|0|directory
+lib32/libpulse-simple.so|777|0|0|symbolic link
+lib32/pkgconfig|755|0|0|directory
+lib32/pkgconfig/libpulse-simple.pc|644|0|0|regular file
+lib32/pkgconfig/libpulse-mainloop-glib.pc|644|0|0|regular file
+lib32/pkgconfig/libpulse.pc|644|0|0|regular file
+lib32/libpulse-simple.so.0.1.0|755|0|0|regular file
+lib32/libpulse.so|777|0|0|symbolic link
+lib32/libpulse-mainloop-glib.so.0|777|0|0|symbolic link
+lib32/libpulse-mainloop-glib.so|777|0|0|symbolic link
+lib32/libpulse-mainloop-glib.so.0.0.5|755|0|0|regular file
+lib32/libpulse-simple.so.0|777|0|0|symbolic link
+lib32/pulseaudio|755|0|0|directory
+lib32/pulseaudio/libpulsecommon-10.0.so|755|0|0|regular file
+lib32/pulseaudio/libpulsedsp.so|755|0|0|regular file
+lib32/libpulse.so.0.20.1|755|0|0|regular file
+lib32/libpulse.so.0|777|0|0|symbolic link

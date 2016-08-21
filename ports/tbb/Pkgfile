@@ -1,0 +1,18 @@
+name=tbb
+version=2017_20170226
+_pkgver=2017_U5
+deps="musl"
+desc="High level abstract threading library"
+source="https://github.com/01org/tbb/archive/$_pkgver.tar.gz"
+
+build() {
+	cd tbb-$_pkgver
+	sed -e "s@#define MALLOC_UNIXLIKE_OVERLOAD_ENABLED __linux__@@" \
+		-i src/tbbmalloc/proxy.h
+	export CXXFLAGS="$CXXFLAGS -fno-lifetime-dse"	
+	make || die
+	install -d "$pkgdir"/lib
+	install -m755 build/linux_*/*.so* "$pkgdir"/lib
+	install -d "$pkgdir"/include
+	cp -a include/tbb "$pkgdir"/include
+}

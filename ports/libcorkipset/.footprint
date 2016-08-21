@@ -1,0 +1,18 @@
+bin/ipsetbuild|755|0|0|regular file
+bin/ipsetcat|755|0|0|regular file
+bin/ipsetdot|755|0|0|regular file
+bin|755|0|0|directory
+include/libcorkipset/bdd/nodes.h|644|0|0|regular file
+include/libcorkipset/bdd|755|0|0|directory
+include/libcorkipset/bits.h|644|0|0|regular file
+include/libcorkipset/errors.h|644|0|0|regular file
+include/libcorkipset/ipset.h|644|0|0|regular file
+include/libcorkipset/logging.h|644|0|0|regular file
+include/libcorkipset|755|0|0|directory
+include|755|0|0|directory
+lib/libcorkipset.so.1.1.0|755|0|0|regular file
+lib/libcorkipset.so.1|777|0|0|symbolic link
+lib/libcorkipset.so|777|0|0|symbolic link
+lib/pkgconfig/libcorkipset.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

@@ -1,0 +1,12 @@
+name=libevdev
+version=1.5.7
+deps=check
+desc="libevdev is a wrapper library for evdev devices"
+source="http://www.freedesktop.org/software/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static
+	make || die
+	make install DESTDIR="$pkgdir" || die
+}

@@ -1,0 +1,11 @@
+name=hwids
+version=20161103
+desc="hardware identification databases"
+source="https://github.com/gentoo/hwids/archive/hwids-$version.tar.gz"
+
+build() {
+	cd $name-$name-$version
+	for ids in pci.ids usb.ids; do
+		install -Dm644 "$ids" "${pkgdir}/share/hwdata/${ids}"
+	done
+}

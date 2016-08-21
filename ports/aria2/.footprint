@@ -1,0 +1,133 @@
+bin/aria2c|755|0|0|regular file
+bin|755|0|0|directory
+share/locale/ar/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES|755|0|0|directory
+share/locale/ar|755|0|0|directory
+share/locale/bg/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES|755|0|0|directory
+share/locale/bg|755|0|0|directory
+share/locale/bn/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES|755|0|0|directory
+share/locale/bn|755|0|0|directory
+share/locale/ca/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/da/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/el/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en@boldquot/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/en@boldquot/LC_MESSAGES|755|0|0|directory
+share/locale/en@boldquot|755|0|0|directory
+share/locale/en@quot/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/en@quot/LC_MESSAGES|755|0|0|directory
+share/locale/en@quot|755|0|0|directory
+share/locale/es/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fa/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES|755|0|0|directory
+share/locale/fa|755|0|0|directory
+share/locale/fi/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fil/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/fil/LC_MESSAGES|755|0|0|directory
+share/locale/fil|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/he/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES|755|0|0|directory
+share/locale/he|755|0|0|directory
+share/locale/hr/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/id/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/it/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/kk/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/kk/LC_MESSAGES|755|0|0|directory
+share/locale/kk|755|0|0|directory
+share/locale/ko/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/ms/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES|755|0|0|directory
+share/locale/ms|755|0|0|directory
+share/locale/nb/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/nl/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/nn/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES|755|0|0|directory
+share/locale/nn|755|0|0|directory
+share/locale/oc/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES|755|0|0|directory
+share/locale/oc|755|0|0|directory
+share/locale/pl/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ro/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sk/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sr/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/th/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES|755|0|0|directory
+share/locale/th|755|0|0|directory
+share/locale/tr/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_HK/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES|755|0|0|directory
+share/locale/zh_HK|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/aria2.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/aria2c.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

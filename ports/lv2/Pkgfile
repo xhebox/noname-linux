@@ -1,0 +1,14 @@
+name=lv2
+version=1.14.0
+desc="Successor to the LADSPA audio plug-in standard"
+deps="libsndfile gtk python"
+source="http://lv2plug.in/spec/lv2-$version.tar.bz2"
+
+build() {
+	cd lv2-$version
+
+	python waf configure --prefix=// --libdir=/lib
+	python waf build || die
+	python waf install --destdir="$pkgdir" || die
+}
+

@@ -1,0 +1,17 @@
+name=mxml
+version=2.10
+desc="A small XML parsing library"
+source="https://www.msweet.org/files/project3/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	./configure --prefix= --enable-shared
+	make  || die
+	make DSTROOT="$pkgdir" install  || die
+}

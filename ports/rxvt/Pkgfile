@@ -1,0 +1,58 @@
+name=rxvt
+version=9.22
+desc="rxvt fork with unicode and xft support"
+deps="xorg-server libpng perl glib gdk-pixbuf"
+source="http://dist.schmorp.de/$name-unicode/Attic/$name-unicode-$version.tar.bz2
+sgr-mouse-mode.patch
+fix-smart-resize-with-x11-frame-borders.patch
+256color.patch
+clear.patch
+enable-wide-glyphs.patch
+line-spacing-fix.patch
+secondaryWheel.patch"
+
+ext() {
+	cd $name-unicode-$version
+	for i in $source;do
+		case $i in
+		sgr*|256*.patch|*font*|*line*) patch -p0 -i ../$i;;
+		*.patch) patch -p1 -i ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd $name-unicode-$version
+	./configure --prefix=/ \
+		--enable-utmp \
+		--disable-wtmp \
+		--enable-transparency \
+		--enable-combining \
+		--enable-fading \
+		--enable-font-styles \
+		--enable-iso14755 \
+		--enable-keepscrolling \
+		--enable-lastlog \
+		--enable-mousewheel \
+		--enable-next-scroll \
+		--enable-perl \
+		--enable-pointer-blank \
+		--enable-rxvt-scroll \
+		--enable-selectionscrolling \
+		--enable-slipwheeling \
+		--enable-smart-resize \
+		--disable-startup-notification \
+		--enable-transparency \
+		--enable-unicode3 \
+		--enable-xft \
+		--enable-xim \
+		--enable-xterm-scroll \
+		--enable-pixbuf \
+		--enable-frills \
+		--enable-256-color \
+		--enable-text-blink
+
+	make || die
+	mkdir -p "$pkgdir"/share/terminfo
+	make TERMINFO="$pkgdir"/share/terminfo DESTDIR="$pkgdir" install || die
+}

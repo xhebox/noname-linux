@@ -1,0 +1,233 @@
+bin/cgroup_event_listener|755|0|0|regular file
+bin/cpufreq-bench_plot.sh|755|0|0|regular file
+bin/cpufreq-bench|755|0|0|regular file
+bin/cpupower|755|0|0|regular file
+bin/perf-read-vdso32|755|0|0|regular file
+bin/perf|755|0|0|regular file
+bin/tmon|755|0|0|regular file
+bin/trace|755|0|0|regular file
+bin/turbostat|755|0|0|regular file
+bin/usbipd|755|0|0|regular file
+bin/usbip|755|0|0|regular file
+bin/x86_energy_perf_policy|755|0|0|regular file
+bin|755|0|0|directory
+etc/cpufreq-bench.conf|644|0|0|regular file
+etc|755|0|0|directory
+include/cpufreq.h|644|0|0|regular file
+include/cpuidle.h|644|0|0|regular file
+include/usbip/usbip_common.h|644|0|0|regular file
+include/usbip/usbip_host_driver.h|644|0|0|regular file
+include/usbip/vhci_driver.h|644|0|0|regular file
+include/usbip|755|0|0|directory
+include|755|0|0|directory
+lib/libcpupower.so.0.0.1|755|0|0|regular file
+lib/libcpupower.so.0|777|0|0|symbolic link
+lib/libcpupower.so|777|0|0|symbolic link
+lib/libtraceevent.so|644|0|0|regular file
+lib/libusbip.a|644|0|0|regular file
+lib/libusbip.so.0.0.1|755|0|0|regular file
+lib/libusbip.so.0|777|0|0|symbolic link
+lib/libusbip.so|777|0|0|symbolic link
+lib/perf/libperf-gtk.so|755|0|0|regular file
+lib/perf/perf-archive|755|0|0|regular file
+lib/perf/perf-with-kcore|755|0|0|regular file
+lib/perf/scripts/perl/Perf-Trace-Util/lib/Perf/Trace/Context.pm|755|0|0|regular file
+lib/perf/scripts/perl/Perf-Trace-Util/lib/Perf/Trace/Core.pm|755|0|0|regular file
+lib/perf/scripts/perl/Perf-Trace-Util/lib/Perf/Trace/Util.pm|755|0|0|regular file
+lib/perf/scripts/perl/Perf-Trace-Util/lib/Perf/Trace|755|0|0|directory
+lib/perf/scripts/perl/Perf-Trace-Util/lib/Perf|755|0|0|directory
+lib/perf/scripts/perl/Perf-Trace-Util/lib|755|0|0|directory
+lib/perf/scripts/perl/Perf-Trace-Util|755|0|0|directory
+lib/perf/scripts/perl/bin/check-perf-trace-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/failed-syscalls-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/failed-syscalls-report|755|0|0|regular file
+lib/perf/scripts/perl/bin/rw-by-file-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/rw-by-file-report|755|0|0|regular file
+lib/perf/scripts/perl/bin/rw-by-pid-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/rw-by-pid-report|755|0|0|regular file
+lib/perf/scripts/perl/bin/rwtop-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/rwtop-report|755|0|0|regular file
+lib/perf/scripts/perl/bin/wakeup-latency-record|755|0|0|regular file
+lib/perf/scripts/perl/bin/wakeup-latency-report|755|0|0|regular file
+lib/perf/scripts/perl/bin|755|0|0|directory
+lib/perf/scripts/perl/check-perf-trace.pl|755|0|0|regular file
+lib/perf/scripts/perl/failed-syscalls.pl|755|0|0|regular file
+lib/perf/scripts/perl/rw-by-file.pl|755|0|0|regular file
+lib/perf/scripts/perl/rw-by-pid.pl|755|0|0|regular file
+lib/perf/scripts/perl/rwtop.pl|755|0|0|regular file
+lib/perf/scripts/perl/wakeup-latency.pl|755|0|0|regular file
+lib/perf/scripts/perl|755|0|0|directory
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf/Trace/Core.py|755|0|0|regular file
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf/Trace/EventClass.py|755|0|0|regular file
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf/Trace/SchedGui.py|755|0|0|regular file
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf/Trace/Util.py|755|0|0|regular file
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf/Trace|755|0|0|directory
+lib/perf/scripts/python/Perf-Trace-Util/lib/Perf|755|0|0|directory
+lib/perf/scripts/python/Perf-Trace-Util/lib|755|0|0|directory
+lib/perf/scripts/python/Perf-Trace-Util|755|0|0|directory
+lib/perf/scripts/python/bin/compaction-times-record|755|0|0|regular file
+lib/perf/scripts/python/bin/compaction-times-report|755|0|0|regular file
+lib/perf/scripts/python/bin/event_analyzing_sample-record|755|0|0|regular file
+lib/perf/scripts/python/bin/event_analyzing_sample-report|755|0|0|regular file
+lib/perf/scripts/python/bin/export-to-postgresql-record|755|0|0|regular file
+lib/perf/scripts/python/bin/export-to-postgresql-report|755|0|0|regular file
+lib/perf/scripts/python/bin/failed-syscalls-by-pid-record|755|0|0|regular file
+lib/perf/scripts/python/bin/failed-syscalls-by-pid-report|755|0|0|regular file
+lib/perf/scripts/python/bin/futex-contention-record|755|0|0|regular file
+lib/perf/scripts/python/bin/futex-contention-report|755|0|0|regular file
+lib/perf/scripts/python/bin/net_dropmonitor-record|755|0|0|regular file
+lib/perf/scripts/python/bin/net_dropmonitor-report|755|0|0|regular file
+lib/perf/scripts/python/bin/netdev-times-record|755|0|0|regular file
+lib/perf/scripts/python/bin/netdev-times-report|755|0|0|regular file
+lib/perf/scripts/python/bin/sched-migration-record|755|0|0|regular file
+lib/perf/scripts/python/bin/sched-migration-report|755|0|0|regular file
+lib/perf/scripts/python/bin/sctop-record|755|0|0|regular file
+lib/perf/scripts/python/bin/sctop-report|755|0|0|regular file
+lib/perf/scripts/python/bin/stackcollapse-record|755|0|0|regular file
+lib/perf/scripts/python/bin/stackcollapse-report|755|0|0|regular file
+lib/perf/scripts/python/bin/syscall-counts-by-pid-record|755|0|0|regular file
+lib/perf/scripts/python/bin/syscall-counts-by-pid-report|755|0|0|regular file
+lib/perf/scripts/python/bin/syscall-counts-record|755|0|0|regular file
+lib/perf/scripts/python/bin/syscall-counts-report|755|0|0|regular file
+lib/perf/scripts/python/bin|755|0|0|directory
+lib/perf/scripts/python/call-graph-from-postgresql.py|755|0|0|regular file
+lib/perf/scripts/python/check-perf-trace.py|755|0|0|regular file
+lib/perf/scripts/python/compaction-times.py|755|0|0|regular file
+lib/perf/scripts/python/event_analyzing_sample.py|755|0|0|regular file
+lib/perf/scripts/python/export-to-postgresql.py|755|0|0|regular file
+lib/perf/scripts/python/failed-syscalls-by-pid.py|755|0|0|regular file
+lib/perf/scripts/python/futex-contention.py|755|0|0|regular file
+lib/perf/scripts/python/net_dropmonitor.py|755|0|0|regular file
+lib/perf/scripts/python/netdev-times.py|755|0|0|regular file
+lib/perf/scripts/python/sched-migration.py|755|0|0|regular file
+lib/perf/scripts/python/sctop.py|755|0|0|regular file
+lib/perf/scripts/python/stackcollapse.py|755|0|0|regular file
+lib/perf/scripts/python/stat-cpi.py|755|0|0|regular file
+lib/perf/scripts/python/syscall-counts-by-pid.py|755|0|0|regular file
+lib/perf/scripts/python/syscall-counts.py|755|0|0|regular file
+lib/perf/scripts/python|755|0|0|directory
+lib/perf/scripts|755|0|0|directory
+lib/perf/tests/attr.py|755|0|0|regular file
+lib/perf/tests/attr/README|755|0|0|regular file
+lib/perf/tests/attr/base-record|755|0|0|regular file
+lib/perf/tests/attr/base-stat|755|0|0|regular file
+lib/perf/tests/attr/test-record-C0|755|0|0|regular file
+lib/perf/tests/attr/test-record-basic|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-any|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-any_call|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-any_ret|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-any|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-hv|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-ind_call|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-k|755|0|0|regular file
+lib/perf/tests/attr/test-record-branch-filter-u|755|0|0|regular file
+lib/perf/tests/attr/test-record-count|755|0|0|regular file
+lib/perf/tests/attr/test-record-data|755|0|0|regular file
+lib/perf/tests/attr/test-record-freq|755|0|0|regular file
+lib/perf/tests/attr/test-record-graph-default|755|0|0|regular file
+lib/perf/tests/attr/test-record-graph-dwarf|755|0|0|regular file
+lib/perf/tests/attr/test-record-graph-fp|755|0|0|regular file
+lib/perf/tests/attr/test-record-group-sampling|755|0|0|regular file
+lib/perf/tests/attr/test-record-group1|755|0|0|regular file
+lib/perf/tests/attr/test-record-group|755|0|0|regular file
+lib/perf/tests/attr/test-record-no-delay|755|0|0|regular file
+lib/perf/tests/attr/test-record-no-inherit|755|0|0|regular file
+lib/perf/tests/attr/test-record-no-samples|755|0|0|regular file
+lib/perf/tests/attr/test-record-period|755|0|0|regular file
+lib/perf/tests/attr/test-record-raw|755|0|0|regular file
+lib/perf/tests/attr/test-stat-C0|755|0|0|regular file
+lib/perf/tests/attr/test-stat-basic|755|0|0|regular file
+lib/perf/tests/attr/test-stat-default|755|0|0|regular file
+lib/perf/tests/attr/test-stat-detailed-1|755|0|0|regular file
+lib/perf/tests/attr/test-stat-detailed-2|755|0|0|regular file
+lib/perf/tests/attr/test-stat-detailed-3|755|0|0|regular file
+lib/perf/tests/attr/test-stat-group1|755|0|0|regular file
+lib/perf/tests/attr/test-stat-group|755|0|0|regular file
+lib/perf/tests/attr/test-stat-no-inherit|755|0|0|regular file
+lib/perf/tests/attr|755|0|0|directory
+lib/perf/tests|755|0|0|directory
+lib/perf/traceevent/plugins/plugin_cfg80211.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_function.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_hrtimer.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_jbd2.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_kmem.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_kvm.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_mac80211.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_sched_switch.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_scsi.so|755|0|0|regular file
+lib/perf/traceevent/plugins/plugin_xen.so|755|0|0|regular file
+lib/perf/traceevent/plugins|755|0|0|directory
+lib/perf/traceevent|755|0|0|directory
+lib/perf|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/perf|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/doc/cpupower/README-BENCH|644|0|0|regular file
+share/doc/cpupower/cpufreq-bench_script.sh|755|0|0|regular file
+share/doc/cpupower|755|0|0|directory
+share/doc/perf-tip/tips.txt|644|0|0|regular file
+share/doc/perf-tip|755|0|0|directory
+share/doc|755|0|0|directory
+share/locale/cs/LC_MESSAGES/cpupower.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/de/LC_MESSAGES/cpupower.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/fr/LC_MESSAGES/cpupower.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/it/LC_MESSAGES/cpupower.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/pt/LC_MESSAGES/cpupower.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/cpupower-frequency-info.1.gz|644|0|0|regular file
+share/man/man1/cpupower-frequency-set.1.gz|644|0|0|regular file
+share/man/man1/cpupower-idle-info.1.gz|644|0|0|regular file
+share/man/man1/cpupower-idle-set.1.gz|644|0|0|regular file
+share/man/man1/cpupower-info.1.gz|644|0|0|regular file
+share/man/man1/cpupower-monitor.1.gz|644|0|0|regular file
+share/man/man1/cpupower-set.1.gz|644|0|0|regular file
+share/man/man1/cpupower.1.gz|644|0|0|regular file
+share/man/man1/perf-annotate.1.gz|644|0|0|regular file
+share/man/man1/perf-archive.1.gz|644|0|0|regular file
+share/man/man1/perf-bench.1.gz|644|0|0|regular file
+share/man/man1/perf-buildid-cache.1.gz|644|0|0|regular file
+share/man/man1/perf-buildid-list.1.gz|644|0|0|regular file
+share/man/man1/perf-c2c.1.gz|644|0|0|regular file
+share/man/man1/perf-config.1.gz|644|0|0|regular file
+share/man/man1/perf-data.1.gz|644|0|0|regular file
+share/man/man1/perf-diff.1.gz|644|0|0|regular file
+share/man/man1/perf-evlist.1.gz|644|0|0|regular file
+share/man/man1/perf-help.1.gz|644|0|0|regular file
+share/man/man1/perf-inject.1.gz|644|0|0|regular file
+share/man/man1/perf-kmem.1.gz|644|0|0|regular file
+share/man/man1/perf-kvm.1.gz|644|0|0|regular file
+share/man/man1/perf-list.1.gz|644|0|0|regular file
+share/man/man1/perf-lock.1.gz|644|0|0|regular file
+share/man/man1/perf-mem.1.gz|644|0|0|regular file
+share/man/man1/perf-probe.1.gz|644|0|0|regular file
+share/man/man1/perf-record.1.gz|644|0|0|regular file
+share/man/man1/perf-report.1.gz|644|0|0|regular file
+share/man/man1/perf-sched.1.gz|644|0|0|regular file
+share/man/man1/perf-script-perl.1.gz|644|0|0|regular file
+share/man/man1/perf-script-python.1.gz|644|0|0|regular file
+share/man/man1/perf-script.1.gz|644|0|0|regular file
+share/man/man1/perf-stat.1.gz|644|0|0|regular file
+share/man/man1/perf-test.1.gz|644|0|0|regular file
+share/man/man1/perf-timechart.1.gz|644|0|0|regular file
+share/man/man1/perf-top.1.gz|644|0|0|regular file
+share/man/man1/perf-trace.1.gz|644|0|0|regular file
+share/man/man1/perf.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man8/turbostat.8.gz|644|0|0|regular file
+share/man/man8/usbip.8.gz|644|0|0|regular file
+share/man/man8/usbipd.8.gz|644|0|0|regular file
+share/man/man8/x86_energy_perf_policy.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

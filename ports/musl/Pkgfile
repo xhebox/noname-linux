@@ -1,0 +1,121 @@
+name=musl
+version=1.1.16
+desc="An implementation of the standard C library for Linux-based systems."
+source="
+https://www.musl-libc.org/releases/musl-$version.tar.gz
+musl.patch
+emoji.patch
+tmpl.h
+__stack_chk_fail_local.c
+getconf.c
+iconv.c
+getent.c
+ldd"
+deps="linux-headers tzdata libc-dev filesystem fortify-headers gettext"
+
+ext() {
+	cd musl-$version
+	for i in $source;do
+		msg $i
+		case $i in
+		*patch) patch -p1 -i "$srcdir"/$i || die;;
+		esac
+	done
+}
+
+build() {
+	cd $name-$version
+	PKG_NO_STRIP=yes
+	# ------------------------------
+	# ssp support
+	gcc $CPPFLAGS $CFLAGS -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+	ar r libssp_nonshared.a __stack_chk_fail_local.o
+	gcc $CPPFLAGS $CFLAGS -m32 -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local32.o
+	ar r libssp_nonshared32.a __stack_chk_fail_local32.o
+	# ------------------------------
+	
+	mkdir -p "$pkgdir"/include/$TARGET
+	mkdir -p "$pkgdir"/include/$TARGET32
+	export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -g2"
+	./configure \
+		--host=$TARGET \
+		--build=$TARGET \
+		--target=$TARGET \
+		--prefix=  \
+		--libdir=/lib \
+		--syslibdir=/lib \
+		--sysconfdir=/etc \
+		--mandir=/share/man \
+		--localstatedir=/var 
+
+	make  || die
+	make DESTDIR="$pkgdir" install || die
+
+	make clean || die
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	export CFLAGS="$CFLAGS -m32"
+	./configure \
+		--host=$TARGET32 \
+		--build=$TARGET32 \
+		--target=$TARGET32 \
+		--prefix= \
+		--libdir=/lib32 \
+		--syslibdir=/lib \
+		--sysconfdir=/etc \
+		--mandir=/share/man \
+		--localstatedir=/var 
+	make  || die
+	make DESTDIR="$pkgdir"/32 install  || die
+
+	mkdir -p "$pkgdir"/include/$TARGET32
+	mkdir -p "$pkgdir"/include/$TARGET
+	mv "$pkgdir"/include/bits "$pkgdir"/include/$TARGET/bits
+	mv "$pkgdir"/32/include/bits "$pkgdir"/include/$TARGET32/bits
+	mkdir -p "$pkgdir"/include/bits
+
+	local list="`ls $pkgdir/include/$TARGET32/bits`"
+	list="$list`ls $pkgdir/include/$TARGET/bits`"
+	for i in $list;do
+		sed -e "s/__name/$i/g" \
+		  -e "s/__target32/$TARGET32/g" \
+		  -e "s/__target64/$TARGET/g" \
+			"$srcdir"/tmpl.h > "$pkgdir"/include/bits/"$i"
+	done
+
+	rm -r "$pkgdir"/32/include
+	mv "$pkgdir"/32/lib/* "$pkgdir"/lib
+	rmdir "$pkgdir"/32/lib
+	mv "$pkgdir"/32/* "$pkgdir"/
+	rmdir "$pkgdir"/32
+
+	mkdir -p "$pkgdir"/bin \
+		"$pkgdir"/etc
+
+	cp libssp_nonshared.a "$pkgdir"/lib
+	cp libssp_nonshared32.a "$pkgdir"/lib32/libssp_nonshared.a
+
+	cat > "$pkgdir"/etc/ld-musl-"$ARCH".path << "EOF"
+/lib
+/lib/qt
+/lib/qt4
+/lib/opencollada
+/lib/libgig
+EOF
+
+	cat > "$pkgdir"/etc/ld-musl-"$ARCH32".path << "EOF"
+/lib32
+/lib32/qt
+/lib32/opencollada
+/lib32/qt4
+/lib32/libgig
+EOF
+
+	ln -s ../lib/libc.so "$pkgdir"/lib/ldd
+	ln -s ../lib32/libc.so "$pkgdir"/lib32/ldd
+	install -D -m755 "$srcdir"/ldd "$pkgdir"/bin
+
+	local i
+	for i in getconf getent iconv ; do
+		gcc $CPPFLAGS $CFLAGS "$srcdir"/$i.c -o "$pkgdir"/bin/$i
+	done
+}

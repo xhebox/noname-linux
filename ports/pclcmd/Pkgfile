@@ -1,0 +1,21 @@
+name=pclcmd
+version=0.1
+desc='Command line client for pCloud'
+deps="python-dateutil git ca-certificates python-progressbar"
+
+ext() {
+	git clone --depth=1 https://github.com/abbat/pclcmd.git
+}
+
+build() {
+	cd "${name}"
+
+	install -d "${pkgdir}/bin"
+	install -d "${pkgdir}/share/pyshared"
+
+	install -D -m755 pclcmd.py        "${pkgdir}/share/pyshared/${name}.py"
+	install -D -m644 README.md        "${pkgdir}/share/doc/${name}/README.md"
+	install -D -m644 pclcmd.cfg       "${pkgdir}/share/doc/${name}/${name}.cfg"
+
+	ln -s "/share/pyshared/${name}.py" "${pkgdir}/bin/${name}"
+}

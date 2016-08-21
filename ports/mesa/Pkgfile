@@ -1,0 +1,54 @@
+name=mesa
+version=17.0.5
+deps="expat libdrm xorg-proto libxshmfence libxcb libx11 libxfixes libxext libxdamage libxxf86vm libxvmc python elfutils libgcrypt llvm libclc libomxil-bellagio"
+desc="Mesa 3D Graphics Library"
+source="https://www.mesa3d.org/archive/mesa-$version.tar.xz
+musl-endian.patch
+musl.patch
+"
+
+ext() {
+	cd mesa-$version
+	for i in $source; do
+		msg $i
+		case $i in
+		musl*patch) patch -p0 -i "$srcdir"/$i || die ;;
+		*patch)	patch -Np1 -i "$srcdir"/$i || die ;;
+		esac
+	done
+	CFLAGS="$CFLAGS -D_XOPEN_SOURCE=700 "
+}
+
+build() {
+	cd mesa-$version
+	/bin/bash ./configure \
+		--prefix= \
+		--with-gallium-drivers=radeonsi,nouveau,swrast,virgl \
+		--with-dri-drivers=i915,i965,radeon,nouveau,swrast \
+		--with-vulkan-drivers=intel,radeon \
+		--with-dri-driverdir=/lib/xorg/modules/dri \
+		--with-egl-platforms=drm,x11 \
+		--enable-egl \
+		--enable-gles2 \
+		--enable-gbm \
+		--enable-shared-glapi \
+		--enable-xvmc \
+		--enable-nine \
+		--enable-glx \
+		--enable-va \
+		--enable-omx \
+		--enable-gallium-osmesa \
+		--enable-xa \
+		--enable-vdpau \
+		--disable-glx-tls \
+		--enable-dri \
+		--enable-dri3 \
+		--enable-opencl \
+		--enable-opencl-icd \
+		--enable-texture-float \
+		--enable-gallium-llvm \
+		--enable-llvm-shared-libs
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

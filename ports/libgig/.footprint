@@ -1,0 +1,51 @@
+bin/akaidump|755|0|0|regular file
+bin/akaiextract|755|0|0|regular file
+bin/dlsdump|755|0|0|regular file
+bin/gig2mono|755|0|0|regular file
+bin/gig2stereo|755|0|0|regular file
+bin/gigdump|755|0|0|regular file
+bin/gigextract|755|0|0|regular file
+bin/gigmerge|755|0|0|regular file
+bin/korg2gig|755|0|0|regular file
+bin/korgdump|755|0|0|regular file
+bin/rifftree|755|0|0|regular file
+bin/sf2dump|755|0|0|regular file
+bin/sf2extract|755|0|0|regular file
+bin|755|0|0|directory
+include/libgig/Akai.h|644|0|0|regular file
+include/libgig/DLS.h|644|0|0|regular file
+include/libgig/Korg.h|644|0|0|regular file
+include/libgig/RIFF.h|644|0|0|regular file
+include/libgig/SF.h|644|0|0|regular file
+include/libgig/gig.h|644|0|0|regular file
+include/libgig|755|0|0|directory
+include|755|0|0|directory
+lib/libgig/libakai.a|644|0|0|regular file
+lib/libgig/libakai.so.0.0.0|755|0|0|regular file
+lib/libgig/libakai.so.0|777|0|0|symbolic link
+lib/libgig/libakai.so|777|0|0|symbolic link
+lib/libgig/libgig.a|644|0|0|regular file
+lib/libgig/libgig.so.7.0.0|755|0|0|regular file
+lib/libgig/libgig.so.7|777|0|0|symbolic link
+lib/libgig/libgig.so|777|0|0|symbolic link
+lib/libgig|755|0|0|directory
+lib/pkgconfig/akai.pc|644|0|0|regular file
+lib/pkgconfig/gig.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/akaidump.1.gz|644|0|0|regular file
+share/man/man1/akaiextract.1.gz|644|0|0|regular file
+share/man/man1/dlsdump.1.gz|644|0|0|regular file
+share/man/man1/gig2mono.1.gz|644|0|0|regular file
+share/man/man1/gig2stereo.1.gz|644|0|0|regular file
+share/man/man1/gigdump.1.gz|644|0|0|regular file
+share/man/man1/gigextract.1.gz|644|0|0|regular file
+share/man/man1/gigmerge.1.gz|644|0|0|regular file
+share/man/man1/korg2gig.1.gz|644|0|0|regular file
+share/man/man1/korgdump.1.gz|644|0|0|regular file
+share/man/man1/rifftree.1.gz|644|0|0|regular file
+share/man/man1/sf2dump.1.gz|644|0|0|regular file
+share/man/man1/sf2extract.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

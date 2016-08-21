@@ -1,0 +1,14 @@
+name=libspnav
+version=0.2.3
+desc="Alternative to the proprietary 3Dconnexion device driver and SDK for their 3D input devices"
+deps="libx11"
+source="http://downloads.sourceforge.net/spacenav/$name-$version.tar.gz
+Makefile.patch"
+
+build() {
+	cd $name-$version
+	patch -p1 < ../Makefile.patch || die
+	./configure --prefix= --disable-debug
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

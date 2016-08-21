@@ -1,0 +1,16 @@
+name=libsndfile
+version=1.0.28
+deps="alsa-lib libvorbis flac"
+source="http://www.mega-nerd.com/libsndfile/files/libsndfile-$version.tar.gz"
+desc="Library for manipulating sound files."
+
+build() {
+	cd libsndfile-$version
+
+	./configure --prefix=
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+	rm -r $pkgdir/share/doc
+}
+

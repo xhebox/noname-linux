@@ -1,0 +1,18 @@
+name=soundtouch
+version=1.9.2
+desc="An audio processing library"
+deps="gcc"
+source="http://www.surina.net/soundtouch/soundtouch-${version}.tar.gz"
+
+ext() {
+	cd soundtouch
+	sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/' configure.ac
+}
+
+build() {
+	cd soundtouch
+	./bootstrap
+	./configure --prefix= --enable-shared --with-pic
+	make || die
+	make DESTDIR="${pkgdir}" pkgdocdir=/share/doc/soundtouch install || die
+}

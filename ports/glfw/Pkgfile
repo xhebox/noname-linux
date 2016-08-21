@@ -1,0 +1,18 @@
+name=glfw
+version=3.2.1
+deps="mesa cmake extra-cmake-modules libxcursor libxi libxrandr libxkbcommon libxinerama"
+desc="A free, open source, portable framework for graphical application development"
+source="https://github.com/glfw/glfw/archive/${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	
+	[[ -d build-x11 ]] && rm -r build-x11
+	mkdir build-x11 && cd build-x11
+
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DBUILD_SHARED_LIBS=ON
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

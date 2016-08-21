@@ -1,0 +1,42 @@
+name=xterm
+version=327
+desc="X Terminal Emulator"
+deps="xorg-app libxkbfile libxaw libxft ncurses"
+source="ftp://invisible-island.net/$name/$name-$version.tgz
+posix-ptys.patch"
+
+build() {
+	cd $name-$version
+	patch -p1 < ../posix-ptys.patch || die
+	./configure --prefix= \
+	--libdir=/etc \
+	--mandir=/share/man \
+	--with-app-defaults=/share/X11/app-defaults/ \
+	--with-x \
+	--disable-full-tgetent \
+	--disable-imake \
+	--enable-ansi-color \
+	--enable-88-color \
+	--enable-256-color \
+	--enable-broken-osc \
+	--enable-broken-st \
+	--enable-load-vt-fonts \
+	--enable-i18n \
+	--enable-wide-chars \
+	--enable-doublechars \
+	--enable-warnings \
+	--enable-tcap-query \
+	--enable-logging \
+	--enable-dabbrev \
+	--enable-freetype \
+	--enable-luit \
+	--enable-mini-luit \
+	--enable-narrowproto \
+	--enable-exec-xterm \
+	--enable-sixel-graphics \
+	--with-tty-group=tty \
+	--with-utempter
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

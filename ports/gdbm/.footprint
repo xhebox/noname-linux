@@ -1,0 +1,57 @@
+bin/gdbm_dump|755|0|0|regular file
+bin/gdbm_load|755|0|0|regular file
+bin/gdbmtool|755|0|0|regular file
+bin|755|0|0|directory
+include/dbm.h|644|0|0|regular file
+include/gdbm.h|644|0|0|regular file
+include/ndbm.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libgdbm.so.4.0.0|755|0|0|regular file
+lib/libgdbm.so.4|777|0|0|symbolic link
+lib/libgdbm.so|777|0|0|symbolic link
+lib/libgdbm_compat.so.4.0.0|755|0|0|regular file
+lib/libgdbm_compat.so.4|777|0|0|symbolic link
+lib/libgdbm_compat.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/locale/da/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/eo/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES|755|0|0|directory
+share/locale/eo|755|0|0|directory
+share/locale/fi/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/ja/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/pl/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/sr/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/gdbm.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/gdbm_dump.1.gz|644|0|0|regular file
+share/man/man1/gdbm_load.1.gz|644|0|0|regular file
+share/man/man1/gdbmtool.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/gdbm.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

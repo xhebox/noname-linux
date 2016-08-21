@@ -1,0 +1,13 @@
+bin/libassuan-config|755|0|0|regular file
+bin|755|0|0|directory
+include/assuan.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libassuan.so.0.7.3|755|0|0|regular file
+lib/libassuan.so.0|777|0|0|symbolic link
+lib/libassuan.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/aclocal/libassuan.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/info/assuan.info|644|0|0|regular file
+share/info|755|0|0|directory
+share|755|0|0|directory

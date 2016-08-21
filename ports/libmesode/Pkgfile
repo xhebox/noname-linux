@@ -1,0 +1,12 @@
+name=libmesode
+version=0.9.1
+deps="libressl expat check"
+source="https://github.com/boothj5/libmesode/archive/$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./bootstrap.sh
+	/bin/bash ./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

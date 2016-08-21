@@ -1,0 +1,13 @@
+name=tilda
+version=1.3.3
+desc="A Gtk based drop down terminal for Linux and Unix"
+deps="vte3 confuse"
+source="https://github.com/lanoxx/$name/archive/$name-$version.tar.gz"
+
+build() {
+	cd $name-$name-$version
+	./autogen.sh
+	./configure --prefix= --disable-rpath
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

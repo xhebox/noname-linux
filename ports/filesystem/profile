@@ -1,0 +1,16 @@
+# /etc/profile
+
+umask 022
+PATH="/bin:/sbin"
+export PATH
+MANPATH=/share/man
+export MANPATH
+
+if test -d /etc/profile.d/; then
+	for profile in /etc/profile.d/*.sh; do
+		test -r "$profile" && . "$profile"
+	done
+	unset profile
+fi
+
+unset TERMCAP

@@ -1,0 +1,15 @@
+. $PORTS/libcap/Pkgfile
+name=libcap-32
+deps="attr-32 musl libcap"
+
+build() {
+	cd libcap-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	make KERNEL_HEADERS=/include lib=/lib32  || die
+	make RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib32 SBINDIR=/bin install  || die
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/share
+}

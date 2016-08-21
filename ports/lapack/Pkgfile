@@ -1,0 +1,24 @@
+name=lapack
+version=3.7.0
+desc="Linear Algebra PACKage"
+source="http://www.netlib.org/${name}/${name}-${version}.tgz"
+deps="python gcc cmake"
+
+build() {
+	cd $name-$version
+	mkdir build
+	cd build
+	cmake .. \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DBUILD_SHARED_LIBS=ON \
+		-DBUILD_TESTING=OFF \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_INSTALL_LIBDIR=/lib \
+		-DCMAKE_Fortran_COMPILER=gfortran \
+		-DLAPACKE=ON \
+		-DCBLAS=ON \
+		-DBUILD_DEPRECATED=ON
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

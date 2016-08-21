@@ -1,0 +1,13 @@
+name=libsodium
+version=1.0.12
+desc="P(ortable|ackageable) NaCl-based crypto library"
+deps="musl"
+source="http://download.libsodium.org/$name/releases/$name-${version}.tar.gz"
+
+build() {
+	cd libsodium-$version
+	lt_cv_prog_compiler_static_works=yes \
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

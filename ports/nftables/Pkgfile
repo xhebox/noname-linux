@@ -1,0 +1,17 @@
+name=nftables
+version=0.7
+deps="libmnl libnftnl readline libgmp"
+desc="Netfilter nftables userspace tools"
+source="http://www.netfilter.org/projects/${name}/files/${name}-${version}.tar.bz2
+nftables.conf"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+		--sbindir=/bin \
+		--sysconfdir=/share \
+		--disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	install -Dm644 ../nftables.conf "$pkgdir/etc/nftables.conf"
+}

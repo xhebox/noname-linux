@@ -1,0 +1,28 @@
+bin/giblib-config|755|0|0|regular file
+bin|755|0|0|directory
+include/giblib/gib_btree.h|644|0|0|regular file
+include/giblib/gib_debug.h|644|0|0|regular file
+include/giblib/gib_hash.h|644|0|0|regular file
+include/giblib/gib_imlib.h|644|0|0|regular file
+include/giblib/gib_list.h|644|0|0|regular file
+include/giblib/gib_queue.h|644|0|0|regular file
+include/giblib/gib_stack.h|644|0|0|regular file
+include/giblib/gib_style.h|644|0|0|regular file
+include/giblib/gib_utils.h|644|0|0|regular file
+include/giblib/giblib.h|644|0|0|regular file
+include/giblib/giblib_config.h|644|0|0|regular file
+include/giblib|755|0|0|directory
+include|755|0|0|directory
+lib/libgiblib.so.1.0.6|755|0|0|regular file
+lib/libgiblib.so.1|777|0|0|symbolic link
+lib/libgiblib.so|777|0|0|symbolic link
+lib/pkgconfig/giblib.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/giblib/AUTHORS|644|0|0|regular file
+share/doc/giblib/ChangeLog|644|0|0|regular file
+share/doc/giblib/README|644|0|0|regular file
+share/doc/giblib/TODO|644|0|0|regular empty file
+share/doc/giblib|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

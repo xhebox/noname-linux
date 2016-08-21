@@ -1,0 +1,23 @@
+name=udns
+version=0.4
+desc="Stub DNS resolver library with ability to perform both syncronous and asyncronous DNS queries"
+deps=musl
+source="http://www.corpit.ru/mjt/udns/udns-${version}.tar.gz"
+
+build() {
+	cd udns-$version
+	./configure
+	make || die
+	make sharedlib || doe
+	install -D -m0755 dnsget "${pkgdir}/bin/dnsget"
+	install -D -m0755 rblcheck "${pkgdir}/bin/rblcheck"
+	install -D -m0755 ex-rdns "${pkgdir}/bin/ex-rdns"
+
+	install -D -m0644 udns.h "${pkgdir}/include/udns.h"
+	install -D -m0755 libudns.so.0 "${pkgdir}/lib/libudns.so.0"
+	ln -s libudns.so.0 "${pkgdir}/lib/libudns.so"
+
+	install -D -m0644 dnsget.1 "${pkgdir}/share/man/man1/dnsget.1"
+	install -D -m0644 rblcheck.1 "${pkgdir}/share/man/man1/rblcheck.1"
+	install -D -m0644 udns.3 "${pkgdir}/share/man/man3/udns.3"
+}

@@ -1,0 +1,25 @@
+. $PORTS/gnutls/Pkgfile
+name=gnutls-32
+deps="nettle-32 libgmp-32 gnutls zlib-32 p11-kit-32 libtasn1-32 libidn-32"
+
+build() {
+	cd gnutls-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix=/ --disable-static \
+	--host=$TARGET32 \
+	--build=$TARGET32 \
+	--target=$TARGET32 \
+	--libdir=/lib32 \
+	--with-included-unistring \
+	--with-zlib \
+	--disable-static \
+	--disable-guile
+	make || die
+	sed '/INSTALL_DATA.*files/ s/$(INSTALL_DATA)/cp/' -i doc/manpages/Makefile
+	make DESTDIR="$pkgdir" install || die
+	rm -rf "$pkgdir"/share
+	rm -rf "$pkgdir"/include
+	rm -rf "$pkgdir"/bin
+}

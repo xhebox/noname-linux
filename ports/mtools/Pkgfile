@@ -1,0 +1,18 @@
+name=mtools
+version=4.0.18
+desc="A collection of utilities to access MS-DOS disks"
+deps="bash musl"
+source="http://ftp.gnu.org/gnu/mtools/${name}-${version}.tar.bz2"
+
+build() {
+	cd "${srcdir}/${name}-${version}"
+
+	sed -i '/^SAMPLE FILE$/s:^:# :' mtools.conf
+	./configure --prefix= \
+		--mandir=/share/man \
+		--without-x \
+		--sysconfdir=/etc
+	make || die
+	make -j 1 DESTDIR="${pkgdir}" install || die
+	install -Dm644 mtools.conf "${pkgdir}/etc/mtools.conf"
+}

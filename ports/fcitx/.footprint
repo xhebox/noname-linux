@@ -1,0 +1,506 @@
+lib/libfcitx-utils.so.0|777|0|0|symbolic link
+lib/libfcitx-gclient.so|777|0|0|symbolic link
+lib/libfcitx-utils.so|777|0|0|symbolic link
+lib/libfcitx-config.so|777|0|0|symbolic link
+lib/libfcitx-config.so.4|777|0|0|symbolic link
+lib/libfcitx-gclient.so.0|777|0|0|symbolic link
+lib/libfcitx-core.so.0|777|0|0|symbolic link
+lib/libfcitx-core.so|777|0|0|symbolic link
+share/fcitx/skin/default/menu.png|777|0|0|symbolic link
+bin/txt2mb|755|0|0|regular file
+bin/fcitx4-config|755|0|0|regular file
+bin/mb2txt|755|0|0|regular file
+bin/readPYMB|755|0|0|regular file
+bin/createPYMB|755|0|0|regular file
+bin/fcitx-diagnose|755|0|0|regular file
+bin/mb2org|755|0|0|regular file
+bin/fcitx-remote|755|0|0|regular file
+bin/readPYBase|755|0|0|regular file
+bin/fcitx-configtool|755|0|0|regular file
+bin/fcitx|755|0|0|regular file
+bin/fcitx-skin-installer|755|0|0|regular file
+bin/fcitx-dbus-watcher|755|0|0|regular file
+bin/scel2org|755|0|0|regular file
+bin/fcitx-autostart|755|0|0|regular file
+etc/xdg/autostart/fcitx-autostart.desktop|644|0|0|regular file
+include/fcitx-utils/utarray.h|644|0|0|regular file
+include/fcitx-utils/log.h|644|0|0|regular file
+include/fcitx-utils/desktop-parse.h|644|0|0|regular file
+include/fcitx-utils/memory.h|644|0|0|regular file
+include/fcitx-utils/keysymgen.h|644|0|0|regular file
+include/fcitx-utils/objpool.h|644|0|0|regular file
+include/fcitx-utils/keysym.h|644|0|0|regular file
+include/fcitx-utils/handler-table.h|644|0|0|regular file
+include/fcitx-utils/uthash.h|644|0|0|regular file
+include/fcitx-utils/stringmap.h|644|0|0|regular file
+include/fcitx-utils/bitset.h|644|0|0|regular file
+include/fcitx-utils/utils.h|644|0|0|regular file
+include/fcitx-utils/utf8.h|644|0|0|regular file
+include/fcitx-config/hotkey.h|644|0|0|regular file
+include/fcitx-config/fcitx-config.h|644|0|0|regular file
+include/fcitx-config/xdg.h|644|0|0|regular file
+include/fcitx/addon.h|644|0|0|regular file
+include/fcitx/profile.h|644|0|0|regular file
+include/fcitx/ui.h|644|0|0|regular file
+include/fcitx/keys.h|644|0|0|regular file
+include/fcitx/instance.h|644|0|0|regular file
+include/fcitx/module/ipc/ipc.h|644|0|0|regular file
+include/fcitx/module/x11/x11stuff.h|644|0|0|regular file
+include/fcitx/module/x11/fcitx-x11.h|644|0|0|regular file
+include/fcitx/module/spell/fcitx-spell.h|644|0|0|regular file
+include/fcitx/module/spell/spell.h|644|0|0|regular file
+include/fcitx/module/punc/punc.h|644|0|0|regular file
+include/fcitx/module/punc/fcitx-punc.h|644|0|0|regular file
+include/fcitx/module/freedesktop-notify/fcitx-freedesktop-notify.h|644|0|0|regular file
+include/fcitx/module/freedesktop-notify/freedesktop-notify.h|644|0|0|regular file
+include/fcitx/module/pinyin-enhance/fcitx-pinyin-enhance.h|644|0|0|regular file
+include/fcitx/module/pinyin-enhance/pinyin-enhance.h|644|0|0|regular file
+include/fcitx/module/notificationitem/notificationitem.h|644|0|0|regular file
+include/fcitx/module/notificationitem/fcitx-notificationitem.h|644|0|0|regular file
+include/fcitx/module/xkb/fcitx-xkb.h|644|0|0|regular file
+include/fcitx/module/xkb/xkb.h|644|0|0|regular file
+include/fcitx/module/dbus/fcitx-dbus.h|644|0|0|regular file
+include/fcitx/module/dbus/dbusstuff.h|644|0|0|regular file
+include/fcitx/module/pinyin/pydef.h|644|0|0|regular file
+include/fcitx/module/pinyin/fcitx-pinyin.h|644|0|0|regular file
+include/fcitx/module/classicui/fcitx-classicui.h|644|0|0|regular file
+include/fcitx/module/classicui/classicuiinterface.h|644|0|0|regular file
+include/fcitx/module/chttrans/chttrans.h|644|0|0|regular file
+include/fcitx/module/chttrans/fcitx-chttrans.h|644|0|0|regular file
+include/fcitx/module/quickphrase/fcitx-quickphrase.h|644|0|0|regular file
+include/fcitx/module/quickphrase/quickphrase.h|644|0|0|regular file
+include/fcitx/module/clipboard/fcitx-clipboard.h|644|0|0|regular file
+include/fcitx/module/clipboard/clipboard.h|644|0|0|regular file
+include/fcitx/configfile.h|644|0|0|regular file
+include/fcitx/ime.h|644|0|0|regular file
+include/fcitx/module.h|644|0|0|regular file
+include/fcitx/hook.h|644|0|0|regular file
+include/fcitx/frontend.h|644|0|0|regular file
+include/fcitx/fcitx.h|644|0|0|regular file
+include/fcitx/candidate.h|644|0|0|regular file
+include/fcitx/context.h|644|0|0|regular file
+include/fcitx-gclient/fcitxclient.h|644|0|0|regular file
+include/fcitx-gclient/fcitxconnection.h|644|0|0|regular file
+include/fcitx-gclient/fcitxinputmethod.h|644|0|0|regular file
+include/fcitx-gclient/fcitxkbd.h|644|0|0|regular file
+lib/libfcitx-core.so.0.3|755|0|0|regular file
+lib/gtk-3.0/3.0.0/immodules/im-fcitx.so|755|0|0|regular file
+lib/libfcitx-gclient.so.0.1|755|0|0|regular file
+lib/gtk-2.0/2.10.0/immodules/im-fcitx.so|755|0|0|regular file
+lib/fcitx/fcitx-chttrans.so|755|0|0|regular file
+lib/fcitx/fcitx-qw.so|755|0|0|regular file
+lib/fcitx/fcitx-remote-module.so|755|0|0|regular file
+lib/fcitx/fcitx-xkb.so|755|0|0|regular file
+lib/fcitx/fcitx-dbus.so|755|0|0|regular file
+lib/fcitx/fcitx-pinyin-enhance.so|755|0|0|regular file
+lib/fcitx/fcitx-autoeng.so|755|0|0|regular file
+lib/fcitx/fcitx-xim.so|755|0|0|regular file
+lib/fcitx/fcitx-notificationitem.so|755|0|0|regular file
+lib/fcitx/fcitx-ipc.so|755|0|0|regular file
+lib/fcitx/fcitx-vk.so|755|0|0|regular file
+lib/fcitx/fcitx-table.so|755|0|0|regular file
+lib/fcitx/fcitx-punc.so|755|0|0|regular file
+lib/fcitx/fcitx-kimpanel-ui.so|755|0|0|regular file
+lib/fcitx/fcitx-spell.so|755|0|0|regular file
+lib/fcitx/fcitx-pinyin.so|755|0|0|regular file
+lib/fcitx/fcitx-x11.so|755|0|0|regular file
+lib/fcitx/libexec/fcitx-po-parser|755|0|0|regular file
+lib/fcitx/libexec/comp-spell-dict|755|0|0|regular file
+lib/fcitx/libexec/fcitx-scanner|755|0|0|regular file
+lib/fcitx/fcitx-unicode.so|755|0|0|regular file
+lib/fcitx/fcitx-quickphrase.so|755|0|0|regular file
+lib/fcitx/fcitx-imselector.so|755|0|0|regular file
+lib/fcitx/fcitx-xkbdbus.so|755|0|0|regular file
+lib/fcitx/fcitx-keyboard.so|755|0|0|regular file
+lib/fcitx/fcitx-freedesktop-notify.so|755|0|0|regular file
+lib/fcitx/fcitx-classic-ui.so|755|0|0|regular file
+lib/fcitx/fcitx-clipboard.so|755|0|0|regular file
+lib/fcitx/fcitx-fullwidth-char.so|755|0|0|regular file
+lib/libfcitx-utils.so.0.1|755|0|0|regular file
+lib/libfcitx-config.so.4.1|755|0|0|regular file
+lib/pkgconfig/fcitx-utils.pc|644|0|0|regular file
+lib/pkgconfig/fcitx-config.pc|644|0|0|regular file
+lib/pkgconfig/fcitx.pc|644|0|0|regular file
+lib/pkgconfig/fcitx-gclient.pc|644|0|0|regular file
+lib/girepository-1.0/Fcitx-1.0.typelib|644|0|0|regular file
+share/mime/packages/x-fskin.xml|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/fcitx.mo|644|0|0|regular file
+share/fcitx/spell/en_dict.fscd|644|0|0|regular file
+share/fcitx/data/vk.conf|644|0|0|regular file
+share/fcitx/data/punc.mb.zh_CN|644|0|0|regular file
+share/fcitx/data/punc.mb.zh_HK|644|0|0|regular file
+share/fcitx/data/gbks2t.tab|644|0|0|regular file
+share/fcitx/data/env_setup.sh|644|0|0|regular file
+share/fcitx/data/quickphrase.d/emoji.mb|644|0|0|regular file
+share/fcitx/data/quickphrase.d/latex.mb|644|0|0|regular file
+share/fcitx/data/charselectdata|644|0|0|regular file
+share/fcitx/data/punc.mb.zh_TW|644|0|0|regular file
+share/fcitx/data/AutoEng.dat|644|0|0|regular file
+share/fcitx/imicon/shuangpin.png|644|0|0|regular file
+share/fcitx/imicon/cangjie.png|644|0|0|regular file
+share/fcitx/imicon/wubi.png|644|0|0|regular file
+share/fcitx/imicon/pinyin.png|644|0|0|regular file
+share/fcitx/imicon/erbi.png|644|0|0|regular file
+share/fcitx/imicon/ziranma.png|644|0|0|regular file
+share/fcitx/imicon/wbpy.png|644|0|0|regular file
+share/fcitx/addon/fcitx-kimpanel-ui.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-keyboard.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-freedesktop-notify.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-quickphrase.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-unicode.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-table.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-autoeng.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-ipc.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-pinyin.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-classic-ui.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-dbus.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-vk.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-chttrans.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-pinyin-enhance.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-punc.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-x11.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-notificationitem.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-qw.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-fullwidth-char.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-clipboard.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-imselector.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-xkbdbus.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-xkb.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-spell.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-remote-module.conf|644|0|0|regular file
+share/fcitx/addon/fcitx-xim.conf|644|0|0|regular file
+share/fcitx/configdesc/fcitx-spell.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-chttrans.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-xim.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-quickphrase.desc|644|0|0|regular file
+share/fcitx/configdesc/skin.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-classic-ui.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-pinyin-enhance.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-autoeng.desc|644|0|0|regular file
+share/fcitx/configdesc/inputmethod.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-table.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-imselector.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-keyboard.desc|644|0|0|regular file
+share/fcitx/configdesc/addon.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-xkb.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-unicode.desc|644|0|0|regular file
+share/fcitx/configdesc/table.desc|644|0|0|regular file
+share/fcitx/configdesc/profile.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-pinyin.desc|644|0|0|regular file
+share/fcitx/configdesc/config.desc|644|0|0|regular file
+share/fcitx/configdesc/fcitx-clipboard.desc|644|0|0|regular file
+share/fcitx/inputmethod/shuangpin.conf|644|0|0|regular file
+share/fcitx/inputmethod/pinyin.conf|644|0|0|regular file
+share/fcitx/inputmethod/qw.conf|644|0|0|regular file
+share/fcitx/dbus/daemon.conf|644|0|0|regular file
+share/fcitx/skin/dark/chttrans_inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/remind_inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/remind_active.png|644|0|0|regular file
+share/fcitx/skin/dark/input.png|644|0|0|regular file
+share/fcitx/skin/dark/vk_inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/quwei.png|644|0|0|regular file
+share/fcitx/skin/dark/shuangpin.png|644|0|0|regular file
+share/fcitx/skin/dark/chttrans_active.png|644|0|0|regular file
+share/fcitx/skin/dark/cangjie.png|644|0|0|regular file
+share/fcitx/skin/dark/wubi.png|644|0|0|regular file
+share/fcitx/skin/dark/vk_active.png|644|0|0|regular file
+share/fcitx/skin/dark/pinyin.png|644|0|0|regular file
+share/fcitx/skin/dark/fullwidth_inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/cn.png|644|0|0|regular file
+share/fcitx/skin/dark/erbi.png|644|0|0|regular file
+share/fcitx/skin/dark/fcitx_skin.conf|644|0|0|regular file
+share/fcitx/skin/dark/prev.png|644|0|0|regular file
+share/fcitx/skin/dark/ziranma.png|644|0|0|regular file
+share/fcitx/skin/dark/menu.png|644|0|0|regular file
+share/fcitx/skin/dark/bar.png|644|0|0|regular file
+share/fcitx/skin/dark/dianbaoma.png|644|0|0|regular file
+share/fcitx/skin/dark/en.png|644|0|0|regular file
+share/fcitx/skin/dark/next.png|644|0|0|regular file
+share/fcitx/skin/dark/bingchan.png|644|0|0|regular file
+share/fcitx/skin/dark/punc_inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/fullwidth_active.png|644|0|0|regular file
+share/fcitx/skin/dark/inactive.png|644|0|0|regular file
+share/fcitx/skin/dark/active.png|644|0|0|regular file
+share/fcitx/skin/dark/wbpy.png|644|0|0|regular file
+share/fcitx/skin/dark/wanfeng.png|644|0|0|regular file
+share/fcitx/skin/dark/keyboard.png|644|0|0|regular file
+share/fcitx/skin/dark/punc_active.png|644|0|0|regular file
+share/fcitx/skin/dark/logo.png|644|0|0|regular file
+share/fcitx/skin/default/chttrans_inactive.png|644|0|0|regular file
+share/fcitx/skin/default/remind_inactive.png|644|0|0|regular file
+share/fcitx/skin/default/remind_active.png|644|0|0|regular file
+share/fcitx/skin/default/anthy.png|644|0|0|regular file
+share/fcitx/skin/default/input.png|644|0|0|regular file
+share/fcitx/skin/default/bopomofo.png|644|0|0|regular file
+share/fcitx/skin/default/vk_inactive.png|644|0|0|regular file
+share/fcitx/skin/default/quwei.png|644|0|0|regular file
+share/fcitx/skin/default/shuangpin.png|644|0|0|regular file
+share/fcitx/skin/default/boshiamy.png|644|0|0|regular file
+share/fcitx/skin/default/chttrans_active.png|644|0|0|regular file
+share/fcitx/skin/default/cangjie.png|644|0|0|regular file
+share/fcitx/skin/default/wubi.png|644|0|0|regular file
+share/fcitx/skin/default/vk_active.png|644|0|0|regular file
+share/fcitx/skin/default/pinyin.png|644|0|0|regular file
+share/fcitx/skin/default/fullwidth_inactive.png|644|0|0|regular file
+share/fcitx/skin/default/cn.png|644|0|0|regular file
+share/fcitx/skin/default/hangul.png|644|0|0|regular file
+share/fcitx/skin/default/erbi.png|644|0|0|regular file
+share/fcitx/skin/default/fcitx_skin.conf|644|0|0|regular file
+share/fcitx/skin/default/prev.png|644|0|0|regular file
+share/fcitx/skin/default/unikey.png|644|0|0|regular file
+share/fcitx/skin/default/sogoupinyin.png|644|0|0|regular file
+share/fcitx/skin/default/ziranma.png|644|0|0|regular file
+share/fcitx/skin/default/bar.png|644|0|0|regular file
+share/fcitx/skin/default/dianbaoma.png|644|0|0|regular file
+share/fcitx/skin/default/en.png|644|0|0|regular file
+share/fcitx/skin/default/shuangpin-libpinyin.png|644|0|0|regular file
+share/fcitx/skin/default/next.png|644|0|0|regular file
+share/fcitx/skin/default/bingchan.png|644|0|0|regular file
+share/fcitx/skin/default/punc_inactive.png|644|0|0|regular file
+share/fcitx/skin/default/fullwidth_active.png|644|0|0|regular file
+share/fcitx/skin/default/inactive.png|644|0|0|regular file
+share/fcitx/skin/default/kkc.png|644|0|0|regular file
+share/fcitx/skin/default/pinyin-libpinyin.png|644|0|0|regular file
+share/fcitx/skin/default/active.png|644|0|0|regular file
+share/fcitx/skin/default/wbpy.png|644|0|0|regular file
+share/fcitx/skin/default/wanfeng.png|644|0|0|regular file
+share/fcitx/skin/default/keyboard.png|644|0|0|regular file
+share/fcitx/skin/default/punc_active.png|644|0|0|regular file
+share/fcitx/skin/default/logo.png|644|0|0|regular file
+share/fcitx/skin/classic/chttrans_inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/remind_inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/remind_active.png|644|0|0|regular file
+share/fcitx/skin/classic/input.png|644|0|0|regular file
+share/fcitx/skin/classic/vk_inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/quwei.png|644|0|0|regular file
+share/fcitx/skin/classic/shuangpin.png|644|0|0|regular file
+share/fcitx/skin/classic/chttrans_active.png|644|0|0|regular file
+share/fcitx/skin/classic/cangjie.png|644|0|0|regular file
+share/fcitx/skin/classic/wubi.png|644|0|0|regular file
+share/fcitx/skin/classic/vk_active.png|644|0|0|regular file
+share/fcitx/skin/classic/pinyin.png|644|0|0|regular file
+share/fcitx/skin/classic/fullwidth_inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/cn.png|644|0|0|regular file
+share/fcitx/skin/classic/erbi.png|644|0|0|regular file
+share/fcitx/skin/classic/fcitx_skin.conf|644|0|0|regular file
+share/fcitx/skin/classic/prev.png|644|0|0|regular file
+share/fcitx/skin/classic/ziranma.png|644|0|0|regular file
+share/fcitx/skin/classic/menu.png|644|0|0|regular file
+share/fcitx/skin/classic/bar.png|644|0|0|regular file
+share/fcitx/skin/classic/dianbaoma.png|644|0|0|regular file
+share/fcitx/skin/classic/en.png|644|0|0|regular file
+share/fcitx/skin/classic/next.png|644|0|0|regular file
+share/fcitx/skin/classic/bingchan.png|644|0|0|regular file
+share/fcitx/skin/classic/punc_inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/fullwidth_active.png|644|0|0|regular file
+share/fcitx/skin/classic/inactive.png|644|0|0|regular file
+share/fcitx/skin/classic/active.png|644|0|0|regular file
+share/fcitx/skin/classic/wbpy.png|644|0|0|regular file
+share/fcitx/skin/classic/wanfeng.png|644|0|0|regular file
+share/fcitx/skin/classic/punc_active.png|644|0|0|regular file
+share/fcitx/skin/classic/logo.png|644|0|0|regular file
+share/fcitx/table/db.mb|644|0|0|regular file
+share/fcitx/table/wanfeng.mb|644|0|0|regular file
+share/fcitx/table/wbx.mb|644|0|0|regular file
+share/fcitx/table/wanfeng.conf|644|0|0|regular file
+share/fcitx/table/wbpy.mb|644|0|0|regular file
+share/fcitx/table/db.conf|644|0|0|regular file
+share/fcitx/table/qxm.mb|644|0|0|regular file
+share/fcitx/table/erbi.mb|644|0|0|regular file
+share/fcitx/table/zrm.mb|644|0|0|regular file
+share/fcitx/table/cj.mb|644|0|0|regular file
+share/fcitx/table/zrm.conf|644|0|0|regular file
+share/fcitx/table/wbx.conf|644|0|0|regular file
+share/fcitx/table/qxm.conf|644|0|0|regular file
+share/fcitx/table/cangjie.conf|644|0|0|regular file
+share/fcitx/table/erbi.conf|644|0|0|regular file
+share/fcitx/table/wbpy.conf|644|0|0|regular file
+share/fcitx/pinyin/pyphrase.mb|644|0|0|regular file
+share/fcitx/pinyin/pybase.mb|644|0|0|regular file
+share/fcitx/py-enhance/py_stroke.mb|644|0|0|regular file
+share/fcitx/py-enhance/py_table.mb|644|0|0|regular file
+share/man/man1/fcitx-remote.1.gz|644|0|0|regular file
+share/man/man1/fcitx.1.gz|644|0|0|regular file
+share/man/man1/readPYMB.1.gz|644|0|0|regular file
+share/man/man1/mb2txt.1.gz|644|0|0|regular file
+share/man/man1/txt2mb.1.gz|644|0|0|regular file
+share/man/man1/mb2org.1.gz|644|0|0|regular file
+share/man/man1/scel2org.1.gz|644|0|0|regular file
+share/man/man1/readPYBase.1.gz|644|0|0|regular file
+share/man/man1/createPYMB.1.gz|644|0|0|regular file
+share/gir-1.0/Fcitx-1.0.gir|644|0|0|regular file
+share/cmake/fcitx/fcitx-extract-qt.sh|755|0|0|regular file
+share/cmake/fcitx/FcitxConfigVersion.cmake|644|0|0|regular file
+share/cmake/fcitx/fcitx-extract-po.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-extract-desktop.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-extract-kde.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-merge-config.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-write-po.sh|644|0|0|regular file
+share/cmake/fcitx/FcitxMacro.cmake|644|0|0|regular file
+share/cmake/fcitx/FcitxConfig.cmake|644|0|0|regular file
+share/cmake/fcitx/fcitx-parse-po.sh|644|0|0|regular file
+share/cmake/fcitx/fcitx-cmake-helper.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-extract-gettext.sh|755|0|0|regular file
+share/cmake/fcitx/fcitx-extract-confdesc.sh|755|0|0|regular file
+share/cmake/fcitx/getdescpo|755|0|0|regular file
+share/applications/fcitx.desktop|644|0|0|regular file
+share/applications/fcitx-skin-installer.desktop|644|0|0|regular file
+share/applications/fcitx-configtool.desktop|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-vk-active.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-fullwidth-active.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-punc-inactive.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-fullwidth-inactive.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-kbd.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-punc-active.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps/fcitx-vk-inactive.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-vk-active.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-fullwidth-active.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-punc-inactive.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-fullwidth-inactive.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-kbd.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-punc-active.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps/fcitx-vk-inactive.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-vk-active.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-fullwidth-active.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-punc-inactive.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-fullwidth-inactive.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-kbd.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-punc-active.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps/fcitx-vk-inactive.png|644|0|0|regular file
+share/icons/hicolor/32x32/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-remind-inactive.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-vk-active.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-chn.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-fullwidth-active.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-chttrans-inactive.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-wubi.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-cangjie.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-wbpy.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-chttrans-active.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-ziranma.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-punc-inactive.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-fullwidth-inactive.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-shuangpin.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-kbd.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-punc-active.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-pinyin.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-remind-active.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-vk-inactive.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps/fcitx-erbi.png|644|0|0|regular file
+share/icons/hicolor/128x128/apps/fcitx.png|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-fullwidth-inactive.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-fullwidth-active.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-punc-inactive.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-vk-active-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-punc-inactive-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-kbd.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-vk-inactive.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-fullwidth-active-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-punc-active.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-punc-active-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-vk-inactive-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-kbd-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-fullwidth-inactive-symbolic.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx-vk-active.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps/fcitx.svg|644|0|0|regular file
+share/dbus-1/services/org.fcitx.Fcitx.service|644|0|0|regular file
+share/dbus-1/services|755|0|0|directory
+share/dbus-1|755|0|0|directory
+share/icons/hicolor/scalable/apps|755|0|0|directory
+share/icons/hicolor/scalable|755|0|0|directory
+share/icons/hicolor/128x128/apps|755|0|0|directory
+share/icons/hicolor/128x128|755|0|0|directory
+share/icons/hicolor/48x48/apps|755|0|0|directory
+share/icons/hicolor/48x48|755|0|0|directory
+share/icons/hicolor/32x32/apps|755|0|0|directory
+share/icons/hicolor/32x32|755|0|0|directory
+share/icons/hicolor/16x16/apps|755|0|0|directory
+share/icons/hicolor/16x16|755|0|0|directory
+share/icons/hicolor/24x24/apps|755|0|0|directory
+share/icons/hicolor/24x24|755|0|0|directory
+share/icons/hicolor/22x22/apps|755|0|0|directory
+share/icons/hicolor/22x22|755|0|0|directory
+share/icons/hicolor|755|0|0|directory
+share/icons|755|0|0|directory
+share/applications|755|0|0|directory
+share/cmake/fcitx|755|0|0|directory
+share/cmake|755|0|0|directory
+share/gir-1.0|755|0|0|directory
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share/fcitx/py-enhance|755|0|0|directory
+share/fcitx/pinyin|755|0|0|directory
+share/fcitx/table|755|0|0|directory
+share/fcitx/skin/classic|755|0|0|directory
+share/fcitx/skin/default|755|0|0|directory
+share/fcitx/skin/dark|755|0|0|directory
+share/fcitx/skin|755|0|0|directory
+share/fcitx/dbus|755|0|0|directory
+share/fcitx/inputmethod|755|0|0|directory
+share/fcitx/configdesc|755|0|0|directory
+share/fcitx/addon|755|0|0|directory
+share/fcitx/imicon|755|0|0|directory
+share/fcitx/data/quickphrase.d|755|0|0|directory
+share/fcitx/data|755|0|0|directory
+share/fcitx/spell|755|0|0|directory
+share/fcitx|755|0|0|directory
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale|755|0|0|directory
+share/mime/packages|755|0|0|directory
+share/mime|755|0|0|directory
+share|755|0|0|directory
+lib/girepository-1.0|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib/fcitx/libexec|755|0|0|directory
+lib/fcitx|755|0|0|directory
+lib/gtk-2.0/2.10.0/immodules|755|0|0|directory
+lib/gtk-2.0/2.10.0|755|0|0|directory
+lib/gtk-2.0|755|0|0|directory
+lib/gtk-3.0/3.0.0/immodules|755|0|0|directory
+lib/gtk-3.0/3.0.0|755|0|0|directory
+lib/gtk-3.0|755|0|0|directory
+lib|755|0|0|directory
+include/fcitx-gclient|755|0|0|directory
+include/fcitx/module/clipboard|755|0|0|directory
+include/fcitx/module/quickphrase|755|0|0|directory
+include/fcitx/module/chttrans|755|0|0|directory
+include/fcitx/module/classicui|755|0|0|directory
+include/fcitx/module/pinyin|755|0|0|directory
+include/fcitx/module/dbus|755|0|0|directory
+include/fcitx/module/xkb|755|0|0|directory
+include/fcitx/module/notificationitem|755|0|0|directory
+include/fcitx/module/pinyin-enhance|755|0|0|directory
+include/fcitx/module/freedesktop-notify|755|0|0|directory
+include/fcitx/module/punc|755|0|0|directory
+include/fcitx/module/spell|755|0|0|directory
+include/fcitx/module/x11|755|0|0|directory
+include/fcitx/module/ipc|755|0|0|directory
+include/fcitx/module|755|0|0|directory
+include/fcitx|755|0|0|directory
+include/fcitx-config|755|0|0|directory
+include/fcitx-utils|755|0|0|directory
+include|755|0|0|directory
+etc/xdg/autostart|755|0|0|directory
+etc/xdg|755|0|0|directory
+etc|755|0|0|directory
+bin|755|0|0|directory

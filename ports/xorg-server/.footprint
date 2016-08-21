@@ -1,0 +1,219 @@
+bin/Xephyr|755|0|0|regular file
+bin/Xnest|755|0|0|regular file
+bin/Xorg|755|0|0|regular file
+bin/Xvfb|755|0|0|regular file
+bin/X|777|0|0|symbolic link
+bin/cvt|755|0|0|regular file
+bin/gtf|755|0|0|regular file
+bin|755|0|0|directory
+include/xorg/BT.h|644|0|0|regular file
+include/xorg/IBM.h|644|0|0|regular file
+include/xorg/TI.h|644|0|0|regular file
+include/xorg/XIstubs.h|644|0|0|regular file
+include/xorg/Xprintf.h|644|0|0|regular file
+include/xorg/callback.h|644|0|0|regular file
+include/xorg/client.h|644|0|0|regular file
+include/xorg/closestr.h|644|0|0|regular file
+include/xorg/closure.h|644|0|0|regular file
+include/xorg/colormap.h|644|0|0|regular file
+include/xorg/colormapst.h|644|0|0|regular file
+include/xorg/compiler.h|644|0|0|regular file
+include/xorg/compositeext.h|644|0|0|regular file
+include/xorg/cursor.h|644|0|0|regular file
+include/xorg/cursorstr.h|644|0|0|regular file
+include/xorg/damage.h|644|0|0|regular file
+include/xorg/damagestr.h|644|0|0|regular file
+include/xorg/dbestruct.h|644|0|0|regular file
+include/xorg/dgaproc.h|644|0|0|regular file
+include/xorg/displaymode.h|644|0|0|regular file
+include/xorg/dix.h|644|0|0|regular file
+include/xorg/dixaccess.h|644|0|0|regular file
+include/xorg/dixevents.h|644|0|0|regular file
+include/xorg/dixfont.h|644|0|0|regular file
+include/xorg/dixfontstr.h|644|0|0|regular file
+include/xorg/dixgrabs.h|644|0|0|regular file
+include/xorg/dixstruct.h|644|0|0|regular file
+include/xorg/dri.h|644|0|0|regular file
+include/xorg/dri2.h|644|0|0|regular file
+include/xorg/dri3.h|644|0|0|regular file
+include/xorg/dristruct.h|644|0|0|regular file
+include/xorg/edid.h|644|0|0|regular file
+include/xorg/events.h|644|0|0|regular file
+include/xorg/exa.h|644|0|0|regular file
+include/xorg/exevents.h|644|0|0|regular file
+include/xorg/extension.h|644|0|0|regular file
+include/xorg/extinit.h|644|0|0|regular file
+include/xorg/extnsionst.h|644|0|0|regular file
+include/xorg/fb.h|644|0|0|regular file
+include/xorg/fbdevhw.h|644|0|0|regular file
+include/xorg/fboverlay.h|644|0|0|regular file
+include/xorg/fbpict.h|644|0|0|regular file
+include/xorg/fbrop.h|644|0|0|regular file
+include/xorg/fourcc.h|644|0|0|regular file
+include/xorg/gc.h|644|0|0|regular file
+include/xorg/gcstruct.h|644|0|0|regular file
+include/xorg/geext.h|644|0|0|regular file
+include/xorg/geint.h|644|0|0|regular file
+include/xorg/glamor.h|644|0|0|regular file
+include/xorg/globals.h|644|0|0|regular file
+include/xorg/glx_extinit.h|644|0|0|regular file
+include/xorg/glyphstr.h|644|0|0|regular file
+include/xorg/hotplug.h|644|0|0|regular file
+include/xorg/i2c_def.h|644|0|0|regular file
+include/xorg/input.h|644|0|0|regular file
+include/xorg/inputstr.h|644|0|0|regular file
+include/xorg/list.h|644|0|0|regular file
+include/xorg/mi.h|644|0|0|regular file
+include/xorg/micmap.h|644|0|0|regular file
+include/xorg/micoord.h|644|0|0|regular file
+include/xorg/migc.h|644|0|0|regular file
+include/xorg/miline.h|644|0|0|regular file
+include/xorg/mioverlay.h|644|0|0|regular file
+include/xorg/mipict.h|644|0|0|regular file
+include/xorg/mipointer.h|644|0|0|regular file
+include/xorg/mipointrst.h|644|0|0|regular file
+include/xorg/misc.h|644|0|0|regular file
+include/xorg/miscstruct.h|644|0|0|regular file
+include/xorg/mistruct.h|644|0|0|regular file
+include/xorg/misync.h|644|0|0|regular file
+include/xorg/misyncfd.h|644|0|0|regular file
+include/xorg/misyncshm.h|644|0|0|regular file
+include/xorg/misyncstr.h|644|0|0|regular file
+include/xorg/mizerarc.h|644|0|0|regular file
+include/xorg/nonsdk_extinit.h|644|0|0|regular file
+include/xorg/opaque.h|644|0|0|regular file
+include/xorg/optionstr.h|644|0|0|regular file
+include/xorg/os.h|644|0|0|regular file
+include/xorg/panoramiX.h|644|0|0|regular file
+include/xorg/panoramiXsrv.h|644|0|0|regular file
+include/xorg/picture.h|644|0|0|regular file
+include/xorg/picturestr.h|644|0|0|regular file
+include/xorg/pixmap.h|644|0|0|regular file
+include/xorg/pixmapstr.h|644|0|0|regular file
+include/xorg/present.h|644|0|0|regular file
+include/xorg/presentext.h|644|0|0|regular file
+include/xorg/privates.h|644|0|0|regular file
+include/xorg/property.h|644|0|0|regular file
+include/xorg/propertyst.h|644|0|0|regular file
+include/xorg/ptrveloc.h|644|0|0|regular file
+include/xorg/randrstr.h|644|0|0|regular file
+include/xorg/region.h|644|0|0|regular file
+include/xorg/regionstr.h|644|0|0|regular file
+include/xorg/registry.h|644|0|0|regular file
+include/xorg/resource.h|644|0|0|regular file
+include/xorg/rgb.h|644|0|0|regular file
+include/xorg/rrtransform.h|644|0|0|regular file
+include/xorg/sarea.h|644|0|0|regular file
+include/xorg/screenint.h|644|0|0|regular file
+include/xorg/scrnintstr.h|644|0|0|regular file
+include/xorg/selection.h|644|0|0|regular file
+include/xorg/servermd.h|644|0|0|regular file
+include/xorg/shadow.h|644|0|0|regular file
+include/xorg/shadowfb.h|644|0|0|regular file
+include/xorg/shmint.h|644|0|0|regular file
+include/xorg/site.h|644|0|0|regular file
+include/xorg/syncsdk.h|644|0|0|regular file
+include/xorg/validate.h|644|0|0|regular file
+include/xorg/vbe.h|644|0|0|regular file
+include/xorg/vbeModes.h|644|0|0|regular file
+include/xorg/vgaHW.h|644|0|0|regular file
+include/xorg/wfbrename.h|644|0|0|regular file
+include/xorg/window.h|644|0|0|regular file
+include/xorg/windowstr.h|644|0|0|regular file
+include/xorg/xaarop.h|644|0|0|regular file
+include/xorg/xace.h|644|0|0|regular file
+include/xorg/xacestr.h|644|0|0|regular file
+include/xorg/xf86.h|644|0|0|regular file
+include/xorg/xf86Crtc.h|644|0|0|regular file
+include/xorg/xf86Cursor.h|644|0|0|regular file
+include/xorg/xf86DDC.h|644|0|0|regular file
+include/xorg/xf86Modes.h|644|0|0|regular file
+include/xorg/xf86Module.h|644|0|0|regular file
+include/xorg/xf86Opt.h|644|0|0|regular file
+include/xorg/xf86Optionstr.h|644|0|0|regular file
+include/xorg/xf86Optrec.h|644|0|0|regular file
+include/xorg/xf86Parser.h|644|0|0|regular file
+include/xorg/xf86Pci.h|644|0|0|regular file
+include/xorg/xf86PciInfo.h|644|0|0|regular file
+include/xorg/xf86Priv.h|644|0|0|regular file
+include/xorg/xf86Privstr.h|644|0|0|regular file
+include/xorg/xf86RamDac.h|644|0|0|regular file
+include/xorg/xf86RandR12.h|644|0|0|regular file
+include/xorg/xf86VGAarbiter.h|644|0|0|regular file
+include/xorg/xf86Xinput.h|644|0|0|regular file
+include/xorg/xf86_OSlib.h|644|0|0|regular file
+include/xorg/xf86_OSproc.h|644|0|0|regular file
+include/xorg/xf86cmap.h|644|0|0|regular file
+include/xorg/xf86fbman.h|644|0|0|regular file
+include/xorg/xf86i2c.h|644|0|0|regular file
+include/xorg/xf86int10.h|644|0|0|regular file
+include/xorg/xf86platformBus.h|644|0|0|regular file
+include/xorg/xf86sbusBus.h|644|0|0|regular file
+include/xorg/xf86str.h|644|0|0|regular file
+include/xorg/xf86xv.h|644|0|0|regular file
+include/xorg/xf86xvmc.h|644|0|0|regular file
+include/xorg/xf86xvpriv.h|644|0|0|regular file
+include/xorg/xisb.h|644|0|0|regular file
+include/xorg/xkbfile.h|644|0|0|regular file
+include/xorg/xkbrules.h|644|0|0|regular file
+include/xorg/xkbsrv.h|644|0|0|regular file
+include/xorg/xkbstr.h|644|0|0|regular file
+include/xorg/xorg-server.h|644|0|0|regular file
+include/xorg/xorgVersion.h|644|0|0|regular file
+include/xorg/xserver-properties.h|644|0|0|regular file
+include/xorg/xserver_poll.h|644|0|0|regular file
+include/xorg/xvdix.h|644|0|0|regular file
+include/xorg/xvmcext.h|644|0|0|regular file
+include/xorg|755|0|0|directory
+include|755|0|0|directory
+lib/Xorg.wrap|4755|0|0|regular file
+lib/Xorg|4755|0|0|regular file
+lib/pkgconfig/xorg-server.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/xorg/modules/drivers/modesetting_drv.so|755|0|0|regular file
+lib/xorg/modules/drivers|755|0|0|directory
+lib/xorg/modules/extensions/libglx.so|755|0|0|regular file
+lib/xorg/modules/extensions|755|0|0|directory
+lib/xorg/modules/libexa.so|755|0|0|regular file
+lib/xorg/modules/libfb.so|755|0|0|regular file
+lib/xorg/modules/libfbdevhw.so|755|0|0|regular file
+lib/xorg/modules/libglamoregl.so|755|0|0|regular file
+lib/xorg/modules/libint10.so|755|0|0|regular file
+lib/xorg/modules/libshadow.so|755|0|0|regular file
+lib/xorg/modules/libshadowfb.so|755|0|0|regular file
+lib/xorg/modules/libvbe.so|755|0|0|regular file
+lib/xorg/modules/libvgahw.so|755|0|0|regular file
+lib/xorg/modules/libwfb.so|755|0|0|regular file
+lib/xorg/modules|755|0|0|directory
+lib/xorg/protocol.txt|644|0|0|regular file
+lib/xorg|755|0|0|directory
+lib|755|0|0|directory
+share/X11/xorg.conf.d/10-quirks.conf|644|0|0|regular file
+share/X11/xorg.conf.d|755|0|0|directory
+share/X11|755|0|0|directory
+share/aclocal/xorg-server.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/man/man1/Xephyr.1.gz|644|0|0|regular file
+share/man/man1/Xnest.1.gz|644|0|0|regular file
+share/man/man1/Xorg.1.gz|644|0|0|regular file
+share/man/man1/Xorg.wrap.1.gz|644|0|0|regular file
+share/man/man1/Xserver.1.gz|644|0|0|regular file
+share/man/man1/Xvfb.1.gz|644|0|0|regular file
+share/man/man1/cvt.1.gz|644|0|0|regular file
+share/man/man1/gtf.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man4/exa.4.gz|644|0|0|regular file
+share/man/man4/fbdevhw.4.gz|644|0|0|regular file
+share/man/man4/modesetting.4.gz|644|0|0|regular file
+share/man/man4|755|0|0|directory
+share/man/man5/Xwrapper.config.5.gz|644|0|0|regular file
+share/man/man5/xorg.conf.5.gz|644|0|0|regular file
+share/man/man5/xorg.conf.d.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+var/lib/xkb/README.compiled|644|0|0|regular file
+var/lib/xkb|755|0|0|directory
+var/lib|755|0|0|directory
+var/log|755|0|0|directory
+var|755|0|0|directory

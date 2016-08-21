@@ -1,0 +1,12 @@
+--- pigz-2.3.3/pigz.c~	2015-03-17 23:33:11.000000000 -0400
++++ pigz-2.3.3/pigz.c	2015-03-17 23:33:53.698282005 -0400
+@@ -3557,6 +3557,9 @@
+     if (g.decode) {
+         in_init();
+         method = get_header(1);
++        if (method == -1) {
++            throw(1, "EOF on input", g.inf);
++        }
+         if (method != 8 && method != 257 &&
+                 /* gzip -cdf acts like cat on uncompressed input */
+                 !(method == -2 && g.force && g.pipeout && g.decode != 2 &&

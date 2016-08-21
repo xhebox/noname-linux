@@ -1,0 +1,8 @@
+lib/libmpfr.so.4|777|0|0|symbolic link
+lib/libmpfr.so|777|0|0|symbolic link
+include/mpfr.h|644|0|0|regular file
+include/mpf2mpfr.h|644|0|0|regular file
+lib/libmpfr.so.4.1.5|755|0|0|regular file
+share|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory

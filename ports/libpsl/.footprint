@@ -1,0 +1,17 @@
+bin/psl|755|0|0|regular file
+bin|755|0|0|directory
+include/libpsl.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libpsl.so.5.1.1|755|0|0|regular file
+lib/libpsl.so.5|777|0|0|symbolic link
+lib/libpsl.so|777|0|0|symbolic link
+lib/pkgconfig/libpsl.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/psl-make-dafsa.1.gz|644|0|0|regular file
+share/man/man1/psl.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/libpsl.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

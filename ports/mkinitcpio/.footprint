@@ -1,0 +1,75 @@
+bin/lsinitcpio|755|0|0|regular file
+bin/mkinitcpio|755|0|0|regular file
+bin|755|0|0|directory
+etc/initcpio/hooks|755|0|0|directory
+etc/initcpio/install|755|0|0|directory
+etc/initcpio|755|0|0|directory
+etc/mkinitcpio.conf|644|0|0|regular file
+etc/mkinitcpio.d|755|0|0|directory
+etc|755|0|0|directory
+lib/initcpio/busybox|755|0|0|regular file
+lib/initcpio/functions|644|0|0|regular file
+lib/initcpio/hooks/consolefont|664|0|0|regular file
+lib/initcpio/hooks/keymap|664|0|0|regular file
+lib/initcpio/hooks/memdisk|664|0|0|regular file
+lib/initcpio/hooks/resume|664|0|0|regular file
+lib/initcpio/hooks/shutdown|664|0|0|regular file
+lib/initcpio/hooks/sleep|664|0|0|regular file
+lib/initcpio/hooks/udev|644|0|0|regular file
+lib/initcpio/hooks/usr|664|0|0|regular file
+lib/initcpio/hooks|755|0|0|directory
+lib/initcpio/init_functions|644|0|0|regular file
+lib/initcpio/init|755|0|0|regular file
+lib/initcpio/install/autodetect|664|0|0|regular file
+lib/initcpio/install/base|664|0|0|regular file
+lib/initcpio/install/block|664|0|0|regular file
+lib/initcpio/install/consolefont|664|0|0|regular file
+lib/initcpio/install/filesystems|664|0|0|regular file
+lib/initcpio/install/fsck|664|0|0|regular file
+lib/initcpio/install/fw|777|0|0|symbolic link
+lib/initcpio/install/hostdata|664|0|0|regular file
+lib/initcpio/install/keyboard|664|0|0|regular file
+lib/initcpio/install/keymap|664|0|0|regular file
+lib/initcpio/install/memdisk|664|0|0|regular file
+lib/initcpio/install/mmc|777|0|0|symbolic link
+lib/initcpio/install/modconf|664|0|0|regular file
+lib/initcpio/install/pata|777|0|0|symbolic link
+lib/initcpio/install/resume|664|0|0|regular file
+lib/initcpio/install/sata|777|0|0|symbolic link
+lib/initcpio/install/scsi|777|0|0|symbolic link
+lib/initcpio/install/sd-shutdown|664|0|0|regular file
+lib/initcpio/install/sd-vconsole|664|0|0|regular file
+lib/initcpio/install/shutdown|664|0|0|regular file
+lib/initcpio/install/sleep|664|0|0|regular file
+lib/initcpio/install/strip|664|0|0|regular file
+lib/initcpio/install/udev|644|0|0|regular file
+lib/initcpio/install/usbinput|777|0|0|symbolic link
+lib/initcpio/install/usb|777|0|0|symbolic link
+lib/initcpio/install/usr|664|0|0|regular file
+lib/initcpio/install/virtio|777|0|0|symbolic link
+lib/initcpio/install|755|0|0|directory
+lib/initcpio/shutdown|755|0|0|regular file
+lib/initcpio/udev/01-memdisk.rules|644|0|0|regular file
+lib/initcpio/udev|755|0|0|directory
+lib/initcpio|755|0|0|directory
+lib/kernel/install.d/50-mkinitcpio.install|755|0|0|regular file
+lib/kernel/install.d|755|0|0|directory
+lib/kernel|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/lsinitcpio|777|0|0|symbolic link
+share/bash-completion/completions/mkinitcpio|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/man/man1/lsinitcpio.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/mkinitcpio.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/mkinitcpio.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share/mkinitcpio/example.preset|644|0|0|regular file
+share/mkinitcpio|755|0|0|directory
+share/zsh/site-functions/_mkinitcpio|644|0|0|regular file
+share/zsh/site-functions|755|0|0|directory
+share/zsh|755|0|0|directory
+share|755|0|0|directory

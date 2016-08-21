@@ -1,0 +1,13 @@
+include/fortify/fortify-headers.h|644|0|0|regular file
+include/fortify/poll.h|644|0|0|regular file
+include/fortify/stdio.h|644|0|0|regular file
+include/fortify/stdlib.h|644|0|0|regular file
+include/fortify/string.h|644|0|0|regular file
+include/fortify/strings.h|644|0|0|regular file
+include/fortify/sys/select.h|644|0|0|regular file
+include/fortify/sys/socket.h|644|0|0|regular file
+include/fortify/sys|755|0|0|directory
+include/fortify/unistd.h|644|0|0|regular file
+include/fortify/wchar.h|644|0|0|regular file
+include/fortify|755|0|0|directory
+include|755|0|0|directory

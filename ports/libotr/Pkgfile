@@ -1,0 +1,12 @@
+name=libotr
+version=4.1.1
+deps="libgcrypt"
+desc="C library that implements the OTR protocol"
+source="https://otr.cypherpunks.ca/$name-$version.tar.gz"
+
+build() {
+  cd $name-$version
+  ./configure --prefix=
+  make || die
+  make DESTDIR="$pkgdir" install || die
+}

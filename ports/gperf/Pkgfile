@@ -1,0 +1,11 @@
+name=gperf
+version=3.1
+deps=musl
+desc="Perfect hashf unction generator"
+source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

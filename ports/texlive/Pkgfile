@@ -1,0 +1,97 @@
+name=texlive
+version=20160523b
+deps="cairo pixman graphite2 t1lib gd poppler libsigsegv libpng libjpeg-turbo harfbuzz icu harfbuzz libgmp libmpfr potrace perl clisp ffcall zlib zziplib ruby"
+source="http://mirrors.ustc.edu.cn/CTAN/systems/texlive/Source/texlive-$version-source.tar.xz
+ftp://ftp.fsn.hu/pub/linux/distributions/frugalware/frugalware-2.1/source/xapps-extra/texlive/texlive-${version}-texmf.tar.xz
+09-texlive-fonts.conf
+texmf.cnf
+texmfcnf.lua
+"
+_luatex="dvilualatex dviluatex lualollipop"
+_pdftex="amstex cslatex csplain eplain etex jadetex latex lollipop mex
+	mllatex mltex pdfetex pdfcslatex pdfcsplain pdfjadetex pdflatex
+	pdfmex pdfxmltex texsis utf8mex xmltex"
+_xetex="xelatex xelollipop"
+
+build() {
+	cd texlive-${version%?}-source
+	mkdir -p build && cd build
+	../configure --prefix=/ -C \
+		--sysconfdir=/etc \
+		--datarootdir=/share \
+		--datadir=/share \
+		--mandir=/share/man \
+		--disable-native-texlive-build \
+		--with-banner-add="Noname Linux" \
+		--disable-multiplatform \
+		--disable-dialog \
+		--disable-psutils \
+		--disable-t1utils \
+		--disable-bibtexu \
+		--disable-xz \
+		--enable-shared \
+		--disable-static \
+		--with-system-zlib \
+		--with-system-pnglib \
+		--with-system-ncurses \
+		--with-system-t1lib \
+		--with-system-gd \
+		--with-system-poppler \
+		--with-system-xpdf \
+		--with-system-freetype2 \
+		--with-system-pixman \
+		--with-system-cairo \
+		--with-system-zziplib \
+		--with-system-harfbuzz \
+		--with-system-graphite \
+		--with-system-icu \
+		--with-system-gmp \
+		--with-system-mpfr \
+		--with-system-potrace \
+		--with-freetype2-libdir=/lib \
+		--with-freetype2-include=/include/freetype2 \
+		--with-xdvi-x-toolkit=xaw \
+		--disable-dump-share \
+		--disable-aleph \
+		--enable-luatex \
+		--with-clisp-runtime=default \
+		--enable-xindy --disable-xindy-rules --disable-xindy-docs
+		#--with-system-libpaper \
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	local texcmd; for texcmd in $_pdftex; do
+		ln -s pdftex "$pkgdir"/bin/$texcmd || die
+	done
+	ln -s eptex "$pkgdir"/bin/platex || die
+	ln -s euptex "$pkgdir"/bin/uplatex || die
+	local texcmd; for texcmd in $_xetex; do
+		ln -s xetex "$pkgdir"/bin/$texcmd || die
+	done
+	local texcmd; for texcmd in $_luatex; do
+		ln -s luatex "$pkgdir"/bin/$texcmd || die
+	done
+
+	cp -rf ../../texlive-${version%?}-texmf/* "$pkgdir"/share/
+
+	mkdir -pv "$pkgdir"/share/tlpkg/TeXLive/
+	cp -rf ../texk/tests/TeXLive/* \
+		"$pkgdir"/share/tlpkg/TeXLive || die
+
+	install -d -m755 "$pkgdir"/etc/fonts/conf.avail
+	install -m644 "$srcdir"/09-texlive-fonts.conf "$pkgdir"/etc/fonts/conf.avail/
+	rm -f "$pkgdir"/share/texmf-dist/web2c/texmf.cnf
+	mkdir -p "$pkgdir"/etc/texmf/web2c
+	install -m644 "$srcdir"/texmf.cnf "$pkgdir"/etc/texmf/web2c/texmf.cnf
+	ln -sf /etc/texmf/web2c/texmf.cnf "$pkgdir"/share/texmf-dist/web2c/texmf.cnf
+	install -m644 "$srcdir"/texmfcnf.lua "$pkgdir"/share/texmf-dist/web2c/texmfcnf.lua
+}
+
+post() {
+	if [ "$UPD" -eq 1 ]; then
+		pchroot "$ROOT" /bin/mktexlsr &&
+		pchroot "$ROOT" /bin/fmtutil-sys --all &&
+		pchroot "$ROOT" /bin/mtxrun --generate /share/texmf-dist
+	fi
+}

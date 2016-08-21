@@ -1,0 +1,36 @@
+name=boost
+version=1.63.0
+ver=`echo 1.63.0 | sed 's/\./_/g'`
+deps="icu python bzip2"
+desc="Free peer-reviewed portable C++ source libraries."
+source="http://downloads.sourceforge.net/project/$name/$name/$version/${name}_$ver.tar.bz2
+poll.patch
+libressl.patch"
+
+build() {
+	cd ${name}_$ver
+	patch -p0 < ../libressl.patch || die
+	patch -p0 < ../poll.patch || die
+
+	local JOBS=`echo $MAKEFLAGS | awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}'`
+	test -n "$JOBS" && export JOBS="-j $JOBS"
+
+	# This command fixes a header to overcome a problem with Qt's moc command.
+	# It is necessary for building some KDE packages
+	sed \
+		-e '1 i#ifndef Q_MOC_RUN' \
+		-e '$ a#endif' \
+		-i boost/type_traits/detail/has_binary_operator.hpp
+
+	./bootstrap.sh --prefix=$pkgdir --with-toolset=gcc --with-icu --with-python=/bin/python
+	./b2 stage threading=multi link=shared debug-symbols=off  variant=release \
+	runtime-link=shared \
+	toolset=gcc \
+	python=2.7 \
+	cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
+	cxxflags="${CPPFLAGS} ${CXXFLAGS} -std=c++14 -fPIC -O3" \
+	linkflags="${LDFLAGS}" \
+	--layout=system \
+	$JOBS \
+	install
+}

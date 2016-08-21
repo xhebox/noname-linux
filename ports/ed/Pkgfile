@@ -1,0 +1,15 @@
+name=ed
+version=1.14.2
+deps="musl"
+desc="A POSIX-compliant line-oriented text editor"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.lz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --sbindir=/bin \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install || die
+}

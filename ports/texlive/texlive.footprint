@@ -1,0 +1,1097 @@
+bin/a2ping|777|0|0|symbolic link
+bin/a5toa4|777|0|0|symbolic link
+bin/adhocfilelist|777|0|0|symbolic link
+bin/afm2afm|777|0|0|symbolic link
+bin/afm2pl|755|0|0|regular file
+bin/afm2tfm|755|0|0|regular file
+bin/allcm|777|0|0|symbolic link
+bin/allec|777|0|0|symbolic link
+bin/allneeded|777|0|0|symbolic link
+bin/amstex|777|0|0|symbolic link
+bin/arara|777|0|0|symbolic link
+bin/arlatex|777|0|0|symbolic link
+bin/authorindex|777|0|0|symbolic link
+bin/autoinst|777|0|0|symbolic link
+bin/autosp|755|0|0|regular file
+bin/bbox|755|0|0|regular file
+bin/bg5+latex|777|0|0|symbolic link
+bin/bg5+pdflatex|777|0|0|symbolic link
+bin/bg5conv|755|0|0|regular file
+bin/bg5latex|755|0|0|regular file
+bin/bg5pdflatex|755|0|0|regular file
+bin/bibdoiadd|777|0|0|symbolic link
+bin/bibexport|777|0|0|symbolic link
+bin/bibtex8|755|0|0|regular file
+bin/bibtex|755|0|0|regular file
+bin/bibzbladd|777|0|0|symbolic link
+bin/bundledoc|777|0|0|symbolic link
+bin/cachepic|777|0|0|symbolic link
+bin/cef5conv|755|0|0|regular file
+bin/cef5latex|755|0|0|regular file
+bin/cef5pdflatex|755|0|0|regular file
+bin/cefconv|755|0|0|regular file
+bin/ceflatex|755|0|0|regular file
+bin/cefpdflatex|755|0|0|regular file
+bin/cefsconv|755|0|0|regular file
+bin/cefslatex|755|0|0|regular file
+bin/cefspdflatex|755|0|0|regular file
+bin/cfftot1|755|0|0|regular file
+bin/checkcites|777|0|0|symbolic link
+bin/checklistings|777|0|0|symbolic link
+bin/chktex|755|0|0|regular file
+bin/chkweb|777|0|0|symbolic link
+bin/cjk-gs-integrate|777|0|0|symbolic link
+bin/contextjit|777|0|0|symbolic link
+bin/context|777|0|0|symbolic link
+bin/convbkmk|777|0|0|symbolic link
+bin/cslatex|777|0|0|symbolic link
+bin/csplain|777|0|0|symbolic link
+bin/ctangle|755|0|0|regular file
+bin/ctanify|777|0|0|symbolic link
+bin/ctanupload|777|0|0|symbolic link
+bin/ctie|755|0|0|regular file
+bin/cweave|755|0|0|regular file
+bin/de-macro|777|0|0|symbolic link
+bin/depythontex|777|0|0|symbolic link
+bin/detex|755|0|0|regular file
+bin/devnag|755|0|0|regular file
+bin/deweb|777|0|0|symbolic link
+bin/diadia|777|0|0|symbolic link
+bin/disdvi|755|0|0|regular file
+bin/dosepsbin|777|0|0|symbolic link
+bin/dt2dv|755|0|0|regular file
+bin/dtxgen|777|0|0|symbolic link
+bin/dv2dt|755|0|0|regular file
+bin/dvi2fax|777|0|0|symbolic link
+bin/dvi2tty|755|0|0|regular file
+bin/dviasm|777|0|0|symbolic link
+bin/dvibook|755|0|0|regular file
+bin/dviconcat|755|0|0|regular file
+bin/dvicopy|755|0|0|regular file
+bin/dvidvi|755|0|0|regular file
+bin/dvigif|777|0|0|symbolic link
+bin/dvihp|755|0|0|regular file
+bin/dvilj2p|755|0|0|regular file
+bin/dvilj4l|755|0|0|regular file
+bin/dvilj4|755|0|0|regular file
+bin/dvilj6|777|0|0|symbolic link
+bin/dvilj|755|0|0|regular file
+bin/dvipdfmx|777|0|0|symbolic link
+bin/dvipdfm|777|0|0|symbolic link
+bin/dvipdft|755|0|0|regular file
+bin/dvipng|755|0|0|regular file
+bin/dvipos|755|0|0|regular file
+bin/dvips|755|0|0|regular file
+bin/dvired|777|0|0|symbolic link
+bin/dviselect|755|0|0|regular file
+bin/dvisvgm|755|0|0|regular file
+bin/dvitodvi|755|0|0|regular file
+bin/dvitomp|777|0|0|symbolic link
+bin/dvitype|755|0|0|regular file
+bin/e2pall|777|0|0|symbolic link
+bin/ebb|777|0|0|symbolic link
+bin/ebong|777|0|0|symbolic link
+bin/eplain|777|0|0|symbolic link
+bin/epspdftk|777|0|0|symbolic link
+bin/epspdf|777|0|0|symbolic link
+bin/epstopdf|777|0|0|symbolic link
+bin/eptex|755|0|0|regular file
+bin/etex|777|0|0|symbolic link
+bin/euptex|755|0|0|regular file
+bin/exceltex|777|0|0|symbolic link
+bin/extconv|755|0|0|regular file
+bin/extractbb|777|0|0|symbolic link
+bin/fig4latex|777|0|0|symbolic link
+bin/findhyph|777|0|0|symbolic link
+bin/fmtutil-sys|777|0|0|symbolic link
+bin/fmtutil|777|0|0|symbolic link
+bin/fontinst|777|0|0|symbolic link
+bin/fragmaster|777|0|0|symbolic link
+bin/gbklatex|755|0|0|regular file
+bin/gbkpdflatex|755|0|0|regular file
+bin/getmapdl|777|0|0|symbolic link
+bin/gftodvi|755|0|0|regular file
+bin/gftopk|755|0|0|regular file
+bin/gftype|755|0|0|regular file
+bin/gregorio|755|0|0|regular file
+bin/gsftopk|755|0|0|regular file
+bin/hbf2gf|755|0|0|regular file
+bin/htcontext|777|0|0|symbolic link
+bin/htlatex|777|0|0|symbolic link
+bin/htmex|777|0|0|symbolic link
+bin/httexi|777|0|0|symbolic link
+bin/httex|777|0|0|symbolic link
+bin/htxelatex|777|0|0|symbolic link
+bin/htxetex|777|0|0|symbolic link
+bin/ht|777|0|0|symbolic link
+bin/inimf|777|0|0|symbolic link
+bin/initex|777|0|0|symbolic link
+bin/installfont-tl|777|0|0|symbolic link
+bin/jadetex|777|0|0|symbolic link
+bin/jamo-normalize|777|0|0|symbolic link
+bin/kanji-config-updmap-sys|777|0|0|symbolic link
+bin/kanji-config-updmap|777|0|0|symbolic link
+bin/kanji-fontmap-creator|777|0|0|symbolic link
+bin/komkindex|777|0|0|symbolic link
+bin/kpseaccess|755|0|0|regular file
+bin/kpsepath|777|0|0|symbolic link
+bin/kpsereadlink|755|0|0|regular file
+bin/kpsestat|755|0|0|regular file
+bin/kpsetool|777|0|0|symbolic link
+bin/kpsewhere|777|0|0|symbolic link
+bin/kpsewhich|755|0|0|regular file
+bin/kpsexpand|777|0|0|symbolic link
+bin/lacheck|755|0|0|regular file
+bin/latex-git-log|777|0|0|symbolic link
+bin/latex2man|777|0|0|symbolic link
+bin/latexdiff-vc|777|0|0|symbolic link
+bin/latexdiff|777|0|0|symbolic link
+bin/latexfileversion|777|0|0|symbolic link
+bin/latexindent|777|0|0|symbolic link
+bin/latexmk|777|0|0|symbolic link
+bin/latexpand|777|0|0|symbolic link
+bin/latexrevise|777|0|0|symbolic link
+bin/latex|777|0|0|symbolic link
+bin/lily-glyph-commands|777|0|0|symbolic link
+bin/lily-image-commands|777|0|0|symbolic link
+bin/lily-rebuild-pdfs|777|0|0|symbolic link
+bin/listbib|777|0|0|symbolic link
+bin/listings-ext.sh|777|0|0|symbolic link
+bin/lollipop|777|0|0|symbolic link
+bin/ltx2crossrefxml|777|0|0|symbolic link
+bin/ltxfileinfo|777|0|0|symbolic link
+bin/ltximg|777|0|0|symbolic link
+bin/lua2dox_filter|777|0|0|symbolic link
+bin/luajittex|755|0|0|regular file
+bin/luaotfload-tool|777|0|0|symbolic link
+bin/luatex|755|0|0|regular file
+bin/luatools|777|0|0|symbolic link
+bin/m-tx|777|0|0|symbolic link
+bin/mag|755|0|0|regular file
+bin/make4ht|777|0|0|symbolic link
+bin/makedtx|777|0|0|symbolic link
+bin/makeglossaries-lite|777|0|0|symbolic link
+bin/makeglossaries|777|0|0|symbolic link
+bin/makeindex|755|0|0|regular file
+bin/makejvf|755|0|0|regular file
+bin/match_parens|777|0|0|symbolic link
+bin/mathspic|777|0|0|symbolic link
+bin/mendex|755|0|0|regular file
+bin/mex|777|0|0|symbolic link
+bin/mf-nowin|755|0|0|regular file
+bin/mf2pt1|777|0|0|symbolic link
+bin/mflua-nowin|777|0|0|symbolic link
+bin/mfluajit-nowin|777|0|0|symbolic link
+bin/mfluajit|755|0|0|regular file
+bin/mflua|755|0|0|regular file
+bin/mfplain|777|0|0|symbolic link
+bin/mft|755|0|0|regular file
+bin/mf|755|0|0|regular file
+bin/mk4ht|777|0|0|symbolic link
+bin/mkgrkindex|777|0|0|symbolic link
+bin/mkindex|755|0|0|regular file
+bin/mkjobtexmf|777|0|0|symbolic link
+bin/mkocp|755|0|0|regular file
+bin/mkofm|755|0|0|regular file
+bin/mkpic|777|0|0|symbolic link
+bin/mkt1font|777|0|0|symbolic link
+bin/mktexfmt|777|0|0|symbolic link
+bin/mktexlsr|755|0|0|regular file
+bin/mktexmf|755|0|0|regular file
+bin/mktexpk|755|0|0|regular file
+bin/mktextfm|755|0|0|regular file
+bin/mllatex|777|0|0|symbolic link
+bin/mltex|777|0|0|symbolic link
+bin/mmafm|755|0|0|regular file
+bin/mmpfb|755|0|0|regular file
+bin/mpost|755|0|0|regular file
+bin/mptopdf|777|0|0|symbolic link
+bin/msxlint|755|0|0|regular file
+bin/mtxrunjit|777|0|0|symbolic link
+bin/mtxrun|777|0|0|symbolic link
+bin/multibibliography|777|0|0|symbolic link
+bin/musixflx|777|0|0|symbolic link
+bin/musixtex|777|0|0|symbolic link
+bin/odvicopy|755|0|0|regular file
+bin/odvitype|755|0|0|regular file
+bin/ofm2opl|777|0|0|symbolic link
+bin/omfonts|755|0|0|regular file
+bin/opl2ofm|777|0|0|symbolic link
+bin/ot2kpx|777|0|0|symbolic link
+bin/otangle|755|0|0|regular file
+bin/otfinfo|755|0|0|regular file
+bin/otftotfm|755|0|0|regular file
+bin/otp2ocp|755|0|0|regular file
+bin/outocp|755|0|0|regular file
+bin/ovf2ovp|777|0|0|symbolic link
+bin/ovp2ovf|777|0|0|symbolic link
+bin/patgen|755|0|0|regular file
+bin/pbibtex|755|0|0|regular file
+bin/pdf180|777|0|0|symbolic link
+bin/pdf270|777|0|0|symbolic link
+bin/pdf90|777|0|0|symbolic link
+bin/pdfannotextractor|777|0|0|symbolic link
+bin/pdfatfi|777|0|0|symbolic link
+bin/pdfbook2|777|0|0|symbolic link
+bin/pdfbook|777|0|0|symbolic link
+bin/pdfclose|755|0|0|regular file
+bin/pdfcrop|777|0|0|symbolic link
+bin/pdfcslatex|777|0|0|symbolic link
+bin/pdfcsplain|777|0|0|symbolic link
+bin/pdfetex|777|0|0|symbolic link
+bin/pdfflip|777|0|0|symbolic link
+bin/pdfjadetex|777|0|0|symbolic link
+bin/pdfjam-pocketmod|777|0|0|symbolic link
+bin/pdfjam-slides3up|777|0|0|symbolic link
+bin/pdfjam-slides6up|777|0|0|symbolic link
+bin/pdfjam|777|0|0|symbolic link
+bin/pdfjoin|777|0|0|symbolic link
+bin/pdflatex|777|0|0|symbolic link
+bin/pdfmex|777|0|0|symbolic link
+bin/pdfnup|777|0|0|symbolic link
+bin/pdfopen|755|0|0|regular file
+bin/pdfpun|777|0|0|symbolic link
+bin/pdftex|755|0|0|regular file
+bin/pdftosrc|755|0|0|regular file
+bin/pdfxmltex|777|0|0|symbolic link
+bin/pdfxup|777|0|0|symbolic link
+bin/pdvitomp|777|0|0|symbolic link
+bin/pdvitype|755|0|0|regular file
+bin/pedigree|777|0|0|symbolic link
+bin/perltex|777|0|0|symbolic link
+bin/pfarrei|777|0|0|symbolic link
+bin/pfb2pfa|755|0|0|regular file
+bin/pk2bm|755|0|0|regular file
+bin/pkfix-helper|777|0|0|symbolic link
+bin/pkfix|777|0|0|symbolic link
+bin/pktogf|755|0|0|regular file
+bin/pktype|755|0|0|regular file
+bin/platex|777|0|0|symbolic link
+bin/pltotf|755|0|0|regular file
+bin/pmpost|755|0|0|regular file
+bin/pmx2pdf|777|0|0|symbolic link
+bin/pmxab|755|0|0|regular file
+bin/pmxchords|777|0|0|symbolic link
+bin/pn2pdf|777|0|0|symbolic link
+bin/pooltype|755|0|0|regular file
+bin/ppltotf|755|0|0|regular file
+bin/prepmx|755|0|0|regular file
+bin/ps2eps|777|0|0|symbolic link
+bin/ps2frag|777|0|0|symbolic link
+bin/ps2pk|755|0|0|regular file
+bin/ps4pdf|777|0|0|symbolic link
+bin/pslatex|777|0|0|symbolic link
+bin/pst2pdf|777|0|0|symbolic link
+bin/ptex2pdf|777|0|0|symbolic link
+bin/ptex|755|0|0|regular file
+bin/ptftopl|755|0|0|regular file
+bin/purifyeps|777|0|0|symbolic link
+bin/pygmentex|777|0|0|symbolic link
+bin/pythontex|777|0|0|symbolic link
+bin/repstopdf|777|0|0|symbolic link
+bin/rpdfcrop|777|0|0|symbolic link
+bin/rubibtex|777|0|0|symbolic link
+bin/rubikrotation|777|0|0|symbolic link
+bin/rumakeindex|777|0|0|symbolic link
+bin/rungs|777|0|0|symbolic link
+bin/scor2prt|755|0|0|regular file
+bin/simpdftex|777|0|0|symbolic link
+bin/sjisconv|755|0|0|regular file
+bin/sjislatex|755|0|0|regular file
+bin/sjispdflatex|755|0|0|regular file
+bin/splitindex|777|0|0|symbolic link
+bin/srcredact|777|0|0|symbolic link
+bin/sty2dtx|777|0|0|symbolic link
+bin/svn-multi|777|0|0|symbolic link
+bin/synctex|755|0|0|regular file
+bin/t1dotlessj|755|0|0|regular file
+bin/t1lint|755|0|0|regular file
+bin/t1rawafm|755|0|0|regular file
+bin/t1reencode|755|0|0|regular file
+bin/t1testpage|755|0|0|regular file
+bin/t4ht|755|0|0|regular file
+bin/tangle|755|0|0|regular file
+bin/teckit_compile|755|0|0|regular file
+bin/tex2xindy|755|0|0|regular file
+bin/tex4ebook|777|0|0|symbolic link
+bin/tex4ht|755|0|0|regular file
+bin/texconfig-dialog|777|0|0|symbolic link
+bin/texconfig-sys|777|0|0|symbolic link
+bin/texconfig|777|0|0|symbolic link
+bin/texcount|777|0|0|symbolic link
+bin/texdef|777|0|0|symbolic link
+bin/texdiff|777|0|0|symbolic link
+bin/texdirflatten|777|0|0|symbolic link
+bin/texdoctk|777|0|0|symbolic link
+bin/texdoc|777|0|0|symbolic link
+bin/texexec|777|0|0|symbolic link
+bin/texfot|777|0|0|symbolic link
+bin/texhash|777|0|0|symbolic link
+bin/texindy|777|0|0|symbolic link
+bin/texlinks|777|0|0|symbolic link
+bin/texliveonfly|777|0|0|symbolic link
+bin/texloganalyser|777|0|0|symbolic link
+bin/texluac|777|0|0|symbolic link
+bin/texluajitc|777|0|0|symbolic link
+bin/texluajit|777|0|0|symbolic link
+bin/texlua|777|0|0|symbolic link
+bin/texmfstart|777|0|0|symbolic link
+bin/texsis|777|0|0|symbolic link
+bin/tex|755|0|0|regular file
+bin/tftopl|755|0|0|regular file
+bin/thumbpdf|777|0|0|symbolic link
+bin/tie|755|0|0|regular file
+bin/tlmgr|777|0|0|symbolic link
+bin/tpic2pdftex|755|0|0|regular file
+bin/ttf2afm|755|0|0|regular file
+bin/ttf2kotexfont|777|0|0|symbolic link
+bin/ttf2pk|755|0|0|regular file
+bin/ttf2tfm|755|0|0|regular file
+bin/ttfdump|755|0|0|regular file
+bin/ttftotype42|755|0|0|regular file
+bin/typeoutfileinfo|777|0|0|symbolic link
+bin/ulqda|777|0|0|symbolic link
+bin/upbibtex|755|0|0|regular file
+bin/updmap-sys|777|0|0|symbolic link
+bin/updmap|777|0|0|symbolic link
+bin/updvitomp|777|0|0|symbolic link
+bin/updvitype|755|0|0|regular file
+bin/uplatex|777|0|0|symbolic link
+bin/upmendex|755|0|0|regular file
+bin/upmpost|755|0|0|regular file
+bin/uppltotf|755|0|0|regular file
+bin/uptex|755|0|0|regular file
+bin/uptftopl|755|0|0|regular file
+bin/urlbst|777|0|0|symbolic link
+bin/utf8mex|777|0|0|symbolic link
+bin/vftovp|755|0|0|regular file
+bin/vlna|755|0|0|regular file
+bin/vpe|777|0|0|symbolic link
+bin/vpl2ovp|777|0|0|symbolic link
+bin/vpl2vpl|777|0|0|symbolic link
+bin/vptovf|755|0|0|regular file
+bin/weave|755|0|0|regular file
+bin/wofm2opl|755|0|0|regular file
+bin/wopl2ofm|755|0|0|regular file
+bin/wovf2ovp|755|0|0|regular file
+bin/wovp2ovf|755|0|0|regular file
+bin/xdvi-xaw|755|0|0|regular file
+bin/xdvipdfmx|755|0|0|regular file
+bin/xdvi|755|0|0|regular file
+bin/xelatex|777|0|0|symbolic link
+bin/xelollipop|777|0|0|symbolic link
+bin/xetex|755|0|0|regular file
+bin/xindy.mem|644|0|0|regular file
+bin/xindy.run|755|0|0|regular file
+bin/xindy|777|0|0|symbolic link
+bin/xmltex|777|0|0|symbolic link
+bin/yplan|777|0|0|symbolic link
+bin|755|0|0|directory
+include/kpathsea/absolute.h|644|0|0|regular file
+include/kpathsea/c-ctype.h|644|0|0|regular file
+include/kpathsea/c-dir.h|644|0|0|regular file
+include/kpathsea/c-errno.h|644|0|0|regular file
+include/kpathsea/c-fopen.h|644|0|0|regular file
+include/kpathsea/c-limits.h|644|0|0|regular file
+include/kpathsea/c-memstr.h|644|0|0|regular file
+include/kpathsea/c-minmax.h|644|0|0|regular file
+include/kpathsea/c-namemx.h|644|0|0|regular file
+include/kpathsea/c-pathch.h|644|0|0|regular file
+include/kpathsea/c-pathmx.h|644|0|0|regular file
+include/kpathsea/c-proto.h|644|0|0|regular file
+include/kpathsea/c-stat.h|644|0|0|regular file
+include/kpathsea/c-std.h|644|0|0|regular file
+include/kpathsea/c-unistd.h|644|0|0|regular file
+include/kpathsea/cnf.h|644|0|0|regular file
+include/kpathsea/concatn.h|644|0|0|regular file
+include/kpathsea/config.h|644|0|0|regular file
+include/kpathsea/debug.h|644|0|0|regular file
+include/kpathsea/expand.h|644|0|0|regular file
+include/kpathsea/getopt.h|644|0|0|regular file
+include/kpathsea/hash.h|644|0|0|regular file
+include/kpathsea/knj.h|644|0|0|regular file
+include/kpathsea/kpathsea.h|644|0|0|regular file
+include/kpathsea/lib.h|644|0|0|regular file
+include/kpathsea/line.h|644|0|0|regular file
+include/kpathsea/magstep.h|644|0|0|regular file
+include/kpathsea/mingw32.h|644|0|0|regular file
+include/kpathsea/paths.h|644|0|0|regular file
+include/kpathsea/pathsearch.h|644|0|0|regular file
+include/kpathsea/proginit.h|644|0|0|regular file
+include/kpathsea/progname.h|644|0|0|regular file
+include/kpathsea/readable.h|644|0|0|regular file
+include/kpathsea/simpletypes.h|644|0|0|regular file
+include/kpathsea/str-list.h|644|0|0|regular file
+include/kpathsea/str-llist.h|644|0|0|regular file
+include/kpathsea/systypes.h|644|0|0|regular file
+include/kpathsea/tex-file.h|644|0|0|regular file
+include/kpathsea/tex-glyph.h|644|0|0|regular file
+include/kpathsea/tex-hush.h|644|0|0|regular file
+include/kpathsea/tex-make.h|644|0|0|regular file
+include/kpathsea/types.h|644|0|0|regular file
+include/kpathsea/variable.h|644|0|0|regular file
+include/kpathsea/version.h|644|0|0|regular file
+include/kpathsea/win32lib.h|644|0|0|regular file
+include/kpathsea|755|0|0|directory
+include/ptexenc/ptexenc.h|644|0|0|regular file
+include/ptexenc/unicode.h|644|0|0|regular file
+include/ptexenc|755|0|0|directory
+include/synctex/synctex_parser.h|644|0|0|regular file
+include/synctex/synctex_parser_utils.h|644|0|0|regular file
+include/synctex|755|0|0|directory
+include/texlua52/lauxlib.h|644|0|0|regular file
+include/texlua52/lua.hpp|644|0|0|regular file
+include/texlua52/lua.h|644|0|0|regular file
+include/texlua52/luaconf.h|644|0|0|regular file
+include/texlua52/lualib.h|644|0|0|regular file
+include/texlua52|755|0|0|directory
+include/texluajit/lauxlib.h|644|0|0|regular file
+include/texluajit/lua.hpp|644|0|0|regular file
+include/texluajit/lua.h|644|0|0|regular file
+include/texluajit/luaconf.h|644|0|0|regular file
+include/texluajit/luajit.h|644|0|0|regular file
+include/texluajit/lualib.h|644|0|0|regular file
+include/texluajit|755|0|0|directory
+include|755|0|0|directory
+lib/kpathsea/c-auto.h|644|0|0|regular file
+lib/kpathsea|755|0|0|directory
+lib/libkpathsea.so.6.2.2|755|0|0|regular file
+lib/libkpathsea.so.6|777|0|0|symbolic link
+lib/libkpathsea.so|777|0|0|symbolic link
+lib/libptexenc.so.1.3.4|755|0|0|regular file
+lib/libptexenc.so.1|777|0|0|symbolic link
+lib/libptexenc.so|777|0|0|symbolic link
+lib/libsynctex.so.1.18.0|755|0|0|regular file
+lib/libsynctex.so.1|777|0|0|symbolic link
+lib/libsynctex.so|777|0|0|symbolic link
+lib/libtexlua52.so.5.2.4|755|0|0|regular file
+lib/libtexlua52.so.5|777|0|0|symbolic link
+lib/libtexlua52.so|777|0|0|symbolic link
+lib/libtexluajit.so.2.1.0|755|0|0|regular file
+lib/libtexluajit.so.2|777|0|0|symbolic link
+lib/libtexluajit.so|777|0|0|symbolic link
+lib/pkgconfig/kpathsea.pc|644|0|0|regular file
+lib/pkgconfig/ptexenc.pc|644|0|0|regular file
+lib/pkgconfig/synctex.pc|644|0|0|regular file
+lib/pkgconfig/texlua52.pc|644|0|0|regular file
+lib/pkgconfig/texluajit.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/info/dvipng.info|644|0|0|regular file
+share/info/dvips.info|644|0|0|regular file
+share/info/kpathsea.info|644|0|0|regular file
+share/info/tlbuild.info|644|0|0|regular file
+share/info/web2c.info|644|0|0|regular file
+share/info|755|0|0|directory
+share/man/man1/afm2pl.1.gz|644|0|0|regular file
+share/man/man1/afm2tfm.1.gz|644|0|0|regular file
+share/man/man1/allcm.1.gz|644|0|0|regular file
+share/man/man1/allec.1.gz|644|0|0|regular file
+share/man/man1/allneeded.1.gz|644|0|0|regular file
+share/man/man1/amstex.1.gz|644|0|0|regular file
+share/man/man1/autosp.1.gz|644|0|0|regular file
+share/man/man1/bbox.1.gz|644|0|0|regular file
+share/man/man1/bg5conv.1.gz|644|0|0|regular file
+share/man/man1/bibtex.1.gz|644|0|0|regular file
+share/man/man1/cef5conv.1.gz|644|0|0|regular file
+share/man/man1/cefconv.1.gz|644|0|0|regular file
+share/man/man1/cefsconv.1.gz|644|0|0|regular file
+share/man/man1/cfftot1.1.gz|644|0|0|regular file
+share/man/man1/chktex.1.gz|644|0|0|regular file
+share/man/man1/chkweb.1.gz|644|0|0|regular file
+share/man/man1/ctangle.1.gz|644|0|0|regular file
+share/man/man1/ctie.1.gz|644|0|0|regular file
+share/man/man1/cweave.1.gz|644|0|0|regular file
+share/man/man1/cweb.1.gz|644|0|0|regular file
+share/man/man1/detex.1.gz|644|0|0|regular file
+share/man/man1/devnag.1.gz|644|0|0|regular file
+share/man/man1/deweb.1.gz|644|0|0|regular file
+share/man/man1/disdvi.1.gz|644|0|0|regular file
+share/man/man1/dt2dv.1.gz|644|0|0|regular file
+share/man/man1/dv2dt.1.gz|644|0|0|regular file
+share/man/man1/dvi2fax.1.gz|644|0|0|regular file
+share/man/man1/dvi2tty.1.gz|644|0|0|regular file
+share/man/man1/dvibook.1.gz|644|0|0|regular file
+share/man/man1/dviconcat.1.gz|644|0|0|regular file
+share/man/man1/dvicopy.1.gz|644|0|0|regular file
+share/man/man1/dvidvi.1.gz|644|0|0|regular file
+share/man/man1/dvigif.1.gz|644|0|0|regular file
+share/man/man1/dvihp.1.gz|644|0|0|regular file
+share/man/man1/dvilj.1.gz|644|0|0|regular file
+share/man/man1/dvilj2p.1.gz|644|0|0|regular file
+share/man/man1/dvilj4.1.gz|644|0|0|regular file
+share/man/man1/dvilj4l.1.gz|644|0|0|regular file
+share/man/man1/dvilj6.1.gz|644|0|0|regular file
+share/man/man1/dvipdfm.1.gz|644|0|0|regular file
+share/man/man1/dvipdfmx.1.gz|644|0|0|regular file
+share/man/man1/dvipdft.1.gz|644|0|0|regular file
+share/man/man1/dvipng.1.gz|644|0|0|regular file
+share/man/man1/dvipos.1.gz|644|0|0|regular file
+share/man/man1/dvips.1.gz|644|0|0|regular file
+share/man/man1/dvired.1.gz|644|0|0|regular file
+share/man/man1/dviselect.1.gz|644|0|0|regular file
+share/man/man1/dvisvgm.1.gz|644|0|0|regular file
+share/man/man1/dvitodvi.1.gz|644|0|0|regular file
+share/man/man1/dvitomp.1.gz|644|0|0|regular file
+share/man/man1/dvitype.1.gz|644|0|0|regular file
+share/man/man1/e2pall.1.gz|644|0|0|regular file
+share/man/man1/ebb.1.gz|644|0|0|regular file
+share/man/man1/extconv.1.gz|644|0|0|regular file
+share/man/man1/extractbb.1.gz|644|0|0|regular file
+share/man/man1/fmtutil-sys.1.gz|644|0|0|regular file
+share/man/man1/fmtutil.1.gz|644|0|0|regular file
+share/man/man1/fontinst.1.gz|644|0|0|regular file
+share/man/man1/gftodvi.1.gz|644|0|0|regular file
+share/man/man1/gftopk.1.gz|644|0|0|regular file
+share/man/man1/gftype.1.gz|644|0|0|regular file
+share/man/man1/gsftopk.1.gz|644|0|0|regular file
+share/man/man1/hbf2gf.1.gz|644|0|0|regular file
+share/man/man1/inimf.1.gz|644|0|0|regular file
+share/man/man1/initex.1.gz|644|0|0|regular file
+share/man/man1/kpseaccess.1.gz|644|0|0|regular file
+share/man/man1/kpsepath.1.gz|644|0|0|regular file
+share/man/man1/kpsereadlink.1.gz|644|0|0|regular file
+share/man/man1/kpsestat.1.gz|644|0|0|regular file
+share/man/man1/kpsetool.1.gz|644|0|0|regular file
+share/man/man1/kpsewhere.1.gz|644|0|0|regular file
+share/man/man1/kpsewhich.1.gz|644|0|0|regular file
+share/man/man1/kpsexpand.1.gz|644|0|0|regular file
+share/man/man1/lacheck.1.gz|644|0|0|regular file
+share/man/man1/latex.1.gz|644|0|0|regular file
+share/man/man1/luatex.1.gz|644|0|0|regular file
+share/man/man1/mag.1.gz|644|0|0|regular file
+share/man/man1/makeindex.1.gz|644|0|0|regular file
+share/man/man1/mendex.1.gz|644|0|0|regular file
+share/man/man1/mf-nowin.1.gz|644|0|0|regular file
+share/man/man1/mf.1.gz|644|0|0|regular file
+share/man/man1/mft.1.gz|644|0|0|regular file
+share/man/man1/mkindex.1.gz|644|0|0|regular file
+share/man/man1/mkocp.1.gz|644|0|0|regular file
+share/man/man1/mkofm.1.gz|644|0|0|regular file
+share/man/man1/mktexfmt.1.gz|644|0|0|regular file
+share/man/man1/mktexlsr.1.gz|644|0|0|regular file
+share/man/man1/mktexmf.1.gz|644|0|0|regular file
+share/man/man1/mktexpk.1.gz|644|0|0|regular file
+share/man/man1/mktextfm.1.gz|644|0|0|regular file
+share/man/man1/mmafm.1.gz|644|0|0|regular file
+share/man/man1/mmpfb.1.gz|644|0|0|regular file
+share/man/man1/mpost.1.gz|644|0|0|regular file
+share/man/man1/msxlint.1.gz|644|0|0|regular file
+share/man/man1/odvicopy.1.gz|644|0|0|regular file
+share/man/man1/odvitype.1.gz|644|0|0|regular file
+share/man/man1/ofm2opl.1.gz|644|0|0|regular file
+share/man/man1/opl2ofm.1.gz|644|0|0|regular file
+share/man/man1/otangle.1.gz|644|0|0|regular file
+share/man/man1/otfinfo.1.gz|644|0|0|regular file
+share/man/man1/otftotfm.1.gz|644|0|0|regular file
+share/man/man1/otp2ocp.1.gz|644|0|0|regular file
+share/man/man1/outocp.1.gz|644|0|0|regular file
+share/man/man1/ovf2ovp.1.gz|644|0|0|regular file
+share/man/man1/ovp2ovf.1.gz|644|0|0|regular file
+share/man/man1/patgen.1.gz|644|0|0|regular file
+share/man/man1/pdfclose.1.gz|644|0|0|regular file
+share/man/man1/pdfetex.1.gz|644|0|0|regular file
+share/man/man1/pdflatex.1.gz|644|0|0|regular file
+share/man/man1/pdfopen.1.gz|644|0|0|regular file
+share/man/man1/pdftex.1.gz|644|0|0|regular file
+share/man/man1/pdftosrc.1.gz|644|0|0|regular file
+share/man/man1/pfb2pfa.1.gz|644|0|0|regular file
+share/man/man1/pk2bm.1.gz|644|0|0|regular file
+share/man/man1/pktogf.1.gz|644|0|0|regular file
+share/man/man1/pktype.1.gz|644|0|0|regular file
+share/man/man1/pltotf.1.gz|644|0|0|regular file
+share/man/man1/pmxab.1.gz|644|0|0|regular file
+share/man/man1/pooltype.1.gz|644|0|0|regular file
+share/man/man1/prepmx.1.gz|644|0|0|regular file
+share/man/man1/ps2eps.1.gz|644|0|0|regular file
+share/man/man1/ps2frag.1.gz|644|0|0|regular file
+share/man/man1/ps2pk.1.gz|644|0|0|regular file
+share/man/man1/pslatex.1.gz|644|0|0|regular file
+share/man/man1/rubibtex.1.gz|644|0|0|regular file
+share/man/man1/rumakeindex.1.gz|644|0|0|regular file
+share/man/man1/scor2prt.1.gz|644|0|0|regular file
+share/man/man1/sjisconv.1.gz|644|0|0|regular file
+share/man/man1/synctex.1.gz|644|0|0|regular file
+share/man/man1/t1dotlessj.1.gz|644|0|0|regular file
+share/man/man1/t1lint.1.gz|644|0|0|regular file
+share/man/man1/t1rawafm.1.gz|644|0|0|regular file
+share/man/man1/t1reencode.1.gz|644|0|0|regular file
+share/man/man1/t1testpage.1.gz|644|0|0|regular file
+share/man/man1/tangle.1.gz|644|0|0|regular file
+share/man/man1/tex.1.gz|644|0|0|regular file
+share/man/man1/tex2xindy.1.gz|644|0|0|regular file
+share/man/man1/texconfig-sys.1.gz|644|0|0|regular file
+share/man/man1/texconfig.1.gz|644|0|0|regular file
+share/man/man1/texdoctk.1.gz|644|0|0|regular file
+share/man/man1/texhash.1.gz|644|0|0|regular file
+share/man/man1/texindy.1.gz|644|0|0|regular file
+share/man/man1/texlinks.1.gz|644|0|0|regular file
+share/man/man1/texlua.1.gz|644|0|0|regular file
+share/man/man1/texluac.1.gz|644|0|0|regular file
+share/man/man1/tftopl.1.gz|644|0|0|regular file
+share/man/man1/tie.1.gz|644|0|0|regular file
+share/man/man1/tpic2pdftex.1.gz|644|0|0|regular file
+share/man/man1/ttf2afm.1.gz|644|0|0|regular file
+share/man/man1/ttf2pk.1.gz|644|0|0|regular file
+share/man/man1/ttf2tfm.1.gz|644|0|0|regular file
+share/man/man1/ttfdump.1.gz|644|0|0|regular file
+share/man/man1/ttftotype42.1.gz|644|0|0|regular file
+share/man/man1/updmap-sys.1.gz|644|0|0|regular file
+share/man/man1/updmap.1.gz|644|0|0|regular file
+share/man/man1/vftovp.1.gz|644|0|0|regular file
+share/man/man1/vlna.1.gz|644|0|0|regular file
+share/man/man1/vptovf.1.gz|644|0|0|regular file
+share/man/man1/weave.1.gz|644|0|0|regular file
+share/man/man1/xdvi.1.gz|644|0|0|regular file
+share/man/man1/xdvipdfmx.1.gz|644|0|0|regular file
+share/man/man1/xindy.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/fmtutil.cnf.5.gz|644|0|0|regular file
+share/man/man5/synctex.5.gz|644|0|0|regular file
+share/man/man5/updmap.cfg.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share/texmf-dist/bibtex/csf/base/88591lat.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/88591sca.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/ascii.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/cp437lat.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/cp850lat.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/cp850sca.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/cp866rus.csf|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base/csfile.txt|644|0|0|regular file
+share/texmf-dist/bibtex/csf/base|755|0|0|directory
+share/texmf-dist/bibtex/csf|755|0|0|directory
+share/texmf-dist/bibtex|755|0|0|directory
+share/texmf-dist/chktex/chktexrc|644|0|0|regular file
+share/texmf-dist/chktex|755|0|0|directory
+share/texmf-dist/doc/bibtex8/00readme.txt|644|0|0|regular file
+share/texmf-dist/doc/bibtex8/HISTORY|644|0|0|regular file
+share/texmf-dist/doc/bibtex8/csfile.txt|644|0|0|regular file
+share/texmf-dist/doc/bibtex8/file_id.diz|644|0|0|regular file
+share/texmf-dist/doc/bibtex8|755|0|0|directory
+share/texmf-dist/doc/chktex/ChkTeX.pdf|644|0|0|regular file
+share/texmf-dist/doc/chktex|755|0|0|directory
+share/texmf-dist/doc|755|0|0|directory
+share/texmf-dist/dvipdfmx/dvipdfmx.cfg|644|0|0|regular file
+share/texmf-dist/dvipdfmx|755|0|0|directory
+share/texmf-dist/dvips/base/color.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/crop.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/finclude.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/hps.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/special.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/tex.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/texc.pro|644|0|0|regular file
+share/texmf-dist/dvips/base/texps.pro|644|0|0|regular file
+share/texmf-dist/dvips/base|755|0|0|directory
+share/texmf-dist/dvips/config/config.xdvi|644|0|0|regular file
+share/texmf-dist/dvips/config|755|0|0|directory
+share/texmf-dist/dvips/gsftopk/render.ps|644|0|0|regular file
+share/texmf-dist/dvips/gsftopk|755|0|0|directory
+share/texmf-dist/dvips|755|0|0|directory
+share/texmf-dist/fonts/cmap/dvipdfmx/EUC-UCS2|644|0|0|regular file
+share/texmf-dist/fonts/cmap/dvipdfmx|755|0|0|directory
+share/texmf-dist/fonts/cmap|755|0|0|directory
+share/texmf-dist/fonts/enc/dvips/base/7t.enc|644|0|0|regular file
+share/texmf-dist/fonts/enc/dvips/base|755|0|0|directory
+share/texmf-dist/fonts/enc/dvips|755|0|0|directory
+share/texmf-dist/fonts/enc/ttf2pk/base/T1-WGL4.enc|644|0|0|regular file
+share/texmf-dist/fonts/enc/ttf2pk/base|755|0|0|directory
+share/texmf-dist/fonts/enc/ttf2pk|755|0|0|directory
+share/texmf-dist/fonts/enc|755|0|0|directory
+share/texmf-dist/fonts/map/dvipdfmx/cid-x.map|644|0|0|regular file
+share/texmf-dist/fonts/map/dvipdfmx|755|0|0|directory
+share/texmf-dist/fonts/map/glyphlist/glyphlist.txt|644|0|0|regular file
+share/texmf-dist/fonts/map/glyphlist/pdfglyphlist.txt|644|0|0|regular file
+share/texmf-dist/fonts/map/glyphlist/texglyphlist.txt|644|0|0|regular file
+share/texmf-dist/fonts/map/glyphlist|755|0|0|directory
+share/texmf-dist/fonts/map|755|0|0|directory
+share/texmf-dist/fonts/sfd/ttf2pk/Big5.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/EUC.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/HKSCS.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/KS-HLaTeX.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/SJIS.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UBg5plus.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UBig5.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UGB.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UGBK.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UJIS.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UKS-HLaTeX.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/UKS.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk/Unicode.sfd|644|0|0|regular file
+share/texmf-dist/fonts/sfd/ttf2pk|755|0|0|directory
+share/texmf-dist/fonts/sfd|755|0|0|directory
+share/texmf-dist/fonts|755|0|0|directory
+share/texmf-dist/hbf2gf/b5ka12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/b5kr12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/b5so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c1so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c2so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c3so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c4so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c5so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c6so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/c7so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/csso12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/gsfs14.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/j2so12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/jsso12.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf/ksso17.cfg|644|0|0|regular file
+share/texmf-dist/hbf2gf|755|0|0|directory
+share/texmf-dist/scripts/a2ping/a2ping.pl|755|0|0|regular file
+share/texmf-dist/scripts/a2ping|755|0|0|directory
+share/texmf-dist/scripts/accfonts/mkt1font|755|0|0|regular file
+share/texmf-dist/scripts/accfonts/vpl2ovp|755|0|0|regular file
+share/texmf-dist/scripts/accfonts/vpl2vpl|755|0|0|regular file
+share/texmf-dist/scripts/accfonts|755|0|0|directory
+share/texmf-dist/scripts/adhocfilelist/adhocfilelist.sh|755|0|0|regular file
+share/texmf-dist/scripts/adhocfilelist|755|0|0|directory
+share/texmf-dist/scripts/arara/arara.sh|755|0|0|regular file
+share/texmf-dist/scripts/arara|755|0|0|directory
+share/texmf-dist/scripts/authorindex/authorindex|755|0|0|regular file
+share/texmf-dist/scripts/authorindex|755|0|0|directory
+share/texmf-dist/scripts/bibexport/bibexport.sh|755|0|0|regular file
+share/texmf-dist/scripts/bibexport|755|0|0|directory
+share/texmf-dist/scripts/bundledoc/arlatex|755|0|0|regular file
+share/texmf-dist/scripts/bundledoc/bundledoc|755|0|0|regular file
+share/texmf-dist/scripts/bundledoc|755|0|0|directory
+share/texmf-dist/scripts/cachepic/cachepic.tlu|755|0|0|regular file
+share/texmf-dist/scripts/cachepic|755|0|0|directory
+share/texmf-dist/scripts/checkcites/checkcites.lua|755|0|0|regular file
+share/texmf-dist/scripts/checkcites|755|0|0|directory
+share/texmf-dist/scripts/checklistings/checklistings.sh|755|0|0|regular file
+share/texmf-dist/scripts/checklistings|755|0|0|directory
+share/texmf-dist/scripts/chktex/chkweb.sh|755|0|0|regular file
+share/texmf-dist/scripts/chktex/deweb.pl|755|0|0|regular file
+share/texmf-dist/scripts/chktex|755|0|0|directory
+share/texmf-dist/scripts/cjk-gs-integrate/cjk-gs-integrate.pl|755|0|0|regular file
+share/texmf-dist/scripts/cjk-gs-integrate|755|0|0|directory
+share/texmf-dist/scripts/context/perl/mptopdf.pl|755|0|0|regular file
+share/texmf-dist/scripts/context/perl|755|0|0|directory
+share/texmf-dist/scripts/context/stubs/unix/contextjit|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/context|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/luatools|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/mtxrunjit|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/mtxrun|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/texexec|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix/texmfstart|755|0|0|regular file
+share/texmf-dist/scripts/context/stubs/unix|755|0|0|directory
+share/texmf-dist/scripts/context/stubs|755|0|0|directory
+share/texmf-dist/scripts/context|755|0|0|directory
+share/texmf-dist/scripts/convbkmk/convbkmk.rb|755|0|0|regular file
+share/texmf-dist/scripts/convbkmk|755|0|0|directory
+share/texmf-dist/scripts/crossrefware/bibdoiadd.pl|755|0|0|regular file
+share/texmf-dist/scripts/crossrefware/bibzbladd.pl|755|0|0|regular file
+share/texmf-dist/scripts/crossrefware/ltx2crossrefxml.pl|755|0|0|regular file
+share/texmf-dist/scripts/crossrefware|755|0|0|directory
+share/texmf-dist/scripts/ctanify/ctanify|755|0|0|regular file
+share/texmf-dist/scripts/ctanify|755|0|0|directory
+share/texmf-dist/scripts/ctanupload/ctanupload.pl|755|0|0|regular file
+share/texmf-dist/scripts/ctanupload|755|0|0|directory
+share/texmf-dist/scripts/de-macro/de-macro|755|0|0|regular file
+share/texmf-dist/scripts/de-macro|755|0|0|directory
+share/texmf-dist/scripts/diadia/diadia.lua|755|0|0|regular file
+share/texmf-dist/scripts/diadia|755|0|0|directory
+share/texmf-dist/scripts/dosepsbin/dosepsbin.pl|755|0|0|regular file
+share/texmf-dist/scripts/dosepsbin|755|0|0|directory
+share/texmf-dist/scripts/dtxgen/dtxgen|755|0|0|regular file
+share/texmf-dist/scripts/dtxgen|755|0|0|directory
+share/texmf-dist/scripts/dviasm/dviasm.py|755|0|0|regular file
+share/texmf-dist/scripts/dviasm|755|0|0|directory
+share/texmf-dist/scripts/ebong/ebong.py|755|0|0|regular file
+share/texmf-dist/scripts/ebong|755|0|0|directory
+share/texmf-dist/scripts/epspdf/epspdf.tlu|755|0|0|regular file
+share/texmf-dist/scripts/epspdf/epspdftk.tcl|755|0|0|regular file
+share/texmf-dist/scripts/epspdf|755|0|0|directory
+share/texmf-dist/scripts/epstopdf/epstopdf.pl|755|0|0|regular file
+share/texmf-dist/scripts/epstopdf|755|0|0|directory
+share/texmf-dist/scripts/exceltex/exceltex|755|0|0|regular file
+share/texmf-dist/scripts/exceltex|755|0|0|directory
+share/texmf-dist/scripts/fig4latex/fig4latex|755|0|0|regular file
+share/texmf-dist/scripts/fig4latex|755|0|0|directory
+share/texmf-dist/scripts/findhyph/findhyph|755|0|0|regular file
+share/texmf-dist/scripts/findhyph|755|0|0|directory
+share/texmf-dist/scripts/fontools/afm2afm|755|0|0|regular file
+share/texmf-dist/scripts/fontools/autoinst|755|0|0|regular file
+share/texmf-dist/scripts/fontools/ot2kpx|755|0|0|regular file
+share/texmf-dist/scripts/fontools|755|0|0|directory
+share/texmf-dist/scripts/fragmaster/fragmaster.pl|755|0|0|regular file
+share/texmf-dist/scripts/fragmaster|755|0|0|directory
+share/texmf-dist/scripts/getmap/getmapdl.lua|755|0|0|regular file
+share/texmf-dist/scripts/getmap|755|0|0|directory
+share/texmf-dist/scripts/glossaries/makeglossaries-lite.lua|755|0|0|regular file
+share/texmf-dist/scripts/glossaries/makeglossaries|755|0|0|regular file
+share/texmf-dist/scripts/glossaries|755|0|0|directory
+share/texmf-dist/scripts/installfont/installfont-tl|755|0|0|regular file
+share/texmf-dist/scripts/installfont|755|0|0|directory
+share/texmf-dist/scripts/jfontmaps/kanji-config-updmap-sys.sh|755|0|0|regular file
+share/texmf-dist/scripts/jfontmaps/kanji-config-updmap.pl|755|0|0|regular file
+share/texmf-dist/scripts/jfontmaps/kanji-fontmap-creator.pl|755|0|0|regular file
+share/texmf-dist/scripts/jfontmaps|755|0|0|directory
+share/texmf-dist/scripts/kotex-utils/jamo-normalize.pl|755|0|0|regular file
+share/texmf-dist/scripts/kotex-utils/komkindex.pl|755|0|0|regular file
+share/texmf-dist/scripts/kotex-utils/ttf2kotexfont.pl|755|0|0|regular file
+share/texmf-dist/scripts/kotex-utils|755|0|0|directory
+share/texmf-dist/scripts/latex-git-log/latex-git-log|755|0|0|regular file
+share/texmf-dist/scripts/latex-git-log|755|0|0|directory
+share/texmf-dist/scripts/latex2man/latex2man|755|0|0|regular file
+share/texmf-dist/scripts/latex2man|755|0|0|directory
+share/texmf-dist/scripts/latexdiff/latexdiff-vc.pl|755|0|0|regular file
+share/texmf-dist/scripts/latexdiff/latexdiff.pl|755|0|0|regular file
+share/texmf-dist/scripts/latexdiff/latexrevise.pl|755|0|0|regular file
+share/texmf-dist/scripts/latexdiff|755|0|0|directory
+share/texmf-dist/scripts/latexfileversion/latexfileversion|755|0|0|regular file
+share/texmf-dist/scripts/latexfileversion|755|0|0|directory
+share/texmf-dist/scripts/latexindent/latexindent.pl|755|0|0|regular file
+share/texmf-dist/scripts/latexindent|755|0|0|directory
+share/texmf-dist/scripts/latexmk/latexmk.pl|755|0|0|regular file
+share/texmf-dist/scripts/latexmk|755|0|0|directory
+share/texmf-dist/scripts/latexpand/latexpand|755|0|0|regular file
+share/texmf-dist/scripts/latexpand|755|0|0|directory
+share/texmf-dist/scripts/lilyglyphs/lily-glyph-commands.py|755|0|0|regular file
+share/texmf-dist/scripts/lilyglyphs/lily-image-commands.py|755|0|0|regular file
+share/texmf-dist/scripts/lilyglyphs/lily-rebuild-pdfs.py|755|0|0|regular file
+share/texmf-dist/scripts/lilyglyphs|755|0|0|directory
+share/texmf-dist/scripts/listbib/listbib|755|0|0|regular file
+share/texmf-dist/scripts/listbib|755|0|0|directory
+share/texmf-dist/scripts/listings-ext/listings-ext.sh|755|0|0|regular file
+share/texmf-dist/scripts/listings-ext|755|0|0|directory
+share/texmf-dist/scripts/ltxfileinfo/ltxfileinfo|755|0|0|regular file
+share/texmf-dist/scripts/ltxfileinfo|755|0|0|directory
+share/texmf-dist/scripts/ltximg/ltximg.pl|755|0|0|regular file
+share/texmf-dist/scripts/ltximg|755|0|0|directory
+share/texmf-dist/scripts/lua2dox/lua2dox_filter|755|0|0|regular file
+share/texmf-dist/scripts/lua2dox|755|0|0|directory
+share/texmf-dist/scripts/luaotfload/luaotfload-tool.lua|755|0|0|regular file
+share/texmf-dist/scripts/luaotfload|755|0|0|directory
+share/texmf-dist/scripts/m-tx/m-tx.lua|755|0|0|regular file
+share/texmf-dist/scripts/m-tx|755|0|0|directory
+share/texmf-dist/scripts/make4ht/make4ht|755|0|0|regular file
+share/texmf-dist/scripts/make4ht|755|0|0|directory
+share/texmf-dist/scripts/makedtx/makedtx.pl|755|0|0|regular file
+share/texmf-dist/scripts/makedtx|755|0|0|directory
+share/texmf-dist/scripts/match_parens/match_parens|755|0|0|regular file
+share/texmf-dist/scripts/match_parens|755|0|0|directory
+share/texmf-dist/scripts/mathspic/mathspic.pl|755|0|0|regular file
+share/texmf-dist/scripts/mathspic|755|0|0|directory
+share/texmf-dist/scripts/mf2pt1/mf2pt1.pl|755|0|0|regular file
+share/texmf-dist/scripts/mf2pt1|755|0|0|directory
+share/texmf-dist/scripts/mkgrkindex/mkgrkindex|755|0|0|regular file
+share/texmf-dist/scripts/mkgrkindex|755|0|0|directory
+share/texmf-dist/scripts/mkjobtexmf/mkjobtexmf.pl|755|0|0|regular file
+share/texmf-dist/scripts/mkjobtexmf|755|0|0|directory
+share/texmf-dist/scripts/mkpic/mkpic|755|0|0|regular file
+share/texmf-dist/scripts/mkpic|755|0|0|directory
+share/texmf-dist/scripts/multibibliography/multibibliography.pl|755|0|0|regular file
+share/texmf-dist/scripts/multibibliography|755|0|0|directory
+share/texmf-dist/scripts/musixtex/musixflx.lua|755|0|0|regular file
+share/texmf-dist/scripts/musixtex/musixtex.lua|755|0|0|regular file
+share/texmf-dist/scripts/musixtex|755|0|0|directory
+share/texmf-dist/scripts/oberdiek/pdfatfi.pl|755|0|0|regular file
+share/texmf-dist/scripts/oberdiek|755|0|0|directory
+share/texmf-dist/scripts/pax/pdfannotextractor.pl|755|0|0|regular file
+share/texmf-dist/scripts/pax|755|0|0|directory
+share/texmf-dist/scripts/pdfbook2/pdfbook2|755|0|0|regular file
+share/texmf-dist/scripts/pdfbook2|755|0|0|directory
+share/texmf-dist/scripts/pdfcrop/pdfcrop.pl|755|0|0|regular file
+share/texmf-dist/scripts/pdfcrop|755|0|0|directory
+share/texmf-dist/scripts/pdfjam/pdf180|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdf270|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdf90|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfbook|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfflip|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfjam-pocketmod|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfjam-slides3up|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfjam-slides6up|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfjam|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfjoin|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfnup|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam/pdfpun|755|0|0|regular file
+share/texmf-dist/scripts/pdfjam|755|0|0|directory
+share/texmf-dist/scripts/pdfxup/pdfxup|755|0|0|regular file
+share/texmf-dist/scripts/pdfxup|755|0|0|directory
+share/texmf-dist/scripts/pedigree-perl/pedigree.pl|755|0|0|regular file
+share/texmf-dist/scripts/pedigree-perl|755|0|0|directory
+share/texmf-dist/scripts/perltex/perltex.pl|755|0|0|regular file
+share/texmf-dist/scripts/perltex|755|0|0|directory
+share/texmf-dist/scripts/petri-nets/pn2pdf|755|0|0|regular file
+share/texmf-dist/scripts/petri-nets|755|0|0|directory
+share/texmf-dist/scripts/pfarrei/a5toa4.tlu|755|0|0|regular file
+share/texmf-dist/scripts/pfarrei/pfarrei.tlu|755|0|0|regular file
+share/texmf-dist/scripts/pfarrei|755|0|0|directory
+share/texmf-dist/scripts/pkfix-helper/pkfix-helper|755|0|0|regular file
+share/texmf-dist/scripts/pkfix-helper|755|0|0|directory
+share/texmf-dist/scripts/pkfix/pkfix.pl|755|0|0|regular file
+share/texmf-dist/scripts/pkfix|755|0|0|directory
+share/texmf-dist/scripts/pmx/pmx2pdf.lua|755|0|0|regular file
+share/texmf-dist/scripts/pmxchords/pmxchords.lua|755|0|0|regular file
+share/texmf-dist/scripts/pmxchords|755|0|0|directory
+share/texmf-dist/scripts/pmx|755|0|0|directory
+share/texmf-dist/scripts/ps2eps/ps2eps.pl|755|0|0|regular file
+share/texmf-dist/scripts/ps2eps|755|0|0|directory
+share/texmf-dist/scripts/pst-pdf/ps4pdf|755|0|0|regular file
+share/texmf-dist/scripts/pst-pdf|755|0|0|directory
+share/texmf-dist/scripts/pst2pdf/pst2pdf.pl|755|0|0|regular file
+share/texmf-dist/scripts/pst2pdf|755|0|0|directory
+share/texmf-dist/scripts/ptex2pdf/ptex2pdf.lua|755|0|0|regular file
+share/texmf-dist/scripts/ptex2pdf|755|0|0|directory
+share/texmf-dist/scripts/purifyeps/purifyeps|755|0|0|regular file
+share/texmf-dist/scripts/purifyeps|755|0|0|directory
+share/texmf-dist/scripts/pygmentex/pygmentex.py|755|0|0|regular file
+share/texmf-dist/scripts/pygmentex|755|0|0|directory
+share/texmf-dist/scripts/pythontex/depythontex.py|755|0|0|regular file
+share/texmf-dist/scripts/pythontex/pythontex.py|755|0|0|regular file
+share/texmf-dist/scripts/pythontex|755|0|0|directory
+share/texmf-dist/scripts/rubik/rubikrotation.pl|755|0|0|regular file
+share/texmf-dist/scripts/rubik|755|0|0|directory
+share/texmf-dist/scripts/simpdftex/simpdftex|755|0|0|regular file
+share/texmf-dist/scripts/simpdftex|755|0|0|directory
+share/texmf-dist/scripts/splitindex/splitindex.pl|755|0|0|regular file
+share/texmf-dist/scripts/splitindex|755|0|0|directory
+share/texmf-dist/scripts/srcredact/srcredact.pl|755|0|0|regular file
+share/texmf-dist/scripts/srcredact|755|0|0|directory
+share/texmf-dist/scripts/sty2dtx/sty2dtx.pl|755|0|0|regular file
+share/texmf-dist/scripts/sty2dtx|755|0|0|directory
+share/texmf-dist/scripts/svn-multi/svn-multi.pl|755|0|0|regular file
+share/texmf-dist/scripts/svn-multi|755|0|0|directory
+share/texmf-dist/scripts/tex4ebook/tex4ebook|755|0|0|regular file
+share/texmf-dist/scripts/tex4ebook|755|0|0|directory
+share/texmf-dist/scripts/tex4ht/ht.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/htcontext.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/htlatex.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/htmex.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/httex.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/httexi.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/htxelatex.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/htxetex.sh|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht/mk4ht.pl|755|0|0|regular file
+share/texmf-dist/scripts/tex4ht|755|0|0|directory
+share/texmf-dist/scripts/texcount/texcount.pl|755|0|0|regular file
+share/texmf-dist/scripts/texcount|755|0|0|directory
+share/texmf-dist/scripts/texdef/texdef.pl|755|0|0|regular file
+share/texmf-dist/scripts/texdef|755|0|0|directory
+share/texmf-dist/scripts/texdiff/texdiff|755|0|0|regular file
+share/texmf-dist/scripts/texdiff|755|0|0|directory
+share/texmf-dist/scripts/texdirflatten/texdirflatten|755|0|0|regular file
+share/texmf-dist/scripts/texdirflatten|755|0|0|directory
+share/texmf-dist/scripts/texdoc/texdoc.tlu|755|0|0|regular file
+share/texmf-dist/scripts/texdoctk/texdoctk.pl|755|0|0|regular file
+share/texmf-dist/scripts/texdoctk|755|0|0|directory
+share/texmf-dist/scripts/texdoc|755|0|0|directory
+share/texmf-dist/scripts/texfot/texfot.pl|755|0|0|regular file
+share/texmf-dist/scripts/texfot|755|0|0|directory
+share/texmf-dist/scripts/texlive/TeXLive/TLConfig.pm|644|0|0|regular file
+share/texmf-dist/scripts/texlive/TeXLive/TLUtils.pm|644|0|0|regular file
+share/texmf-dist/scripts/texlive/TeXLive|755|0|0|directory
+share/texmf-dist/scripts/texlive/allcm.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/allneeded.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/dvi2fax.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/dvired.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/e2pall.pl|755|0|0|regular file
+share/texmf-dist/scripts/texlive/fmtutil-sys.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/fmtutil.pl|755|0|0|regular file
+share/texmf-dist/scripts/texlive/fontinst.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/kpsetool.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/kpsewhere.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/ps2frag.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/pslatex.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/rubibtex.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/rumakeindex.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/rungs.tlu|755|0|0|regular file
+share/texmf-dist/scripts/texlive/texconfig-dialog.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/texconfig-sys.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/texconfig.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/texlinks.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/tlmgr.pl|755|0|0|regular file
+share/texmf-dist/scripts/texlive/updmap-sys.sh|755|0|0|regular file
+share/texmf-dist/scripts/texlive/updmap.pl|755|0|0|regular file
+share/texmf-dist/scripts/texliveonfly/texliveonfly.py|755|0|0|regular file
+share/texmf-dist/scripts/texliveonfly|755|0|0|directory
+share/texmf-dist/scripts/texlive|755|0|0|directory
+share/texmf-dist/scripts/texloganalyser/texloganalyser|755|0|0|regular file
+share/texmf-dist/scripts/texloganalyser|755|0|0|directory
+share/texmf-dist/scripts/thumbpdf/thumbpdf.pl|755|0|0|regular file
+share/texmf-dist/scripts/thumbpdf|755|0|0|directory
+share/texmf-dist/scripts/typeoutfileinfo/typeoutfileinfo.sh|755|0|0|regular file
+share/texmf-dist/scripts/typeoutfileinfo|755|0|0|directory
+share/texmf-dist/scripts/ulqda/ulqda.pl|755|0|0|regular file
+share/texmf-dist/scripts/ulqda|755|0|0|directory
+share/texmf-dist/scripts/urlbst/urlbst|755|0|0|regular file
+share/texmf-dist/scripts/urlbst|755|0|0|directory
+share/texmf-dist/scripts/vpe/vpe.pl|755|0|0|regular file
+share/texmf-dist/scripts/vpe|755|0|0|directory
+share/texmf-dist/scripts/xindy/texindy.pl|755|0|0|regular file
+share/texmf-dist/scripts/xindy/xindy.pl|755|0|0|regular file
+share/texmf-dist/scripts/xindy|755|0|0|directory
+share/texmf-dist/scripts/yplan/yplan|755|0|0|regular file
+share/texmf-dist/scripts/yplan|755|0|0|directory
+share/texmf-dist/scripts|755|0|0|directory
+share/texmf-dist/source/fonts/zhmetrics/ttfonts.map|644|0|0|regular file
+share/texmf-dist/source/fonts/zhmetrics|755|0|0|directory
+share/texmf-dist/source/fonts|755|0|0|directory
+share/texmf-dist/source|755|0|0|directory
+share/texmf-dist/texconfig/tcfmgr.map|644|0|0|regular file
+share/texmf-dist/texconfig/tcfmgr|755|0|0|regular file
+share/texmf-dist/texconfig|755|0|0|directory
+share/texmf-dist/ttf2pk/VPS.rpl|644|0|0|regular file
+share/texmf-dist/ttf2pk/ttf2pk.cfg|644|0|0|regular file
+share/texmf-dist/ttf2pk|755|0|0|directory
+share/texmf-dist/web2c/fmtutil.cnf|644|0|0|regular file
+share/texmf-dist/web2c/mktex.opt|644|0|0|regular file
+share/texmf-dist/web2c/mktexdir.opt|644|0|0|regular file
+share/texmf-dist/web2c/mktexdir|755|0|0|regular file
+share/texmf-dist/web2c/mktexnam.opt|644|0|0|regular file
+share/texmf-dist/web2c/mktexnam|755|0|0|regular file
+share/texmf-dist/web2c/mktexupd|755|0|0|regular file
+share/texmf-dist/web2c/texmf.cnf|644|0|0|regular file
+share/texmf-dist/web2c|755|0|0|directory
+share/texmf-dist/xdvi/XDvi|644|0|0|regular file
+share/texmf-dist/xdvi/pixmap/toolbar.xpm|644|0|0|regular file
+share/texmf-dist/xdvi/pixmap/toolbar2.xpm|644|0|0|regular file
+share/texmf-dist/xdvi/pixmap|755|0|0|directory
+share/texmf-dist/xdvi|755|0|0|directory
+share/texmf-dist/xindy/VERSION|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/book-order.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/ff-ranges-only.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/ff-ranges.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/german-sty.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/ignore-hyphen.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/ignore-punctuation.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/keep-blanks.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/latex-loc-fmts.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/latex.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/latin-lettergroups.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/letter-order.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/makeindex.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/numeric-sort.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/page-ranges.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/tex.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/texindy.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base/word-order.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/base|755|0|0|directory
+share/texmf-dist/xindy/modules/class/pagenums.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/class|755|0|0|directory
+share/texmf-dist/xindy/modules/lang/german/din5007.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/german/duden.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/german/tex.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/german|755|0|0|directory
+share/texmf-dist/xindy/modules/lang/korean/utf8-lang.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/korean/utf8.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/korean|755|0|0|directory
+share/texmf-dist/xindy/modules/lang/latin/caseisrt.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/latin/letgroup.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/lang/latin|755|0|0|directory
+share/texmf-dist/xindy/modules/lang|755|0|0|directory
+share/texmf-dist/xindy/modules/ord/letorder.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/ord|755|0|0|directory
+share/texmf-dist/xindy/modules/rules/isolatin1-exchange.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/rules/isolatin1-tolower.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/rules/latin-exchange.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/rules/latin-tolower.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/rules|755|0|0|directory
+share/texmf-dist/xindy/modules/styles/basic.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/styles/makeidx.xdy|644|0|0|regular file
+share/texmf-dist/xindy/modules/styles|755|0|0|directory
+share/texmf-dist/xindy/modules|755|0|0|directory
+share/texmf-dist/xindy|755|0|0|directory
+share/texmf-dist|755|0|0|directory
+share|755|0|0|directory

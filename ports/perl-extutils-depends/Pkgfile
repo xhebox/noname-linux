@@ -1,0 +1,12 @@
+name=perl-extutils-depends
+version=0.405
+desc="The Perl depends module"
+deps="perl"
+source="http://www.cpan.org/authors/id/X/XA/XAOC/ExtUtils-Depends-${version}.tar.gz"
+
+build() {
+	cd ExtUtils-Depends-$version
+	perl Makefile.PL INSTALLDIRS=vendor
+	make || die
+	make -j1 DESTDIR="$pkgdir" install || die
+}

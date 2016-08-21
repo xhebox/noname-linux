@@ -1,0 +1,238 @@
+bin/genl-ctrl-list|755|0|0|regular file
+bin/idiag-socket-details|755|0|0|regular file
+bin/nf-ct-add|755|0|0|regular file
+bin/nf-ct-list|755|0|0|regular file
+bin/nf-exp-add|755|0|0|regular file
+bin/nf-exp-delete|755|0|0|regular file
+bin/nf-exp-list|755|0|0|regular file
+bin/nf-log|755|0|0|regular file
+bin/nf-monitor|755|0|0|regular file
+bin/nf-queue|755|0|0|regular file
+bin/nl-addr-add|755|0|0|regular file
+bin/nl-addr-delete|755|0|0|regular file
+bin/nl-addr-list|755|0|0|regular file
+bin/nl-class-add|755|0|0|regular file
+bin/nl-class-delete|755|0|0|regular file
+bin/nl-class-list|755|0|0|regular file
+bin/nl-classid-lookup|755|0|0|regular file
+bin/nl-cls-add|755|0|0|regular file
+bin/nl-cls-delete|755|0|0|regular file
+bin/nl-cls-list|755|0|0|regular file
+bin/nl-fib-lookup|755|0|0|regular file
+bin/nl-link-enslave|755|0|0|regular file
+bin/nl-link-ifindex2name|755|0|0|regular file
+bin/nl-link-list|755|0|0|regular file
+bin/nl-link-name2ifindex|755|0|0|regular file
+bin/nl-link-release|755|0|0|regular file
+bin/nl-link-set|755|0|0|regular file
+bin/nl-link-stats|755|0|0|regular file
+bin/nl-list-caches|755|0|0|regular file
+bin/nl-list-sockets|755|0|0|regular file
+bin/nl-monitor|755|0|0|regular file
+bin/nl-neigh-add|755|0|0|regular file
+bin/nl-neigh-delete|755|0|0|regular file
+bin/nl-neigh-list|755|0|0|regular file
+bin/nl-neightbl-list|755|0|0|regular file
+bin/nl-pktloc-lookup|755|0|0|regular file
+bin/nl-qdisc-add|755|0|0|regular file
+bin/nl-qdisc-delete|755|0|0|regular file
+bin/nl-qdisc-list|755|0|0|regular file
+bin/nl-route-add|755|0|0|regular file
+bin/nl-route-delete|755|0|0|regular file
+bin/nl-route-get|755|0|0|regular file
+bin/nl-route-list|755|0|0|regular file
+bin/nl-rule-list|755|0|0|regular file
+bin/nl-tctree-list|755|0|0|regular file
+bin/nl-util-addr|755|0|0|regular file
+bin|755|0|0|directory
+etc/libnl/classid|644|0|0|regular file
+etc/libnl/pktloc|644|0|0|regular file
+etc/libnl|755|0|0|directory
+etc|755|0|0|directory
+include/libnl3/netlink/addr.h|644|0|0|regular file
+include/libnl3/netlink/attr.h|644|0|0|regular file
+include/libnl3/netlink/cache-api.h|644|0|0|regular file
+include/libnl3/netlink/cache.h|644|0|0|regular file
+include/libnl3/netlink/cli/addr.h|644|0|0|regular file
+include/libnl3/netlink/cli/class.h|644|0|0|regular file
+include/libnl3/netlink/cli/cls.h|644|0|0|regular file
+include/libnl3/netlink/cli/ct.h|644|0|0|regular file
+include/libnl3/netlink/cli/exp.h|644|0|0|regular file
+include/libnl3/netlink/cli/link.h|644|0|0|regular file
+include/libnl3/netlink/cli/neigh.h|644|0|0|regular file
+include/libnl3/netlink/cli/qdisc.h|644|0|0|regular file
+include/libnl3/netlink/cli/route.h|644|0|0|regular file
+include/libnl3/netlink/cli/rule.h|644|0|0|regular file
+include/libnl3/netlink/cli/tc.h|644|0|0|regular file
+include/libnl3/netlink/cli/utils.h|644|0|0|regular file
+include/libnl3/netlink/cli|755|0|0|directory
+include/libnl3/netlink/data.h|644|0|0|regular file
+include/libnl3/netlink/errno.h|644|0|0|regular file
+include/libnl3/netlink/fib_lookup/lookup.h|644|0|0|regular file
+include/libnl3/netlink/fib_lookup/request.h|644|0|0|regular file
+include/libnl3/netlink/fib_lookup|755|0|0|directory
+include/libnl3/netlink/genl/ctrl.h|644|0|0|regular file
+include/libnl3/netlink/genl/family.h|644|0|0|regular file
+include/libnl3/netlink/genl/genl.h|644|0|0|regular file
+include/libnl3/netlink/genl/mngt.h|644|0|0|regular file
+include/libnl3/netlink/genl|755|0|0|directory
+include/libnl3/netlink/handlers.h|644|0|0|regular file
+include/libnl3/netlink/hash.h|644|0|0|regular file
+include/libnl3/netlink/hashtable.h|644|0|0|regular file
+include/libnl3/netlink/idiag/idiagnl.h|644|0|0|regular file
+include/libnl3/netlink/idiag/meminfo.h|644|0|0|regular file
+include/libnl3/netlink/idiag/msg.h|644|0|0|regular file
+include/libnl3/netlink/idiag/req.h|644|0|0|regular file
+include/libnl3/netlink/idiag/vegasinfo.h|644|0|0|regular file
+include/libnl3/netlink/idiag|755|0|0|directory
+include/libnl3/netlink/list.h|644|0|0|regular file
+include/libnl3/netlink/msg.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/ct.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/exp.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/log.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/log_msg.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/netfilter.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/nfnl.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/queue.h|644|0|0|regular file
+include/libnl3/netlink/netfilter/queue_msg.h|644|0|0|regular file
+include/libnl3/netlink/netfilter|755|0|0|directory
+include/libnl3/netlink/netlink-compat.h|644|0|0|regular file
+include/libnl3/netlink/netlink-kernel.h|644|0|0|regular file
+include/libnl3/netlink/netlink.h|644|0|0|regular file
+include/libnl3/netlink/object-api.h|644|0|0|regular file
+include/libnl3/netlink/object.h|644|0|0|regular file
+include/libnl3/netlink/route/act/gact.h|644|0|0|regular file
+include/libnl3/netlink/route/act/mirred.h|644|0|0|regular file
+include/libnl3/netlink/route/act/skbedit.h|644|0|0|regular file
+include/libnl3/netlink/route/action.h|644|0|0|regular file
+include/libnl3/netlink/route/act|755|0|0|directory
+include/libnl3/netlink/route/addr.h|644|0|0|regular file
+include/libnl3/netlink/route/class.h|644|0|0|regular file
+include/libnl3/netlink/route/classifier.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/basic.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/cgroup.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch/cmp.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch/meta.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch/nbyte.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch/text.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/ematch|755|0|0|directory
+include/libnl3/netlink/route/cls/fw.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/police.h|644|0|0|regular file
+include/libnl3/netlink/route/cls/u32.h|644|0|0|regular file
+include/libnl3/netlink/route/cls|755|0|0|directory
+include/libnl3/netlink/route/link.h|644|0|0|regular file
+include/libnl3/netlink/route/link/api.h|644|0|0|regular file
+include/libnl3/netlink/route/link/bonding.h|644|0|0|regular file
+include/libnl3/netlink/route/link/bridge.h|644|0|0|regular file
+include/libnl3/netlink/route/link/can.h|644|0|0|regular file
+include/libnl3/netlink/route/link/inet.h|644|0|0|regular file
+include/libnl3/netlink/route/link/inet6.h|644|0|0|regular file
+include/libnl3/netlink/route/link/info-api.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ip6tnl.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ipgre.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ipip.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ipvlan.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ipvti.h|644|0|0|regular file
+include/libnl3/netlink/route/link/macsec.h|644|0|0|regular file
+include/libnl3/netlink/route/link/macvlan.h|644|0|0|regular file
+include/libnl3/netlink/route/link/macvtap.h|644|0|0|regular file
+include/libnl3/netlink/route/link/ppp.h|644|0|0|regular file
+include/libnl3/netlink/route/link/sit.h|644|0|0|regular file
+include/libnl3/netlink/route/link/sriov.h|644|0|0|regular file
+include/libnl3/netlink/route/link/veth.h|644|0|0|regular file
+include/libnl3/netlink/route/link/vlan.h|644|0|0|regular file
+include/libnl3/netlink/route/link/vrf.h|644|0|0|regular file
+include/libnl3/netlink/route/link/vxlan.h|644|0|0|regular file
+include/libnl3/netlink/route/link|755|0|0|directory
+include/libnl3/netlink/route/neighbour.h|644|0|0|regular file
+include/libnl3/netlink/route/neightbl.h|644|0|0|regular file
+include/libnl3/netlink/route/nexthop.h|644|0|0|regular file
+include/libnl3/netlink/route/pktloc.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/cbq.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/dsmark.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/fifo.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/fq_codel.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/hfsc.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/htb.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/netem.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/plug.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/prio.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/red.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/sfq.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc/tbf.h|644|0|0|regular file
+include/libnl3/netlink/route/qdisc|755|0|0|directory
+include/libnl3/netlink/route/route.h|644|0|0|regular file
+include/libnl3/netlink/route/rtnl.h|644|0|0|regular file
+include/libnl3/netlink/route/rule.h|644|0|0|regular file
+include/libnl3/netlink/route/tc-api.h|644|0|0|regular file
+include/libnl3/netlink/route/tc.h|644|0|0|regular file
+include/libnl3/netlink/route|755|0|0|directory
+include/libnl3/netlink/socket.h|644|0|0|regular file
+include/libnl3/netlink/types.h|644|0|0|regular file
+include/libnl3/netlink/utils.h|644|0|0|regular file
+include/libnl3/netlink/version.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/ae.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/lifetime.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/sa.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/selector.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/sp.h|644|0|0|regular file
+include/libnl3/netlink/xfrm/template.h|644|0|0|regular file
+include/libnl3/netlink/xfrm|755|0|0|directory
+include/libnl3/netlink|755|0|0|directory
+include/libnl3|755|0|0|directory
+include|755|0|0|directory
+lib/libnl-3.so.200.24.0|755|0|0|regular file
+lib/libnl-3.so.200|777|0|0|symbolic link
+lib/libnl-3.so|777|0|0|symbolic link
+lib/libnl-cli-3.so.200.24.0|755|0|0|regular file
+lib/libnl-cli-3.so.200|777|0|0|symbolic link
+lib/libnl-cli-3.so|777|0|0|symbolic link
+lib/libnl-genl-3.so.200.24.0|755|0|0|regular file
+lib/libnl-genl-3.so.200|777|0|0|symbolic link
+lib/libnl-genl-3.so|777|0|0|symbolic link
+lib/libnl-idiag-3.so.200.24.0|755|0|0|regular file
+lib/libnl-idiag-3.so.200|777|0|0|symbolic link
+lib/libnl-idiag-3.so|777|0|0|symbolic link
+lib/libnl-nf-3.so.200.24.0|755|0|0|regular file
+lib/libnl-nf-3.so.200|777|0|0|symbolic link
+lib/libnl-nf-3.so|777|0|0|symbolic link
+lib/libnl-route-3.so.200.24.0|755|0|0|regular file
+lib/libnl-route-3.so.200|777|0|0|symbolic link
+lib/libnl-route-3.so|777|0|0|symbolic link
+lib/libnl-xfrm-3.so.200.24.0|755|0|0|regular file
+lib/libnl-xfrm-3.so.200|777|0|0|symbolic link
+lib/libnl-xfrm-3.so|777|0|0|symbolic link
+lib/libnl/cli/cls/basic.so|755|0|0|regular file
+lib/libnl/cli/cls/cgroup.so|755|0|0|regular file
+lib/libnl/cli/cls|755|0|0|directory
+lib/libnl/cli/qdisc/bfifo.so|755|0|0|regular file
+lib/libnl/cli/qdisc/blackhole.so|755|0|0|regular file
+lib/libnl/cli/qdisc/fq_codel.so|755|0|0|regular file
+lib/libnl/cli/qdisc/hfsc.so|755|0|0|regular file
+lib/libnl/cli/qdisc/htb.so|755|0|0|regular file
+lib/libnl/cli/qdisc/ingress.so|755|0|0|regular file
+lib/libnl/cli/qdisc/pfifo.so|755|0|0|regular file
+lib/libnl/cli/qdisc/plug.so|755|0|0|regular file
+lib/libnl/cli/qdisc|755|0|0|directory
+lib/libnl/cli|755|0|0|directory
+lib/libnl|755|0|0|directory
+lib/pkgconfig/libnl-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-cli-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-genl-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-idiag-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-nf-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-route-3.0.pc|644|0|0|regular file
+lib/pkgconfig/libnl-xfrm-3.0.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man8/genl-ctrl-list.8.gz|644|0|0|regular file
+share/man/man8/nl-classid-lookup.8.gz|644|0|0|regular file
+share/man/man8/nl-pktloc-lookup.8.gz|644|0|0|regular file
+share/man/man8/nl-qdisc-add.8.gz|644|0|0|regular file
+share/man/man8/nl-qdisc-delete.8.gz|644|0|0|regular file
+share/man/man8/nl-qdisc-list.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

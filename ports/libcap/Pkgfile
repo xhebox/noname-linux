@@ -1,0 +1,23 @@
+name=libcap
+version=2.25
+desc="POSIX.1e capabilities library"
+source="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz
+libcap-gperf-3.1.patch"
+deps="attr musl"
+
+ext() {
+	cd libcap-$version
+	sed -i 's/CFLAGS :=/CFLAGS +=/g' Make.Rules
+	sed -i 's/LDFLAGS :=/LDFLAGS +=/g' Make.Rules
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" ;;
+		esac
+	done
+}
+
+build() {
+	cd libcap-$version
+	make KERNEL_HEADERS=/include lib=/lib || die
+	make RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib SBINDIR=/bin install  || die
+}

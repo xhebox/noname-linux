@@ -1,0 +1,145 @@
+diff --git a/dwm.c b/dwm.c
+--- a/dwm.c
++++ b/dwm.c
+@@ -79,7 +79,9 @@
+ enum { SchemeNorm, SchemeSel, SchemeLast }; /* color schemes */
+ enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation,
+ 	   NetWMName, NetWMState, NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+-	   NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
++	   NetWMWindowTypeDialog,
++	   NetNumberOfDesktops, NetCurrentDesktop,
++	   NetSupportingWMCheck, NetWMDesktop, NetClientList, NetLast };     /* EWMH atoms */
+ enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
+ enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+ enum { ClkTagBar, ClkTabBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+@@ -217,6 +218,7 @@
+ static void setfocus(Client *c);
+ static void setlayout(const Arg *arg);
+ static void setmfact(const Arg *arg);
++static void setnumbdesktops(void);
+ static void setup(void);
+ static void showhide(Client *c);
+ static void sigchld(int unused);
+@@ -263,6 +263,8 @@
+ static void unfocus(Client *c, int setfocus);
+ static void unmanage(Client *c, int destroyed);
+ static void unmapnotify(XEvent *e);
++static void updateclientdesktop(Client *c);
++static void updatecurrenddesktop(void);
+ static int updategeom(void);
+ static void updatebarpos(Monitor *m);
+ static void updatebars(void);
+@@ -1841,6 +1842,13 @@
+ }
+ 
+ void
++setcurrentdesktop(void){
++	long data[] = { 0 };
++	XChangeProperty(dpy, root, netatom[NetCurrentDesktop], XA_CARDINAL, 32,
++			PropModeReplace, (unsigned char *)data, 1);
++}
++
++void
+ setclientstate(Client *c, long state)
+ {
+ 	long data[] = { state, None };
+@@ -1971,6 +1971,13 @@
+ }
+ 
+ void
++setnumbdesktops(void){
++	long data[] = { TAGMASK };
++	XChangeProperty(dpy, root, netatom[NetNumberOfDesktops], XA_CARDINAL, 32,
++			PropModeReplace, (unsigned char *)data, 1);
++}
++
++void
+ setup(void)
+ {
+ 	XSetWindowAttributes wa;
+@@ -2007,6 +2007,10 @@
+ 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
+ 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
+ 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
++	netatom[NetNumberOfDesktops] = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", False);
++	netatom[NetCurrentDesktop] = XInternAtom(dpy, "_NET_CURRENT_DESKTOP", False);
++       netatom[NetWMDesktop] = XInternAtom(dpy, "_NET_WM_DESKTOP", False);
++	netatom[NetSupportingWMCheck] = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
+ 	xatom[Manager] = XInternAtom(dpy, "MANAGER", False);
+ 	xatom[Xembed] = XInternAtom(dpy, "_XEMBED", False);
+ 	xatom[XembedInfo] = XInternAtom(dpy, "_XEMBED_INFO", False);
+@@ -1591,6 +1610,10 @@
+ 	XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32,
+ 			PropModeReplace, (unsigned char *) netatom, NetLast);
+ 	XDeleteProperty(dpy, root, netatom[NetClientList]);
++	/* set EWMH NUMBER_OF_DESKTOPS */
++	setnumbdesktops();
++	/* initialize EWMH CURRENT_DESKTOP */
++	setcurrentdesktop();
+ 	/* select for events */
+ 	wa.cursor = cursor[CurNormal];
+ 	wa.event_mask = SubstructureRedirectMask|SubstructureNotifyMask|ButtonPressMask|PointerMotionMask
+@@ -1732,6 +1755,7 @@
+ 		focus(NULL);
+ 		arrange(selmon);
+ 	}
++	updatecurrenddesktop();
+ }
+ 
+ void
+@@ -1801,6 +1801,8 @@
+ 		.background_pixmap = ParentRelative,
+ 		.event_mask = ButtonPressMask|ExposureMask
+ 	};
++	Atom utf8string;
++	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
+ 	for (m = mons; m; m = m->next) {
+ 		if (m->barwin)
+ 			continue;
+@@ -2297,7 +2297,14 @@
+ 					  CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+ 		XDefineCursor(dpy, m->tabwin, cursor[CurNormal]->cursor);
+ 		XMapRaised(dpy, m->tabwin);
+-	}
++		XChangeProperty(dpy, m->barwin, netatom[NetWMName], utf8string,
++				8, PropModeReplace, (unsigned char *)"dwm", 3);
++ 	}
++	/* it doesn't matter which bar we use for this, so just use the first one */
++	XChangeProperty(dpy, root, netatom[NetSupportingWMCheck], XA_WINDOW, 32,
++			PropModeReplace, (unsigned char *)&mons->barwin, 1);
++	XChangeProperty(dpy, mons->barwin, netatom[NetSupportingWMCheck], XA_WINDOW,
++			32, PropModeReplace, (unsigned char *)&mons->barwin, 1);
+ }
+ 
+ void
+@@ -2385,6 +2385,22 @@
+ 			                (unsigned char *) &(c->win), 1);
+ }
+ 
++void
++updatecurrenddesktop(){
++       long data[] = { selmon->tagset[selmon->seltags] };
++
++       XChangeProperty(dpy, root, netatom[NetCurrentDesktop], XA_CARDINAL, 32,
++                       PropModeReplace, (unsigned char *)data, 1);
++}
++
++void
++updateclientdesktop(Client *c) {
++	long data[] = { c->tags };
++
++	XChangeProperty(dpy, c->win, netatom[NetWMDesktop], XA_CARDINAL, 32,
++			PropModeReplace, (unsigned char *)data, 1);
++}
++
+ int
+ updategeom(void)
+ {
+@@ -2020,6 +2052,7 @@
+ 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
+ 	focus(NULL);
+ 	arrange(selmon);
++	updatecurrenddesktop();
+ }
+ 
+ Client *

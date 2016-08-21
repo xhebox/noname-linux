@@ -1,0 +1,30 @@
+bin/dhcpcd|555|0|0|regular file
+etc/dhcpcd.conf|644|0|0|regular file
+lib/dhcpcd/dhcpcd-run-hooks|555|0|0|regular file
+lib/dhcpcd/dev/udev.so|555|0|0|regular file
+lib/dhcpcd/dhcpcd-hooks/30-hostname|444|0|0|regular file
+lib/dhcpcd/dhcpcd-hooks/50-ntp.conf|444|0|0|regular file
+lib/dhcpcd/dhcpcd-hooks/20-resolv.conf|444|0|0|regular file
+lib/dhcpcd/dhcpcd-hooks/01-test|444|0|0|regular file
+lib/dhcpcd/dhcpcd-hooks/02-dump|444|0|0|regular file
+share/man/man8/dhcpcd.8.gz|644|0|0|regular file
+share/man/man8/dhcpcd-run-hooks.8.gz|644|0|0|regular file
+share/man/man5/dhcpcd.conf.5.gz|644|0|0|regular file
+share/dhcpcd/hooks/29-lookup-hostname|444|0|0|regular file
+share/dhcpcd/hooks/15-timezone|444|0|0|regular file
+share/dhcpcd/hooks/10-wpa_supplicant|444|0|0|regular file
+var/lib/dhcpcd|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory
+share/dhcpcd/hooks|755|0|0|directory
+share/dhcpcd|755|0|0|directory
+share/man/man5|755|0|0|directory
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/dhcpcd/dhcpcd-hooks|755|0|0|directory
+lib/dhcpcd/dev|755|0|0|directory
+lib/dhcpcd|755|0|0|directory
+lib|755|0|0|directory
+etc|755|0|0|directory
+bin|755|0|0|directory

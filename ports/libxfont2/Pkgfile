@@ -1,0 +1,15 @@
+name=libxfont2
+version=2.0.1
+desc="xorg lib libXfont"
+deps="harfbuzz xorg-proto xtrans libfontenc"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXfont2-$version.tar.bz2"
+
+build() {
+	cd libXfont2-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

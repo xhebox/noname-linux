@@ -1,0 +1,19 @@
+name=aria2
+version=1.31.0
+desc="Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink."
+deps="expat libgmp libxml2 libressl sqlite libssh2 c-ares"
+source="https://github.com/aria2/aria2/releases/download/release-$version/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/ \
+		--with-openssl --with-libexpat \
+		--with-bashcompletiondir=/share/bash-completion/completions
+
+	make || die
+	make prefix=/$pkgdir install || die
+
+	rm -r $pkgdir/share/doc $pkgdir/share/man/ru $pkgdir/share/man/pt
+}

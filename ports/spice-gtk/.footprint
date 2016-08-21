@@ -1,0 +1,109 @@
+lib/libspice-client-glib-2.0.so|777|0|0|symbolic link
+lib/libspice-controller.so|777|0|0|symbolic link
+lib/libspice-client-gtk-3.0.so.5|777|0|0|symbolic link
+lib/libspice-controller.so.0|777|0|0|symbolic link
+lib/libspice-client-glib-2.0.so.8|777|0|0|symbolic link
+lib/libspice-client-gtk-3.0.so|777|0|0|symbolic link
+bin/spicy-screenshot|755|0|0|regular file
+bin/spicy|755|0|0|regular file
+bin/spicy-stats|755|0|0|regular file
+include/spice-client-gtk-3.0/spice-widget-enums.h|644|0|0|regular file
+include/spice-client-gtk-3.0/spice-widget.h|644|0|0|regular file
+include/spice-client-gtk-3.0/spice-gtk-session.h|644|0|0|regular file
+include/spice-client-gtk-3.0/spice-client-gtk.h|644|0|0|regular file
+include/spice-client-gtk-3.0/spice-grabsequence.h|644|0|0|regular file
+include/spice-client-gtk-3.0/usb-device-widget.h|644|0|0|regular file
+include/spice-client-glib-2.0/usb-device-manager.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-main.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-types.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-file-transfer-task.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-webdav.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-client.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-playback.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-option.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-port.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-session.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-inputs.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-usbredir.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-display.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-glib-enums.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-util.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-version.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-cursor.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-channel-enums.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-smartcard.h|644|0|0|regular file
+include/spice-client-glib-2.0/channel-record.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-uri.h|644|0|0|regular file
+include/spice-client-glib-2.0/smartcard-manager.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-channel.h|644|0|0|regular file
+include/spice-client-glib-2.0/spice-audio.h|644|0|0|regular file
+include/spice-controller/spice-controller.h|644|0|0|regular file
+lib/vala/vapi/spice-protocol.vapi|644|0|0|regular file
+lib/libspice-client-gtk-3.0.so.5.0.0|755|0|0|regular file
+lib/man/man1/spice-client.1|644|0|0|regular file
+lib/gir-1.0/SpiceClientGLib-2.0.gir|644|0|0|regular file
+lib/gir-1.0/SpiceClientGtk-3.0.gir|644|0|0|regular file
+lib/pkgconfig/spice-client-glib-2.0.pc|644|0|0|regular file
+lib/pkgconfig/spice-controller.pc|644|0|0|regular file
+lib/pkgconfig/spice-client-gtk-3.0.pc|644|0|0|regular file
+lib/libspice-controller.so.0.0.0|755|0|0|regular file
+lib/libspice-client-glib-2.0.so.8.6.0|755|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/ch02.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceUsbredirChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpicePortChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceSmartcardManager.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-SpiceUsbDeviceWidget.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk.devhelp2|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/application-support.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/index.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpicePlaybackChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceSmartcardChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/ch03.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-SpiceDisplay.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/left-insensitive.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/left.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/ch01.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/right.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceRecordChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceMainChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceSession.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceAudio.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/annotation-glossary.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceDisplayChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/api-index-full.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-Utilities.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceInputsChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/home.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-SpiceURI.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/right-insensitive.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/api-reference.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/up.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-Version-Information.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceCursorChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/spice-gtk-SpiceGtkSession.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/up-insensitive.png|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceUsbDeviceManager.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/style.css|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/object-tree.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceWebdavChannel.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/SpiceFileTransferTask.html|644|0|0|regular file
+lib/gtk-doc/html/spice-gtk/api-index-deprecated.html|644|0|0|regular file
+lib/girepository-1.0/SpiceClientGLib-2.0.typelib|644|0|0|regular file
+lib/girepository-1.0/SpiceClientGtk-3.0.typelib|644|0|0|regular file
+lib/girepository-1.0|755|0|0|directory
+lib/gtk-doc/html/spice-gtk|755|0|0|directory
+lib/gtk-doc/html|755|0|0|directory
+lib/gtk-doc|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib/gir-1.0|755|0|0|directory
+lib/man/man1|755|0|0|directory
+lib/man|755|0|0|directory
+lib/vala/vapi|755|0|0|directory
+lib/vala|755|0|0|directory
+lib|755|0|0|directory
+include/spice-controller|755|0|0|directory
+include/spice-client-glib-2.0|755|0|0|directory
+include/spice-client-gtk-3.0|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

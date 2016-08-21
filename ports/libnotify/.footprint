@@ -1,0 +1,19 @@
+lib/libnotify.so|777|0|0|symbolic link
+lib/libnotify.so.4|777|0|0|symbolic link
+bin/notify-send|755|0|0|regular file
+include/libnotify/notify-enum-types.h|644|0|0|regular file
+include/libnotify/notify.h|644|0|0|regular file
+include/libnotify/notify-features.h|644|0|0|regular file
+include/libnotify/notification.h|644|0|0|regular file
+lib/libnotify.so.4.0.0|755|0|0|regular file
+lib/pkgconfig/libnotify.pc|644|0|0|regular file
+lib/girepository-1.0/Notify-0.7.typelib|644|0|0|regular file
+share/gir-1.0/Notify-0.7.gir|644|0|0|regular file
+share/gir-1.0|755|0|0|directory
+share|755|0|0|directory
+lib/girepository-1.0|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/libnotify|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

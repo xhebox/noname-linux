@@ -1,0 +1,16 @@
+name=snappy
+version=1.1.4
+deps=musl
+desc="A fast compressor/decompressor library"
+source="https://github.com/google/snappy/releases/download/${version}/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	export CXXFLAGS="$CXXFLAGS -DNDEBUG"
+	./configure \
+		--prefix= \
+		--disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share/doc
+}

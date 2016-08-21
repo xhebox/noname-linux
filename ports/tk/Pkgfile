@@ -1,0 +1,18 @@
+name=tk
+version=8.6.6
+desc="A windowing toolkit for use with tcl"
+deps="tcl libxscrnsaver libxft zlib"
+source="http://downloads.sourceforge.net/sourceforge/tcl/tk${version}-src.tar.gz"
+
+build() {
+	cd tk${version}/unix
+	./configure --prefix= --mandir=/share/man --enable-threads --enable-64bit
+	make || die
+	make INSTALL_ROOT="${pkgdir}" install install-private-headers || die
+	ln -sf wish${version%.*} "${pkgdir}/bin/wish"
+	ln -sf libtk${version%.*}.so "${pkgdir}/lib/libtk.so"
+
+	sed -e "s#${srcdir}/tk${version}/unix#/lib#" \
+	  -e "s#${srcdir}/tk${version}#/include#" \
+	  -i "${pkgdir}/lib/tkConfig.sh"
+}

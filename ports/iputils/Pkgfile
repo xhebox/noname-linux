@@ -1,0 +1,38 @@
+name=iputils
+version=20161105
+deps="libcap libressl"
+desc="IP Configuration Utilities (and ping)"
+source="https://github.com/iputils/iputils/archive/s$version.tar.gz
+manpages-$version.patch
+021109-uclibc-no-ether_ntohost.patch
+iputils-20150815-missing-AI_IDN-AI_CANONIDN-NI_IDN.patch
+iputils-20150815-nonroot-floodping.patch
+iputils-20150815-remove-rdisc-glibc-assumption.patch
+"
+#iputils-20150815-scope-delimiter.patch
+
+ext() {
+	cd $name-s$version
+	for i in $source;do
+		msg $i
+		case $i in
+		*.patch) patch -Np1 < ../$i || die;;
+		esac
+	done
+}
+
+build() {
+	cd $name-s$version
+	make \
+	USE_GNUTLS=no \
+	USE_GCRYPT=no \
+	USE_NETTLE=no \
+	|| die
+
+	install -dm755 "${pkgdir}"/bin
+	install -m755 arping clockdiff rarpd rdisc tftpd tracepath "${pkgdir}"/bin/
+	install -dm755 "${pkgdir}"/share/man/man8
+	for f in arping clockdiff rarpd rdisc tftpd tracepath; do
+		install -Dm644 doc/${f}.8 "$pkgdir"/share/man/man8/${f}
+	done
+}

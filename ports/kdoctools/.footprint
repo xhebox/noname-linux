@@ -1,0 +1,1154 @@
+bin/checkXML5|755|0|0|regular file
+bin/meinproc5|755|0|0|regular file
+bin|755|0|0|directory
+include/KF5/KDocTools/docbookxslt.h|644|0|0|regular file
+include/KF5/KDocTools/kdoctools_export.h|644|0|0|regular file
+include/KF5/KDocTools|755|0|0|directory
+include/KF5|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/KF5DocTools/KF5DocToolsConfig.cmake|644|0|0|regular file
+lib/cmake/KF5DocTools/KF5DocToolsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/KF5DocTools/KF5DocToolsMacros.cmake|644|0|0|regular file
+lib/cmake/KF5DocTools/KF5DocToolsTargets-release.cmake|644|0|0|regular file
+lib/cmake/KF5DocTools/KF5DocToolsTargets.cmake|644|0|0|regular file
+lib/cmake/KF5DocTools|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libKF5DocTools.so.5.33.0|755|0|0|regular file
+lib/libKF5DocTools.so.5|777|0|0|symbolic link
+lib/libKF5DocTools.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/doc/HTML/af/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/af/kdoctools5-common|755|0|0|directory
+share/doc/HTML/af|755|0|0|directory
+share/doc/HTML/ca/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/ca/kdoctools5-common|755|0|0|directory
+share/doc/HTML/ca|755|0|0|directory
+share/doc/HTML/cs/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/cs/kdoctools5-common|755|0|0|directory
+share/doc/HTML/cs|755|0|0|directory
+share/doc/HTML/da/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/da/kdoctools5-common|755|0|0|directory
+share/doc/HTML/da|755|0|0|directory
+share/doc/HTML/de/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/de/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/de/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/de/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/de/kdoctools5-common|755|0|0|directory
+share/doc/HTML/de|755|0|0|directory
+share/doc/HTML/el/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/el/kdoctools5-common|755|0|0|directory
+share/doc/HTML/el|755|0|0|directory
+share/doc/HTML/en/kdoctools5-common/artistic-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/block_title_bottom.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/block_title_mid.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/block_title_top.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/bsd-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/fdl-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/fdl-notice.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/gpl-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/kde-default.css|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/kde-docs.css|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/kde_logo.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/kde_logo_bg.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/kmenu.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/lgpl-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/part_of_the_kde_family_horizontal_190.png|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/qpl-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/top-kde.jpg|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/top-left.jpg|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/top-right.jpg|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/top.jpg|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/x11-license.html|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common/xml.dcl|644|0|0|regular file
+share/doc/HTML/en/kdoctools5-common|755|0|0|directory
+share/doc/HTML/en|755|0|0|directory
+share/doc/HTML/eo/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/eo/kdoctools5-common|755|0|0|directory
+share/doc/HTML/eo|755|0|0|directory
+share/doc/HTML/es/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/es/kdoctools5-common|755|0|0|directory
+share/doc/HTML/es|755|0|0|directory
+share/doc/HTML/et/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/et/kdoctools5-common|755|0|0|directory
+share/doc/HTML/et|755|0|0|directory
+share/doc/HTML/fr/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/fr/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/fr/kdoctools5-common|755|0|0|directory
+share/doc/HTML/fr|755|0|0|directory
+share/doc/HTML/gl/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/gl/kdoctools5-common|755|0|0|directory
+share/doc/HTML/gl|755|0|0|directory
+share/doc/HTML/he/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/he/kdoctools5-common|755|0|0|directory
+share/doc/HTML/he|755|0|0|directory
+share/doc/HTML/hu/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/hu/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/hu/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/hu/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/hu/kdoctools5-common|755|0|0|directory
+share/doc/HTML/hu|755|0|0|directory
+share/doc/HTML/it/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/it/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/it/kdoctools5-common|755|0|0|directory
+share/doc/HTML/it|755|0|0|directory
+share/doc/HTML/ja/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/ja/kdoctools5-common|755|0|0|directory
+share/doc/HTML/ja|755|0|0|directory
+share/doc/HTML/ko/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/ko/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/ko/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/ko/kdoctools5-common|755|0|0|directory
+share/doc/HTML/ko|755|0|0|directory
+share/doc/HTML/lt/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/lt/kdoctools5-common|755|0|0|directory
+share/doc/HTML/lt|755|0|0|directory
+share/doc/HTML/nds/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/nds/kdoctools5-common|755|0|0|directory
+share/doc/HTML/nds|755|0|0|directory
+share/doc/HTML/nl/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/nl/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/nl/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/nl/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/nl/kdoctools5-common|755|0|0|directory
+share/doc/HTML/nl|755|0|0|directory
+share/doc/HTML/nn/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/nn/kdoctools5-common|755|0|0|directory
+share/doc/HTML/nn|755|0|0|directory
+share/doc/HTML/pl/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/pl/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/pl/kdoctools5-common|755|0|0|directory
+share/doc/HTML/pl|755|0|0|directory
+share/doc/HTML/pt/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/pt/kdoctools5-common|755|0|0|directory
+share/doc/HTML/pt|755|0|0|directory
+share/doc/HTML/ro/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/ro/kdoctools5-common|755|0|0|directory
+share/doc/HTML/ro|755|0|0|directory
+share/doc/HTML/ru/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/ru/kdoctools5-common|755|0|0|directory
+share/doc/HTML/ru|755|0|0|directory
+share/doc/HTML/sl/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/sl/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/sl/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/sl/kdoctools5-common|755|0|0|directory
+share/doc/HTML/sl|755|0|0|directory
+share/doc/HTML/sr/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/sr/kdoctools5-common|755|0|0|directory
+share/doc/HTML/sr|755|0|0|directory
+share/doc/HTML/sv/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/sv/kdoctools5-common|755|0|0|directory
+share/doc/HTML/sv|755|0|0|directory
+share/doc/HTML/tr/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/tr/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/tr/kdoctools5-common|755|0|0|directory
+share/doc/HTML/tr|755|0|0|directory
+share/doc/HTML/uk/kdoctools5-common/fdl-translated.html|644|0|0|regular file
+share/doc/HTML/uk/kdoctools5-common/gpl-translated.html|644|0|0|regular file
+share/doc/HTML/uk/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/uk/kdoctools5-common/lgpl-translated.html|644|0|0|regular file
+share/doc/HTML/uk/kdoctools5-common|755|0|0|directory
+share/doc/HTML/uk|755|0|0|directory
+share/doc/HTML/wa/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/wa/kdoctools5-common|755|0|0|directory
+share/doc/HTML/wa|755|0|0|directory
+share/doc/HTML/xh/kdoctools5-common/kde-localised.css|644|0|0|regular file
+share/doc/HTML/xh/kdoctools5-common|755|0|0|directory
+share/doc/HTML/xh|755|0|0|directory
+share/doc/HTML|755|0|0|directory
+share/doc|755|0|0|directory
+share/kf5/kdoctools/customization/README|644|0|0|regular file
+share/kf5/kdoctools/customization/af/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/af/entities|755|0|0|directory
+share/kf5/kdoctools/customization/af/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/af/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/af/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/af|755|0|0|directory
+share/kf5/kdoctools/customization/bg/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/entities|755|0|0|directory
+share/kf5/kdoctools/customization/bg/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/bg/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/bg|755|0|0|directory
+share/kf5/kdoctools/customization/ca/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/entities|755|0|0|directory
+share/kf5/kdoctools/customization/ca/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ca/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ca|755|0|0|directory
+share/kf5/kdoctools/customization/cs/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/entities|755|0|0|directory
+share/kf5/kdoctools/customization/cs/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/cs/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/cs|755|0|0|directory
+share/kf5/kdoctools/customization/da/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/da/entities|755|0|0|directory
+share/kf5/kdoctools/customization/da/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/da/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/da/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/da|755|0|0|directory
+share/kf5/kdoctools/customization/de/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/de/entities|755|0|0|directory
+share/kf5/kdoctools/customization/de/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/de/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/de/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/de|755|0|0|directory
+share/kf5/kdoctools/customization/dtd/kdedbx45.dtd|644|0|0|regular file
+share/kf5/kdoctools/customization/dtd/modifications.elements|644|0|0|regular file
+share/kf5/kdoctools/customization/dtd/rdbhier2.elements|644|0|0|regular file
+share/kf5/kdoctools/customization/dtd/rdbpool.elements|644|0|0|regular file
+share/kf5/kdoctools/customization/dtd|755|0|0|directory
+share/kf5/kdoctools/customization/el/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/el/entities|755|0|0|directory
+share/kf5/kdoctools/customization/el/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/el/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/el/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/el|755|0|0|directory
+share/kf5/kdoctools/customization/en-GB/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/entities|755|0|0|directory
+share/kf5/kdoctools/customization/en-GB/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/en-GB|755|0|0|directory
+share/kf5/kdoctools/customization/en/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/en/entities|755|0|0|directory
+share/kf5/kdoctools/customization/en/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/en/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/en/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/entities/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/entities/general.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/entities/l10n.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/entities|755|0|0|directory
+share/kf5/kdoctools/customization/en|755|0|0|directory
+share/kf5/kdoctools/customization/eo/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/entities|755|0|0|directory
+share/kf5/kdoctools/customization/eo/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/eo/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/eo|755|0|0|directory
+share/kf5/kdoctools/customization/es/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/es/entities|755|0|0|directory
+share/kf5/kdoctools/customization/es/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/es/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/es/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/es|755|0|0|directory
+share/kf5/kdoctools/customization/et/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/et/entities|755|0|0|directory
+share/kf5/kdoctools/customization/et/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/et/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/et/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/et|755|0|0|directory
+share/kf5/kdoctools/customization/fi/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/entities|755|0|0|directory
+share/kf5/kdoctools/customization/fi/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fi/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fi|755|0|0|directory
+share/kf5/kdoctools/customization/fo/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/entities|755|0|0|directory
+share/kf5/kdoctools/customization/fo/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fo/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fo|755|0|0|directory
+share/kf5/kdoctools/customization/fr/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/entities|755|0|0|directory
+share/kf5/kdoctools/customization/fr/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fr/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/fr|755|0|0|directory
+share/kf5/kdoctools/customization/gl/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/entities|755|0|0|directory
+share/kf5/kdoctools/customization/gl/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/gl/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/gl|755|0|0|directory
+share/kf5/kdoctools/customization/he/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/he/entities|755|0|0|directory
+share/kf5/kdoctools/customization/he/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/he/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/he/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/he|755|0|0|directory
+share/kf5/kdoctools/customization/hu/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/entities|755|0|0|directory
+share/kf5/kdoctools/customization/hu/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/hu/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/hu|755|0|0|directory
+share/kf5/kdoctools/customization/id/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/id/entities|755|0|0|directory
+share/kf5/kdoctools/customization/id/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/id/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/id/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/id|755|0|0|directory
+share/kf5/kdoctools/customization/it/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/it/entities|755|0|0|directory
+share/kf5/kdoctools/customization/it/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/it/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/it/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/it|755|0|0|directory
+share/kf5/kdoctools/customization/ja/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/entities|755|0|0|directory
+share/kf5/kdoctools/customization/ja/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ja/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ja|755|0|0|directory
+share/kf5/kdoctools/customization/kde-chunk-common.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-chunk-online.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-chunk.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-include-common.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-include-man.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-navig-online.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-navig.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-nochunk.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-style.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-ttlpg-online.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-ttlpg.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-web-navig.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/kde-web.xsl|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/entities|755|0|0|directory
+share/kf5/kdoctools/customization/ko/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ko/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ko|755|0|0|directory
+share/kf5/kdoctools/customization/lt/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/entities|755|0|0|directory
+share/kf5/kdoctools/customization/lt/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/lt/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/lt|755|0|0|directory
+share/kf5/kdoctools/customization/nds/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/entities|755|0|0|directory
+share/kf5/kdoctools/customization/nds/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nds/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nds|755|0|0|directory
+share/kf5/kdoctools/customization/nl/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/entities|755|0|0|directory
+share/kf5/kdoctools/customization/nl/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nl/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nl|755|0|0|directory
+share/kf5/kdoctools/customization/nn/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/entities|755|0|0|directory
+share/kf5/kdoctools/customization/nn/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nn/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/nn|755|0|0|directory
+share/kf5/kdoctools/customization/no/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/no/entities|755|0|0|directory
+share/kf5/kdoctools/customization/no/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/no/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/no/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/no|755|0|0|directory
+share/kf5/kdoctools/customization/pl/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/entities|755|0|0|directory
+share/kf5/kdoctools/customization/pl/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pl/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pl|755|0|0|directory
+share/kf5/kdoctools/customization/pt-BR/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/entities|755|0|0|directory
+share/kf5/kdoctools/customization/pt-BR/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt-BR|755|0|0|directory
+share/kf5/kdoctools/customization/pt/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/entities|755|0|0|directory
+share/kf5/kdoctools/customization/pt/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/pt|755|0|0|directory
+share/kf5/kdoctools/customization/ro/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/entities|755|0|0|directory
+share/kf5/kdoctools/customization/ro/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ro/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ro|755|0|0|directory
+share/kf5/kdoctools/customization/ru/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/entities|755|0|0|directory
+share/kf5/kdoctools/customization/ru/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ru/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/ru|755|0|0|directory
+share/kf5/kdoctools/customization/sk/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sk/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sk/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sk|755|0|0|directory
+share/kf5/kdoctools/customization/sl/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sl/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sl/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sl|755|0|0|directory
+share/kf5/kdoctools/customization/sr/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sr/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sr@ijekavian/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavian/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sr@ijekavianlatin/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@ijekavianlatin|755|0|0|directory
+share/kf5/kdoctools/customization/sr@ijekavian|755|0|0|directory
+share/kf5/kdoctools/customization/sr@latin/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sr@latin/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sr@latin|755|0|0|directory
+share/kf5/kdoctools/customization/sr|755|0|0|directory
+share/kf5/kdoctools/customization/sv/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/entities|755|0|0|directory
+share/kf5/kdoctools/customization/sv/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sv/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/sv|755|0|0|directory
+share/kf5/kdoctools/customization/th/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/th/entities|755|0|0|directory
+share/kf5/kdoctools/customization/th/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/th/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/th/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/th|755|0|0|directory
+share/kf5/kdoctools/customization/tr/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/entities|755|0|0|directory
+share/kf5/kdoctools/customization/tr/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/tr/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/tr|755|0|0|directory
+share/kf5/kdoctools/customization/uk/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/entities|755|0|0|directory
+share/kf5/kdoctools/customization/uk/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/uk/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/uk|755|0|0|directory
+share/kf5/kdoctools/customization/wa/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/entities|755|0|0|directory
+share/kf5/kdoctools/customization/wa/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/wa/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/wa|755|0|0|directory
+share/kf5/kdoctools/customization/xh/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/entities|755|0|0|directory
+share/kf5/kdoctools/customization/xh/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xh/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xh|755|0|0|directory
+share/kf5/kdoctools/customization/xsl/README|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/all-l10n.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/ca.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/cs.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/de.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/el.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/en.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/es.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/et.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/fr.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/gl.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/hu.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/it.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/lt.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/nds.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/nl.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/nn.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/pl.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/pt.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/pt_br.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/ru.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sl.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sr.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sr_ijekavian.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sr_ijekavianlatin.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sr_latin.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/sv.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/tr.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl/uk.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xsl|755|0|0|directory
+share/kf5/kdoctools/customization/xx/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/contributor.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/entities|755|0|0|directory
+share/kf5/kdoctools/customization/xx/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xx/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/xx|755|0|0|directory
+share/kf5/kdoctools/customization/zh-CN/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underLGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/entities|755|0|0|directory
+share/kf5/kdoctools/customization/zh-CN/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-CN|755|0|0|directory
+share/kf5/kdoctools/customization/zh-TW/catalog.xml|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/fdl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/gpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/help-menu.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/install-compile.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/install-intro.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/lgpl-notice.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/report-bugs.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/underArtisticLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/underBSDLicense.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/underFDL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/underGPL.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/underX11License.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities/update-doc.docbook|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/entities|755|0|0|directory
+share/kf5/kdoctools/customization/zh-TW/lang.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/strings.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW/user.entities|644|0|0|regular file
+share/kf5/kdoctools/customization/zh-TW|755|0|0|directory
+share/kf5/kdoctools/customization|755|0|0|directory
+share/kf5/kdoctools|755|0|0|directory
+share/kf5|755|0|0|directory
+share/man/man1/checkXML5.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man7/kf5options.7.gz|644|0|0|regular file
+share/man/man7/qt5options.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man/man8/meinproc5.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

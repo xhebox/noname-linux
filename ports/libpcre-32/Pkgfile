@@ -1,0 +1,22 @@
+name=libpcre-32
+version=8.40
+desc="Perl Compatible Regular Expressions"
+deps=libpcre
+source="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$version.tar.bz2"
+
+build(){
+	cd pcre-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure \
+		--prefix= \
+		--libdir=/lib32 \
+		--disable-static --enable-jit --enable-utf  --enable-unicode-properties --enable-pcre16 --enable-pcre32 
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/include
+}

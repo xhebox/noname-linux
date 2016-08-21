@@ -1,0 +1,15 @@
+name=grep
+version=3.0
+desc="The GNU grep utility"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
+deps="bash libpcre"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install   || die
+	rm -r "$pkgdir"/share/info
+}

@@ -1,0 +1,18 @@
+name=libxvmc-32
+version=1.0.10
+desc="Xvmc library"
+deps="xorg-proto libxv-32 libxext-32 libxvmc"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXvMC-$version.tar.bz2"
+
+build() {
+	cd libXvMC-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix= --disable-static --libdir=/lib32
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+}

@@ -1,0 +1,16 @@
+name=groff
+version=1.22.3
+deps="perl gcc"
+desc="GNU troff text-formatting system"
+source="ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--without-x 
+	make arch/misc && make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/share/info
+	rm -rf "$pkgdir"/share/doc
+}

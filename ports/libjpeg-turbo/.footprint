@@ -1,0 +1,31 @@
+lib/libturbojpeg.so.0|777|0|0|symbolic link
+lib/libjpeg.so|777|0|0|symbolic link
+lib/libturbojpeg.so|777|0|0|symbolic link
+lib/libjpeg.so.62|777|0|0|symbolic link
+bin/rdjpgcom|755|0|0|regular file
+bin/tjbench|755|0|0|regular file
+bin/djpeg|755|0|0|regular file
+bin/jpegtran|755|0|0|regular file
+bin/cjpeg|755|0|0|regular file
+bin/wrjpgcom|755|0|0|regular file
+include/jpeglib.h|644|0|0|regular file
+include/turbojpeg.h|644|0|0|regular file
+include/jconfig.h|644|0|0|regular file
+include/jerror.h|644|0|0|regular file
+include/jmorecfg.h|644|0|0|regular file
+lib/libturbojpeg.so.0.1.0|755|0|0|regular file
+lib/libjpeg.so.62.2.0|755|0|0|regular file
+lib/pkgconfig/libjpeg.pc|644|0|0|regular file
+lib/pkgconfig/libturbojpeg.pc|644|0|0|regular file
+share/man/man1/djpeg.1.gz|644|0|0|regular file
+share/man/man1/cjpeg.1.gz|644|0|0|regular file
+share/man/man1/rdjpgcom.1.gz|644|0|0|regular file
+share/man/man1/wrjpgcom.1.gz|644|0|0|regular file
+share/man/man1/jpegtran.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

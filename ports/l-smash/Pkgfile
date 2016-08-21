@@ -1,0 +1,16 @@
+name=l-smash
+version=2.9.1
+desc='MP4 muxer and other tools'
+deps=musl
+source="https://github.com/l-smash/l-smash/archive/v${version}.tar.gz"
+
+build() {
+	cd l-smash-${version}
+
+	./configure \
+		--prefix=/ \
+		--enable-shared \
+		--disable-static
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

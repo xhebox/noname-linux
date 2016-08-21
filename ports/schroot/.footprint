@@ -1,0 +1,172 @@
+bin/dchroot|4755|0|0|regular file
+bin/schroot|4755|0|0|regular file
+bin|755|0|0|directory
+etc/schroot/arch/copyfiles|644|0|0|regular file
+etc/schroot/arch/fstab|644|0|0|regular file
+etc/schroot/arch/nssdatabases|644|0|0|regular file
+etc/schroot/arch|755|0|0|directory
+etc/schroot/buildd/copyfiles|644|0|0|regular file
+etc/schroot/buildd/fstab|644|0|0|regular file
+etc/schroot/buildd/nssdatabases|644|0|0|regular file
+etc/schroot/buildd|755|0|0|directory
+etc/schroot/chroot.d/arch.conf|644|0|0|regular file
+etc/schroot/chroot.d|755|0|0|directory
+etc/schroot/default/copyfiles|644|0|0|regular file
+etc/schroot/default/fstab|644|0|0|regular file
+etc/schroot/default/nssdatabases|644|0|0|regular file
+etc/schroot/default|755|0|0|directory
+etc/schroot/desktop/copyfiles|644|0|0|regular file
+etc/schroot/desktop/fstab|644|0|0|regular file
+etc/schroot/desktop/nssdatabases|644|0|0|regular file
+etc/schroot/desktop|755|0|0|directory
+etc/schroot/minimal/copyfiles|644|0|0|regular file
+etc/schroot/minimal/fstab|644|0|0|regular file
+etc/schroot/minimal/nssdatabases|644|0|0|regular file
+etc/schroot/minimal|755|0|0|directory
+etc/schroot/sbuild/copyfiles|644|0|0|regular file
+etc/schroot/sbuild/fstab|644|0|0|regular file
+etc/schroot/sbuild/nssdatabases|644|0|0|regular file
+etc/schroot/sbuild|755|0|0|directory
+etc/schroot/schroot.conf|644|0|0|regular file
+etc/schroot/setup.d/00check|755|0|0|regular file
+etc/schroot/setup.d/05btrfs|755|0|0|regular file
+etc/schroot/setup.d/05file|755|0|0|regular file
+etc/schroot/setup.d/05lvm|755|0|0|regular file
+etc/schroot/setup.d/05union|755|0|0|regular file
+etc/schroot/setup.d/10mount|755|0|0|regular file
+etc/schroot/setup.d/15binfmt|755|0|0|regular file
+etc/schroot/setup.d/15killprocs|755|0|0|regular file
+etc/schroot/setup.d/20copyfiles|755|0|0|regular file
+etc/schroot/setup.d/20nssdatabases|755|0|0|regular file
+etc/schroot/setup.d/50chrootname|755|0|0|regular file
+etc/schroot/setup.d/70services|755|0|0|regular file
+etc/schroot/setup.d/99check|777|0|0|symbolic link
+etc/schroot/setup.d|755|0|0|directory
+etc/schroot|755|0|0|directory
+etc|755|0|0|directory
+include/sbuild/auth/auth.h|644|0|0|regular file
+include/sbuild/auth/deny.h|644|0|0|regular file
+include/sbuild/auth|755|0|0|directory
+include/sbuild/chroot/chroot.h|644|0|0|regular file
+include/sbuild/chroot/config.h|644|0|0|regular file
+include/sbuild/chroot/facet/block-device-base.h|644|0|0|regular file
+include/sbuild/chroot/facet/block-device.h|644|0|0|regular file
+include/sbuild/chroot/facet/custom.h|644|0|0|regular file
+include/sbuild/chroot/facet/directory-base.h|644|0|0|regular file
+include/sbuild/chroot/facet/directory.h|644|0|0|regular file
+include/sbuild/chroot/facet/facet.h|644|0|0|regular file
+include/sbuild/chroot/facet/factory.h|644|0|0|regular file
+include/sbuild/chroot/facet/file.h|644|0|0|regular file
+include/sbuild/chroot/facet/fsunion.h|644|0|0|regular file
+include/sbuild/chroot/facet/loopback.h|644|0|0|regular file
+include/sbuild/chroot/facet/lvm-snapshot.h|644|0|0|regular file
+include/sbuild/chroot/facet/mountable.h|644|0|0|regular file
+include/sbuild/chroot/facet/personality.h|644|0|0|regular file
+include/sbuild/chroot/facet/plain.h|644|0|0|regular file
+include/sbuild/chroot/facet/session-clonable.h|644|0|0|regular file
+include/sbuild/chroot/facet/session-setup.h|644|0|0|regular file
+include/sbuild/chroot/facet/session.h|644|0|0|regular file
+include/sbuild/chroot/facet/source-clonable.h|644|0|0|regular file
+include/sbuild/chroot/facet/source-setup.h|644|0|0|regular file
+include/sbuild/chroot/facet/source.h|644|0|0|regular file
+include/sbuild/chroot/facet/storage.h|644|0|0|regular file
+include/sbuild/chroot/facet/unshare.h|644|0|0|regular file
+include/sbuild/chroot/facet/userdata.h|644|0|0|regular file
+include/sbuild/chroot/facet|755|0|0|directory
+include/sbuild/chroot|755|0|0|directory
+include/sbuild/ctty.h|644|0|0|regular file
+include/sbuild/custom-error.h|644|0|0|regular file
+include/sbuild/environment.h|644|0|0|regular file
+include/sbuild/error.h|644|0|0|regular file
+include/sbuild/error.tcc|644|0|0|regular file
+include/sbuild/fdstream.h|644|0|0|regular file
+include/sbuild/feature.h|644|0|0|regular file
+include/sbuild/format-detail.h|644|0|0|regular file
+include/sbuild/i18n.h|644|0|0|regular file
+include/sbuild/keyfile-reader.h|644|0|0|regular file
+include/sbuild/keyfile-writer.h|644|0|0|regular file
+include/sbuild/keyfile.h|644|0|0|regular file
+include/sbuild/lock.h|644|0|0|regular file
+include/sbuild/log.h|644|0|0|regular file
+include/sbuild/mntstream.h|644|0|0|regular file
+include/sbuild/nostream.h|644|0|0|regular file
+include/sbuild/parse-error.h|644|0|0|regular file
+include/sbuild/parse-value.h|644|0|0|regular file
+include/sbuild/personality.h|644|0|0|regular file
+include/sbuild/regex.h|644|0|0|regular file
+include/sbuild/run-parts.h|644|0|0|regular file
+include/sbuild/session.h|644|0|0|regular file
+include/sbuild/types.h|644|0|0|regular file
+include/sbuild/util.h|644|0|0|regular file
+include/sbuild|755|0|0|directory
+include|755|0|0|directory
+lib/libsbuild.so.1.7.2|755|0|0|regular file
+lib/libsbuild.so|777|0|0|symbolic link
+lib/pkgconfig/sbuild.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/schroot/listmounts|755|0|0|regular file
+lib/schroot/mount|755|0|0|regular file
+lib/schroot|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/schroot|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/locale/cs/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/da/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/en/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/en/LC_MESSAGES|755|0|0|directory
+share/locale/en|755|0|0|directory
+share/locale/eu/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES|755|0|0|directory
+share/locale/eu|755|0|0|directory
+share/locale/fr/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/it/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/pt/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/sv/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/vi/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/schroot.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/dchroot.1.gz|644|0|0|regular file
+share/man/man1/schroot.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/schroot-script-config.5.gz|644|0|0|regular file
+share/man/man5/schroot-setup.5.gz|644|0|0|regular file
+share/man/man5/schroot.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man7/schroot-faq.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man|755|0|0|directory
+share/schroot/setup/common-config|644|0|0|regular file
+share/schroot/setup/common-data|644|0|0|regular file
+share/schroot/setup/common-functions|644|0|0|regular file
+share/schroot/setup|755|0|0|directory
+share/schroot|755|0|0|directory
+share|755|0|0|directory
+var/lib/schroot/mount|755|0|0|directory
+var/lib/schroot/session|755|0|0|directory
+var/lib/schroot/union/overlay|755|0|0|directory
+var/lib/schroot/union/underlay|755|0|0|directory
+var/lib/schroot/union|755|0|0|directory
+var/lib/schroot/unpack|755|0|0|directory
+var/lib/schroot|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory

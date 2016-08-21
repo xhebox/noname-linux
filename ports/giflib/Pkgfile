@@ -1,0 +1,14 @@
+name=giflib
+version=5.1.4
+deps=xmlto
+desc="A library for reading and writing gif images"
+source="
+http://downloads.sourceforge.net/sourceforge/giflib/giflib-${version}.tar.bz2
+"
+
+build() {
+	cd giflib-$version
+	./configure --prefix= --disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

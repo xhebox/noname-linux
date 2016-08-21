@@ -1,0 +1,27 @@
+etc/asound.conf|644|0|0|regular file
+etc|755|0|0|directory
+lib/alsa-lib/libasound_module_conf_pulse.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_ctl_arcam_av.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_ctl_oss.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_ctl_pulse.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_oss.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_pulse.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_speex.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_upmix.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_usb_stream.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_pcm_vdownmix.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_rate_samplerate.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_rate_samplerate_best.so|777|0|0|symbolic link
+lib/alsa-lib/libasound_module_rate_samplerate_linear.so|777|0|0|symbolic link
+lib/alsa-lib/libasound_module_rate_samplerate_medium.so|777|0|0|symbolic link
+lib/alsa-lib/libasound_module_rate_samplerate_order.so|777|0|0|symbolic link
+lib/alsa-lib/libasound_module_rate_speexrate.so|755|0|0|regular file
+lib/alsa-lib/libasound_module_rate_speexrate_best.so|777|0|0|symbolic link
+lib/alsa-lib/libasound_module_rate_speexrate_medium.so|777|0|0|symbolic link
+lib/alsa-lib|755|0|0|directory
+lib|755|0|0|directory
+share/alsa/alsa.conf.d/50-pulseaudio.conf|644|0|0|regular file
+share/alsa/alsa.conf.d/99-pulseaudio-default.conf.example|644|0|0|regular file
+share/alsa/alsa.conf.d|755|0|0|directory
+share/alsa|755|0|0|directory
+share|755|0|0|directory

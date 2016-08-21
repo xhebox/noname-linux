@@ -1,0 +1,18 @@
+name=kcoreaddons
+version=5.33.0
+desc='Addons to QtCore'
+deps="qt5-base shared-mime-info extra-cmake-modules qt5-tools llvm"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kcoreaddons-${version}.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../kcoreaddons-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-D_KDE4_DEFAULT_HOME_POSTFIX=4 \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

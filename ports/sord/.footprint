@@ -1,0 +1,19 @@
+bin/sord_validate|755|0|0|regular file
+bin/sordi|755|0|0|regular file
+bin|755|0|0|directory
+include/sord-0/sord/sord.h|644|0|0|regular file
+include/sord-0/sord/sordmm.hpp|644|0|0|regular file
+include/sord-0/sord|755|0|0|directory
+include/sord-0|755|0|0|directory
+include|755|0|0|directory
+lib/libsord-0.so.0.14.0|755|0|0|regular file
+lib/libsord-0.so.0|777|0|0|symbolic link
+lib/libsord-0.so|777|0|0|symbolic link
+lib/pkgconfig/sord-0.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/sord_validate.1.gz|644|0|0|regular file
+share/man/man1/sordi.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

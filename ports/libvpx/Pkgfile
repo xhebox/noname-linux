@@ -1,0 +1,34 @@
+name=libvpx
+version=1.6.1
+deps="bash perl yasm"
+desc="Library for the vp8 codec"
+source="
+https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Fix-for-issue-1114-compile-error.patch?h=packages/libvpx
+https://github.com/webmproject/libvpx/archive/v${version}.tar.gz
+"
+
+build() {
+	cd $name-$version
+	for i in $source; do
+		case $i in
+		libvpx) patch -p1 -i "$srcdir"/$i ;;
+		*.patch) patch -p1 -i "$srcdir"/$i ;;
+		esac
+	done
+	export CROSS=" "
+	bash ./configure \
+		--prefix= \
+		--enable-vp8 \
+		--enable-vp9 \
+		--enable-vp9-highbitdepth \
+		--enable-runtime-cpu-detect \
+		--enable-shared \
+		--enable-postproc \
+		--enable-pic \
+		--enable-experimental --enable-spatial-svc \
+		--disable-install-docs \
+		--disable-install-srcs \
+		--disable-static
+	make || die
+	make DIST_DIR="$pkgdir" install || die
+}

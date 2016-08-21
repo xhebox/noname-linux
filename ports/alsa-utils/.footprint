@@ -1,0 +1,77 @@
+bin/aconnect|755|0|0|regular file
+bin/alsa-info.sh|755|0|0|regular file
+bin/alsactl|755|0|0|regular file
+bin/alsaloop|755|0|0|regular file
+bin/alsamixer|755|0|0|regular file
+bin/alsatplg|755|0|0|regular file
+bin/alsaucm|755|0|0|regular file
+bin/amidi|755|0|0|regular file
+bin/amixer|755|0|0|regular file
+bin/aplaymidi|755|0|0|regular file
+bin/aplay|755|0|0|regular file
+bin/arecordmidi|755|0|0|regular file
+bin/arecord|777|0|0|symbolic link
+bin/aseqdump|755|0|0|regular file
+bin/aseqnet|755|0|0|regular file
+bin/iecset|755|0|0|regular file
+bin/speaker-test|755|0|0|regular file
+bin|755|0|0|directory
+lib/udev/rules.d/90-alsa-restore.rules|644|0|0|regular file
+lib/udev/rules.d|755|0|0|directory
+lib/udev|755|0|0|directory
+lib|755|0|0|directory
+share/alsa/init/00main|644|0|0|regular file
+share/alsa/init/ca0106|644|0|0|regular file
+share/alsa/init/default|644|0|0|regular file
+share/alsa/init/hda|644|0|0|regular file
+share/alsa/init/help|644|0|0|regular file
+share/alsa/init/info|644|0|0|regular file
+share/alsa/init/test|644|0|0|regular file
+share/alsa/init|755|0|0|directory
+share/alsa/speaker-test/sample_map.csv|644|0|0|regular file
+share/alsa/speaker-test|755|0|0|directory
+share/alsa|755|0|0|directory
+share/locale/de/LC_MESSAGES/alsa-utils.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/fr/LC_MESSAGES/alsa-utils.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/ja/LC_MESSAGES/alsa-utils.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/aconnect.1.gz|644|0|0|regular file
+share/man/man1/alsa-info.sh.1.gz|644|0|0|regular file
+share/man/man1/alsactl.1.gz|644|0|0|regular file
+share/man/man1/alsaloop.1.gz|644|0|0|regular file
+share/man/man1/alsamixer.1.gz|644|0|0|regular file
+share/man/man1/amidi.1.gz|644|0|0|regular file
+share/man/man1/amixer.1.gz|644|0|0|regular file
+share/man/man1/aplay.1.gz|644|0|0|regular file
+share/man/man1/aplaymidi.1.gz|644|0|0|regular file
+share/man/man1/arecord.1.gz|777|0|0|symbolic link
+share/man/man1/arecordmidi.1.gz|644|0|0|regular file
+share/man/man1/aseqdump.1.gz|644|0|0|regular file
+share/man/man1/aseqnet.1.gz|644|0|0|regular file
+share/man/man1/iecset.1.gz|644|0|0|regular file
+share/man/man1/speaker-test.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man7/alsactl_init.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man|755|0|0|directory
+share/sounds/alsa/Front_Center.wav|644|0|0|regular file
+share/sounds/alsa/Front_Left.wav|644|0|0|regular file
+share/sounds/alsa/Front_Right.wav|644|0|0|regular file
+share/sounds/alsa/Noise.wav|644|0|0|regular file
+share/sounds/alsa/Rear_Center.wav|644|0|0|regular file
+share/sounds/alsa/Rear_Left.wav|644|0|0|regular file
+share/sounds/alsa/Rear_Right.wav|644|0|0|regular file
+share/sounds/alsa/Side_Left.wav|644|0|0|regular file
+share/sounds/alsa/Side_Right.wav|644|0|0|regular file
+share/sounds/alsa|755|0|0|directory
+share/sounds|755|0|0|directory
+share|755|0|0|directory
+var/lib/alsa|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory

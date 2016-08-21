@@ -1,0 +1,199 @@
+name=linux
+version=4.10.8
+desc="Linux system kernel"
+_zenpatch=zen-4.10.8-3dba096c1a08bb6884978b4af803ae9ee9a43a38.diff
+source="https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-${version%.*}.tar.xz
+https://www.kernel.org/pub/linux/kernel/v4.x/patch-${version}.xz
+https://raw.githubusercontent.com/dolohow/uksm/master/uksm-${version%.*}.patch
+http://pkgbuild.com/~heftig/zen-patches/${_zenpatch}.xz
+libc-4.8-portability.patch
+linux.preset
+config
+"
+deps="linux-headers perl bc bash libgmp elfutils kmod linux-firmware mkinitcpio gzip docbook-xsl xmlto"
+KARCH=x86
+
+setk() {
+	_kernelname="-zen$1"
+	_kernver="${version}${_kernelname}"
+	_basekernel=${_kernver%%-*}
+	_basekernel=${_basekernel%.*}
+}
+setk '-native'
+
+_ext() {
+	cd linux-${version%.*}
+	patch -Np1 -i "${srcdir}/patch-${version}" || die
+	patch -p1 -i "${srcdir}/${_zenpatch}" || die
+	patch -p1 -i "${srcdir}/uksm-${version%.*}.patch" || die
+
+	# disable strip
+	export PKG_NO_STRIP=yes
+
+	cp "$srcdir"/config .config
+
+	# CONFIG_EXPERT=y
+	# CONFIG_CFG80211_INTERNAL_REGDB=y
+	sed -i 's/# CONFIG_EXPERT is not set/CONFIG_EXPERT=y/g' .config
+	sed -i 's/# CONFIG_CFG80211_INTERNAL_REGDB is not set/CONFIG_CFG80211_INTERNAL_REGDB=y/g' .config
+
+	sed -i 's/\$(LIBS)/& $(LDFLAGS)/' tools/power/cpupower/bench/Makefile
+	sed -i 's/SIGCLD/SIGCHLD/g' tools/usb/usbip/src/usbipd.c
+	curl -L https://raw.githubusercontent.com/Distrotech/wireless-regdb/master/db.txt -o net/wireless/db.txt || die
+}
+
+ext() {
+	_ext
+	sed -i -e 's/CONFIG_GENERIC_CPU=y/# CONFIG_GENERIC_CPU is not set/g' \
+		-e 's/# CONFIG_MNATIVE is not set/CONFIG_MNATIVE=y/g' \
+	.config
+	sed -i 's/CONFIG_LOCALVERSION=".*"/CONFIG_LOCALVERSION="-native"/g' .config
+	sed -i "s/-zen/$_kernelname/g" ../linux.preset
+}
+
+build() {
+	cd linux-${version%.*}
+	make \
+	silentoldconfig || die
+
+	mkdir -p "$pkgdir"/boot
+
+	sed -i '2iexit 0' scripts/depmod.sh
+
+	make \
+	INSTALL_MOD_PATH="$pkgdir" INSTALL_PATH="$pkgdir/boot" bzImage modules  || die
+
+	make ARCH=$ARCH KCFLAGS="$CFLAGS " INSTALL_MOD_PATH="$pkgdir" INSTALL_PATH="$pkgdir/boot" modules_install || die
+
+	cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-linux${_kernelname}"
+
+	rm -f "${pkgdir}"/lib/modules/${_kernver}/source
+	rm -f "${pkgdir}"/lib/modules/${_kernver}/build
+	rm -rf "${pkgdir}/lib/firmware"
+	mkdir -p "${pkgdir}/lib/modules/extramodules-${_basekernel}${_kernelname}"
+	ln -s "../extramodules-${_basekernel}${_kernelname}" "${pkgdir}/lib/modules/${_kernver}/extramodules"
+	echo "${_kernver}" > "${pkgdir}/lib/modules/extramodules-${_basekernel}${_kernelname}/version"
+	depmod -b "${pkgdir}" -F System.map "${_kernver}"
+	install -D -m644 vmlinux "${pkgdir}/lib/modules/${_kernver}/build/vmlinux"
+
+	install -D -m644 Makefile \
+	"${pkgdir}/lib/modules/${_kernver}/build/Makefile"
+	install -D -m644 kernel/Makefile \
+	"${pkgdir}/lib/modules/${_kernver}/build/kernel/Makefile"
+	install -D -m644 .config \
+	"${pkgdir}/lib/modules/${_kernver}/build/.config"
+
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/include"
+
+	for i in acpi asm-generic config crypto drm generated keys linux math-emu \
+		media net pcmcia scsi soc sound trace uapi video xen; do
+		cp -a include/${i} "${pkgdir}/lib/modules/${_kernver}/build/include/"
+	done
+
+# copy arch includes for external modules
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/arch/x86"
+	cp -a arch/x86/include "${pkgdir}/lib/modules/${_kernver}/build/arch/x86/"
+
+# copy files necessary for later builds, like nvidia and vmware
+	cp Module.symvers "${pkgdir}/lib/modules/${_kernver}/build"
+	cp -a scripts "${pkgdir}/lib/modules/${_kernver}/build"
+
+# fix permissions on scripts dir
+	chmod og-w -R "${pkgdir}/lib/modules/${_kernver}/build/scripts"
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/.tmp_versions"
+
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/arch/${KARCH}/kernel"
+
+	cp arch/${KARCH}/Makefile "${pkgdir}/lib/modules/${_kernver}/build/arch/${KARCH}/"
+
+	cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/lib/modules/${_kernver}/build/arch/${KARCH}/kernel/"
+
+# add docbook makefile
+	install -D -m644 Documentation/DocBook/Makefile \
+	"${pkgdir}/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
+
+# add dm headers
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/md"
+	cp drivers/md/*.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/md"
+
+# add inotify.h
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/include/linux"
+	cp include/linux/inotify.h "${pkgdir}/lib/modules/${_kernver}/build/include/linux/"
+
+# add wireless headers
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/net/mac80211/"
+	cp net/mac80211/*.h "${pkgdir}/lib/modules/${_kernver}/build/net/mac80211/"
+
+# add dvb headers for external modules
+# in reference to:
+# http://bugs.archlinux.org/task/9912
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-core"
+	cp drivers/media/dvb-core/*.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-core/"
+# and...
+# http://bugs.archlinux.org/task/11194
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/include/config/dvb/"
+	cp include/config/dvb/*.h "${pkgdir}/lib/modules/${_kernver}/build/include/config/dvb/"
+
+# add dvb headers for http://mcentral.de/hg/~mrec/em28xx-new
+# in reference to:
+# http://bugs.archlinux.org/task/13146
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
+	cp drivers/media/dvb-frontends/lgdt330x.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
+mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/i2c/"
+	cp drivers/media/i2c/msp3400-driver.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/i2c/"
+
+# add dvb headers
+# in reference to:
+# http://bugs.archlinux.org/task/20402
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb"
+	cp drivers/media/usb/dvb-usb/*.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb/"
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-frontends"
+	cp drivers/media/dvb-frontends/*.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/tuners"
+	cp drivers/media/tuners/*.h "${pkgdir}/lib/modules/${_kernver}/build/drivers/media/tuners/"
+
+# add xfs and shmem for aufs building
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/fs/xfs"
+	mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/mm"
+
+# copy in Kconfig files
+	for i in $(find . -name "Kconfig*"); do
+		mkdir -p "${pkgdir}"/lib/modules/${_kernver}/build/`echo ${i} | sed 's|/Kconfig.*||'`
+		cp ${i} "${pkgdir}/lib/modules/${_kernver}/build/${i}"
+	done
+
+# add objtool for external module building and enabled VALIDATION_STACK option
+	if [ -f tools/objtool/objtool ];  then
+		mkdir -p "${pkgdir}/lib/modules/${_kernver}/build/tools/objtool"
+		cp -a tools/objtool/objtool ${pkgdir}/lib/modules/${_kernver}/build/tools/objtool/
+	fi
+
+	chown -R root.root "${pkgdir}/lib/modules/${_kernver}/build"
+	find "${pkgdir}/lib/modules/${_kernver}/build" -type d -exec chmod 755 {} \;
+
+# strip scripts directory
+	find "${pkgdir}/lib/modules/${_kernver}/build/scripts" -type f -perm -u+w 2>/dev/null | while read binary ; do
+	    case "$(file -bi "${binary}")" in
+		      *application/x-sharedlib*) # Libraries (.so)
+		      /bin/strip ${STRIP_SHARED} "${binary}";;
+		      *application/x-archive*) # Libraries (.a)
+		      /bin/strip ${STRIP_STATIC} "${binary}";;
+		      *application/x-executable*) # Binaries
+		      /bin/strip ${STRIP_BINARIES} "${binary}";;
+	    esac
+	done
+
+	install -D -m644 Documentation/DocBook/Makefile \
+	"${pkgdir}/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
+
+	install -Dm644 ../linux.preset "${pkgdir}/etc/mkinitcpio.d/linux${_kernelname}.preset"
+}
+
+post() {
+	if [ "$UPD" -eq 1 ]; then
+		pchroot "$ROOT" /bin/depmod $_kernver || die
+		pchroot "$ROOT" /bin/rm -f /boot/initramfs-linux${_kernelname}.img || die
+		pchroot "$ROOT" /bin/rm -f /boot/initramfs-linux${_kernelname}-fallback.img || die
+		pchroot "$ROOT" /bin/mkinitcpio -p linux${_kernelname} || die
+	fi
+}

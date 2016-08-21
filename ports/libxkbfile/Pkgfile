@@ -1,0 +1,15 @@
+name=libxkbfile
+version=1.0.9
+deps=libx11
+desc="xorg lib libxkbfile"
+source="http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-$version.tar.bz2"
+
+build() {
+	cd libxkbfile-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

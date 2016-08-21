@@ -1,0 +1,12 @@
+name=iasl
+version=20170224
+desc="Intel ACPI Source Language compiler"
+deps="flex bison"
+source="https://acpica.org/sites/acpica/files/acpica-unix-${version}.tar.gz"
+
+build() {
+	cd acpica-unix-$version/generate/unix
+
+	make || die
+	make PREFIX= DESTDIR=${pkgdir} install || die
+}

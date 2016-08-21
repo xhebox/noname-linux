@@ -1,0 +1,13 @@
+name=libjpeg-turbo
+version=1.5.1
+deps=nasm
+desc="Library of JPEG support functions."
+source="http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static --mandir=/share/man
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share/doc
+}

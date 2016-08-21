@@ -1,0 +1,18 @@
+name=toxcore
+_name=c-toxcore
+version=0.1.8
+desc="Secure, configuration-free, P2P Skype replacement backend"
+deps="libconfig libsodium libvpx opus check"
+source="https://github.com/TokTok/${_name}/archive/v${version}.tar.gz"
+
+build() {
+	cd $_name-$version
+	autoreconf -if
+	./configure \
+		--prefix= \
+		--enable-daemon \
+		--disable-ntox \
+		--enable-tests
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

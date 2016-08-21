@@ -1,0 +1,9 @@
+lib32/libgnutls.so.30.14.2|755|0|0|regular file
+lib32/libgnutls.so.30|777|0|0|symbolic link
+lib32/libgnutls.so|777|0|0|symbolic link
+lib32/libgnutlsxx.so.28.1.0|755|0|0|regular file
+lib32/libgnutlsxx.so.28|777|0|0|symbolic link
+lib32/libgnutlsxx.so|777|0|0|symbolic link
+lib32/pkgconfig/gnutls.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

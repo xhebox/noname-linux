@@ -1,0 +1,61 @@
+lib/pkgconfig/xcb-proto.pc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/xtypes.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/__init__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/xtypes.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/matcher.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/xtypes.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/matcher.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/error.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/expr.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/__init__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/align.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/align.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/state.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/expr.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/error.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/state.pyo|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/align.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/__init__.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/expr.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/state.pyc|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/error.py|644|0|0|regular file
+lib/python2.7/site-packages/xcbgen/matcher.pyc|644|0|0|regular file
+share/xcb/xcb.xsd|644|0|0|regular file
+share/xcb/xselinux.xml|644|0|0|regular file
+share/xcb/xproto.xml|644|0|0|regular file
+share/xcb/record.xml|644|0|0|regular file
+share/xcb/shm.xml|644|0|0|regular file
+share/xcb/xinerama.xml|644|0|0|regular file
+share/xcb/shape.xml|644|0|0|regular file
+share/xcb/randr.xml|644|0|0|regular file
+share/xcb/ge.xml|644|0|0|regular file
+share/xcb/xkb.xml|644|0|0|regular file
+share/xcb/glx.xml|644|0|0|regular file
+share/xcb/composite.xml|644|0|0|regular file
+share/xcb/bigreq.xml|644|0|0|regular file
+share/xcb/xinput.xml|644|0|0|regular file
+share/xcb/xevie.xml|644|0|0|regular file
+share/xcb/res.xml|644|0|0|regular file
+share/xcb/xc_misc.xml|644|0|0|regular file
+share/xcb/screensaver.xml|644|0|0|regular file
+share/xcb/xf86dri.xml|644|0|0|regular file
+share/xcb/dpms.xml|644|0|0|regular file
+share/xcb/dri2.xml|644|0|0|regular file
+share/xcb/xprint.xml|644|0|0|regular file
+share/xcb/xf86vidmode.xml|644|0|0|regular file
+share/xcb/xtest.xml|644|0|0|regular file
+share/xcb/present.xml|644|0|0|regular file
+share/xcb/xv.xml|644|0|0|regular file
+share/xcb/dri3.xml|644|0|0|regular file
+share/xcb/sync.xml|644|0|0|regular file
+share/xcb/damage.xml|644|0|0|regular file
+share/xcb/xvmc.xml|644|0|0|regular file
+share/xcb/xfixes.xml|644|0|0|regular file
+share/xcb/render.xml|644|0|0|regular file
+share/xcb|755|0|0|directory
+share|755|0|0|directory
+lib/python2.7/site-packages/xcbgen|755|0|0|directory
+lib/python2.7/site-packages|755|0|0|directory
+lib/python2.7|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

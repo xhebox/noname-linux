@@ -1,0 +1,14 @@
+name=libva
+version=1.8.1
+desc="vaapi"
+deps="xorg-proto libxfixes libx11 libdrm"
+source="https://www.freedesktop.org/software/vaapi/releases/libva/libva-$version.tar.bz2"
+
+build() {
+	cd libva-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

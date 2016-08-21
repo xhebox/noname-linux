@@ -1,0 +1,4 @@
+lib32/libgpg-error.so.0.22.0|755|0|0|regular file
+lib32/libgpg-error.so.0|777|0|0|symbolic link
+lib32/libgpg-error.so|777|0|0|symbolic link
+lib32|755|0|0|directory

@@ -1,0 +1,13 @@
+name=gpgme
+version=1.9.0
+deps="libassuan libgpg-error"
+source="https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2"
+
+build() {
+	cd gpgme-$version
+
+	./configure --prefix= --disable-fd-passing --disable-static \
+              --disable-gpgsm-test
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

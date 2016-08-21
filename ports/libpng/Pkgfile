@@ -1,0 +1,16 @@
+name=libpng
+version=1.6.29
+deps=zlib
+desc="Library of PNG support functions with APNG support."
+source="http://download.sourceforge.net/$name/$name-$version.tar.xz
+http://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-$version-apng.patch.gz"
+
+build() {
+	cd $name-$version
+	patch -p1 < ../libpng-$version-apng.patch || die
+	./configure --prefix= --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm "$pkgdir"/lib/libpng.la
+}
+

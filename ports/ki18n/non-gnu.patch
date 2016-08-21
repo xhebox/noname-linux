@@ -1,0 +1,20 @@
+--- ki18n-5.32.0/src/kcatalog.cpp	2017-03-04 16:13:47.000000000 +0000
++++ ki18n-5.32.0/src/kcatalog.cpp	2017-03-04 16:13:47.000000000 +0000
+@@ -41,7 +41,7 @@
+ #endif
+ #endif
+ 
+-#if defined(__USE_GNU_GETTEXT)
++#if 0
+ extern "C" int Q_DECL_IMPORT _nl_msg_cat_cntr;
+ #endif
+ 
+@@ -173,7 +173,7 @@
+ 
+         // Magic to make sure GNU Gettext doesn't use stale cached translation
+         // from previous language.
+-#if defined(__USE_GNU_GETTEXT)
++#if 0
+         ++_nl_msg_cat_cntr;
+ #endif
+     }

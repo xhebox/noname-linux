@@ -1,0 +1,35 @@
+name=cairo
+version=1.14.8
+desc="A 2D graphics library with support for multiple output devices"
+deps="fontconfig libpng pixman libx11 libxcb libxrender libjpeg-turbo libxext glib lzo"
+source="https://cairographics.org/releases/$name-$version.tar.xz
+"
+
+ext() {
+        cd $name-$version
+	for i in $source; do
+		case $i in
+		*musl*.patch) patch -p0 -i "$srcdir/$i" || die;;
+		*.patch) patch -p1 -i "$srcdir/$i" || die;;
+		esac
+	done
+}
+
+build() {
+        cd $name-$version
+        ./configure \
+		--prefix= \
+		--libdir=/lib \
+		--libexecdir=/lib \
+		--disable-static \
+		--enable-tee \
+		--enable-gl \
+		--enable-egl \
+		--enable-svg \
+		--enable-ps \
+		--enable-pdf \
+		--enable-gobject \
+                --disable-gtk-doc
+        make
+        make DESTDIR="$pkgdir" install
+}

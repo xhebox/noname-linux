@@ -1,0 +1,19 @@
+. $PORTS/libpng/Pkgfile
+name=libpng-32
+deps="zlib-32 libpng"
+
+build() {
+	cd libpng-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	patch -p1 < ../libpng-$version-apng.patch || die
+	./configure --prefix= --disable-static --libdir=/lib32
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm "$pkgdir"/lib32/libpng.la
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/bin
+}
+

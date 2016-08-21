@@ -1,0 +1,23 @@
+name=clisp
+version=2.49
+desc="ANSI Common Lisp interpreter, compiler and debugger"
+deps="readline libsigsegv ffcall"
+source="http://downloads.sourceforge.net/sourceforge/clisp/clisp-${version}.tar.bz2
+no-page.h.patch
+patch-modules_readline_readline.lisp"
+
+ext() {
+	cd clisp-${version}
+	patch -Np0 -i ../patch-modules_readline_readline.lisp || die
+	patch -p0 -i ../no-page.h.patch || die
+	sed -i 's/clisp\.cons\.org/clisp.org/' src/cfgunix.lisp
+}
+
+build() {
+	cd clisp-${version}
+	ulimit -s 16384
+	./configure --prefix= --without-dynamic-modules --with-ffcall --with-dynamic-ffi --disable-rpath
+	cd src
+	make -j1 || die
+	make -j1 prefix= DESTDIR="$pkgdir" install || die
+}

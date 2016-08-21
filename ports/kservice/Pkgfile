@@ -1,0 +1,17 @@
+name=kservice
+version=5.33.0
+desc='Advanced plugin and service introspection'
+deps="ki18n kconfig kcrash kdbusaddons extra-cmake-modules kdoctools python3"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kservice-${version}.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../kservice-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

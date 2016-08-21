@@ -1,0 +1,15 @@
+name=libasyncns
+version=0.8
+source="
+http://0pointer.de/lennart/projects/$name/$name-$version.tar.gz
+"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--disable-static
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,10 @@
+--- c-blosc-1.11.3/bench/bench.c	2017-03-09 11:56:46.000000000 +0000
++++ c-blosc-1.11.3/bench/bench.c	2017-03-09 11:56:46.000000000 +0000
+@@ -41,6 +41,7 @@
+   #if defined(__GLIBC__)
+     #include <time.h>
+   #else
++    #include <time.h>
+     #include <sys/time.h>
+   #endif
+ #else

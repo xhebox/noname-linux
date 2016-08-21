@@ -1,0 +1,15 @@
+name=libtxc_dxtn
+version=1.0.1
+source="http://people.freedesktop.org/~cbrill/$name/$name-$version.tar.bz2"
+desc="S3 Texture Compression (S3TC) library for Mesa"
+deps=mesa
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+}
+

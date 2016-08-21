@@ -1,0 +1,13 @@
+name=metis
+version=5.1.0.p3
+_pkgver=`echo $version | sed 's/\.p/-p/g'`
+desc="A set of serial programs for partitioning graphs, partitioning finite element meshes, and producing fill reducing orderings for sparse matrices"
+deps="cmake musl"
+source="http://ftp.mcs.anl.gov/pub/petsc/externalpackages/metis-${_pkgver}.tar.gz"
+
+build() {
+	cd metis-$_pkgver
+	make config shared=1 prefix= || die
+	make || die
+	make install DESTDIR="$pkgdir" || die
+}

@@ -1,0 +1,16 @@
+name=qtstyleplugins
+version=git
+desc="GTK+ for qt5"
+deps="qt5-x11extras gtk3"
+
+ext() {
+	git clone --depth=1 git://code.qt.io/qt/qtstyleplugins.git
+}
+
+build() {
+	cd $name
+	qmake PREFIX='/' LIBDIR='/lib'
+	make || die
+	make INSTALL_ROOT="${pkgdir}" install || die
+	rm --recursive "${pkgdir}/lib/cmake"
+}

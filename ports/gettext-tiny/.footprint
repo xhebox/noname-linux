@@ -1,0 +1,40 @@
+bin/msgfmt|755|0|0|regular file
+bin|755|0|0|directory
+include|755|0|0|directory
+lib|755|0|0|directory
+share/gettext-tiny/m4/ansi-c++.m4|644|0|0|regular file
+share/gettext-tiny/m4/codeset.m4|644|0|0|regular file
+share/gettext-tiny/m4/configheader.m4|644|0|0|regular file
+share/gettext-tiny/m4/fcntl-o.m4|644|0|0|regular file
+share/gettext-tiny/m4/gettext.m4|644|0|0|regular file
+share/gettext-tiny/m4/glibc2.m4|644|0|0|regular file
+share/gettext-tiny/m4/glibc21.m4|644|0|0|regular file
+share/gettext-tiny/m4/iconv.m4|644|0|0|regular file
+share/gettext-tiny/m4/intdiv0.m4|644|0|0|regular file
+share/gettext-tiny/m4/intl.m4|644|0|0|regular file
+share/gettext-tiny/m4/intldir.m4|644|0|0|regular file
+share/gettext-tiny/m4/intlmacosx.m4|644|0|0|regular file
+share/gettext-tiny/m4/intmax.m4|644|0|0|regular file
+share/gettext-tiny/m4/inttypes-pri.m4|644|0|0|regular file
+share/gettext-tiny/m4/inttypes_h.m4|644|0|0|regular file
+share/gettext-tiny/m4/lcmessage.m4|644|0|0|regular file
+share/gettext-tiny/m4/lib-ld.m4|644|0|0|regular file
+share/gettext-tiny/m4/lib-link.m4|644|0|0|regular file
+share/gettext-tiny/m4/lib-prefix.m4|644|0|0|regular file
+share/gettext-tiny/m4/lock.m4|644|0|0|regular file
+share/gettext-tiny/m4/longlong.m4|644|0|0|regular file
+share/gettext-tiny/m4/nls.m4|644|0|0|regular file
+share/gettext-tiny/m4/po.m4|644|0|0|regular file
+share/gettext-tiny/m4/printf-posix.m4|644|0|0|regular file
+share/gettext-tiny/m4/progtest.m4|644|0|0|regular file
+share/gettext-tiny/m4/size_max.m4|644|0|0|regular file
+share/gettext-tiny/m4/stdint_h.m4|644|0|0|regular file
+share/gettext-tiny/m4/threadlib.m4|644|0|0|regular file
+share/gettext-tiny/m4/uintmax_t.m4|644|0|0|regular file
+share/gettext-tiny/m4/visibility.m4|644|0|0|regular file
+share/gettext-tiny/m4/wchar_t.m4|644|0|0|regular file
+share/gettext-tiny/m4/wint_t.m4|644|0|0|regular file
+share/gettext-tiny/m4/xsize.m4|644|0|0|regular file
+share/gettext-tiny/m4|755|0|0|directory
+share/gettext-tiny|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,28 @@
+name=libarchive
+version=3.3.1
+desc="Library to read/write several different streaming archive formats"
+source="http://www.libarchive.org/downloads/libarchive-${version}.tar.gz
+filter-xz-enable-threads.patch
+libressl.patch"
+deps="zlib bzip2 acl lz4 libressl expat lzo xz"
+
+ext() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*xz*.patch) patch -p0 -i "$srcdir"/"$i" || die;;
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+}
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+	--enable-acl --enable-xattr \
+	--enable-expat --enable-lz4 \
+	--enable-openssl --without-xml2 --without-nettle \
+	--disable-rpath ac_cv_func_lchmod=no
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

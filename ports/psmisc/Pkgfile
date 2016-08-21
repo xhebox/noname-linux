@@ -1,0 +1,23 @@
+name=psmisc
+version=22.21
+deps="ncurses"
+desc="Small set of utilities that use the linux proc filesystem"
+source="http://downloads.sourceforge.net/psmisc/${name}-${version}.tar.gz
+fuser.patch
+musl.patch"
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p0 < ../`basename $i` ;;
+		esac
+	done
+	./configure --prefix=/ \
+		--libexecdir=/lib \
+		--bindir=/bin --sbindir=/bin \
+		--libdir=/lib --enable-shared --disable-static \
+		--without-selinux --with-acl --with-attr --enable-subordinate-ids 
+	make  || die
+	make DESTDIR="$pkgdir" install   || die
+}

@@ -1,0 +1,81 @@
+name=nss
+version=3.30.2
+desc="Mozilla Network Security Services (NSS)"
+deps="nspr sqlite xmlto python"
+_version=`echo $version | sed 's/\./_/g'`
+source="https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${_version}_RTM/src/nss-${version}.tar.gz
+nss-config.in
+nss-config.xml
+nss.pc.in"
+
+ext() {
+	echo -n "$(date +"%e %B %Y")" >date.xml
+	echo -n "$version" >version.xml
+	cd nss-$version
+	sed -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/' \
+	-i nss/coreconf/rules.mk
+}
+
+build() {
+	xmlto man nss-config.xml || die
+
+	cd $name-$version/nss
+
+	export BUILD_OPT=1
+	export NSS_USE_SYSTEM_SQLITE=1
+	export NSS_ALLOW_SSLKEYLOGFILE=1
+	export NSS_ENABLE_ECC=1
+	export NSS_ENABLE_WERROR=0
+	export NSPR_INCLUDE_DIR="`nspr-config --includedir`"
+	export NSPR_LIB_DIR="`nspr-config --libdir`"
+	export XCFLAGS="${CFLAGS}"
+	export USE_64=1
+
+	make -j1 -C coreconf || die
+	make -j1 -C lib/dbm || die
+	make -j1 || die
+	make clean_docs build_docs || die
+	cd ..
+
+	install -d "$pkgdir"/bin
+	install -d "$pkgdir"/lib/pkgconfig
+	install -d "$pkgdir"/include/nss
+	install -d "$pkgdir"/share/man/man1
+	NSS_VMAJOR=`awk '/#define.*NSS_VMAJOR/ {print $3}' nss/lib/nss/nss.h `
+	NSS_VMINOR=`awk '/#define.*NSS_VMINOR/ {print $3}' nss/lib/nss/nss.h`
+	NSS_VPATCH=`awk '/#define.*NSS_VPATCH/ {print $3}' nss/lib/nss/nss.h`
+
+	sed "$srcdir"/nss.pc.in \
+	-e "s,%libdir%,/lib,g" \
+	-e "s,%prefix%,/,g" \
+	-e "s,%exec_prefix%,/bin,g" \
+	-e "s,%includedir%,/include/nss,g" \
+	-e "s,%NSPR_VERSION%,$version,g" \
+	-e "s,%NSS_VERSION%,$version,g" \
+	> "$pkgdir"/lib/pkgconfig/nss.pc
+	ln -sf nss.pc "$pkgdir"/lib/pkgconfig/mozilla-nss.pc
+	chmod 644 "$pkgdir"/lib/pkgconfig/*.pc
+
+	sed "$srcdir"/nss-config.in \
+	-e "s,@libdir@,/lib,g" \
+	-e "s,@prefix@,/bin,g" \
+	-e "s,@exec_prefix@,/bin,g" \
+	-e "s,@includedir@,/include/nss,g" \
+	-e "s,@MOD_MAJOR_VERSION@,${NSS_VMAJOR},g" \
+	-e "s,@MOD_MINOR_VERSION@,${NSS_VMINOR},g" \
+	-e "s,@MOD_PATCH_VERSION@,${NSS_VPATCH},g" \
+	> "$pkgdir"/bin/nss-config
+	chmod 755 "$pkgdir"/bin/nss-config
+
+	install -t "$pkgdir/share/man/man1" -m644 nss/doc/nroff/*.1 ../nss-config.1
+
+	cd dist
+	install -t "$pkgdir/include/nss" -m644 public/nss/*.h
+
+	cd *.OBJ/bin
+	install -t "$pkgdir/bin" *util derdump pp shlibsign signtool signver ssltap vfychain vfyserv
+
+	cd ../lib
+	install -t "$pkgdir/lib" *.so
+	install -t "$pkgdir/lib" -m644 *.chk libcrmf.a
+}

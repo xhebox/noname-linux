@@ -1,0 +1,260 @@
+include/qt/QtLocation/5.8.0/QtLocation/private/qabstractgeotilecache_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qcache3q_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocameracapabilities_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocameradata_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocameratiles_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocodereply_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocodingmanager_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeocodingmanagerengine_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeofiletilecache_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomaneuver_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomap_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomap_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomappingmanager_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomappingmanager_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomappingmanagerengine_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomappingmanagerengine_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomaptype_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeomaptype_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoroute_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeorouteparser_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeorouteparser_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeorouteparserosrmv4_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeorouteparserosrmv5_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoroutereply_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeorouterequest_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoroutesegment_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoroutingmanager_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoroutingmanagerengine_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeoserviceprovider_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmap_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmap_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmappingmanagerengine_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmappingmanagerengine_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmapreply_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmapreply_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotiledmapscene_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotilefetcher_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotilefetcher_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotilerequestmanager_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotilespec_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qgeotilespec_p_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qlocationglobal_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplace_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceattribute_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacecategory_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacecontactdetail_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacecontent_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacecontentrequest_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceeditorial_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceicon_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceimage_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacemanagerengine_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceproposedsearchresult_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceratings_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacereply_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceresult_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacereview_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacesearchresult_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplacesupplier_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/qplaceuser_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private/unsupportedreplies_p.h|644|0|0|regular file
+include/qt/QtLocation/5.8.0/QtLocation/private|755|0|0|directory
+include/qt/QtLocation/5.8.0/QtLocation|755|0|0|directory
+include/qt/QtLocation/5.8.0|755|0|0|directory
+include/qt/QtLocation/QGeoCodeReply|644|0|0|regular file
+include/qt/QtLocation/QGeoCodingManagerEngine|644|0|0|regular file
+include/qt/QtLocation/QGeoCodingManager|644|0|0|regular file
+include/qt/QtLocation/QGeoManeuver|644|0|0|regular file
+include/qt/QtLocation/QGeoRouteReply|644|0|0|regular file
+include/qt/QtLocation/QGeoRouteRequest|644|0|0|regular file
+include/qt/QtLocation/QGeoRouteSegment|644|0|0|regular file
+include/qt/QtLocation/QGeoRoute|644|0|0|regular file
+include/qt/QtLocation/QGeoRoutingManagerEngine|644|0|0|regular file
+include/qt/QtLocation/QGeoRoutingManager|644|0|0|regular file
+include/qt/QtLocation/QGeoServiceProviderFactory|644|0|0|regular file
+include/qt/QtLocation/QGeoServiceProvider|644|0|0|regular file
+include/qt/QtLocation/QLocation|644|0|0|regular file
+include/qt/QtLocation/QPlaceAttribute|644|0|0|regular file
+include/qt/QtLocation/QPlaceCategory|644|0|0|regular file
+include/qt/QtLocation/QPlaceContactDetail|644|0|0|regular file
+include/qt/QtLocation/QPlaceContentReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceContentRequest|644|0|0|regular file
+include/qt/QtLocation/QPlaceContent|644|0|0|regular file
+include/qt/QtLocation/QPlaceDetailsReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceEditorial|644|0|0|regular file
+include/qt/QtLocation/QPlaceIcon|644|0|0|regular file
+include/qt/QtLocation/QPlaceIdReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceImage|644|0|0|regular file
+include/qt/QtLocation/QPlaceManagerEngine|644|0|0|regular file
+include/qt/QtLocation/QPlaceManager|644|0|0|regular file
+include/qt/QtLocation/QPlaceMatchReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceMatchRequest|644|0|0|regular file
+include/qt/QtLocation/QPlaceProposedSearchResult|644|0|0|regular file
+include/qt/QtLocation/QPlaceRatings|644|0|0|regular file
+include/qt/QtLocation/QPlaceReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceResult|644|0|0|regular file
+include/qt/QtLocation/QPlaceReview|644|0|0|regular file
+include/qt/QtLocation/QPlaceSearchReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceSearchRequest|644|0|0|regular file
+include/qt/QtLocation/QPlaceSearchResult|644|0|0|regular file
+include/qt/QtLocation/QPlaceSearchSuggestionReply|644|0|0|regular file
+include/qt/QtLocation/QPlaceSupplier|644|0|0|regular file
+include/qt/QtLocation/QPlaceUser|644|0|0|regular file
+include/qt/QtLocation/QPlace|644|0|0|regular file
+include/qt/QtLocation/QtLocationDepends|644|0|0|regular file
+include/qt/QtLocation/QtLocationVersion|644|0|0|regular file
+include/qt/QtLocation/QtLocation|644|0|0|regular file
+include/qt/QtLocation/placemacro.h|644|0|0|regular file
+include/qt/QtLocation/qgeocodereply.h|644|0|0|regular file
+include/qt/QtLocation/qgeocodingmanager.h|644|0|0|regular file
+include/qt/QtLocation/qgeocodingmanagerengine.h|644|0|0|regular file
+include/qt/QtLocation/qgeomaneuver.h|644|0|0|regular file
+include/qt/QtLocation/qgeoroute.h|644|0|0|regular file
+include/qt/QtLocation/qgeoroutereply.h|644|0|0|regular file
+include/qt/QtLocation/qgeorouterequest.h|644|0|0|regular file
+include/qt/QtLocation/qgeoroutesegment.h|644|0|0|regular file
+include/qt/QtLocation/qgeoroutingmanager.h|644|0|0|regular file
+include/qt/QtLocation/qgeoroutingmanagerengine.h|644|0|0|regular file
+include/qt/QtLocation/qgeoserviceprovider.h|644|0|0|regular file
+include/qt/QtLocation/qgeoserviceproviderfactory.h|644|0|0|regular file
+include/qt/QtLocation/qlocation.h|644|0|0|regular file
+include/qt/QtLocation/qlocationglobal.h|644|0|0|regular file
+include/qt/QtLocation/qplace.h|644|0|0|regular file
+include/qt/QtLocation/qplaceattribute.h|644|0|0|regular file
+include/qt/QtLocation/qplacecategory.h|644|0|0|regular file
+include/qt/QtLocation/qplacecontactdetail.h|644|0|0|regular file
+include/qt/QtLocation/qplacecontent.h|644|0|0|regular file
+include/qt/QtLocation/qplacecontentreply.h|644|0|0|regular file
+include/qt/QtLocation/qplacecontentrequest.h|644|0|0|regular file
+include/qt/QtLocation/qplacedetailsreply.h|644|0|0|regular file
+include/qt/QtLocation/qplaceeditorial.h|644|0|0|regular file
+include/qt/QtLocation/qplaceicon.h|644|0|0|regular file
+include/qt/QtLocation/qplaceidreply.h|644|0|0|regular file
+include/qt/QtLocation/qplaceimage.h|644|0|0|regular file
+include/qt/QtLocation/qplacemanager.h|644|0|0|regular file
+include/qt/QtLocation/qplacemanagerengine.h|644|0|0|regular file
+include/qt/QtLocation/qplacematchreply.h|644|0|0|regular file
+include/qt/QtLocation/qplacematchrequest.h|644|0|0|regular file
+include/qt/QtLocation/qplaceproposedsearchresult.h|644|0|0|regular file
+include/qt/QtLocation/qplaceratings.h|644|0|0|regular file
+include/qt/QtLocation/qplacereply.h|644|0|0|regular file
+include/qt/QtLocation/qplaceresult.h|644|0|0|regular file
+include/qt/QtLocation/qplacereview.h|644|0|0|regular file
+include/qt/QtLocation/qplacesearchreply.h|644|0|0|regular file
+include/qt/QtLocation/qplacesearchrequest.h|644|0|0|regular file
+include/qt/QtLocation/qplacesearchresult.h|644|0|0|regular file
+include/qt/QtLocation/qplacesearchsuggestionreply.h|644|0|0|regular file
+include/qt/QtLocation/qplacesupplier.h|644|0|0|regular file
+include/qt/QtLocation/qplaceuser.h|644|0|0|regular file
+include/qt/QtLocation/qtlocationversion.h|644|0|0|regular file
+include/qt/QtLocation|755|0|0|directory
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qdeclarativegeoaddress_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qdeclarativegeolocation_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qdoublevector2d_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qdoublevector3d_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeoaddress_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeocircle_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeocoordinate_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeolocation_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeopositioninfosource_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeoprojection_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeorectangle_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qgeoshape_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qlocationdata_simulator_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qlocationutils_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qnmeapositioninfosource_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qpositioningglobal_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private/qtpositioning-config_p.h|644|0|0|regular file
+include/qt/QtPositioning/5.8.0/QtPositioning/private|755|0|0|directory
+include/qt/QtPositioning/5.8.0/QtPositioning|755|0|0|directory
+include/qt/QtPositioning/5.8.0|755|0|0|directory
+include/qt/QtPositioning/QGeoAddress|644|0|0|regular file
+include/qt/QtPositioning/QGeoAreaMonitorInfo|644|0|0|regular file
+include/qt/QtPositioning/QGeoAreaMonitorSource|644|0|0|regular file
+include/qt/QtPositioning/QGeoCircle|644|0|0|regular file
+include/qt/QtPositioning/QGeoCoordinate|644|0|0|regular file
+include/qt/QtPositioning/QGeoLocation|644|0|0|regular file
+include/qt/QtPositioning/QGeoPositionInfoSourceFactory|644|0|0|regular file
+include/qt/QtPositioning/QGeoPositionInfoSource|644|0|0|regular file
+include/qt/QtPositioning/QGeoPositionInfo|644|0|0|regular file
+include/qt/QtPositioning/QGeoRectangle|644|0|0|regular file
+include/qt/QtPositioning/QGeoSatelliteInfoSource|644|0|0|regular file
+include/qt/QtPositioning/QGeoSatelliteInfo|644|0|0|regular file
+include/qt/QtPositioning/QGeoShape|644|0|0|regular file
+include/qt/QtPositioning/QNmeaPositionInfoSource|644|0|0|regular file
+include/qt/QtPositioning/QtPositioningDepends|644|0|0|regular file
+include/qt/QtPositioning/QtPositioningVersion|644|0|0|regular file
+include/qt/QtPositioning/QtPositioning|644|0|0|regular file
+include/qt/QtPositioning/qgeoaddress.h|644|0|0|regular file
+include/qt/QtPositioning/qgeoareamonitorinfo.h|644|0|0|regular file
+include/qt/QtPositioning/qgeoareamonitorsource.h|644|0|0|regular file
+include/qt/QtPositioning/qgeocircle.h|644|0|0|regular file
+include/qt/QtPositioning/qgeocoordinate.h|644|0|0|regular file
+include/qt/QtPositioning/qgeolocation.h|644|0|0|regular file
+include/qt/QtPositioning/qgeopositioninfo.h|644|0|0|regular file
+include/qt/QtPositioning/qgeopositioninfosource.h|644|0|0|regular file
+include/qt/QtPositioning/qgeopositioninfosourcefactory.h|644|0|0|regular file
+include/qt/QtPositioning/qgeorectangle.h|644|0|0|regular file
+include/qt/QtPositioning/qgeosatelliteinfo.h|644|0|0|regular file
+include/qt/QtPositioning/qgeosatelliteinfosource.h|644|0|0|regular file
+include/qt/QtPositioning/qgeoshape.h|644|0|0|regular file
+include/qt/QtPositioning/qnmeapositioninfosource.h|644|0|0|regular file
+include/qt/QtPositioning/qpositioningglobal.h|644|0|0|regular file
+include/qt/QtPositioning/qtpositioning-config.h|644|0|0|regular empty file
+include/qt/QtPositioning/qtpositioningversion.h|644|0|0|regular file
+include/qt/QtPositioning|755|0|0|directory
+include/qt|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/Qt5Location/Qt5LocationConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5Location/Qt5LocationConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5Location/Qt5Location_GeoServiceProviderFactoryEsri.cmake|644|0|0|regular file
+lib/cmake/Qt5Location/Qt5Location_QGeoServiceProviderFactoryMapbox.cmake|644|0|0|regular file
+lib/cmake/Qt5Location/Qt5Location_QGeoServiceProviderFactoryNokia.cmake|644|0|0|regular file
+lib/cmake/Qt5Location/Qt5Location_QGeoServiceProviderFactoryOsm.cmake|644|0|0|regular file
+lib/cmake/Qt5Location|755|0|0|directory
+lib/cmake/Qt5Positioning/Qt5PositioningConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5Positioning/Qt5PositioningConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Qt5Positioning/Qt5Positioning_QGeoPositionInfoSourceFactoryGeoclue.cmake|644|0|0|regular file
+lib/cmake/Qt5Positioning/Qt5Positioning_QGeoPositionInfoSourceFactoryPoll.cmake|644|0|0|regular file
+lib/cmake/Qt5Positioning|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libQt5Location.prl|644|0|0|regular file
+lib/libQt5Location.so.5.8.0|755|0|0|regular file
+lib/libQt5Location.so.5.8|777|0|0|symbolic link
+lib/libQt5Location.so.5|777|0|0|symbolic link
+lib/libQt5Location.so|777|0|0|symbolic link
+lib/libQt5Positioning.prl|644|0|0|regular file
+lib/libQt5Positioning.so.5.8.0|755|0|0|regular file
+lib/libQt5Positioning.so.5.8|777|0|0|symbolic link
+lib/libQt5Positioning.so.5|777|0|0|symbolic link
+lib/libQt5Positioning.so|777|0|0|symbolic link
+lib/pkgconfig/Qt5Location.pc|644|0|0|regular file
+lib/pkgconfig/Qt5Positioning.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/qt/mkspecs/modules/qt_lib_location.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_location_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_positioning.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_positioning_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt/plugins/geoservices/libqtgeoservices_esri.so|755|0|0|regular file
+lib/qt/plugins/geoservices/libqtgeoservices_mapbox.so|755|0|0|regular file
+lib/qt/plugins/geoservices/libqtgeoservices_nokia.so|755|0|0|regular file
+lib/qt/plugins/geoservices/libqtgeoservices_osm.so|755|0|0|regular file
+lib/qt/plugins/geoservices|755|0|0|directory
+lib/qt/plugins/position/libqtposition_geoclue.so|755|0|0|regular file
+lib/qt/plugins/position/libqtposition_positionpoll.so|755|0|0|regular file
+lib/qt/plugins/position|755|0|0|directory
+lib/qt/plugins|755|0|0|directory
+lib/qt/qml/QtLocation/libdeclarative_location.so|755|0|0|regular file
+lib/qt/qml/QtLocation/plugins.qmltypes|644|0|0|regular file
+lib/qt/qml/QtLocation/qmldir|644|0|0|regular file
+lib/qt/qml/QtLocation|755|0|0|directory
+lib/qt/qml/QtPositioning/libdeclarative_positioning.so|755|0|0|regular file
+lib/qt/qml/QtPositioning/plugins.qmltypes|644|0|0|regular file
+lib/qt/qml/QtPositioning/qmldir|644|0|0|regular file
+lib/qt/qml/QtPositioning|755|0|0|directory
+lib/qt/qml|755|0|0|directory
+lib/qt|755|0|0|directory
+lib|755|0|0|directory

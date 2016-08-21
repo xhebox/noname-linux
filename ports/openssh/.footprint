@@ -1,0 +1,44 @@
+bin/findssl.sh|755|0|0|regular file
+bin/scp|755|0|0|regular file
+bin/sftp|755|0|0|regular file
+bin/ssh-add|755|0|0|regular file
+bin/ssh-agent|755|0|0|regular file
+bin/ssh-copy-id|755|0|0|regular file
+bin/ssh-keygen|755|0|0|regular file
+bin/ssh-keyscan|755|0|0|regular file
+bin/sshd|755|0|0|regular file
+bin/ssh|755|0|0|regular file
+bin|755|0|0|directory
+etc/ssh/moduli|644|0|0|regular file
+etc/ssh/ssh_config|644|0|0|regular file
+etc/ssh/sshd_config|644|0|0|regular file
+etc/ssh|755|0|0|directory
+etc|755|0|0|directory
+lib/ssh/sftp-server|755|0|0|regular file
+lib/ssh/ssh-keysign|4711|0|0|regular file
+lib/ssh/ssh-pkcs11-helper|755|0|0|regular file
+lib/ssh|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/scp.1.gz|644|0|0|regular file
+share/man/man1/sftp.1.gz|644|0|0|regular file
+share/man/man1/slogin.1.gz|777|0|0|symbolic link
+share/man/man1/ssh-add.1.gz|644|0|0|regular file
+share/man/man1/ssh-agent.1.gz|644|0|0|regular file
+share/man/man1/ssh-copy-id.1.gz|644|0|0|regular file
+share/man/man1/ssh-keygen.1.gz|644|0|0|regular file
+share/man/man1/ssh-keyscan.1.gz|644|0|0|regular file
+share/man/man1/ssh.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/moduli.5.gz|644|0|0|regular file
+share/man/man5/ssh_config.5.gz|644|0|0|regular file
+share/man/man5/sshd_config.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/sftp-server.8.gz|644|0|0|regular file
+share/man/man8/ssh-keysign.8.gz|644|0|0|regular file
+share/man/man8/ssh-pkcs11-helper.8.gz|644|0|0|regular file
+share/man/man8/sshd.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+var/empty|755|0|0|directory
+var|755|0|0|directory

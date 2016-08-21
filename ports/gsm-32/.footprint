@@ -1,0 +1,4 @@
+lib32/libgsm.so.1.0.13|755|0|0|regular file
+lib32/libgsm.so.1|777|0|0|symbolic link
+lib32/libgsm.so|777|0|0|symbolic link
+lib32|755|0|0|directory

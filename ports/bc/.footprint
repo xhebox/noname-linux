@@ -1,0 +1,8 @@
+bin/bc|755|0|0|regular file
+bin/dc|755|0|0|regular file
+bin|755|0|0|directory
+share/man/man1/bc.1.gz|644|0|0|regular file
+share/man/man1/dc.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

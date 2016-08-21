@@ -1,0 +1,12 @@
+name=sbsms
+version=2.0.2
+desc="Library for time stretching and pitch scaling of audio"
+deps="gcc"
+source="http://downloads.sourceforge.net/project/sbsms/sbsms/$version/libsbsms-$version.tar.gz"
+
+build() {
+	cd libsbsms-$version
+	./configure --prefix= --enable-shared
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

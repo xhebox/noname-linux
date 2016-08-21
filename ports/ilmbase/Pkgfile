@@ -1,0 +1,20 @@
+name=ilmbase
+version=2.2.0
+desc="Base libraries from ILM for OpenEXR"
+deps="musl"
+source="http://download.savannah.nongnu.org/releases/openexr/${name}-${version}.tar.gz
+ilmbase-2.0.1-no_undefined.patch"
+
+build() {
+	cd ilmbase-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i || die;;
+		esac
+	done
+	LDFLAGS="-lpthread"
+	find * -type f -exec sed -i 's/bin\/sh/bin\/bash/g' {} \;
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

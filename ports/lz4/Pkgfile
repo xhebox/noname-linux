@@ -1,0 +1,12 @@
+name=lz4
+version=1.7.5
+desc="fast lossless compression algorithm"
+source="https://github.com/lz4/lz4/archive/v$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	make -C lib PREFIX=  || die
+	make -C programs PREFIX= lz4 lz4c  || die
+	make PREFIX= DESTDIR="$pkgdir" install  || die
+}

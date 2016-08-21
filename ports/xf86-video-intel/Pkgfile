@@ -1,0 +1,20 @@
+name=xf86-video-intel
+version=2.99.917+772+gc72bb27a
+deps="xorg-server xcb-util libxscrnsaver libxvmc libxcb xcb-util"
+desc="Intel graphics video driver"
+
+ext() {
+	git clone git://anongit.freedesktop.org/xorg/driver/xf86-video-intel
+	cd xf86-video-intel
+	git reset --hard ${version#*+g}
+}
+
+build() {
+	cd xf86-video-intel
+	./autogen.sh --prefix=/ --libexecdir=/lib --disable-static \
+	--with-default-accel=sna --enable-uxa --enable-sna \
+	--enable-xvmc --enable-kms-only \
+	--enable-dri3 --with-default-dri=3
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

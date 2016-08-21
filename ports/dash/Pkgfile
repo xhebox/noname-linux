@@ -1,0 +1,15 @@
+name=dash
+version=0.5.9.1
+deps=musl
+desc="The Almquist shell, a POSIX-compliant /bin/sh implementation"
+source="http://gondor.apana.org.au/~herbert/dash/files/dash-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	ln -s dash "$pkgdir"/bin/sh
+	ln -s dash.1 "$pkgdir"/share/man/man1/sh.1
+}
+

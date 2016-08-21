@@ -1,0 +1,27 @@
+# fstab: static file system information for chroots.
+# Note that the mount point will be prefixed by the chroot path
+# (CHROOT_PATH)
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/proc           /proc           none    rw,bind         0       0
+/sys            /sys            none    rw,bind         0       0
+/dev            /dev            none    rw,bind         0       0
+/dev/pts        /dev/pts        none    rw,bind         0       0
+/home           /home           none    rw,bind         0       0
+/tmp            /tmp            none    rw,bind         0       0
+
+# If you use gdm3, uncomment this line to allow Xauth to work
+#/var/run/gdm3  /var/run/gdm3   none    rw,bind         0       0
+# For PulseAudio and other desktop-related things
+#/var/lib/dbus    /var/lib/dbus  none    rw,bind         0       0
+/var/lib/dbus/machine-id    /etc/machine-id  none    rw,bind         0       0
+/run/dbus/system_bus_socket    /run/dbus/system_bus_socket  none    rw,bind         0       0
+/dev/shm       /dev/shm        none    rw,bind         0       0
+
+# It may be desirable to have access to /run, especially if you wish
+# to run additional services in the chroot.  However, note that this
+# may potentially cause undesirable behaviour on upgrades, such as
+# killing services on the host.
+#/run           /run            none    rw,bind         0       0
+#/run/lock      /run/lock       none    rw,bind         0       0
+#/run/shm       /run/shm        none    rw,bind         0       0

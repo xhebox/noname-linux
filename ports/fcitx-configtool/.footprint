@@ -1,0 +1,16 @@
+bin/fcitx-config-gtk3|755|0|0|regular file
+bin|755|0|0|directory
+share/locale/de/LC_MESSAGES/fcitx-configtool.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/ja/LC_MESSAGES/fcitx-configtool.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/fcitx-configtool.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/fcitx-configtool.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share|755|0|0|directory

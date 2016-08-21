@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z "$XDG_VTNR" ]; then
+	exec /bin/X -nolisten tcp "$@"
+else
+	exec /bin/X -nolisten tcp "$@" vt$XDG_VTNR
+fi

@@ -1,0 +1,10 @@
+lib|755|0|0|directory
+lib/libpixman-1.so.0|777|0|0|symbolic link
+lib/libpixman-1.so.0.34.0|755|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/pkgconfig/pixman-1.pc|644|0|0|regular file
+lib/libpixman-1.so|777|0|0|symbolic link
+include|755|0|0|directory
+include/pixman-1|755|0|0|directory
+include/pixman-1/pixman-version.h|644|0|0|regular file
+include/pixman-1/pixman.h|644|0|0|regular file

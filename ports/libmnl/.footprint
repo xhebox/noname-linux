@@ -1,0 +1,9 @@
+lib/libmnl.so|777|0|0|symbolic link
+lib/libmnl.so.0|777|0|0|symbolic link
+include/libmnl/libmnl.h|644|0|0|regular file
+lib/libmnl.so.0.2.0|755|0|0|regular file
+lib/pkgconfig/libmnl.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/libmnl|755|0|0|directory
+include|755|0|0|directory

@@ -1,0 +1,18 @@
+bin/pdnsd-ctl|755|0|0|regular file
+bin/pdnsd|755|0|0|regular file
+bin|755|0|0|directory
+etc|755|0|0|directory
+share/doc/pdnsd/pdnsd.conf|644|0|0|regular file
+share/doc/pdnsd|755|0|0|directory
+share/doc|755|0|0|directory
+share/man/man5/pdnsd.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/pdnsd-ctl.8.gz|644|0|0|regular file
+share/man/man8/pdnsd.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+var/cache/pdnsd/pdnsd.cache|640|184|184|regular empty file
+var/cache/pdnsd|750|184|184|directory
+var/cache|755|0|0|directory
+var|755|0|0|directory

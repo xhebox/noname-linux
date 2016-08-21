@@ -1,0 +1,17 @@
+name=minizip
+version=1.2.11
+desc="a library for manipulation with files from .zip archives"
+deps=zlib
+source="http://zlib.net/zlib-$version.tar.gz"
+
+build() {
+	cd zlib-$version/contrib/minizip
+
+	autoreconf -if
+
+	./configure --prefix=/ \
+	--enable-static=no
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

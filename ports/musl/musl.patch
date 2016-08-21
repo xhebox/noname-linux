@@ -1,0 +1,2176 @@
+diff --git a/Makefile b/Makefile
+index 8246b78f..d2e89979 100644
+--- a/Makefile
++++ b/Makefile
+@@ -35,7 +35,7 @@ AOBJS = $(LIBC_OBJS)
+ LOBJS = $(LIBC_OBJS:.o=.lo)
+ GENH = obj/include/bits/alltypes.h obj/include/bits/syscall.h
+ GENH_INT = obj/src/internal/version.h
+-IMPH = $(addprefix $(srcdir)/, src/internal/stdio_impl.h src/internal/pthread_impl.h src/internal/libc.h)
++IMPH = $(addprefix $(srcdir)/, src/internal/stdio_impl.h src/internal/pthread_impl.h src/internal/locale_impl.h src/internal/libc.h)
+ 
+ LDFLAGS =
+ LDFLAGS_AUTO =
+diff --git a/arch/arm/bits/limits.h b/arch/arm/bits/limits.h
+index 65a3dd64..fbc6d238 100644
+--- a/arch/arm/bits/limits.h
++++ b/arch/arm/bits/limits.h
+@@ -1,6 +1,5 @@
+ #if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
+  || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+-#define PAGE_SIZE 4096
+ #define LONG_BIT 32
+ #endif
+ 
+diff --git a/arch/i386/bits/signal.h b/arch/i386/bits/signal.h
+index 1f9085a5..9931ee93 100644
+--- a/arch/i386/bits/signal.h
++++ b/arch/i386/bits/signal.h
+@@ -7,25 +7,44 @@
+ #endif
+ 
+ #ifdef _GNU_SOURCE
+-#define REG_GS          0
+-#define REG_FS          1
+-#define REG_ES          2
+-#define REG_DS          3
+-#define REG_EDI         4
+-#define REG_ESI         5
+-#define REG_EBP         6
+-#define REG_ESP         7
+-#define REG_EBX         8
+-#define REG_EDX         9
+-#define REG_ECX         10
+-#define REG_EAX         11
+-#define REG_TRAPNO      12
+-#define REG_ERR         13
+-#define REG_EIP         14
+-#define REG_CS          15
+-#define REG_EFL         16
+-#define REG_UESP        17
+-#define REG_SS          18
++enum { REG_GS = 0 };
++#define REG_GS REG_GS
++enum { REG_FS = 1 };
++#define REG_FS REG_FS
++enum { REG_ES = 2 };
++#define REG_ES REG_ES
++enum { REG_DS = 3 };
++#define REG_DS REG_DS
++enum { REG_EDI = 4 };
++#define REG_EDI REG_EDI
++enum { REG_ESI = 5 };
++#define REG_ESI REG_ESI
++enum { REG_EBP = 6 };
++#define REG_EBP REG_EBP
++enum { REG_ESP = 7 };
++#define REG_ESP REG_ESP
++enum { REG_EBX = 8 };
++#define REG_EBX REG_EBX
++enum { REG_EDX = 9 };
++#define REG_EDX REG_EDX
++enum { REG_ECX = 10 };
++#define REG_ECX REG_ECX
++enum { REG_EAX = 11 };
++#define REG_EAX REG_EAX
++enum { REG_TRAPNO = 12 };
++#define REG_TRAPNO REG_TRAPNO
++enum { REG_ERR = 13 };
++#define REG_ERR REG_ERR
++enum { REG_EIP = 14 };
++#define REG_EIP REG_EIP
++enum { REG_CS = 15 };
++#define REG_CS REG_CS
++enum { REG_EFL = 16 };
++#define REG_EFL REG_EFL
++enum { REG_UESP = 17 };
++#define REG_UESP REG_UESP
++enum { REG_SS = 18 };
++#define REG_SS REG_SS
+ #endif
+ 
+ #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+diff --git a/arch/powerpc64/reloc.h b/arch/powerpc64/reloc.h
+index e1bad009..faf70acd 100644
+--- a/arch/powerpc64/reloc.h
++++ b/arch/powerpc64/reloc.h
+@@ -27,6 +27,6 @@
+ 	"	bl 1f \n" \
+ 	"	.long " #sym "-. \n" \
+ 	"1:	mflr %1 \n" \
+-	"	lwz %0, 0(%1) \n" \
++	"	lwa %0, 0(%1) \n" \
+ 	"	add %0, %0, %1 \n" \
+ 	: "=r"(*(fp)), "=r"((long){0}) : : "memory", "lr" )
+diff --git a/arch/s390x/bits/signal.h b/arch/s390x/bits/signal.h
+index c8665832..e5aca4ba 100644
+--- a/arch/s390x/bits/signal.h
++++ b/arch/s390x/bits/signal.h
+@@ -33,6 +33,21 @@ typedef struct
+ 	fpregset_t fpregs;
+ } mcontext_t;
+ 
++struct sigcontext {
++	unsigned long oldmask[1];
++	struct {
++		struct {
++			__psw_t psw;
++			unsigned long gprs[16];
++			unsigned acrs[16];
++		} regs;
++		struct {
++			unsigned fpc;
++			double fprs[16];
++		} fpregs;
++	} *sregs;
++};
++
+ #else
+ 
+ typedef struct {
+diff --git a/arch/s390x/bits/user.h b/arch/s390x/bits/user.h
+index 90f07b78..17bce16f 100644
+--- a/arch/s390x/bits/user.h
++++ b/arch/s390x/bits/user.h
+@@ -8,7 +8,7 @@ typedef union {
+ 
+ typedef struct {
+ 	unsigned fpc;
+-	fpreg_t fprs[16];
++	elf_fpreg_t fprs[16];
+ } elf_fpregset_t;
+ 
+ #define ELF_NGREG 27
+@@ -32,7 +32,7 @@ struct _user_per_struct {
+ 	unsigned short perc_atmid;
+ 	unsigned long address;
+ 	unsigned char access_id;
+-} per_struct;
++};
+ 
+ struct _user_regs_struct {
+ 	struct _user_psw_struct psw;
+diff --git a/arch/x32/bits/signal.h b/arch/x32/bits/signal.h
+index 4c4adf31..097be6f4 100644
+--- a/arch/x32/bits/signal.h
++++ b/arch/x32/bits/signal.h
+@@ -7,29 +7,52 @@
+ #endif
+ 
+ #ifdef _GNU_SOURCE
+-#define REG_R8          0
+-#define REG_R9          1
+-#define REG_R10         2
+-#define REG_R11         3
+-#define REG_R12         4
+-#define REG_R13         5
+-#define REG_R14         6
+-#define REG_R15         7
+-#define REG_RDI         8
+-#define REG_RSI         9
+-#define REG_RBP         10
+-#define REG_RBX         11
+-#define REG_RDX         12
+-#define REG_RAX         13
+-#define REG_RCX         14
+-#define REG_RSP         15
+-#define REG_RIP         16
+-#define REG_EFL         17
+-#define REG_CSGSFS      18
+-#define REG_ERR         19
+-#define REG_TRAPNO      20
+-#define REG_OLDMASK     21
+-#define REG_CR2         22
++enum { REG_R8 = 0 };
++#define REG_R8 REG_R8
++enum { REG_R9 = 1 };
++#define REG_R9 REG_R9
++enum { REG_R10 = 2 };
++#define REG_R10 REG_R10
++enum { REG_R11 = 3 };
++#define REG_R11 REG_R11
++enum { REG_R12 = 4 };
++#define REG_R12 REG_R12
++enum { REG_R13 = 5 };
++#define REG_R13 REG_R13
++enum { REG_R14 = 6 };
++#define REG_R14 REG_R14
++enum { REG_R15 = 7 };
++#define REG_R15 REG_R15
++enum { REG_RDI = 8 };
++#define REG_RDI REG_RDI
++enum { REG_RSI = 9 };
++#define REG_RSI REG_RSI
++enum { REG_RBP = 10 };
++#define REG_RBP REG_RBP
++enum { REG_RBX = 11 };
++#define REG_RBX REG_RBX
++enum { REG_RDX = 12 };
++#define REG_RDX REG_RDX
++enum { REG_RAX = 13 };
++#define REG_RAX REG_RAX
++enum { REG_RCX = 14 };
++#define REG_RCX REG_RCX
++enum { REG_RSP = 15 };
++#define REG_RSP REG_RSP
++enum { REG_RIP = 16 };
++#define REG_RIP REG_RIP
++enum { REG_EFL = 17 };
++#define REG_EFL REG_EFL
++enum { REG_CSGSFS = 18 };
++#define REG_CSGSFS REG_CSGSFS
++enum { REG_ERR = 19 };
++#define REG_ERR REG_ERR
++enum { REG_TRAPNO = 20 };
++#define REG_TRAPNO REG_TRAPNO
++enum { REG_OLDMASK = 21 };
++#define REG_OLDMASK REG_OLDMASK
++enum { REG_CR2 = 22 };
++#define REG_CR2 REG_CR2
+ #endif
+ 
+ #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+diff --git a/arch/x32/pthread_arch.h b/arch/x32/pthread_arch.h
+index ecb0bbfb..267ad073 100644
+--- a/arch/x32/pthread_arch.h
++++ b/arch/x32/pthread_arch.h
+@@ -10,3 +10,5 @@ static inline struct pthread *__pthread_self()
+ #define MC_PC gregs[REG_RIP]
+ 
+ #define CANARY canary2
++
++#define tls_mod_off_t unsigned long long
+diff --git a/arch/x86_64/bits/signal.h b/arch/x86_64/bits/signal.h
+index e3c31417..c99317d3 100644
+--- a/arch/x86_64/bits/signal.h
++++ b/arch/x86_64/bits/signal.h
+@@ -7,29 +7,52 @@
+ #endif
+ 
+ #ifdef _GNU_SOURCE
+-#define REG_R8          0
+-#define REG_R9          1
+-#define REG_R10         2
+-#define REG_R11         3
+-#define REG_R12         4
+-#define REG_R13         5
+-#define REG_R14         6
+-#define REG_R15         7
+-#define REG_RDI         8
+-#define REG_RSI         9
+-#define REG_RBP         10
+-#define REG_RBX         11
+-#define REG_RDX         12
+-#define REG_RAX         13
+-#define REG_RCX         14
+-#define REG_RSP         15
+-#define REG_RIP         16
+-#define REG_EFL         17
+-#define REG_CSGSFS      18
+-#define REG_ERR         19
+-#define REG_TRAPNO      20
+-#define REG_OLDMASK     21
+-#define REG_CR2         22
++enum { REG_R8 = 0 };
++#define REG_R8 REG_R8
++enum { REG_R9 = 1 };
++#define REG_R9 REG_R9
++enum { REG_R10 = 2 };
++#define REG_R10 REG_R10
++enum { REG_R11 = 3 };
++#define REG_R11 REG_R11
++enum { REG_R12 = 4 };
++#define REG_R12 REG_R12
++enum { REG_R13 = 5 };
++#define REG_R13 REG_R13
++enum { REG_R14 = 6 };
++#define REG_R14 REG_R14
++enum { REG_R15 = 7 };
++#define REG_R15 REG_R15
++enum { REG_RDI = 8 };
++#define REG_RDI REG_RDI
++enum { REG_RSI = 9 };
++#define REG_RSI REG_RSI
++enum { REG_RBP = 10 };
++#define REG_RBP REG_RBP
++enum { REG_RBX = 11 };
++#define REG_RBX REG_RBX
++enum { REG_RDX = 12 };
++#define REG_RDX REG_RDX
++enum { REG_RAX = 13 };
++#define REG_RAX REG_RAX
++enum { REG_RCX = 14 };
++#define REG_RCX REG_RCX
++enum { REG_RSP = 15 };
++#define REG_RSP REG_RSP
++enum { REG_RIP = 16 };
++#define REG_RIP REG_RIP
++enum { REG_EFL = 17 };
++#define REG_EFL REG_EFL
++enum { REG_CSGSFS = 18 };
++#define REG_CSGSFS REG_CSGSFS
++enum { REG_ERR = 19 };
++#define REG_ERR REG_ERR
++enum { REG_TRAPNO = 20 };
++#define REG_TRAPNO REG_TRAPNO
++enum { REG_OLDMASK = 21 };
++#define REG_OLDMASK REG_OLDMASK
++enum { REG_CR2 = 22 };
++#define REG_CR2 REG_CR2
+ #endif
+ 
+ #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+diff --git a/include/spawn.h b/include/spawn.h
+index 29c799ee..bba57ce4 100644
+--- a/include/spawn.h
++++ b/include/spawn.h
+@@ -21,6 +21,8 @@ struct sched_param;
+ #define POSIX_SPAWN_SETSIGMASK 8
+ #define POSIX_SPAWN_SETSCHEDPARAM 16
+ #define POSIX_SPAWN_SETSCHEDULER 32
++#define POSIX_SPAWN_USEVFORK 64
++#define POSIX_SPAWN_SETSID 128
+ 
+ typedef struct {
+ 	int __flags;
+diff --git a/ldso/dynlink.c b/ldso/dynlink.c
+index c6890845..d20dbd87 100644
+--- a/ldso/dynlink.c
++++ b/ldso/dynlink.c
+@@ -52,17 +52,17 @@ struct dso {
+ 	Phdr *phdr;
+ 	int phnum;
+ 	size_t phentsize;
+-	int refcnt;
+ 	Sym *syms;
+ 	Elf_Symndx *hashtab;
+ 	uint32_t *ghashtab;
+ 	int16_t *versym;
+ 	char *strings;
++	struct dso *syms_next, *lazy_next;
++	size_t *lazy, lazy_cnt;
+ 	unsigned char *map;
+ 	size_t map_len;
+ 	dev_t dev;
+ 	ino_t ino;
+-	signed char global;
+ 	char relocated;
+ 	char constructed;
+ 	char kernel_mapped;
+@@ -113,7 +113,7 @@ static struct builtin_tls {
+ static size_t *saved_addends, *apply_addends_to;
+ 
+ static struct dso ldso;
+-static struct dso *head, *tail, *fini_head;
++static struct dso *head, *tail, *fini_head, *syms_tail, *lazy_head;
+ static char *env_path, *sys_path;
+ static unsigned long long gencnt;
+ static int runtime;
+@@ -258,19 +258,12 @@ static Sym *gnu_lookup_filtered(uint32_t h1, uint32_t *hashtab, struct dso *dso,
+ 
+ static struct symdef find_sym(struct dso *dso, const char *s, int need_def)
+ {
+-	uint32_t h = 0, gh, gho, *ght;
+-	size_t ghm = 0;
++	uint32_t h = 0, gh = gnu_hash(s), gho = gh / (8*sizeof(size_t)), *ght;
++	size_t ghm = 1ul << gh % (8*sizeof(size_t));
+ 	struct symdef def = {0};
+-	for (; dso; dso=dso->next) {
++	for (; dso; dso=dso->syms_next) {
+ 		Sym *sym;
+-		if (!dso->global) continue;
+ 		if ((ght = dso->ghashtab)) {
+-			if (!ghm) {
+-				gh = gnu_hash(s);
+-				int maskbits = 8 * sizeof ghm;
+-				gho = gh / maskbits;
+-				ghm = 1ul << gh % maskbits;
+-			}
+ 			sym = gnu_lookup_filtered(gh, ght, dso, s, gho, ghm);
+ 		} else {
+ 			if (!h) h = sysv_hash(s);
+@@ -286,11 +279,9 @@ static struct symdef find_sym(struct dso *dso, const char *s, int need_def)
+ 				continue;
+ 		if (!(1<<(sym->st_info&0xf) & OK_TYPES)) continue;
+ 		if (!(1<<(sym->st_info>>4) & OK_BINDS)) continue;
+-
+-		if (def.sym && sym->st_info>>4 == STB_WEAK) continue;
+ 		def.sym = sym;
+ 		def.dso = dso;
+-		if (sym->st_info>>4 == STB_GLOBAL) break;
++		break;
+ 	}
+ 	return def;
+ }
+@@ -326,17 +317,40 @@ static void do_relocs(struct dso *dso, size_t *rel, size_t rel_size, size_t stri
+ 		if (skip_relative && IS_RELATIVE(rel[1], dso->syms)) continue;
+ 		type = R_TYPE(rel[1]);
+ 		if (type == REL_NONE) continue;
+-		sym_index = R_SYM(rel[1]);
+ 		reloc_addr = laddr(dso, rel[0]);
++
++		if (stride > 2) {
++			addend = rel[2];
++		} else if (type==REL_GOT || type==REL_PLT|| type==REL_COPY) {
++			addend = 0;
++		} else if (reuse_addends) {
++			/* Save original addend in stage 2 where the dso
++			 * chain consists of just ldso; otherwise read back
++			 * saved addend since the inline one was clobbered. */
++			if (head==&ldso)
++				saved_addends[save_slot] = *reloc_addr;
++			addend = saved_addends[save_slot++];
++		} else {
++			addend = *reloc_addr;
++		}
++
++		sym_index = R_SYM(rel[1]);
+ 		if (sym_index) {
+ 			sym = syms + sym_index;
+ 			name = strings + sym->st_name;
+-			ctx = type==REL_COPY ? head->next : head;
++			ctx = type==REL_COPY ? head->syms_next : head;
+ 			def = (sym->st_info&0xf) == STT_SECTION
+ 				? (struct symdef){ .dso = dso, .sym = sym }
+ 				: find_sym(ctx, name, type==REL_PLT);
+ 			if (!def.sym && (sym->st_shndx != SHN_UNDEF
+ 			    || sym->st_info>>4 != STB_WEAK)) {
++				if (dso->lazy && (type==REL_PLT || type==REL_GOT)) {
++					dso->lazy[3*dso->lazy_cnt+0] = rel[0];
++					dso->lazy[3*dso->lazy_cnt+1] = rel[1];
++					dso->lazy[3*dso->lazy_cnt+2] = addend;
++					dso->lazy_cnt++;
++					continue;
++				}
+ 				error("Error relocating %s: %s: symbol not found",
+ 					dso->name, name);
+ 				if (runtime) longjmp(*rtld_fail, 1);
+@@ -348,21 +362,6 @@ static void do_relocs(struct dso *dso, size_t *rel, size_t rel_size, size_t stri
+ 			def.dso = dso;
+ 		}
+ 
+-		if (stride > 2) {
+-			addend = rel[2];
+-		} else if (type==REL_GOT || type==REL_PLT|| type==REL_COPY) {
+-			addend = 0;
+-		} else if (reuse_addends) {
+-			/* Save original addend in stage 2 where the dso
+-			 * chain consists of just ldso; otherwise read back
+-			 * saved addend since the inline one was clobbered. */
+-			if (head==&ldso)
+-				saved_addends[save_slot] = *reloc_addr;
+-			addend = saved_addends[save_slot++];
+-		} else {
+-			addend = *reloc_addr;
+-		}
+-
+ 		sym_val = def.sym ? (size_t)laddr(def.dso, def.sym->st_value) : 0;
+ 		tls_val = def.sym ? def.sym->st_value : 0;
+ 
+@@ -453,6 +452,26 @@ static void do_relocs(struct dso *dso, size_t *rel, size_t rel_size, size_t stri
+ 	}
+ }
+ 
++static void redo_lazy_relocs()
++{
++	struct dso *p = lazy_head, *next;
++	lazy_head = 0;
++	for (; p; p=next) {
++		next = p->lazy_next;
++		size_t size = p->lazy_cnt*3*sizeof(size_t);
++		p->lazy_cnt = 0;
++		do_relocs(p, p->lazy, size, 3);
++		if (p->lazy_cnt) {
++			p->lazy_next = lazy_head;
++			lazy_head = p;
++		} else {
++			free(p->lazy);
++			p->lazy = 0;
++			p->lazy_next = 0;
++		}
++	}
++}
++
+ /* A huge hack: to make up for the wastefulness of shared libraries
+  * needing at least a page of dirty memory even if they have no global
+  * data, we reclaim the gaps at the beginning and end of writable maps
+@@ -934,7 +953,7 @@ static struct dso *load_library(const char *name, struct dso *needed_by)
+ 		if (!ldso.prev) {
+ 			tail->next = &ldso;
+ 			ldso.prev = tail;
+-			tail = ldso.next ? ldso.next : &ldso;
++			tail = &ldso;
+ 		}
+ 		return &ldso;
+ 	}
+@@ -945,7 +964,6 @@ static struct dso *load_library(const char *name, struct dso *needed_by)
+ 		/* Search for the name to see if it's already loaded */
+ 		for (p=head->next; p; p=p->next) {
+ 			if (p->shortname && !strcmp(p->shortname, name)) {
+-				p->refcnt++;
+ 				return p;
+ 			}
+ 		}
+@@ -1008,7 +1026,6 @@ static struct dso *load_library(const char *name, struct dso *needed_by)
+ 			if (!p->shortname && pathname != name)
+ 				p->shortname = strrchr(p->name, '/')+1;
+ 			close(fd);
+-			p->refcnt++;
+ 			return p;
+ 		}
+ 	}
+@@ -1016,6 +1033,17 @@ static struct dso *load_library(const char *name, struct dso *needed_by)
+ 	close(fd);
+ 	if (!map) return 0;
+ 
++	/* Avoid the danger of getting two versions of libc mapped into the
++	 * same process when an absolute pathname was used. The symbols
++	 * checked are chosen to catch both musl and glibc, and to avoid
++	 * false positives from interposition-hack libraries. */
++	decode_dyn(&temp_dso);
++	if (find_sym(&temp_dso, "__libc_start_main", 1).sym &&
++	    find_sym(&temp_dso, "stdin", 1).sym) {
++		unmap_library(&temp_dso);
++		return load_library("libc.so", needed_by);
++	}
++
+ 	/* Allocate storage for the new DSO. When there is TLS, this
+ 	 * storage must include a reservation for all pre-existing
+ 	 * threads to obtain copies of both the new TLS, and an
+@@ -1035,10 +1063,8 @@ static struct dso *load_library(const char *name, struct dso *needed_by)
+ 		return 0;
+ 	}
+ 	memcpy(p, &temp_dso, sizeof temp_dso);
+-	decode_dyn(p);
+ 	p->dev = st.st_dev;
+ 	p->ino = st.st_ino;
+-	p->refcnt = 1;
+ 	p->needed_by = needed_by;
+ 	p->name = p->buf;
+ 	strcpy(p->name, pathname);
+@@ -1115,9 +1141,24 @@ static void load_preload(char *s)
+ 	}
+ }
+ 
+-static void make_global(struct dso *p)
++static void add_syms(struct dso *p)
++{
++	if (!p->syms_next && syms_tail != p) {
++		syms_tail->syms_next = p;
++		syms_tail = p;
++	}
++}
++
++static void revert_syms(struct dso *old_tail)
+ {
+-	for (; p; p=p->next) p->global = 1;
++	struct dso *p, *next;
++	/* Chop off the tail of the list of dsos that participate in
++	 * the global symbol table, reverting them to RTLD_LOCAL. */
++	for (p=old_tail; p; p=next) {
++		next = p->syms_next;
++		p->syms_next = 0;
++	}
++	syms_tail = old_tail;
+ }
+ 
+ static void do_mips_relocs(struct dso *p, size_t *got)
+@@ -1257,7 +1298,7 @@ void __init_tls(size_t *auxv)
+ }
+ 
+ __attribute__((__visibility__("hidden")))
+-void *__tls_get_new(size_t *v)
++void *__tls_get_new(tls_mod_off_t *v)
+ {
+ 	pthread_t self = __pthread_self();
+ 
+@@ -1346,7 +1387,6 @@ void __dls2(unsigned char *base, size_t *sp)
+ 	}
+ 	Ehdr *ehdr = (void *)ldso.base;
+ 	ldso.name = ldso.shortname = "libc.so";
+-	ldso.global = 1;
+ 	ldso.phnum = ehdr->e_phnum;
+ 	ldso.phdr = laddr(&ldso, ehdr->e_phoff);
+ 	ldso.phentsize = ehdr->e_phentsize;
+@@ -1534,7 +1574,6 @@ _Noreturn void __dls3(size_t *sp)
+ #endif
+ 		tls_align = MAXP2(tls_align, app.tls.align);
+ 	}
+-	app.global = 1;
+ 	decode_dyn(&app);
+ 	if (DL_FDPIC) {
+ 		makefuncdescs(&app);
+@@ -1549,7 +1588,21 @@ _Noreturn void __dls3(size_t *sp)
+ 		argv[-3] = (void *)app.loadmap;
+ 	}
+ 
+-	/* Attach to vdso, if provided by the kernel */
++	/* Initial dso chain consists only of the app. */
++	head = tail = syms_tail = &app;
++
++	/* Donate unused parts of app and library mapping to malloc */
++	reclaim_gaps(&app);
++	reclaim_gaps(&ldso);
++
++	/* Load preload/needed libraries, add symbols to global namespace. */
++	if (env_preload) load_preload(env_preload);
++ 	load_deps(&app);
++	for (struct dso *p=head; p; p=p->next)
++		add_syms(p);
++
++	/* Attach to vdso, if provided by the kernel, last so that it does
++	 * not become part of the global namespace.  */
+ 	if (search_vec(auxv, &vdso_base, AT_SYSINFO_EHDR) && vdso_base) {
+ 		Ehdr *ehdr = (void *)vdso_base;
+ 		Phdr *phdr = vdso.phdr = (void *)(vdso_base + ehdr->e_phoff);
+@@ -1563,26 +1616,13 @@ _Noreturn void __dls3(size_t *sp)
+ 		}
+ 		vdso.name = "";
+ 		vdso.shortname = "linux-gate.so.1";
+-		vdso.global = 1;
+ 		vdso.relocated = 1;
+ 		decode_dyn(&vdso);
+-		vdso.prev = &ldso;
+-		ldso.next = &vdso;
++		vdso.prev = tail;
++		tail->next = &vdso;
++		tail = &vdso;
+ 	}
+ 
+-	/* Initial dso chain consists only of the app. */
+-	head = tail = &app;
+-
+-	/* Donate unused parts of app and library mapping to malloc */
+-	reclaim_gaps(&app);
+-	reclaim_gaps(&ldso);
+-
+-	/* Load preload/needed libraries, add their symbols to the global
+-	 * namespace, and perform all remaining relocations. */
+-	if (env_preload) load_preload(env_preload);
+-	load_deps(&app);
+-	make_global(&app);
+-
+ 	for (i=0; app.dynv[i]; i+=2) {
+ 		if (!DT_DEBUG_INDIRECT && app.dynv[i]==DT_DEBUG)
+ 			app.dynv[i+1] = (size_t)&debug;
+@@ -1641,9 +1681,31 @@ _Noreturn void __dls3(size_t *sp)
+ 	for(;;);
+ }
+ 
++static void prepare_lazy(struct dso *p)
++{
++	size_t dyn[DYN_CNT], n, flags1=0;
++	decode_vec(p->dynv, dyn, DYN_CNT);
++	search_vec(p->dynv, &flags1, DT_FLAGS_1);
++	if (dyn[DT_BIND_NOW] || (dyn[DT_FLAGS] & DF_BIND_NOW) || (flags1 & DF_1_NOW))
++		return;
++	n = dyn[DT_RELSZ]/2 + dyn[DT_RELASZ]/3 + dyn[DT_PLTRELSZ]/2 + 1;
++	if (NEED_MIPS_GOT_RELOCS) {
++		size_t j=0; search_vec(p->dynv, &j, DT_MIPS_GOTSYM);
++		size_t i=0; search_vec(p->dynv, &i, DT_MIPS_SYMTABNO);
++		n += i-j;
++	}
++	p->lazy = calloc(n, 3*sizeof(size_t));
++	if (!p->lazy) {
++		error("Error preparing lazy relocation for %s: %m", p->name);
++		longjmp(*rtld_fail, 1);
++	}
++	p->lazy_next = lazy_head;
++	lazy_head = p;
++}
++
+ void *dlopen(const char *file, int mode)
+ {
+-	struct dso *volatile p, *orig_tail, *next;
++	struct dso *volatile p, *orig_tail, *orig_syms_tail, *orig_lazy_head, *next;
+ 	struct tls_module *orig_tls_tail;
+ 	size_t orig_tls_cnt, orig_tls_offset, orig_tls_align;
+ 	size_t i;
+@@ -1661,15 +1723,15 @@ void *dlopen(const char *file, int mode)
+ 	orig_tls_cnt = tls_cnt;
+ 	orig_tls_offset = tls_offset;
+ 	orig_tls_align = tls_align;
++	orig_lazy_head = lazy_head;
++	orig_syms_tail = syms_tail;
+ 	orig_tail = tail;
+ 	noload = mode & RTLD_NOLOAD;
+ 
+ 	rtld_fail = &jb;
+ 	if (setjmp(*rtld_fail)) {
+ 		/* Clean up anything new that was (partially) loaded */
+-		if (p && p->deps) for (i=0; p->deps[i]; i++)
+-			if (p->deps[i]->global < 0)
+-				p->deps[i]->global = 0;
++		revert_syms(orig_syms_tail);
+ 		for (p=orig_tail->next; p; p=next) {
+ 			next = p->next;
+ 			while (p->td_index) {
+@@ -1686,9 +1748,11 @@ void *dlopen(const char *file, int mode)
+ 		}
+ 		if (!orig_tls_tail) libc.tls_head = 0;
+ 		tls_tail = orig_tls_tail;
++		if (tls_tail) tls_tail->next = 0;
+ 		tls_cnt = orig_tls_cnt;
+ 		tls_offset = orig_tls_offset;
+ 		tls_align = orig_tls_align;
++		lazy_head = orig_lazy_head;
+ 		tail = orig_tail;
+ 		tail->next = 0;
+ 		p = 0;
+@@ -1706,22 +1770,30 @@ void *dlopen(const char *file, int mode)
+ 	/* First load handling */
+ 	if (!p->deps) {
+ 		load_deps(p);
++		if (!p->relocated && (mode & RTLD_LAZY)) {
++			prepare_lazy(p);
++			if (p->deps) for (i=0; p->deps[i]; i++)
++				if (!p->deps[i]->relocated)
++					prepare_lazy(p->deps[i]);
++		}
++		/* Make new symbols global, at least temporarily, so we can do
++		 * relocations. If not RTLD_GLOBAL, this is reverted below. */
++		add_syms(p);
+ 		if (p->deps) for (i=0; p->deps[i]; i++)
+-			if (!p->deps[i]->global)
+-				p->deps[i]->global = -1;
+-		if (!p->global) p->global = -1;
++			add_syms(p->deps[i]);
+ 		reloc_all(p);
+-		if (p->deps) for (i=0; p->deps[i]; i++)
+-			if (p->deps[i]->global < 0)
+-				p->deps[i]->global = 0;
+-		if (p->global < 0) p->global = 0;
+ 	}
+ 
+-	if (mode & RTLD_GLOBAL) {
+-		if (p->deps) for (i=0; p->deps[i]; i++)
+-			p->deps[i]->global = 1;
+-		p->global = 1;
+-	}
++	/* If RTLD_GLOBAL was not specified, undo any new additions
++	 * to the global symbol table. This is a nop if the library was
++	 * previously loaded and already global. */
++	if (!(mode & RTLD_GLOBAL))
++		revert_syms(orig_syms_tail);
++
++	/* Processing of deferred lazy relocations must not happen until
++	 * the new libraries are committed; otherwise we could end up with
++	 * relocations resolved to symbol definitions that get removed. */
++	redo_lazy_relocs();
+ 
+ 	update_tls_size();
+ 	_dl_debug_state();
+@@ -1768,7 +1840,7 @@ static void *addr2dso(size_t a)
+ 	return 0;
+ }
+ 
+-void *__tls_get_addr(size_t *);
++void *__tls_get_addr(tls_mod_off_t *);
+ 
+ static void *do_dlsym(struct dso *p, const char *s, void *ra)
+ {
+@@ -1786,7 +1858,7 @@ static void *do_dlsym(struct dso *p, const char *s, void *ra)
+ 		struct symdef def = find_sym(p, s, 0);
+ 		if (!def.sym) goto failed;
+ 		if ((def.sym->st_info&0xf) == STT_TLS)
+-			return __tls_get_addr((size_t []){def.dso->tls_id, def.sym->st_value});
++			return __tls_get_addr((tls_mod_off_t []){def.dso->tls_id, def.sym->st_value});
+ 		if (DL_FDPIC && (def.sym->st_info&0xf) == STT_FUNC)
+ 			return def.dso->funcdescs + (def.sym - def.dso->syms);
+ 		return laddr(def.dso, def.sym->st_value);
+@@ -1801,7 +1873,7 @@ static void *do_dlsym(struct dso *p, const char *s, void *ra)
+ 		sym = sysv_lookup(s, h, p);
+ 	}
+ 	if (sym && (sym->st_info&0xf) == STT_TLS)
+-		return __tls_get_addr((size_t []){p->tls_id, sym->st_value});
++		return __tls_get_addr((tls_mod_off_t []){p->tls_id, sym->st_value});
+ 	if (DL_FDPIC && sym && sym->st_shndx && (sym->st_info&0xf) == STT_FUNC)
+ 		return p->funcdescs + (sym - p->syms);
+ 	if (sym && sym->st_value && (1<<(sym->st_info&0xf) & OK_TYPES))
+@@ -1815,7 +1887,7 @@ static void *do_dlsym(struct dso *p, const char *s, void *ra)
+ 			sym = sysv_lookup(s, h, p->deps[i]);
+ 		}
+ 		if (sym && (sym->st_info&0xf) == STT_TLS)
+-			return __tls_get_addr((size_t []){p->deps[i]->tls_id, sym->st_value});
++			return __tls_get_addr((tls_mod_off_t []){p->deps[i]->tls_id, sym->st_value});
+ 		if (DL_FDPIC && sym && sym->st_shndx && (sym->st_info&0xf) == STT_FUNC)
+ 			return p->deps[i]->funcdescs + (sym - p->deps[i]->syms);
+ 		if (sym && sym->st_value && (1<<(sym->st_info&0xf) & OK_TYPES))
+diff --git a/src/internal/intscan.c b/src/internal/intscan.c
+index 65d497ec..a4a5ae86 100644
+--- a/src/internal/intscan.c
++++ b/src/internal/intscan.c
+@@ -29,7 +29,7 @@ unsigned long long __intscan(FILE *f, unsigned base, int pok, unsigned long long
+ 	int c, neg=0;
+ 	unsigned x;
+ 	unsigned long long y;
+-	if (base > 36) {
++	if (base > 36 || base == 1) {
+ 		errno = EINVAL;
+ 		return 0;
+ 	}
+diff --git a/src/internal/locale_impl.h b/src/internal/locale_impl.h
+index f5e4d9b4..d5a3cc94 100644
+--- a/src/internal/locale_impl.h
++++ b/src/internal/locale_impl.h
+@@ -6,7 +6,7 @@
+ #include "libc.h"
+ #include "pthread_impl.h"
+ 
+-#define LOCALE_NAME_MAX 15
++#define LOCALE_NAME_MAX 23
+ 
+ struct __locale_map {
+ 	const void *map;
+diff --git a/src/internal/pthread_impl.h b/src/internal/pthread_impl.h
+index 757b86ad..ae0ab1c5 100644
+--- a/src/internal/pthread_impl.h
++++ b/src/internal/pthread_impl.h
+@@ -97,6 +97,10 @@ struct __timer {
+ #define DTP_OFFSET 0
+ #endif
+ 
++#ifndef tls_mod_off_t
++#define tls_mod_off_t size_t
++#endif
++
+ #define SIGTIMER 32
+ #define SIGCANCEL 33
+ #define SIGSYNCCALL 34
+diff --git a/src/ldso/dl_iterate_phdr.c b/src/ldso/dl_iterate_phdr.c
+index c141fd9b..f3160ef4 100644
+--- a/src/ldso/dl_iterate_phdr.c
++++ b/src/ldso/dl_iterate_phdr.c
+@@ -4,6 +4,9 @@
+ 
+ #define AUX_CNT 38
+ 
++__attribute__((__weak__, __visibility__("hidden")))
++extern const size_t _DYNAMIC[];
++
+ static int static_dl_iterate_phdr(int(*callback)(struct dl_phdr_info *info, size_t size, void *data), void *data)
+ {
+ 	unsigned char *p;
+@@ -11,7 +14,7 @@ static int static_dl_iterate_phdr(int(*callback)(struct dl_phdr_info *info, size
+ 	size_t base = 0;
+ 	size_t n;
+ 	struct dl_phdr_info info;
+-	size_t i, aux[AUX_CNT];
++	size_t i, aux[AUX_CNT] = {0};
+ 
+ 	for (i=0; libc.auxv[i]; i+=2)
+ 		if (libc.auxv[i]<AUX_CNT) aux[libc.auxv[i]] = libc.auxv[i+1];
+@@ -20,6 +23,8 @@ static int static_dl_iterate_phdr(int(*callback)(struct dl_phdr_info *info, size
+ 		phdr = (void *)p;
+ 		if (phdr->p_type == PT_PHDR)
+ 			base = aux[AT_PHDR] - phdr->p_vaddr;
++		if (phdr->p_type == PT_DYNAMIC && _DYNAMIC)
++			base = (size_t)_DYNAMIC - phdr->p_vaddr;
+ 		if (phdr->p_type == PT_TLS)
+ 			tls_phdr = phdr;
+ 	}
+diff --git a/src/ldso/s390x/dlsym.s b/src/ldso/s390x/dlsym.s
+new file mode 100644
+index 00000000..2e9fa8fb
+--- /dev/null
++++ b/src/ldso/s390x/dlsym.s
+@@ -0,0 +1,6 @@
++	.global dlsym
++	.hidden __dlsym
++	.type   dlsym,@function
++dlsym:
++	lgr %r4, %r14
++	jg __dlsym
+diff --git a/src/legacy/getpass.c b/src/legacy/getpass.c
+index 15ab9851..d51286c0 100644
+--- a/src/legacy/getpass.c
++++ b/src/legacy/getpass.c
+@@ -27,7 +27,7 @@ char *getpass(const char *prompt)
+ 
+ 	l = read(fd, password, sizeof password);
+ 	if (l >= 0) {
+-		if (l > 0 && password[l-1] == '\n') l--;
++		if (l > 0 && password[l-1] == '\n' || l==sizeof password) l--;
+ 		password[l] = 0;
+ 	}
+ 
+diff --git a/src/locale/dcngettext.c b/src/locale/dcngettext.c
+index a5ff8475..b79b7010 100644
+--- a/src/locale/dcngettext.c
++++ b/src/locale/dcngettext.c
+@@ -40,8 +40,8 @@ char *bindtextdomain(const char *domainname, const char *dirname)
+ 	if (!domainname) return 0;
+ 	if (!dirname) return gettextdir(domainname, &(size_t){0});
+ 
+-	size_t domlen = strlen(domainname);
+-	size_t dirlen = strlen(dirname);
++	size_t domlen = strnlen(domainname, NAME_MAX+1);
++	size_t dirlen = strnlen(dirname, PATH_MAX);
+ 	if (domlen > NAME_MAX || dirlen >= PATH_MAX) {
+ 		errno = EINVAL;
+ 		return 0;
+@@ -57,7 +57,7 @@ char *bindtextdomain(const char *domainname, const char *dirname)
+ 	}
+ 
+ 	if (!p) {
+-		p = malloc(sizeof *p + domlen + dirlen + 2);
++		p = calloc(sizeof *p + domlen + dirlen + 2, 1);
+ 		if (!p) {
+ 			UNLOCK(lock);
+ 			return 0;
+@@ -74,7 +74,7 @@ char *bindtextdomain(const char *domainname, const char *dirname)
+ 	a_store(&p->active, 1);
+ 
+ 	for (q=bindings; q; q=q->next) {
+-		if (!strcmp(p->domainname, domainname) && q != p)
++		if (!strcmp(q->domainname, domainname) && q != p)
+ 			a_store(&q->active, 0);
+ 	}
+ 
+@@ -100,7 +100,9 @@ struct msgcat {
+ 	size_t map_size;
+ 	void *volatile plural_rule;
+ 	volatile int nplurals;
+-	char name[];
++	struct binding *binding;
++	const struct __locale_map *lm;
++	int cat;
+ };
+ 
+ static char *dummy_gettextdomain()
+@@ -120,65 +122,86 @@ char *dcngettext(const char *domainname, const char *msgid1, const char *msgid2,
+ 	struct msgcat *p;
+ 	struct __locale_struct *loc = CURRENT_LOCALE;
+ 	const struct __locale_map *lm;
+-	const char *dirname, *locname, *catname;
+-	size_t dirlen, loclen, catlen, domlen;
++	size_t domlen;
++	struct binding *q;
+ 
+ 	if ((unsigned)category >= LC_ALL) goto notrans;
+ 
+ 	if (!domainname) domainname = __gettextdomain();
+ 
+-	domlen = strlen(domainname);
++	domlen = strnlen(domainname, NAME_MAX+1);
+ 	if (domlen > NAME_MAX) goto notrans;
+ 
+-	dirname = gettextdir(domainname, &dirlen);
+-	if (!dirname) goto notrans;
++	for (q=bindings; q; q=q->next)
++		if (!strcmp(q->domainname, domainname) && q->active)
++			break;
++	if (!q) goto notrans;
+ 
+ 	lm = loc->cat[category];
+ 	if (!lm) {
+ notrans:
+ 		return (char *) ((n == 1) ? msgid1 : msgid2);
+ 	}
+-	locname = lm->name;
+-
+-	catname = catnames[category];
+-	catlen = catlens[category];
+-	loclen = strlen(locname);
+-
+-	size_t namelen = dirlen+1 + loclen+1 + catlen+1 + domlen+3;
+-	char name[namelen+1], *s = name;
+-
+-	memcpy(s, dirname, dirlen);
+-	s[dirlen] = '/';
+-	s += dirlen + 1;
+-	memcpy(s, locname, loclen);
+-	s[loclen] = '/';
+-	s += loclen + 1;
+-	memcpy(s, catname, catlen);
+-	s[catlen] = '/';
+-	s += catlen + 1;
+-	memcpy(s, domainname, domlen);
+-	s[domlen] = '.';
+-	s[domlen+1] = 'm';
+-	s[domlen+2] = 'o';
+-	s[domlen+3] = 0;
+ 
+ 	for (p=cats; p; p=p->next)
+-		if (!strcmp(p->name, name))
++		if (p->binding == q && p->lm == lm && p->cat == category)
+ 			break;
+ 
+ 	if (!p) {
++		const char *dirname, *locname, *catname, *modname, *locp;
++		size_t dirlen, loclen, catlen, modlen, alt_modlen;
+ 		void *old_cats;
+ 		size_t map_size;
+-		const void *map = __map_file(name, &map_size);
++
++		dirname = q->dirname;
++		locname = lm->name;
++		catname = catnames[category];
++
++		dirlen = q->dirlen;
++		loclen = strlen(locname);
++		catlen = catlens[category];
++
++		/* Logically split @mod suffix from locale name. */
++		modname = memchr(locname, '@', loclen);
++		if (!modname) modname = locname + loclen;
++		alt_modlen = modlen = loclen - (modname-locname);
++		loclen = modname-locname;
++
++		/* Drop .charset identifier; it is not used. */
++		const char *csp = memchr(locname, '.', loclen);
++		if (csp) loclen = csp-locname;
++
++		char name[dirlen+1 + loclen+modlen+1 + catlen+1 + domlen+3 + 1];
++		const void *map;
++
++		for (;;) {
++			snprintf(name, sizeof name, "%s/%.*s%.*s/%s/%s.mo\0",
++				dirname, (int)loclen, locname,
++				(int)alt_modlen, modname, catname, domainname);
++			if (map = __map_file(name, &map_size)) break;
++
++			/* Try dropping @mod, _YY, then both. */
++			if (alt_modlen) {
++				alt_modlen = 0;
++			} else if ((locp = memchr(locname, '_', loclen))) {
++				loclen = locp-locname;
++				alt_modlen = modlen;
++			} else {
++				break;
++			}
++		}
+ 		if (!map) goto notrans;
+-		p = malloc(sizeof *p + namelen + 1);
++
++		p = calloc(sizeof *p, 1);
+ 		if (!p) {
+ 			__munmap((void *)map, map_size);
+ 			goto notrans;
+ 		}
++		p->cat = category;
++		p->binding = q;
++		p->lm = lm;
+ 		p->map = map;
+ 		p->map_size = map_size;
+-		memcpy(p->name, name, namelen+1);
+ 		do {
+ 			old_cats = cats;
+ 			p->next = old_cats;
+diff --git a/src/locale/setlocale.c b/src/locale/setlocale.c
+index 8dae5a4e..623660cc 100644
+--- a/src/locale/setlocale.c
++++ b/src/locale/setlocale.c
+@@ -48,10 +48,13 @@ char *setlocale(int cat, const char *name)
+ 			}
+ 		}
+ 		char *s = buf;
++		const char *part;
++		int same = 0;
+ 		for (i=0; i<LC_ALL; i++) {
+ 			const struct __locale_map *lm =
+ 				libc.global_locale.cat[i];
+-			const char *part = lm ? lm->name : "C";
++			if (lm == libc.global_locale.cat[0]) same++;
++			part = lm ? lm->name : "C";
+ 			size_t l = strlen(part);
+ 			memcpy(s, part, l);
+ 			s[l] = ';';
+@@ -59,7 +62,7 @@ char *setlocale(int cat, const char *name)
+ 		}
+ 		*--s = 0;
+ 		UNLOCK(lock);
+-		return buf;
++		return same==LC_ALL ? (char *)part : buf;
+ 	}
+ 
+ 	char *ret = setlocale_one_unlocked(cat, name);
+diff --git a/src/math/aarch64/ceil.c b/src/math/aarch64/ceil.c
+new file mode 100644
+index 00000000..ac80c1dc
+--- /dev/null
++++ b/src/math/aarch64/ceil.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double ceil(double x)
++{
++	__asm__ ("frintp %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/ceilf.c b/src/math/aarch64/ceilf.c
+new file mode 100644
+index 00000000..1ef1e9c8
+--- /dev/null
++++ b/src/math/aarch64/ceilf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float ceilf(float x)
++{
++	__asm__ ("frintp %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/fabs.c b/src/math/aarch64/fabs.c
+new file mode 100644
+index 00000000..5c3ecaf4
+--- /dev/null
++++ b/src/math/aarch64/fabs.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double fabs(double x)
++{
++	__asm__ ("fabs %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/fabs.s b/src/math/aarch64/fabs.s
+deleted file mode 100644
+index 8c04d091..00000000
+--- a/src/math/aarch64/fabs.s
++++ /dev/null
+@@ -1,6 +0,0 @@
+-.text
+-.global fabs
+-.type   fabs,%function
+-fabs:
+-	fabs d0, d0
+-	ret
+diff --git a/src/math/aarch64/fabsf.c b/src/math/aarch64/fabsf.c
+new file mode 100644
+index 00000000..7fde9817
+--- /dev/null
++++ b/src/math/aarch64/fabsf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float fabsf(float x)
++{
++	__asm__ ("fabs %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/fabsf.s b/src/math/aarch64/fabsf.s
+deleted file mode 100644
+index 6e96dd43..00000000
+--- a/src/math/aarch64/fabsf.s
++++ /dev/null
+@@ -1,6 +0,0 @@
+-.text
+-.global fabsf
+-.type   fabsf,%function
+-fabsf:
+-	fabs s0, s0
+-	ret
+diff --git a/src/math/aarch64/floor.c b/src/math/aarch64/floor.c
+new file mode 100644
+index 00000000..50ffdb28
+--- /dev/null
++++ b/src/math/aarch64/floor.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double floor(double x)
++{
++	__asm__ ("frintm %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/floorf.c b/src/math/aarch64/floorf.c
+new file mode 100644
+index 00000000..8d007e9f
+--- /dev/null
++++ b/src/math/aarch64/floorf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float floorf(float x)
++{
++	__asm__ ("frintm %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/fma.c b/src/math/aarch64/fma.c
+new file mode 100644
+index 00000000..2450ea7e
+--- /dev/null
++++ b/src/math/aarch64/fma.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double fma(double x, double y, double z)
++{
++	__asm__ ("fmadd %d0, %d1, %d2, %d3" : "=w"(x) : "w"(x), "w"(y), "w"(z));
++	return x;
++}
+diff --git a/src/math/aarch64/fmaf.c b/src/math/aarch64/fmaf.c
+new file mode 100644
+index 00000000..9a147213
+--- /dev/null
++++ b/src/math/aarch64/fmaf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float fmaf(float x, float y, float z)
++{
++	__asm__ ("fmadd %s0, %s1, %s2, %s3" : "=w"(x) : "w"(x), "w"(y), "w"(z));
++	return x;
++}
+diff --git a/src/math/aarch64/fmax.c b/src/math/aarch64/fmax.c
+new file mode 100644
+index 00000000..86dcb3b4
+--- /dev/null
++++ b/src/math/aarch64/fmax.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double fmax(double x, double y)
++{
++	__asm__ ("fmaxnm %d0, %d1, %d2" : "=w"(x) : "w"(x), "w"(y));
++	return x;
++}
+diff --git a/src/math/aarch64/fmaxf.c b/src/math/aarch64/fmaxf.c
+new file mode 100644
+index 00000000..ee5eac2d
+--- /dev/null
++++ b/src/math/aarch64/fmaxf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float fmaxf(float x, float y)
++{
++	__asm__ ("fmaxnm %s0, %s1, %s2" : "=w"(x) : "w"(x), "w"(y));
++	return x;
++}
+diff --git a/src/math/aarch64/fmin.c b/src/math/aarch64/fmin.c
+new file mode 100644
+index 00000000..f1e99808
+--- /dev/null
++++ b/src/math/aarch64/fmin.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double fmin(double x, double y)
++{
++	__asm__ ("fminnm %d0, %d1, %d2" : "=w"(x) : "w"(x), "w"(y));
++	return x;
++}
+diff --git a/src/math/aarch64/fminf.c b/src/math/aarch64/fminf.c
+new file mode 100644
+index 00000000..80468f67
+--- /dev/null
++++ b/src/math/aarch64/fminf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float fminf(float x, float y)
++{
++	__asm__ ("fminnm %s0, %s1, %s2" : "=w"(x) : "w"(x), "w"(y));
++	return x;
++}
+diff --git a/src/math/aarch64/llrint.c b/src/math/aarch64/llrint.c
+new file mode 100644
+index 00000000..a9e07a93
+--- /dev/null
++++ b/src/math/aarch64/llrint.c
+@@ -0,0 +1,10 @@
++#include <math.h>
++
++long long llrint(double x)
++{
++	long long n;
++	__asm__ (
++		"frintx %d1, %d1\n"
++		"fcvtzs %x0, %d1\n" : "=r"(n), "+w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/llrintf.c b/src/math/aarch64/llrintf.c
+new file mode 100644
+index 00000000..12b6804f
+--- /dev/null
++++ b/src/math/aarch64/llrintf.c
+@@ -0,0 +1,10 @@
++#include <math.h>
++
++long long llrintf(float x)
++{
++	long long n;
++	__asm__ (
++		"frintx %s1, %s1\n"
++		"fcvtzs %x0, %s1\n" : "=r"(n), "+w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/llround.c b/src/math/aarch64/llround.c
+new file mode 100644
+index 00000000..e09ddd48
+--- /dev/null
++++ b/src/math/aarch64/llround.c
+@@ -0,0 +1,8 @@
++#include <math.h>
++
++long long llround(double x)
++{
++	long long n;
++	__asm__ ("fcvtas %x0, %d1" : "=r"(n) : "w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/llroundf.c b/src/math/aarch64/llroundf.c
+new file mode 100644
+index 00000000..16699598
+--- /dev/null
++++ b/src/math/aarch64/llroundf.c
+@@ -0,0 +1,8 @@
++#include <math.h>
++
++long long llroundf(float x)
++{
++	long long n;
++	__asm__ ("fcvtas %x0, %s1" : "=r"(n) : "w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/lrint.c b/src/math/aarch64/lrint.c
+new file mode 100644
+index 00000000..cb7785ad
+--- /dev/null
++++ b/src/math/aarch64/lrint.c
+@@ -0,0 +1,10 @@
++#include <math.h>
++
++long lrint(double x)
++{
++	long n;
++	__asm__ (
++		"frintx %d1, %d1\n"
++		"fcvtzs %x0, %d1\n" : "=r"(n), "+w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/lrintf.c b/src/math/aarch64/lrintf.c
+new file mode 100644
+index 00000000..4d750d69
+--- /dev/null
++++ b/src/math/aarch64/lrintf.c
+@@ -0,0 +1,10 @@
++#include <math.h>
++
++long lrintf(float x)
++{
++	long n;
++	__asm__ (
++		"frintx %s1, %s1\n"
++		"fcvtzs %x0, %s1\n" : "=r"(n), "+w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/lround.c b/src/math/aarch64/lround.c
+new file mode 100644
+index 00000000..85656c78
+--- /dev/null
++++ b/src/math/aarch64/lround.c
+@@ -0,0 +1,8 @@
++#include <math.h>
++
++long lround(double x)
++{
++	long n;
++	__asm__ ("fcvtas %x0, %d1" : "=r"(n) : "w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/lroundf.c b/src/math/aarch64/lroundf.c
+new file mode 100644
+index 00000000..32e51f3c
+--- /dev/null
++++ b/src/math/aarch64/lroundf.c
+@@ -0,0 +1,8 @@
++#include <math.h>
++
++long lroundf(float x)
++{
++	long n;
++	__asm__ ("fcvtas %x0, %s1" : "=r"(n) : "w"(x));
++	return n;
++}
+diff --git a/src/math/aarch64/nearbyint.c b/src/math/aarch64/nearbyint.c
+new file mode 100644
+index 00000000..9c3fdb44
+--- /dev/null
++++ b/src/math/aarch64/nearbyint.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double nearbyint(double x)
++{
++	__asm__ ("frinti %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/nearbyintf.c b/src/math/aarch64/nearbyintf.c
+new file mode 100644
+index 00000000..8e7f61df
+--- /dev/null
++++ b/src/math/aarch64/nearbyintf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float nearbyintf(float x)
++{
++	__asm__ ("frinti %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/rint.c b/src/math/aarch64/rint.c
+new file mode 100644
+index 00000000..45b194b5
+--- /dev/null
++++ b/src/math/aarch64/rint.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double rint(double x)
++{
++	__asm__ ("frintx %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/rintf.c b/src/math/aarch64/rintf.c
+new file mode 100644
+index 00000000..1ae7dd25
+--- /dev/null
++++ b/src/math/aarch64/rintf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float rintf(float x)
++{
++	__asm__ ("frintx %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/round.c b/src/math/aarch64/round.c
+new file mode 100644
+index 00000000..897a84cc
+--- /dev/null
++++ b/src/math/aarch64/round.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double round(double x)
++{
++	__asm__ ("frinta %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/roundf.c b/src/math/aarch64/roundf.c
+new file mode 100644
+index 00000000..91637eaa
+--- /dev/null
++++ b/src/math/aarch64/roundf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float roundf(float x)
++{
++	__asm__ ("frinta %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/sqrt.c b/src/math/aarch64/sqrt.c
+new file mode 100644
+index 00000000..fe93c3e6
+--- /dev/null
++++ b/src/math/aarch64/sqrt.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double sqrt(double x)
++{
++	__asm__ ("fsqrt %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/sqrt.s b/src/math/aarch64/sqrt.s
+deleted file mode 100644
+index 1917e18d..00000000
+--- a/src/math/aarch64/sqrt.s
++++ /dev/null
+@@ -1,6 +0,0 @@
+-.text
+-.global sqrt
+-.type   sqrt,%function
+-sqrt:
+-	fsqrt d0, d0
+-	ret
+diff --git a/src/math/aarch64/sqrtf.c b/src/math/aarch64/sqrtf.c
+new file mode 100644
+index 00000000..275c7f39
+--- /dev/null
++++ b/src/math/aarch64/sqrtf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float sqrtf(float x)
++{
++	__asm__ ("fsqrt %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/sqrtf.s b/src/math/aarch64/sqrtf.s
+deleted file mode 100644
+index 1639497b..00000000
+--- a/src/math/aarch64/sqrtf.s
++++ /dev/null
+@@ -1,6 +0,0 @@
+-.text
+-.global sqrtf
+-.type   sqrtf,%function
+-sqrtf:
+-	fsqrt s0, s0
+-	ret
+diff --git a/src/math/aarch64/trunc.c b/src/math/aarch64/trunc.c
+new file mode 100644
+index 00000000..e592147a
+--- /dev/null
++++ b/src/math/aarch64/trunc.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++double trunc(double x)
++{
++	__asm__ ("frintz %d0, %d1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/aarch64/truncf.c b/src/math/aarch64/truncf.c
+new file mode 100644
+index 00000000..20ef30f1
+--- /dev/null
++++ b/src/math/aarch64/truncf.c
+@@ -0,0 +1,7 @@
++#include <math.h>
++
++float truncf(float x)
++{
++	__asm__ ("frintz %s0, %s1" : "=w"(x) : "w"(x));
++	return x;
++}
+diff --git a/src/math/j0f.c b/src/math/j0f.c
+index 45883dc4..fab554a3 100644
+--- a/src/math/j0f.c
++++ b/src/math/j0f.c
+@@ -208,8 +208,8 @@ static float pzerof(float x)
+ 	GET_FLOAT_WORD(ix, x);
+ 	ix &= 0x7fffffff;
+ 	if      (ix >= 0x41000000){p = pR8; q = pS8;}
+-	else if (ix >= 0x40f71c58){p = pR5; q = pS5;}
+-	else if (ix >= 0x4036db68){p = pR3; q = pS3;}
++	else if (ix >= 0x409173eb){p = pR5; q = pS5;}
++	else if (ix >= 0x4036d917){p = pR3; q = pS3;}
+ 	else /*ix >= 0x40000000*/ {p = pR2; q = pS2;}
+ 	z = 1.0f/(x*x);
+ 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
+@@ -304,8 +304,8 @@ static float qzerof(float x)
+ 	GET_FLOAT_WORD(ix, x);
+ 	ix &= 0x7fffffff;
+ 	if      (ix >= 0x41000000){p = qR8; q = qS8;}
+-	else if (ix >= 0x40f71c58){p = qR5; q = qS5;}
+-	else if (ix >= 0x4036db68){p = qR3; q = qS3;}
++	else if (ix >= 0x409173eb){p = qR5; q = qS5;}
++	else if (ix >= 0x4036d917){p = qR3; q = qS3;}
+ 	else /*ix >= 0x40000000*/ {p = qR2; q = qS2;}
+ 	z = 1.0f/(x*x);
+ 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
+diff --git a/src/math/j1f.c b/src/math/j1f.c
+index 58875af9..3434c53d 100644
+--- a/src/math/j1f.c
++++ b/src/math/j1f.c
+@@ -74,14 +74,13 @@ float j1f(float x)
+ 		return 1/(x*x);
+ 	if (ix >= 0x40000000)  /* |x| >= 2 */
+ 		return common(ix, fabsf(x), 0, sign);
+-	if (ix >= 0x32000000) {  /* |x| >= 2**-27 */
++	if (ix >= 0x39000000) {  /* |x| >= 2**-13 */
+ 		z = x*x;
+ 		r = z*(r00+z*(r01+z*(r02+z*r03)));
+ 		s = 1+z*(s01+z*(s02+z*(s03+z*(s04+z*s05))));
+ 		z = 0.5f + r/s;
+ 	} else
+-		/* raise inexact if x!=0 */
+-		z = 0.5f + x;
++		z = 0.5f;
+ 	return z*x;
+ }
+ 
+@@ -114,7 +113,7 @@ float y1f(float x)
+ 		return 1/x;
+ 	if (ix >= 0x40000000)  /* |x| >= 2.0 */
+ 		return common(ix,x,1,0);
+-	if (ix < 0x32000000)  /* x < 2**-27 */
++	if (ix < 0x33000000)  /* x < 2**-25 */
+ 		return -tpi/x;
+ 	z = x*x;
+ 	u = U0[0]+z*(U0[1]+z*(U0[2]+z*(U0[3]+z*U0[4])));
+@@ -205,8 +204,8 @@ static float ponef(float x)
+ 	GET_FLOAT_WORD(ix, x);
+ 	ix &= 0x7fffffff;
+ 	if      (ix >= 0x41000000){p = pr8; q = ps8;}
+-	else if (ix >= 0x40f71c58){p = pr5; q = ps5;}
+-	else if (ix >= 0x4036db68){p = pr3; q = ps3;}
++	else if (ix >= 0x409173eb){p = pr5; q = ps5;}
++	else if (ix >= 0x4036d917){p = pr3; q = ps3;}
+ 	else /*ix >= 0x40000000*/ {p = pr2; q = ps2;}
+ 	z = 1.0f/(x*x);
+ 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
+@@ -300,9 +299,9 @@ static float qonef(float x)
+ 
+ 	GET_FLOAT_WORD(ix, x);
+ 	ix &= 0x7fffffff;
+-	if      (ix >= 0x40200000){p = qr8; q = qs8;}
+-	else if (ix >= 0x40f71c58){p = qr5; q = qs5;}
+-	else if (ix >= 0x4036db68){p = qr3; q = qs3;}
++	if      (ix >= 0x41000000){p = qr8; q = qs8;}
++	else if (ix >= 0x409173eb){p = qr5; q = qs5;}
++	else if (ix >= 0x4036d917){p = qr3; q = qs3;}
+ 	else /*ix >= 0x40000000*/ {p = qr2; q = qs2;}
+ 	z = 1.0f/(x*x);
+ 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
+diff --git a/src/math/scalbn.c b/src/math/scalbn.c
+index 530e07c7..182f5610 100644
+--- a/src/math/scalbn.c
++++ b/src/math/scalbn.c
+@@ -16,11 +16,13 @@ double scalbn(double x, int n)
+ 				n = 1023;
+ 		}
+ 	} else if (n < -1022) {
+-		y *= 0x1p-1022;
+-		n += 1022;
++		/* make sure final n < -53 to avoid double
++		   rounding in the subnormal range */
++		y *= 0x1p-1022 * 0x1p53;
++		n += 1022 - 53;
+ 		if (n < -1022) {
+-			y *= 0x1p-1022;
+-			n += 1022;
++			y *= 0x1p-1022 * 0x1p53;
++			n += 1022 - 53;
+ 			if (n < -1022)
+ 				n = -1022;
+ 		}
+diff --git a/src/math/scalbnf.c b/src/math/scalbnf.c
+index 0b62c3c7..a5ad208b 100644
+--- a/src/math/scalbnf.c
++++ b/src/math/scalbnf.c
+@@ -16,11 +16,11 @@ float scalbnf(float x, int n)
+ 				n = 127;
+ 		}
+ 	} else if (n < -126) {
+-		y *= 0x1p-126f;
+-		n += 126;
++		y *= 0x1p-126f * 0x1p24f;
++		n += 126 - 24;
+ 		if (n < -126) {
+-			y *= 0x1p-126f;
+-			n += 126;
++			y *= 0x1p-126f * 0x1p24f;
++			n += 126 - 24;
+ 			if (n < -126)
+ 				n = -126;
+ 		}
+diff --git a/src/math/scalbnl.c b/src/math/scalbnl.c
+index 08a4c587..db44dab0 100644
+--- a/src/math/scalbnl.c
++++ b/src/math/scalbnl.c
+@@ -20,11 +20,11 @@ long double scalbnl(long double x, int n)
+ 				n = 16383;
+ 		}
+ 	} else if (n < -16382) {
+-		x *= 0x1p-16382L;
+-		n += 16382;
++		x *= 0x1p-16382L * 0x1p113L;
++		n += 16382 - 113;
+ 		if (n < -16382) {
+-			x *= 0x1p-16382L;
+-			n += 16382;
++			x *= 0x1p-16382L * 0x1p113L;
++			n += 16382 - 113;
+ 			if (n < -16382)
+ 				n = -16382;
+ 		}
+diff --git a/src/misc/getopt.c b/src/misc/getopt.c
+index 8290aef7..e9bab41c 100644
+--- a/src/misc/getopt.c
++++ b/src/misc/getopt.c
+@@ -60,7 +60,6 @@ int getopt(int argc, char * const argv[], const char *optstring)
+ 		c = 0xfffd; /* replacement char */
+ 	}
+ 	optchar = argv[optind]+optpos;
+-	optopt = c;
+ 	optpos += k;
+ 
+ 	if (!argv[optind][optpos]) {
+@@ -79,6 +78,7 @@ int getopt(int argc, char * const argv[], const char *optstring)
+ 	} while (l && d != c);
+ 
+ 	if (d != c) {
++		optopt = c;
+ 		if (optstring[0] != ':' && opterr)
+ 			__getopt_msg(argv[0], ": unrecognized option: ", optchar, k);
+ 		return '?';
+@@ -86,6 +86,7 @@ int getopt(int argc, char * const argv[], const char *optstring)
+ 	if (optstring[i] == ':') {
+ 		if (optstring[i+1] == ':') optarg = 0;
+ 		else if (optind >= argc) {
++			optopt = c;
+ 			if (optstring[0] == ':') return ':';
+ 			if (opterr) __getopt_msg(argv[0],
+ 				": option requires an argument: ",
+diff --git a/src/misc/getopt_long.c b/src/misc/getopt_long.c
+index c6e14625..568ae7ba 100644
+--- a/src/misc/getopt_long.c
++++ b/src/misc/getopt_long.c
+@@ -75,9 +75,9 @@ static int __getopt_long_core(int argc, char *const *argv, const char *optstring
+ 		if (cnt==1) {
+ 			i = match;
+ 			optind++;
+-			optopt = longopts[i].val;
+ 			if (*opt == '=') {
+ 				if (!longopts[i].has_arg) {
++					optopt = longopts[i].val;
+ 					if (colon || !opterr)
+ 						return '?';
+ 					__getopt_msg(argv[0],
+@@ -89,6 +89,7 @@ static int __getopt_long_core(int argc, char *const *argv, const char *optstring
+ 				optarg = opt+1;
+ 			} else if (longopts[i].has_arg == required_argument) {
+ 				if (!(optarg = argv[optind])) {
++					optopt = longopts[i].val;
+ 					if (colon) return ':';
+ 					if (!opterr) return '?';
+ 					__getopt_msg(argv[0],
+@@ -107,6 +108,7 @@ static int __getopt_long_core(int argc, char *const *argv, const char *optstring
+ 			return longopts[i].val;
+ 		}
+ 		if (argv[optind][1] == '-') {
++			optopt = 0;
+ 			if (!colon && opterr)
+ 				__getopt_msg(argv[0], cnt ?
+ 					": option is ambiguous: " :
+diff --git a/src/mman/mmap.c b/src/mman/mmap.c
+index b85f25ca..19caadbd 100644
+--- a/src/mman/mmap.c
++++ b/src/mman/mmap.c
+@@ -10,7 +10,7 @@ static void dummy(void) { }
+ weak_alias(dummy, __vm_wait);
+ 
+ #define UNIT SYSCALL_MMAP2_UNIT
+-#define OFF_MASK ((-0x2000ULL << (8*sizeof(long)-1)) | (UNIT-1))
++#define OFF_MASK ((-0x2000ULL << (8*sizeof(syscall_arg_t)-1)) | (UNIT-1))
+ 
+ void *__mmap(void *start, size_t len, int prot, int flags, int fd, off_t off)
+ {
+diff --git a/src/network/lookup_name.c b/src/network/lookup_name.c
+index fb7303a3..066be4d5 100644
+--- a/src/network/lookup_name.c
++++ b/src/network/lookup_name.c
+@@ -338,8 +338,8 @@ int __lookup_name(struct address buf[static MAXADDRS], char canon[static 256], c
+ 	/* No further processing is needed if there are fewer than 2
+ 	 * results or if there are only IPv4 results. */
+ 	if (cnt<2 || family==AF_INET) return cnt;
+-	for (i=0; buf[i].family == AF_INET; i++)
+-		if (i==cnt) return cnt;
++	for (i=0; i<cnt; i++) if (buf[i].family != AF_INET) break;
++	if (i==cnt) return cnt;
+ 
+ 	int cs;
+ 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &cs);
+diff --git a/src/network/res_msend.c b/src/network/res_msend.c
+index de7f6157..3e018009 100644
+--- a/src/network/res_msend.c
++++ b/src/network/res_msend.c
+@@ -76,7 +76,11 @@ int __res_msend_rc(int nqueries, const unsigned char *const *queries,
+ 		fd = socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0);
+ 		family = AF_INET;
+ 	}
+-	if (fd < 0 || bind(fd, (void *)&sa, sl) < 0) return -1;
++	if (fd < 0 || bind(fd, (void *)&sa, sl) < 0) {
++		if (fd >= 0) close(fd);
++		pthread_setcancelstate(cs, 0);
++		return -1;
++	}
+ 
+ 	/* Past this point, there are no errors. Each individual query will
+ 	 * yield either no reply (indicated by zero length) or an answer
+diff --git a/src/network/resolvconf.c b/src/network/resolvconf.c
+index 2cf1f475..4c3e4c4b 100644
+--- a/src/network/resolvconf.c
++++ b/src/network/resolvconf.c
+@@ -45,8 +45,8 @@ int __get_resolv_conf(struct resolvconf *conf, char *search, size_t search_sz)
+ 				if (z != p) conf->ndots = x > 15 ? 15 : x;
+ 			}
+ 			p = strstr(line, "attempts:");
+-			if (p && isdigit(p[6])) {
+-				p += 6;
++			if (p && isdigit(p[9])) {
++				p += 9;
+ 				unsigned long x = strtoul(p, &z, 10);
+ 				if (z != p) conf->attempts = x > 10 ? 10 : x;
+ 			}
+diff --git a/src/process/posix_spawn.c b/src/process/posix_spawn.c
+index 0bdf71cd..ea5d2998 100644
+--- a/src/process/posix_spawn.c
++++ b/src/process/posix_spawn.c
+@@ -73,6 +73,10 @@ static int child(void *args_vp)
+ 		__libc_sigaction(i, &sa, 0);
+ 	}
+ 
++	if (attr->__flags & POSIX_SPAWN_SETSID)
++		if ((ret=__syscall(SYS_setsid)) < 0)
++			goto fail;
++
+ 	if (attr->__flags & POSIX_SPAWN_SETPGROUP)
+ 		if ((ret=__syscall(SYS_setpgid, 0, attr->__pgrp)))
+ 			goto fail;
+diff --git a/src/process/posix_spawnattr_setflags.c b/src/process/posix_spawnattr_setflags.c
+index f750c040..68780992 100644
+--- a/src/process/posix_spawnattr_setflags.c
++++ b/src/process/posix_spawnattr_setflags.c
+@@ -1,7 +1,18 @@
+ #include <spawn.h>
++#include <errno.h>
+ 
+ int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags)
+ {
++	const unsigned all_flags =
++		POSIX_SPAWN_RESETIDS |
++		POSIX_SPAWN_SETPGROUP |
++		POSIX_SPAWN_SETSIGDEF |
++		POSIX_SPAWN_SETSIGMASK |
++		POSIX_SPAWN_SETSCHEDPARAM |
++		POSIX_SPAWN_SETSCHEDULER |
++		POSIX_SPAWN_USEVFORK |
++		POSIX_SPAWN_SETSID;
++	if (flags & ~all_flags) return EINVAL;
+ 	attr->__flags = flags;
+ 	return 0;
+ }
+diff --git a/src/regex/glob.c b/src/regex/glob.c
+index 6affee04..5b6ff124 100644
+--- a/src/regex/glob.c
++++ b/src/regex/glob.c
+@@ -169,8 +169,6 @@ int glob(const char *restrict pat, int flags, int (*errfunc)(const char *path, i
+ 		d = "";
+ 	}
+ 
+-	if (strlen(p) > PATH_MAX) return GLOB_NOSPACE;
+-
+ 	if (!errfunc) errfunc = ignore_err;
+ 
+ 	if (!(flags & GLOB_APPEND)) {
+@@ -179,6 +177,8 @@ int glob(const char *restrict pat, int flags, int (*errfunc)(const char *path, i
+ 		g->gl_pathv = NULL;
+ 	}
+ 
++	if (strnlen(p, PATH_MAX+1) > PATH_MAX) return GLOB_NOSPACE;
++
+ 	if (*p) error = match_in_dir(d, p, flags, errfunc, &tail);
+ 	if (error == GLOB_NOSPACE) {
+ 		freelist(&head);
+diff --git a/src/regex/regcomp.c b/src/regex/regcomp.c
+index 5a7b53a7..fb24556e 100644
+--- a/src/regex/regcomp.c
++++ b/src/regex/regcomp.c
+@@ -636,6 +636,20 @@ static reg_errcode_t parse_bracket(tre_parse_ctx_t *ctx, const char *s)
+ 		goto parse_bracket_done;
+ 
+ 	if (neg.negate) {
++		/*
++		 * With REG_NEWLINE, POSIX requires that newlines are not matched by
++		 * any form of a non-matching list.
++		 */
++		if (ctx->cflags & REG_NEWLINE) {
++			lit = tre_new_lit(&ls);
++			if (!lit) {
++				err = REG_ESPACE;
++				goto parse_bracket_done;
++			}
++			lit->code_min = '\n';
++			lit->code_max = '\n';
++			lit->position = -1;
++		}
+ 		/* Sort the array if we need to negate it. */
+ 		qsort(ls.a, ls.len, sizeof *ls.a, tre_compare_lit);
+ 		/* extra lit for the last negated range */
+diff --git a/src/regex/regexec.c b/src/regex/regexec.c
+index 5c4cb922..253b0e14 100644
+--- a/src/regex/regexec.c
++++ b/src/regex/regexec.c
+@@ -215,15 +215,15 @@ tre_tnfa_run_parallel(const tre_tnfa_t *tnfa, const void *string,
+     /* Ensure that tbytes and xbytes*num_states cannot overflow, and that
+      * they don't contribute more than 1/8 of SIZE_MAX to total_bytes. */
+     if (num_tags > SIZE_MAX/(8 * sizeof(regoff_t) * tnfa->num_states))
+-      goto error_exit;
++      return REG_ESPACE;
+ 
+     /* Likewise check rbytes. */
+     if (tnfa->num_states+1 > SIZE_MAX/(8 * sizeof(*reach_next)))
+-      goto error_exit;
++      return REG_ESPACE;
+ 
+     /* Likewise check pbytes. */
+     if (tnfa->num_states > SIZE_MAX/(8 * sizeof(*reach_pos)))
+-      goto error_exit;
++      return REG_ESPACE;
+ 
+     /* Compute the length of the block we need. */
+     tbytes = sizeof(*tmp_tags) * num_tags;
+diff --git a/src/search/lsearch.c b/src/search/lsearch.c
+index 63f31922..5eb5cc2b 100644
+--- a/src/search/lsearch.c
++++ b/src/search/lsearch.c
+@@ -9,7 +9,7 @@ void *lsearch(const void *key, void *base, size_t *nelp, size_t width,
+ 	size_t i;
+ 
+ 	for (i = 0; i < n; i++)
+-		if (compar(p[i], key) == 0)
++		if (compar(key, p[i]) == 0)
+ 			return p[i];
+ 	*nelp = n+1;
+ 	return memcpy(p[n], key, width);
+@@ -23,7 +23,7 @@ void *lfind(const void *key, const void *base, size_t *nelp,
+ 	size_t i;
+ 
+ 	for (i = 0; i < n; i++)
+-		if (compar(p[i], key) == 0)
++		if (compar(key, p[i]) == 0)
+ 			return p[i];
+ 	return 0;
+ }
+diff --git a/src/stdio/vfprintf.c b/src/stdio/vfprintf.c
+index 60da14d8..8c81efc2 100644
+--- a/src/stdio/vfprintf.c
++++ b/src/stdio/vfprintf.c
+@@ -4,6 +4,7 @@
+ #include <limits.h>
+ #include <string.h>
+ #include <stdarg.h>
++#include <stddef.h>
+ #include <wchar.h>
+ #include <inttypes.h>
+ #include <math.h>
+@@ -26,14 +27,6 @@
+ 
+ #define FLAGMASK (ALT_FORM|ZERO_PAD|LEFT_ADJ|PAD_POS|MARK_POS|GROUPED)
+ 
+-#if UINT_MAX == ULONG_MAX
+-#define LONG_IS_INT
+-#endif
+-
+-#if SIZE_MAX != ULONG_MAX || UINTMAX_MAX != ULLONG_MAX
+-#define ODD_TYPES
+-#endif
+-
+ /* State machine to accept length modifiers + conversion specifiers.
+  * Result is 0 on failure, or an argument type to pop on success. */
+ 
+@@ -42,23 +35,9 @@ enum {
+ 	ZTPRE, JPRE,
+ 	STOP,
+ 	PTR, INT, UINT, ULLONG,
+-#ifndef LONG_IS_INT
+ 	LONG, ULONG,
+-#else
+-#define LONG INT
+-#define ULONG UINT
+-#endif
+ 	SHORT, USHORT, CHAR, UCHAR,
+-#ifdef ODD_TYPES
+ 	LLONG, SIZET, IMAX, UMAX, PDIFF, UIPTR,
+-#else
+-#define LLONG ULLONG
+-#define SIZET ULONG
+-#define IMAX LLONG
+-#define UMAX ULLONG
+-#define PDIFF LONG
+-#define UIPTR ULONG
+-#endif
+ 	DBL, LDBL,
+ 	NOARG,
+ 	MAXSTATE
+@@ -134,23 +113,19 @@ static void pop_arg(union arg *arg, int type, va_list *ap)
+ 	       case PTR:	arg->p = va_arg(*ap, void *);
+ 	break; case INT:	arg->i = va_arg(*ap, int);
+ 	break; case UINT:	arg->i = va_arg(*ap, unsigned int);
+-#ifndef LONG_IS_INT
+ 	break; case LONG:	arg->i = va_arg(*ap, long);
+ 	break; case ULONG:	arg->i = va_arg(*ap, unsigned long);
+-#endif
+ 	break; case ULLONG:	arg->i = va_arg(*ap, unsigned long long);
+ 	break; case SHORT:	arg->i = (short)va_arg(*ap, int);
+ 	break; case USHORT:	arg->i = (unsigned short)va_arg(*ap, int);
+ 	break; case CHAR:	arg->i = (signed char)va_arg(*ap, int);
+ 	break; case UCHAR:	arg->i = (unsigned char)va_arg(*ap, int);
+-#ifdef ODD_TYPES
+ 	break; case LLONG:	arg->i = va_arg(*ap, long long);
+ 	break; case SIZET:	arg->i = va_arg(*ap, size_t);
+ 	break; case IMAX:	arg->i = va_arg(*ap, intmax_t);
+ 	break; case UMAX:	arg->i = va_arg(*ap, uintmax_t);
+ 	break; case PDIFF:	arg->i = va_arg(*ap, ptrdiff_t);
+ 	break; case UIPTR:	arg->i = (uintptr_t)va_arg(*ap, void *);
+-#endif
+ 	break; case DBL:	arg->f = va_arg(*ap, double);
+ 	break; case LDBL:	arg->f = va_arg(*ap, long double);
+ 	}
+diff --git a/src/stdio/vfwscanf.c b/src/stdio/vfwscanf.c
+index 223aad4f..1ebc5cef 100644
+--- a/src/stdio/vfwscanf.c
++++ b/src/stdio/vfwscanf.c
+@@ -214,11 +214,12 @@ int vfwscanf(FILE *restrict f, const wchar_t *restrict fmt, va_list ap)
+ 				set = L"";
+ 			} else if (t == 's') {
+ 				invert = 1;
+-				set = (const wchar_t[]){
++				static const wchar_t spaces[] = {
+ 					' ', '\t', '\n', '\r', 11, 12,  0x0085,
+ 					0x2000, 0x2001, 0x2002, 0x2003, 0x2004, 0x2005,
+ 					0x2006, 0x2008, 0x2009, 0x200a,
+ 					0x2028, 0x2029, 0x205f, 0x3000, 0 };
++				set = spaces;
+ 			} else {
+ 				if (*++p == '^') p++, invert = 1;
+ 				else invert = 0;
+diff --git a/src/thread/__tls_get_addr.c b/src/thread/__tls_get_addr.c
+index 6945faa0..3b6c9b1b 100644
+--- a/src/thread/__tls_get_addr.c
++++ b/src/thread/__tls_get_addr.c
+@@ -3,9 +3,9 @@
+ #include "libc.h"
+ 
+ __attribute__((__visibility__("hidden")))
+-void *__tls_get_new(size_t *);
++void *__tls_get_new(tls_mod_off_t *);
+ 
+-void *__tls_get_addr(size_t *v)
++void *__tls_get_addr(tls_mod_off_t *v)
+ {
+ 	pthread_t self = __pthread_self();
+ 	if (v[0]<=(size_t)self->dtv[0])
+diff --git a/src/thread/arm/atomics.s b/src/thread/arm/atomics.s
+index 202faa4a..101ad391 100644
+--- a/src/thread/arm/atomics.s
++++ b/src/thread/arm/atomics.s
+@@ -84,7 +84,7 @@ __a_gettp_cp15:
+ 	bx lr
+ 
+ /* Tag this file with minimum ISA level so as not to affect linking. */
+-.arch armv4t
++.object_arch armv4t
+ .eabi_attribute 6,2
+ 
+ .data
+diff --git a/src/thread/synccall.c b/src/thread/synccall.c
+index 000ec4e3..f6813576 100644
+--- a/src/thread/synccall.c
++++ b/src/thread/synccall.c
+@@ -50,7 +50,7 @@ void __synccall(void (*func)(void *), void *ctx)
+ 	int cs, i, r, pid, self;;
+ 	DIR dir = {0};
+ 	struct dirent *de;
+-	struct sigaction sa = { .sa_flags = 0, .sa_handler = handler };
++	struct sigaction sa = { .sa_flags = SA_RESTART, .sa_handler = handler };
+ 	struct chain *cp, *next;
+ 	struct timespec ts;
+ 
+diff --git a/src/time/__tz.c b/src/time/__tz.c
+index 0e0c4ea2..ffe8d402 100644
+--- a/src/time/__tz.c
++++ b/src/time/__tz.c
+@@ -373,18 +373,14 @@ void __secs_to_zone(long long t, int local, int *isdst, long *offset, long *oppo
+ 	long long t0 = rule_to_secs(r0, y);
+ 	long long t1 = rule_to_secs(r1, y);
+ 
++	if (!local) {
++		t0 += __timezone;
++		t1 += dst_off;
++	}
+ 	if (t0 < t1) {
+-		if (!local) {
+-			t0 += __timezone;
+-			t1 += dst_off;
+-		}
+ 		if (t >= t0 && t < t1) goto dst;
+ 		goto std;
+ 	} else {
+-		if (!local) {
+-			t1 += __timezone;
+-			t0 += dst_off;
+-		}
+ 		if (t >= t1 && t < t0) goto std;
+ 		goto dst;
+ 	}
+diff --git a/src/time/strftime.c b/src/time/strftime.c
+index e103e02b..a3039204 100644
+--- a/src/time/strftime.c
++++ b/src/time/strftime.c
+@@ -166,8 +166,8 @@ const char *__strftime_fmt_1(char (*s)[100], size_t *l, int f, const struct tm *
+ 		item = T_FMT;
+ 		goto nl_strftime;
+ 	case 'y':
+-		val = tm->tm_year % 100;
+-		if (val<0) val += 100;
++		val = (tm->tm_year + 1900LL) % 100;
++		if (val < 0) val = -val;
+ 		goto number;
+ 	case 'Y':
+ 		val = tm->tm_year + 1900LL;
+diff --git a/src/time/strptime.c b/src/time/strptime.c
+index 55c7ed1b..c54a0d8c 100644
+--- a/src/time/strptime.c
++++ b/src/time/strptime.c
+@@ -11,7 +11,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 	int i, w, neg, adj, min, range, *dest, dummy;
+ 	const char *ex;
+ 	size_t len;
+-	int want_century = 0, century = 0;
++	int want_century = 0, century = 0, relyear = 0;
+ 	while (*f) {
+ 		if (*f != '%') {
+ 			if (isspace(*f)) for (; *s && isspace(*s); s++);
+@@ -73,6 +73,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 			dest = &tm->tm_yday;
+ 			min = 1;
+ 			range = 366;
++			adj = 1;
+ 			goto numeric_range;
+ 		case 'm':
+ 			dest = &tm->tm_mon;
+@@ -93,6 +94,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 			len = strlen(ex);
+ 			if (!strncasecmp(s, ex, len)) {
+ 				tm->tm_hour %= 12;
++				s += len;
+ 				break;
+ 			}
+ 			ex = nl_langinfo(PM_STR);
+@@ -100,6 +102,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 			if (!strncasecmp(s, ex, len)) {
+ 				tm->tm_hour %= 12;
+ 				tm->tm_hour += 12;
++				s += len;
+ 				break;
+ 			}
+ 			return 0;
+@@ -141,7 +144,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 			if (!s) return 0;
+ 			break;
+ 		case 'y':
+-			dest = &tm->tm_year;
++			dest = &relyear;
+ 			w = 2;
+ 			want_century |= 1;
+ 			goto numeric_digits;
+@@ -195,6 +198,7 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 		}
+ 	}
+ 	if (want_century) {
++		tm->tm_year = relyear;
+ 		if (want_century & 2) tm->tm_year += century * 100 - 1900;
+ 		else if (tm->tm_year <= 68) tm->tm_year += 100;
+ 	}
+diff --git a/src/unistd/ttyname_r.c b/src/unistd/ttyname_r.c
+index a38ba4f2..33aa4ae1 100644
+--- a/src/unistd/ttyname_r.c
++++ b/src/unistd/ttyname_r.c
+@@ -23,7 +23,7 @@ int ttyname_r(int fd, char *name, size_t size)
+ 	if (stat(name, &st1) || fstat(fd, &st2))
+ 		return errno;
+ 	if (st1.st_dev != st2.st_dev || st1.st_ino != st2.st_ino)
+-		return ENOENT;
++		return ENODEV;
+ 
+ 	return 0;
+ }

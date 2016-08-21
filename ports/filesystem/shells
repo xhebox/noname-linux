@@ -1,0 +1,10 @@
+#
+# /etc/shells
+#
+
+/bin/sh
+/bin/dash
+/bin/zsh
+
+# End of file
+

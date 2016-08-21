@@ -1,0 +1,24 @@
+name=valgrind
+version=3.12.0
+desc="An open-source memory debugger for GNU/Linux"
+deps=musl
+source="http://www.valgrind.org/downloads/valgrind-$version.tar.bz2
+valgrind-3.11.0-musl.patch
+valgrind-3.7.0-fno-stack-protector.patch
+valgrind-3.7.0-respect-flags.patch
+"
+
+build() {
+	cd $name-$version
+	sed -i -e "s:doc/valgrind:doc/${PF}:" docs/Makefile.am || die
+	sed -i -e 's:-arch \(i386\|x86_64\)::g' Makefile.all.am || die
+	CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+	CXXFLAGS="${CFLAGS}"
+	patch -p1 < ../valgrind-3.7.0-respect-flags.patch || die
+	patch -p1 < ../valgrind-3.7.0-fno-stack-protector.patch || die
+	patch -p1 < ../valgrind-3.11.0-musl.patch || die
+	autoreconf -i
+	./configure --prefix=/ --without-mpicc
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

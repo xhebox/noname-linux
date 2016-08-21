@@ -1,0 +1,108 @@
+bin/a2x.py|755|0|0|regular file
+bin/a2x|777|0|0|symbolic link
+bin/asciidoc.py|755|0|0|regular file
+bin/asciidoc|777|0|0|symbolic link
+bin|755|0|0|directory
+etc/asciidoc/asciidoc.conf|644|0|0|regular file
+etc/asciidoc/dblatex/asciidoc-dblatex.sty|644|0|0|regular file
+etc/asciidoc/dblatex/asciidoc-dblatex.xsl|644|0|0|regular file
+etc/asciidoc/dblatex|755|0|0|directory
+etc/asciidoc/docbook-xsl/chunked.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/common.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/epub.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/fo.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/htmlhelp.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/manpage.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/text.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl/xhtml.xsl|644|0|0|regular file
+etc/asciidoc/docbook-xsl|755|0|0|directory
+etc/asciidoc/docbook45.conf|644|0|0|regular file
+etc/asciidoc/filters/code/code-filter.conf|644|0|0|regular file
+etc/asciidoc/filters/code/code-filter.py|755|0|0|regular file
+etc/asciidoc/filters/code|755|0|0|directory
+etc/asciidoc/filters/graphviz/graphviz-filter.conf|644|0|0|regular file
+etc/asciidoc/filters/graphviz/graphviz2png.py|755|0|0|regular file
+etc/asciidoc/filters/graphviz|755|0|0|directory
+etc/asciidoc/filters/latex/latex-filter.conf|644|0|0|regular file
+etc/asciidoc/filters/latex/latex2png.py|755|0|0|regular file
+etc/asciidoc/filters/latex|755|0|0|directory
+etc/asciidoc/filters/music/music-filter.conf|644|0|0|regular file
+etc/asciidoc/filters/music/music2png.py|755|0|0|regular file
+etc/asciidoc/filters/music|755|0|0|directory
+etc/asciidoc/filters/source/source-highlight-filter.conf|644|0|0|regular file
+etc/asciidoc/filters/source|755|0|0|directory
+etc/asciidoc/filters|755|0|0|directory
+etc/asciidoc/help.conf|644|0|0|regular file
+etc/asciidoc/html4.conf|644|0|0|regular file
+etc/asciidoc/html5.conf|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/1.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/10.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/11.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/12.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/13.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/14.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/15.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/2.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/3.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/4.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/5.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/6.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/7.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/8.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts/9.png|644|0|0|regular file
+etc/asciidoc/images/icons/callouts|755|0|0|directory
+etc/asciidoc/images/icons/caution.png|644|0|0|regular file
+etc/asciidoc/images/icons/example.png|644|0|0|regular file
+etc/asciidoc/images/icons/home.png|644|0|0|regular file
+etc/asciidoc/images/icons/important.png|644|0|0|regular file
+etc/asciidoc/images/icons/next.png|644|0|0|regular file
+etc/asciidoc/images/icons/note.png|644|0|0|regular file
+etc/asciidoc/images/icons/prev.png|644|0|0|regular file
+etc/asciidoc/images/icons/tip.png|644|0|0|regular file
+etc/asciidoc/images/icons/up.png|644|0|0|regular file
+etc/asciidoc/images/icons/warning.png|644|0|0|regular file
+etc/asciidoc/images/icons|755|0|0|directory
+etc/asciidoc/images|755|0|0|directory
+etc/asciidoc/javascripts/ASCIIMathML.js|644|0|0|regular file
+etc/asciidoc/javascripts/LaTeXMathML.js|644|0|0|regular file
+etc/asciidoc/javascripts/asciidoc.js|644|0|0|regular file
+etc/asciidoc/javascripts/slidy.js|644|0|0|regular file
+etc/asciidoc/javascripts/toc.js|644|0|0|regular file
+etc/asciidoc/javascripts|755|0|0|directory
+etc/asciidoc/lang-cs.conf|644|0|0|regular file
+etc/asciidoc/lang-de.conf|644|0|0|regular file
+etc/asciidoc/lang-el.conf|644|0|0|regular file
+etc/asciidoc/lang-en.conf|644|0|0|regular file
+etc/asciidoc/lang-es.conf|644|0|0|regular file
+etc/asciidoc/lang-fr.conf|644|0|0|regular file
+etc/asciidoc/lang-hu.conf|644|0|0|regular file
+etc/asciidoc/lang-it.conf|644|0|0|regular file
+etc/asciidoc/lang-nl.conf|644|0|0|regular file
+etc/asciidoc/lang-pt-BR.conf|644|0|0|regular file
+etc/asciidoc/lang-ro.conf|644|0|0|regular file
+etc/asciidoc/lang-ru.conf|644|0|0|regular file
+etc/asciidoc/lang-uk.conf|644|0|0|regular file
+etc/asciidoc/latex.conf|644|0|0|regular file
+etc/asciidoc/slidy.conf|644|0|0|regular file
+etc/asciidoc/stylesheets/asciidoc.css|644|0|0|regular file
+etc/asciidoc/stylesheets/docbook-xsl.css|644|0|0|regular file
+etc/asciidoc/stylesheets/pygments.css|644|0|0|regular file
+etc/asciidoc/stylesheets/slidy.css|644|0|0|regular file
+etc/asciidoc/stylesheets/toc2.css|644|0|0|regular file
+etc/asciidoc/stylesheets/xhtml11-quirks.css|644|0|0|regular file
+etc/asciidoc/stylesheets|755|0|0|directory
+etc/asciidoc/text.conf|644|0|0|regular file
+etc/asciidoc/themes/flask/flask.css|644|0|0|regular file
+etc/asciidoc/themes/flask|755|0|0|directory
+etc/asciidoc/themes/volnitsky/volnitsky.css|644|0|0|regular file
+etc/asciidoc/themes/volnitsky|755|0|0|directory
+etc/asciidoc/themes|755|0|0|directory
+etc/asciidoc/xhtml11-quirks.conf|644|0|0|regular file
+etc/asciidoc/xhtml11.conf|644|0|0|regular file
+etc/asciidoc|755|0|0|directory
+etc|755|0|0|directory
+share/man/man1/a2x.1.gz|644|0|0|regular file
+share/man/man1/asciidoc.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,13 @@
+name=libxfixes
+version=5.0.3
+deps="xorg-proto libx11"
+desc="X Fixes extension client library"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXfixes-$version.tar.bz2"
+
+build() {
+	cd libXfixes-$version
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

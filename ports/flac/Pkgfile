@@ -1,0 +1,22 @@
+name=flac
+version=1.3.2
+deps="libogg nasm"
+desc="Free Lossless Audio Codec"
+source="http://downloads.xiph.org/releases/flac/flac-${version}.tar.xz"
+
+ext() {
+	cd flac-$version
+	find src -name "*.c" -exec sed -i 's/__sigemptyset/sigemptyset/g' {} \;
+}
+
+build() {
+	cd flac-$version
+	./configure --prefix= --disable-static \
+	--enable-shared \
+	--enable-ogg \
+	--enable-sse \
+	--with-pic
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

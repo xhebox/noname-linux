@@ -1,0 +1,161 @@
+etc/xml/docbook-xml|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/dbcentx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/docbook.cat|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/dbnotnx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/dbpoolx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/calstblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/soextblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-box.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-num.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-grk4.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-tech.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-lat1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-lat2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amsa.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-grk2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-grk1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-cyr1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amsn.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amso.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amsc.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-pub.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-cyr2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amsb.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-dia.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-grk3.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/ent/iso-amsr.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/docbookx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/dbhierx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.2/dbgenent.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/dbcentx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/docbook.cat|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/dbnotnx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/dbpoolx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/calstblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/soextblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isotech.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isogrk1.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/README|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isodia.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isocyr1.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamsr.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamsb.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isogrk3.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamso.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamsn.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamsc.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isonum.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isolat1.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isogrk2.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isoamsa.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isobox.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isocyr2.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isolat2.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isogrk4.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/ent/isopub.ent|654|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/docbookx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/htmltblx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/dbhierx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.4/dbgenent.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/dbcentx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/docbook.cat|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/dbnotnx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/dbpoolx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/calstblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/soextblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isotech.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isogrk1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/README|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isodia.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isocyr1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamsr.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamsb.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isogrk3.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamso.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamsn.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamsc.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isonum.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isolat1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isogrk2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isoamsa.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isobox.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isocyr2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isolat2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isogrk4.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/ent/isopub.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/docbookx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/htmltblx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/dbhierx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.5/dbgenent.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/dbcentx.mod|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/docbook.cat|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/dbnotnx.mod|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/dbpoolx.mod|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/calstblx.dtd|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/soextblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-box.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-num.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-grk4.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-tech.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-lat1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-lat2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amsa.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-grk2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-grk1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-cyr1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amsn.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amso.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amsc.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-pub.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-cyr2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amsb.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-dia.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-grk3.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/ent/iso-amsr.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/docbookx.dtd|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/dbhierx.mod|744|0|0|regular file
+share/xml/docbook/xml-dtd-4.1.2/dbgenent.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/dbcentx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/docbook.cat|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/dbnotnx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/dbpoolx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/calstblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/soextblx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-box.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-num.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-grk4.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-tech.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-lat1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-lat2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amsa.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-grk2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-grk1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-cyr1.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amsn.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amso.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amsc.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-pub.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-cyr2.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amsb.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-dia.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-grk3.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent/iso-amsr.ent|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/docbookx.dtd|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/htmltblx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/dbhierx.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/dbgenent.mod|644|0|0|regular file
+share/xml/docbook/xml-dtd-4.3/ent|755|0|0|directory
+share/xml/docbook/xml-dtd-4.3|755|0|0|directory
+share/xml/docbook/xml-dtd-4.1.2/ent|755|0|0|directory
+share/xml/docbook/xml-dtd-4.1.2|755|0|0|directory
+share/xml/docbook/xml-dtd-4.5/ent|755|0|0|directory
+share/xml/docbook/xml-dtd-4.5|755|0|0|directory
+share/xml/docbook/xml-dtd-4.4/ent|755|0|0|directory
+share/xml/docbook/xml-dtd-4.4|755|0|0|directory
+share/xml/docbook/xml-dtd-4.2/ent|755|0|0|directory
+share/xml/docbook/xml-dtd-4.2|755|0|0|directory
+share/xml/docbook|755|0|0|directory
+share/xml|755|0|0|directory
+share|755|0|0|directory
+etc/xml|755|0|0|directory
+etc|755|0|0|directory

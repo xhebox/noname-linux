@@ -1,0 +1,12 @@
+bin/zipsplit|755|0|0|regular file
+bin/zipcloak|755|0|0|regular file
+bin/zip|755|0|0|regular file
+bin/zipnote|755|0|0|regular file
+share/man/man1/zipnote.1.gz|644|0|0|regular file
+share/man/man1/zipcloak.1.gz|644|0|0|regular file
+share/man/man1/zipsplit.1.gz|644|0|0|regular file
+share/man/man1/zip.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

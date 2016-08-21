@@ -1,0 +1,13 @@
+name=http-parser
+version=2.7.1
+deps="libtool"
+desc="HTTP request/response parser for c"
+source="https://github.com/joyent/http-parser/archive/v${version}.tar.gz"
+
+build() {
+	cd http-parser-$version
+
+	make library || die
+	make PREFIX=$pkgdir install || die
+	ln -sf libhttp_parser.so.$version "${pkgdir}/lib/libhttp_parser.so"
+}

@@ -1,0 +1,42 @@
+name=attr-32
+version=2.4.47
+desc="Extented attributes library"
+deps=attr
+source="http://download-mirror.savannah.gnu.org/releases/attr/attr-$version.src.tar.gz
+attr-2.4.46-ifdef_cplusplus.patch
+attr-2.4.47-fix-missing-sys_types_h.patch
+"
+
+ext() {
+	cd attr-$version
+	for i in $source;do
+		case $i in
+		*patch) patch -p1 < ../$i || die;;
+		esac
+	done
+}
+
+build() {
+	cd attr-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	unset PLATFORM #184564
+	export DEBUG=-DNDEBUG
+	export OPTIMIZER="$CFLAGS"
+	export INSTALL_USER=root
+	export INSTALL_GROUP=root
+	./configure \
+		--prefix= \
+		--enable-shared \
+		--disable-static \
+		--enable-gettext \
+		--enable-nls \
+		--libdir=/lib32 \
+		--libexecdir=/lib32
+	make  || die
+	make -j1 DIST_ROOT="$pkgdir" install install-lib install-dev  || die
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/bin
+}

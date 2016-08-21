@@ -1,0 +1,17 @@
+name=spice
+version=0.13.2
+deps="glib alsa-lib pixman libressl libjpeg-turbo zlib spice-protocol python-six libsasl"
+source="http://spice-space.org/download/releases/spice-$version.tar.bz2"
+desc="toolset for interaction with virtualized desktop devices"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/ \
+		--datarootdir=/lib \
+		--disable-smartcard \
+		--disable-static --disable-celt051
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

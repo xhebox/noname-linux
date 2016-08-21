@@ -1,0 +1,46 @@
+bin/dltest|755|0|0|regular file
+bin/isql|755|0|0|regular file
+bin/iusql|755|0|0|regular file
+bin/odbc_config|755|0|0|regular file
+bin/odbcinst|755|0|0|regular file
+bin/slencheck|755|0|0|regular file
+bin|755|0|0|directory
+etc/ODBCDataSources|755|0|0|directory
+etc/odbc.ini|644|0|0|regular empty file
+etc/odbcinst.ini|644|0|0|regular empty file
+etc|755|0|0|directory
+include/autotest.h|644|0|0|regular file
+include/odbcinst.h|644|0|0|regular file
+include/odbcinstext.h|644|0|0|regular file
+include/sql.h|644|0|0|regular file
+include/sqlext.h|644|0|0|regular file
+include/sqlspi.h|644|0|0|regular file
+include/sqltypes.h|644|0|0|regular file
+include/sqlucode.h|644|0|0|regular file
+include/unixodbc_conf.h|644|0|0|regular file
+include/uodbc_extras.h|644|0|0|regular file
+include/uodbc_stats.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libodbc.so.2.0.0|755|0|0|regular file
+lib/libodbc.so.2|777|0|0|symbolic link
+lib/libodbc.so|777|0|0|symbolic link
+lib/libodbccr.so.2.0.0|755|0|0|regular file
+lib/libodbccr.so.2|777|0|0|symbolic link
+lib/libodbccr.so|777|0|0|symbolic link
+lib/libodbcinst.so.2.0.0|755|0|0|regular file
+lib/libodbcinst.so.2|777|0|0|symbolic link
+lib/libodbcinst.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/man/man1/dltest.1.gz|644|0|0|regular file
+share/man/man1/isql.1.gz|644|0|0|regular file
+share/man/man1/iusql.1.gz|644|0|0|regular file
+share/man/man1/odbc_config.1.gz|644|0|0|regular file
+share/man/man1/odbcinst.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/odbc.ini.5.gz|644|0|0|regular file
+share/man/man5/odbcinst.ini.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man7/unixODBC.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,30 @@
+bin/opj_compress|755|0|0|regular file
+bin/opj_decompress|755|0|0|regular file
+bin/opj_dump|755|0|0|regular file
+bin|755|0|0|directory
+include/openjpeg-2.1/openjpeg.h|644|0|0|regular file
+include/openjpeg-2.1/opj_config.h|644|0|0|regular file
+include/openjpeg-2.1/opj_stdint.h|644|0|0|regular file
+include/openjpeg-2.1|755|0|0|directory
+include|755|0|0|directory
+lib/libopenjp2.so.2.1.2|755|0|0|regular file
+lib/libopenjp2.so.7|777|0|0|symbolic link
+lib/libopenjp2.so|777|0|0|symbolic link
+lib/openjpeg-2.1/OpenJPEGConfig.cmake|644|0|0|regular file
+lib/openjpeg-2.1/OpenJPEGTargets-release.cmake|644|0|0|regular file
+lib/openjpeg-2.1/OpenJPEGTargets.cmake|644|0|0|regular file
+lib/openjpeg-2.1|755|0|0|directory
+lib/pkgconfig/libopenjp2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/openjpeg-2.1/LICENSE|644|0|0|regular file
+share/doc/openjpeg-2.1|755|0|0|directory
+share/doc|755|0|0|directory
+share/man/man1/opj_compress.1.gz|644|0|0|regular file
+share/man/man1/opj_decompress.1.gz|644|0|0|regular file
+share/man/man1/opj_dump.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/libopenjp2.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,12 @@
+name=mtdev
+version=1.1.5
+deps=musl
+desc="Multitouch Protocol Translation Library"
+source="http://bitmath.org/code/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static
+	make || die
+	make install DESTDIR="$pkgdir" || die
+}

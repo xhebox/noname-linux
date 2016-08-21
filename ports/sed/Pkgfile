@@ -1,0 +1,17 @@
+name=sed
+version=4.4
+deps="acl"
+desc="The GNU sed utility"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --sbindir=/bin \
+		--enable-acl \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install   || die
+	rm -r "$pkgdir"/share/info
+}

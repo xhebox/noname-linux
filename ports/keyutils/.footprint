@@ -1,0 +1,59 @@
+bin/key.dns_resolver|755|0|0|regular file
+bin/keyctl|755|0|0|regular file
+bin/request-key|755|0|0|regular file
+bin|755|0|0|directory
+etc/request-key.conf|644|0|0|regular file
+etc/request-key.d|755|0|0|directory
+etc|755|0|0|directory
+include/keyutils.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libkeyutils.a|644|0|0|regular file
+lib/libkeyutils.so.1.6|755|0|0|regular file
+lib/libkeyutils.so.1|777|0|0|symbolic link
+lib/libkeyutils.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/man/man1/keyctl.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/find_key_by_type_and_name.3.gz|644|0|0|regular file
+share/man/man3/keyctl.3.gz|644|0|0|regular file
+share/man/man3/keyctl_assume_authority.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_chown.3.gz|644|0|0|regular file
+share/man/man3/keyctl_clear.3.gz|644|0|0|regular file
+share/man/man3/keyctl_describe.3.gz|644|0|0|regular file
+share/man/man3/keyctl_describe_alloc.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_dh_compute.3.gz|644|0|0|regular file
+share/man/man3/keyctl_dh_compute_alloc.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_get_keyring_ID.3.gz|644|0|0|regular file
+share/man/man3/keyctl_get_persistent.3.gz|644|0|0|regular file
+share/man/man3/keyctl_get_security.3.gz|644|0|0|regular file
+share/man/man3/keyctl_get_security_alloc.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_instantiate.3.gz|644|0|0|regular file
+share/man/man3/keyctl_instantiate_iov.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_invalidate.3.gz|644|0|0|regular file
+share/man/man3/keyctl_join_session_keyring.3.gz|644|0|0|regular file
+share/man/man3/keyctl_link.3.gz|644|0|0|regular file
+share/man/man3/keyctl_negate.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_read.3.gz|644|0|0|regular file
+share/man/man3/keyctl_read_alloc.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_reject.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_revoke.3.gz|644|0|0|regular file
+share/man/man3/keyctl_search.3.gz|644|0|0|regular file
+share/man/man3/keyctl_session_to_parent.3.gz|644|0|0|regular file
+share/man/man3/keyctl_set_reqkey_keyring.3.gz|644|0|0|regular file
+share/man/man3/keyctl_set_timeout.3.gz|644|0|0|regular file
+share/man/man3/keyctl_setperm.3.gz|644|0|0|regular file
+share/man/man3/keyctl_unlink.3.gz|777|0|0|symbolic link
+share/man/man3/keyctl_update.3.gz|644|0|0|regular file
+share/man/man3/recursive_key_scan.3.gz|644|0|0|regular file
+share/man/man3/recursive_session_key_scan.3.gz|777|0|0|symbolic link
+share/man/man3|755|0|0|directory
+share/man/man5/request-key.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man7/keyutils.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man/man8/key.dns_resolver.8.gz|644|0|0|regular file
+share/man/man8/request-key.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share/request-key-debug.sh|755|0|0|regular file
+share|755|0|0|directory

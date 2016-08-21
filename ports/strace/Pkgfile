@@ -1,0 +1,16 @@
+name=strace
+version=4.16
+desc="A useful diagnositic, instructional, and debugging tool"
+deps="perl libunwind"
+source="http://downloads.sourceforge.net/${name}/${name}-$version.tar.xz
+musl.patch"
+
+build() {
+	cd $name-$version
+	patch -p0 < ../musl.patch || die
+	./configure --prefix=/ \
+		--with-libunwind
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

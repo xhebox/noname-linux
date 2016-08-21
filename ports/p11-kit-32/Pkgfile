@@ -1,0 +1,23 @@
+. $PORTS/p11-kit/Pkgfile
+name=p11-kit-32
+deps="musl libtasn1-32 libffi-32 p11-kit"
+
+build() {
+	cd p11-kit-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix=/ \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--libdir=/lib32 \
+		--libexecdir=/lib32 \
+		--with-module-path=/lib32/pkcs11 \
+		--with-trust-paths=/etc/ca-certificates/trust-source:/share/ca-certificates/trust-source
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -rf "${pkgdir}"/etc
+	rm -rf "${pkgdir}"/bin
+	rm -rf "${pkgdir}"/include
+	rm -rf "${pkgdir}"/share
+}

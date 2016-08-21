@@ -1,0 +1,18 @@
+
+name=sysfsutils
+version=2.1.0
+deps=musl
+desc="System Utilities Based on Sysfs"
+source="http://downloads.sourceforge.net/sourceforge/linux-diag/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--mandir=/share/man \
+		--disable-static 
+	
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}
+

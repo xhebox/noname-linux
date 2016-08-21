@@ -1,0 +1,21 @@
+name=openal
+version=1.17.2
+desc="Cross-platform 3D audio library, software implementation"
+deps="alsa-lib cmake pulseaudio fluidsynth sdl2 ffmpeg"
+source="https://github.com/kcat/openal-soft/archive/openal-soft-$version.tar.gz"
+
+ext() {
+	mkdir build examples
+	cd openal-soft-openal-soft-$version
+	sed -i 's/PIX_FMT_YUV420P/AV_&/g' examples/alffplay.c
+}
+
+build() {
+	cd build
+	cmake -D CMAKE_INSTALL_PREFIX= -D CMAKE_BUILD_TYPE=Release ../openal-soft-openal-soft-$version
+	make || die
+	make DESTDIR="$pkgdir/" install || die
+	cd ../openal-soft-openal-soft-$version
+	install -m644 env-vars.txt "$pkgdir/share/openal/"
+	install -m644 hrtf.txt "$pkgdir/share/openal/"
+}

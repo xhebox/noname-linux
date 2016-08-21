@@ -1,0 +1,27 @@
+name=imagemagick
+version=6.9.8.4
+desc="An image viewing/manipulation program"
+deps="libtool lcms2 libxt fontconfig libxext opencl-headers openexr librsvg libxml2 openjpeg2 glu libwebp ocl-icd liblqr ghostscript perl" 
+source="http://www.imagemagick.org/download/ImageMagick-${version%.*}-${version##*.}.tar.xz
+perlmagick.rpath.patch"
+
+ext() {
+	cd ImageMagick-${version%.*}-${version##*.}
+	sed '/AC_PATH_XTRA/d' -i configure.ac
+	autoreconf --force --install
+	patch -p0 -i "${srcdir}/perlmagick.rpath.patch" || die
+}
+
+build() {
+	cd ImageMagick-${version%.*}-${version##*.}
+
+	./configure --prefix= --sysconfdir=/etc --with-modules \
+		--enable-hdri --with-openexr --with-xml \
+		--with-webp --with-gslib --with-gs-font-dir=/share/fonts/Type1 \
+		--with-perl --with-perl-options="INSTALLDIRS=vendor" --with-lqr --with-rsvg \
+		--enable-opencl --with-openjp2 --without-gvc --without-djvu --without-autotrace \
+		--without-jbig --without-fpx --without-dps --without-fftw
+	make || die
+	make -j1 DESTDIR="${pkgdir}" install || die
+	make DESTDIR="${pkgdir}" install-data-html || die
+}

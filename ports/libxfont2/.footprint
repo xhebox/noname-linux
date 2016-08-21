@@ -1,0 +1,10 @@
+lib/libXfont2.so.2|777|0|0|symbolic link
+lib/libXfont2.so|777|0|0|symbolic link
+include/X11/fonts/libxfont2.h|644|0|0|regular file
+lib/libXfont2.so.2.0.0|755|0|0|regular file
+lib/pkgconfig/xfont2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/fonts|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

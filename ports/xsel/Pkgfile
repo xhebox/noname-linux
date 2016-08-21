@@ -1,0 +1,16 @@
+name=xsel
+version=1.2.0
+deps="libx11 libxt"
+desc="clipboard manager"
+source="
+http://www.vergenet.net/~conrad/software/xsel/download/$name-$version.tar.gz
+"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

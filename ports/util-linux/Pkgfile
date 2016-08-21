@@ -1,0 +1,47 @@
+name=util-linux
+version=2.29.2
+if [ "${version%*.*.*}" = "$version" ]; then
+	_ver="$version"
+else
+	_ver="${version%.*}"
+fi
+desc="uuid lib from util-linux"
+source="https://www.kernel.org/pub/linux/utils/util-linux/v$_ver/util-linux-$version.tar.xz
+fix-musl-2.patch
+fix-musl.patch
+ttydefaults.h"
+deps="ncurses zlib shadow coreutils"
+
+ext() {
+	cd util-linux-$version
+	patch -p0 < ../fix-musl-2.patch || die
+	patch -p0 < ../fix-musl.patch || die
+	cp ../ttydefaults.h include
+	CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
+}
+
+build() {
+	cd util-linux-$version
+	./configure --prefix= \
+		--enable-raw \
+		--disable-vipw \
+		--disable-newgrp \
+		--disable-chfn-chsh \
+		--disable-nologin \
+		--disable-vipw \
+		--without-selinux \
+		--without-audit \
+		--enable-write \
+		--enable-libuuid --enable-makeinstall-chown \
+		--enable-libblkid --enable-fsck --disable-rpath \
+		--without-udev \
+		--without-python 
+
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	chgrp tty "$pkgdir"/bin/wall
+	chgrp tty "$pkgdir"/bin/write
+	mv "$pkgdir"/sbin/* "$pkgdir"/bin
+	rmdir "$pkgdir"/sbin
+	rm -r "$pkgdir"/share/doc
+}

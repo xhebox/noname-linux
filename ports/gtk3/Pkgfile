@@ -1,0 +1,34 @@
+name=gtk3
+version=3.22.15
+desc="A multi-platform toolkit for creating graphical user interfaces"
+deps="atk gdk-pixbuf pixman libxcursor libxrandr libxdamage libxcomposite pango hicolor-icon-theme libxi libepoxy expat adwaita-icon-theme libxinerama gobject-introspection"
+source="http://ftp.gnome.org/pub/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz
+0003-disable-atk-bridge.patch
+0004-Remove-Gdk-dependency-from-gtk-encode-symbolic-svg.patch"
+
+build() {
+	cd gtk+-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir/$i" ;;
+		esac
+	done
+	sed -i 's/ atk-bridge-2.0//g' configure
+	./configure --prefix=/ \
+	--datadir=/share \
+	--disable-gtk-doc-html \
+	--enable-xinerama \
+	--enable-x11-backend \
+	--enable-xkb \
+	--enable-xrandr \
+	--enable-xfixes \
+	--enable-xcomposite \
+	--enable-xdamage \
+	--disable-cups \
+	--disable-wayland-backend \
+	--enable-introspection \
+	--disable-static
+	sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make  || die
+	make DESTDIR="$pkgdir" install || die
+}

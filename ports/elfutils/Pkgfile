@@ -1,0 +1,29 @@
+name=elfutils
+version=0.168
+desc="Libraries/utilities to handle ELF objects (drop in replacement for libelf)"
+source="https://fedorahosted.org/releases/e/l/${name}/${version}/${name}-${version}.tar.bz2
+elfutils-0.168-musl-libs.patch
+elfutils-0.168-musl-obstack-fts.patch
+elfutils-0.168-musl-utils.patch
+"
+deps="zlib xz bzip2 m4 argp-standalone gettext musl-obstack musl-fts gettext"
+
+ext () {
+	cd elfutils-$version
+	for i in $source;do
+		case $i in
+		*.patch)patch -p1 < ../$i ;;
+		esac
+	done
+	sed -i 's:-Werror::' */Makefile.in
+	autoreconf -fi
+	export CFLAGS="$CFLAGS -Wno-null-dereference"
+}
+
+build() {
+	cd elfutils-$version
+	./configure --prefix= \
+	--program-prefix=eu-
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

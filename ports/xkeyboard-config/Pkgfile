@@ -1,0 +1,19 @@
+name=xkeyboard-config
+version=2.20
+deps="xorg-app intltool"
+desc="X keyboard configuration database"
+source="http://xorg.freedesktop.org/releases/individual/data/$name/$name-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix= \
+	            --with-xkb-base=/share/X11/xkb \
+	            --with-xkb-rules-symlink=xorg
+
+	make -j1 || die
+	make DESTDIR="$pkgdir" install || die
+
+	ln -s /var/lib/xkb "$pkgdir"/share/X11/xkb/compiled
+	find "$pkgdir" -name README -delete
+}

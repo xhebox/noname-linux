@@ -1,0 +1,17 @@
+name=zlib
+version=1.2.11
+desc="zlib"
+source="http://www.zlib.net/zlib-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	./configure --prefix= --shared 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

@@ -1,0 +1,10 @@
+#!/bin/sh
+[ ! -f "$@" ] && echo "no such file" && exit 1
+arch="`file -L "$@"`"
+if [ "${arch%64-bit*}" != "$arch" ];then
+	/lib/ldd "$@"
+elif [ "${arch%32-bit*}" != "$arch" ];then
+	/lib32/ldd "$@"
+else
+	echo "neither 32bit or 64bit!"
+fi

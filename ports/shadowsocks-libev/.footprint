@@ -1,0 +1,35 @@
+bin/ss-local|755|0|0|regular file
+bin/ss-manager|755|0|0|regular file
+bin/ss-nat|755|0|0|regular file
+bin/ss-redir|755|0|0|regular file
+bin/ss-server|755|0|0|regular file
+bin/ss-tunnel|755|0|0|regular file
+bin|755|0|0|directory
+include/shadowsocks.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libshadowsocks-libev.so.2.0.0|755|0|0|regular file
+lib/libshadowsocks-libev.so.2|777|0|0|symbolic link
+lib/libshadowsocks-libev.so|777|0|0|symbolic link
+lib/pkgconfig/shadowsocks-libev.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/shadowsocks-libev/shadowsocks-libev.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-local.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-manager.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-nat.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-redir.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-server.html|644|0|0|regular file
+share/doc/shadowsocks-libev/ss-tunnel.html|644|0|0|regular file
+share/doc/shadowsocks-libev|755|0|0|directory
+share/doc|755|0|0|directory
+share/man/man1/ss-local.1.gz|644|0|0|regular file
+share/man/man1/ss-manager.1.gz|644|0|0|regular file
+share/man/man1/ss-nat.1.gz|644|0|0|regular file
+share/man/man1/ss-redir.1.gz|644|0|0|regular file
+share/man/man1/ss-server.1.gz|644|0|0|regular file
+share/man/man1/ss-tunnel.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man8/shadowsocks-libev.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

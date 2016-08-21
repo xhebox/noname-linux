@@ -1,0 +1,28 @@
+name=man-db
+version=2.7.6.1
+deps="pbzip2 pigz groff xz libpipeline gdbm coreutils gettext"
+desc="The on-line manual database"
+source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--sbindir=/bin \
+		--libdir=/lib \
+		--libexecdir=/lib \
+		--with-pager=less \
+		--with-gzip=/bin/pigz \
+		--with-bzip2=/bin/pbzip2 \
+		--enable-threads=posix \
+		--with-lzma=/bin/lzma \
+		--with-xz=/bin/xz \
+		--disable-setuid \
+		--without-included-regex  
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/share/info
+	rm -rf "$pkgdir"/share/doc
+	rm -r "$pkgdir"/share/man/??
+	rm -rf "$pkgdir"/usr
+}

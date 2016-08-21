@@ -1,0 +1,15 @@
+name=diffutils
+version=3.5
+deps="bash musl"
+desc="The GNU diff utilities"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

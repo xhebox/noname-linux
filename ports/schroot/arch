@@ -1,0 +1,10 @@
+[arch]
+description=arch
+directory=/mnt/arch
+users=xhe
+groups=users
+profile=arch
+aliases=default
+type=directory
+personality=linux
+preserve-environment=true

@@ -1,0 +1,14 @@
+name=libxscrnsaver
+version=1.2.2
+desc="X Screen Saver extension client library"
+deps="libx11 xorg-proto libxext"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXScrnSaver-$version.tar.bz2"
+
+build() {
+	cd libXScrnSaver-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,42 @@
+bin/finit|755|0|0|regular file
+bin/halt|777|0|0|symbolic link
+bin/initctl|755|0|0|regular file
+bin/init|777|0|0|symbolic link
+bin/poweroff|777|0|0|symbolic link
+bin/reboot|755|0|0|regular file
+bin/shutdown|777|0|0|symbolic link
+bin/suspend|777|0|0|symbolic link
+bin/telinit|777|0|0|symbolic link
+bin|755|0|0|directory
+etc/finit.conf|644|0|0|regular file
+etc/init.d|755|0|0|directory
+etc/rc.local|755|0|0|regular file
+etc|755|0|0|directory
+include/finit/cond.h|644|0|0|regular file
+include/finit/finit.h|644|0|0|regular file
+include/finit/helpers.h|644|0|0|regular file
+include/finit/inetd.h|644|0|0|regular file
+include/finit/plugin.h|644|0|0|regular file
+include/finit/svc.h|644|0|0|regular file
+include/finit|755|0|0|directory
+include|755|0|0|directory
+lib/finit/plugins/bootmisc.so|755|0|0|regular file
+lib/finit/plugins/dbus.so|755|0|0|regular file
+lib/finit/plugins/hwclock.so|755|0|0|regular file
+lib/finit/plugins/initctl.so|755|0|0|regular file
+lib/finit/plugins/netlink.so|755|0|0|regular file
+lib/finit/plugins/pidfile.so|755|0|0|regular file
+lib/finit/plugins/procps.so|755|0|0|regular file
+lib/finit/plugins/resolvconf.so|755|0|0|regular file
+lib/finit/plugins/tty.so|755|0|0|regular file
+lib/finit/plugins/urandom.so|755|0|0|regular file
+lib/finit/plugins/x11-common.so|755|0|0|regular file
+lib/finit/plugins|755|0|0|directory
+lib/finit|755|0|0|directory
+lib|755|0|0|directory
+share/doc/finit/LICENSE|644|0|0|regular file
+share/doc/finit/README.md|644|0|0|regular file
+share/doc/finit/finit.conf|644|0|0|regular file
+share/doc/finit|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

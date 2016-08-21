@@ -1,0 +1,22 @@
+. $PORTS/libxslt/Pkgfile
+name=libxslt-32
+deps="libxml2-32 zlib-32 libgcrypt-32 libxslt"
+
+build() {
+	cd libxslt-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	autoreconf -fi
+	./configure \
+		--prefix=/ \
+		--libdir=/lib32 \
+		--without-python
+
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR=$pkgdir install || die
+	rm -r $pkgdir/share
+	rm -r $pkgdir/include
+	rm -r $pkgdir/bin
+}

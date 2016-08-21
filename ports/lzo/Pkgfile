@@ -1,0 +1,18 @@
+name=lzo
+version=2.10
+desc="Portable lossless data compression library"
+source="http://www.oberhumer.com/opensource/lzo/download/lzo-${version}.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ --enable-shared
+	make || die
+	gcc $CFLAGS -fpic -Iinclude/lzo -o minilzo/minilzo.o -c minilzo/minilzo.c
+	gcc $LDFLAGS -shared -o libminilzo.so.0 -Wl,-soname,libminilzo.so.0 minilzo/minilzo.o	
+	make DESTDIR="$pkgdir" install  || die
+	install -m 755 libminilzo.so.0 ${pkgdir}/lib
+	install -p -m 644 minilzo/minilzo.h ${pkgdir}/include/lzo
+	cd ${pkgdir}/lib
+	ln -s libminilzo.so.0 libminilzo.so
+}

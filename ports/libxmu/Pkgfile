@@ -1,0 +1,19 @@
+name=libxmu
+version=1.1.2
+desc="xorg lib libXmu"
+deps="libxt xorg-proto libxext libx11"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXmu-$version.tar.bz2"
+
+build() {
+	cd libXmu-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	rm "$pkgdir"/share/doc/libXmu/Xmu.xml
+	rm "$pkgdir"/share/doc/libXmu/xlogo.svg
+	find "$pkgdir"/share -type d -delete
+}
+

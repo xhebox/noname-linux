@@ -1,0 +1,12 @@
+name=libinput
+version=1.7.2
+deps="mtdev libevdev eudev graphviz"
+desc="Libinput translates evdev events into Wayland events"
+source="http://www.freedesktop.org/software/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ --enable-libwacom=disable --disable-static
+	make || die
+	make install DESTDIR="$pkgdir" || die
+}

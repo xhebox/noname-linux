@@ -1,0 +1,18 @@
+name=pdnsd
+version=1.2.9.a
+_version=${version%.*}
+desc="Proxy DNS server with permanent caching"
+deps=musl
+source="http://members.home.nl/p.a.rombouts/pdnsd/releases/pdnsd-$_version-par.tar.gz"
+
+build() {
+	cd $name-$_version
+	./configure --prefix= --sysconfdir=/etc --sbindir=/bin --enable-ipv6 || die
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	install -dm0755 "$pkgdir/share/doc/pdnsd"
+	sed -i 's/"nobody"/"pdnsd"/' "$pkgdir/etc/pdnsd.conf.sample"
+	mv "$pkgdir/etc/pdnsd.conf.sample" "$pkgdir/share/doc/pdnsd/pdnsd.conf"
+	chown -R 184:184 "$pkgdir/var/cache/pdnsd"
+}

@@ -1,0 +1,14 @@
+name=libxrandr
+version=1.5.1
+deps="libxext libxrender"
+desc="X Resize and Rotate extension client library"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXrandr-$version.tar.bz2"
+
+build() {
+	cd libXrandr-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

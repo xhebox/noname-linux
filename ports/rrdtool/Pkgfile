@@ -1,0 +1,15 @@
+name=rrdtool
+version=1.6.0
+deps="perl python pango libxml2"
+desc="Data logging and graphing application"
+source="http://oss.oetiker.ch/rrdtool/pub/rrdtool-${version}.tar.gz"
+
+build() {
+	cd rrdtool-$version
+	./configure --prefix=/ --localstatedir=/var --disable-rpath \
+	--enable-perl --enable-perl-site-install --with-perl-options='INSTALLDIRS=vendor' \
+	--enable-python \
+	--disable-libwrap
+	make || die
+	make DESTDIR="$pkgdir" includedir=/include install || die
+}

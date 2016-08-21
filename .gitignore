@@ -1,0 +1,16 @@
+ports/*/*.tar*
+ports/*/*.tgz*
+ports/*/*.rar*
+ports/*/*.zip*
+ports/*/*.rpm*
+ports/*/*.t3g*
+ports/*/*.bin*
+ports/*/*.run*
+ports/*/*msi*
+ports/*/*iso*
+scripts/*iso
+scripts/*tar.xz
+scripts/result
+scripts/travis
+index
+pindex

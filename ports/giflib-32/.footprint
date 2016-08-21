@@ -1,0 +1,4 @@
+lib32/libgif.so|777|0|0|symbolic link
+lib32/libgif.so.7|777|0|0|symbolic link
+lib32/libgif.so.7.0.0|755|0|0|regular file
+lib32|755|0|0|directory

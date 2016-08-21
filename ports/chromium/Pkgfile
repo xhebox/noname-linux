@@ -1,0 +1,106 @@
+name=chromium
+version=58.0.3029.96
+deps="alsa-lib bzip2 gtk gtk3 snappy harfbuzz perl pciutils dbus libexif gperf mesa python yasm libvpx nss ninja libcap libva-intel-driver flac libva libjpeg-turbo libpng xdg-utils libxslt ffmpeg expat libwebp elfutils speex mesa hwids libxscrnsaver desktop-file-utils glib libevent libvdpau-va-gl libxfont2 icu ttf-dejavu krb5 nodejs"
+desc="The open-source project behind Google Chrome"
+source="
+https://commondatastorage.googleapis.com/chromium-browser-official/$name-$version.tar.xz
+chromium-gn-bootstrap-r2.patch
+chromium-system-ffmpeg-r4.patch
+chromium-widevine.patch
+default-pthread-stacksize.patch
+gn_bootstrap.patch
+gn_fix_for_noname.patch
+last-commit-position.patch
+musl-fixes.patch
+musl-sandbox.patch
+no-execinfo.patch
+no-getcontext.patch
+no-mallinfo.patch
+resolver.patch
+vaapi_patch_r0.patch
+chromium.sh
+chromium.desktop
+"
+
+ext() {
+	cd $name-$version
+	sed "s/@WIDEVINE_VERSION@/Pinkie Pie/" -i ../chromium-widevine.patch || die
+	for i in $source; do
+		msg $i
+		case $i in
+		chromium-*gn*|icu*|*getrlimit*|*allocator*|*vaapi*) patch -p1 -i "$srcdir"/$i || die;;
+		*.patch|*.diff) patch -p0 -i "$srcdir"/$i || die;;
+		esac
+	done
+
+	sed -i '/config("compiler")/ a cflags_cc = [ "-fno-delete-null-pointer-checks" ]' build/config/linux/BUILD.gn
+	local _system_libs="flac harfbuzz-ng libjpeg libpng libwebp libxml libxslt snappy yasm zlib ffmpeg libevent"
+	local _lib
+	for _lib in $_system_libs libjpeg_turbo; do
+		find -type f -path "*third_party/$_lib/*" \
+			\! -path "*third_party/$_lib/chromium/*" \
+			\! -path "*third_party/$_lib/google/*" \
+			\! -path "*base/third_party/icu/*" \
+			\! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+		-delete
+	done
+	python2.7 build/linux/unbundle/replace_gn_files.py --system-libraries ${_system_libs} || die
+	python2.7 third_party/libaddressinput/chromium/tools/update-strings.py
+	mkdir -p third_party/node/linux/node-linux-x64/bin
+	ln -s /bin/node third_party/node/linux/node-linux-x64/bin/
+	sed 's|//third_party/usb_ids/usb.ids|/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
+	touch chrome/test/data/webui/i18n_process_css_test.html
+	export LDFLAGS="$LDFLAGS -Wl,--no-keep-memory"
+}
+
+build() {
+	cd $name-$version
+	PKG_NO_STRIP=yes
+	# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
+	# To be honest, i am too poor to get a complete set of keys..
+	# you can get your own keys, and put them here...
+	# or set env vars like GOOGLE_API_KEY, uppercase, same as the followings...
+	#conf="$conf -Dgoogle_api_key=
+	#-Dgoogle_default_client_id=
+	#-Dgoogle_default_client_secret="
+	export TMPDIR="$srcdir/temp"
+	mkdir -p "$TMPDIR"
+	local _flags='is_clang=false clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true linux_use_bundled_binutils=false use_cups=false use_gconf=false use_gnome_keyring=false use_gold=false use_gtk3=true use_kerberos=true use_pulseaudio=true use_sysroot=false enable_hangout_services_extension=true enable_widevine=true enable_nacl=false enable_nacl_nonsfi=false symbol_level=0 use_allocator="none" use_experimental_allocator_shim=false'
+
+	python2.7 tools/gn/bootstrap/bootstrap.py --gn-gen-args "${_flags}" || die
+	out/Release/gn gen out/Release --args="${_flags}" || die
+	ninja -C out/Release chrome chrome_sandbox chromedriver widevinecdmadapter pdf || die
+	
+	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
+
+	install -Dm4755 out/Release/chrome_sandbox "$pkgdir/lib/chromium/chrome-sandbox"
+
+	install -D out/Release/chromedriver "$pkgdir/lib/chromium/chromedriver"
+
+	cp out/Release/*.pak out/Release/*.bin out/Release/libwidevinecdmadapter.so \
+	out/Release/icudtl.dat \
+	out/Release/gen/content/content_resources.pak \
+	"$pkgdir/lib/chromium/"
+
+	cp -a out/Release/locales "$pkgdir/lib/chromium/"
+
+	install -Dm644 out/Release/chrome.1 "$pkgdir/share/man/man1/chromium.1"
+
+	install -Dm644 "$srcdir/chromium.desktop" \
+	"$pkgdir/share/applications/chromium.desktop"
+
+	install -Dm755 "$srcdir/chromium.sh" \
+	"$pkgdir/bin/chromium"
+
+	for size in 22 24 48 64 128 256; do
+		install -Dm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	for size in 16 32; do
+		install -Dm644 "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	ln -s /lib/chromium/chromedriver "$pkgdir/bin/chromedriver"
+}

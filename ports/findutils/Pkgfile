@@ -1,0 +1,15 @@
+name=findutils
+version=4.6.0
+deps="bash"
+desc="Basic directory searching utilities"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

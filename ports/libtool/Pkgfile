@@ -1,0 +1,14 @@
+name=libtool
+version=2.4.6
+desc="A generic library support script"
+source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
+deps=m4
+
+build() {
+	cd $name-$version
+	./bootstrap --force
+	./configure --prefix= --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

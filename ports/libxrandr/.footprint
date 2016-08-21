@@ -1,0 +1,28 @@
+lib/libXrandr.so|777|0|0|symbolic link
+lib/libXrandr.so.2|777|0|0|symbolic link
+include/X11/extensions/Xrandr.h|644|0|0|regular file
+lib/libXrandr.so.2.2.0|755|0|0|regular file
+lib/pkgconfig/xrandr.pc|644|0|0|regular file
+share/man/man3/XRRSetScreenConfig.3.gz|644|0|0|regular file
+share/man/man3/XRRGetScreenInfo.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigRotations.3.gz|644|0|0|regular file
+share/man/man3/XRRSetScreenConfigAndRate.3.gz|644|0|0|regular file
+share/man/man3/XRRQueryExtension.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigSizes.3.gz|644|0|0|regular file
+share/man/man3/XRRSelectInput.3.gz|644|0|0|regular file
+share/man/man3/XRRQueryVersion.3.gz|644|0|0|regular file
+share/man/man3/XRRFreeScreenConfigInfo.3.gz|644|0|0|regular file
+share/man/man3/Xrandr.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigCurrentRate.3.gz|644|0|0|regular file
+share/man/man3/XRRRootToScreen.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigRates.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigTimes.3.gz|644|0|0|regular file
+share/man/man3/XRRConfigCurrentConfiguration.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/extensions|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

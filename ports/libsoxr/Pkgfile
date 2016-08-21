@@ -1,0 +1,24 @@
+name=libsoxr
+version=0.1.2
+desc="The SoX Resampler library that aims to give fast and high quality results for any constant resampling ratio"
+deps="cmake"
+source="http://downloads.sourceforge.net/project/soxr/soxr-$version-Source.tar.xz"
+
+build() {
+	cd soxr-$version-Source
+	cmake \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DBUILD_EXAMPLES=OFF \
+		-DBUILD_SHARED_LIBS=ON \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DVISIBILITY_HIDDENL=ON \
+		-DWITH_AVFFT=ON \
+		-DWITH_DOUBLE_PRECISION=ON \
+		-DWITH_LSR_BINDINGS=ON \
+		-DWITH_OPENMP=ON \
+		-DWITH_PFFFT=ON \
+		-DWITH_SIMD=ON \
+		.
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

@@ -1,0 +1,18 @@
+name=wireless_tools
+version=30.pre9
+desc="Wireless Extensions."
+deps=musl
+source="http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/$name.$version.tar.gz"
+
+build() {
+	cd $name.30
+	sed -i '/BUILD_STATIC =/d' Makefile
+	make CFLAGS="$CFLAGS -I." LDFLAGS="$LDFLAGS"  || die
+	make INSTALL_DIR="$pkgdir/bin" \
+	INSTALL_INC="$pkgdir/include" \
+	INSTALL_MAN="$pkgdir/share/man" \
+	INSTALL_LIB="$pkgdir/lib" \
+	install  || die
+	rm -r "$pkgdir"/share/man/??.*
+	rm -r "$pkgdir"/share/man/??
+}

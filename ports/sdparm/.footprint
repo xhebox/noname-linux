@@ -1,0 +1,10 @@
+bin/scsi_ch_swp|755|0|0|regular file
+bin/sdparm|755|0|0|regular file
+bin/sas_disk_blink|755|0|0|regular file
+share/man/man8/sdparm.8.gz|644|0|0|regular file
+share/man/man8/scsi_ch_swp.8.gz|644|0|0|regular file
+share/man/man8/sas_disk_blink.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,32 @@
+name=freetype
+version=2.7.1
+deps="zlib libpng bzip2 harfbuzz"
+desc="A free and portable TrueType font rendering engine"
+source="http://download.savannah.gnu.org/releases/freetype/freetype-$version.tar.bz2
+freetype2.sh
+"
+
+ext() {
+	cd freetype-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -Np1 < ../$i || die ;;
+		esac
+	done
+}
+
+build() {
+	cd freetype-$version
+	./configure --prefix= \
+		--disable-static \
+		--with-zlib 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	install -Dm644 ../freetype2.sh "$pkgdir"/etc/profile.d/freetype2.sh
+}
+
+post() {
+	if [ $UPD -eq 1 ]; then
+		error "Subpixel hinting can be now configured in /etc/profile.d/freetype2.sh."
+	fi
+}

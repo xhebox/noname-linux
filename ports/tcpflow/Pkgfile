@@ -1,0 +1,18 @@
+name=tcpflow
+version=1.4.5
+desc="Captures data transmitted as part of TCP connections then stores the data conveniently"
+deps="libpcap cairo libressl sqlite boost"
+source="http://digitalcorpora.org/downloads/tcpflow/tcpflow-$version.tar.gz
+tcpflow-openssl-1.1.patch"
+
+ext() {
+	cd tcpflow-$version
+	patch -p1 -i ../tcpflow-openssl-1.1.patch || die
+}
+
+build() {
+	cd tcpflow-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

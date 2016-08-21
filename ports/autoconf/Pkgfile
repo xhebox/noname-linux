@@ -1,0 +1,14 @@
+name=autoconf
+version=2.69
+deps="m4 perl"
+desc="A package of M4 macros to produce scripts to auto matically configure source code"
+source="ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+
+build(){
+	cd $name-$version
+	./configure --prefix= 
+	make  || die
+	make prefix="$pkgdir" install  || die
+	rm -r "${pkgdir}"/share/info 
+}
+

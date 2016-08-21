@@ -1,0 +1,12 @@
+name=libconfig
+version=1.5
+desc="C/C++ Configuration File Library"
+deps=gcc
+source="http://www.hyperrealm.com/libconfig/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

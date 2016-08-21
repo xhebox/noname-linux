@@ -1,0 +1,17 @@
+name=speexdsp
+version=1.2rc3
+desc="A free codec library for speech - DSP."
+source="http://downloads.us.xiph.org/releases/speex/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix= \
+		--disable-static
+
+	make || die
+	make prefix=$pkgdir install || die
+}
+

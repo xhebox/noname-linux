@@ -1,0 +1,207 @@
+bin/aserver|755|0|0|regular file
+bin|755|0|0|directory
+include/alsa/alisp.h|644|0|0|regular file
+include/alsa/asoundef.h|644|0|0|regular file
+include/alsa/asoundlib.h|644|0|0|regular file
+include/alsa/conf.h|644|0|0|regular file
+include/alsa/control.h|644|0|0|regular file
+include/alsa/control_external.h|644|0|0|regular file
+include/alsa/error.h|644|0|0|regular file
+include/alsa/global.h|644|0|0|regular file
+include/alsa/hwdep.h|644|0|0|regular file
+include/alsa/input.h|644|0|0|regular file
+include/alsa/mixer.h|644|0|0|regular file
+include/alsa/mixer_abst.h|644|0|0|regular file
+include/alsa/output.h|644|0|0|regular file
+include/alsa/pcm.h|644|0|0|regular file
+include/alsa/pcm_external.h|644|0|0|regular file
+include/alsa/pcm_extplug.h|644|0|0|regular file
+include/alsa/pcm_ioplug.h|644|0|0|regular file
+include/alsa/pcm_old.h|644|0|0|regular file
+include/alsa/pcm_plugin.h|644|0|0|regular file
+include/alsa/pcm_rate.h|644|0|0|regular file
+include/alsa/rawmidi.h|644|0|0|regular file
+include/alsa/seq.h|644|0|0|regular file
+include/alsa/seq_event.h|644|0|0|regular file
+include/alsa/seq_midi_event.h|644|0|0|regular file
+include/alsa/seqmid.h|644|0|0|regular file
+include/alsa/sound/asoc.h|644|0|0|regular file
+include/alsa/sound/asound_fm.h|644|0|0|regular file
+include/alsa/sound/emu10k1.h|644|0|0|regular file
+include/alsa/sound/hdsp.h|644|0|0|regular file
+include/alsa/sound/hdspm.h|644|0|0|regular file
+include/alsa/sound/sb16_csp.h|644|0|0|regular file
+include/alsa/sound/sscape_ioctl.h|644|0|0|regular file
+include/alsa/sound/tlv.h|644|0|0|regular file
+include/alsa/sound/type_compat.h|644|0|0|regular file
+include/alsa/sound|755|0|0|directory
+include/alsa/timer.h|644|0|0|regular file
+include/alsa/topology.h|644|0|0|regular file
+include/alsa/use-case.h|644|0|0|regular file
+include/alsa/version.h|644|0|0|regular file
+include/alsa|755|0|0|directory
+include/sys/asoundlib.h|644|0|0|regular file
+include/sys|755|0|0|directory
+include|755|0|0|directory
+lib/alsa-lib/smixer/smixer-ac97.so|755|0|0|regular file
+lib/alsa-lib/smixer/smixer-hda.so|755|0|0|regular file
+lib/alsa-lib/smixer/smixer-python.so|755|0|0|regular file
+lib/alsa-lib/smixer/smixer-sbase.so|755|0|0|regular file
+lib/alsa-lib/smixer|755|0|0|directory
+lib/alsa-lib|755|0|0|directory
+lib/libasound.so.2.0.0|755|0|0|regular file
+lib/libasound.so.2|777|0|0|symbolic link
+lib/libasound.so|777|0|0|symbolic link
+lib/pkgconfig/alsa.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/aclocal/alsa.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/alsa/alsa.conf.d/README|644|0|0|regular file
+share/alsa/alsa.conf.d|755|0|0|directory
+share/alsa/alsa.conf|644|0|0|regular file
+share/alsa/cards/AACI.conf|644|0|0|regular file
+share/alsa/cards/ATIIXP-MODEM.conf|644|0|0|regular file
+share/alsa/cards/ATIIXP-SPDMA.conf|644|0|0|regular file
+share/alsa/cards/ATIIXP.conf|644|0|0|regular file
+share/alsa/cards/AU8810.conf|644|0|0|regular file
+share/alsa/cards/AU8820.conf|644|0|0|regular file
+share/alsa/cards/AU8830.conf|644|0|0|regular file
+share/alsa/cards/Audigy.conf|644|0|0|regular file
+share/alsa/cards/Audigy2.conf|644|0|0|regular file
+share/alsa/cards/Aureon51.conf|644|0|0|regular file
+share/alsa/cards/Aureon71.conf|644|0|0|regular file
+share/alsa/cards/CA0106.conf|644|0|0|regular file
+share/alsa/cards/CMI8338-SWIEC.conf|644|0|0|regular file
+share/alsa/cards/CMI8338.conf|644|0|0|regular file
+share/alsa/cards/CMI8738-MC6.conf|644|0|0|regular file
+share/alsa/cards/CMI8738-MC8.conf|644|0|0|regular file
+share/alsa/cards/CMI8788.conf|644|0|0|regular file
+share/alsa/cards/CS46xx.conf|644|0|0|regular file
+share/alsa/cards/EMU10K1.conf|644|0|0|regular file
+share/alsa/cards/EMU10K1X.conf|644|0|0|regular file
+share/alsa/cards/ENS1370.conf|644|0|0|regular file
+share/alsa/cards/ENS1371.conf|644|0|0|regular file
+share/alsa/cards/ES1968.conf|644|0|0|regular file
+share/alsa/cards/Echo_Echo3G.conf|644|0|0|regular file
+share/alsa/cards/FM801.conf|644|0|0|regular file
+share/alsa/cards/FWSpeakers.conf|644|0|0|regular file
+share/alsa/cards/FireWave.conf|644|0|0|regular file
+share/alsa/cards/GUS.conf|644|0|0|regular file
+share/alsa/cards/HDA-Intel.conf|644|0|0|regular file
+share/alsa/cards/ICE1712.conf|644|0|0|regular file
+share/alsa/cards/ICE1724.conf|644|0|0|regular file
+share/alsa/cards/ICH-MODEM.conf|644|0|0|regular file
+share/alsa/cards/ICH.conf|644|0|0|regular file
+share/alsa/cards/ICH4.conf|644|0|0|regular file
+share/alsa/cards/Loopback.conf|644|0|0|regular file
+share/alsa/cards/Maestro3.conf|644|0|0|regular file
+share/alsa/cards/NFORCE.conf|644|0|0|regular file
+share/alsa/cards/PC-Speaker.conf|644|0|0|regular file
+share/alsa/cards/PMac.conf|644|0|0|regular file
+share/alsa/cards/PMacToonie.conf|644|0|0|regular file
+share/alsa/cards/PS3.conf|644|0|0|regular file
+share/alsa/cards/RME9636.conf|644|0|0|regular file
+share/alsa/cards/RME9652.conf|644|0|0|regular file
+share/alsa/cards/SB-XFi.conf|644|0|0|regular file
+share/alsa/cards/SI7018.conf|644|0|0|regular file
+share/alsa/cards/SI7018/sndoc-mixer.alisp|644|0|0|regular file
+share/alsa/cards/SI7018/sndop-mixer.alisp|644|0|0|regular file
+share/alsa/cards/SI7018|755|0|0|directory
+share/alsa/cards/TRID4DWAVENX.conf|644|0|0|regular file
+share/alsa/cards/USB-Audio.conf|644|0|0|regular file
+share/alsa/cards/VIA686A.conf|644|0|0|regular file
+share/alsa/cards/VIA8233.conf|644|0|0|regular file
+share/alsa/cards/VIA8233A.conf|644|0|0|regular file
+share/alsa/cards/VIA8237.conf|644|0|0|regular file
+share/alsa/cards/VX222.conf|644|0|0|regular file
+share/alsa/cards/VXPocket.conf|644|0|0|regular file
+share/alsa/cards/VXPocket440.conf|644|0|0|regular file
+share/alsa/cards/YMF744.conf|644|0|0|regular file
+share/alsa/cards/aliases.alisp|644|0|0|regular file
+share/alsa/cards/aliases.conf|644|0|0|regular file
+share/alsa/cards|755|0|0|directory
+share/alsa/pcm/center_lfe.conf|644|0|0|regular file
+share/alsa/pcm/default.conf|644|0|0|regular file
+share/alsa/pcm/dmix.conf|644|0|0|regular file
+share/alsa/pcm/dpl.conf|644|0|0|regular file
+share/alsa/pcm/dsnoop.conf|644|0|0|regular file
+share/alsa/pcm/front.conf|644|0|0|regular file
+share/alsa/pcm/hdmi.conf|644|0|0|regular file
+share/alsa/pcm/iec958.conf|644|0|0|regular file
+share/alsa/pcm/modem.conf|644|0|0|regular file
+share/alsa/pcm/rear.conf|644|0|0|regular file
+share/alsa/pcm/side.conf|644|0|0|regular file
+share/alsa/pcm/surround21.conf|644|0|0|regular file
+share/alsa/pcm/surround40.conf|644|0|0|regular file
+share/alsa/pcm/surround41.conf|644|0|0|regular file
+share/alsa/pcm/surround50.conf|644|0|0|regular file
+share/alsa/pcm/surround51.conf|644|0|0|regular file
+share/alsa/pcm/surround71.conf|644|0|0|regular file
+share/alsa/pcm|755|0|0|directory
+share/alsa/smixer.conf|644|0|0|regular file
+share/alsa/sndo-mixer.alisp|644|0|0|regular file
+share/alsa/topology/broadwell/broadwell.conf|644|0|0|regular file
+share/alsa/topology/broadwell|755|0|0|directory
+share/alsa/topology/bxtrt298/bxt_i2s.conf|644|0|0|regular file
+share/alsa/topology/bxtrt298|755|0|0|directory
+share/alsa/topology/sklrt286/skl_i2s.conf|644|0|0|regular file
+share/alsa/topology/sklrt286|755|0|0|directory
+share/alsa/topology|755|0|0|directory
+share/alsa/ucm/DAISY-I2S/DAISY-I2S.conf|644|0|0|regular file
+share/alsa/ucm/DAISY-I2S/HiFi.conf|644|0|0|regular file
+share/alsa/ucm/DAISY-I2S|755|0|0|directory
+share/alsa/ucm/DB410c/DB410c.conf|644|0|0|regular file
+share/alsa/ucm/DB410c/HDMI|644|0|0|regular file
+share/alsa/ucm/DB410c/HiFi|644|0|0|regular file
+share/alsa/ucm/DB410c|755|0|0|directory
+share/alsa/ucm/GoogleNyan/GoogleNyan.conf|644|0|0|regular file
+share/alsa/ucm/GoogleNyan/HiFi.conf|644|0|0|regular file
+share/alsa/ucm/GoogleNyan|755|0|0|directory
+share/alsa/ucm/PAZ00/HiFi.conf|644|0|0|regular file
+share/alsa/ucm/PAZ00/PAZ00.conf|644|0|0|regular file
+share/alsa/ucm/PAZ00/Record.conf|644|0|0|regular file
+share/alsa/ucm/PAZ00|755|0|0|directory
+share/alsa/ucm/PandaBoard/FMAnalog|644|0|0|regular file
+share/alsa/ucm/PandaBoard/PandaBoard.conf|644|0|0|regular file
+share/alsa/ucm/PandaBoard/hifiLP|644|0|0|regular file
+share/alsa/ucm/PandaBoard/hifi|644|0|0|regular file
+share/alsa/ucm/PandaBoard/record|644|0|0|regular file
+share/alsa/ucm/PandaBoard/voiceCall|644|0|0|regular file
+share/alsa/ucm/PandaBoard/voice|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/FMAnalog|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/PandaBoardES.conf|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/hifiLP|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/hifi|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/record|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/voiceCall|644|0|0|regular file
+share/alsa/ucm/PandaBoardES/voice|644|0|0|regular file
+share/alsa/ucm/PandaBoardES|755|0|0|directory
+share/alsa/ucm/PandaBoard|755|0|0|directory
+share/alsa/ucm/SDP4430/FMAnalog|644|0|0|regular file
+share/alsa/ucm/SDP4430/SDP4430.conf|644|0|0|regular file
+share/alsa/ucm/SDP4430/hifiLP|644|0|0|regular file
+share/alsa/ucm/SDP4430/hifi|644|0|0|regular file
+share/alsa/ucm/SDP4430/record|644|0|0|regular file
+share/alsa/ucm/SDP4430/voiceCall|644|0|0|regular file
+share/alsa/ucm/SDP4430/voice|644|0|0|regular file
+share/alsa/ucm/SDP4430|755|0|0|directory
+share/alsa/ucm/VEYRON-I2S/HiFi.conf|644|0|0|regular file
+share/alsa/ucm/VEYRON-I2S/VEYRON-I2S.conf|644|0|0|regular file
+share/alsa/ucm/VEYRON-I2S|755|0|0|directory
+share/alsa/ucm/broadwell-rt286/HiFi|644|0|0|regular file
+share/alsa/ucm/broadwell-rt286/broadwell-rt286.conf|644|0|0|regular file
+share/alsa/ucm/broadwell-rt286|755|0|0|directory
+share/alsa/ucm/chtrt5645/HiFi.conf|644|0|0|regular file
+share/alsa/ucm/chtrt5645/chtrt5645.conf|644|0|0|regular file
+share/alsa/ucm/chtrt5645|755|0|0|directory
+share/alsa/ucm/skylake-rt286/Hdmi1|644|0|0|regular file
+share/alsa/ucm/skylake-rt286/Hdmi2|644|0|0|regular file
+share/alsa/ucm/skylake-rt286/HiFi|644|0|0|regular file
+share/alsa/ucm/skylake-rt286/skylake-rt286.conf|644|0|0|regular file
+share/alsa/ucm/skylake-rt286|755|0|0|directory
+share/alsa/ucm/tegraalc5632/tegraalc5632.conf|644|0|0|regular file
+share/alsa/ucm/tegraalc5632|755|0|0|directory
+share/alsa/ucm|755|0|0|directory
+share/alsa|755|0|0|directory
+share|755|0|0|directory

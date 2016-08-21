@@ -1,0 +1,17 @@
+name=man-pages-zh
+version=1.6.3.1
+desc='Simplified Chinese Linux man pages'
+deps="opencc python"
+source="https://github.com/man-pages-zh/manpages-zh/archive/v$version.tar.gz"
+
+build() {
+	cd manpages-zh-$version
+	autoreconf -i
+	./configure --prefix=
+	make || die
+	make install DESTDIR="$pkgdir" || die
+	cd "$pkgdir"/share/man/zh_CN
+	rm -f ./man1/groups*
+	cd "$pkgdir"/share/man/zh_TW
+	rm -f ./man1/groups*
+}

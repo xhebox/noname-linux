@@ -1,0 +1,82 @@
+bin/croco-0.6-config|755|0|0|regular file
+bin/csslint-0.6|755|0|0|regular file
+bin|755|0|0|directory
+include/libcroco-0.6/libcroco/cr-additional-sel.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-attr-sel.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-cascade.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-declaration.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-doc-handler.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-enc-handler.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-fonts.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-input.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-num.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-om-parser.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-parser.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-parsing-location.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-prop-list.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-pseudo.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-rgb.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-sel-eng.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-selector.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-simple-sel.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-statement.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-string.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-style.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-stylesheet.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-term.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-tknzr.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-token.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/cr-utils.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/libcroco-config.h|644|0|0|regular file
+include/libcroco-0.6/libcroco/libcroco.h|644|0|0|regular file
+include/libcroco-0.6/libcroco|755|0|0|directory
+include/libcroco-0.6|755|0|0|directory
+include|755|0|0|directory
+lib/libcroco-0.6.so.3.0.1|755|0|0|regular file
+lib/libcroco-0.6.so.3|777|0|0|symbolic link
+lib/libcroco-0.6.so|777|0|0|symbolic link
+lib/pkgconfig/libcroco-0.6.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/gtk-doc/html/libcroco/ch01.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/home.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/index.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/left-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/left.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-additional-sel.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-attr-sel.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-cascade.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-declaration.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-doc-handler.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-enc-handler.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-fonts.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-input.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-num.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-om-parser.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-parser.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-parsing-location.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-prop-list.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-pseudo.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-rgb.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-sel-eng.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-selector.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-simple-sel.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-statement.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-string.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-style.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-stylesheet.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-term.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-tknzr.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-token.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-cr-utils.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco-libcroco-config.html|644|0|0|regular file
+share/gtk-doc/html/libcroco/libcroco.devhelp2|644|0|0|regular file
+share/gtk-doc/html/libcroco/right-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/right.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/style.css|644|0|0|regular file
+share/gtk-doc/html/libcroco/up-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/libcroco/up.png|644|0|0|regular file
+share/gtk-doc/html/libcroco|755|0|0|directory
+share/gtk-doc/html|755|0|0|directory
+share/gtk-doc|755|0|0|directory
+share|755|0|0|directory

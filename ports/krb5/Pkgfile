@@ -1,0 +1,49 @@
+name=krb5
+version=1.15
+desc="The Kerberos network authentication system"
+deps="e2fsprogs libldap keyutils perl db"
+source="https://web.mit.edu/kerberos/dist/krb5/${version}/${name}-${version}.tar.gz
+libressl.patch
+krb5-config_LDFLAGS.patch"
+
+ext() {
+	cd ${name}-${version}
+	patch -p1 -i "${srcdir}"/krb5-config_LDFLAGS.patch || die
+	patch -p1 -i "${srcdir}"/libressl.patch || die
+	sed -i "/KRB5ROOT=/s/\/local//" src/util/ac_check_krb5.m4
+}
+
+build() {
+	cd ${name}-${version}/src
+	export CFLAGS="$CFLAGS -fPIC -fno-strict-aliasing -fstack-protector-all"
+	export CPPFLAGS="$CPPFLAGS -I/include/et"
+	export WARN_CFLAGS=""
+	./configure --prefix= \
+		--sbindir=/bin \
+		--sysconfdir=/etc \
+		--localstatedir=/var/lib \
+		--enable-shared \
+		--with-system-et \
+		--with-system-ss \
+		--disable-rpath \
+		--disable-static \
+		--without-tcl \
+		--with-ldap \
+		--without-system-verto
+
+	make || die
+	make DESTDIR="${pkgdir}" EXAMPLEDIR=/share/doc/${name}/examples install || die
+
+	install -m 644 plugins/kdb/ldap/libkdb_ldap/kerberos.ldif "${pkgdir}"/share/doc/${name}/examples
+	install -m 644 plugins/kdb/ldap/libkdb_ldap/kerberos.schema "${pkgdir}"/share/doc/${name}/examples
+	install -dm 755 "${pkgdir}"/var/lib/krb5kdc
+	install -pm 644 config-files/kdc.conf "${pkgdir}"/var/lib/krb5kdc/kdc.conf
+	install -dm 755 "${pkgdir}"/etc
+	install -pm 644 config-files/krb5.conf "${pkgdir}"/etc/krb5.conf
+	install -dm 755 "${pkgdir}"/share/aclocal
+	install -m 644 util/ac_check_krb5.m4 "${pkgdir}"/share/aclocal
+}
+
+post() {
+	ldd /lib/sasl2/libgssapiv2.so 2>&1 | grep -q krb5 || opt_post_rebuild libsasl krb5
+}

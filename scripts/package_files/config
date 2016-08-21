@@ -1,0 +1,10 @@
+#!/bin/sh
+ARCH=x86_64
+ARCH32=i386
+TARGET=x86_64-pc-linux-musl
+TARGET32=i386-pc-linux-musl
+ROOT=$SYSROOT/noname
+DB=$ROOT/var/db/pkg
+COLORS_F=1
+SUM="sha512sum"
+PORTS="/home/xhe/noname-linux/ports"

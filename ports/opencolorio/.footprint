@@ -1,0 +1,24 @@
+lib/libOpenColorIO.so.1|777|0|0|symbolic link
+lib/libOpenColorIO.so|777|0|0|symbolic link
+bin/ociocheck|755|0|0|regular file
+bin/ociobakelut|755|0|0|regular file
+include/PyOpenColorIO/PyOpenColorIO.h|644|0|0|regular file
+include/OpenColorIO/OpenColorIO.h|644|0|0|regular file
+include/OpenColorIO/OpenColorTransforms.h|644|0|0|regular file
+include/OpenColorIO/OpenColorABI.h|644|0|0|regular file
+include/OpenColorIO/OpenColorTypes.h|644|0|0|regular file
+lib/libOpenColorIO.a|644|0|0|regular file
+lib/libOpenColorIO.so.1.0.9|755|0|0|regular file
+lib/pkgconfig/OpenColorIO.pc|644|0|0|regular file
+lib/python2.7/site-packages/PyOpenColorIO.so|755|0|0|regular file
+share/ocio/setup_ocio.sh|755|0|0|regular file
+share/ocio|755|0|0|directory
+share|755|0|0|directory
+lib/python2.7/site-packages|755|0|0|directory
+lib/python2.7|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/OpenColorIO|755|0|0|directory
+include/PyOpenColorIO|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,12 @@
+lib/libmtdev.so|777|0|0|symbolic link
+lib/libmtdev.so.1|777|0|0|symbolic link
+bin/mtdev-test|755|0|0|regular file
+include/mtdev-plumbing.h|644|0|0|regular file
+include/mtdev.h|644|0|0|regular file
+include/mtdev-mapping.h|644|0|0|regular file
+lib/libmtdev.so.1.0.0|755|0|0|regular file
+lib/pkgconfig/mtdev.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

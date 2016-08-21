@@ -1,0 +1,25 @@
+name=iproute2
+version=4.11.0
+desc="IP Routing Utilities"
+source="http://www.kernel.org/pub/linux/utils/net/${name}/${name}-${version}.tar.xz
+musl.patch
+iproute2-3.1.0-mtu.patch
+"
+deps="libmnl xz bison flex"
+
+build() {
+	cd $name-$version
+	patch -p1 < ../musl.patch || die|| die|| die
+	patch -p1 < ../iproute2-3.1.0-mtu.patch  || die
+	sed -i 's,CCOPTS,HOSTCCOPTS,g' netem/Makefile
+	./configure --prefix= \
+                --libdir=/lib \
+                --sbindir=/bin \
+                --bindir=/bin \
+		--datadir=/share \
+                --libexecdir=/lib \
+		--disable-static 
+	make CCOPTS="-D_GNU_SOURCE $CFLAGS" LIBDIR=/lib  || die
+	make -j1 DESTDIR="$pkgdir" LIBDIR=/lib PREFIX=/ install  || die
+	mv "$pkgdir"/sbin "$pkgdir"/bin
+}

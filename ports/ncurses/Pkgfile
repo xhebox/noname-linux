@@ -1,0 +1,35 @@
+name=ncurses
+version=6.0
+desc="A SystemV Release4.0 cursese mulation library"
+source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix= \
+		--includedir=/include \
+		--mandir=/share/man \
+		--without-ada \
+		--with-pkg-config-libdir=/lib/pkgconfig \
+		--with-shared \
+		--with-manpage-symlinks \
+		--with-manpage-format=normal \
+		--enable-ext-colors \
+		--enable-ext-mouse \
+		--with-normal \
+		--enable-pc-files \
+		--enable-overwrite \
+		--enable-widec 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+
+	for lib in ncurses ncurses++ form panel menu; do
+		echo "INPUT(-l${lib}w)" > "$pkgdir"/lib/lib${lib}.so
+		ln -s ${lib}w.pc "$pkgdir"/lib/pkgconfig/${lib}.pc
+	done
+
+	echo "INPUT(-lncursesw)" > "$pkgdir"/lib/libcursesw.so
+	ln -s libncurses.so "$pkgdir"/lib/libcurses.so
+}

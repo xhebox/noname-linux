@@ -1,0 +1,10 @@
+name=bdf-unifont
+version=9.0.04
+desc="GNU Unifont Glyphs"
+deps="fontconfig xorg-fonts xorg-app"
+source="http://unifoundry.com/pub/unifont-${version}/font-builds/unifont-${version}.bdf.gz"
+
+build() {
+	install -Dm644 "${srcdir}/unifont-${version}.bdf" \
+		"${pkgdir}/share/fonts/misc/unifont.bdf"
+}

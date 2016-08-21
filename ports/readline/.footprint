@@ -1,0 +1,25 @@
+bin|755|0|0|directory
+etc/inputrc|644|0|0|regular file
+etc|755|0|0|directory
+include/readline/chardefs.h|644|0|0|regular file
+include/readline/history.h|644|0|0|regular file
+include/readline/keymaps.h|644|0|0|regular file
+include/readline/readline.h|644|0|0|regular file
+include/readline/rlconf.h|644|0|0|regular file
+include/readline/rlstdc.h|644|0|0|regular file
+include/readline/rltypedefs.h|644|0|0|regular file
+include/readline/tilde.h|644|0|0|regular file
+include/readline|755|0|0|directory
+include|755|0|0|directory
+lib/libhistory.so.7.0|555|0|0|regular file
+lib/libhistory.so.7|777|0|0|symbolic link
+lib/libhistory.so|777|0|0|symbolic link
+lib/libreadline.so.7.0|555|0|0|regular file
+lib/libreadline.so.7|777|0|0|symbolic link
+lib/libreadline.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/man/man3/history.3.gz|644|0|0|regular file
+share/man/man3/readline.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

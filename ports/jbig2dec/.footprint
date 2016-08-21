@@ -1,0 +1,13 @@
+bin/jbig2dec|755|0|0|regular file
+bin|755|0|0|directory
+include/jbig2.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libjbig2dec.a|644|0|0|regular file
+lib/libjbig2dec.so.0.0.0|755|0|0|regular file
+lib/libjbig2dec.so.0|777|0|0|symbolic link
+lib/libjbig2dec.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/man/man1/jbig2dec.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,312 @@
+bin/irssi|755|0|0|regular file
+bin|755|0|0|directory
+etc/irssi.conf|644|0|0|regular file
+etc|755|0|0|directory
+include/irssi/irssi-config.h|644|0|0|regular file
+include/irssi/irssi-version.h|644|0|0|regular file
+include/irssi/src/common.h|644|0|0|regular file
+include/irssi/src/core/args.h|644|0|0|regular file
+include/irssi/src/core/channel-rec.h|644|0|0|regular file
+include/irssi/src/core/channel-setup-rec.h|644|0|0|regular file
+include/irssi/src/core/channels-setup.h|644|0|0|regular file
+include/irssi/src/core/channels.h|644|0|0|regular file
+include/irssi/src/core/chat-protocols.h|644|0|0|regular file
+include/irssi/src/core/chatnet-rec.h|644|0|0|regular file
+include/irssi/src/core/chatnets.h|644|0|0|regular file
+include/irssi/src/core/commands.h|644|0|0|regular file
+include/irssi/src/core/core.h|644|0|0|regular file
+include/irssi/src/core/expandos.h|644|0|0|regular file
+include/irssi/src/core/ignore.h|644|0|0|regular file
+include/irssi/src/core/levels.h|644|0|0|regular file
+include/irssi/src/core/line-split.h|644|0|0|regular file
+include/irssi/src/core/log.h|644|0|0|regular file
+include/irssi/src/core/masks.h|644|0|0|regular file
+include/irssi/src/core/misc.h|644|0|0|regular file
+include/irssi/src/core/module.h|644|0|0|regular file
+include/irssi/src/core/modules-load.h|644|0|0|regular file
+include/irssi/src/core/modules.h|644|0|0|regular file
+include/irssi/src/core/net-disconnect.h|644|0|0|regular file
+include/irssi/src/core/net-nonblock.h|644|0|0|regular file
+include/irssi/src/core/net-sendbuffer.h|644|0|0|regular file
+include/irssi/src/core/network.h|644|0|0|regular file
+include/irssi/src/core/nick-rec.h|644|0|0|regular file
+include/irssi/src/core/nicklist.h|644|0|0|regular file
+include/irssi/src/core/nickmatch-cache.h|644|0|0|regular file
+include/irssi/src/core/pidwait.h|644|0|0|regular file
+include/irssi/src/core/queries.h|644|0|0|regular file
+include/irssi/src/core/query-rec.h|644|0|0|regular file
+include/irssi/src/core/rawlog.h|644|0|0|regular file
+include/irssi/src/core/recode.h|644|0|0|regular file
+include/irssi/src/core/server-connect-rec.h|644|0|0|regular file
+include/irssi/src/core/server-rec.h|644|0|0|regular file
+include/irssi/src/core/server-setup-rec.h|644|0|0|regular file
+include/irssi/src/core/servers-reconnect.h|644|0|0|regular file
+include/irssi/src/core/servers-setup.h|644|0|0|regular file
+include/irssi/src/core/servers.h|644|0|0|regular file
+include/irssi/src/core/session.h|644|0|0|regular file
+include/irssi/src/core/settings.h|644|0|0|regular file
+include/irssi/src/core/signals.h|644|0|0|regular file
+include/irssi/src/core/special-vars.h|644|0|0|regular file
+include/irssi/src/core/tls.h|644|0|0|regular file
+include/irssi/src/core/utf8.h|644|0|0|regular file
+include/irssi/src/core/window-item-def.h|644|0|0|regular file
+include/irssi/src/core/window-item-rec.h|644|0|0|regular file
+include/irssi/src/core/write-buffer.h|644|0|0|regular file
+include/irssi/src/core|755|0|0|directory
+include/irssi/src/fe-common/core/chat-completion.h|644|0|0|regular file
+include/irssi/src/fe-common/core/command-history.h|644|0|0|regular file
+include/irssi/src/fe-common/core/completion.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-channels.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-common-core.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-core-commands.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-exec.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-messages.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-queries.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-recode.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-tls.h|644|0|0|regular file
+include/irssi/src/fe-common/core/fe-windows.h|644|0|0|regular file
+include/irssi/src/fe-common/core/formats.h|644|0|0|regular file
+include/irssi/src/fe-common/core/hilight-text.h|644|0|0|regular file
+include/irssi/src/fe-common/core/keyboard.h|644|0|0|regular file
+include/irssi/src/fe-common/core/module-formats.h|644|0|0|regular file
+include/irssi/src/fe-common/core/module.h|644|0|0|regular file
+include/irssi/src/fe-common/core/printtext.h|644|0|0|regular file
+include/irssi/src/fe-common/core/themes.h|644|0|0|regular file
+include/irssi/src/fe-common/core/window-activity.h|644|0|0|regular file
+include/irssi/src/fe-common/core/window-items.h|644|0|0|regular file
+include/irssi/src/fe-common/core/windows-layout.h|644|0|0|regular file
+include/irssi/src/fe-common/core|755|0|0|directory
+include/irssi/src/fe-common/irc/dcc/fe-dcc.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/dcc/module-formats.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/dcc/module.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/dcc|755|0|0|directory
+include/irssi/src/fe-common/irc/fe-irc-channels.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/fe-irc-server.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/module-formats.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/module.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/notifylist/module-formats.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/notifylist/module.h|644|0|0|regular file
+include/irssi/src/fe-common/irc/notifylist|755|0|0|directory
+include/irssi/src/fe-common/irc|755|0|0|directory
+include/irssi/src/fe-common|755|0|0|directory
+include/irssi/src/fe-text/statusbar-item.h|644|0|0|regular file
+include/irssi/src/fe-text|755|0|0|directory
+include/irssi/src/irc/core/bans.h|644|0|0|regular file
+include/irssi/src/irc/core/channel-rejoin.h|644|0|0|regular file
+include/irssi/src/irc/core/ctcp.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-cap.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-channels.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-chatnets.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-commands.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-masks.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-nicklist.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-queries.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-servers-setup.h|644|0|0|regular file
+include/irssi/src/irc/core/irc-servers.h|644|0|0|regular file
+include/irssi/src/irc/core/irc.h|644|0|0|regular file
+include/irssi/src/irc/core/mode-lists.h|644|0|0|regular file
+include/irssi/src/irc/core/modes.h|644|0|0|regular file
+include/irssi/src/irc/core/module.h|644|0|0|regular file
+include/irssi/src/irc/core/netsplit.h|644|0|0|regular file
+include/irssi/src/irc/core/sasl.h|644|0|0|regular file
+include/irssi/src/irc/core/servers-idle.h|644|0|0|regular file
+include/irssi/src/irc/core/servers-redirect.h|644|0|0|regular file
+include/irssi/src/irc/core|755|0|0|directory
+include/irssi/src/irc/dcc/dcc-chat.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-file-rec.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-file.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-get.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-queue.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-rec.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-send.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc-server.h|644|0|0|regular file
+include/irssi/src/irc/dcc/dcc.h|644|0|0|regular file
+include/irssi/src/irc/dcc/module.h|644|0|0|regular file
+include/irssi/src/irc/dcc|755|0|0|directory
+include/irssi/src/irc/flood/module.h|644|0|0|regular file
+include/irssi/src/irc/flood|755|0|0|directory
+include/irssi/src/irc/notifylist/module.h|644|0|0|regular file
+include/irssi/src/irc/notifylist/notify-setup.h|644|0|0|regular file
+include/irssi/src/irc/notifylist/notifylist.h|644|0|0|regular file
+include/irssi/src/irc/notifylist|755|0|0|directory
+include/irssi/src/irc|755|0|0|directory
+include/irssi/src/lib-config/iconfig.h|644|0|0|regular file
+include/irssi/src/lib-config/module.h|644|0|0|regular file
+include/irssi/src/lib-config|755|0|0|directory
+include/irssi/src|755|0|0|directory
+include/irssi|755|0|0|directory
+include|755|0|0|directory
+lib/irssi/modules/libirc_proxy.a|644|0|0|regular file
+lib/irssi/modules/libirc_proxy.so|755|0|0|regular file
+lib/irssi/modules|755|0|0|directory
+lib/irssi|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/Irssi.pm|444|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/Irssi/Irc.pm|444|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/Irssi/TextUI.pm|444|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/Irssi/UI.pm|444|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/Irssi|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/.packlist|644|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/Irc/.packlist|644|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/Irc/Irc.so|555|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/Irc|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/Irssi.so|555|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/TextUI/.packlist|644|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/TextUI/TextUI.so|555|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/TextUI|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/UI/.packlist|644|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/UI/UI.so|555|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi/UI|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/auto/Irssi|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/auto|755|0|0|directory
+lib/perl5/x86_64-linux-thread-multi/perllocal.pod|644|0|0|regular file
+lib/perl5/x86_64-linux-thread-multi|755|0|0|directory
+lib/perl5|755|0|0|directory
+lib|755|0|0|directory
+share/doc/irssi/design.txt|644|0|0|regular file
+share/doc/irssi/faq.html|644|0|0|regular file
+share/doc/irssi/faq.txt|644|0|0|regular file
+share/doc/irssi/formats.txt|644|0|0|regular file
+share/doc/irssi/manual.txt|644|0|0|regular file
+share/doc/irssi/perl.txt|644|0|0|regular file
+share/doc/irssi/signals.txt|644|0|0|regular file
+share/doc/irssi/special_vars.txt|644|0|0|regular file
+share/doc/irssi/startup-HOWTO.html|644|0|0|regular file
+share/doc/irssi|755|0|0|directory
+share/doc|755|0|0|directory
+share/irssi/help/accept|644|0|0|regular file
+share/irssi/help/action|644|0|0|regular file
+share/irssi/help/admin|644|0|0|regular file
+share/irssi/help/alias|644|0|0|regular file
+share/irssi/help/away|644|0|0|regular file
+share/irssi/help/ban|644|0|0|regular file
+share/irssi/help/beep|644|0|0|regular file
+share/irssi/help/bind|644|0|0|regular file
+share/irssi/help/cat|644|0|0|regular file
+share/irssi/help/cd|644|0|0|regular file
+share/irssi/help/channel|644|0|0|regular file
+share/irssi/help/clear|644|0|0|regular file
+share/irssi/help/completion|644|0|0|regular file
+share/irssi/help/connect|644|0|0|regular file
+share/irssi/help/ctcp|644|0|0|regular file
+share/irssi/help/cycle|644|0|0|regular file
+share/irssi/help/dcc|644|0|0|regular file
+share/irssi/help/dehilight|644|0|0|regular file
+share/irssi/help/deop|644|0|0|regular file
+share/irssi/help/devoice|644|0|0|regular file
+share/irssi/help/die|644|0|0|regular file
+share/irssi/help/disconnect|644|0|0|regular file
+share/irssi/help/echo|644|0|0|regular file
+share/irssi/help/eval|644|0|0|regular file
+share/irssi/help/exec|644|0|0|regular file
+share/irssi/help/flushbuffer|644|0|0|regular file
+share/irssi/help/format|644|0|0|regular file
+share/irssi/help/hash|644|0|0|regular file
+share/irssi/help/help|644|0|0|regular file
+share/irssi/help/hilight|644|0|0|regular file
+share/irssi/help/ignore|644|0|0|regular file
+share/irssi/help/info|644|0|0|regular file
+share/irssi/help/invite|644|0|0|regular file
+share/irssi/help/irssiproxy|644|0|0|regular file
+share/irssi/help/ison|644|0|0|regular file
+share/irssi/help/join|644|0|0|regular file
+share/irssi/help/kickban|644|0|0|regular file
+share/irssi/help/kick|644|0|0|regular file
+share/irssi/help/kill|644|0|0|regular file
+share/irssi/help/knockout|644|0|0|regular file
+share/irssi/help/knock|644|0|0|regular file
+share/irssi/help/lastlog|644|0|0|regular file
+share/irssi/help/layout|644|0|0|regular file
+share/irssi/help/levels|644|0|0|regular file
+share/irssi/help/links|644|0|0|regular file
+share/irssi/help/list|644|0|0|regular file
+share/irssi/help/load|644|0|0|regular file
+share/irssi/help/log|644|0|0|regular file
+share/irssi/help/lusers|644|0|0|regular file
+share/irssi/help/map|644|0|0|regular file
+share/irssi/help/me|644|0|0|regular file
+share/irssi/help/mircdcc|644|0|0|regular file
+share/irssi/help/mode|644|0|0|regular file
+share/irssi/help/motd|644|0|0|regular file
+share/irssi/help/msg|644|0|0|regular file
+share/irssi/help/names|644|0|0|regular file
+share/irssi/help/nctcp|644|0|0|regular file
+share/irssi/help/netsplit|644|0|0|regular file
+share/irssi/help/network|644|0|0|regular file
+share/irssi/help/nick|644|0|0|regular file
+share/irssi/help/notice|644|0|0|regular file
+share/irssi/help/notify|644|0|0|regular file
+share/irssi/help/oper|644|0|0|regular file
+share/irssi/help/op|644|0|0|regular file
+share/irssi/help/part|644|0|0|regular file
+share/irssi/help/ping|644|0|0|regular file
+share/irssi/help/query|644|0|0|regular file
+share/irssi/help/quit|644|0|0|regular file
+share/irssi/help/quote|644|0|0|regular file
+share/irssi/help/rawlog|644|0|0|regular file
+share/irssi/help/recode|644|0|0|regular file
+share/irssi/help/reconnect|644|0|0|regular file
+share/irssi/help/rehash|644|0|0|regular file
+share/irssi/help/reload|644|0|0|regular file
+share/irssi/help/restart|644|0|0|regular file
+share/irssi/help/rmreconns|644|0|0|regular file
+share/irssi/help/rmrejoins|644|0|0|regular file
+share/irssi/help/save|644|0|0|regular file
+share/irssi/help/sconnect|644|0|0|regular file
+share/irssi/help/script|644|0|0|regular file
+share/irssi/help/scrollback|644|0|0|regular file
+share/irssi/help/server|644|0|0|regular file
+share/irssi/help/servlist|644|0|0|regular file
+share/irssi/help/set|644|0|0|regular file
+share/irssi/help/silence|644|0|0|regular file
+share/irssi/help/squery|644|0|0|regular file
+share/irssi/help/squit|644|0|0|regular file
+share/irssi/help/stats|644|0|0|regular file
+share/irssi/help/statusbar|644|0|0|regular file
+share/irssi/help/time|644|0|0|regular file
+share/irssi/help/toggle|644|0|0|regular file
+share/irssi/help/topic|644|0|0|regular file
+share/irssi/help/trace|644|0|0|regular file
+share/irssi/help/ts|644|0|0|regular file
+share/irssi/help/unalias|644|0|0|regular file
+share/irssi/help/unban|644|0|0|regular file
+share/irssi/help/unignore|644|0|0|regular file
+share/irssi/help/unload|644|0|0|regular file
+share/irssi/help/unnotify|644|0|0|regular file
+share/irssi/help/unquery|644|0|0|regular file
+share/irssi/help/unsilence|644|0|0|regular file
+share/irssi/help/upgrade|644|0|0|regular file
+share/irssi/help/uptime|644|0|0|regular file
+share/irssi/help/userhost|644|0|0|regular file
+share/irssi/help/version|644|0|0|regular file
+share/irssi/help/ver|644|0|0|regular file
+share/irssi/help/voice|644|0|0|regular file
+share/irssi/help/wait|644|0|0|regular file
+share/irssi/help/wallops|644|0|0|regular file
+share/irssi/help/wall|644|0|0|regular file
+share/irssi/help/whois|644|0|0|regular file
+share/irssi/help/whowas|644|0|0|regular file
+share/irssi/help/who|644|0|0|regular file
+share/irssi/help/window|644|0|0|regular file
+share/irssi/help|755|0|0|directory
+share/irssi/scripts/autoop.pl|644|0|0|regular file
+share/irssi/scripts/autorejoin.pl|644|0|0|regular file
+share/irssi/scripts/buf.pl|644|0|0|regular file
+share/irssi/scripts/command.pl|644|0|0|regular file
+share/irssi/scripts/dns.pl|644|0|0|regular file
+share/irssi/scripts/kills.pl|644|0|0|regular file
+share/irssi/scripts/mail.pl|644|0|0|regular file
+share/irssi/scripts/mlock.pl|644|0|0|regular file
+share/irssi/scripts/msg-event.pl|644|0|0|regular file
+share/irssi/scripts/quitmsg.pl|644|0|0|regular file
+share/irssi/scripts/redirect.pl|644|0|0|regular file
+share/irssi/scripts/scriptassist.pl|644|0|0|regular file
+share/irssi/scripts/usercount.pl|644|0|0|regular file
+share/irssi/scripts|755|0|0|directory
+share/irssi/themes/colorless.theme|644|0|0|regular file
+share/irssi/themes/default.theme|644|0|0|regular file
+share/irssi/themes|755|0|0|directory
+share/irssi|755|0|0|directory
+share/man/man1/irssi.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

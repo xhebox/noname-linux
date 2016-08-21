@@ -1,0 +1,188 @@
+#!/bin/sh
+set -e
+export PKG_CONFIG=`pwd`/package_files/config
+export SYSROOT=`pwd`
+pchroot() {
+	mount -t proc none $1/proc
+	mount -t sysfs none $1/sys
+	mount -o bind /dev/ $1/dev
+	chroot $@
+	umount -R $1/proc
+	umount -R $1/sys
+	umount -R $1/dev
+}
+
+# clean
+rm -rf ./noname
+rm -rf ./iso
+rm -rf efiboot.img
+rm -rf ./rootfs
+mkdir -p ./noname/var/db/pkg
+
+# install noname
+echo ":: building rootfs"
+cat lists_of_base | while read i; do
+	../pkg -S $i || exit
+done
+rm -f noname/boot/initram*
+echo ":: build rootfs done"
+cp -a -l noname rootfs
+rm rootfs/etc/mkinitcpio.conf
+rm rootfs/etc/hostname
+rm rootfs/etc/fstab
+rm rootfs/etc/finit.conf
+rm rootfs/lib/initcpio/init_functions
+rm rootfs/lib/initcpio/init
+cp -f noname/etc/mkinitcpio.conf  rootfs/etc/
+cp -f noname/etc/hostname  rootfs/etc/
+cp -f noname/etc/fstab  rootfs/etc/
+cp -f noname/etc/finit.conf  rootfs/etc/
+cp -f noname/lib/initcpio/init_functions rootfs/lib/initcpio
+cp -f noname/lib/initcpio/init  rootfs/lib/initcpio
+
+echo ":: building iso"
+sed -i 's/autodetect//g' noname/etc/mkinitcpio.conf 
+sed -i 's/MODULES="/&loop/g' noname/etc/mkinitcpio.conf 
+sed -i 's/fsck"/"/g' noname/etc/mkinitcpio.conf
+sed -i 's/mount_handler=default_mount_handler/mount_handler=iso_mount_handler/g' noname/lib/initcpio/init
+cat > noname/etc/rc.local << "EOF"
+#!/bin/sh
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars || true
+EOF
+chmod +x noname/etc/rc.local
+cat > noname/etc/hostname << "EOF"
+PC
+EOF
+cat > noname/etc/fstab << "EOF"
+EOF
+cat > noname/etc/finit.conf << "EOF"
+host PC
+user root
+runlevel 2
+task [S2345] /bin/nft -f /etc/nftables.conf -- Firewall
+service [S2345] /bin/acpid -f -- ACPI daemon
+tty [12345] /dev/tty1  38400 linux
+tty [2345]  /dev/tty2  38400 linux
+tty [2345]  /dev/tty3  38400 linux
+tty [2345]  /dev/tty4  38400 linux
+EOF
+cat >> noname/bin/install-rootfs << "EOF"
+#!/bin/sh
+pchroot() {
+	mount -t proc none $1/proc
+	mount -t sysfs none $1/sys
+	mount -o bind /dev/ $1/dev
+	chroot $@
+	umount -R $1/proc
+	umount -R $1/sys
+	umount -R $1/dev
+}
+cp -a /rootfs/* /$1
+pchroot /$1 /bin/mkinitcpio -p linux-zen
+EOF
+chmod +x noname/bin/install-rootfs
+cat >> noname/bin/nchroot << "EOF"
+#!/bin/sh
+mount -o bind /proc $1/proc
+mount -o bind /sys $1/sys
+mount -o bind /dev/ $1/dev
+chroot $@
+umount -R $1/proc
+umount -R $1/sys
+umount -R $1/dev
+EOF
+chmod +x noname/bin/nchroot
+cat >> noname/lib/initcpio/init_functions << "EOF"
+
+iso_mount_handler() {
+    msg ":: mounting '$root' on real root"
+    local f=0
+    local name=""
+    echo ":: wait 5s to let the kernel load the usbdisk/cd"
+    mkdir /realroot
+    mount -t tmpfs -o "size=256M",mode=0755 tmpfs /realroot
+    mkdir /realroot/work
+    mkdir /realroot/low
+    mkdir /realroot/up
+    while sleep 5s; do
+	    for i in `ls -1 /dev/block`; do
+		    name=`ls -l /dev/block/$i | cut -d '/' -f 5`
+		    echo ":: look for root.sq in /dev/$name"
+		    if mount "/dev/block/$i" /realroot/low &>/dev/null; then
+		   	 [ -f "/realroot/low/root.sq" ] && {
+		    		echo ":: found root.sq in /dev/$name"
+    	    		 	mount -t squashfs "/realroot/low/root.sq" /realroot/low
+				mount -t overlay overlay -o lowerdir=/realroot/low,upperdir=/realroot/up,workdir=/realroot/work $1
+				return 0
+			 }
+			 umount /realroot/low &>/dev/null
+		    fi
+	    done
+	    f=$((f+1))
+	    [ "$f" -eq 3 ] && break
+	    echo ":: retry after 5s"
+    done
+    echo "You are now being dropped into an emergency shell."
+    launch_interactive_shell
+    msg "Trying to continue (this will most likely fail) ..."
+}
+EOF
+pchroot noname /bin/mkinitcpio -p linux-zen
+
+# create
+mkdir iso
+mv noname/boot iso/
+rm iso/boot/initramfs-linux-zen-fallback.img
+
+echo ":: creating iso content "
+mv rootfs noname/
+cp ../README.md noname/
+
+echo ":: building squashfs "
+mksquashfs noname root.sq
+
+echo ":: building real iso "
+mv root.sq iso
+cp -a /lib/syslinux/bios iso/isolinux
+mv iso/boot/* iso/isolinux
+rmdir iso/boot
+cp package_files/isolinux.cfg iso/isolinux
+
+dd if=/dev/zero of=efiboot.img bs=1M count=32
+mkdosfs -F 12 efiboot.img
+MOUNTPOINT=$(mktemp -d)
+modprobe loop
+mount -o loop efiboot.img $MOUNTPOINT
+mkdir -p $MOUNTPOINT/EFI/BOOT
+cp -a /lib/syslinux/efi64/* $MOUNTPOINT/EFI/BOOT/
+mv $MOUNTPOINT/EFI/BOOT/syslinux.efi $MOUNTPOINT/EFI/BOOT/bootx64.efi
+cp -a iso/isolinux/initramfs-linux-zen.img $MOUNTPOINT/EFI/BOOT
+cp -a iso/isolinux/intel-ucode.img $MOUNTPOINT/EFI/BOOT
+cp -a iso/isolinux/vmlinuz-linux-zen $MOUNTPOINT/EFI/BOOT
+cp -a package_files/isolinux.cfg $MOUNTPOINT/EFI/BOOT/syslinux.cfg
+umount $MOUNTPOINT
+rmdir $MOUNTPOINT
+mv efiboot.img iso/isolinux
+ 
+xorriso -as mkisofs \
+        -iso-level 3 \
+        -full-iso9660-filenames \
+	-volid "Noname_$(date +%Y%m)" \
+	-appid "Noname_Livecd" \
+        -publisher "Xhebox/noname" \
+        -preparer "prepared by mkarchiso" \
+        -eltorito-boot isolinux/isolinux.bin \
+        -eltorito-catalog isolinux/boot.cat \
+        -no-emul-boot -boot-load-size 4 -boot-info-table \
+        -isohybrid-mbr iso/isolinux/isohdpfx.bin \
+	-eltorito-alt-boot \
+	-e isolinux/efiboot.img \
+	-no-emul-boot \
+	-isohybrid-gpt-basdat \
+	-output noname_`date +%Y%m`.iso \
+        iso
+
+# clear
+rm -rf ./noname
+rm -rf ./iso
+rm -rf ./rootfs

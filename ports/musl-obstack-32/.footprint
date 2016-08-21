@@ -1,0 +1,4 @@
+lib32/libobstack.a|644|0|0|regular file
+lib32/pkgconfig/musl-obstack.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

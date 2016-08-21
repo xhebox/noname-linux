@@ -1,0 +1,25 @@
+name=opensubdiv
+version=3.1.1
+desc="An Open-Source subdivision surface library"
+deps="zlib ptex libxcursor libxinerama xorg-app glew glfw tbb python ocl-icd clew"
+vv="`echo ${version} | sed 's/\./_/g'`"
+source="https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v${vv}.tar.gz"
+
+build() {
+	cd OpenSubdiv-$vv
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i || die;;
+		esac
+	done
+
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_BUILD_TYPE=Release
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

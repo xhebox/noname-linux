@@ -1,0 +1,44 @@
+name=binutils
+version=2.28
+desc="The GNU Binutils are a collection of binary tools"
+source="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.bz2
+https://git.busybox.net/buildroot/plain/package/binutils/arc-2016.09-eng005/0800-Docs-Prevent-build-failures-when-makeinfo-is-missing.patch"
+deps="zlib bison"
+
+build(){
+	cd $name-$version
+
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"`basename $i`" ;;
+		esac
+	done
+	sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
+	sed -e 's,source,\.,g' -i ld/scripttempl/elf32msp430.sc
+	./configure \
+		ac_cv_prog_MAKEINFO=missing \
+		--host=$TARGET \
+		--build=$TARGET \
+		--target=$TARGET \
+		--prefix= \
+		--enable-plugins \
+		--enable-threads \
+		--enable-ld=default \
+		--with-pic \
+		--enable-gold \
+		--enable-shared \
+		--enable-deterministic-archives \
+		--enable-nls \
+		--disable-werror 
+
+	make  || die
+	make DESTDIR="$pkgdir" tooldir=/ install  || die
+	rm ${pkgdir}/share/man/man1/dlltool*
+	rm ${pkgdir}/share/man/man1/nlmconv*
+	rm ${pkgdir}/share/man/man1/windres*
+	rm ${pkgdir}/share/man/man1/windmc*
+	rm -r "$pkgdir"/share/info
+	rm "$pkgdir"/bin/ld
+	ln -sf ld.bfd "$pkgdir"/bin/ld
+	sed -i "s|-L$srcdir[^ ]* ||g" "$pkgdir"/lib/libbfd.la  "$pkgdir"/lib/libopcodes.la
+}

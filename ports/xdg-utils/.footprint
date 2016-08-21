@@ -1,0 +1,21 @@
+bin/xdg-desktop-icon|755|0|0|regular file
+bin/xdg-desktop-menu|755|0|0|regular file
+bin/xdg-email|755|0|0|regular file
+bin/xdg-icon-resource|755|0|0|regular file
+bin/xdg-mime|755|0|0|regular file
+bin/xdg-open|755|0|0|regular file
+bin/xdg-screensaver|755|0|0|regular file
+bin/xdg-settings|755|0|0|regular file
+bin|755|0|0|directory
+share/desktop-directories|755|0|0|directory
+share/man/man1/xdg-desktop-icon.1.gz|644|0|0|regular file
+share/man/man1/xdg-desktop-menu.1.gz|644|0|0|regular file
+share/man/man1/xdg-email.1.gz|644|0|0|regular file
+share/man/man1/xdg-icon-resource.1.gz|644|0|0|regular file
+share/man/man1/xdg-mime.1.gz|644|0|0|regular file
+share/man/man1/xdg-open.1.gz|644|0|0|regular file
+share/man/man1/xdg-screensaver.1.gz|644|0|0|regular file
+share/man/man1/xdg-settings.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

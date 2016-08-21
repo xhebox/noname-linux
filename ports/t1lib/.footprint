@@ -1,0 +1,20 @@
+bin/type1afm|755|0|0|regular file
+bin/xglyph|755|0|0|regular file
+bin|755|0|0|directory
+include/t1lib.h|644|0|0|regular file
+include/t1libx.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libt1.a|644|0|0|regular file
+lib/libt1.so.5.1.2|644|0|0|regular file
+lib/libt1.so.5|777|0|0|symbolic link
+lib/libt1.so|777|0|0|symbolic link
+lib/libt1x.a|644|0|0|regular file
+lib/libt1x.so.5.1.2|644|0|0|regular file
+lib/libt1x.so.5|777|0|0|symbolic link
+lib/libt1x.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/t1lib/doc/t1lib_doc.pdf|644|0|0|regular file
+share/t1lib/doc|755|0|0|directory
+share/t1lib/t1lib.config|644|0|0|regular file
+share/t1lib|755|0|0|directory
+share|755|0|0|directory

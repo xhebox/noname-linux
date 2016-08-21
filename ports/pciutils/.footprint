@@ -1,0 +1,26 @@
+bin/lspci|755|0|0|regular file
+bin/setpci|755|0|0|regular file
+bin/update-pciids|755|0|0|regular file
+bin|755|0|0|directory
+include/pci/config.h|644|0|0|regular file
+include/pci/header.h|644|0|0|regular file
+include/pci/pci.h|644|0|0|regular file
+include/pci/types.h|644|0|0|regular file
+include/pci|755|0|0|directory
+include|755|0|0|directory
+lib/libpci.a|644|0|0|regular file
+lib/libpci.so.3.5.4|644|0|0|regular file
+lib/libpci.so.3|777|0|0|symbolic link
+lib/libpci.so|777|0|0|symbolic link
+lib/pkgconfig/libpci.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man7/pcilib.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man/man8/lspci.8.gz|644|0|0|regular file
+share/man/man8/setpci.8.gz|644|0|0|regular file
+share/man/man8/update-pciids.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share/pci.ids.gz|644|0|0|regular file
+share|755|0|0|directory

@@ -1,0 +1,21 @@
+name=ptex
+version=2.1.28
+desc="Per-Face Texture Mapping for Production Rendering"
+deps="zlib cmake"
+source="https://github.com/wdas/ptex/archive/v${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i || die;;
+		esac
+	done
+	mkdir build
+	cd build
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=/lib
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

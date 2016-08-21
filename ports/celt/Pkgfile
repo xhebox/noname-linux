@@ -1,0 +1,15 @@
+name=celt
+version=0.11.3
+desc="low-lantency audio communication codec"
+source="http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz"
+deps="libogg"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+	    --sbindir=/bin \
+	    --enable-custom-modes \
+	    --disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

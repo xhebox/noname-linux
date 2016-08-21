@@ -1,0 +1,15 @@
+name=libepoxy
+version=1.4.2
+desc="Direct Rendering Manager runtime library"
+deps="mesa graphviz"
+source="https://github.com/anholt/libepoxy/archive/$version.tar.gz"
+
+build() {
+	cd $name-$version
+	NOCONFIGURE=1 ./autogen.sh
+	./configure --prefix= --disable-static \
+		--enable-shared
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

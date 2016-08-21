@@ -1,0 +1,16 @@
+lib/libudns.so|777|0|0|symbolic link
+bin/rblcheck|755|0|0|regular file
+bin/ex-rdns|755|0|0|regular file
+bin/dnsget|755|0|0|regular file
+include/udns.h|644|0|0|regular file
+lib/libudns.so.0|755|0|0|regular file
+share/man/man3/udns.3.gz|644|0|0|regular file
+share/man/man1/dnsget.1.gz|644|0|0|regular file
+share/man/man1/rblcheck.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,30 @@
+name=go
+version=1.8.1
+deps="git binutils gcc"
+desc="The Go Programming Language"
+source="http://golang.org/dl/go${version}.src.tar.gz"
+
+PKG_NO_STRIP=yes
+
+build() {
+	export GOOS=linux
+	export GOARCH=amd64
+	export GOROOT_FINAL=/lib/go
+	export GOROOT_BOOTSTRAP=/lib/go
+	export GOROOT="$srcdir/go"
+	export GOBIN="$GOROOT/bin"
+	export GOPATH="$srcdir/"
+	cd go/src
+	./make.bash --no-clean
+	cd ..
+
+	install -d "$pkgdir/bin" "$pkgdir/lib/go" "$pkgdir/share/doc/go"
+	cp -a bin pkg src lib misc "$pkgdir/lib/go"
+	cp -r doc/* "$pkgdir/share/doc/go"
+
+	ln -sf /lib/go/bin/go "$pkgdir/bin/go"
+	ln -sf /lib/go/bin/gofmt "$pkgdir/bin/gofmt"
+	ln -sf /share/doc/go "$pkgdir/lib/go/doc"
+	rm -rf "$pkgdir/lib/go/pkg/bootstrap"
+	rm -rf "$pkgdir/lib/go/pkg/tool/*/api"
+}

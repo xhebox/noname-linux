@@ -1,0 +1,23 @@
+. $PORTS/libdrm/Pkgfile
+name=libdrm-32
+deps="libpciaccess-32 pthread-stubs libdrm"
+
+build() {
+	cd "$srcdir"/libdrm-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure \
+		--prefix= \
+		--libdir=/lib32 \
+		--disable-static --disable-udev \
+		--enable-radeon --enable-nouveau --enable-intel \
+		--enable-libkms \
+		--disable-manpages \
+		--disable-cairo-tests \
+		--disable-valgrind
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/include
+}

@@ -1,0 +1,20 @@
+name=phonon
+version=4.9.1
+deps="extra-cmake-modules pulseaudio qt5-tools"
+source="http://download.kde.org/stable/${name}/${version}/${name}-${version}.tar.xz"
+
+build() {
+	mkdir build
+	cd build
+	cmake ../${name}-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=ON \
+		-DPHONON_BUILD_PHONON4QT5=ON \
+		-DDBUS_INTERFACES_INSTALL_DIR=/share/dbus-1/interfaces \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+	cp -a "$pkgdir"/usr/* "$pkgdir"
+	rm -rf "$pkgdir"/usr
+}

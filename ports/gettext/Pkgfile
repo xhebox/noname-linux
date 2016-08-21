@@ -1,0 +1,26 @@
+name=gettext
+version=0.19.8.1
+desc="The GNU internationalization library"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz
+fix-abi.patch"
+
+ext(){
+	cd gettext-$version
+	patch -p1 -i "$srcdir"/fix-abi.patch || die
+}
+
+build(){
+	cd gettext-$version
+
+	./configure --prefix= \
+	--with-included-glib --with-included-libcroco \
+	--with-included-libxml --with-included-libunistring
+
+	make  || die
+	make -j1 DESTDIR=$pkgdir install  || die
+	rm -r "$pkgdir"/share/info
+	rm -r "$pkgdir"/share/doc
+	rm "$pkgdir"/include/gettext-po.h
+	mv "$pkgdir"/bin/msgfmt "$pkgdir"/bin/ggmsgfmt
+	rm "$pkgdir"/share/gettext/intl/COPYING.LIB
+}

@@ -1,0 +1,13 @@
+name=m4
+version=1.4.18
+desc="Gnu m4"
+source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	./configure --prefix= 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

@@ -1,0 +1,14 @@
+name=util-macros
+version=1.19.1
+deps="m4"
+desc="xorg m4 macros"
+source="http://xorg.freedesktop.org/releases/individual/util/util-macros-$version.tar.bz2"
+
+build() {
+	cd util-macros-$version
+
+	./configure --prefix= 
+
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

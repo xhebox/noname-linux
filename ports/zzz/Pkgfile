@@ -1,0 +1,15 @@
+name=zzz
+version=git
+desc="suspend/hibernate scripts"
+source="zzz
+zzz.8
+"
+
+build() {
+	install -Dm755 zzz "$pkgdir"/bin/zzz
+	install -Dm644 zzz.8 "$pkgdir"/share/man/man8/zzz.8
+}
+
+post() {
+	grep -H -q 'resume=' $ROOT/etc/default/grub ||error "resume=/dev/sdaX is needed for hibernate, add it to kernel boot cmdline!" 
+}

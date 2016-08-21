@@ -1,0 +1,34 @@
+bin/depmod|777|0|0|symbolic link
+bin/insmod|777|0|0|symbolic link
+bin/kmod|755|0|0|regular file
+bin/lsmod|777|0|0|symbolic link
+bin/modinfo|777|0|0|symbolic link
+bin/modprobe|777|0|0|symbolic link
+bin/rmmod|777|0|0|symbolic link
+bin|755|0|0|directory
+etc/depmod.d|755|0|0|directory
+etc/modprobe.d|755|0|0|directory
+etc|755|0|0|directory
+include/libkmod.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libkmod.so.2.3.2|755|0|0|regular file
+lib/libkmod.so.2|777|0|0|symbolic link
+lib/libkmod.so|777|0|0|symbolic link
+lib/pkgconfig/libkmod.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man5/depmod.d.5.gz|644|0|0|regular file
+share/man/man5/modprobe.d.5.gz|644|0|0|regular file
+share/man/man5/modules.dep.5.gz|644|0|0|regular file
+share/man/man5/modules.dep.bin.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/depmod.8.gz|644|0|0|regular file
+share/man/man8/insmod.8.gz|644|0|0|regular file
+share/man/man8/kmod.8.gz|644|0|0|regular file
+share/man/man8/lsmod.8.gz|644|0|0|regular file
+share/man/man8/modinfo.8.gz|644|0|0|regular file
+share/man/man8/modprobe.8.gz|644|0|0|regular file
+share/man/man8/rmmod.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

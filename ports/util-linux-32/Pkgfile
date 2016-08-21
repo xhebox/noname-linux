@@ -1,0 +1,31 @@
+. $PORTS/util-linux/Pkgfile
+name=util-linux-32
+deps="zlib-32 util-linux"
+
+build() {
+	cd util-linux-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix= \
+		--libdir=/lib32 \
+		--without-ncurses \
+		--enable-raw \
+		--enable-vipw \
+		--enable-newgrp \
+		--disable-chfn-chsh \
+		--enable-write \
+		--enable-mesg \
+		--enable-libuuid --disable-makeinstall-chown \
+		--enable-libblkid --enable-fsck --disable-rpath \
+		--without-udev \
+		--enable-libmount-force-mountinfo \
+		--without-python 
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/sbin
+}

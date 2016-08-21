@@ -1,0 +1,18 @@
+name=bison
+version=3.0.4
+desc="The GNU Project parser generator"
+source="https://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.xz"
+deps="m4 perl"
+
+build() {
+	cd bison-$version
+	./configure \
+		--prefix= \
+		--disable-static \
+		--disable-texinfo 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+	rm -r "$pkgdir"/share/doc
+	rm -r "$pkgdir"/share/bison/README
+}

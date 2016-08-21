@@ -1,0 +1,16 @@
+name=tar
+version=1.29
+desc="GNU tar"
+deps="pigz pbzip2 xz lz4"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--libexecdir=/lib \
+		FORCE_UNSAFE_CONFIGURE=1 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

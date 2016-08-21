@@ -1,0 +1,17 @@
+name=liblo
+version=0.28
+desc="A lightweight OSC (Open Sound Control) implementation"
+source="http://downloads.sourceforge.net/$name/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	./configure --prefix=
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

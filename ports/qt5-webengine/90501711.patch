@@ -1,0 +1,59 @@
+From 905017117d38d799bc95d6cfdd0195b717b605b8 Mon Sep 17 00:00:00 2001
+From: Szabolcs David <davidsz@inf.u-szeged.hu>
+Date: Mon, 13 Feb 2017 08:48:37 -0800
+Subject: [PATCH] Fix empty dialogs on window.onbeforeunload
+
+Custom texts are not supported anymore in unload dialogs. Fill them
+with a better message.
+
+Task-number: QTBUG-58673
+Change-Id: I820155452461db90bf1df2ae8a8ec10ee752aab1
+Reviewed-by: Joerg Bornemann <joerg.bornemann@qt.io>
+---
+ src/core/javascript_dialog_manager_qt.cpp   | 2 +-
+ src/webengine/ui_delegates_manager.cpp      | 5 ++++-
+ src/webenginewidgets/api/qwebenginepage.cpp | 2 +-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/src/core/javascript_dialog_manager_qt.cpp b/src/core/javascript_dialog_manager_qt.cpp
+index 2844dba..5fac12d 100644
+--- a/src/core/javascript_dialog_manager_qt.cpp
++++ b/src/core/javascript_dialog_manager_qt.cpp
+@@ -71,7 +71,7 @@ void JavaScriptDialogManagerQt::RunJavaScriptDialog(content::WebContents *webCon
+ void JavaScriptDialogManagerQt::RunBeforeUnloadDialog(content::WebContents *webContents, bool isReload,
+                                                       const content::JavaScriptDialogManager::DialogClosedCallback &callback) {
+     Q_UNUSED(isReload);
+-    runDialogForContents(webContents, WebContentsAdapterClient::UnloadDialog, QString()/*toQt(messageText).toHtmlEscaped()*/, QString() , QUrl(), callback);
++    runDialogForContents(webContents, WebContentsAdapterClient::UnloadDialog, QString(), QString(), QUrl(), callback);
+ }
+ 
+ bool JavaScriptDialogManagerQt::HandleJavaScriptDialog(content::WebContents *contents, bool accept, const base::string16 *promptOverride)
+diff --git a/src/webengine/ui_delegates_manager.cpp b/src/webengine/ui_delegates_manager.cpp
+index a374840..4a47a49 100644
+--- a/src/webengine/ui_delegates_manager.cpp
++++ b/src/webengine/ui_delegates_manager.cpp
+@@ -330,7 +330,10 @@ void UIDelegatesManager::showDialog(QSharedPointer<JavaScriptDialogController> d
+         item->setParentItem(m_view);
+     dialog->setParent(m_view);
+     QQmlProperty textProp(dialog, QStringLiteral("text"));
+-    textProp.write(dialogController->message());
++    if (dialogController->type() == WebContentsAdapterClient::UnloadDialog)
++        textProp.write(tr("Changes that you made may not be saved."));
++    else
++        textProp.write(dialogController->message());
+ 
+     QQmlProperty titleProp(dialog, QStringLiteral("title"));
+     titleProp.write(title);
+diff --git a/src/webenginewidgets/api/qwebenginepage.cpp b/src/webenginewidgets/api/qwebenginepage.cpp
+index abf91f5..9150525 100644
+--- a/src/webenginewidgets/api/qwebenginepage.cpp
++++ b/src/webenginewidgets/api/qwebenginepage.cpp
+@@ -1436,7 +1436,7 @@ void QWebEnginePagePrivate::javascriptDialog(QSharedPointer<JavaScriptDialogCont
+             controller->textProvided(promptResult);
+         break;
+     case UnloadDialog:
+-        accepted = (QMessageBox::information(view, QCoreApplication::translate("QWebEnginePage", "Are you sure you want to leave this page?"), controller->message(), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes);
++        accepted = (QMessageBox::question(view, QCoreApplication::translate("QWebEnginePage", "Are you sure you want to leave this page?"), QCoreApplication::translate("QWebEnginePage", "Changes that you made may not be saved."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok);
+         break;
+     case InternalAuthorizationDialog:
+         accepted = (QMessageBox::question(view, controller->title(), controller->message(), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes);

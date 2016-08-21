@@ -1,0 +1,12 @@
+name=sdparm
+version=1.10
+desc="An utility similar to hdparm but for SCSI devices"
+deps=bash
+source="http://sg.danny.cz/sg/p/${name}-${version}.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/
+	make || die
+	make DESTDIR=${pkgdir} install || die
+}

@@ -1,0 +1,1087 @@
+share/iso-codes/json/iso_15924.json|644|0|0|regular file
+share/iso-codes/json/iso_3166-1.json|644|0|0|regular file
+share/iso-codes/json/iso_3166-2.json|644|0|0|regular file
+share/iso-codes/json/iso_3166-3.json|644|0|0|regular file
+share/iso-codes/json/iso_4217.json|644|0|0|regular file
+share/iso-codes/json/iso_639-2.json|644|0|0|regular file
+share/iso-codes/json/iso_639-3.json|644|0|0|regular file
+share/iso-codes/json/iso_639-5.json|644|0|0|regular file
+share/iso-codes/json/schema-15924.json|644|0|0|regular file
+share/iso-codes/json/schema-3166-1.json|644|0|0|regular file
+share/iso-codes/json/schema-3166-2.json|644|0|0|regular file
+share/iso-codes/json/schema-3166-3.json|644|0|0|regular file
+share/iso-codes/json/schema-4217.json|644|0|0|regular file
+share/iso-codes/json/schema-639-2.json|644|0|0|regular file
+share/iso-codes/json/schema-639-3.json|644|0|0|regular file
+share/iso-codes/json/schema-639-5.json|644|0|0|regular file
+share/iso-codes/json|755|0|0|directory
+share/iso-codes|755|0|0|directory
+share/locale/af/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/af/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/af/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/af/LC_MESSAGES|755|0|0|directory
+share/locale/af|755|0|0|directory
+share/locale/am/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/am/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/am/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/am/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/am/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/am/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/am/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/am/LC_MESSAGES|755|0|0|directory
+share/locale/am|755|0|0|directory
+share/locale/ar/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ar/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ar/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ar/LC_MESSAGES|755|0|0|directory
+share/locale/ar|755|0|0|directory
+share/locale/as/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/as/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/as/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/as/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/as/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/as/LC_MESSAGES|755|0|0|directory
+share/locale/ast/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ast/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ast/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ast/LC_MESSAGES|755|0|0|directory
+share/locale/ast|755|0|0|directory
+share/locale/as|755|0|0|directory
+share/locale/az/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/az/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/az/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/az/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/az/LC_MESSAGES|755|0|0|directory
+share/locale/az|755|0|0|directory
+share/locale/be/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/be/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/be/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/be/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/be/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/be/LC_MESSAGES|755|0|0|directory
+share/locale/be|755|0|0|directory
+share/locale/bg/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/bg/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/bg/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/bg/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/bg/LC_MESSAGES|755|0|0|directory
+share/locale/bg|755|0|0|directory
+share/locale/bn/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/bn/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/bn/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/bn/LC_MESSAGES|755|0|0|directory
+share/locale/bn_IN/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/bn_IN/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/bn_IN/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/bn_IN/LC_MESSAGES|755|0|0|directory
+share/locale/bn_IN|755|0|0|directory
+share/locale/bn|755|0|0|directory
+share/locale/br/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/br/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/br/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/br/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/br/LC_MESSAGES|755|0|0|directory
+share/locale/br|755|0|0|directory
+share/locale/bs/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/bs/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/bs/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/bs/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/bs/LC_MESSAGES|755|0|0|directory
+share/locale/bs|755|0|0|directory
+share/locale/byn/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/byn/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/byn/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/byn/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/byn/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/byn/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/byn/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/byn/LC_MESSAGES|755|0|0|directory
+share/locale/byn|755|0|0|directory
+share/locale/ca/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ca/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ca/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ca/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/crh/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/crh/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/crh/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/crh/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/crh/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/crh/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/crh/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/crh/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/crh/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/crh/LC_MESSAGES|755|0|0|directory
+share/locale/crh|755|0|0|directory
+share/locale/cs/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/cs/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/cs/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/cs/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/cy/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/cy/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/cy/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/cy/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/cy/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/cy/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/cy/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/cy/LC_MESSAGES|755|0|0|directory
+share/locale/cy|755|0|0|directory
+share/locale/da/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/da/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/da/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/da/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/de/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/de/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/de/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/de/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/dz/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/dz/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/dz/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/dz/LC_MESSAGES|755|0|0|directory
+share/locale/dz|755|0|0|directory
+share/locale/el/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/el/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/el/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/el/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/en/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/en/LC_MESSAGES|755|0|0|directory
+share/locale/en|755|0|0|directory
+share/locale/eo/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/eo/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/eo/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/eo/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/eo/LC_MESSAGES|755|0|0|directory
+share/locale/eo|755|0|0|directory
+share/locale/es/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/es/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/es/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/es/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/et/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/et/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/et/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/et/LC_MESSAGES|755|0|0|directory
+share/locale/et|755|0|0|directory
+share/locale/eu/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/eu/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/eu/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/eu/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/eu/LC_MESSAGES|755|0|0|directory
+share/locale/eu|755|0|0|directory
+share/locale/fa/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/fa/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/fa/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/fa/LC_MESSAGES|755|0|0|directory
+share/locale/fa|755|0|0|directory
+share/locale/fi/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/fi/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/fi/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/fi/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fo/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/fo/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/fo/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/fo/LC_MESSAGES|755|0|0|directory
+share/locale/fo|755|0|0|directory
+share/locale/fr/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/fr/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/fr/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/fr/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/fr/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/ga/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ga/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ga/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ga/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ga/LC_MESSAGES|755|0|0|directory
+share/locale/ga|755|0|0|directory
+share/locale/gez/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/gez/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/gez/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/gez/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/gez/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/gez/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/gez/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/gez/LC_MESSAGES|755|0|0|directory
+share/locale/gez|755|0|0|directory
+share/locale/gl/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/gl/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/gl/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/gu/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/gu/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/gu/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/gu/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/gu/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/gu/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/gu/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/gu/LC_MESSAGES|755|0|0|directory
+share/locale/gu|755|0|0|directory
+share/locale/haw/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/haw/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/haw/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/haw/LC_MESSAGES|755|0|0|directory
+share/locale/haw|755|0|0|directory
+share/locale/he/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/he/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/he/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/he/LC_MESSAGES|755|0|0|directory
+share/locale/he|755|0|0|directory
+share/locale/hi/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/hi/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/hi/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/hi/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/hi/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/hi/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/hi/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/hi/LC_MESSAGES|755|0|0|directory
+share/locale/hi|755|0|0|directory
+share/locale/hr/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/hr/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/hr/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/hu/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/hu/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/hu/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/hy/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/hy/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/hy/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/hy/LC_MESSAGES|755|0|0|directory
+share/locale/hy|755|0|0|directory
+share/locale/ia/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ia/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ia/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ia/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ia/LC_MESSAGES|755|0|0|directory
+share/locale/ia|755|0|0|directory
+share/locale/id/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/id/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/id/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/id/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/is/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/is/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/is/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/is/LC_MESSAGES|755|0|0|directory
+share/locale/is|755|0|0|directory
+share/locale/it/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/it/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/it/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/it/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ja/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ja/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ja/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/ka/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ka/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ka/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ka/LC_MESSAGES|755|0|0|directory
+share/locale/ka|755|0|0|directory
+share/locale/kk/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/kk/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/kk/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/kk/LC_MESSAGES|755|0|0|directory
+share/locale/kk|755|0|0|directory
+share/locale/km/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/km/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/km/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/km/LC_MESSAGES|755|0|0|directory
+share/locale/km|755|0|0|directory
+share/locale/kn/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/kn/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/kn/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/kn/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/kn/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/kn/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/kn/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/kn/LC_MESSAGES|755|0|0|directory
+share/locale/kn|755|0|0|directory
+share/locale/ko/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ko/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ko/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ko/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/kok/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/kok/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/kok/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/kok/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/kok/LC_MESSAGES|755|0|0|directory
+share/locale/kok|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/ku/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ku/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ku/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ku/LC_MESSAGES|755|0|0|directory
+share/locale/ku|755|0|0|directory
+share/locale/lt/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/lt/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/lt/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/lt/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/lv/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/lv/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/lv/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/lv/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/lv/LC_MESSAGES|755|0|0|directory
+share/locale/lv|755|0|0|directory
+share/locale/mi/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/mi/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/mi/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/mi/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/mi/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/mi/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/mi/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/mi/LC_MESSAGES|755|0|0|directory
+share/locale/mi|755|0|0|directory
+share/locale/mk/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/mk/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/mk/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/mk/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/mk/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/mk/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/mk/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/mk/LC_MESSAGES|755|0|0|directory
+share/locale/mk|755|0|0|directory
+share/locale/ml/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ml/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ml/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ml/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ml/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ml/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ml/LC_MESSAGES|755|0|0|directory
+share/locale/ml|755|0|0|directory
+share/locale/mn/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/mn/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/mn/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/mn/LC_MESSAGES|755|0|0|directory
+share/locale/mn|755|0|0|directory
+share/locale/mr/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/mr/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/mr/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/mr/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/mr/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/mr/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/mr/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/mr/LC_MESSAGES|755|0|0|directory
+share/locale/mr|755|0|0|directory
+share/locale/ms/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ms/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ms/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ms/LC_MESSAGES|755|0|0|directory
+share/locale/ms|755|0|0|directory
+share/locale/mt/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/mt/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/mt/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/mt/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/mt/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/mt/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/mt/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/mt/LC_MESSAGES|755|0|0|directory
+share/locale/mt|755|0|0|directory
+share/locale/nb/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/nb/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/nb/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/ne/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ne/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ne/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ne/LC_MESSAGES|755|0|0|directory
+share/locale/ne|755|0|0|directory
+share/locale/nl/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/nl/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/nl/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/nl/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/nl/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/nn/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/nn/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/nn/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/nn/LC_MESSAGES|755|0|0|directory
+share/locale/nn|755|0|0|directory
+share/locale/nso/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/nso/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/nso/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/nso/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/nso/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/nso/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/nso/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/nso/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/nso/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/nso/LC_MESSAGES|755|0|0|directory
+share/locale/nso|755|0|0|directory
+share/locale/oc/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/oc/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/oc/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/oc/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/oc/LC_MESSAGES|755|0|0|directory
+share/locale/oc|755|0|0|directory
+share/locale/or/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/or/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/or/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/or/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/or/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/or/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/or/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/or/LC_MESSAGES|755|0|0|directory
+share/locale/or|755|0|0|directory
+share/locale/pa/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/pa/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/pa/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/pa/LC_MESSAGES|755|0|0|directory
+share/locale/pa|755|0|0|directory
+share/locale/pl/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/pl/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/pl/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/pl/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/pl/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/ps/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ps/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ps/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ps/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ps/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ps/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ps/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ps/LC_MESSAGES|755|0|0|directory
+share/locale/ps|755|0|0|directory
+share/locale/pt/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/pt/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/pt/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/pt_BR/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/pt_BR/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ro/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ro/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ro/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ro/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ru/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ru/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/rw/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/rw/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/rw/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/rw/LC_MESSAGES|755|0|0|directory
+share/locale/rw|755|0|0|directory
+share/locale/si/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/si/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/si/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/si/LC_MESSAGES|755|0|0|directory
+share/locale/si|755|0|0|directory
+share/locale/sk/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sk/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/sk/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/sk/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sl/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sl/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/sl/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/sl/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/so/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/so/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/so/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/so/LC_MESSAGES|755|0|0|directory
+share/locale/so|755|0|0|directory
+share/locale/sq/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sq/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sq/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sq/LC_MESSAGES|755|0|0|directory
+share/locale/sq|755|0|0|directory
+share/locale/sr/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sr/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/sr/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/sr/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/sr/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr@latin/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sr@latin/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/sr@latin/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/sr@latin/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/sr@latin/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/sr@latin/LC_MESSAGES|755|0|0|directory
+share/locale/sr@latin|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sv/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/sv/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/sv/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/sw/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/sw/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/sw/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/sw/LC_MESSAGES|755|0|0|directory
+share/locale/sw|755|0|0|directory
+share/locale/ta/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ta/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ta/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ta/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ta/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ta/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ta/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ta/LC_MESSAGES|755|0|0|directory
+share/locale/ta|755|0|0|directory
+share/locale/te/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/te/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/te/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/te/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/te/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/te/LC_MESSAGES|755|0|0|directory
+share/locale/te|755|0|0|directory
+share/locale/th/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/th/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/th/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/th/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/th/LC_MESSAGES|755|0|0|directory
+share/locale/th|755|0|0|directory
+share/locale/ti/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ti/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ti/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ti/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ti/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ti/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ti/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ti/LC_MESSAGES|755|0|0|directory
+share/locale/tig/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tig/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tig/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tig/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/tig/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/tig/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/tig/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/tig/LC_MESSAGES|755|0|0|directory
+share/locale/tig|755|0|0|directory
+share/locale/ti|755|0|0|directory
+share/locale/tk/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tk/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tk/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tk/LC_MESSAGES|755|0|0|directory
+share/locale/tk|755|0|0|directory
+share/locale/tl/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tl/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tl/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tl/LC_MESSAGES|755|0|0|directory
+share/locale/tl|755|0|0|directory
+share/locale/tr/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tr/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/tr/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/tr/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/tt/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tt/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tt/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tt/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/tt/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/tt/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/tt/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/tt/LC_MESSAGES|755|0|0|directory
+share/locale/tt@iqtelif/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/tt@iqtelif/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/tt@iqtelif/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/tt@iqtelif/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/tt@iqtelif/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/tt@iqtelif/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/tt@iqtelif/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/tt@iqtelif/LC_MESSAGES|755|0|0|directory
+share/locale/tt@iqtelif|755|0|0|directory
+share/locale/tt|755|0|0|directory
+share/locale/ug/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ug/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ug/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ug/LC_MESSAGES|755|0|0|directory
+share/locale/ug|755|0|0|directory
+share/locale/uk/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/uk/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/uk/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_639-5.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/uk/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/uk/LC_MESSAGES/iso_639_5.mo|777|0|0|symbolic link
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/ve/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/ve/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/ve/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/ve/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/ve/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/ve/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/ve/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/ve/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/ve/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/ve/LC_MESSAGES|755|0|0|directory
+share/locale/ve|755|0|0|directory
+share/locale/vi/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/vi/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/vi/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/vi/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/wa/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/wa/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/wa/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/wa/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/wa/LC_MESSAGES|755|0|0|directory
+share/locale/wal/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/wal/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/wal/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/wal/LC_MESSAGES|755|0|0|directory
+share/locale/wal|755|0|0|directory
+share/locale/wa|755|0|0|directory
+share/locale/wo/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/wo/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/wo/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/wo/LC_MESSAGES|755|0|0|directory
+share/locale/wo|755|0|0|directory
+share/locale/xh/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/xh/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/xh/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/xh/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/xh/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/xh/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/xh/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/xh/LC_MESSAGES|755|0|0|directory
+share/locale/xh|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/zh_CN/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/zh_CN/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/zh_CN/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_HK/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/zh_HK/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/zh_HK/LC_MESSAGES|755|0|0|directory
+share/locale/zh_HK|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/iso_15924.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_3166-2.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/zh_TW/LC_MESSAGES/iso_3166_2.mo|777|0|0|symbolic link
+share/locale/zh_TW/LC_MESSAGES/iso_4217.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/zh_TW/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale/zu/LC_MESSAGES/iso_3166-1.mo|644|0|0|regular file
+share/locale/zu/LC_MESSAGES/iso_3166-3.mo|644|0|0|regular file
+share/locale/zu/LC_MESSAGES/iso_3166.mo|777|0|0|symbolic link
+share/locale/zu/LC_MESSAGES/iso_639-2.mo|644|0|0|regular file
+share/locale/zu/LC_MESSAGES/iso_639-3.mo|644|0|0|regular file
+share/locale/zu/LC_MESSAGES/iso_639.mo|777|0|0|symbolic link
+share/locale/zu/LC_MESSAGES/iso_639_3.mo|777|0|0|symbolic link
+share/locale/zu/LC_MESSAGES|755|0|0|directory
+share/locale/zu|755|0|0|directory
+share/locale|755|0|0|directory
+share/pkgconfig/iso-codes.pc|644|0|0|regular file
+share/pkgconfig|755|0|0|directory
+share/xml/iso-codes/iso_15924.xml|644|0|0|regular file
+share/xml/iso-codes/iso_3166-1.xml|644|0|0|regular file
+share/xml/iso-codes/iso_3166-2.xml|644|0|0|regular file
+share/xml/iso-codes/iso_3166-3.xml|644|0|0|regular empty file
+share/xml/iso-codes/iso_3166.xml|777|0|0|symbolic link
+share/xml/iso-codes/iso_3166_2.xml|777|0|0|symbolic link
+share/xml/iso-codes/iso_4217.xml|644|0|0|regular file
+share/xml/iso-codes/iso_639-2.xml|644|0|0|regular file
+share/xml/iso-codes/iso_639-3.xml|644|0|0|regular file
+share/xml/iso-codes/iso_639-5.xml|644|0|0|regular file
+share/xml/iso-codes/iso_639.xml|777|0|0|symbolic link
+share/xml/iso-codes/iso_639_3.xml|777|0|0|symbolic link
+share/xml/iso-codes/iso_639_5.xml|777|0|0|symbolic link
+share/xml/iso-codes|755|0|0|directory
+share/xml|755|0|0|directory
+share|755|0|0|directory

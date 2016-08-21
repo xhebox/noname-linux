@@ -1,0 +1,43 @@
+From 7e7dd26251c355a54b5c34ea4fb27dcda9ee7b94 Mon Sep 17 00:00:00 2001
+From: Florian Bruhin <git@the-compiler.org>
+Date: Sun, 12 Feb 2017 15:44:01 +0100
+Subject: [PATCH] Use Qt::ToolTip as window type for dropdown popus
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+In 58467ed1950ee070d0907cbdabb8466aba277305, the window type for dropdown popups
+was changed from Qt::ToolTip to Qt:Tool to fix issues when using a
+QWebEngineView inside a modal dialog on macOS.
+
+However, this causes a separate window to pop up at least under Linux, so we use
+Qt::ToolTip again there.
+
+Task-number: QTBUG-58488
+Task-number: QTBUG-58544
+Change-Id: I951b91980be89a37ee07b19fca684d13b6098af0
+Reviewed-by: Alexandru Croitor <alexandru.croitor@qt.io>
+Reviewed-by: Michael Brüning <michael.bruning@qt.io>
+---
+ src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp b/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
+index e4c8996..e7ad5b1 100644
+--- a/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
++++ b/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
+@@ -182,10 +182,14 @@ void RenderWidgetHostViewQtDelegateWidget::initAsPopup(const QRect& screenRect)
+     setAttribute(Qt::WA_ShowWithoutActivating);
+     setFocusPolicy(Qt::NoFocus);
+ 
++#ifdef Q_OS_MACOS
+     // macOS doesn't like Qt::ToolTip when QWebEngineView is inside a modal dialog, specifically by
+     // not forwarding click events to the popup. So we use Qt::Tool which behaves the same way, but
+     // works on macOS too.
+     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus);
++#else
++    setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus);
++#endif
+ 
+     setGeometry(screenRect);
+     show();

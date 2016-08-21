@@ -1,0 +1,54 @@
+bin/qtox|755|0|0|regular file
+bin|755|0|0|directory
+share/appdata/qTox.appdata.xml|644|0|0|regular file
+share/appdata|755|0|0|directory
+share/applications/qtox.desktop|644|0|0|regular file
+share/applications|755|0|0|directory
+share/icons/hicolor/128x128/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/128x128/apps|755|0|0|directory
+share/icons/hicolor/128x128|755|0|0|directory
+share/icons/hicolor/14x14/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/14x14/apps|755|0|0|directory
+share/icons/hicolor/14x14|755|0|0|directory
+share/icons/hicolor/16x16/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/16x16/apps|755|0|0|directory
+share/icons/hicolor/16x16|755|0|0|directory
+share/icons/hicolor/192x192/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/192x192/apps|755|0|0|directory
+share/icons/hicolor/192x192|755|0|0|directory
+share/icons/hicolor/22x22/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/22x22/apps|755|0|0|directory
+share/icons/hicolor/22x22|755|0|0|directory
+share/icons/hicolor/24x24/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/24x24/apps|755|0|0|directory
+share/icons/hicolor/24x24|755|0|0|directory
+share/icons/hicolor/256x256/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/256x256/apps|755|0|0|directory
+share/icons/hicolor/256x256|755|0|0|directory
+share/icons/hicolor/32x32/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/32x32/apps|755|0|0|directory
+share/icons/hicolor/32x32|755|0|0|directory
+share/icons/hicolor/36x36/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/36x36/apps|755|0|0|directory
+share/icons/hicolor/36x36|755|0|0|directory
+share/icons/hicolor/48x48/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/48x48/apps|755|0|0|directory
+share/icons/hicolor/48x48|755|0|0|directory
+share/icons/hicolor/512x512/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/512x512/apps|755|0|0|directory
+share/icons/hicolor/512x512|755|0|0|directory
+share/icons/hicolor/64x64/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/64x64/apps|755|0|0|directory
+share/icons/hicolor/64x64|755|0|0|directory
+share/icons/hicolor/72x72/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/72x72/apps|755|0|0|directory
+share/icons/hicolor/72x72|755|0|0|directory
+share/icons/hicolor/96x96/apps/qtox.png|644|0|0|regular file
+share/icons/hicolor/96x96/apps|755|0|0|directory
+share/icons/hicolor/96x96|755|0|0|directory
+share/icons/hicolor/scalable/apps/qtox.svg|644|0|0|regular file
+share/icons/hicolor/scalable/apps|755|0|0|directory
+share/icons/hicolor/scalable|755|0|0|directory
+share/icons/hicolor|755|0|0|directory
+share/icons|755|0|0|directory
+share|755|0|0|directory

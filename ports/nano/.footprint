@@ -1,0 +1,67 @@
+bin/nano|755|0|0|regular file
+bin/rnano|777|0|0|symbolic link
+bin|755|0|0|directory
+etc/nanorc|644|0|0|regular file
+etc|755|0|0|directory
+lib|755|0|0|directory
+share/doc/nano/faq.html|644|0|0|regular file
+share/doc/nano/nano.1.html|644|0|0|regular file
+share/doc/nano/nano.html|644|0|0|regular file
+share/doc/nano/nanorc.5.html|644|0|0|regular file
+share/doc/nano/rnano.1.html|644|0|0|regular file
+share/doc/nano|755|0|0|directory
+share/doc|755|0|0|directory
+share/info/nano.info|644|0|0|regular file
+share/info|755|0|0|directory
+share/man/man1/nano.1.gz|644|0|0|regular file
+share/man/man1/rnano.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man5/nanorc.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share/nano/asm.nanorc|644|0|0|regular file
+share/nano/autoconf.nanorc|644|0|0|regular file
+share/nano/awk.nanorc|644|0|0|regular file
+share/nano/c.nanorc|644|0|0|regular file
+share/nano/changelog.nanorc|644|0|0|regular file
+share/nano/cmake.nanorc|644|0|0|regular file
+share/nano/css.nanorc|644|0|0|regular file
+share/nano/debian.nanorc|644|0|0|regular file
+share/nano/default.nanorc|644|0|0|regular file
+share/nano/elisp.nanorc|644|0|0|regular file
+share/nano/fortran.nanorc|644|0|0|regular file
+share/nano/gentoo.nanorc|644|0|0|regular file
+share/nano/go.nanorc|644|0|0|regular file
+share/nano/groff.nanorc|644|0|0|regular file
+share/nano/guile.nanorc|644|0|0|regular file
+share/nano/html.nanorc|644|0|0|regular file
+share/nano/java.nanorc|644|0|0|regular file
+share/nano/javascript.nanorc|644|0|0|regular file
+share/nano/json.nanorc|644|0|0|regular file
+share/nano/lua.nanorc|644|0|0|regular file
+share/nano/makefile.nanorc|644|0|0|regular file
+share/nano/man.nanorc|644|0|0|regular file
+share/nano/mgp.nanorc|644|0|0|regular file
+share/nano/mutt.nanorc|644|0|0|regular file
+share/nano/nanohelp.nanorc|644|0|0|regular file
+share/nano/nanorc.nanorc|644|0|0|regular file
+share/nano/nftables.nanorc|644|0|0|regular file
+share/nano/objc.nanorc|644|0|0|regular file
+share/nano/ocaml.nanorc|644|0|0|regular file
+share/nano/patch.nanorc|644|0|0|regular file
+share/nano/perl.nanorc|644|0|0|regular file
+share/nano/php.nanorc|644|0|0|regular file
+share/nano/po.nanorc|644|0|0|regular file
+share/nano/postgresql.nanorc|644|0|0|regular file
+share/nano/pov.nanorc|644|0|0|regular file
+share/nano/python.nanorc|644|0|0|regular file
+share/nano/ruby.nanorc|644|0|0|regular file
+share/nano/rust.nanorc|644|0|0|regular file
+share/nano/sh.nanorc|644|0|0|regular file
+share/nano/spec.nanorc|644|0|0|regular file
+share/nano/tcl.nanorc|644|0|0|regular file
+share/nano/tex.nanorc|644|0|0|regular file
+share/nano/texinfo.nanorc|644|0|0|regular file
+share/nano/xml.nanorc|644|0|0|regular file
+share/nano|755|0|0|directory
+share|755|0|0|directory

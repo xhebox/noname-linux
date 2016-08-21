@@ -1,0 +1,5 @@
+lib/libhttp_parser.so|777|0|0|symbolic link
+include/http_parser.h|755|0|0|regular file
+lib/libhttp_parser.so.2.7.1|755|0|0|regular file
+lib|755|0|0|directory
+include|755|0|0|directory

@@ -1,0 +1,15 @@
+. $PORTS/libffi/Pkgfile
+name=libffi-32
+deps="musl libffi"
+
+build() {
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	cd libffi-$version
+	./configure --prefix= --disable-static --libdir=/lib32
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share
+}
+

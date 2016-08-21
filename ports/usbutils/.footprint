@@ -1,0 +1,14 @@
+bin/usbhid-dump|755|0|0|regular file
+bin/usb-devices|755|0|0|regular file
+bin/lsusb|755|0|0|regular file
+bin/lsusb.py|755|0|0|regular file
+share/man/man8/lsusb.8.gz|644|0|0|regular file
+share/man/man8/usbhid-dump.8.gz|644|0|0|regular file
+share/man/man1/usb-devices.1.gz|644|0|0|regular file
+share/pkgconfig/usbutils.pc|644|0|0|regular file
+share/pkgconfig|755|0|0|directory
+share/man/man1|755|0|0|directory
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

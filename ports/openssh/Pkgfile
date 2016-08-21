@@ -1,0 +1,26 @@
+name=openssh
+version=7.5p1
+deps="zlib libressl xorg-app krb5"
+desc="Free version of the SSH connectivity tools"
+source="https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/${name}-${version}.tar.gz"
+
+build() {
+	cd openssh-$version
+	./configure \
+		--prefix=/ \
+		--sbindir=/bin \
+		--libexecdir=/lib/ssh \
+		--sysconfdir=/etc/ssh \
+		--with-ssl-engine \
+		--with-privsep-user=nobody \
+		--with-xauth=/bin/xauth \
+		--with-md5-passwords \
+		--without-rpath \
+		--with-pid-dir=/run
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	ln -sf ssh.1.gz "${pkgdir}"/share/man/man1/slogin.1.gz
+	install -Dm755 contrib/findssl.sh "${pkgdir}"/bin/findssl.sh
+	install -Dm755 contrib/ssh-copy-id "${pkgdir}"/bin/ssh-copy-id
+	install -Dm644 contrib/ssh-copy-id.1 "${pkgdir}"/share/man/man1/ssh-copy-id.1
+}

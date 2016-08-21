@@ -1,0 +1,14 @@
+lib/libcelt0.so.2|777|0|0|symbolic link
+lib/libcelt0.so|777|0|0|symbolic link
+bin/celtenc|755|0|0|regular file
+bin/celtdec|755|0|0|regular file
+include/celt/celt_header.h|644|0|0|regular file
+include/celt/celt.h|644|0|0|regular file
+include/celt/celt_types.h|644|0|0|regular file
+lib/libcelt0.so.2.0.0|755|0|0|regular file
+lib/pkgconfig/celt.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/celt|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,674 @@
+#!/bin/sh
+{
+msg() {
+	printf "${GREEN}=::${NORMAL}${WHITE} %s\n${NORMAL}" "$1"
+}
+
+error() {
+	printf "${RED}ERR=!!${NORMAL}${WHITE} %s\n${NORMAL}" "$1" >&2
+}
+
+die() {
+	rm -f ${cur_pkgpath}/.list*
+	[ "$1" ] && error "$1"
+	# make it possible to kill the scripts from subprocess
+	kill -s TERM "$$"
+}
+
+pchroot() {
+	local RROOT="`realpath $ROOT`"
+	local ret=0
+	pushd $RROOT
+	if [ "$RROOT" != "/" ]; then
+		mount -t proc none $RROOT/proc
+		mount -t sysfs none $RROOT/sys
+		mount -t devtmpfs none $RROOT/dev
+		mount -o bind /etc/resolv.conf $ROOT/etc/resolv.conf
+		chroot $@
+		ret=$?
+		umount -R $RROOT/proc
+		umount -R $RROOT/sys
+		umount -R $RROOT/dev
+		umount -R $RROOT/etc/resolv.conf
+	else
+		chroot $@
+		ret=$?
+	fi
+	popd
+	return $ret
+}
+
+contains() {
+	if [ "${1#*$2}" != "${1}" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+fn_exist() {
+	if contains "`type $1 2>&1`" 'function'; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+init_vars() {
+	PKG_DEPLISTS=''
+	PKG_FORCE=''
+	PKG_NO_DEPS=''
+	PKG_NO_POST=''
+	PKG_KEEP_WORK=''
+	PKG_IGNORE_SUM=''
+	PKG_FETCH=''
+	PKG_NO_STRIP=''
+	PKG_NO_REMOVELA=''
+
+	if [ "${COLORS_F}" -ne 0 ]; then
+		NORMAL='\033[1;0m'
+		WHITE='\033[1;1m'
+		RED='\033[1;31m'
+		GREEN='\033[1;32m'
+		YELLOW='\033[1;33m'
+		BLUE='\033[1;34m'
+	else
+		NORMAL=''
+		WHITE=''
+		RED=''
+		GREEN=''
+		YELLOW=''
+		BLUE=''
+	fi
+}
+
+check_dir() {
+	pathchk -P "$1" || die "$1 is not a portable path! $2"
+	if [ ! -d $1 ]; then
+		die "Directory '$1' does not exist. $2"
+	elif [ ! -w $1 ]; then
+		die "Directory '$1' not writable. $2"
+	elif [ ! -x $1 ] || [ ! -r $1 ]; then
+		die "Directory '$1' not readable. $2"
+	fi
+}
+
+check_file() {
+	pathchk -P "$1" || die "$1 is not a portable path! $2"
+	if [ ! -e $1 ] || [ ! -w $1 ]; then
+		die "File $1 is not writable. $2"
+	fi
+}
+
+pushd() {
+	pathchk -P "$1" || die "$1 is not a portable path! $2"
+	PKG_DIRLISTS="$PWD;$PKG_DIRLISTS"
+	cd $1
+}
+
+popd() {
+	cd `echo "$PKG_DIRLISTS" | cut -d ';' -f 1`
+       	PKG_DIRLISTS=`echo "$PKG_DIRLISTS" | cut -d ';' -f 2-`
+}
+
+main() {
+	PKG_DIRLISTS=''
+	pushd /
+
+	unset -v LC_ALL
+	export LC_ALL=C.UTF-8
+	readonly LC_ALL
+
+	unset -v LANG
+	export LANG=C.UTF-8
+	readonly LANG
+
+	if [ "${PKG_CONFIG}" ];then
+		. "${PKG_CONFIG}"
+	elif [ -f /etc/pkg.conf ];then
+		. /etc/pkg.conf
+	else
+		die 'neither /etc/pkg.conf exists nor PKG_CONFIG env-var is set'
+	fi
+
+	init_vars
+
+	[ "${ROOT}" ] || die '$ROOT not set'
+	[ "${ARCH}" ] || die '$ARCH not set'
+	[ "${TARGET}" ] || die '$TARGET not set'
+	[ "${PORTS}" ] || die '$PORTS not set'
+	[ "${DB}" ] || die '$DB not set'
+
+	flock -n 3 || die 'anther thread is running!'
+
+	for i in ${ROOT} ${PORTS} ${DB}; do
+		check_dir $i
+	done
+
+	trap "exit 1" TERM
+	trap 'die "Aborted by user"' INT
+
+	local ACTION=''
+	local QACTION='i'
+	while getopts FEUMQSRvfemdpskiolah f; do
+		QACTION=$f
+		case $f in
+			F|U|E|M|Q|S|R|v) ACTION=$f;;
+			f) PKG_FORCE=yes;;
+			e) PKG_FETCH=yes;;
+			m) PKG_IGNORE_SUM=yes;;
+			d) PKG_NO_DEPS=yes;;
+			p) PKG_NO_POST=yes;;
+			s) PKG_NO_STRIP=yes;;
+			k) PKG_KEEP_WORK=yes;;
+			h) opt_help;;
+		esac
+	done
+	shift
+	for i in $@; do
+		i=${i%/}
+		[ "$ACTION" != "Q" ] && opt_readpkg "$i"
+		case $ACTION in
+		E) opt_extract "$i" ;;
+		U) opt_updatesums "$i" ;;
+		F) opt_fetch "$i" ;;
+		S) opt_install "$i" no || die "$i: failed to install package." ;;
+		R) opt_remove "$i" || die "$i: failed to remove package." ;;
+		M) opt_build "$i" || die "$i: failed to build package." ;;
+		Q) opt_query "$QACTION" "$i" || die "$i: failed to query package." ;;
+		v) opt_version ;;
+		\?) [ -z "$ACTION" ] && opt_help;;
+		esac
+	done
+	popd
+}
+
+_remove() {
+	if [ ! -d "$ROOT/${1}" ]; then
+		rm -f "$ROOT"/"${1}" || die "$1: remove file $1 failed"
+	else
+		[ -z "`ls $ROOT/$1`" ] && {
+		rmdir "$ROOT"/"${1}" || die "$1: remove dir $1 failed"
+		}
+	fi
+}
+
+opt_readpkg() {
+	# these two options are used in Pkgfile: NO_STRIP, NO_REMOVELA
+	unset -v conflicts desc version name deps source cur_pkgpath PKG_NO_STRIP PKG_NO_REMOVELA
+	unset -f build
+	unset -f post
+	unset -f ext
+	unset -f pre
+	if [ -f "${PORTS}/${1}/Pkgfile" ]; then
+		cur_pkgpath="$PORTS/$1"
+	else
+		die "Package $1 does not exist."
+	fi
+	. "$cur_pkgpath"/Pkgfile
+	[ "$1" != "$name" ] && die "$1: name and reponame is different"
+	return 0
+}
+
+opt_readpkgfp() {
+	if [ ! -f "${DB}/${1}.metadata" ];then
+		die "package $1 is not installed"
+	fi
+	check_file "${DB}/${1}.footprint"
+	cat "${DB}/${1}.footprint"
+}
+
+url_fetch() {
+	[ -f "$1" ] || curl -O -L "$2" || {
+		rm -f "$1"
+		die "Failed to fetch $1"
+	}
+}
+
+opt_fetch() {
+	pushd "$cur_pkgpath"
+	for s in $source; do
+		if echo "$s" | grep -q -E '^((https|http|ftp|rtsp|mms)?:\/\/).+'; then
+			local target="`basename $s`"
+			msg "Downloading $target for $1"
+			url_fetch "$target" "$s"
+		fi
+	done
+	popd
+	msg "$1: Fetch done"
+}
+
+opt_extract() {
+	if [ "$PKG_FETCH" ] ;then
+		opt_fetch "$1"
+	fi
+	local chekcsumfile srcdir pkgdir tmp
+	pkgdir="${cur_pkgpath}/.pkg"
+	srcdir="${cur_pkgpath}/.src"
+	checksumfile="${cur_pkgpath}/.checksums"
+	if [ -n "${source}" ] && [ -z "$PKG_IGNORE_SUM" ];then
+		pushd "${cur_pkgpath}"
+		check_file "${checksumfile}" "(failed in checksum)"
+		for i in $source; do
+			tmp="`basename $i`"
+			grep -q -F "$tmp" "$checksumfile" || die "$1: Missing checksums of file - $tmp"
+		done
+		if $SUM -c "${checksumfile}"; then
+			msg "$1: Verification succeeded" 
+		else
+			die "$1: Verification failed"
+		fi
+		popd
+	fi
+
+	[ -d "$srcdir" ] && error "$1: Previous srcdir exists...Clean it!"
+	rm -rf "${srcdir}"
+	mkdir "${srcdir}"
+	check_dir "${srcdir}"
+
+	pushd "$srcdir"
+	for s in $source; do
+		tmp="`basename $s`"
+		check_file "${cur_pkgpath}/${tmp}"
+		case $tmp in
+			*.tar*|*.zip|*.7z|*.rar|*tgz*) bsdtar -xpf "${cur_pkgpath}"/"$tmp" || die "$1: Failed to unpack file - $tmp"
+				continue;;
+			*.gz) pigz -dkc "${cur_pkgpath}"/"$tmp" > "$srcdir"/"${tmp%.gz}" || die "$1: Failed to unpack file - $tmp"
+				continue;;
+			*.bz2) pbzip2 -dkc "${cur_pkgpath}"/"$tmp" > "$srcdir"/"${tmp%.bz2}" || die "$1: Failed to unpack file - $tmp"
+				continue;;
+			*.xz) unxz -dkc "${cur_pkgpath}"/"$tmp" > "$srcdir"/"${tmp%.xz}" || die "$1: Failed to unpack file - $tmp"
+				continue;;
+		esac
+		ln -s ../"$tmp" "$srcdir"/"$tmp"
+	done
+	if fn_exist ext;then
+		ext || die 'Falied to extract!'
+	fi
+	popd
+	msg "$1: Extracted"
+}
+
+opt_updatesums() {
+	if [ "$PKG_FETCH" ] ;then
+		opt_fetch "$1"
+	fi
+	local checksumfile tmp
+	checksumfile="${cur_pkgpath}/.checksums"
+	rm -f "$checksumfile"
+	touch "$checksumfile"
+	check_file "$checksumfile"
+	pushd "${cur_pkgpath}"
+	for s in $source; do
+		tmp="`basename $s`"
+		check_file "$tmp" "(failed in updatesums)"
+		$SUM "$tmp" >> "$checksumfile" || die "$1: Checksum abort!"
+	done
+	popd
+	msg "$1: Checksum updated"
+}
+
+opt_clean() {
+	if [ -z "$PKG_KEEP_WORK" ];then
+		local cur_pkgpath
+		if [ ! -f "${PORTS}/${1}/Pkgfile" ]; then
+			die "Package $1 does not exist."
+		else
+			cur_pkgpath="$PORTS/$1"
+		fi
+		rm -rf "${cur_pkgpath}/.src" "${cur_pkgpath}/.pkg"
+		rm -f ${cur_pkgpath}/.list*
+	fi
+}
+
+opt_remove() {
+	opt_readpkgfp "$1" | while read i
+	do
+		local tmp="`echo ${i} | cut -d '|' -f 1`"
+		_remove "$tmp"
+	done
+	rm -f "${DB}/${1}."footprint || die "$1: remove footprint failed"
+	rm -f "${DB}/${1}."metadata || die "$1: remove metadata failed"
+	msg "$1: removed"
+}
+
+opt_post_rebuild() {
+	local dbak=$PKG_NO_DEPS
+	local lbak="$PKG_DEPSLISTS"
+	PKG_NO_DEPS=yes
+	PKG_DEPLISTS="`echo $PKG_DEPLISTS | sed s/$1//g`"
+	opt_readpkg $1
+	opt_build $1
+	opt_install $1 no
+	opt_readpkg $2
+	PKG_NO_DEPS=$dbak
+	PKG_DEPLISTS="$lbak"
+}
+
+opt_install() {
+	for i in $conflicts;do
+		if [ -f "${DB}/${i}.metadata" ];then
+			die "$1: a conflicting package is installed -> $i!"
+		fi
+	done
+
+	if contains "$PKG_DEPLISTS" "$1;"; then
+		return 0
+	fi
+
+	if [ -z "$PKG_NO_DEPS" ]; then
+		for i in $deps;do
+			opt_readpkg "$i"
+			opt_install "$i" "yes" || die "$i: failed to install package."
+		done
+	fi
+
+	opt_readpkg "$1"
+
+	local rflags=''
+	[ "$PKG_NO_DEPS" ] && rflags="${rflags}d"
+	[ "$PKG_FORCE" ] && rflags="${rflags}f"
+	if [ ! -f "${cur_pkgpath}/${1}#$version.tgz" ] || [ ! -f "${cur_pkgpath}/.metadata" ];then
+		flock -u 3
+		env -i /bin/sh -c "/bin/pkg -M${rflags} $1" || die "$1: failed to build package."
+		flock -n 3 || die 'anther thread is running!'
+	fi
+
+	local UPD=0
+
+	if [ "`ls $DB`" = '' ]; then
+		tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+	elif [ "$name" = "filesystem" ]; then
+		if [ -f "${DB}/${name}.metadata" ]; then
+			# do not override current config files
+			tar -xp -C "$ROOT/" \
+			--exclude=passwd \
+			--exclude=shadow \
+			--exclude=group \
+			--exclude=gshadow \
+			--exclude=resolv.conf \
+			--exclude=hosts \
+			--exclude=hostname \
+			-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+		else
+			tar -xp -C "$ROOT/" \
+			-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+		fi
+	elif [  "$PKG_FORCE" ];then
+		tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+	else
+		rm -f ${cur_pkgpath}/.list*
+		check_file "${cur_pkgpath}/.metadata"
+		if [ -f "${DB}/${name}.metadata" ]; then
+			[ ${cur_pkgpath}/.metadata -nt ${DB}/${name}.metadata ] && UPD=1
+		else
+			UPD=1
+		fi
+		if [ "$UPD" -eq 1 ]; then
+			cat ${cur_pkgpath}/.footprint | sort >> ${cur_pkgpath}/.list2
+			if [ -f "${DB}/${name}.metadata" ]; then
+				opt_readpkgfp "$1" | sort > ${cur_pkgpath}/.list1
+				comm -23 "${cur_pkgpath}/.list1" "${cur_pkgpath}/.list2" | grep -Po '(^.+)(?=\|\d\d\d)' > ${cur_pkgpath}/.list3
+				comm -13 "${cur_pkgpath}/.list1" "${cur_pkgpath}/.list2" | grep -Po '(^.+)(?=\|\d\d\d)' > ${cur_pkgpath}/.list4
+			else
+				comm -23 "/dev/null" "${cur_pkgpath}/.list2" | grep -Po '(^.+)(?=\|\d\d\d)' > ${cur_pkgpath}/.list3
+				comm -13 "/dev/null" "${cur_pkgpath}/.list2" | grep -Po '(^.+)(?=\|\d\d\d)' > ${cur_pkgpath}/.list4
+			fi
+
+			pushd $ROOT
+			cat ${cur_pkgpath}/.list4 | while read i
+			do
+				if [ -f "$ROOT/$i" ]; then
+					error "$1: file ${tmp} exists!"
+					error "    fp -> `grep -F ${i}\| ${cur_pkgpath}/.footprint`"
+					die "    now -> `stat --printf='%n|%a|%u|%g|%F\n' $i | sed 's/regular empty file/regular file/g'`"
+				elif [ -d "$ROOT/$i" ]; then
+					if [ "$i" != "etc" ] && 
+					[ "$i" != "boot" ] && 
+					[ "$i" != "include" ] && 
+					[ "$i" != "share" ] && 
+					[ "$i" != "lib" ] && 
+					[ "$i" != "lib32" ] && 
+					[ "$i" != "lib64" ] && 
+					[ "$i" != "bin" ] &&
+					[ "`grep -F ${i}\| ${cur_pkgpath}/.footprint`" != "`stat --printf='%n|%a|%u|%g|%F\n' $i 2>&1`" ];then 
+						error "$1: dir ${i} exists!"
+						error "    fp -> `grep -F ${i}\| ${cur_pkgpath}/.footprint`"
+						die "    now -> `stat --printf='%n|%a|%u|%g|%F\n' $i`"
+					fi
+				fi
+			done
+			cat ${cur_pkgpath}/.list3 | while read i
+			do
+				_remove "$i"
+			done
+			rm -f ${cur_pkgpath}/.list*
+			popd
+			tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+		fi
+	fi
+
+	check_file "$cur_pkgpath/.footprint"
+	cp -r "$cur_pkgpath/.footprint" "${DB}/${1}.footprint" || die "$1: install footprint failed"
+
+	pushd /
+	if fn_exist post && [ -z "$PKG_NO_POST" ]; then
+		post || die "$1: Failed to post!"
+	fi
+	if [ "$UPD" -eq 1 ]; then
+		grep -q -F 'share/icons' "${DB}/${1}.footprint" && {
+			msg 'Try to update gtk icon cache'
+			[ -e "$ROOT/bin/gtk-update-icon-cache" ] && {
+				ls -1 "$ROOT/share/icons" | while read i; do
+					pchroot "$ROOT" /bin/gtk-update-icon-cache -f "/share/icons/$i" || die "$1: Failed to update gtk icon cache!"
+				done
+			}
+		}
+		grep -q -F 'lib/gio' "${DB}/${1}.footprint" && {
+			msg 'Try to update gio cache'
+			[ -e "$ROOT/bin/gio-querymodules" ] && pchroot "$ROOT" /bin/gio-querymodules /lib/gio/modules || die "$1: Failed to update gio cache!"
+		}
+		grep -q -F 'share/glib-2.0' "${DB}/${1}.footprint" && {
+			msg 'Try to compiling GSettings XML schema files'
+			[ -e "$ROOT/bin/glib-compile-schemas" ] && pchroot "$ROOT" /bin/glib-compile-schemas /share/glib-2.0/schemas || die "$1: Failed to compiling GSettings files!"
+		}
+		grep -q -F 'lib/gdk-pixbuf' "${DB}/${1}.footprint" && {
+			msg 'Try to probe GDK-Pixbuf loader modules'
+			[ -e "$ROOT/bin/gdk-pixbuf-query-loaders" ] && pchroot "$ROOT" /bin/gdk-pixbuf-query-loaders --update-cache || die "$1: Failed to update gdk loader cache!"
+		}
+		grep -q -F 'share/fonts' "${DB}/${1}.footprint" && {
+			msg 'Try to update font cache'
+			[ -e "$ROOT/bin/fc-cache" ] && pchroot "$ROOT" /bin/fc-cache -f || die "$1: Failed to update font cache!"
+		}
+		grep -q -F 'immodules' "${DB}/${1}.footprint" && {
+			msg 'Try to immodules cache'
+			[ -e "$ROOT/bin/gtk-query-immodules-3.0" ] && pchroot "$ROOT" /bin/gtk-query-immodules-3.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
+			[ -e "$ROOT/bin/gtk-query-immodules-2.0" ] && pchroot "$ROOT" /bin/gtk-query-immodules-2.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
+		}
+		grep -q -F 'share/mime' "${DB}/${1}.footprint" && {
+			msg 'Update the MIME type database'
+			[ -e "$ROOT/bin/update-mime-database" ] && pchroot "$ROOT" /bin/update-mime-database /share/mime || die "$1: Failed to update the MIME type database!"
+		}
+		grep -q -F 'share/ca-certificates/trust-source' "${DB}/${1}.footprint" && {
+			msg 'Update the certs database'
+			[ -e "$ROOT/bin/update-ca-trust" ] && pchroot "$ROOT" /bin/update-ca-trust || die "$1: Failed to update the certs database!"
+		}
+	fi
+	popd
+
+	check_file "$cur_pkgpath/.metadata"
+	cp -r "$cur_pkgpath/.metadata" "${DB}/${1}.metadata" || die "$1: install metadata failed"
+	opt_clean "$1"
+
+	# suppress annoying messages
+	[ "$2" = "no" ] && msg "$1: Installed" || true
+	PKG_DEPLISTS="$1;$PKG_DEPLISTS"
+}
+
+opt_build() {
+	if [ -z "$PKG_NO_DEPS" ]; then
+		for i in $deps;do
+			opt_readpkg "$i"
+			opt_install "$i" "no" || die "$i: failed to install package."
+		done
+	fi
+
+	opt_readpkg "$1"
+	opt_fetch "$1"
+	opt_extract "$1"
+
+	local srcdir pkgdir
+	pkgdir="${cur_pkgpath}/.pkg"
+	srcdir="${cur_pkgpath}/.src"
+	[ -d "$pkgdir" ] && error "$1: Previous pkgdir exists...Clean it!"
+	rm -rf "$pkgdir"
+	mkdir "${pkgdir}"
+	check_dir "${pkgdir}"
+
+	rm -f "${cur_pkgpath}/.footprint"
+	rm -f ${cur_pkgpath}/*#*.tgz
+
+	pushd "${srcdir}"
+	msg "$1: Building.."
+	build || die 'Failed to build!'
+	popd
+
+	pushd "${pkgdir}"
+	[ -d "./share/man" ] && compressdoc -g "`pwd`"/share/man
+	if [ -z "$PKG_NO_REMOVELA" ]; then
+		find . -name "*.la" -type f -exec rm {} \;
+	fi
+	if [ -z "$PKG_NO_STRIP" ]; then
+		find . -type f | while read FILE; do
+			case $(file -b "$FILE") in
+			*ELF*executable*not\ stripped)
+				strip --strip-all "$FILE";;
+			*ELF*shared\ object*not\ stripped)
+				strip --strip-unneeded "$FILE";;
+			current\ ar\ archive)
+				strip --strip-debug "$FILE";;
+			esac
+		done
+	fi
+	find . -name "*.pc" -exec sed -i \
+		-e 's;//;/;g' \
+		-e 's;/usr;/;g' \
+		-e 's;/usr/local;/;g' \
+		-e 's;//;/;g' \
+		{} \;
+	rm -f lib/perl5/core_perl/perllocal.pod
+	rm -f lib32/perl5/core_perl/perllocal.pod
+	rm -f lib/charset.alias
+	rm -f lib32/charset.alias
+	tar -czpf "${cur_pkgpath}/${name}#${version}.tgz" *
+	if [ $? -ne 0 ]; then
+		rm "${cur_pkgpath}/${name}"#*.tgz
+		die "pack $1 failed"
+	fi
+	find . -exec stat --printf="%n|%a|%u|%g|%F\n" {} \; | sed -e 's;^./;;g' -e '1d' | sort -n > "${cur_pkgpath}/.footprint"
+	if [ $? -ne 0 ]; then
+		die "Package $1 footprint generation failed"
+	fi
+	echo "`date`"  > "${cur_pkgpath}/.metadata"
+	printf '%s\n' "$name" "$version" >> "${cur_pkgpath}/.metadata"
+	echo "$desc"  >> "${cur_pkgpath}/.metadata"
+	popd
+
+	opt_clean "$1"
+	msg "$1: Build done"
+}
+
+opt_query() {
+	case $1 in
+	i) opt_query "$2";;
+	a) opt_query_installed "$2";;
+	l) opt_readpkgfp "$2";;
+	d) opt_query_deps "$2";;
+	o) printf "${BLUE}"
+	opt_query_own "$2"
+	printf "${NORMAL}";;
+	esac
+}
+
+opt_query_normal() {
+	msg "name: ${name}"
+	msg "version:  ${version}"
+	msg "desc:  ${desc}"
+	msg "deps:  ${deps}"
+}
+
+opt_query_installed() {
+	printf "${BLUE}"
+	ls -1 "$DB" | cut -d '.' -f 1 | uniq
+	printf "${NORMAL}"
+}
+
+opt_query_own() {
+	local tmp="${1##/}"
+	tmp="${tmp%%/}"
+
+	pushd "$DB"
+	grep -r -H "^${tmp}|" . -m 1 | cut -d ':' -f 1 | cut -d '/' -f 2 | cut -d '.' -f 1 | uniq
+	popd
+}
+
+opt_query_deps() {
+	if contains "$PKG_DEPLISTS" "$1;"; then
+		return 0
+	fi
+
+	printf "${GREEN}$2$1${NORMAL}\n"
+	PKG_DEPLISTS="$1;$PKG_DEPLISTS"
+
+	local s="| $2"
+	opt_readpkg "$1"
+
+	for i in $deps;do
+		opt_query_deps "$i" "$s"
+	done
+}
+
+opt_regmo() {
+	rm $1/*.gmo
+	pushd $1
+	for i in `ls *.po`;do
+		make ${i%.po}.gmo
+	done
+	popd
+}
+
+opt_version() {
+	msg "name: `basename ${0}`"
+	msg "version:  1.4"
+}
+
+opt_help() {
+	msg " [action]  [function]"
+	msg " -R  remove packages"
+	msg " -S  install packages"
+	msg "        (d) no deps"
+	msg "        (p) no post installation"
+	msg "        (f) force install"
+	msg "        (s) no strip in building"
+	msg "        (k) keep work dirs"
+	msg "        (m) ignore checksums"
+	msg " -M  build the specific package"
+	msg "        (d) no deps"
+	msg "        (s) no strip in building"
+	msg "        (k) keep work dirs"
+	msg "        (m) ignore checksums"
+	msg " -E  extract packages"
+	msg "        (m) ignore checksums"
+	msg "        (e) fetch packages if needed"
+	msg " -U  update packages checksums"
+	msg "        (e) fetch packages if needed"
+	msg " -F  fetch packages"
+	msg " -Q(i)   display information of package"
+	msg " -Qd   display deps tree of package"
+	msg " -Ql   listed all files of package"
+	msg " -Qo   look for which package the files belongs to"
+	msg " -Qa   listed all installed package"
+}
+
+main "$@"
+} 3<>/tmp/.rilock

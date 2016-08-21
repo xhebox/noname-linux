@@ -1,0 +1,28 @@
+name=libcorkipset
+version=1.1.1
+_debver=7
+desc="A small C helper library for storing sets of IPv4 and IPv6 addresses"
+deps="libcork cmake check"
+
+ext() {
+	git clone https://github.com/rogers0/libcorkipset/
+	cd libcorkipset
+	git checkout -b debian
+
+	for p in debian/patches/*.patch; do
+		patch -p1 -i "$p" || die
+	done
+	sed -e 's%#include <ipset%#include <libcorkipset%' \
+	-e 's%#include "ipset%#include "libcorkipset%' \
+	-i include/ipset/*.h */*/*/*.c */*/*/*.c.in */*/*.c */*.c
+	mv include/ipset include/libcorkipset
+}
+
+build() {
+	cd libcorkipset
+	mkdir build
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=lib
+	make || die
+	make DESTDIR="$pkgdir/" install || die
+}

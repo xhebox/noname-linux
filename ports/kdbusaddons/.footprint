@@ -1,0 +1,165 @@
+bin/kquitapp5|755|0|0|regular file
+bin|755|0|0|directory
+include/KF5/KDBusAddons/KDBusConnectionPool|644|0|0|regular file
+include/KF5/KDBusAddons/KDBusInterProcessLock|644|0|0|regular file
+include/KF5/KDBusAddons/KDBusService|644|0|0|regular file
+include/KF5/KDBusAddons/KDEDModule|644|0|0|regular file
+include/KF5/KDBusAddons/KDEInitInterface|644|0|0|regular file
+include/KF5/KDBusAddons/kdbusaddons_export.h|644|0|0|regular file
+include/KF5/KDBusAddons/kdbusconnectionpool.h|644|0|0|regular file
+include/KF5/KDBusAddons/kdbusinterprocesslock.h|644|0|0|regular file
+include/KF5/KDBusAddons/kdbusservice.h|644|0|0|regular file
+include/KF5/KDBusAddons/kdedmodule.h|644|0|0|regular file
+include/KF5/KDBusAddons/kdeinitinterface.h|644|0|0|regular file
+include/KF5/KDBusAddons|755|0|0|directory
+include/KF5/kdbusaddons_version.h|644|0|0|regular file
+include/KF5|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/KF5DBusAddons/KF5DBusAddonsConfig.cmake|644|0|0|regular file
+lib/cmake/KF5DBusAddons/KF5DBusAddonsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/KF5DBusAddons/KF5DBusAddonsTargets-release.cmake|644|0|0|regular file
+lib/cmake/KF5DBusAddons/KF5DBusAddonsTargets.cmake|644|0|0|regular file
+lib/cmake/KF5DBusAddons|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libKF5DBusAddons.so.5.33.0|755|0|0|regular file
+lib/libKF5DBusAddons.so.5|777|0|0|symbolic link
+lib/libKF5DBusAddons.so|777|0|0|symbolic link
+lib/qt/mkspecs/modules/qt_KDBusAddons.pri|644|0|0|regular file
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt|755|0|0|directory
+lib|755|0|0|directory
+share/locale/ar/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ar/LC_MESSAGES|755|0|0|directory
+share/locale/ar|755|0|0|directory
+share/locale/ast/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ast/LC_MESSAGES|755|0|0|directory
+share/locale/ast|755|0|0|directory
+share/locale/bs/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/bs/LC_MESSAGES|755|0|0|directory
+share/locale/bs|755|0|0|directory
+share/locale/ca/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca@valencia/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ca@valencia/LC_MESSAGES|755|0|0|directory
+share/locale/ca@valencia|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/da/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/el/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en_GB/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/en_GB/LC_MESSAGES|755|0|0|directory
+share/locale/en_GB|755|0|0|directory
+share/locale/es/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/et/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/et/LC_MESSAGES|755|0|0|directory
+share/locale/et|755|0|0|directory
+share/locale/fi/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gd/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/gd/LC_MESSAGES|755|0|0|directory
+share/locale/gd|755|0|0|directory
+share/locale/gl/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/hu/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/ia/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ia/LC_MESSAGES|755|0|0|directory
+share/locale/ia|755|0|0|directory
+share/locale/it/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/ko/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/lt/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/nb/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/nds/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/nds/LC_MESSAGES|755|0|0|directory
+share/locale/nds|755|0|0|directory
+share/locale/nl/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/nn/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/nn/LC_MESSAGES|755|0|0|directory
+share/locale/nn|755|0|0|directory
+share/locale/pa/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/pa/LC_MESSAGES|755|0|0|directory
+share/locale/pa|755|0|0|directory
+share/locale/pl/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ro/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/se/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/se/LC_MESSAGES|755|0|0|directory
+share/locale/se|755|0|0|directory
+share/locale/sk/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sl/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sr/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr@ijekavian/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sr@ijekavian/LC_MESSAGES|755|0|0|directory
+share/locale/sr@ijekavianlatin/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sr@ijekavianlatin/LC_MESSAGES|755|0|0|directory
+share/locale/sr@ijekavianlatin|755|0|0|directory
+share/locale/sr@ijekavian|755|0|0|directory
+share/locale/sr@latin/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES|755|0|0|directory
+share/locale/sr@latin|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tr/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/kdbusaddons5_qt.qm|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
+share|755|0|0|directory

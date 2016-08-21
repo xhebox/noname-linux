@@ -1,0 +1,15 @@
+--- pigz-2.3.1/pigz.c.org	2014-12-31 11:09:06.244358641 -0500
++++ pigz-2.3.1/pigz.c	2014-12-31 11:10:12.981524312 -0500
+@@ -3701,10 +3701,10 @@
+     g.procs = nprocs(8);
+ #endif
+     g.block = 131072UL;             /* 128K */
+-    g.rsync = 0;                    /* don't do rsync blocking */
++    g.rsync = 1;                    /* don't do rsync blocking */
+     g.setdict = 1;                  /* initialize dictionary each thread */
+     g.verbosity = 1;                /* normal message level */
+-    g.headis = 3;                   /* store/restore name and timestamp */
++    g.headis = 1;                   /* store/restore name  */
+     g.pipeout = 0;                  /* don't force output to stdout */
+     g.sufx = ".gz";                 /* compressed file suffix */
+     g.decode = 0;                   /* compress */

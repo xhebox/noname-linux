@@ -1,0 +1,27 @@
+name=suitesparse
+version=4.5.4
+desc="A collection of sparse matrix libraries"
+deps="metis lapack tbb gcc cmake chrpath"
+source="http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$version.tar.gz
+suitesparse-link-tbb.patch"
+
+ext() {
+	cd SuiteSparse
+	patch -p1 -i ../suitesparse-link-tbb.patch || die
+}
+
+build() {
+	cd SuiteSparse
+	BLAS=-lblas \
+	TBB=-ltbb SPQR_CONFIG=-DHAVE_TBB \
+	MY_METIS_LIB=/lib/libmetis.so \
+	make library || die
+	install -dm755 "${pkgdir}"/include
+	install -dm755 "${pkgdir}"/lib
+
+	BLAS=-lblas \
+	TBB=-ltbb SPQR_CONFIG=-DHAVE_TBB \
+	MY_METIS_LIB=/lib/libmetis.so \
+	make INSTALL_LIB="${pkgdir}"/lib INSTALL_INCLUDE="${pkgdir}"/include install || die
+	chrpath -d "$pkgdir"/lib/*
+}

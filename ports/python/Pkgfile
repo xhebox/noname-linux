@@ -1,0 +1,43 @@
+name=python
+version=2.7.13
+desc="A high-level scripting language"
+deps="expat libressl zlib ncurses bzip2 sqlite libffi gdbm"
+source="http://www.python.org/ftp/python/$version/Python-$version.tar.xz
+pyconfig.h
+http://git.alpinelinux.org/cgit/aports/plain/main/python/musl-find_library.patch"
+
+build() {
+	cd "$srcdir/Python-$version"
+	patch -p1 < ../musl-find_library.patch || die
+
+	rm -r Modules/expat \
+		Modules/zlib \
+		Modules/_ctypes/darwin* \
+		Modules/_ctypes/libffi*
+
+	./configure \
+		--prefix=/ \
+		--libdir=/lib \
+		--exec-prefix=/ \
+		--enable-shared \
+		--enable-ipv6 \
+		--disable-static \
+		--with-signal-module \
+		--with-system-expat \
+		--with-system-ffi \
+		--with-computed-gotos --with-lto \
+		--with-threads 
+	make EXTRA_CFLAGS="$CFLAGS"  || die
+	make  DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall  || die
+	ln -sf python2.7.1 $pkgdir/share/man/man1/python.1
+
+	ln -s python2.7 $pkgdir/bin/python
+	ln -s python2.7-config $pkgdir/bin/python-config
+	ln -s python2.7 $pkgdir/lib/python
+	ln -s python2.7 $pkgdir/include/python
+	ln -s /lib/libpython2.7.so $pkgdir/lib/python2.7/config/libpython2.7.so
+	rm $pkgdir/lib/python/ctypes/macholib/README.ctypes
+
+	mv $pkgdir/include/python2.7/pyconfig.h $pkgdir/include/python2.7/pyconfig-64.h
+	install -m 0644 ../pyconfig.h $pkgdir/include/python2.7/
+}

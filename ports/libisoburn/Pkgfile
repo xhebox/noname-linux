@@ -1,0 +1,12 @@
+name=libisoburn
+version=1.4.6
+desc="frontend for libraries libburn and libisofs"
+source="http://files.libburnia-project.org/releases/${name}-${version}.tar.gz"
+deps="readline libburn libisofs"
+
+build() {
+	cd libisoburn-${version}
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,19 @@
+name=flex
+version=2.6.4
+deps="m4 bison"
+desc="Fast Lexical Analyzer Generator"
+source="https://github.com/westes/flex/releases/download/v$version/flex-$version.tar.gz"
+
+build() {
+	cd $name-$version
+    
+	./configure --prefix= \
+	--disable-static \
+	--enable-shared 
+    
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share/info
+	rm -r "$pkgdir"/share/doc
+	ln -s flex "$pkgdir"/bin/lex
+}

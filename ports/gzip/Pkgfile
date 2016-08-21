@@ -1,0 +1,13 @@
+name=gzip
+version=1.8
+deps=less
+desc="GNU compression utility(replacement for compress)"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

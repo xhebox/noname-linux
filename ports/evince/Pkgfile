@@ -1,0 +1,30 @@
+name=evince
+version=3.24.0
+desc="GTK3 document viewer, complete features, no gnome dependencies"
+source="https://download.gnome.org/sources/evince/${version%.*}/evince-${version}.tar.xz"
+deps="gtk3 libsm intltool python poppler dbus libarchive itstool t1lib"
+
+build() {
+	cd evince-$version
+	./configure --prefix= \
+	--sysconfdir=/etc \
+	--localstatedir=/var \
+	--libexecdir=/lib/${name} \
+	--enable-pdf \
+	--enable-tiff \
+	--enable-previewer \
+	--enable-comics \
+	--enable-dbus \
+	--enable-viewer \
+	--enable-t1lib \
+	--enable-introspection \
+	--disable-gtk-doc \
+	--disable-multimedia \
+	--disable-static \
+	--disable-nautilus \
+	--without-keyring \
+	--disable-debug
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

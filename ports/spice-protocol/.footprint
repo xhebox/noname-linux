@@ -1,0 +1,22 @@
+include/spice-1/spice/vdi_dev.h|644|0|0|regular file
+include/spice-1/spice/types.h|644|0|0|regular file
+include/spice-1/spice/enums.h|644|0|0|regular file
+include/spice-1/spice/start-packed.h|644|0|0|regular file
+include/spice-1/spice/macros.h|644|0|0|regular file
+include/spice-1/spice/protocol.h|644|0|0|regular file
+include/spice-1/spice/barrier.h|644|0|0|regular file
+include/spice-1/spice/qxl_dev.h|644|0|0|regular file
+include/spice-1/spice/ipc_ring.h|644|0|0|regular file
+include/spice-1/spice/end-packed.h|644|0|0|regular file
+include/spice-1/spice/controller_prot.h|644|0|0|regular file
+include/spice-1/spice/qxl_windows.h|644|0|0|regular file
+include/spice-1/spice/vd_agent.h|644|0|0|regular file
+include/spice-1/spice/stats.h|644|0|0|regular file
+include/spice-1/spice/foreign_menu_prot.h|644|0|0|regular file
+include/spice-1/spice/error_codes.h|644|0|0|regular file
+lib/pkgconfig/spice-protocol.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/spice-1/spice|755|0|0|directory
+include/spice-1|755|0|0|directory
+include|755|0|0|directory

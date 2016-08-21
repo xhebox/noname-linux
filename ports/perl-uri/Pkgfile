@@ -1,0 +1,13 @@
+name=perl-uri
+_realname=URI
+version=1.71
+desc="Uniform Resource Identifiers (absolute and relative)"
+deps="perl"
+source="http://cpan.metacpan.org/authors/id/E/ET/ETHER/${_realname}-${version}.tar.gz"
+
+build() {
+	cd "${_realname}-$version"
+	perl Makefile.PL INSTALLDIRS=vendor
+	make || die
+	make install DESTDIR="${pkgdir}" || die
+}

@@ -1,0 +1,44 @@
+lib32/libnl-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-3.so.200|777|0|0|symbolic link
+lib32/libnl-3.so|777|0|0|symbolic link
+lib32/libnl-cli-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-cli-3.so.200|777|0|0|symbolic link
+lib32/libnl-cli-3.so|777|0|0|symbolic link
+lib32/libnl-genl-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-genl-3.so.200|777|0|0|symbolic link
+lib32/libnl-genl-3.so|777|0|0|symbolic link
+lib32/libnl-idiag-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-idiag-3.so.200|777|0|0|symbolic link
+lib32/libnl-idiag-3.so|777|0|0|symbolic link
+lib32/libnl-nf-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-nf-3.so.200|777|0|0|symbolic link
+lib32/libnl-nf-3.so|777|0|0|symbolic link
+lib32/libnl-route-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-route-3.so.200|777|0|0|symbolic link
+lib32/libnl-route-3.so|777|0|0|symbolic link
+lib32/libnl-xfrm-3.so.200.24.0|755|0|0|regular file
+lib32/libnl-xfrm-3.so.200|777|0|0|symbolic link
+lib32/libnl-xfrm-3.so|777|0|0|symbolic link
+lib32/libnl/cli/cls/basic.so|755|0|0|regular file
+lib32/libnl/cli/cls/cgroup.so|755|0|0|regular file
+lib32/libnl/cli/cls|755|0|0|directory
+lib32/libnl/cli/qdisc/bfifo.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/blackhole.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/fq_codel.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/hfsc.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/htb.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/ingress.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/pfifo.so|755|0|0|regular file
+lib32/libnl/cli/qdisc/plug.so|755|0|0|regular file
+lib32/libnl/cli/qdisc|755|0|0|directory
+lib32/libnl/cli|755|0|0|directory
+lib32/libnl|755|0|0|directory
+lib32/pkgconfig/libnl-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-cli-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-genl-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-idiag-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-nf-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-route-3.0.pc|644|0|0|regular file
+lib32/pkgconfig/libnl-xfrm-3.0.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

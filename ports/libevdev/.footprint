@@ -1,0 +1,19 @@
+bin/libevdev-tweak-device|755|0|0|regular file
+bin/mouse-dpi-tool|755|0|0|regular file
+bin/touchpad-edge-detector|755|0|0|regular file
+bin|755|0|0|directory
+include/libevdev-1.0/libevdev/libevdev-uinput.h|644|0|0|regular file
+include/libevdev-1.0/libevdev/libevdev.h|644|0|0|regular file
+include/libevdev-1.0/libevdev|755|0|0|directory
+include/libevdev-1.0|755|0|0|directory
+include|755|0|0|directory
+lib/libevdev.so.2.1.19|755|0|0|regular file
+lib/libevdev.so.2|777|0|0|symbolic link
+lib/libevdev.so|777|0|0|symbolic link
+lib/pkgconfig/libevdev.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man3/libevdev.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

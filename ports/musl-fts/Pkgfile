@@ -1,0 +1,15 @@
+name=musl-fts
+version=1.2.7
+deps="automake libtool musl"
+desc="Implementation of fts for musl libc"
+source="https://github.com/pullmoll/${name}/archive/v${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	./bootstrap.sh
+	./configure --prefix= 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	install -Dm644 ${name}.pc "$pkgdir"/lib/pkgconfig/$name.pc
+	install -Dm644 fts.3 "$pkgdir"/share/man/man3/fts.3
+}

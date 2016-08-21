@@ -1,0 +1,23 @@
+name=time
+version=1.7.2
+deps=musl
+desc="Measures many of the CPU resources that programs use"
+source="http://git.savannah.gnu.org/cgit/time.git/snapshot/time-$version.tar.gz
+time-1.7-Recompute-CPU-usage-at-microsecond-level.patch
+time-1.7-ru_maxrss-is-in-kilobytes-on-Linux.patch"
+
+build() {
+	cd $name-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i || die ;
+		esac
+	done
+	./configure \
+		--prefix=/ \
+		--disable-static 
+	make  || die
+	make prefix=/"$pkgdir" install  || die
+	rm -rf "$pkgdir"/info
+}
+

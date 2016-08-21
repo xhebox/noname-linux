@@ -1,0 +1,13 @@
+name=libsigsegv
+version=2.10
+desc="Page fault detection library"
+deps=musl
+source="http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-${version}.tar.gz"
+
+build() {
+	cd libsigsegv-${version}
+	./configure --prefix= --enable-shared
+	make || die
+	make DESTDIR=${pkgdir} install || die
+}
+

@@ -1,0 +1,39 @@
+include/KF5/KItemModels/KBreadcrumbSelectionModel|644|0|0|regular file
+include/KF5/KItemModels/KCheckableProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KConcatenateRowsProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KDescendantsProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KExtraColumnsProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KLinkItemSelectionModel|644|0|0|regular file
+include/KF5/KItemModels/KModelIndexProxyMapper|644|0|0|regular file
+include/KF5/KItemModels/KRearrangeColumnsProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KRecursiveFilterProxyModel|644|0|0|regular file
+include/KF5/KItemModels/KSelectionProxyModel|644|0|0|regular file
+include/KF5/KItemModels/kbreadcrumbselectionmodel.h|644|0|0|regular file
+include/KF5/KItemModels/kcheckableproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/kconcatenaterowsproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/kdescendantsproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/kextracolumnsproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/kitemmodels_export.h|644|0|0|regular file
+include/KF5/KItemModels/klinkitemselectionmodel.h|644|0|0|regular file
+include/KF5/KItemModels/kmodelindexproxymapper.h|644|0|0|regular file
+include/KF5/KItemModels/krearrangecolumnsproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/krecursivefilterproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels/kselectionproxymodel.h|644|0|0|regular file
+include/KF5/KItemModels|755|0|0|directory
+include/KF5/kitemmodels_version.h|644|0|0|regular file
+include/KF5|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/KF5ItemModels/KF5ItemModelsConfig.cmake|644|0|0|regular file
+lib/cmake/KF5ItemModels/KF5ItemModelsConfigVersion.cmake|644|0|0|regular file
+lib/cmake/KF5ItemModels/KF5ItemModelsTargets-release.cmake|644|0|0|regular file
+lib/cmake/KF5ItemModels/KF5ItemModelsTargets.cmake|644|0|0|regular file
+lib/cmake/KF5ItemModels|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libKF5ItemModels.so.5.33.0|755|0|0|regular file
+lib/libKF5ItemModels.so.5|777|0|0|symbolic link
+lib/libKF5ItemModels.so|777|0|0|symbolic link
+lib/qt/mkspecs/modules/qt_KItemModels.pri|644|0|0|regular file
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt|755|0|0|directory
+lib|755|0|0|directory

@@ -1,0 +1,19 @@
+name=arc-theme
+version=20170302
+deps="gtk gtk3 gtk-engine-murrine"
+desc="A flat theme with transparent elements for GTK 3, GTK 2 and Gnome-Shell. Official releases only."
+source="https://github.com/horst3180/${name}/archive/$version.tar.gz"
+
+build() {
+	cd $name-$version
+
+	./autogen.sh --prefix=/ --disable-static \
+	--disable-cinnamon \
+	--disable-gnome-shell \
+	--disable-metacity \
+	--disable-unity \
+	--disable-xfwm
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

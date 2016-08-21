@@ -1,0 +1,62 @@
+bin/bsdcat|755|0|0|regular file
+bin/bsdcpio|755|0|0|regular file
+bin/bsdtar|755|0|0|regular file
+bin|755|0|0|directory
+include/archive.h|644|0|0|regular file
+include/archive_entry.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libarchive.a|644|0|0|regular file
+lib/libarchive.so.13.3.1|755|0|0|regular file
+lib/libarchive.so.13|777|0|0|symbolic link
+lib/libarchive.so|777|0|0|symbolic link
+lib/pkgconfig/libarchive.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man1/bsdcat.1.gz|644|0|0|regular file
+share/man/man1/bsdcpio.1.gz|644|0|0|regular file
+share/man/man1/bsdtar.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man3/archive_entry.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_acl.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_linkify.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_paths.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_perms.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_stat.3.gz|644|0|0|regular file
+share/man/man3/archive_entry_time.3.gz|644|0|0|regular file
+share/man/man3/archive_read.3.gz|644|0|0|regular file
+share/man/man3/archive_read_add_passphrase.3.gz|644|0|0|regular file
+share/man/man3/archive_read_data.3.gz|644|0|0|regular file
+share/man/man3/archive_read_disk.3.gz|644|0|0|regular file
+share/man/man3/archive_read_extract.3.gz|644|0|0|regular file
+share/man/man3/archive_read_filter.3.gz|644|0|0|regular file
+share/man/man3/archive_read_format.3.gz|644|0|0|regular file
+share/man/man3/archive_read_free.3.gz|644|0|0|regular file
+share/man/man3/archive_read_header.3.gz|644|0|0|regular file
+share/man/man3/archive_read_new.3.gz|644|0|0|regular file
+share/man/man3/archive_read_open.3.gz|644|0|0|regular file
+share/man/man3/archive_read_set_options.3.gz|644|0|0|regular file
+share/man/man3/archive_util.3.gz|644|0|0|regular file
+share/man/man3/archive_write.3.gz|644|0|0|regular file
+share/man/man3/archive_write_blocksize.3.gz|644|0|0|regular file
+share/man/man3/archive_write_data.3.gz|644|0|0|regular file
+share/man/man3/archive_write_disk.3.gz|644|0|0|regular file
+share/man/man3/archive_write_filter.3.gz|644|0|0|regular file
+share/man/man3/archive_write_finish_entry.3.gz|644|0|0|regular file
+share/man/man3/archive_write_format.3.gz|644|0|0|regular file
+share/man/man3/archive_write_free.3.gz|644|0|0|regular file
+share/man/man3/archive_write_header.3.gz|644|0|0|regular file
+share/man/man3/archive_write_new.3.gz|644|0|0|regular file
+share/man/man3/archive_write_open.3.gz|644|0|0|regular file
+share/man/man3/archive_write_set_options.3.gz|644|0|0|regular file
+share/man/man3/archive_write_set_passphrase.3.gz|644|0|0|regular file
+share/man/man3/libarchive.3.gz|644|0|0|regular file
+share/man/man3/libarchive_changes.3.gz|644|0|0|regular file
+share/man/man3/libarchive_internals.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man/man5/cpio.5.gz|644|0|0|regular file
+share/man/man5/libarchive-formats.5.gz|644|0|0|regular file
+share/man/man5/mtree.5.gz|644|0|0|regular file
+share/man/man5/tar.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

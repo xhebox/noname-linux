@@ -1,0 +1,71 @@
+bin/attr|755|0|0|regular file
+bin/getfattr|755|0|0|regular file
+bin/setfattr|755|0|0|regular file
+bin|755|0|0|directory
+include/attr/attributes.h|644|0|0|regular file
+include/attr/error_context.h|644|0|0|regular file
+include/attr/libattr.h|644|0|0|regular file
+include/attr/xattr.h|644|0|0|regular file
+include/attr|755|0|0|directory
+include|755|0|0|directory
+lib/libattr.so.1.1.0|644|0|0|regular file
+lib/libattr.so.1|777|0|0|symbolic link
+lib/libattr.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/locale/cs/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/de/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/es/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fr/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gl/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/nl/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/pl/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/sv/LC_MESSAGES/attr.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale|755|0|0|directory
+share/man/man1/attr.1.gz|644|0|0|regular file
+share/man/man1/getfattr.1.gz|644|0|0|regular file
+share/man/man1/setfattr.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man2/fgetxattr.2.gz|777|0|0|symbolic link
+share/man/man2/flistxattr.2.gz|777|0|0|symbolic link
+share/man/man2/fremovexattr.2.gz|777|0|0|symbolic link
+share/man/man2/fsetxattr.2.gz|777|0|0|symbolic link
+share/man/man2/getxattr.2.gz|644|0|0|regular file
+share/man/man2/lgetxattr.2.gz|777|0|0|symbolic link
+share/man/man2/listxattr.2.gz|644|0|0|regular file
+share/man/man2/llistxattr.2.gz|777|0|0|symbolic link
+share/man/man2/lremovexattr.2.gz|777|0|0|symbolic link
+share/man/man2/lsetxattr.2.gz|777|0|0|symbolic link
+share/man/man2/removexattr.2.gz|644|0|0|regular file
+share/man/man2/setxattr.2.gz|644|0|0|regular file
+share/man/man2|755|0|0|directory
+share/man/man3/attr_get.3.gz|644|0|0|regular file
+share/man/man3/attr_getf.3.gz|777|0|0|symbolic link
+share/man/man3/attr_list.3.gz|644|0|0|regular file
+share/man/man3/attr_listf.3.gz|777|0|0|symbolic link
+share/man/man3/attr_multi.3.gz|644|0|0|regular file
+share/man/man3/attr_multif.3.gz|777|0|0|symbolic link
+share/man/man3/attr_remove.3.gz|644|0|0|regular file
+share/man/man3/attr_removef.3.gz|777|0|0|symbolic link
+share/man/man3/attr_set.3.gz|644|0|0|regular file
+share/man/man3/attr_setf.3.gz|777|0|0|symbolic link
+share/man/man3|755|0|0|directory
+share/man/man5/attr.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

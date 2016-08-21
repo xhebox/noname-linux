@@ -1,0 +1,15 @@
+lib/libGLEW.so|777|0|0|symbolic link
+lib/libGLEW.so.2.0|777|0|0|symbolic link
+bin/visualinfo|755|0|0|regular file
+bin/glewinfo|755|0|0|regular file
+include/GL/wglew.h|644|0|0|regular file
+include/GL/glxew.h|644|0|0|regular file
+include/GL/glew.h|644|0|0|regular file
+lib/libGLEW.so.2.0.0|644|0|0|regular file
+lib/pkgconfig/glew.pc|644|0|0|regular file
+lib/libGLEW.a|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/GL|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

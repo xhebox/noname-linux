@@ -1,0 +1,67 @@
+bin/dbus-cleanup-sockets|755|0|0|regular file
+bin/dbus-daemon|755|0|0|regular file
+bin/dbus-launch|755|0|0|regular file
+bin/dbus-monitor|755|0|0|regular file
+bin/dbus-run-session|755|0|0|regular file
+bin/dbus-send|755|0|0|regular file
+bin/dbus-test-tool|755|0|0|regular file
+bin/dbus-update-activation-environment|755|0|0|regular file
+bin/dbus-uuidgen|755|0|0|regular file
+bin|755|0|0|directory
+etc/dbus-1/session.conf|644|0|0|regular file
+etc/dbus-1/system.conf|644|0|0|regular file
+etc/dbus-1|755|0|0|directory
+etc|755|0|0|directory
+include/dbus-1.0/dbus/dbus-address.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-bus.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-connection.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-errors.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-macros.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-memory.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-message.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-misc.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-pending-call.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-protocol.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-server.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-shared.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-signature.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-syntax.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-threads.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus-types.h|644|0|0|regular file
+include/dbus-1.0/dbus/dbus.h|644|0|0|regular file
+include/dbus-1.0/dbus|755|0|0|directory
+include/dbus-1.0|755|0|0|directory
+include|755|0|0|directory
+lib/dbus-1.0/include/dbus/dbus-arch-deps.h|644|0|0|regular file
+lib/dbus-1.0/include/dbus|755|0|0|directory
+lib/dbus-1.0/include|755|0|0|directory
+lib/dbus-1.0|755|0|0|directory
+lib/dbus-daemon-launch-helper|4750|81|81|regular file
+lib/libdbus-1.so.3.14.11|755|0|0|regular file
+lib/libdbus-1.so.3|777|0|0|symbolic link
+lib/libdbus-1.so|777|0|0|symbolic link
+lib/pkgconfig/dbus-1.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/dbus-1/services|755|0|0|directory
+share/dbus-1/session.conf|644|0|0|regular file
+share/dbus-1/session.d|755|0|0|directory
+share/dbus-1/system-services|755|0|0|directory
+share/dbus-1/system.conf|644|0|0|regular file
+share/dbus-1/system.d|755|0|0|directory
+share/dbus-1|755|0|0|directory
+share/man/man1/dbus-cleanup-sockets.1.gz|644|0|0|regular file
+share/man/man1/dbus-daemon.1.gz|644|0|0|regular file
+share/man/man1/dbus-launch.1.gz|644|0|0|regular file
+share/man/man1/dbus-monitor.1.gz|644|0|0|regular file
+share/man/man1/dbus-run-session.1.gz|644|0|0|regular file
+share/man/man1/dbus-send.1.gz|644|0|0|regular file
+share/man/man1/dbus-test-tool.1.gz|644|0|0|regular file
+share/man/man1/dbus-update-activation-environment.1.gz|644|0|0|regular file
+share/man/man1/dbus-uuidgen.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+var/lib/dbus|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory

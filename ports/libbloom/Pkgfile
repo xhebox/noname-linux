@@ -1,0 +1,14 @@
+name=libbloom
+version=1.4
+desc="A simple and small bloom filter implementation in plain C"
+deps="musl"
+source="https://github.com/jvirkki/libbloom/archive/v$version.tar.gz"
+
+build() {
+	cd libbloom-$version
+	MM="" make || die
+	install -Dm644 bloom.h "$pkgdir"/include/bloom.h
+	install -Dm755 build/libbloom.so.$version "$pkgdir"/lib/libbloom.so.$version
+	ln -s libbloom.so.$version "$pkgdir"/lib/libbloom.so.${version%.*}
+	ln -s libbloom.so.${version%.*} "$pkgdir"/lib/libbloom.so
+}

@@ -1,0 +1,18 @@
+name=pixman
+version=0.34.0
+desc="Pixel manipulation library"
+source="https://www.x.org/archive/individual/lib/pixman-$version.tar.gz
+float-header-fix.patch"
+deps=libpng
+
+build() {
+	cd pixman-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p0 -i "$srcdir"/"$i";;
+		esac
+	done
+	./configure --prefix= --disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

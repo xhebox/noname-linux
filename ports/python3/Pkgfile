@@ -1,0 +1,44 @@
+name=python3
+version=3.6.1
+desc="A high-level scripting language(3.x)"
+deps="expat libressl zlib ncurses bzip2 sqlite libffi gdbm expat"
+source="http://www.python.org/ftp/python/$version/Python-$version.tar.xz
+readonly.patch"
+
+build() {
+	cd "$srcdir/Python-$version"
+	rm -rf Modules/expat
+	rm -rf Modules/_ctypes/darwin*
+	rm -rf Modules/_ctypes/libffi*
+	rm -rf Modules/zlib
+	rm -rf Modules/_decimal/libmpdec
+	patch -p1 < ../readonly.patch || die
+	./configure --prefix=/ \
+		--libdir=/lib \
+		--exec-prefix=/ \
+		--enable-shared \
+		--with-threads \
+		--with-sqlite \
+		--enable-ipv6 \
+		--with-system-expat \
+		--with-system-ffi \
+		--with-system-libmpdec \
+		--without-ensurepip \
+		--enable-loadable-sqlite-extensions
+
+	make EXTRA_CFLAGS="$CFLAGS" || die
+	make DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall || die
+
+	find $pkgdir -name "README*" -delete
+	find $pkgdir -name "ChangeLog*" -delete
+	find $pkgdir -name "TODO*" -delete
+	find $pkgdir -name "NEWS*" -delete
+
+	ln -s /bin/python${version%.*} $pkgdir/bin/python3
+	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/scripts
+	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/i18n
+	install -m755 Tools/i18n/msgfmt.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
+	install -m755 Tools/i18n/pygettext.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
+	install -m755 Tools/scripts/*py "${pkgdir}"/lib/python${version%.*}/Tools/scripts/
+
+}

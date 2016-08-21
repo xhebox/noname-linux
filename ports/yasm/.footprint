@@ -1,0 +1,46 @@
+bin/vsyasm|755|0|0|regular file
+bin/yasm|755|0|0|regular file
+bin/ytasm|755|0|0|regular file
+bin|755|0|0|directory
+include/libyasm-stdint.h|644|0|0|regular file
+include/libyasm.h|644|0|0|regular file
+include/libyasm/arch.h|644|0|0|regular file
+include/libyasm/assocdat.h|644|0|0|regular file
+include/libyasm/bitvect.h|644|0|0|regular file
+include/libyasm/bytecode.h|644|0|0|regular file
+include/libyasm/compat-queue.h|644|0|0|regular file
+include/libyasm/coretype.h|644|0|0|regular file
+include/libyasm/dbgfmt.h|644|0|0|regular file
+include/libyasm/errwarn.h|644|0|0|regular file
+include/libyasm/expr.h|644|0|0|regular file
+include/libyasm/file.h|644|0|0|regular file
+include/libyasm/floatnum.h|644|0|0|regular file
+include/libyasm/hamt.h|644|0|0|regular file
+include/libyasm/insn.h|644|0|0|regular file
+include/libyasm/intnum.h|644|0|0|regular file
+include/libyasm/inttree.h|644|0|0|regular file
+include/libyasm/linemap.h|644|0|0|regular file
+include/libyasm/listfmt.h|644|0|0|regular file
+include/libyasm/md5.h|644|0|0|regular file
+include/libyasm/module.h|644|0|0|regular file
+include/libyasm/objfmt.h|644|0|0|regular file
+include/libyasm/parser.h|644|0|0|regular file
+include/libyasm/phash.h|644|0|0|regular file
+include/libyasm/preproc.h|644|0|0|regular file
+include/libyasm/section.h|644|0|0|regular file
+include/libyasm/symrec.h|644|0|0|regular file
+include/libyasm/valparam.h|644|0|0|regular file
+include/libyasm/value.h|644|0|0|regular file
+include/libyasm|755|0|0|directory
+include|755|0|0|directory
+lib/libyasm.a|644|0|0|regular file
+lib|755|0|0|directory
+share/man/man1/yasm.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man7/yasm_arch.7.gz|644|0|0|regular file
+share/man/man7/yasm_dbgfmts.7.gz|644|0|0|regular file
+share/man/man7/yasm_objfmts.7.gz|644|0|0|regular file
+share/man/man7/yasm_parsers.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

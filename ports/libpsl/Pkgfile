@@ -1,0 +1,22 @@
+name=libpsl
+version=0.17.0
+desc='Public Suffix List library'
+deps="icu libxslt python3 publicsuffix-list"
+source="https://github.com/rockdaboot/libpsl/releases/download/${name}-${version}/${name}-${version}.tar.gz"
+
+build() {
+	cd ${name}-${version}
+	rm -frv list
+	./configure \
+		--prefix= \
+		--disable-static \
+		--disable-dependency-tracking \
+		--enable-man \
+		--enable-builtin=libicu \
+		--enable-runtime=libicu \
+		--with-psl-file=/share/publicsuffix/effective_tld_names.dat \
+		--with-psl-testfile=/share/publicsuffix/test_psl.txt
+	LC_CTYPE=en_US.UTF-8 make || die
+	make DESTDIR="${pkgdir}" install || die
+	install -Dm 644 docs/libpsl/libpsl.3 -t "${pkgdir}/share/man/man3"
+}

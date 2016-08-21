@@ -1,0 +1,20 @@
+name=zziplib
+version=0.13.66
+desc="A lightweight library that offers the ability to easily extract data from files archived in a single zip file"
+deps="zlib python"
+source="https://github.com/gdraheim/zziplib/archive/v$version.tar.gz
+automake-compatibility.patch"
+
+build() {
+	cd zziplib-${version}
+	patch -p1 < ../automake-compatibility.patch || die
+	sed -i -e s,--export-dynamic,, configure
+	CONFIG_SHELL=/bin/bash \
+	CFLAGS="$CFLAGS  -fno-strict-aliasing" \
+	./configure --prefix= --disable-static
+	make -j1 V=1 || die
+	make DESTDIR="${pkgdir}" install || die
+	chmod -s "${pkgdir}/share/man/man3"
+	chmod 644 "${pkgdir}"/share/man/man3/*
+	chown -R root:root "${pkgdir}/share/man/man3"
+}

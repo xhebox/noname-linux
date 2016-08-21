@@ -1,0 +1,20 @@
+name=lilv
+version=0.22.0
+desc="A C library interface to the LV2 plug-in standard"
+deps="python-numpy sratom sord"
+source="http://download.drobilla.net/lilv-$version.tar.bz2"
+
+build() {
+	cd lilv-$version
+
+	sed -i "/ldconfig/d" wscript
+
+	python waf configure --prefix=// \
+		--configdir=/etc \
+		--dyn-manifest \
+		--bindings
+
+	python waf build || die
+	python waf install --destdir="$pkgdir" || die
+	#rm -r "$pkgdir"/etc
+}

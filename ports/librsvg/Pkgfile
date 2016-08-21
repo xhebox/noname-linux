@@ -1,0 +1,16 @@
+name=librsvg
+version=2.40.17
+desc="SAX-based renderer for SVG files into a GdkPixbuf"
+deps="glib cairo libcroco gdk-pixbuf pango gobject-introspection"
+source="http://ftp.gnome.org/pub/gnome/sources/$name/2.40/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--enable-introspection \
+		--disable-static
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install  || die
+}

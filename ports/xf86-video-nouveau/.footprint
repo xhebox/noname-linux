@@ -1,0 +1,9 @@
+lib/xorg/modules/drivers/nouveau_drv.so|755|0|0|regular file
+lib/xorg/modules/drivers|755|0|0|directory
+lib/xorg/modules|755|0|0|directory
+lib/xorg|755|0|0|directory
+lib|755|0|0|directory
+share/man/man4/nouveau.4.gz|644|0|0|regular file
+share/man/man4|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

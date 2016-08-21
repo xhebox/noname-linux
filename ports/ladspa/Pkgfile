@@ -1,0 +1,21 @@
+name=ladspa
+version=1.13
+deps=musl
+desc="Linux Audio Developer's Simple Plugin API (LADSPA)"
+source="https://github.com/OpenMandrivaAssociation/ladspa/raw/master/${name}_sdk_${version}.tgz
+fix-memleak-in-plugin-scanning.patch
+fallback-ladspa-path.patch"
+
+build() {
+	cd "${srcdir}/${name}_sdk/src"
+	patch -Np1 -i "${srcdir}/fix-memleak-in-plugin-scanning.patch"
+	patch -Np2 -i "${srcdir}/fallback-ladspa-path.patch"
+	sed	-e 's/mkdirhier/mkdir -p/' \
+		-e "s#-O3#${CFLAGS} ${LDFLAGS}#" \
+		-i makefile
+	make targets
+	make INSTALL_PLUGINS_DIR="${pkgdir}/lib/ladspa/" \
+		INSTALL_INCLUDE_DIR="${pkgdir}/include/" \
+		INSTALL_BINARY_DIR="${pkgdir}/bin/" install
+}
+

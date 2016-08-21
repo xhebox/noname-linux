@@ -1,0 +1,17 @@
+name=db
+version=5.3.28
+desc="The db library"
+source="http://download.oracle.com/berkeley-db/db-${version}.tar.gz"
+deps="bash"
+
+build() {
+	cd $name-$version
+	cd build_unix
+	../dist/configure --prefix=/ --enable-compat185 \
+	--enable-shared --enable-static --enable-cxx --enable-dbm \
+	--enable-stl 
+
+	make LIBSO_LIBS=-lpthread  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/docs
+}

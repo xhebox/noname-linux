@@ -1,0 +1,70 @@
+name=libldap
+version=2.4.44
+ver=`echo $version | sed 's/\./_/g'`
+deps="libtool libsasl e2fsprogs util-linux unixodbc chrpath libressl"
+source="https://github.com/openldap/openldap/archive/OPENLDAP_REL_ENG_$ver.tar.gz
+openldap-ntlm.patch"
+
+ext() {
+	cd openldap-OPENLDAP_REL_ENG_$ver
+	patch -p1 -i "${srcdir}"/openldap-ntlm.patch || die
+	sed -i 's|-m 644 $(LIBRARY)|-m 755 $(LIBRARY)|' libraries/liblber/Makefile.in
+	sed -i 's|-m 644 $(LIBRARY)|-m 755 $(LIBRARY)|' libraries/libldap/Makefile.in
+	sed -i 's|-m 644 $(LIBRARY)|-m 755 $(LIBRARY)|' libraries/libldap_r/Makefile.in
+
+	sed -i 's|#define LDAPI_SOCK LDAP_RUNDIR LDAP_DIRSEP "run" LDAP_DIRSEP "ldapi"|#define LDAPI_SOCK LDAP_DIRSEP "run" LDAP_DIRSEP "openldap" LDAP_DIRSEP "ldapi"|' include/ldap_defaults.h
+	sed -i 's|%LOCALSTATEDIR%/run|/run/openldap|' servers/slapd/slapd.ldif
+	sed -i 's|%LOCALSTATEDIR%/run|/run/openldap|' servers/slapd/slapd.conf
+	sed -i 's|-$(MKDIR) $(DESTDIR)$(localstatedir)/run|-$(MKDIR) $(DESTDIR)/run/openldap|' servers/slapd/Makefile.in
+}
+
+build() {
+	cd openldap-OPENLDAP_REL_ENG_$ver
+	autoconf
+	./configure --prefix= --libexecdir=/lib \
+		--sysconfdir=/etc --localstatedir=/var/lib/openldap --sbindir=/bin \
+		--enable-slapd \
+		--with-tls=openssl \
+		--with-cyrus-sasl \
+		--enable-ipv6 --enable-local \
+		--enable-crypt --enable-spasswd --enable-modules \
+		--enable-backends --disable-ndb --enable-overlays=mod \
+		--with-cyrus-sasl --with-threads
+	make || die
+	cd contrib/slapd-modules/nssov
+	make prefix=/ libexecdir=/lib sysconfdir=/etc/openldap || die
+	chrpath -d .libs/nssov.so
+	cd -
+	make DESTDIR="${pkgdir}" install || die
+	install -Dm644 doc/man/man5/ldap.conf.5.tmp "${pkgdir}"/share/man/man5/ldap.conf.5
+
+	rm "${pkgdir}"/etc/openldap/*.default
+
+	ln -sf liblber.so "${pkgdir}"/lib/liblber.so.2
+	ln -sf libldap.so "${pkgdir}"/lib/libldap.so.2
+	pushd contrib/slapd-modules/nssov
+	install -m755 .libs/nssov.so.0.0.0 "${pkgdir}"/lib/openldap
+	ln -s nssov.so.0.0.0 "${pkgdir}"/lib/openldap/nssov.so
+	ln -s nssov.so.0.0.0 "${pkgdir}"/lib/openldap/nssov.so.0
+	install -m444 ldapns.schema "${pkgdir}"/etc/openldap/schema
+	install -m644 slapo-nssov.5 "${pkgdir}"/share/man/man5/slapo-nssov.5
+	popd
+
+	rm "${pkgdir}"/share/man/man5/ldap.conf.5
+	rm -r "${pkgdir}"/run
+
+	ln -s ../lib/slapd "${pkgdir}"/bin/slapd
+
+	chown root:439 "${pkgdir}"/etc/openldap/slapd.conf
+	chown root:439 "${pkgdir}"/etc/openldap/slapd.ldif
+	chown root:439 "${pkgdir}"/etc/openldap/DB_CONFIG.example
+
+	chown 640 "${pkgdir}"/etc/openldap/slapd.conf
+	chown 640 "${pkgdir}"/etc/openldap/slapd.ldif
+	chown 640 "${pkgdir}"/etc/openldap/DB_CONFIG.example
+
+	install -dm700 -o 439 -g 439 "${pkgdir}"/var/lib/openldap
+	chown -R 439:439 "${pkgdir}"/var/lib/openldap
+
+	install -dm700 -o 439 -g 439 "${pkgdir}"/etc/openldap/slapd.d
+}

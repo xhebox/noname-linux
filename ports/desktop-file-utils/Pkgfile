@@ -1,0 +1,21 @@
+name=desktop-file-utils
+version=0.23
+deps="glib"
+desc="Utilities to manage desktop entries"
+source="
+http://www.freedesktop.org/software/$name/releases/$name-$version.tar.xz
+"
+
+build() {
+	cd $name-$version
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/$i ;;
+		esac
+	done
+	./configure \
+		--prefix= \
+		--disable-static
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

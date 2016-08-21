@@ -1,0 +1,14 @@
+name=speech-dispatcher
+version=0.8.6
+deps="libsndfile glib libxml2 dotconf"
+source="https://devel.freebsoft.org/pub/projects/speechd/$name-$version.tar.gz"
+desc="Common interface to speech synthesis"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ \
+		--with-alsa \
+		--disable-python
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

@@ -1,0 +1,24 @@
+name=blosc
+version=1.11.3
+desc="A blocking, shuffling and loss-less compression library."
+deps="zlib lz4 snappy cmake"
+source="https://github.com/Blosc/c-blosc/archive/v${version}.tar.gz
+musl.patch"
+
+ext() {
+	cd c-blosc-$version
+	patch -p1 < ../musl.patch || die
+}
+
+build() {
+	rm -rf build
+	mkdir build
+	cd build
+
+	cmake -DCMAKE_INSTALL_PREFIX= \
+		-DPREFER_EXTERNAL_LZ4="ON" \
+		-DBUILD_TESTS="OFF" \
+		../c-blosc-${version}
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

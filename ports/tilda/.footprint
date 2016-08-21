@@ -1,0 +1,70 @@
+bin/tilda|755|0|0|regular file
+bin|755|0|0|directory
+share/appdata/tilda.appdata.xml|644|0|0|regular file
+share/appdata|755|0|0|directory
+share/applications/tilda.desktop|644|0|0|regular file
+share/applications|755|0|0|directory
+share/locale/bg/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES|755|0|0|directory
+share/locale/bg|755|0|0|directory
+share/locale/ca/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/de/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/el/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en_GB/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/en_GB/LC_MESSAGES|755|0|0|directory
+share/locale/en_GB|755|0|0|directory
+share/locale/es/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fr/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/it/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/lt/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/pl/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ru/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sk/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sl/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sv/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tr/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/tilda.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale|755|0|0|directory
+share/pixmaps/tilda.png|644|0|0|regular file
+share/pixmaps|755|0|0|directory
+share|755|0|0|directory

@@ -1,0 +1,22 @@
+name=nodejs
+version=7.10.0
+deps="zlib python icu libuv http-parser"
+desc="Nodejs interpreter"
+source="http://nodejs.org//dist/v${version}/node-v${version}.tar.gz
+nodejs-v8-icu59.patch"
+
+build() {
+	cd node-v$version
+	patch -p1 -d deps/v8 < ../nodejs-v8-icu59.patch || die
+	GYP_DEFINES="linux_use_gold_flags=0 \
+		linux_use_bundled_binutils=0 \
+		linux_use_bundled_gold=0" \
+	./configure --prefix=/ \
+		--shared-zlib \
+		--shared-http-parser \
+		--shared-libuv \
+		--with-intl=system-icu \
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

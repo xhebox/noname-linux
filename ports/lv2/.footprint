@@ -1,0 +1,250 @@
+bin/lv2specgen.py|755|0|0|regular file
+bin|755|0|0|directory
+include/lv2.h|644|0|0|regular file
+include/lv2/lv2plug.in/ns/ext/atom|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/buf-size|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/data-access|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/dynmanifest|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/event|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/instance-access|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/log|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/midi|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/morph|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/options|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/parameters|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/patch|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/port-groups|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/port-props|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/presets|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/resize-port|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/state|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/time|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/uri-map|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/urid|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/ext/worker|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/extensions/ui|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/extensions/units|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns/extensions|755|0|0|directory
+include/lv2/lv2plug.in/ns/ext|755|0|0|directory
+include/lv2/lv2plug.in/ns/lv2core|777|0|0|symbolic link
+include/lv2/lv2plug.in/ns|755|0|0|directory
+include/lv2/lv2plug.in|755|0|0|directory
+include/lv2|755|0|0|directory
+include|755|0|0|directory
+lib/lv2/atom.lv2/atom-test.c|644|0|0|regular file
+lib/lv2/atom.lv2/atom.h|644|0|0|regular file
+lib/lv2/atom.lv2/atom.ttl|644|0|0|regular file
+lib/lv2/atom.lv2/forge.h|644|0|0|regular file
+lib/lv2/atom.lv2/lv2-atom.doap.ttl|644|0|0|regular file
+lib/lv2/atom.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/atom.lv2/util.h|644|0|0|regular file
+lib/lv2/atom.lv2|755|0|0|directory
+lib/lv2/buf-size.lv2/buf-size.h|644|0|0|regular file
+lib/lv2/buf-size.lv2/buf-size.ttl|644|0|0|regular file
+lib/lv2/buf-size.lv2/lv2-buf-size.doap.ttl|644|0|0|regular file
+lib/lv2/buf-size.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/buf-size.lv2|755|0|0|directory
+lib/lv2/data-access.lv2/data-access.h|644|0|0|regular file
+lib/lv2/data-access.lv2/data-access.ttl|644|0|0|regular file
+lib/lv2/data-access.lv2/lv2-data-access.doap.ttl|644|0|0|regular file
+lib/lv2/data-access.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/data-access.lv2|755|0|0|directory
+lib/lv2/dynmanifest.lv2/dynmanifest.h|644|0|0|regular file
+lib/lv2/dynmanifest.lv2/dynmanifest.ttl|644|0|0|regular file
+lib/lv2/dynmanifest.lv2/lv2-dynmanifest.doap.ttl|644|0|0|regular file
+lib/lv2/dynmanifest.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/dynmanifest.lv2|755|0|0|directory
+lib/lv2/eg-amp.lv2/amp.so|755|0|0|regular file
+lib/lv2/eg-amp.lv2/amp.ttl|644|0|0|regular file
+lib/lv2/eg-amp.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-amp.lv2|755|0|0|directory
+lib/lv2/eg-fifths.lv2/fifths.so|755|0|0|regular file
+lib/lv2/eg-fifths.lv2/fifths.ttl|644|0|0|regular file
+lib/lv2/eg-fifths.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-fifths.lv2|755|0|0|directory
+lib/lv2/eg-metro.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-metro.lv2/metro.so|755|0|0|regular file
+lib/lv2/eg-metro.lv2/metro.ttl|644|0|0|regular file
+lib/lv2/eg-metro.lv2|755|0|0|directory
+lib/lv2/eg-midigate.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-midigate.lv2/midigate.so|755|0|0|regular file
+lib/lv2/eg-midigate.lv2/midigate.ttl|644|0|0|regular file
+lib/lv2/eg-midigate.lv2|755|0|0|directory
+lib/lv2/eg-params.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-params.lv2/params.so|755|0|0|regular file
+lib/lv2/eg-params.lv2/params.ttl|644|0|0|regular file
+lib/lv2/eg-params.lv2|755|0|0|directory
+lib/lv2/eg-sampler.lv2/click.wav|644|0|0|regular file
+lib/lv2/eg-sampler.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-sampler.lv2/sampler.so|755|0|0|regular file
+lib/lv2/eg-sampler.lv2/sampler.ttl|644|0|0|regular file
+lib/lv2/eg-sampler.lv2/sampler_ui.so|755|0|0|regular file
+lib/lv2/eg-sampler.lv2|755|0|0|directory
+lib/lv2/eg-scope.lv2/examploscope.so|755|0|0|regular file
+lib/lv2/eg-scope.lv2/examploscope.ttl|644|0|0|regular file
+lib/lv2/eg-scope.lv2/examploscope_ui.so|755|0|0|regular file
+lib/lv2/eg-scope.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/eg-scope.lv2|755|0|0|directory
+lib/lv2/event.lv2/event-helpers.h|644|0|0|regular file
+lib/lv2/event.lv2/event.h|644|0|0|regular file
+lib/lv2/event.lv2/event.ttl|644|0|0|regular file
+lib/lv2/event.lv2/lv2-event.doap.ttl|644|0|0|regular file
+lib/lv2/event.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/event.lv2|755|0|0|directory
+lib/lv2/instance-access.lv2/instance-access.h|644|0|0|regular file
+lib/lv2/instance-access.lv2/instance-access.ttl|644|0|0|regular file
+lib/lv2/instance-access.lv2/lv2-instance-access.doap.ttl|644|0|0|regular file
+lib/lv2/instance-access.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/instance-access.lv2|755|0|0|directory
+lib/lv2/log.lv2/log.h|644|0|0|regular file
+lib/lv2/log.lv2/log.ttl|644|0|0|regular file
+lib/lv2/log.lv2/logger.h|644|0|0|regular file
+lib/lv2/log.lv2/lv2-log.doap.ttl|644|0|0|regular file
+lib/lv2/log.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/log.lv2|755|0|0|directory
+lib/lv2/lv2core.lv2/lv2.h|644|0|0|regular file
+lib/lv2/lv2core.lv2/lv2core.doap.ttl|644|0|0|regular file
+lib/lv2/lv2core.lv2/lv2core.ttl|644|0|0|regular file
+lib/lv2/lv2core.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/lv2core.lv2|755|0|0|directory
+lib/lv2/midi.lv2/lv2-midi.doap.ttl|644|0|0|regular file
+lib/lv2/midi.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/midi.lv2/midi.h|644|0|0|regular file
+lib/lv2/midi.lv2/midi.ttl|644|0|0|regular file
+lib/lv2/midi.lv2|755|0|0|directory
+lib/lv2/morph.lv2/lv2-morph.doap.ttl|644|0|0|regular file
+lib/lv2/morph.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/morph.lv2/morph.h|644|0|0|regular file
+lib/lv2/morph.lv2/morph.ttl|644|0|0|regular file
+lib/lv2/morph.lv2|755|0|0|directory
+lib/lv2/options.lv2/lv2-options.doap.ttl|644|0|0|regular file
+lib/lv2/options.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/options.lv2/options.h|644|0|0|regular file
+lib/lv2/options.lv2/options.ttl|644|0|0|regular file
+lib/lv2/options.lv2|755|0|0|directory
+lib/lv2/parameters.lv2/lv2-parameters.doap.ttl|644|0|0|regular file
+lib/lv2/parameters.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/parameters.lv2/parameters.h|644|0|0|regular file
+lib/lv2/parameters.lv2/parameters.ttl|644|0|0|regular file
+lib/lv2/parameters.lv2|755|0|0|directory
+lib/lv2/patch.lv2/lv2-patch.doap.ttl|644|0|0|regular file
+lib/lv2/patch.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/patch.lv2/patch.h|644|0|0|regular file
+lib/lv2/patch.lv2/patch.ttl|644|0|0|regular file
+lib/lv2/patch.lv2|755|0|0|directory
+lib/lv2/port-groups.lv2/lv2-port-groups.doap.ttl|644|0|0|regular file
+lib/lv2/port-groups.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/port-groups.lv2/port-groups.h|644|0|0|regular file
+lib/lv2/port-groups.lv2/port-groups.ttl|644|0|0|regular file
+lib/lv2/port-groups.lv2|755|0|0|directory
+lib/lv2/port-props.lv2/lv2-port-props.doap.ttl|644|0|0|regular file
+lib/lv2/port-props.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/port-props.lv2/port-props.h|644|0|0|regular file
+lib/lv2/port-props.lv2/port-props.ttl|644|0|0|regular file
+lib/lv2/port-props.lv2|755|0|0|directory
+lib/lv2/presets.lv2/lv2-presets.doap.ttl|644|0|0|regular file
+lib/lv2/presets.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/presets.lv2/presets.h|644|0|0|regular file
+lib/lv2/presets.lv2/presets.ttl|644|0|0|regular file
+lib/lv2/presets.lv2|755|0|0|directory
+lib/lv2/resize-port.lv2/lv2-resize-port.doap.ttl|644|0|0|regular file
+lib/lv2/resize-port.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/resize-port.lv2/resize-port.h|644|0|0|regular file
+lib/lv2/resize-port.lv2/resize-port.ttl|644|0|0|regular file
+lib/lv2/resize-port.lv2|755|0|0|directory
+lib/lv2/schemas.lv2/dcs.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/dct.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/doap.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/foaf.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/owl.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/rdf.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/rdfs.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2/xsd.ttl|644|0|0|regular file
+lib/lv2/schemas.lv2|755|0|0|directory
+lib/lv2/state.lv2/lv2-state.doap.ttl|644|0|0|regular file
+lib/lv2/state.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/state.lv2/state.h|644|0|0|regular file
+lib/lv2/state.lv2/state.ttl|644|0|0|regular file
+lib/lv2/state.lv2|755|0|0|directory
+lib/lv2/time.lv2/lv2-time.doap.ttl|644|0|0|regular file
+lib/lv2/time.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/time.lv2/time.h|644|0|0|regular file
+lib/lv2/time.lv2/time.ttl|644|0|0|regular file
+lib/lv2/time.lv2|755|0|0|directory
+lib/lv2/ui.lv2/lv2-ui.doap.ttl|644|0|0|regular file
+lib/lv2/ui.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/ui.lv2/ui.h|644|0|0|regular file
+lib/lv2/ui.lv2/ui.ttl|644|0|0|regular file
+lib/lv2/ui.lv2|755|0|0|directory
+lib/lv2/units.lv2/lv2-units.doap.ttl|644|0|0|regular file
+lib/lv2/units.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/units.lv2/units.h|644|0|0|regular file
+lib/lv2/units.lv2/units.ttl|644|0|0|regular file
+lib/lv2/units.lv2|755|0|0|directory
+lib/lv2/uri-map.lv2/lv2-uri-map.doap.ttl|644|0|0|regular file
+lib/lv2/uri-map.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/uri-map.lv2/uri-map.h|644|0|0|regular file
+lib/lv2/uri-map.lv2/uri-map.ttl|644|0|0|regular file
+lib/lv2/uri-map.lv2|755|0|0|directory
+lib/lv2/urid.lv2/lv2-urid.doap.ttl|644|0|0|regular file
+lib/lv2/urid.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/urid.lv2/urid.h|644|0|0|regular file
+lib/lv2/urid.lv2/urid.ttl|644|0|0|regular file
+lib/lv2/urid.lv2|755|0|0|directory
+lib/lv2/worker.lv2/lv2-worker.doap.ttl|644|0|0|regular file
+lib/lv2/worker.lv2/manifest.ttl|644|0|0|regular file
+lib/lv2/worker.lv2/worker.h|644|0|0|regular file
+lib/lv2/worker.lv2/worker.ttl|644|0|0|regular file
+lib/lv2/worker.lv2|755|0|0|directory
+lib/lv2|755|0|0|directory
+lib/pkgconfig/lv2.pc|644|0|0|regular file
+lib/pkgconfig/lv2core.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/lv2specgen/DTD/xhtml-attribs-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-base-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-basic-table-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-basic11-model-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-basic11.dtd|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-bdo-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-blkphras-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-blkpres-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-blkstruct-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-charent-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-csismap-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-datatypes-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-edit-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-events-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-form-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-framework-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-hypertext-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-image-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-inlphras-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-inlpres-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-inlstruct-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-inlstyle-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-inputmode-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-lat1.ent|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-legacy-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-link-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-list-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-meta-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-object-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-param-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-pres-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-qname-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-script-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-special.ent|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-ssismap-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-struct-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-style-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-symbol.ent|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-table-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-target-1.mod|644|0|0|regular file
+share/lv2specgen/DTD/xhtml-text-1.mod|644|0|0|regular file
+share/lv2specgen/DTD|755|0|0|directory
+share/lv2specgen/style.css|644|0|0|regular file
+share/lv2specgen/template.html|644|0|0|regular file
+share/lv2specgen|755|0|0|directory
+share|755|0|0|directory

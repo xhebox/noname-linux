@@ -1,0 +1,21 @@
+lib/libXau.so|777|0|0|symbolic link
+lib/libXau.so.6|777|0|0|symbolic link
+include/X11/Xauth.h|644|0|0|regular file
+lib/libXau.so.6.0.0|755|0|0|regular file
+lib/pkgconfig/xau.pc|644|0|0|regular file
+share/man/man3/XauLockAuth.3.gz|644|0|0|regular file
+share/man/man3/XauReadAuth.3.gz|644|0|0|regular file
+share/man/man3/XauWriteAuth.3.gz|644|0|0|regular file
+share/man/man3/XauUnlockAuth.3.gz|644|0|0|regular file
+share/man/man3/XauGetBestAuthByAddr.3.gz|644|0|0|regular file
+share/man/man3/XauFileName.3.gz|644|0|0|regular file
+share/man/man3/Xau.3.gz|644|0|0|regular file
+share/man/man3/XauDisposeAuth.3.gz|644|0|0|regular file
+share/man/man3/XauGetAuthByAddr.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

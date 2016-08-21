@@ -1,0 +1,12 @@
+name=libusb
+version=1.0.21
+desc="Library that provides generic access to USB devices"
+source="https://github.com/libusb/libusb/releases/download/v$version/libusb-$version.tar.bz2"
+deps="eudev"
+
+build() {
+	cd $name-$version
+	./configure --prefix= 
+	make -j1  || die
+	make DESTDIR=$pkgdir install  || die
+}

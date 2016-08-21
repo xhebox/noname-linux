@@ -1,0 +1,21 @@
+name=opencl-headers
+version=2.1.20161129
+desc="OpenCL (Open Computing Language) header files"
+
+ext() {
+	git clone --depth=1 https://github.com/KhronosGroup/OpenCL-Headers
+	git clone --depth=1 https://github.com/KhronosGroup/OpenCL-CLHPP
+}
+
+build() {
+	install -dm755 "${pkgdir}"/include/CL
+
+	cd OpenCL-Headers
+	for h in $(ls -1 *.h); do
+		install -m 644 ${h} "${pkgdir}"/include/CL/
+	done
+	cd ../OpenCL-CLHPP
+	for h in $(ls -1 *.hpp); do
+		install -m 644 ${h} "${pkgdir}"/include/CL/
+	done
+}

@@ -1,0 +1,10 @@
+bin/acpibin|555|0|0|regular file
+bin/acpidump|555|0|0|regular file
+bin/acpiexamples|555|0|0|regular file
+bin/acpiexec|555|0|0|regular file
+bin/acpihelp|555|0|0|regular file
+bin/acpinames|555|0|0|regular file
+bin/acpisrc|555|0|0|regular file
+bin/acpixtract|555|0|0|regular file
+bin/iasl|555|0|0|regular file
+bin|755|0|0|directory

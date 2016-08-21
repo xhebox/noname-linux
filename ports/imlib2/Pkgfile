@@ -1,0 +1,21 @@
+name=imlib2
+version=1.4.9
+desc="Library that does image file loading and saving as well as rendering, manipulation, arbitrary polygon support"
+deps="bzip2 harfbuzz libjpeg-turbo libpng libtiff libxext giflib"
+source="http://downloads.sourceforge.net/enlightenment/$name-$version.tar.bz2"
+
+build() {
+	cd imlib2-$version
+	sed -i 's/@my_libs@//' imlib2-config.in
+	./configure --prefix= --enable-amd64 \
+	--sysconfdir=/etc/imlib2 \
+	--with-jpeg \
+	--with-png \
+	--with-tiff \
+	--with-gif \
+	--with-zlib \
+	--with-bzip2 \
+	--x-libraries=/lib
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

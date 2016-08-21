@@ -1,0 +1,15 @@
+name=qtox
+_name=qTox
+version=1.10.0
+desc='Powerful Tox client written in C++/Qt that follows the Tox design guidelines'
+deps="libxscrnsaver openal gtk ffmpeg qrencode qt5-svg sqlcipher toxcore qt5-tools"
+source="https://github.com/qTox/qTox/archive/v$version.tar.gz"
+
+build() {
+	mkdir build
+	cd build
+	qmake ENABLE_SYSTRAY_UNITY_BACKEND=NO ../qTox-$version
+	sed -i 's;/usr;;g' Makefile
+	make || die
+	make INSTALL_ROOT="$pkgdir" install || die
+}

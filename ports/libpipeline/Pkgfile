@@ -1,0 +1,15 @@
+name=libpipeline
+version=1.4.1
+deps=musl
+desc="A pipeline manipulation library"
+source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix= \
+		--disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -rf "$pkgdir"/share/info
+}

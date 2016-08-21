@@ -1,0 +1,12 @@
+name=sshpass
+version=1.06
+desc='Fool ssh into accepting an interactive password non-interactively'
+deps=openssh
+source="http://downloads.sourceforge.net/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

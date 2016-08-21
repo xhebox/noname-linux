@@ -1,0 +1,16 @@
+name=libzip
+version=1.2.0
+desc="A C library for reading, creating, and modifying zip archives"
+deps="zlib"
+source="http://www.nih.at/libzip/libzip-${version}.tar.xz"
+
+build() {
+	cd libzip-$version
+
+	LDFLAGS="$LDFLAGS -lfts" \
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+# preserve old header path for compatibility
+	ln -s /lib/libzip/include/zipconf.h "${pkgdir}/include/zipconf.h"
+}

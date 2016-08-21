@@ -1,0 +1,37 @@
+From 31374ba98829e984c7600419c0e5fa71b96fc530 Mon Sep 17 00:00:00 2001
+From: Peter Varga <pvarga@inf.u-szeged.hu>
+Date: Fri, 24 Mar 2017 14:31:02 +0100
+Subject: [PATCH] Forward input method events to RWHV in widget
+
+Task-number: QTBUG-58362
+Change-Id: Id4cf57c60da17538b224bb9bc91277c324c6a55d
+Reviewed-by: Viktor Engelmann <viktor.engelmann@qt.io>
+Reviewed-by: Allan Sandfeld Jensen <allan.jensen@qt.io>
+---
+ .../render_widget_host_view_qt_delegate_widget.cpp               | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp b/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
+index 14c4d72..fd58a07 100644
+--- a/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
++++ b/src/webenginewidgets/render_widget_host_view_qt_delegate_widget.cpp
+@@ -84,10 +84,19 @@ class RenderWidgetHostViewQuickItem : public QQuickItem {
+     {
+         m_client->forwardEvent(event);
+     }
++    void inputMethodEvent(QInputMethodEvent *event) override
++    {
++        m_client->forwardEvent(event);
++    }
+     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override
+     {
+         return m_client->updatePaintNode(oldNode);
+     }
++
++    QVariant inputMethodQuery(Qt::InputMethodQuery query) const override
++    {
++        return m_client->inputMethodQuery(query);
++    }
+ private:
+     RenderWidgetHostViewQtDelegateClient *m_client;
+ };

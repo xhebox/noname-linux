@@ -1,0 +1,18 @@
+bin/mkbitmap|755|0|0|regular file
+bin/potrace|755|0|0|regular file
+bin|755|0|0|directory
+include/potracelib.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libpotrace.a|644|0|0|regular file
+lib/libpotrace.so.0.0.4|755|0|0|regular file
+lib/libpotrace.so.0|777|0|0|symbolic link
+lib/libpotrace.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/doc/potrace/placement.pdf|644|0|0|regular file
+share/doc/potrace|755|0|0|directory
+share/doc|755|0|0|directory
+share/man/man1/mkbitmap.1.gz|644|0|0|regular file
+share/man/man1/potrace.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

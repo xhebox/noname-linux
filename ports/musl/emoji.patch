@@ -1,0 +1,13 @@
+--- musl-1.1.16/src/ctype/wcwidth.c	2017-01-01 03:27:17.000000000 +0000
++++ musl-1.1.16/src/ctype/wcwidth.c	2017-01-01 03:27:17.000000000 +0000
+@@ -17,6 +17,10 @@
+ 			return 0;
+ 		if ((wtable[wtable[wc>>8]*32+((wc&255)>>3)]>>(wc&7))&1)
+ 			return 2;
++		if ( wc - 0x25a0 < 0x20 ||
++		     wc - 0x2b00 < 0x100 ||
++		     wc - 0x1f300 < 0xd00 )
++			return 2;
+ 		return 1;
+ 	}
+ 	if ((wc & 0xfffe) == 0xfffe)

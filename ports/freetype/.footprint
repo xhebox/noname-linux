@@ -1,0 +1,72 @@
+bin/freetype-config|755|0|0|regular file
+bin|755|0|0|directory
+etc/profile.d/freetype2.sh|644|0|0|regular file
+etc/profile.d|755|0|0|directory
+etc|755|0|0|directory
+include/freetype2/freetype/config/ftconfig.h|644|0|0|regular file
+include/freetype2/freetype/config/ftheader.h|644|0|0|regular file
+include/freetype2/freetype/config/ftmodule.h|644|0|0|regular file
+include/freetype2/freetype/config/ftoption.h|644|0|0|regular file
+include/freetype2/freetype/config/ftstdlib.h|644|0|0|regular file
+include/freetype2/freetype/config|755|0|0|directory
+include/freetype2/freetype/freetype.h|644|0|0|regular file
+include/freetype2/freetype/ftadvanc.h|644|0|0|regular file
+include/freetype2/freetype/ftautoh.h|644|0|0|regular file
+include/freetype2/freetype/ftbbox.h|644|0|0|regular file
+include/freetype2/freetype/ftbdf.h|644|0|0|regular file
+include/freetype2/freetype/ftbitmap.h|644|0|0|regular file
+include/freetype2/freetype/ftbzip2.h|644|0|0|regular file
+include/freetype2/freetype/ftcache.h|644|0|0|regular file
+include/freetype2/freetype/ftcffdrv.h|644|0|0|regular file
+include/freetype2/freetype/ftchapters.h|644|0|0|regular file
+include/freetype2/freetype/ftcid.h|644|0|0|regular file
+include/freetype2/freetype/fterrdef.h|644|0|0|regular file
+include/freetype2/freetype/fterrors.h|644|0|0|regular file
+include/freetype2/freetype/ftfntfmt.h|644|0|0|regular file
+include/freetype2/freetype/ftgasp.h|644|0|0|regular file
+include/freetype2/freetype/ftglyph.h|644|0|0|regular file
+include/freetype2/freetype/ftgxval.h|644|0|0|regular file
+include/freetype2/freetype/ftgzip.h|644|0|0|regular file
+include/freetype2/freetype/ftimage.h|644|0|0|regular file
+include/freetype2/freetype/ftincrem.h|644|0|0|regular file
+include/freetype2/freetype/ftlcdfil.h|644|0|0|regular file
+include/freetype2/freetype/ftlist.h|644|0|0|regular file
+include/freetype2/freetype/ftlzw.h|644|0|0|regular file
+include/freetype2/freetype/ftmac.h|644|0|0|regular file
+include/freetype2/freetype/ftmm.h|644|0|0|regular file
+include/freetype2/freetype/ftmodapi.h|644|0|0|regular file
+include/freetype2/freetype/ftmoderr.h|644|0|0|regular file
+include/freetype2/freetype/ftotval.h|644|0|0|regular file
+include/freetype2/freetype/ftoutln.h|644|0|0|regular file
+include/freetype2/freetype/ftpfr.h|644|0|0|regular file
+include/freetype2/freetype/ftrender.h|644|0|0|regular file
+include/freetype2/freetype/ftsizes.h|644|0|0|regular file
+include/freetype2/freetype/ftsnames.h|644|0|0|regular file
+include/freetype2/freetype/ftstroke.h|644|0|0|regular file
+include/freetype2/freetype/ftsynth.h|644|0|0|regular file
+include/freetype2/freetype/ftsystem.h|644|0|0|regular file
+include/freetype2/freetype/fttrigon.h|644|0|0|regular file
+include/freetype2/freetype/ftttdrv.h|644|0|0|regular file
+include/freetype2/freetype/fttypes.h|644|0|0|regular file
+include/freetype2/freetype/ftwinfnt.h|644|0|0|regular file
+include/freetype2/freetype/t1tables.h|644|0|0|regular file
+include/freetype2/freetype/ttnameid.h|644|0|0|regular file
+include/freetype2/freetype/tttables.h|644|0|0|regular file
+include/freetype2/freetype/tttags.h|644|0|0|regular file
+include/freetype2/freetype/ttunpat.h|644|0|0|regular file
+include/freetype2/freetype|755|0|0|directory
+include/freetype2/ft2build.h|644|0|0|regular file
+include/freetype2|755|0|0|directory
+include|755|0|0|directory
+lib/libfreetype.so.6.13.0|755|0|0|regular file
+lib/libfreetype.so.6|777|0|0|symbolic link
+lib/libfreetype.so|777|0|0|symbolic link
+lib/pkgconfig/freetype2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/aclocal/freetype2.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/man/man1/freetype-config.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

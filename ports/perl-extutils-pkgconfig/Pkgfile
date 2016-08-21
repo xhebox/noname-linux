@@ -1,0 +1,12 @@
+name=perl-extutils-pkgconfig
+version=1.16
+desc="The Perl pkgconfig module"
+deps="perl"
+source="http://downloads.sourceforge.net/sourceforge/gtk2-perl/ExtUtils-PkgConfig-${version}.tar.gz"
+
+build() {
+	cd ExtUtils-PkgConfig-$version
+	perl Makefile.PL INSTALLDIRS=vendor
+	make || die
+	make -j1 DESTDIR="$pkgdir" install || die
+}

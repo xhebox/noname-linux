@@ -1,0 +1,17 @@
+name=vte3
+version=0.48.3
+desc="Virtual Terminal Emulator widget for use with GTK3"
+deps="gtk3 pcre2 gnutls intltool gobject-introspection vala git gperf"
+source="http://download.gnome.org/sources/vte/${version%.*}/vte-$version.tar.xz"
+
+build() {
+	cd vte-$version
+
+	./configure --prefix= --sysconfdir=/etc --libexecdir=/lib/vte \
+	--localstatedir=/var --disable-static --enable-introspection --disable-gtk-doc
+
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

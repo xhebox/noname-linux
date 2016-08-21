@@ -1,0 +1,13 @@
+name=libev
+version=4.24
+desc="A full-featured and high-performance event loop"
+deps="musl"
+source="http://dist.schmorp.de/${name}/${name}-${version}.tar.gz"
+
+build() {
+	cd libev-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+	rm ${pkgdir}/include/event.h
+}

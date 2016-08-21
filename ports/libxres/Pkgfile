@@ -1,0 +1,15 @@
+name=libxres
+desc="X Resource extension client library"
+deps="libxext xorg-proto"
+version=1.0.7
+source="http://xorg.freedesktop.org/releases/individual/lib/libXres-$version.tar.bz2"
+
+build() {
+	cd libXres-$version
+
+	./configure --prefix= --disable-static
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

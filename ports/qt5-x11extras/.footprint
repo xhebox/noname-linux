@@ -1,0 +1,27 @@
+lib/libQt5X11Extras.so|777|0|0|symbolic link
+lib/libQt5X11Extras.so.5|777|0|0|symbolic link
+lib/libQt5X11Extras.so.5.8|777|0|0|symbolic link
+include/qt/QtX11Extras/QtX11Extras|644|0|0|regular file
+include/qt/QtX11Extras/QX11Info|644|0|0|regular file
+include/qt/QtX11Extras/QtX11ExtrasVersion|644|0|0|regular file
+include/qt/QtX11Extras/qtx11extrasglobal.h|644|0|0|regular file
+include/qt/QtX11Extras/qx11info_x11.h|644|0|0|regular file
+include/qt/QtX11Extras/QtX11ExtrasDepends|644|0|0|regular file
+include/qt/QtX11Extras/qtx11extrasversion.h|644|0|0|regular file
+lib/cmake/Qt5X11Extras/Qt5X11ExtrasConfig.cmake|644|0|0|regular file
+lib/cmake/Qt5X11Extras/Qt5X11ExtrasConfigVersion.cmake|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_x11extras_private.pri|644|0|0|regular file
+lib/qt/mkspecs/modules/qt_lib_x11extras.pri|644|0|0|regular file
+lib/pkgconfig/Qt5X11Extras.pc|644|0|0|regular file
+lib/libQt5X11Extras.prl|644|0|0|regular file
+lib/libQt5X11Extras.so.5.8.0|755|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/qt/mkspecs/modules|755|0|0|directory
+lib/qt/mkspecs|755|0|0|directory
+lib/qt|755|0|0|directory
+lib/cmake/Qt5X11Extras|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib|755|0|0|directory
+include/qt/QtX11Extras|755|0|0|directory
+include/qt|755|0|0|directory
+include|755|0|0|directory

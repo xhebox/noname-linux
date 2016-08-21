@@ -1,0 +1,6 @@
+bin/iw|755|0|0|regular file
+share/man/man8/iw.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

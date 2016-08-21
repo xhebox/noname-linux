@@ -1,0 +1,13 @@
+name=libnftnl
+version=1.0.7
+deps=musl
+desc="Low-level netlink interface to nf_tables"
+source="http://www.netfilter.org/projects/${name}/files/${name}-${version}.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+		--disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

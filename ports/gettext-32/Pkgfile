@@ -1,0 +1,22 @@
+. $PORTS/gettext/Pkgfile
+name=gettext-32
+deps="gettext"
+
+build(){
+	cd gettext-$version
+	export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	./configure --prefix= \
+	--libdir=/lib32 \
+	--with-included-glib --with-included-libcroco \
+	--with-included-libxml --with-included-libunistring
+
+	make || die
+	make -j1 DESTDIR=$pkgdir install || die
+
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/include
+}

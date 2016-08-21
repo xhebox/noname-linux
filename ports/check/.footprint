@@ -1,0 +1,48 @@
+bin/checkmk|755|0|0|regular file
+bin|755|0|0|directory
+include/check.h|644|0|0|regular file
+include/check_stdint.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libcheck.so.0.0.0|755|0|0|regular file
+lib/libcheck.so.0|777|0|0|symbolic link
+lib/libcheck.so|777|0|0|symbolic link
+lib/pkgconfig/check.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/aclocal/check.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/doc/check/COPYING.LESSER|644|0|0|regular file
+share/doc/check/NEWS|644|0|0|regular file
+share/doc/check/README|644|0|0|regular file
+share/doc/check/example/Makefile.am|644|0|0|regular file
+share/doc/check/example/README|644|0|0|regular file
+share/doc/check/example/configure.ac|644|0|0|regular file
+share/doc/check/example/src/Makefile.am|644|0|0|regular file
+share/doc/check/example/src/main.c|644|0|0|regular file
+share/doc/check/example/src/money.1.c|644|0|0|regular file
+share/doc/check/example/src/money.1.h|644|0|0|regular file
+share/doc/check/example/src/money.2.h|644|0|0|regular file
+share/doc/check/example/src/money.3.c|644|0|0|regular file
+share/doc/check/example/src/money.4.c|644|0|0|regular file
+share/doc/check/example/src/money.5.c|644|0|0|regular file
+share/doc/check/example/src/money.6.c|644|0|0|regular file
+share/doc/check/example/src/money.c|644|0|0|regular file
+share/doc/check/example/src/money.h|644|0|0|regular file
+share/doc/check/example/src|755|0|0|directory
+share/doc/check/example/tests/Makefile.am|644|0|0|regular file
+share/doc/check/example/tests/check_money.1.c|644|0|0|regular file
+share/doc/check/example/tests/check_money.2.c|644|0|0|regular file
+share/doc/check/example/tests/check_money.3.c|644|0|0|regular file
+share/doc/check/example/tests/check_money.6.c|644|0|0|regular file
+share/doc/check/example/tests/check_money.7.c|644|0|0|regular file
+share/doc/check/example/tests/check_money.c|644|0|0|regular file
+share/doc/check/example/tests|755|0|0|directory
+share/doc/check/example|755|0|0|directory
+share/doc/check|755|0|0|directory
+share/doc|755|0|0|directory
+share/info/check.info|644|0|0|regular file
+share/info|755|0|0|directory
+share/man/man1/checkmk.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

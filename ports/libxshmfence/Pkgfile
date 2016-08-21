@@ -1,0 +1,13 @@
+name=libxshmfence
+version=1.2
+desc="X shared memory fences"
+deps="util-macros xorg-proto"
+source="http://xorg.freedesktop.org/archive/individual/lib/libxshmfence-$version.tar.bz2"
+
+build() {
+	cd libxshmfence-$version
+	./configure --prefix= --disable-static --with-shared-memory-dir=/dev/shm
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}
+

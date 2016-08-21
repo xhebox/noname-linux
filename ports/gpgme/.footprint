@@ -1,0 +1,149 @@
+bin/gpgme-config|755|0|0|regular file
+bin/gpgme-tool|755|0|0|regular file
+bin|755|0|0|directory
+include/QGpgME/AbstractImportJob|644|0|0|regular file
+include/QGpgME/AddUserIDJob|644|0|0|regular file
+include/QGpgME/ChangeExpiryJob|644|0|0|regular file
+include/QGpgME/ChangeOwnerTrustJob|644|0|0|regular file
+include/QGpgME/ChangePasswdJob|644|0|0|regular file
+include/QGpgME/CryptoConfig|644|0|0|regular file
+include/QGpgME/DN|644|0|0|regular file
+include/QGpgME/DataProvider|644|0|0|regular file
+include/QGpgME/DecryptJob|644|0|0|regular file
+include/QGpgME/DecryptVerifyJob|644|0|0|regular file
+include/QGpgME/DefaultKeyGenerationJob|644|0|0|regular file
+include/QGpgME/DeleteJob|644|0|0|regular file
+include/QGpgME/DownloadJob|644|0|0|regular file
+include/QGpgME/EncryptJob|644|0|0|regular file
+include/QGpgME/ExportJob|644|0|0|regular file
+include/QGpgME/HierarchicalKeyKistJob|644|0|0|regular file
+include/QGpgME/ImportFromKeyserverJob|644|0|0|regular file
+include/QGpgME/ImportJob|644|0|0|regular file
+include/QGpgME/Job|644|0|0|regular file
+include/QGpgME/KeyForMailboxJob|644|0|0|regular file
+include/QGpgME/KeyGenerationJob|644|0|0|regular file
+include/QGpgME/KeyListJob|644|0|0|regular file
+include/QGpgME/ListAllKeysJob|644|0|0|regular file
+include/QGpgME/MultiDeleteJob|644|0|0|regular file
+include/QGpgME/Protocol|644|0|0|regular file
+include/QGpgME/QGpgMENewCryptoConfig|644|0|0|regular file
+include/QGpgME/RefreshKeysJob|644|0|0|regular file
+include/QGpgME/SignEncryptJob|644|0|0|regular file
+include/QGpgME/SignJob|644|0|0|regular file
+include/QGpgME/SignKeyJob|644|0|0|regular file
+include/QGpgME/SpecialJob|644|0|0|regular file
+include/QGpgME/TofuPolicyJob|644|0|0|regular file
+include/QGpgME/VerifyDetachedJob|644|0|0|regular file
+include/QGpgME/VerifyOpaqueJob|644|0|0|regular file
+include/QGpgME/WKSPublishJob|644|0|0|regular file
+include/QGpgME|755|0|0|directory
+include/gpgme++/configuration.h|644|0|0|regular file
+include/gpgme++/context.h|644|0|0|regular file
+include/gpgme++/data.h|644|0|0|regular file
+include/gpgme++/decryptionresult.h|644|0|0|regular file
+include/gpgme++/defaultassuantransaction.h|644|0|0|regular file
+include/gpgme++/editinteractor.h|644|0|0|regular file
+include/gpgme++/encryptionresult.h|644|0|0|regular file
+include/gpgme++/engineinfo.h|644|0|0|regular file
+include/gpgme++/error.h|644|0|0|regular file
+include/gpgme++/eventloopinteractor.h|644|0|0|regular file
+include/gpgme++/exception.h|644|0|0|regular file
+include/gpgme++/global.h|644|0|0|regular file
+include/gpgme++/gpgadduserideditinteractor.h|644|0|0|regular file
+include/gpgme++/gpgagentgetinfoassuantransaction.h|644|0|0|regular file
+include/gpgme++/gpggencardkeyinteractor.h|644|0|0|regular file
+include/gpgme++/gpgmefw.h|644|0|0|regular file
+include/gpgme++/gpgmepp_export.h|644|0|0|regular file
+include/gpgme++/gpgmepp_version.h|644|0|0|regular file
+include/gpgme++/gpgsetexpirytimeeditinteractor.h|644|0|0|regular file
+include/gpgme++/gpgsetownertrusteditinteractor.h|644|0|0|regular file
+include/gpgme++/gpgsignkeyeditinteractor.h|644|0|0|regular file
+include/gpgme++/importresult.h|644|0|0|regular file
+include/gpgme++/interfaces/assuantransaction.h|644|0|0|regular file
+include/gpgme++/interfaces/dataprovider.h|644|0|0|regular file
+include/gpgme++/interfaces/passphraseprovider.h|644|0|0|regular file
+include/gpgme++/interfaces/progressprovider.h|644|0|0|regular file
+include/gpgme++/interfaces|755|0|0|directory
+include/gpgme++/key.h|644|0|0|regular file
+include/gpgme++/keygenerationresult.h|644|0|0|regular file
+include/gpgme++/keylistresult.h|644|0|0|regular file
+include/gpgme++/notation.h|644|0|0|regular file
+include/gpgme++/result.h|644|0|0|regular file
+include/gpgme++/scdgetinfoassuantransaction.h|644|0|0|regular file
+include/gpgme++/signingresult.h|644|0|0|regular file
+include/gpgme++/swdbresult.h|644|0|0|regular file
+include/gpgme++/tofuinfo.h|644|0|0|regular file
+include/gpgme++/trustitem.h|644|0|0|regular file
+include/gpgme++/verificationresult.h|644|0|0|regular file
+include/gpgme++/vfsmountresult.h|644|0|0|regular file
+include/gpgme++|755|0|0|directory
+include/gpgme.h|644|0|0|regular file
+include/qgpgme/abstractimportjob.h|644|0|0|regular file
+include/qgpgme/adduseridjob.h|644|0|0|regular file
+include/qgpgme/changeexpiryjob.h|644|0|0|regular file
+include/qgpgme/changeownertrustjob.h|644|0|0|regular file
+include/qgpgme/changepasswdjob.h|644|0|0|regular file
+include/qgpgme/cryptoconfig.h|644|0|0|regular file
+include/qgpgme/dataprovider.h|644|0|0|regular file
+include/qgpgme/decryptjob.h|644|0|0|regular file
+include/qgpgme/decryptverifyjob.h|644|0|0|regular file
+include/qgpgme/defaultkeygenerationjob.h|644|0|0|regular file
+include/qgpgme/deletejob.h|644|0|0|regular file
+include/qgpgme/dn.h|644|0|0|regular file
+include/qgpgme/downloadjob.h|644|0|0|regular file
+include/qgpgme/encryptjob.h|644|0|0|regular file
+include/qgpgme/exportjob.h|644|0|0|regular file
+include/qgpgme/hierarchicalkeylistjob.h|644|0|0|regular file
+include/qgpgme/importfromkeyserverjob.h|644|0|0|regular file
+include/qgpgme/importjob.h|644|0|0|regular file
+include/qgpgme/job.h|644|0|0|regular file
+include/qgpgme/keyformailboxjob.h|644|0|0|regular file
+include/qgpgme/keygenerationjob.h|644|0|0|regular file
+include/qgpgme/keylistjob.h|644|0|0|regular file
+include/qgpgme/listallkeysjob.h|644|0|0|regular file
+include/qgpgme/multideletejob.h|644|0|0|regular file
+include/qgpgme/protocol.h|644|0|0|regular file
+include/qgpgme/qgpgme_export.h|644|0|0|regular file
+include/qgpgme/qgpgme_version.h|644|0|0|regular file
+include/qgpgme/qgpgmenewcryptoconfig.h|644|0|0|regular file
+include/qgpgme/refreshkeysjob.h|644|0|0|regular file
+include/qgpgme/signencryptjob.h|644|0|0|regular file
+include/qgpgme/signjob.h|644|0|0|regular file
+include/qgpgme/signkeyjob.h|644|0|0|regular file
+include/qgpgme/specialjob.h|644|0|0|regular file
+include/qgpgme/tofupolicyjob.h|644|0|0|regular file
+include/qgpgme/verifydetachedjob.h|644|0|0|regular file
+include/qgpgme/verifyopaquejob.h|644|0|0|regular file
+include/qgpgme/wkspublishjob.h|644|0|0|regular file
+include/qgpgme|755|0|0|directory
+include|755|0|0|directory
+lib/cmake/Gpgmepp/GpgmeppConfig.cmake|644|0|0|regular file
+lib/cmake/Gpgmepp/GpgmeppConfigVersion.cmake|644|0|0|regular file
+lib/cmake/Gpgmepp|755|0|0|directory
+lib/cmake/QGpgme/QGpgmeConfig.cmake|644|0|0|regular file
+lib/cmake/QGpgme/QGpgmeConfigVersion.cmake|644|0|0|regular file
+lib/cmake/QGpgme|755|0|0|directory
+lib/cmake|755|0|0|directory
+lib/libgpgme.so.11.18.0|755|0|0|regular file
+lib/libgpgme.so.11|777|0|0|symbolic link
+lib/libgpgme.so|777|0|0|symbolic link
+lib/libgpgmepp.so.6.4.0|755|0|0|regular file
+lib/libgpgmepp.so.6|777|0|0|symbolic link
+lib/libgpgmepp.so|777|0|0|symbolic link
+lib/libqgpgme.so.7.2.0|755|0|0|regular file
+lib/libqgpgme.so.7|777|0|0|symbolic link
+lib/libqgpgme.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/aclocal/gpgme.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/common-lisp/source/gpgme/gpgme-package.lisp|644|0|0|regular file
+share/common-lisp/source/gpgme/gpgme.asd|644|0|0|regular file
+share/common-lisp/source/gpgme/gpgme.lisp|644|0|0|regular file
+share/common-lisp/source/gpgme|755|0|0|directory
+share/common-lisp/source|755|0|0|directory
+share/common-lisp|755|0|0|directory
+share/info/gpgme.info-1|644|0|0|regular file
+share/info/gpgme.info-2|644|0|0|regular file
+share/info/gpgme.info|644|0|0|regular file
+share/info|755|0|0|directory
+share|755|0|0|directory

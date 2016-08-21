@@ -1,0 +1,35 @@
+lib/libfuse.so|777|0|0|symbolic link
+lib/libulockmgr.so.1|777|0|0|symbolic link
+lib/libulockmgr.so|777|0|0|symbolic link
+lib/libfuse.so.2|777|0|0|symbolic link
+bin/fusermount|4755|0|0|regular file
+bin/ulockmgr_server|755|0|0|regular file
+bin/mount.fuse|755|0|0|regular file
+include/fuse/fuse_common_compat.h|644|0|0|regular file
+include/fuse/fuse_lowlevel_compat.h|644|0|0|regular file
+include/fuse/cuse_lowlevel.h|644|0|0|regular file
+include/fuse/fuse_lowlevel.h|644|0|0|regular file
+include/fuse/fuse.h|644|0|0|regular file
+include/fuse/fuse_opt.h|644|0|0|regular file
+include/fuse/fuse_common.h|644|0|0|regular file
+include/fuse/fuse_compat.h|644|0|0|regular file
+include/ulockmgr.h|644|0|0|regular file
+include/fuse.h|644|0|0|regular file
+lib/libulockmgr.so.1.0.1|755|0|0|regular file
+lib/libulockmgr.a|644|0|0|regular file
+lib/pkgconfig/fuse.pc|644|0|0|regular file
+lib/libfuse.a|644|0|0|regular file
+lib/libfuse.so.2.9.7|755|0|0|regular file
+share/man/man8/mount.fuse.8.gz|644|0|0|regular file
+share/man/man1/ulockmgr_server.1.gz|644|0|0|regular file
+share/man/man1/fusermount.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/fuse|755|0|0|directory
+include|755|0|0|directory
+etc|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,18 @@
+name=speex
+version=1.2.0
+desc="A free codec library for speech."
+source="http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz"
+deps="libogg fftw speexdsp"
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix= \
+		--disable-static
+
+	sed -i -e "/^SUBDIRS = /s/doc //" Makefile
+	make || die
+	make prefix=$pkgdir install || die
+}
+

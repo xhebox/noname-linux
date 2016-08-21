@@ -1,0 +1,14 @@
+name=automake
+version=1.15
+deps="autoconf perl"
+desc="A tool for automatically generating Makefiles"
+source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/doc 
+	rm -r "$pkgdir"/share/info 
+}

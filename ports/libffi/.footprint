@@ -1,0 +1,17 @@
+lib/libffi-3.2.1/include/ffi.h|644|0|0|regular file
+lib/libffi-3.2.1/include/ffitarget.h|644|0|0|regular file
+lib/libffi-3.2.1/include|755|0|0|directory
+lib/libffi-3.2.1|755|0|0|directory
+lib/libffi.so.6.0.4|755|0|0|regular file
+lib/libffi.so.6|777|0|0|symbolic link
+lib/libffi.so|777|0|0|symbolic link
+lib/pkgconfig/libffi.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/man/man3/ffi.3.gz|644|0|0|regular file
+share/man/man3/ffi_call.3.gz|644|0|0|regular file
+share/man/man3/ffi_prep_cif.3.gz|644|0|0|regular file
+share/man/man3/ffi_prep_cif_var.3.gz|644|0|0|regular file
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

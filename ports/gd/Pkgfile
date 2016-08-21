@@ -1,0 +1,20 @@
+name=gd
+version=2.2.4
+desc="Library for the dynamic creation of images by programmers"
+deps="fontconfig libxpm libwebp perl"
+source="https://github.com/libgd/libgd/releases/download/gd-${version}/libgd-${version}.tar.xz
+gd-2.2.4-upstream.patch"
+
+ext() {
+	cd libgd-${version}
+	patch -p1 -i ${srcdir}/gd-2.2.4-upstream.patch || die
+}
+
+build() {
+	cd libgd-${version}
+	./configure \
+		--prefix= \
+		--disable-rpath
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

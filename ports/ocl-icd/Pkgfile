@@ -1,0 +1,14 @@
+name=ocl-icd
+version=2.2.11
+_pkgver=814
+deps="ruby mesa opencl-headers"
+desc="OpenCL ICD Bindings"
+source="https://forge.imag.fr/frs/download.php/$_pkgver/ocl-icd-$version.tar.gz"
+
+build() {
+	cd ocl-icd-$version
+	./bootstrap
+	./configure --prefix=/
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

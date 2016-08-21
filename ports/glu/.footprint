@@ -1,0 +1,10 @@
+lib|755|0|0|directory
+lib/libGLU.so.1|777|0|0|symbolic link
+lib/libGLU.so.1.3.1|755|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/pkgconfig/glu.pc|644|0|0|regular file
+lib/libGLU.so|777|0|0|symbolic link
+include|755|0|0|directory
+include/GL|755|0|0|directory
+include/GL/glu_mangle.h|644|0|0|regular file
+include/GL/glu.h|644|0|0|regular file

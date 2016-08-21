@@ -1,0 +1,33 @@
+bin/bzfgrep|777|0|0|symbolic link
+bin/bzless|777|0|0|symbolic link
+bin/bzcmp|777|0|0|symbolic link
+bin/bzegrep|777|0|0|symbolic link
+lib/libbz2.so.1|777|0|0|symbolic link
+lib/libbz2.so|777|0|0|symbolic link
+share/man/man1/bunzip2.1.gz|777|0|0|symbolic link
+share/man/man1/bzcat.1.gz|777|0|0|symbolic link
+share/man/man1/bzip2recover.1.gz|777|0|0|symbolic link
+bin/bunzip2|755|0|0|regular file
+bin/bzdiff|755|0|0|regular file
+bin/bzcat|755|0|0|regular file
+bin/bzip2|755|0|0|regular file
+bin/bzmore|755|0|0|regular file
+bin/bzgrep|755|0|0|regular file
+bin/bzip2recover|755|0|0|regular file
+include/bzlib.h|644|0|0|regular file
+lib/libbz2.so.1.0.6|755|0|0|regular file
+lib/libbz2.a|644|0|0|regular file
+share/man/man1/bzcmp.1.gz|644|0|0|regular file
+share/man/man1/bzless.1.gz|644|0|0|regular file
+share/man/man1/bzmore.1.gz|644|0|0|regular file
+share/man/man1/bzip2.1.gz|644|0|0|regular file
+share/man/man1/bzgrep.1.gz|644|0|0|regular file
+share/man/man1/bzdiff.1.gz|644|0|0|regular file
+share/man/man1/bzfgrep.1.gz|644|0|0|regular file
+share/man/man1/bzegrep.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

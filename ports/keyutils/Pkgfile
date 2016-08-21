@@ -1,0 +1,17 @@
+name=keyutils
+version=1.5.10
+desc="Linux Key Management Utilities"
+deps=musl
+source="https://people.redhat.com/~dhowells/${name}/${name}-${version}.tar.bz2
+request-key.conf.patch"
+
+ext() {
+	cd ${name}-${version}
+	patch -Np0 -i ../request-key.conf.patch || die
+}
+
+build() {
+	cd ${name}-${version}
+	make CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" PREFIX=/ SBINDIR='/bin' BINDIR='/bin' || die
+	make DESTDIR="${pkgdir}" PREFIX=/ SBINDIR='/bin' BINDIR='/bin' LIBDIR='/lib' USRLIBDIR='/lib' MANDIR='/share/man' SHAREDIR='/share' INCLUDEDIR='/include' install || die
+}

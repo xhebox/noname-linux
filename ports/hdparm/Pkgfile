@@ -1,0 +1,14 @@
+name=hdparm
+version=9.51
+desc="Utility to access IDE device parameters"
+deps=musl
+source="http://downloads.sourceforge.net/sourceforge/hdparm/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	make || die
+	mkdir "$pkgdir"/bin
+	make DESTDIR=${pkgdir} sbindir=/bin manprefix=/share install || die
+	install -m755 contrib/idectl ${pkgdir}/bin
+	install -m755 contrib/ultrabayd ${pkgdir}/bin
+}

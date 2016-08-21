@@ -1,0 +1,12 @@
+lib/libSM.so|777|0|0|symbolic link
+lib/libSM.so.6|777|0|0|symbolic link
+include/X11/SM/SM.h|644|0|0|regular file
+include/X11/SM/SMlib.h|644|0|0|regular file
+include/X11/SM/SMproto.h|644|0|0|regular file
+lib/libSM.so.6.0.1|755|0|0|regular file
+lib/pkgconfig/sm.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include/X11/SM|755|0|0|directory
+include/X11|755|0|0|directory
+include|755|0|0|directory

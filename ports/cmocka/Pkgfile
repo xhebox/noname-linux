@@ -1,0 +1,13 @@
+name=cmocka
+version=1.1.0
+desc='an elegant unit testing framework for C with support for mock objects'
+deps="cmake musl"
+source="https://cmocka.org/files/${version%.*}/cmocka-$version.tar.xz"
+
+build() {
+	rm -rf build; mkdir build
+	cd build
+	cmake ../$name-$version -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DUNIT_TESTING=ON
+	make || die
+	make install DESTDIR="$pkgdir" || die
+}

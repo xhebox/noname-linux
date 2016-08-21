@@ -1,0 +1,10 @@
+lib32/libhogweed.so|777|0|0|symbolic link
+lib32/libnettle.so.6|777|0|0|symbolic link
+lib32/libnettle.so|777|0|0|symbolic link
+lib32/libhogweed.so.4|777|0|0|symbolic link
+lib32/pkgconfig/hogweed.pc|644|0|0|regular file
+lib32/pkgconfig/nettle.pc|644|0|0|regular file
+lib32/libnettle.so.6.3|644|0|0|regular file
+lib32/libhogweed.so.4.3|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

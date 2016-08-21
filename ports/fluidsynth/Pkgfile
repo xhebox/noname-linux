@@ -1,0 +1,21 @@
+name=fluidsynth
+version=1.1.6
+desc="A real-time software synthesizer based on the SoundFont 2 specifications"
+source="http://downloads.sourceforge.net/$name/$name-$version.tar.gz
+"
+deps="cmake pulseaudio dbus readline ladspa"
+
+build() {
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		esac
+	done
+	cmake . -DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_BUILD_TYPE=Release \
+	-Denable-ladspa=ON \
+	-DLIB_SUFFIX=""
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+}

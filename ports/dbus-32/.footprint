@@ -1,0 +1,17 @@
+lib32/dbus-1.0/include/dbus/dbus-arch-deps.h|644|0|0|regular file
+lib32/dbus-1.0/include/dbus|755|0|0|directory
+lib32/dbus-1.0/include|755|0|0|directory
+lib32/dbus-1.0|755|0|0|directory
+lib32/dbus-daemon-launch-helper|4750|0|81|regular file
+lib32/libdbus-1.so.3.14.11|755|0|0|regular file
+lib32/libdbus-1.so.3|777|0|0|symbolic link
+lib32/libdbus-1.so|777|0|0|symbolic link
+lib32/pkgconfig/dbus-1.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32/systemd/user/dbus.service|644|0|0|regular file
+lib32/systemd/user/dbus.socket|644|0|0|regular file
+lib32/systemd/user/sockets.target.wants/dbus.socket|777|0|0|symbolic link
+lib32/systemd/user/sockets.target.wants|755|0|0|directory
+lib32/systemd/user|755|0|0|directory
+lib32/systemd|755|0|0|directory
+lib32|755|0|0|directory

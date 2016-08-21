@@ -1,0 +1,77 @@
+bin/udevadm|755|0|0|regular file
+bin/udevd|755|0|0|regular file
+bin|755|0|0|directory
+etc/udev/hwdb.bin|444|0|0|regular file
+etc/udev/hwdb.d/20-OUI.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-acpi-vendor.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-bluetooth-vendor-product.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-net-ifname.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-pci-classes.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-pci-vendor-model.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-sdio-classes.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-sdio-vendor-model.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-usb-classes.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/20-usb-vendor-model.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/60-evdev.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/60-keyboard.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/60-sensor.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/70-mouse.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/70-pointingstick.hwdb|644|0|0|regular file
+etc/udev/hwdb.d/70-touchpad.hwdb|644|0|0|regular file
+etc/udev/hwdb.d|755|0|0|directory
+etc/udev/rules.d|755|0|0|directory
+etc/udev/udev.conf|644|0|0|regular file
+etc/udev|755|0|0|directory
+etc|755|0|0|directory
+include/libudev.h|644|0|0|regular file
+include/udev.h|644|0|0|regular file
+include|755|0|0|directory
+lib/firmware|755|0|0|directory
+lib/libudev.so.1.6.3|755|0|0|regular file
+lib/libudev.so.1|777|0|0|symbolic link
+lib/libudev.so|777|0|0|symbolic link
+lib/pkgconfig/libudev.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib/udev/ata_id|755|0|0|regular file
+lib/udev/cdrom_id|755|0|0|regular file
+lib/udev/collect|755|0|0|regular file
+lib/udev/devices/pts|755|0|0|directory
+lib/udev/devices/shm|755|0|0|directory
+lib/udev/devices|755|0|0|directory
+lib/udev/mtd_probe|755|0|0|regular file
+lib/udev/rules.d/50-udev-default.rules|644|0|0|regular file
+lib/udev/rules.d/60-block.rules|644|0|0|regular file
+lib/udev/rules.d/60-cdrom_id.rules|644|0|0|regular file
+lib/udev/rules.d/60-drm.rules|644|0|0|regular file
+lib/udev/rules.d/60-evdev.rules|644|0|0|regular file
+lib/udev/rules.d/60-persistent-alsa.rules|644|0|0|regular file
+lib/udev/rules.d/60-persistent-input.rules|644|0|0|regular file
+lib/udev/rules.d/60-persistent-storage-tape.rules|644|0|0|regular file
+lib/udev/rules.d/60-persistent-storage.rules|644|0|0|regular file
+lib/udev/rules.d/60-persistent-v4l.rules|644|0|0|regular file
+lib/udev/rules.d/60-sensor.rules|644|0|0|regular file
+lib/udev/rules.d/60-serial.rules|644|0|0|regular file
+lib/udev/rules.d/64-btrfs.rules|644|0|0|regular file
+lib/udev/rules.d/70-mouse.rules|644|0|0|regular file
+lib/udev/rules.d/70-touchpad.rules|644|0|0|regular file
+lib/udev/rules.d/75-net-description.rules|644|0|0|regular file
+lib/udev/rules.d/75-probe_mtd.rules|644|0|0|regular file
+lib/udev/rules.d/78-sound-card.rules|644|0|0|regular file
+lib/udev/rules.d/80-drivers.rules|644|0|0|regular file
+lib/udev/rules.d/80-net-name-slot.rules|644|0|0|regular file
+lib/udev/rules.d|755|0|0|directory
+lib/udev/scsi_id|755|0|0|regular file
+lib/udev/v4l_id|755|0|0|regular file
+lib/udev|755|0|0|directory
+lib|755|0|0|directory
+share/man/man5/udev.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man7/udev.7.gz|644|0|0|regular file
+share/man/man7|755|0|0|directory
+share/man/man8/udevadm.8.gz|644|0|0|regular file
+share/man/man8/udevd.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share/pkgconfig/udev.pc|644|0|0|regular file
+share/pkgconfig|755|0|0|directory
+share|755|0|0|directory

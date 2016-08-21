@@ -1,0 +1,16 @@
+. $PORTS/ocl-icd/Pkgfile
+name=ocl-icd-32
+deps="ruby mesa-32 opencl-headers"
+
+build() {
+	cd ocl-icd-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./bootstrap
+	./configure --prefix=/ --libdir=/lib32
+	make || die
+	make DESTDIR=$pkgdir install || die
+	rm -r "$pkgdir"/share
+	rm -r "$pkgdir"/include
+}

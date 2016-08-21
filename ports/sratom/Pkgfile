@@ -1,0 +1,15 @@
+name=sratom
+version=0.4.6
+desc="An LV2 Atom RDF serialisation library"
+deps="lv2 sord python"
+source="http://download.drobilla.net/sratom-$version.tar.bz2"
+
+build() {
+	cd sratom-$version
+
+	sed -i '/ldconfig/d' wscript
+
+	python waf configure --prefix=//
+	python waf build || die
+	python waf install --destdir="$pkgdir" || die
+}

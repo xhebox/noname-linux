@@ -1,0 +1,33 @@
+diff -aru a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c
+--- a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c	2016-12-24 08:47:41.673722069 -0800
++++ b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c	2016-12-24 08:16:18.093460663 -0800
+@@ -191,7 +191,7 @@
+     (*_x509_pp) = PKCS7_cert_from_signer_info(_p7,_si)
+ #endif
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined (LIBRESSL_VERSION_NUMBER)
+ 
+ /* 1.1 standardizes constructor and destructor names, renaming
+  * EVP_MD_CTX_{create,destroy} and deprecating ASN1_STRING_data. */
+@@ -3059,7 +3059,7 @@
+     return retval;
+ }
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L && !defined (LIBRESSL_VERSION_NUMBER)
+ 
+ /*
+  * We need to decode DomainParameters from RFC 3279 section 2.3.3.  We would
+diff -aru a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.h b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.h
+--- a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.h	2016-12-24 08:47:41.674722068 -0800
++++ b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.h	2016-12-24 08:17:49.293133883 -0800
+@@ -46,7 +46,7 @@
+ #include <openssl/asn1.h>
+ #include <openssl/pem.h>
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L && !defined (LIBRESSL_VERSION_NUMBER)
+ #include <openssl/asn1t.h>
+ #else
+ #include <openssl/asn1_mac.h>

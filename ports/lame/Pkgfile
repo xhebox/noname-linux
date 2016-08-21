@@ -1,0 +1,16 @@
+name=lame
+version=3.99.5
+desc="A high quality MPEG Audio Layer III (MP3) encoder"
+deps="nasm ncurses"
+source="http://downloads.sourceforge.net/$name/$name-$version.tar.gz
+sse.patch"
+
+build() {
+	cd $name-$version
+	patch -Np1 -i ../sse.patch || die
+	./configure --prefix= \
+	--enable-nasm \
+	--enable-shared
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

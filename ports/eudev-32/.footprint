@@ -1,0 +1,33 @@
+lib32/libudev.so.1.6.3|755|0|0|regular file
+lib32/libudev.so.1|777|0|0|symbolic link
+lib32/libudev.so|777|0|0|symbolic link
+lib32/pkgconfig/libudev.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32/udev/ata_id|755|0|0|regular file
+lib32/udev/cdrom_id|755|0|0|regular file
+lib32/udev/collect|755|0|0|regular file
+lib32/udev/mtd_probe|755|0|0|regular file
+lib32/udev/rules.d/50-udev-default.rules|644|0|0|regular file
+lib32/udev/rules.d/60-block.rules|644|0|0|regular file
+lib32/udev/rules.d/60-cdrom_id.rules|644|0|0|regular file
+lib32/udev/rules.d/60-drm.rules|644|0|0|regular file
+lib32/udev/rules.d/60-evdev.rules|644|0|0|regular file
+lib32/udev/rules.d/60-persistent-alsa.rules|644|0|0|regular file
+lib32/udev/rules.d/60-persistent-input.rules|644|0|0|regular file
+lib32/udev/rules.d/60-persistent-storage-tape.rules|644|0|0|regular file
+lib32/udev/rules.d/60-persistent-storage.rules|644|0|0|regular file
+lib32/udev/rules.d/60-persistent-v4l.rules|644|0|0|regular file
+lib32/udev/rules.d/60-sensor.rules|644|0|0|regular file
+lib32/udev/rules.d/60-serial.rules|644|0|0|regular file
+lib32/udev/rules.d/64-btrfs.rules|644|0|0|regular file
+lib32/udev/rules.d/70-mouse.rules|644|0|0|regular file
+lib32/udev/rules.d/70-touchpad.rules|644|0|0|regular file
+lib32/udev/rules.d/75-net-description.rules|644|0|0|regular file
+lib32/udev/rules.d/75-probe_mtd.rules|644|0|0|regular file
+lib32/udev/rules.d/78-sound-card.rules|644|0|0|regular file
+lib32/udev/rules.d/80-net-name-slot.rules|644|0|0|regular file
+lib32/udev/rules.d|755|0|0|directory
+lib32/udev/scsi_id|755|0|0|regular file
+lib32/udev/v4l_id|755|0|0|regular file
+lib32/udev|755|0|0|directory
+lib32|755|0|0|directory

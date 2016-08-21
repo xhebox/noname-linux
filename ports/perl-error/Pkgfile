@@ -1,0 +1,12 @@
+name=perl-error
+version=0.17024
+desc="Perl/CPAN Error module - Error/exception handling in an OO-ish way"
+deps=perl
+source="http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/Error-${version}.tar.gz"
+
+build() {
+	cd Error-$version
+	perl Makefile.PL INSTALLDIRS=vendor
+	make 
+	make DESTDIR="${pkgdir}" install
+}

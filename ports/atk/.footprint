@@ -1,0 +1,413 @@
+include/atk-1.0/atk/atk-enum-types.h|644|0|0|regular file
+include/atk-1.0/atk/atk.h|644|0|0|regular file
+include/atk-1.0/atk/atkaction.h|644|0|0|regular file
+include/atk-1.0/atk/atkcomponent.h|644|0|0|regular file
+include/atk-1.0/atk/atkdocument.h|644|0|0|regular file
+include/atk-1.0/atk/atkeditabletext.h|644|0|0|regular file
+include/atk-1.0/atk/atkgobjectaccessible.h|644|0|0|regular file
+include/atk-1.0/atk/atkhyperlink.h|644|0|0|regular file
+include/atk-1.0/atk/atkhyperlinkimpl.h|644|0|0|regular file
+include/atk-1.0/atk/atkhypertext.h|644|0|0|regular file
+include/atk-1.0/atk/atkimage.h|644|0|0|regular file
+include/atk-1.0/atk/atkmisc.h|644|0|0|regular file
+include/atk-1.0/atk/atknoopobject.h|644|0|0|regular file
+include/atk-1.0/atk/atknoopobjectfactory.h|644|0|0|regular file
+include/atk-1.0/atk/atkobject.h|644|0|0|regular file
+include/atk-1.0/atk/atkobjectfactory.h|644|0|0|regular file
+include/atk-1.0/atk/atkplug.h|644|0|0|regular file
+include/atk-1.0/atk/atkrange.h|644|0|0|regular file
+include/atk-1.0/atk/atkregistry.h|644|0|0|regular file
+include/atk-1.0/atk/atkrelation.h|644|0|0|regular file
+include/atk-1.0/atk/atkrelationset.h|644|0|0|regular file
+include/atk-1.0/atk/atkrelationtype.h|644|0|0|regular file
+include/atk-1.0/atk/atkselection.h|644|0|0|regular file
+include/atk-1.0/atk/atksocket.h|644|0|0|regular file
+include/atk-1.0/atk/atkstate.h|644|0|0|regular file
+include/atk-1.0/atk/atkstateset.h|644|0|0|regular file
+include/atk-1.0/atk/atkstreamablecontent.h|644|0|0|regular file
+include/atk-1.0/atk/atktable.h|644|0|0|regular file
+include/atk-1.0/atk/atktablecell.h|644|0|0|regular file
+include/atk-1.0/atk/atktext.h|644|0|0|regular file
+include/atk-1.0/atk/atkutil.h|644|0|0|regular file
+include/atk-1.0/atk/atkvalue.h|644|0|0|regular file
+include/atk-1.0/atk/atkversion.h|644|0|0|regular file
+include/atk-1.0/atk/atkwindow.h|644|0|0|regular file
+include/atk-1.0/atk|755|0|0|directory
+include/atk-1.0|755|0|0|directory
+include|755|0|0|directory
+lib/girepository-1.0/Atk-1.0.typelib|644|0|0|regular file
+lib/girepository-1.0|755|0|0|directory
+lib/libatk-1.0.so.0.22409.1|755|0|0|regular file
+lib/libatk-1.0.so.0|777|0|0|symbolic link
+lib/libatk-1.0.so|777|0|0|symbolic link
+lib/pkgconfig/atk.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/gir-1.0/Atk-1.0.gir|644|0|0|regular file
+share/gir-1.0|755|0|0|directory
+share/gtk-doc/html/atk/AtkAction.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkComponent.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkDocument.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkEditableText.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkGObjectAccessible.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkHyperlink.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkHypertext.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkImage.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkMisc.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkNoOpObject.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkNoOpObjectFactory.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkObject.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkObjectFactory.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkRegistry.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkRelation.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkRelationSet.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkSelection.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkStateSet.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkStreamableContent.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkTable.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkTableCell.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkText.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkUtil.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkValue.html|644|0|0|regular file
+share/gtk-doc/html/atk/AtkWindow.html|644|0|0|regular file
+share/gtk-doc/html/atk/accessibles.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-12.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-13.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-20.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-22.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-3.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-30.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-4.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-6.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-1-9.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-2-10.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-2-12.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-2-2.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-2-8.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-deprecated.html|644|0|0|regular file
+share/gtk-doc/html/atk/api-index-full.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-AtkHyperlinkImpl.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-AtkPlug.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-AtkRange.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-AtkSocket.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-AtkState.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk-Versioning-Utilities.html|644|0|0|regular file
+share/gtk-doc/html/atk/atk.devhelp2|644|0|0|regular file
+share/gtk-doc/html/atk/base-object.html|644|0|0|regular file
+share/gtk-doc/html/atk/data.html|644|0|0|regular file
+share/gtk-doc/html/atk/deprecated.html|644|0|0|regular file
+share/gtk-doc/html/atk/home.png|644|0|0|regular file
+share/gtk-doc/html/atk/index.html|644|0|0|regular file
+share/gtk-doc/html/atk/interfaces.html|644|0|0|regular file
+share/gtk-doc/html/atk/left-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/atk/left.png|644|0|0|regular file
+share/gtk-doc/html/atk/overview.html|644|0|0|regular file
+share/gtk-doc/html/atk/right-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/atk/right.png|644|0|0|regular file
+share/gtk-doc/html/atk/style.css|644|0|0|regular file
+share/gtk-doc/html/atk/toolkit.html|644|0|0|regular file
+share/gtk-doc/html/atk/up-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/atk/up.png|644|0|0|regular file
+share/gtk-doc/html/atk/utilities.html|644|0|0|regular file
+share/gtk-doc/html/atk|755|0|0|directory
+share/gtk-doc/html|755|0|0|directory
+share/gtk-doc|755|0|0|directory
+share/locale/af/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/af/LC_MESSAGES|755|0|0|directory
+share/locale/af|755|0|0|directory
+share/locale/am/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/am/LC_MESSAGES|755|0|0|directory
+share/locale/am|755|0|0|directory
+share/locale/an/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/an/LC_MESSAGES|755|0|0|directory
+share/locale/an|755|0|0|directory
+share/locale/ar/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ar/LC_MESSAGES|755|0|0|directory
+share/locale/ar|755|0|0|directory
+share/locale/as/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/as/LC_MESSAGES|755|0|0|directory
+share/locale/ast/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES|755|0|0|directory
+share/locale/ast|755|0|0|directory
+share/locale/as|755|0|0|directory
+share/locale/az/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/az/LC_MESSAGES|755|0|0|directory
+share/locale/az|755|0|0|directory
+share/locale/be/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/be/LC_MESSAGES|755|0|0|directory
+share/locale/be@latin/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/be@latin/LC_MESSAGES|755|0|0|directory
+share/locale/be@latin|755|0|0|directory
+share/locale/be|755|0|0|directory
+share/locale/bg/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/bg/LC_MESSAGES|755|0|0|directory
+share/locale/bg|755|0|0|directory
+share/locale/bn/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/bn/LC_MESSAGES|755|0|0|directory
+share/locale/bn_IN/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/bn_IN/LC_MESSAGES|755|0|0|directory
+share/locale/bn_IN|755|0|0|directory
+share/locale/bn|755|0|0|directory
+share/locale/bs/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/bs/LC_MESSAGES|755|0|0|directory
+share/locale/bs|755|0|0|directory
+share/locale/ca/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca@valencia/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ca@valencia/LC_MESSAGES|755|0|0|directory
+share/locale/ca@valencia|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/cs/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/cs/LC_MESSAGES|755|0|0|directory
+share/locale/cs|755|0|0|directory
+share/locale/cy/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/cy/LC_MESSAGES|755|0|0|directory
+share/locale/cy|755|0|0|directory
+share/locale/da/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/dz/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/dz/LC_MESSAGES|755|0|0|directory
+share/locale/dz|755|0|0|directory
+share/locale/el/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/el/LC_MESSAGES|755|0|0|directory
+share/locale/el|755|0|0|directory
+share/locale/en@shaw/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/en@shaw/LC_MESSAGES|755|0|0|directory
+share/locale/en@shaw|755|0|0|directory
+share/locale/en_CA/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/en_CA/LC_MESSAGES|755|0|0|directory
+share/locale/en_CA|755|0|0|directory
+share/locale/en_GB/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/en_GB/LC_MESSAGES|755|0|0|directory
+share/locale/en_GB|755|0|0|directory
+share/locale/eo/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES|755|0|0|directory
+share/locale/eo|755|0|0|directory
+share/locale/es/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/et/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/et/LC_MESSAGES|755|0|0|directory
+share/locale/et|755|0|0|directory
+share/locale/eu/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/eu/LC_MESSAGES|755|0|0|directory
+share/locale/eu|755|0|0|directory
+share/locale/fa/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/fa/LC_MESSAGES|755|0|0|directory
+share/locale/fa|755|0|0|directory
+share/locale/fi/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/fur/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/fur/LC_MESSAGES|755|0|0|directory
+share/locale/fur|755|0|0|directory
+share/locale/ga/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ga/LC_MESSAGES|755|0|0|directory
+share/locale/ga|755|0|0|directory
+share/locale/gd/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/gd/LC_MESSAGES|755|0|0|directory
+share/locale/gd|755|0|0|directory
+share/locale/gl/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/gu/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/gu/LC_MESSAGES|755|0|0|directory
+share/locale/gu|755|0|0|directory
+share/locale/he/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/he/LC_MESSAGES|755|0|0|directory
+share/locale/he|755|0|0|directory
+share/locale/hi/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/hi/LC_MESSAGES|755|0|0|directory
+share/locale/hi|755|0|0|directory
+share/locale/hr/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/hy/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/hy/LC_MESSAGES|755|0|0|directory
+share/locale/hy|755|0|0|directory
+share/locale/id/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/is/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/is/LC_MESSAGES|755|0|0|directory
+share/locale/is|755|0|0|directory
+share/locale/it/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/ka/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ka/LC_MESSAGES|755|0|0|directory
+share/locale/ka|755|0|0|directory
+share/locale/kk/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/kk/LC_MESSAGES|755|0|0|directory
+share/locale/kk|755|0|0|directory
+share/locale/km/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/km/LC_MESSAGES|755|0|0|directory
+share/locale/km|755|0|0|directory
+share/locale/kn/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/kn/LC_MESSAGES|755|0|0|directory
+share/locale/kn|755|0|0|directory
+share/locale/ko/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/ku/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ku/LC_MESSAGES|755|0|0|directory
+share/locale/ku|755|0|0|directory
+share/locale/li/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/li/LC_MESSAGES|755|0|0|directory
+share/locale/li|755|0|0|directory
+share/locale/lt/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/lv/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/lv/LC_MESSAGES|755|0|0|directory
+share/locale/lv|755|0|0|directory
+share/locale/mai/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/mai/LC_MESSAGES|755|0|0|directory
+share/locale/mai|755|0|0|directory
+share/locale/mk/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/mk/LC_MESSAGES|755|0|0|directory
+share/locale/mk|755|0|0|directory
+share/locale/ml/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ml/LC_MESSAGES|755|0|0|directory
+share/locale/ml|755|0|0|directory
+share/locale/mn/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/mn/LC_MESSAGES|755|0|0|directory
+share/locale/mn|755|0|0|directory
+share/locale/mr/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/mr/LC_MESSAGES|755|0|0|directory
+share/locale/mr|755|0|0|directory
+share/locale/ms/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ms/LC_MESSAGES|755|0|0|directory
+share/locale/ms|755|0|0|directory
+share/locale/nb/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/ne/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ne/LC_MESSAGES|755|0|0|directory
+share/locale/ne|755|0|0|directory
+share/locale/nl/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/nn/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/nn/LC_MESSAGES|755|0|0|directory
+share/locale/nn|755|0|0|directory
+share/locale/oc/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/oc/LC_MESSAGES|755|0|0|directory
+share/locale/oc|755|0|0|directory
+share/locale/or/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/or/LC_MESSAGES|755|0|0|directory
+share/locale/or|755|0|0|directory
+share/locale/pa/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES|755|0|0|directory
+share/locale/pa|755|0|0|directory
+share/locale/pl/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/ps/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ps/LC_MESSAGES|755|0|0|directory
+share/locale/ps|755|0|0|directory
+share/locale/pt/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/pt/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/pt|755|0|0|directory
+share/locale/ro/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ro/LC_MESSAGES|755|0|0|directory
+share/locale/ro|755|0|0|directory
+share/locale/ru/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/rw/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/rw/LC_MESSAGES|755|0|0|directory
+share/locale/rw|755|0|0|directory
+share/locale/si/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/si/LC_MESSAGES|755|0|0|directory
+share/locale/si|755|0|0|directory
+share/locale/sk/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sk/LC_MESSAGES|755|0|0|directory
+share/locale/sk|755|0|0|directory
+share/locale/sl/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sq/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sq/LC_MESSAGES|755|0|0|directory
+share/locale/sq|755|0|0|directory
+share/locale/sr/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr@ije/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sr@ije/LC_MESSAGES|755|0|0|directory
+share/locale/sr@ije|755|0|0|directory
+share/locale/sr@latin/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sr@latin/LC_MESSAGES|755|0|0|directory
+share/locale/sr@latin|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/ta/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ta/LC_MESSAGES|755|0|0|directory
+share/locale/ta|755|0|0|directory
+share/locale/te/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/te/LC_MESSAGES|755|0|0|directory
+share/locale/te|755|0|0|directory
+share/locale/tg/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/tg/LC_MESSAGES|755|0|0|directory
+share/locale/tg|755|0|0|directory
+share/locale/th/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/th/LC_MESSAGES|755|0|0|directory
+share/locale/th|755|0|0|directory
+share/locale/tk/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/tk/LC_MESSAGES|755|0|0|directory
+share/locale/tk|755|0|0|directory
+share/locale/tr/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/tt/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/tt/LC_MESSAGES|755|0|0|directory
+share/locale/tt|755|0|0|directory
+share/locale/ug/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/ug/LC_MESSAGES|755|0|0|directory
+share/locale/ug|755|0|0|directory
+share/locale/uk/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/wa/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/wa/LC_MESSAGES|755|0|0|directory
+share/locale/wa|755|0|0|directory
+share/locale/xh/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/xh/LC_MESSAGES|755|0|0|directory
+share/locale/xh|755|0|0|directory
+share/locale/yi/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/yi/LC_MESSAGES|755|0|0|directory
+share/locale/yi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_HK/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/zh_HK/LC_MESSAGES|755|0|0|directory
+share/locale/zh_HK|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale/zu/LC_MESSAGES/atk10.mo|644|0|0|regular file
+share/locale/zu/LC_MESSAGES|755|0|0|directory
+share/locale/zu|755|0|0|directory
+share/locale|755|0|0|directory
+share|755|0|0|directory

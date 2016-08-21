@@ -1,0 +1,14 @@
+name=which
+version=2.21
+desc="Displays where a particular program in your path is located"
+source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= \
+                --libexecdir=/lib \
+                --disable-static 
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -r "$pkgdir"/share/info
+}

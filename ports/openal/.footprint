@@ -1,0 +1,27 @@
+bin/altonegen|755|0|0|regular file
+bin/bsincgen|755|0|0|regular file
+bin/makehrtf|755|0|0|regular file
+bin/openal-info|755|0|0|regular file
+bin|755|0|0|directory
+include/AL/al.h|644|0|0|regular file
+include/AL/alc.h|644|0|0|regular file
+include/AL/alext.h|644|0|0|regular file
+include/AL/efx-creative.h|644|0|0|regular file
+include/AL/efx-presets.h|644|0|0|regular file
+include/AL/efx.h|644|0|0|regular file
+include/AL|755|0|0|directory
+include|755|0|0|directory
+lib/libopenal.so.1.17.2|755|0|0|regular file
+lib/libopenal.so.1|777|0|0|symbolic link
+lib/libopenal.so|777|0|0|symbolic link
+lib/pkgconfig/openal.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/openal/alsoftrc.sample|644|0|0|regular file
+share/openal/env-vars.txt|644|0|0|regular file
+share/openal/hrtf.txt|644|0|0|regular file
+share/openal/hrtf/default-44100.mhr|644|0|0|regular file
+share/openal/hrtf/default-48000.mhr|644|0|0|regular file
+share/openal/hrtf|755|0|0|directory
+share/openal|755|0|0|directory
+share|755|0|0|directory

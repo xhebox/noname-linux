@@ -1,0 +1,13 @@
+name=schroedinger
+version=1.0.11
+desc="An implemenation of the Dirac video codec in ANSI C code"
+deps="orc"
+source="http://launchpad.net/$name/trunk/$version/+download/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

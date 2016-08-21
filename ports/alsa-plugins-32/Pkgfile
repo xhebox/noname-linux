@@ -1,0 +1,20 @@
+. $PORTS/alsa-plugins/Pkgfile
+name=alsa-plugins-32
+deps="alsa-lib-32 speex-32 libsamplerate-32 pulseaudio-32 alsa-plugins"
+source=${source%alsaconf*}
+
+build() {
+	cd alsa-plugins-$version
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+	./configure --prefix= \
+	--libdir=/lib32 \
+	--disable-maemo-plugin \
+	--disable-avcodec
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	rm -r "$pkgdir"/share
+}

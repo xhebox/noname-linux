@@ -1,0 +1,13 @@
+lib32/liblber-2.4.so.2.10.7|644|0|0|regular file
+lib32/liblber-2.4.so.2|777|0|0|symbolic link
+lib32/liblber.a|644|0|0|regular file
+lib32/liblber.so|777|0|0|symbolic link
+lib32/libldap-2.4.so.2.10.7|644|0|0|regular file
+lib32/libldap-2.4.so.2|777|0|0|symbolic link
+lib32/libldap.a|644|0|0|regular file
+lib32/libldap.so|777|0|0|symbolic link
+lib32/libldap_r-2.4.so.2.10.7|644|0|0|regular file
+lib32/libldap_r-2.4.so.2|777|0|0|symbolic link
+lib32/libldap_r.a|644|0|0|regular file
+lib32/libldap_r.so|777|0|0|symbolic link
+lib32|755|0|0|directory

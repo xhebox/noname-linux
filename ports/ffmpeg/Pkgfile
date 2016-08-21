@@ -1,0 +1,60 @@
+name=ffmpeg
+version=3.3
+deps="libgmp fontconfig libressl harfbuzz mesa pthread-stubs libva libvdpau opus libvpx speex gnutls celt x264 sdl2 libvorbis fontconfig pulseaudio bzip2 x265 xvidcore libmodplug libsoxr lame libwebp ladspa v4l-utils fribidi libtheora opencore-amr libass libssh vid.stab schroedinger openjpeg2 gsm"
+desc="Complete solution to record, convert and stream audio and video."
+source="http://ffmpeg.org/releases/$name-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix=/ \
+		--bindir=/bin \
+		--libdir=/lib \
+		--shlibdir=/lib \
+		--incdir=/include \
+		--datadir=/share/ffmpeg \
+		--docdir=/share/doc/ffmpeg \
+		--pkgconfigdir=/lib/pkgconfig \
+		--mandir=/share/man \
+		--disable-debug \
+		--enable-avisynth \
+		--enable-avresample \
+		--enable-fontconfig \
+		--enable-gmp \
+		--enable-gnutls \
+		--enable-gpl \
+		--enable-ladspa \
+		--enable-libass \
+		--enable-libfreetype \
+		--enable-libfribidi \
+		--enable-libgsm \
+		--enable-libmodplug \
+		--enable-libmp3lame \
+		--enable-libopencore_amrnb \
+		--enable-libopencore_amrwb \
+		--enable-libopenjpeg \
+		--enable-libopus \
+		--enable-libpulse \
+		--enable-libschroedinger \
+		--enable-libsoxr \
+		--enable-libspeex \
+		--enable-libssh \
+		--enable-libtheora \
+		--enable-libv4l2 \
+		--enable-libvidstab \
+		--enable-libvorbis \
+		--enable-libvpx \
+		--enable-libwebp \
+		--enable-libx264 \
+		--enable-libx265 \
+		--enable-libxvid \
+		--enable-shared \
+		--enable-version3 \
+		--disable-static \
+		--enable-nonfree \
+		--enable-vdpau \
+		--enable-vaapi
+
+	make CC="$CC" SHARED_PP='yes' $MAKEFLAGS || die
+	make DESTDIR="$pkgdir" install install-man || die
+}

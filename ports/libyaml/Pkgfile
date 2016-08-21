@@ -1,0 +1,13 @@
+name=libyaml
+version=0.1.7
+deps=musl
+desc="A YAML parser and emitter library."
+source="http://pyyaml.org/download/$name/yaml-$version.tar.gz"
+
+build() {
+	cd yaml-$version
+
+	./configure --prefix=/
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

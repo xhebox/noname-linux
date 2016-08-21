@@ -1,0 +1,14 @@
+name=vamp-plugin-sdk
+version=2.6
+_dir=1520
+desc="The Vamp audio analysis plug-in system"
+deps="libsndfile gcc"
+source="http://code.soundsoftware.ac.uk/attachments/download/$_dir/vamp-plugin-sdk-$version.tar.gz"
+
+build() {
+	cd vamp-plugin-sdk-$version
+
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

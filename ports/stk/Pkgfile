@@ -1,0 +1,18 @@
+name=stk
+version=4.5.1
+desc="A lightweight OSC (Open Sound Control) implementation"
+source="http://ccrma.stanford.edu/software/stk/release/stk-$version.tar.gz
+runtime.patch"
+deps=musl
+
+build() {
+	cd $name-$version
+	export LIBS="$LIBS -lpthread" 
+
+	sed -i 's/all : $(STATICLIB)/all : $(SHAREDLIB)/' src/Makefile.in
+	sed -i 's:\.\./\.\.:/usr/lib/stk:' projects/demo/demo.cpp
+	./configure RAWWAVE_PATH=/lib/stk/rawwaves/ --prefix= --with-alsa
+	make || die
+	patch -Np1 -i ../runtime.patch
+	make DESTDIR="${pkgdir}" install || die
+}

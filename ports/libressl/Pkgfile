@@ -1,0 +1,13 @@
+name=libressl
+version=2.5.4
+desc="LibreSSL is av ersion of the TLS/crypto stack forked from OpenSSL."
+source="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"
+deps=musl
+
+build() {
+	cd $name-$version
+	./configure --prefix= --enable-shared --disable-static 
+	make || die
+	make DESTDIR="$pkgdir" install  || die
+	rm -f ${pkgdir}/etc/ssl/cert.pem
+}

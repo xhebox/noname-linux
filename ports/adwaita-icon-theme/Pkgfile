@@ -1,0 +1,12 @@
+name=adwaita-icon-theme
+version=3.24.0
+deps="librsvg intltool hicolor-icon-theme"
+desc="default fallback used by the icon theme specification"
+source="http://download.gnome.org/sources/adwaita-icon-theme/${version%.*}/adwaita-icon-theme-$version.tar.xz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ --enable-icon-mapping
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

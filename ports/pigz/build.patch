@@ -1,0 +1,16 @@
+--- pigz-2.2.5/Makefile~	2012-02-11 21:18:18.000000000 -0800
++++ pigz-2.2.5/Makefile	2013-01-26 08:58:02.528465051 -0800
+@@ -53,6 +53,13 @@
+ 
+ pigz.pdf: pigz.1
+ 	groff -mandoc -f H -T ps pigz.1 | ps2pdf - pigz.pdf
++	
++install: pigz
++	mkdir -p $(DESTDIR)/usr/bin
++	cp pigz $(DESTDIR)/usr/bin/pigz
++	ln -s pigz $(DESTDIR)/usr/bin/gzip
++
++		
+ 
+ clean:
+ 	@rm -f *.o pigz unpigz pigzn pigzt pigz.c.gz pigz.c.zz pigz.c.zip

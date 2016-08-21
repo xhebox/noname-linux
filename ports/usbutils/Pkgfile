@@ -1,0 +1,17 @@
+name=usbutils
+version=008
+desc="USB Device Utilities"
+deps="libusb eudev hwids"
+source="http://www.kernel.org/pub/linux/utils/usb/usbutils/${name}-${version}.tar.xz
+fix-python2.patch"
+
+build() {
+	cd $name-$version
+	patch -Np1 -i $srcdir/fix-python2.patch 
+	./configure --prefix=/ --datadir=/share/hwdata --disable-zlib --without-python 
+	make  || die
+	make DESTDIR=$pkgdir install  || die
+	rm -rf $pkgdir/share/hwdata
+	rm -rf $pkgdir/share/sbin
+}
+

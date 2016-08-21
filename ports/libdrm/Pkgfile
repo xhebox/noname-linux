@@ -1,0 +1,24 @@
+name=libdrm
+version=2.4.80
+desc="Userspace interface to kernel DRM services"
+deps="libpciaccess pthread-stubs"
+source="http://dri.freedesktop.org/$name/$name-$version.tar.bz2
+musl.patch"
+
+ext() {
+	cd "$srcdir"/libdrm-$version
+	patch -p0 -i "$srcdir/musl.patch" || die
+}
+
+build() {
+	cd "$srcdir"/$name-$version
+	./configure \
+		--prefix= \
+		--disable-static --disable-udev \
+		--enable-radeon --enable-nouveau --enable-intel \
+		--enable-libkms \
+		--disable-valgrind
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

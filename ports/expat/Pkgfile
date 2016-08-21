@@ -1,0 +1,11 @@
+name=expat
+version=2.2.0
+deps=musl
+desc="A fast, non-validating, stream-oriented XML parsing library"
+source="http://download.sourceforge.net/$name/$name-$version.tar.bz2"
+build() { 
+	 cd $name-$version
+	 ./configure --prefix= 
+	 make 
+	 make DESTDIR="$pkgdir" install 
+}

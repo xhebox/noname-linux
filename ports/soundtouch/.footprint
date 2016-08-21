@@ -1,0 +1,23 @@
+bin/soundstretch|755|0|0|regular file
+bin|755|0|0|directory
+include/soundtouch/BPMDetect.h|644|0|0|regular file
+include/soundtouch/FIFOSampleBuffer.h|644|0|0|regular file
+include/soundtouch/FIFOSamplePipe.h|644|0|0|regular file
+include/soundtouch/STTypes.h|644|0|0|regular file
+include/soundtouch/SoundTouch.h|644|0|0|regular file
+include/soundtouch/soundtouch_config.h|644|0|0|regular file
+include/soundtouch|755|0|0|directory
+include|755|0|0|directory
+lib/libSoundTouch.so.1.0.0|755|0|0|regular file
+lib/libSoundTouch.so.1|777|0|0|symbolic link
+lib/libSoundTouch.so|777|0|0|symbolic link
+lib/pkgconfig/soundtouch.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/aclocal/soundtouch.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/doc/soundtouch/COPYING.TXT|644|0|0|regular file
+share/doc/soundtouch/README.html|644|0|0|regular file
+share/doc/soundtouch|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

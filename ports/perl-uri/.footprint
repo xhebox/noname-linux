@@ -1,0 +1,78 @@
+lib/perl5/core_perl|755|0|0|directory
+lib/perl5/vendor_perl/URI.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/Escape.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/Heuristic.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/IRI.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/QueryParam.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/Split.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/URL.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/WithBase.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_foreign.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_generic.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_idna.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_ldap.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_login.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_punycode.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_query.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_segment.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_server.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/_userpass.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/data.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/Base.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/FAT.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/Mac.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/OS2.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/QNX.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/Unix.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file/Win32.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/file|755|0|0|directory
+lib/perl5/vendor_perl/URI/ftp.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/gopher.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/http.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/https.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/ldap.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/ldapi.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/ldaps.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/mailto.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/mms.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/news.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/nntp.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/pop.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/rlogin.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/rsync.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/rtsp.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/rtspu.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/sftp.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/sip.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/sips.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/snews.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/ssh.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/telnet.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/tn3270.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/urn.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/urn/isbn.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/urn/oid.pm|444|0|0|regular file
+lib/perl5/vendor_perl/URI/urn|755|0|0|directory
+lib/perl5/vendor_perl/URI|755|0|0|directory
+lib/perl5/vendor_perl/auto/URI/.packlist|644|0|0|regular file
+lib/perl5/vendor_perl/auto/URI|755|0|0|directory
+lib/perl5/vendor_perl/auto|755|0|0|directory
+lib/perl5/vendor_perl|755|0|0|directory
+lib/perl5|755|0|0|directory
+lib|755|0|0|directory
+share/man/man3/perl/URI.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::Escape.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::Heuristic.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::QueryParam.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::Split.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::URL.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::WithBase.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::_punycode.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::data.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::file.3pm.gz|644|0|0|regular file
+share/man/man3/perl/URI::ldap.3pm.gz|644|0|0|regular file
+share/man/man3/perl|755|0|0|directory
+share/man/man3|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

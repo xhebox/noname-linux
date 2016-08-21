@@ -1,0 +1,18 @@
+name=hunspell
+version=1.6.1
+desc="Spell checker and morphological analyzer library and program"
+deps="readline perl"
+source="https://github.com/hunspell/hunspell/archive/v${version}.tar.gz"
+
+build() {
+	cd hunspell-$version
+	autoreconf -i
+	./configure --prefix= --disable-static \
+		--with-ui --with-readline
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	pushd $pkgdir/lib
+	ln -s libhunspell-?.?.so libhunspell.so
+	popd
+}

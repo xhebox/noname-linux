@@ -1,0 +1,16 @@
+name=libgmp
+version=6.1.2
+desc="Free library for arbitrary precision arithmetic"
+source="http://gmplib.org/download/gmp/gmp-$version.tar.xz"
+deps=zlib
+
+build() {
+	cd gmp-$version
+	./configure --prefix= \
+		--enable-cxx \
+		--disable-static
+	make
+	make DESTDIR="$pkgdir" install
+	rm -r "$pkgdir"/share/info
+}
+

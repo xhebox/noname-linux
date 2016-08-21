@@ -1,0 +1,12 @@
+name=libmodplug
+version=0.8.8.5
+desc="A MOD playing library"
+deps="musl"
+source="http://downloads.sourceforge.net/modplug-xmms/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

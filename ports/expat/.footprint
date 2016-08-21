@@ -1,0 +1,17 @@
+lib/libexpat.so.1|777|0|0|symbolic link
+lib/libexpat.so|777|0|0|symbolic link
+bin/xmlwf|755|0|0|regular file
+include/expat_config.h|644|0|0|regular file
+include/expat.h|644|0|0|regular file
+include/expat_external.h|644|0|0|regular file
+lib/libexpat.a|644|0|0|regular file
+lib/pkgconfig/expat.pc|644|0|0|regular file
+lib/libexpat.so.1.6.2|755|0|0|regular file
+share/man/man1/xmlwf.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

@@ -1,0 +1,4 @@
+Sat Apr 15 02:36:37 GMT 2017
+serd
+0.22.0
+A lightweight C library for RDF syntax which supports reading and writing Turtle and NTriples.

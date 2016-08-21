@@ -1,0 +1,9 @@
+include/sbsms.h|644|0|0|regular file
+include|755|0|0|directory
+lib/libsbsms.a|644|0|0|regular file
+lib/libsbsms.so.0.0.0|755|0|0|regular file
+lib/libsbsms.so.0|777|0|0|symbolic link
+lib/libsbsms.so|777|0|0|symbolic link
+lib/pkgconfig/sbsms.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

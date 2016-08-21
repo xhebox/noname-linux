@@ -1,0 +1,4 @@
+lib32|755|0|0|directory
+lib32/libattr.so.1|777|0|0|symbolic link
+lib32/libattr.so|777|0|0|symbolic link
+lib32/libattr.so.1.1.0|644|0|0|regular file

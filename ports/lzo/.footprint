@@ -1,0 +1,35 @@
+include/lzo/lzo1.h|644|0|0|regular file
+include/lzo/lzo1a.h|644|0|0|regular file
+include/lzo/lzo1b.h|644|0|0|regular file
+include/lzo/lzo1c.h|644|0|0|regular file
+include/lzo/lzo1f.h|644|0|0|regular file
+include/lzo/lzo1x.h|644|0|0|regular file
+include/lzo/lzo1y.h|644|0|0|regular file
+include/lzo/lzo1z.h|644|0|0|regular file
+include/lzo/lzo2a.h|644|0|0|regular file
+include/lzo/lzo_asm.h|644|0|0|regular file
+include/lzo/lzoconf.h|644|0|0|regular file
+include/lzo/lzodefs.h|644|0|0|regular file
+include/lzo/lzoutil.h|644|0|0|regular file
+include/lzo/minilzo.h|644|0|0|regular file
+include/lzo|755|0|0|directory
+include|755|0|0|directory
+lib/liblzo2.a|644|0|0|regular file
+lib/liblzo2.so.2.0.0|755|0|0|regular file
+lib/liblzo2.so.2|777|0|0|symbolic link
+lib/liblzo2.so|777|0|0|symbolic link
+lib/libminilzo.so.0|755|0|0|regular file
+lib/libminilzo.so|777|0|0|symbolic link
+lib/pkgconfig/lzo2.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/lzo/AUTHORS|644|0|0|regular file
+share/doc/lzo/COPYING|644|0|0|regular file
+share/doc/lzo/LZO.FAQ|644|0|0|regular file
+share/doc/lzo/LZO.TXT|644|0|0|regular file
+share/doc/lzo/LZOAPI.TXT|644|0|0|regular file
+share/doc/lzo/NEWS|644|0|0|regular file
+share/doc/lzo/THANKS|644|0|0|regular file
+share/doc/lzo|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

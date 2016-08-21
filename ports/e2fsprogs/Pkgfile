@@ -1,0 +1,26 @@
+name=e2fsprogs
+version=1.43.4
+deps="util-linux bash"
+desc="ext utils"
+source="http://downloads.sourceforge.net/sourceforge/e2fsprogs/e2fsprogs-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	sed -i '/init\.d/s|^|#|' misc/Makefile.in
+	./configure \
+	--prefix=/ \
+	--sbindir=/bin --disable-uuidd \
+	--disable-libuuid --disable-libblkid \
+	--enable-elf-shlibs \
+	--disable-fsck 
+	make || die
+	make -j1 DESTDIR="$pkgdir" install install-libs || die
+	sed -i -e 's/^AWK=.*/AWK=awk/' "${pkgdir}/bin/compile_et"
+	sed -i -e 's#^SS_DIR=.*#SS_DIR="/share/ss"#' "${pkgdir}/bin/mk_cmds"
+	sed -i -e 's#^ET_DIR=.*#ET_DIR="/share/et"#' "${pkgdir}/bin/compile_et"
+	rm "${pkgdir}"/lib/libcom_err.a
+	rm "${pkgdir}"/lib/libe2p.a
+	rm "${pkgdir}"/lib/libext2fs.a
+	rm "${pkgdir}"/lib/libss.a
+	rm -r "$pkgdir"/share/info
+}

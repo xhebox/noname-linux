@@ -1,0 +1,26 @@
+name=dwm
+version=6.1
+desc="dwm"
+deps="xorg-server"
+source="http://dl.suckless.org/dwm/dwm-6.1.tar.gz
+config.h
+dwm-autostart-20161205-bb3bd6f.diff
+dwm-movestack-6.1.diff
+dwm-6.1-pertag-tab-v2b.diff
+dwm-6.1-systray.diff
+dwm-ewmh.patch
+config.mk
+"
+
+
+build(){
+	cd $name-$version
+	cp -r "$srcdir"/config.mk .
+	cp -r "$srcdir"/config.h .
+	patch -p1 < ../dwm-movestack-6.1.diff || die
+	patch -p1 < ../dwm-6.1-systray.diff || die
+	patch -p1 < ../dwm-6.1-pertag-tab-v2b.diff || die
+	patch -p1 < ../dwm-ewmh.patch || die
+	patch -p1 < ../dwm-autostart-20161205-bb3bd6f.diff || die
+	make PREFIX=/ DESTDIR="$pkgdir" install || die
+}

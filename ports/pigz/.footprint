@@ -1,0 +1,7 @@
+bin/unpigz|755|0|0|regular file
+bin/pigz|755|0|0|regular file
+share/man/man1/pigz.1.gz|644|0|0|regular file
+share/man/man1|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+bin|755|0|0|directory

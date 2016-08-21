@@ -1,0 +1,15 @@
+name=libxml2
+version=2.9.4
+deps="zlib xz readline python"
+desc="XML library version 2"
+source="ftp://xmlsoft.org/libxml2/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+	./configure --prefix= --disable-static --with-threads --with-history
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' -e 's/    if test "$export_dynamic" = yes && test -n "$export_dynamic_flag_spec"; then/      func_append compile_command " -Wl,-O1,--as-needed"\n      func_append finalize_command " -Wl,-O1,--as-needed"\n\0/' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -r "$pkgdir"/share/doc
+	rm -r "$pkgdir"/share/gtk-doc
+}

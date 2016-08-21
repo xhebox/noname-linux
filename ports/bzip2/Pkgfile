@@ -1,0 +1,34 @@
+name=bzip2
+version=1.0.6
+desc="A high-quality data compression program"
+source="http://www.bzip.org/$version/$name-$version.tar.gz
+	bzip2-1.0.4-makefile-CFLAGS.patch
+	bzip2-1.0.6-saneso.patch
+	bzip2-1.0.4-man-links.patch
+	bzip2-1.0.2-progress.patch
+	bzip2-1.0.3-no-test.patch
+	fasterfile.patch
+	bzip2-1.0.4-POSIX-shell.patch"
+deps="musl"
+
+build() {
+	cd $name-$version
+	for i in ${source}; do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/$i  ;;
+		esac
+	done
+	sed -i \
+		-e 's:\$(PREFIX)/man:\$(PREFIX)/share/man:g' \
+		-e 's:ln -s -f $(PREFIX)/bin/:ln -s :' \
+		Makefile
+	sed -i \
+		-e "s:1\.0\.4:$version:" \
+		bzip2.1 bzip2.txt Makefile-libbz2_so manual.*
+	make -f Makefile-libbz2_so all  || die
+	make CFLAGS="$CFLAGS"  || die
+	make PREFIX="$pkgdir" install  || die
+	install -D libbz2.so.$version "$pkgdir"/lib/libbz2.so.$version
+	ln -s libbz2.so.$version "$pkgdir"/lib/libbz2.so
+	ln -s libbz2.so.$version "$pkgdir"/lib/libbz2.so.${version%%.*}
+}

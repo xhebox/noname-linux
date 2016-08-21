@@ -1,0 +1,13 @@
+name=winetricks
+version=20170327
+deps="cabextract curl unzip xorg-app wine"
+desc="Script to install various redistributable runtime libraries in Wine."
+source="https://github.com/Winetricks/winetricks/archive/${version}.tar.gz"
+
+build() {
+	cd $name-$version
+
+	make DESTDIR="$pkgdir" PREFIX=/ install || die
+	sed -i 's#/usr/bin#/bin#g' "$pkgdir"/bin/*
+	sed -i 's#/bin/sh#/bin/bash#g' "$pkgdir"/bin/*
+}

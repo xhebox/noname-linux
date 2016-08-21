@@ -1,0 +1,28 @@
+lib/libsoxr-lsr.so.0|777|0|0|symbolic link
+lib/libsoxr.so.0|777|0|0|symbolic link
+lib/libsoxr-lsr.so|777|0|0|symbolic link
+lib/libsoxr.so|777|0|0|symbolic link
+include/soxr.h|644|0|0|regular file
+include/soxr-lsr.h|644|0|0|regular file
+lib/libsoxr-lsr.so.0.1.9|755|0|0|regular file
+lib/libsoxr.so.0.1.1|755|0|0|regular file
+lib/pkgconfig/soxr.pc|644|0|0|regular file
+lib/pkgconfig/soxr-lsr.pc|644|0|0|regular file
+share/doc/libsoxr/README|644|0|0|regular file
+share/doc/libsoxr/LICENCE|644|0|0|regular file
+share/doc/libsoxr/NEWS|644|0|0|regular file
+share/doc/libsoxr/examples/README|644|0|0|regular file
+share/doc/libsoxr/examples/2-stream.C|644|0|0|regular file
+share/doc/libsoxr/examples/1a-lsr.c|644|0|0|regular file
+share/doc/libsoxr/examples/1-single-block.c|644|0|0|regular file
+share/doc/libsoxr/examples/examples-common.h|644|0|0|regular file
+share/doc/libsoxr/examples/5-variable-rate.c|644|0|0|regular file
+share/doc/libsoxr/examples/3-options-input-fn.c|644|0|0|regular file
+share/doc/libsoxr/examples/4-split-channels.c|644|0|0|regular file
+share/doc/libsoxr/examples|755|0|0|directory
+share/doc/libsoxr|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory

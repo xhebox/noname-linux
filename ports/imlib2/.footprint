@@ -1,0 +1,65 @@
+lib/libImlib2.so|777|0|0|symbolic link
+lib/libImlib2.so.1|777|0|0|symbolic link
+bin/imlib2_view|755|0|0|regular file
+bin/imlib2_conv|755|0|0|regular file
+bin/imlib2_poly|755|0|0|regular file
+bin/imlib2-config|755|0|0|regular file
+bin/imlib2_grab|755|0|0|regular file
+bin/imlib2_bumpmap|755|0|0|regular file
+bin/imlib2_show|755|0|0|regular file
+bin/imlib2_colorspace|755|0|0|regular file
+bin/imlib2_test|755|0|0|regular file
+include/Imlib2.h|644|0|0|regular file
+lib/libImlib2.so.1.4.9|755|0|0|regular file
+lib/libImlib2.a|644|0|0|regular file
+lib/pkgconfig/imlib2.pc|644|0|0|regular file
+lib/imlib2/loaders/argb.so|755|0|0|regular file
+lib/imlib2/loaders/gif.so|755|0|0|regular file
+lib/imlib2/loaders/xpm.so|755|0|0|regular file
+lib/imlib2/loaders/zlib.so|755|0|0|regular file
+lib/imlib2/loaders/bz2.so|755|0|0|regular file
+lib/imlib2/loaders/tga.so|755|0|0|regular file
+lib/imlib2/loaders/png.so|755|0|0|regular file
+lib/imlib2/loaders/lbm.so|755|0|0|regular file
+lib/imlib2/loaders/pnm.so|755|0|0|regular file
+lib/imlib2/loaders/ff.so|755|0|0|regular file
+lib/imlib2/loaders/bmp.so|755|0|0|regular file
+lib/imlib2/loaders/tiff.so|755|0|0|regular file
+lib/imlib2/loaders/jpeg.so|755|0|0|regular file
+lib/imlib2/filters/colormod.so|755|0|0|regular file
+lib/imlib2/filters/testfilter.so|755|0|0|regular file
+lib/imlib2/filters/bumpmap.so|755|0|0|regular file
+share/imlib2/data/fonts/grunge.ttf|644|0|0|regular file
+share/imlib2/data/fonts/morpheus.ttf|644|0|0|regular file
+share/imlib2/data/fonts/notepad.ttf|644|0|0|regular file
+share/imlib2/data/fonts/cinema.ttf|644|0|0|regular file
+share/imlib2/data/images/stop.png|644|0|0|regular file
+share/imlib2/data/images/sh1.png|644|0|0|regular file
+share/imlib2/data/images/bulb.png|644|0|0|regular file
+share/imlib2/data/images/imlib2.png|644|0|0|regular file
+share/imlib2/data/images/mail.png|644|0|0|regular file
+share/imlib2/data/images/calc.png|644|0|0|regular file
+share/imlib2/data/images/lock.png|644|0|0|regular file
+share/imlib2/data/images/cal.png|644|0|0|regular file
+share/imlib2/data/images/bg.png|644|0|0|regular file
+share/imlib2/data/images/menu.png|644|0|0|regular file
+share/imlib2/data/images/sh2.png|644|0|0|regular file
+share/imlib2/data/images/sh3.png|644|0|0|regular file
+share/imlib2/data/images/globe.png|644|0|0|regular file
+share/imlib2/data/images/folder.png|644|0|0|regular file
+share/imlib2/data/images/tnt.png|644|0|0|regular file
+share/imlib2/data/images/mush.png|644|0|0|regular file
+share/imlib2/data/images/audio.png|644|0|0|regular file
+share/imlib2/data/images/paper.png|644|0|0|regular file
+share/imlib2/data/images|755|0|0|directory
+share/imlib2/data/fonts|755|0|0|directory
+share/imlib2/data|755|0|0|directory
+share/imlib2|755|0|0|directory
+share|755|0|0|directory
+lib/imlib2/filters|755|0|0|directory
+lib/imlib2/loaders|755|0|0|directory
+lib/imlib2|755|0|0|directory
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+include|755|0|0|directory
+bin|755|0|0|directory

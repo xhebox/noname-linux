@@ -1,0 +1,5 @@
+lib32/libbz2.so.1|777|0|0|symbolic link
+lib32/libbz2.so|777|0|0|symbolic link
+lib32/libbz2.so.1.0.6|755|0|0|regular file
+lib32/libbz2.a|644|0|0|regular file
+lib32|755|0|0|directory

@@ -1,0 +1,28 @@
+include/libraw/libraw.h|644|0|0|regular file
+include/libraw/libraw_alloc.h|644|0|0|regular file
+include/libraw/libraw_const.h|644|0|0|regular file
+include/libraw/libraw_datastream.h|644|0|0|regular file
+include/libraw/libraw_internal.h|644|0|0|regular file
+include/libraw/libraw_types.h|644|0|0|regular file
+include/libraw/libraw_version.h|644|0|0|regular file
+include/libraw|755|0|0|directory
+include|755|0|0|directory
+lib/libraw.a|644|0|0|regular file
+lib/libraw.so.16.0.0|755|0|0|regular file
+lib/libraw.so.16|777|0|0|symbolic link
+lib/libraw.so|777|0|0|symbolic link
+lib/libraw_r.a|644|0|0|regular file
+lib/libraw_r.so.16.0.0|755|0|0|regular file
+lib/libraw_r.so.16|777|0|0|symbolic link
+lib/libraw_r.so|777|0|0|symbolic link
+lib/pkgconfig/libraw.pc|644|0|0|regular file
+lib/pkgconfig/libraw_r.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/libraw/COPYRIGHT|644|0|0|regular file
+share/doc/libraw/Changelog.txt|644|0|0|regular file
+share/doc/libraw/LICENSE.CDDL|644|0|0|regular file
+share/doc/libraw/LICENSE.LGPL|644|0|0|regular file
+share/doc/libraw|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

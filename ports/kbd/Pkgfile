@@ -1,0 +1,34 @@
+name=kbd
+version=2.0.4
+deps="autoconf automake libtool gettext check"
+desc="Linux keyboard utilities"
+source="http://ftp.altlinux.org/pub/people/legion/kbd/${name}-${version}.tar.xz
+http://git.alpinelinux.org/cgit/aports/plain/main/kbd/error.h
+fix-eu.patch"
+
+build() { 
+	cd $name-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 < ../$i || die;;
+		esac
+	done	
+	
+	mv data/keymaps/i386/qwertz/cz.map data/keymaps/i386/qwertz/cz-qwertz.map
+	mv data/keymaps/i386/olpc/es.map data/keymaps/i386/olpc/es-olpc.map
+	mv data/keymaps/i386/olpc/pt.map data/keymaps/i386/olpc/pt-olpc.map
+	mv data/keymaps/i386/dvorak/no.map data/keymaps/i386/dvorak/no-dvorak.map
+	mv data/keymaps/i386/fgGIod/trf.map data/keymaps/i386/fgGIod/trf-fgGIod.map
+	mv data/keymaps/i386/colemak/en-latin9.map data/keymaps/i386/colemak/colemak.map
+
+	sed -e '/^PKG_CHECK_MODULES.*/d' -i configure.ac
+	sed -e 's,tests ,,g' -i Makefile.am
+	cp ../error.h .
+	autoreconf -fi
+	./configure --prefix= \
+	--disable-vlock \
+	--disable-tests \
+	--datadir=/share/kbd 
+	make KEYCODES_PROGS=yes RESIZECONS_PROGS=yes  || die
+	make DESTDIR="$pkgdir" KEYCODES_PROGS=yes RESIZECONS_PROGS=yes install  || die
+}

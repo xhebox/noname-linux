@@ -1,0 +1,28 @@
+bin/tox-bootstrapd|755|0|0|regular file
+bin|755|0|0|directory
+include/tox/tox.h|644|0|0|regular file
+include/tox/toxav.h|644|0|0|regular file
+include/tox/toxdns.h|644|0|0|regular file
+include/tox/toxencryptsave.h|644|0|0|regular file
+include/tox|755|0|0|directory
+include|755|0|0|directory
+lib/libtoxav.a|644|0|0|regular file
+lib/libtoxav.so.1.8.0|755|0|0|regular file
+lib/libtoxav.so.1|777|0|0|symbolic link
+lib/libtoxav.so|777|0|0|symbolic link
+lib/libtoxcore.a|644|0|0|regular file
+lib/libtoxcore.so.1.8.0|755|0|0|regular file
+lib/libtoxcore.so.1|777|0|0|symbolic link
+lib/libtoxcore.so|777|0|0|symbolic link
+lib/libtoxdns.a|644|0|0|regular file
+lib/libtoxdns.so.1.8.0|755|0|0|regular file
+lib/libtoxdns.so.1|777|0|0|symbolic link
+lib/libtoxdns.so|777|0|0|symbolic link
+lib/libtoxencryptsave.a|644|0|0|regular file
+lib/libtoxencryptsave.so.1.8.0|755|0|0|regular file
+lib/libtoxencryptsave.so.1|777|0|0|symbolic link
+lib/libtoxencryptsave.so|777|0|0|symbolic link
+lib/pkgconfig/libtoxav.pc|644|0|0|regular file
+lib/pkgconfig/libtoxcore.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

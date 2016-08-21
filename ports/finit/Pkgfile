@@ -1,0 +1,20 @@
+name=finit
+version=3.0-rc2
+deps="eudev dbus libuev libite run-parts"
+desc="nice init"
+source="https://github.com/troglobit/finit/releases/download/$version/finit-$version.tar.xz
+cus.patch
+rc.local
+finit.conf"
+
+build() {
+	cd $name-$version
+	patch -p1 < ../cus.patch || die
+	./configure --prefix=/ --sbindir=/bin --disable-inetd --enable-rw-rootfs --enable-dbus-plugin --disable-alsa-utils-plugin --enable-x11-common-plugin --enable-resolvconf-plugin --enable-fallback-shell
+	make  || die
+	make DESTDIR="$pkgdir" install  || die
+	mkdir -p "$pkgdir"/etc
+	cp ../finit.conf "$pkgdir"/etc/finit.conf
+	install -Dm755 ../rc.local "$pkgdir"/etc/rc.local
+	mkdir -p "$pkgdir"/etc/init.d
+}
