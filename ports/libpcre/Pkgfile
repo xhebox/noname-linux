@@ -1,5 +1,5 @@
 name=libpcre
-version=8.40
+version=8.41
 desc="Perl Compatible Regular Expressions"
 deps=musl
 source="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$version.tar.bz2"

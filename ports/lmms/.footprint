@@ -104,6 +104,7 @@ include/lmms/LmmsPalette.h|644|0|0|regular file
 include/lmms/LmmsStyle.h|644|0|0|regular file
 include/lmms/LocklessAllocator.h|644|0|0|regular file
 include/lmms/LocklessList.h|644|0|0|regular file
+include/lmms/MainApplication.h|644|0|0|regular file
 include/lmms/MainWindow.h|644|0|0|regular file
 include/lmms/MemoryHelper.h|644|0|0|regular file
 include/lmms/MemoryManager.h|644|0|0|regular file
@@ -137,6 +138,7 @@ include/lmms/NStateButton.h|644|0|0|regular file
 include/lmms/Note.h|644|0|0|regular file
 include/lmms/NotePlayHandle.h|644|0|0|regular file
 include/lmms/Oscillator.h|644|0|0|regular file
+include/lmms/OutputSettings.h|644|0|0|regular file
 include/lmms/Pattern.h|644|0|0|regular file
 include/lmms/PeakController.h|644|0|0|regular file
 include/lmms/Piano.h|644|0|0|regular file
@@ -374,6 +376,7 @@ lib/lmms/liborganic.so|755|0|0|regular file
 lib/lmms/libpapu.so|755|0|0|regular file
 lib/lmms/libpatman.so|755|0|0|regular file
 lib/lmms/libpeakcontrollereffect.so|755|0|0|regular file
+lib/lmms/libreverbsc.so|755|0|0|regular file
 lib/lmms/libsf2player.so|755|0|0|regular file
 lib/lmms/libsfxr.so|755|0|0|regular file
 lib/lmms/libsid.so|755|0|0|regular file
@@ -396,6 +399,7 @@ share/lmms/backgrounds/lmms_tile.png|644|0|0|regular file
 share/lmms/backgrounds/newbg.png|644|0|0|regular file
 share/lmms/backgrounds/vinnie.png|644|0|0|regular file
 share/lmms/backgrounds|755|0|0|directory
+share/lmms/locale/ar.qm|644|0|0|regular file
 share/lmms/locale/bs.qm|644|0|0|regular file
 share/lmms/locale/ca.qm|644|0|0|regular file
 share/lmms/locale/cs.qm|644|0|0|regular file
@@ -405,6 +409,7 @@ share/lmms/locale/es.qm|644|0|0|regular file
 share/lmms/locale/fa.qm|644|0|0|regular file
 share/lmms/locale/fr.qm|644|0|0|regular file
 share/lmms/locale/gl.qm|644|0|0|regular file
+share/lmms/locale/hu_HU.qm|644|0|0|regular file
 share/lmms/locale/it.qm|644|0|0|regular file
 share/lmms/locale/ja.qm|644|0|0|regular file
 share/lmms/locale/ko.qm|644|0|0|regular file
@@ -412,6 +417,7 @@ share/lmms/locale/nl.qm|644|0|0|regular file
 share/lmms/locale/pl.qm|644|0|0|regular file
 share/lmms/locale/pt.qm|644|0|0|regular file
 share/lmms/locale/ru.qm|644|0|0|regular file
+share/lmms/locale/sl.qm|644|0|0|regular file
 share/lmms/locale/sr.qm|644|0|0|regular file
 share/lmms/locale/sv.qm|644|0|0|regular file
 share/lmms/locale/uk.qm|644|0|0|regular file
@@ -1581,6 +1587,7 @@ share/lmms/projects/demos/EsoXLB-CPU.mmpz|644|0|0|regular file
 share/lmms/projects/demos/Farbro-Tectonic.mmpz|644|0|0|regular file
 share/lmms/projects/demos/Greippi - Krem Kaakkuja (Second Flight Remix).mmpz|644|0|0|regular file
 share/lmms/projects/demos/Impulslogik-Zen.mmpz|644|0|0|regular file
+share/lmms/projects/demos/Jousboxx-BuzzerBeater.mmpz|644|0|0|regular file
 share/lmms/projects/demos/Momo64-esp.mmpz|644|0|0|regular file
 share/lmms/projects/demos/Namitryus-K-Project.mmpz|644|0|0|regular file
 share/lmms/projects/demos/Oglsdl-Dr8v2.mmpz|644|0|0|regular file
@@ -2861,9 +2868,8 @@ share/lmms/themes/classic/step_btn_add.png|644|0|0|regular file
 share/lmms/themes/classic/step_btn_duplicate.png|644|0|0|regular file
 share/lmms/themes/classic/step_btn_off.png|644|0|0|regular file
 share/lmms/themes/classic/step_btn_off_light.png|644|0|0|regular file
-share/lmms/themes/classic/step_btn_on.png|644|0|0|regular file
-share/lmms/themes/classic/step_btn_on_100.png|644|0|0|regular file
-share/lmms/themes/classic/step_btn_on_yellow.png|644|0|0|regular file
+share/lmms/themes/classic/step_btn_on_0.png|644|0|0|regular file
+share/lmms/themes/classic/step_btn_on_200.png|644|0|0|regular file
 share/lmms/themes/classic/step_btn_remove.png|644|0|0|regular file
 share/lmms/themes/classic/stepper-down-press.png|644|0|0|regular file
 share/lmms/themes/classic/stepper-down.png|644|0|0|regular file
@@ -2957,6 +2963,7 @@ share/lmms/themes/default/edit_rename.png|644|0|0|regular file
 share/lmms/themes/default/edit_select.png|644|0|0|regular file
 share/lmms/themes/default/edit_undo.png|644|0|0|regular file
 share/lmms/themes/default/effect_plugin.png|644|0|0|regular file
+share/lmms/themes/default/env_lfo_tab.png|644|0|0|regular file
 share/lmms/themes/default/envelope_graph.png|644|0|0|regular file
 share/lmms/themes/default/error.png|644|0|0|regular file
 share/lmms/themes/default/exit.png|644|0|0|regular file
@@ -2978,7 +2985,9 @@ share/lmms/themes/default/flip_y.png|644|0|0|regular file
 share/lmms/themes/default/folder.png|644|0|0|regular file
 share/lmms/themes/default/folder_locked.png|644|0|0|regular file
 share/lmms/themes/default/folder_opened.png|644|0|0|regular file
+share/lmms/themes/default/func_tab.png|644|0|0|regular file
 share/lmms/themes/default/fx_mixer.png|644|0|0|regular file
+share/lmms/themes/default/fx_tab.png|644|0|0|regular file
 share/lmms/themes/default/hand.png|644|0|0|regular file
 share/lmms/themes/default/help.png|644|0|0|regular file
 share/lmms/themes/default/hint.png|644|0|0|regular file
@@ -3017,6 +3026,8 @@ share/lmms/themes/default/master_volume.png|644|0|0|regular file
 share/lmms/themes/default/maximize.png|644|0|0|regular file
 share/lmms/themes/default/metronome.png|644|0|0|regular file
 share/lmms/themes/default/midi_file.png|644|0|0|regular file
+share/lmms/themes/default/midi_tab.png|644|0|0|regular file
+share/lmms/themes/default/misc_tab.png|644|0|0|regular file
 share/lmms/themes/default/mixer_send_off.png|644|0|0|regular file
 share/lmms/themes/default/mixer_send_on.png|644|0|0|regular file
 share/lmms/themes/default/moog_saw_wave_active.png|644|0|0|regular file
@@ -3044,6 +3055,7 @@ share/lmms/themes/default/pause.png|644|0|0|regular file
 share/lmms/themes/default/piano.png|644|0|0|regular file
 share/lmms/themes/default/play.png|644|0|0|regular file
 share/lmms/themes/default/playpos_marker.png|644|0|0|regular file
+share/lmms/themes/default/plugin_tab.png|644|0|0|regular file
 share/lmms/themes/default/plugins.png|644|0|0|regular file
 share/lmms/themes/default/ports.png|644|0|0|regular file
 share/lmms/themes/default/pr_black_key.png|644|0|0|regular file
@@ -3109,7 +3121,8 @@ share/lmms/themes/default/step_btn_add.png|644|0|0|regular file
 share/lmms/themes/default/step_btn_duplicate.png|644|0|0|regular file
 share/lmms/themes/default/step_btn_off.png|644|0|0|regular file
 share/lmms/themes/default/step_btn_off_light.png|644|0|0|regular file
-share/lmms/themes/default/step_btn_on_100.png|644|0|0|regular file
+share/lmms/themes/default/step_btn_on_0.png|644|0|0|regular file
+share/lmms/themes/default/step_btn_on_200.png|644|0|0|regular file
 share/lmms/themes/default/step_btn_remove.png|644|0|0|regular file
 share/lmms/themes/default/stepper-down-press.png|644|0|0|regular file
 share/lmms/themes/default/stepper-down.png|644|0|0|regular file

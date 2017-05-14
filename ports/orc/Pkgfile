@@ -1,5 +1,5 @@
 name=orc
-version=0.4.26
+version=0.4.27
 desc="The Oild Runtime Compiler"
 source="http://gstreamer.freedesktop.org/src/orc/orc-${version}.tar.xz
 "

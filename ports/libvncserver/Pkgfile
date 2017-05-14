@@ -1,0 +1,13 @@
+name=libvncserver
+version=0.9.11
+desc="Cross-platform C libraries that allow you to easily implement VNC server or client functionality"
+deps="libpng libjpeg-turbo gnutls libgcrypt libressl sdl2"
+source="https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${version}.tar.gz"
+
+build() {
+	cd libvncserver-LibVNCServer-$version
+	NOCONFIGURE=1 ./autogen.sh
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

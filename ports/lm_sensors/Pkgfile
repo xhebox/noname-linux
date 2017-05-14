@@ -9,9 +9,6 @@ lm_sensors-fancontrol.patch
 
 build() {
 	cd lm-sensors-$_ver
-	sed -i prog/*/Module.mk \
-		     -e "/^MODULE_DIR :=/i LDFLAGS := ${LDFLAGS}" \
-		     -e 's;$(CC) $(EXLDFLAGS);$(CC) $(LDFLAGS) $(EXLDFLAGS);'
 	sed -i 's,asm/io.h,sys/io.h,g' prog/dump/*.c
 	patch -p0 -i "${srcdir}/lm_sensors-fancontrol.patch" || die
 	make PREFIX=/ || die

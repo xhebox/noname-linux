@@ -203,8 +203,10 @@ share/man/man1/perf-config.1.gz|644|0|0|regular file
 share/man/man1/perf-data.1.gz|644|0|0|regular file
 share/man/man1/perf-diff.1.gz|644|0|0|regular file
 share/man/man1/perf-evlist.1.gz|644|0|0|regular file
+share/man/man1/perf-ftrace.1.gz|644|0|0|regular file
 share/man/man1/perf-help.1.gz|644|0|0|regular file
 share/man/man1/perf-inject.1.gz|644|0|0|regular file
+share/man/man1/perf-kallsyms.1.gz|644|0|0|regular file
 share/man/man1/perf-kmem.1.gz|644|0|0|regular file
 share/man/man1/perf-kvm.1.gz|644|0|0|regular file
 share/man/man1/perf-list.1.gz|644|0|0|regular file

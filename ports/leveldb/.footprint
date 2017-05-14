@@ -1,0 +1,32 @@
+include/leveldb/c.h|644|0|0|regular file
+include/leveldb/cache.h|644|0|0|regular file
+include/leveldb/comparator.h|644|0|0|regular file
+include/leveldb/db.h|644|0|0|regular file
+include/leveldb/dumpfile.h|644|0|0|regular file
+include/leveldb/env.h|644|0|0|regular file
+include/leveldb/filter_policy.h|644|0|0|regular file
+include/leveldb/iterator.h|644|0|0|regular file
+include/leveldb/options.h|644|0|0|regular file
+include/leveldb/slice.h|644|0|0|regular file
+include/leveldb/status.h|644|0|0|regular file
+include/leveldb/table.h|644|0|0|regular file
+include/leveldb/table_builder.h|644|0|0|regular file
+include/leveldb/write_batch.h|644|0|0|regular file
+include/leveldb|755|0|0|directory
+include|755|0|0|directory
+lib/libleveldb.a|644|0|0|regular file
+lib/libleveldb.so.1.20|755|0|0|regular file
+lib/libleveldb.so.1|777|0|0|symbolic link
+lib/libleveldb.so|777|0|0|symbolic link
+lib|755|0|0|directory
+share/doc/leveldb/bench/db_bench_sqlite3.cc|644|0|0|regular file
+share/doc/leveldb/bench/db_bench_tree_db.cc|644|0|0|regular file
+share/doc/leveldb/benchmark.html|644|0|0|regular file
+share/doc/leveldb/bench|755|0|0|directory
+share/doc/leveldb/impl.md|644|0|0|regular file
+share/doc/leveldb/index.md|644|0|0|regular file
+share/doc/leveldb/log_format.md|644|0|0|regular file
+share/doc/leveldb/table_format.md|644|0|0|regular file
+share/doc/leveldb|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

@@ -1,8 +1,8 @@
 name=krb5
-version=1.15
+version=1.15.1
 desc="The Kerberos network authentication system"
-deps="e2fsprogs libldap keyutils perl db"
-source="https://web.mit.edu/kerberos/dist/krb5/${version}/${name}-${version}.tar.gz
+deps="e2fsprogs keyutils perl db"
+source="https://web.mit.edu/kerberos/dist/krb5/${version%.*}/${name}-${version}.tar.gz
 libressl.patch
 krb5-config_LDFLAGS.patch"
 
@@ -28,7 +28,7 @@ build() {
 		--disable-rpath \
 		--disable-static \
 		--without-tcl \
-		--with-ldap \
+		--without-ldap \
 		--without-system-verto
 
 	make || die
@@ -42,8 +42,4 @@ build() {
 	install -pm 644 config-files/krb5.conf "${pkgdir}"/etc/krb5.conf
 	install -dm 755 "${pkgdir}"/share/aclocal
 	install -m 644 util/ac_check_krb5.m4 "${pkgdir}"/share/aclocal
-}
-
-post() {
-	ldd /lib/sasl2/libgssapiv2.so 2>&1 | grep -q krb5 || opt_post_rebuild libsasl krb5
 }

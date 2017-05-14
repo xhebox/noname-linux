@@ -27,10 +27,10 @@ include/harfbuzz/hb-version.h|644|0|0|regular file
 include/harfbuzz/hb.h|644|0|0|regular file
 include/harfbuzz|755|0|0|directory
 include|755|0|0|directory
-lib/libharfbuzz-icu.so.0.10400.6|755|0|0|regular file
+lib/libharfbuzz-icu.so.0.10400.7|755|0|0|regular file
 lib/libharfbuzz-icu.so.0|777|0|0|symbolic link
 lib/libharfbuzz-icu.so|777|0|0|symbolic link
-lib/libharfbuzz.so.0.10400.6|755|0|0|regular file
+lib/libharfbuzz.so.0.10400.7|755|0|0|regular file
 lib/libharfbuzz.so.0|777|0|0|symbolic link
 lib/libharfbuzz.so|777|0|0|symbolic link
 lib/pkgconfig/harfbuzz-icu.pc|644|0|0|regular file

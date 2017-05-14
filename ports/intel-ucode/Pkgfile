@@ -1,6 +1,6 @@
 name=intel-ucode
-version=20161104
-_dlid=26400
+version=20170707
+_dlid=26925
 deps="libarchive"
 desc="Microcode update files for Intel CPUs"
 source="

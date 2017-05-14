@@ -4,6 +4,7 @@ desc="dwm"
 deps="xorg-server"
 source="http://dl.suckless.org/dwm/dwm-6.1.tar.gz
 config.h
+underline.patch
 dwm-autostart-20161205-bb3bd6f.diff
 dwm-movestack-6.1.diff
 dwm-6.1-pertag-tab-v2b.diff
@@ -17,6 +18,7 @@ build(){
 	cd $name-$version
 	cp -r "$srcdir"/config.mk .
 	cp -r "$srcdir"/config.h .
+	patch -p1 < ../underline.patch || die
 	patch -p1 < ../dwm-movestack-6.1.diff || die
 	patch -p1 < ../dwm-6.1-systray.diff || die
 	patch -p1 < ../dwm-6.1-pertag-tab-v2b.diff || die

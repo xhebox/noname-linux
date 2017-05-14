@@ -1,5 +1,5 @@
 name=libtiff
-version=4.0.7
+version=4.0.8
 desc="Library for manipulation of TIFF images"
 deps="libjpeg-turbo zlib xz glu freeglut mesa"
 source="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"

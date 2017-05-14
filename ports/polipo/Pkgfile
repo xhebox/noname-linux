@@ -1,0 +1,22 @@
+name=polipo
+version=1.1.1
+desc="A small and fast caching web proxy."
+deps=bash
+source="http://www.pps.univ-paris-diderot.fr/~jch/software/files/polipo/polipo-$version.tar.gz"
+
+build() {
+	cd polipo-$version
+	sed -i -e '/INFODIR/d' -e '/info/d' -e '/html/d' Makefile
+	make || die || die || die
+	make 	PREFIX="$pkgdir" \
+		MANDIR="$pkgdir/share/man" \
+		LOCAL_ROOT="$pkgdir/share/polipo/www" \
+		DISK_CACHE_ROOT="$pkgdir/var/cache/polipo" \
+	install || die
+
+	install -Dm 644 config.sample "$pkgdir/etc/polipo/config.sample"
+	install -Dm 644 forbidden.sample "$pkgdir/etc/polipo/forbidden.sample"
+
+	install -dm 700 -o 185 -g 185 "$pkgdir/var/cache/polipo"
+}
+

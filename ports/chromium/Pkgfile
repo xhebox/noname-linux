@@ -1,11 +1,15 @@
 name=chromium
-version=58.0.3029.96
+version=59.0.3071.115
 deps="alsa-lib bzip2 gtk gtk3 snappy harfbuzz perl pciutils dbus libexif gperf mesa python yasm libvpx nss ninja libcap libva-intel-driver flac libva libjpeg-turbo libpng xdg-utils libxslt ffmpeg expat libwebp elfutils speex mesa hwids libxscrnsaver desktop-file-utils glib libevent libvdpau-va-gl libxfont2 icu ttf-dejavu krb5 nodejs"
 desc="The open-source project behind Google Chrome"
 source="
-https://commondatastorage.googleapis.com/chromium-browser-official/$name-$version.tar.xz
+https://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-$version.tar.xz
 chromium-gn-bootstrap-r2.patch
-chromium-system-ffmpeg-r4.patch
+chromium-dma-buf-r1.patch
+chromium-system-icu-r1.patch
+chromium-system-ffmpeg-r6.patch
+chromium-blink-gcc7.patch
+chromium-v8-gcc7.patch
 chromium-widevine.patch
 default-pthread-stacksize.patch
 gn_bootstrap.patch
@@ -17,24 +21,31 @@ no-execinfo.patch
 no-getcontext.patch
 no-mallinfo.patch
 resolver.patch
-vaapi_patch_r0.patch
+swiftshader.patch
+vaapi_patch_r2.patch
 chromium.sh
 chromium.desktop
 "
 
 ext() {
 	cd $name-$version
+
+	curl -O -L http://git.savannah.gnu.org/cgit/freetype/freetype2.git/plain/src/psnames/pstables.h
+	mkdir -p third_party/freetype/src/src/psnames
+	mv pstables.h third_party/freetype/src/src/psnames/pstables.h
+
 	sed "s/@WIDEVINE_VERSION@/Pinkie Pie/" -i ../chromium-widevine.patch || die
 	for i in $source; do
 		msg $i
 		case $i in
-		chromium-*gn*|icu*|*getrlimit*|*allocator*|*vaapi*) patch -p1 -i "$srcdir"/$i || die;;
+		0001*patch) patch -Np1 -d third_party/skia < ../0001-Clip-FreeType-glyph-bitmap-to-mask.patch || die;;
+		00??-*|chromium-*|*ffmpeg*|chromium-*gn*|icu*|*getrlimit*|*allocator*|*vaapi*) patch -p1 -i "$srcdir"/$i || die;;
 		*.patch|*.diff) patch -p0 -i "$srcdir"/$i || die;;
 		esac
 	done
 
 	sed -i '/config("compiler")/ a cflags_cc = [ "-fno-delete-null-pointer-checks" ]' build/config/linux/BUILD.gn
-	local _system_libs="flac harfbuzz-ng libjpeg libpng libwebp libxml libxslt snappy yasm zlib ffmpeg libevent"
+	local _system_libs="flac harfbuzz-ng libjpeg libpng libwebp libxslt snappy yasm zlib ffmpeg libevent"
 	local _lib
 	for _lib in $_system_libs libjpeg_turbo; do
 		find -type f -path "*third_party/$_lib/*" \
@@ -69,7 +80,7 @@ build() {
 
 	python2.7 tools/gn/bootstrap/bootstrap.py --gn-gen-args "${_flags}" || die
 	out/Release/gn gen out/Release --args="${_flags}" || die
-	ninja -C out/Release chrome chrome_sandbox chromedriver widevinecdmadapter pdf || die
+	ninja -j 4 -C out/Release chrome chrome_sandbox chromedriver widevinecdmadapter pdf || die
 	
 	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
 

@@ -1,10 +1,15 @@
 name=qt5-location
-version=5.8.0
+version=5.9.1
 desc='Provides access to position, satellite and area monitoring classes'
 deps="qt5-declarative"
-source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtlocation-opensource-src-$version.tar.xz"
+source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtlocation-opensource-src-$version.tar.xz
+musl.patch"
 
 build() {
+	cd qtlocation-opensource-src-$version
+	patch -p1 < ../musl.patch || die
+	cd -
+
 	mkdir -p build
 	cd build
 

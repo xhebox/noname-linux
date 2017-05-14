@@ -1,4 +1,4 @@
-lib32/libgcrypt.so|777|0|0|symbolic link
+lib32/libgcrypt.so.20.1.8|755|0|0|regular file
 lib32/libgcrypt.so.20|777|0|0|symbolic link
-lib32/libgcrypt.so.20.1.6|755|0|0|regular file
+lib32/libgcrypt.so|777|0|0|symbolic link
 lib32|755|0|0|directory

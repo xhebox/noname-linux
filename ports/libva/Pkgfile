@@ -1,8 +1,8 @@
 name=libva
-version=1.8.1
+version=1.8.3
 desc="vaapi"
 deps="xorg-proto libxfixes libx11 libdrm"
-source="https://www.freedesktop.org/software/vaapi/releases/libva/libva-$version.tar.bz2"
+source="https://github.com/01org/libva/releases/download/$version/libva-$version.tar.bz2"
 
 build() {
 	cd libva-$version

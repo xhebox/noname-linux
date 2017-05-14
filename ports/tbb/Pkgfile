@@ -1,6 +1,6 @@
 name=tbb
-version=2017_20170226
-_pkgver=2017_U5
+version=2017_20170604
+_pkgver=2017_U7
 deps="musl"
 desc="High level abstract threading library"
 source="https://github.com/01org/tbb/archive/$_pkgver.tar.gz"

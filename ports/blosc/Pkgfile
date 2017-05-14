@@ -1,5 +1,5 @@
 name=blosc
-version=1.11.3
+version=1.12.0
 desc="A blocking, shuffling and loss-less compression library."
 deps="zlib lz4 snappy cmake"
 source="https://github.com/Blosc/c-blosc/archive/v${version}.tar.gz

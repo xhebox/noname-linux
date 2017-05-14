@@ -1,5 +1,5 @@
 name=xf86-video-intel
-version=2.99.917+772+gc72bb27a
+version=2.99.917+777+g6babcf15
 deps="xorg-server xcb-util libxscrnsaver libxvmc libxcb xcb-util"
 desc="Intel graphics video driver"
 

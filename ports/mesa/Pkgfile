@@ -1,6 +1,6 @@
 name=mesa
-version=17.0.5
-deps="expat libdrm xorg-proto libxshmfence libxcb libx11 libxfixes libxext libxdamage libxxf86vm libxvmc python elfutils libgcrypt llvm libclc libomxil-bellagio"
+version=17.1.5
+deps="expat libdrm xorg-proto libxshmfence libxcb libx11 libxfixes libxext libxdamage libxxf86vm libxvmc python elfutils libgcrypt llvm libclc libomxil-bellagio libunwind lm_sensors python-mako"
 desc="Mesa 3D Graphics Library"
 source="https://www.mesa3d.org/archive/mesa-$version.tar.xz
 musl-endian.patch
@@ -23,21 +23,23 @@ build() {
 	cd mesa-$version
 	/bin/bash ./configure \
 		--prefix= \
-		--with-gallium-drivers=radeonsi,nouveau,swrast,virgl \
+		--with-gallium-drivers=radeonsi,nouveau,swrast,virgl,swr,svga \
 		--with-dri-drivers=i915,i965,radeon,nouveau,swrast \
 		--with-vulkan-drivers=intel,radeon \
 		--with-dri-driverdir=/lib/xorg/modules/dri \
-		--with-egl-platforms=drm,x11 \
+		--with-platforms=drm,x11 \
+		--enable-libunwind \
+		--enable-lmsensors \
+		--disable-xvmc \
 		--enable-egl \
+		--enable-gles1 \
 		--enable-gles2 \
 		--enable-gbm \
 		--enable-shared-glapi \
-		--enable-xvmc \
 		--enable-nine \
+		--enable-omx \
 		--enable-glx \
 		--enable-va \
-		--enable-omx \
-		--enable-gallium-osmesa \
 		--enable-xa \
 		--enable-vdpau \
 		--disable-glx-tls \
@@ -45,9 +47,13 @@ build() {
 		--enable-dri3 \
 		--enable-opencl \
 		--enable-opencl-icd \
+		--enable-lmsensors \
 		--enable-texture-float \
-		--enable-gallium-llvm \
-		--enable-llvm-shared-libs
+		--enable-gallium-osmesa \
+		--enable-gallium-extra-hud \
+		--enable-llvm-shared-libs \
+		--with-dri-driverdir=/lib/xorg/modules/dri \
+		--with-clang-libdir=/lib
 
 	make || die
 	make DESTDIR="$pkgdir" install || die

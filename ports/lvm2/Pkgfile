@@ -1,5 +1,5 @@
 name=lvm2
-version=2.02.171
+version=2.02.173
 deps="eudev util-linux readline"
 desc="Logical Volume Manager 2 utilities"
 source="

@@ -20,7 +20,7 @@ lib/libvala-0.36.so.0|777|0|0|symbolic link
 lib/libvala-0.36.so|777|0|0|symbolic link
 lib/pkgconfig/libvala-0.36.pc|644|0|0|regular file
 lib/pkgconfig/vapigen-0.36.pc|644|0|0|regular file
-lib/pkgconfig/vapigen.pc|644|0|0|regular file
+lib/pkgconfig/vapigen.pc|777|0|0|symbolic link
 lib/pkgconfig|755|0|0|directory
 lib/vala-0.36/gen-introspect-0.36|755|0|0|regular file
 lib/vala-0.36|755|0|0|directory

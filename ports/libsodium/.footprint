@@ -27,6 +27,7 @@ include/sodium/crypto_onetimeauth.h|644|0|0|regular file
 include/sodium/crypto_onetimeauth_poly1305.h|644|0|0|regular file
 include/sodium/crypto_pwhash.h|644|0|0|regular file
 include/sodium/crypto_pwhash_argon2i.h|644|0|0|regular file
+include/sodium/crypto_pwhash_argon2id.h|644|0|0|regular file
 include/sodium/crypto_pwhash_scryptsalsa208sha256.h|644|0|0|regular file
 include/sodium/crypto_scalarmult.h|644|0|0|regular file
 include/sodium/crypto_scalarmult_curve25519.h|644|0|0|regular file
@@ -59,7 +60,7 @@ include/sodium/version.h|644|0|0|regular file
 include/sodium|755|0|0|directory
 include|755|0|0|directory
 lib/libsodium.a|644|0|0|regular file
-lib/libsodium.so.18.2.0|755|0|0|regular file
+lib/libsodium.so.18.3.0|755|0|0|regular file
 lib/libsodium.so.18|777|0|0|symbolic link
 lib/libsodium.so|777|0|0|symbolic link
 lib/pkgconfig/libsodium.pc|644|0|0|regular file

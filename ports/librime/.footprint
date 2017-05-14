@@ -1,0 +1,15 @@
+bin/rime_deployer|755|0|0|regular file
+bin/rime_dict_manager|755|0|0|regular file
+bin|755|0|0|directory
+include/rime_api.h|644|0|0|regular file
+include|755|0|0|directory
+lib/librime.so.1.2.9|755|0|0|regular file
+lib/librime.so.1|777|0|0|symbolic link
+lib/librime.so|777|0|0|symbolic link
+lib/pkgconfig/rime.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/cmake/rime/RimeConfig.cmake|644|0|0|regular file
+share/cmake/rime|755|0|0|directory
+share/cmake|755|0|0|directory
+share|755|0|0|directory

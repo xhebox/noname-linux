@@ -39,7 +39,7 @@ lib/cmake/KF5WindowSystem/KF5WindowSystemTargets-release.cmake|644|0|0|regular f
 lib/cmake/KF5WindowSystem/KF5WindowSystemTargets.cmake|644|0|0|regular file
 lib/cmake/KF5WindowSystem|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5WindowSystem.so.5.33.0|755|0|0|regular file
+lib/libKF5WindowSystem.so.5.36.0|755|0|0|regular file
 lib/libKF5WindowSystem.so.5|777|0|0|symbolic link
 lib/libKF5WindowSystem.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KWindowSystem.pri|644|0|0|regular file

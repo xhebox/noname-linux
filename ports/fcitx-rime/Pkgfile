@@ -1,0 +1,12 @@
+name=fcitx-rime
+version=0.3.1
+desc='Fcitx Wrapper for librime'
+deps="fcitx librime brise"
+source="https://download.fcitx-im.org/fcitx-rime/fcitx-rime-$version.tar.xz"
+
+build() {
+	cd fcitx-rime-$version
+	cmake -DCMAKE_INSTALL_PREFIX= .
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

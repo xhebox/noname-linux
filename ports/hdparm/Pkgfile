@@ -1,5 +1,5 @@
 name=hdparm
-version=9.51
+version=9.52
 desc="Utility to access IDE device parameters"
 deps=musl
 source="http://downloads.sourceforge.net/sourceforge/hdparm/${name}-${version}.tar.gz"

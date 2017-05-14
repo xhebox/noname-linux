@@ -6,8 +6,8 @@ source="https://github.com/lanoxx/$name/archive/$name-$version.tar.gz"
 
 build() {
 	cd $name-$name-$version
-	./autogen.sh
-	./configure --prefix= --disable-rpath
+	autoreconf -if
+	./configure --prefix=/ --disable-rpath
 	make || die
 	make DESTDIR="${pkgdir}" install || die
 }

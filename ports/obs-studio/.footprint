@@ -150,6 +150,7 @@ share/obs/libobs/opaque.effect|664|0|0|regular file
 share/obs/libobs/premultiplied_alpha.effect|664|0|0|regular file
 share/obs/libobs/solid.effect|664|0|0|regular file
 share/obs/libobs|775|0|0|directory
+share/obs/obs-plugins/frontend-tools/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/da-DK.ini|664|0|0|regular file
@@ -160,6 +161,7 @@ share/obs/obs-plugins/frontend-tools/locale/et-EE.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/eu-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/fr-FR.ini|664|0|0|regular file
+share/obs/obs-plugins/frontend-tools/locale/he-IL.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/frontend-tools/locale/it-IT.ini|664|0|0|regular file
@@ -186,6 +188,7 @@ share/obs/obs-plugins/frontend-tools/locale|775|0|0|directory
 share/obs/obs-plugins/frontend-tools|775|0|0|directory
 share/obs/obs-plugins/image-source/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/image-source/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/da-DK.ini|664|0|0|regular file
@@ -199,6 +202,7 @@ share/obs/obs-plugins/image-source/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/image-source/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale/it-IT.ini|664|0|0|regular file
@@ -225,6 +229,7 @@ share/obs/obs-plugins/image-source/locale/zh-TW.ini|664|0|0|regular file
 share/obs/obs-plugins/image-source/locale|775|0|0|directory
 share/obs/obs-plugins/image-source|775|0|0|directory
 share/obs/obs-plugins/linux-alsa/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-alsa/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-alsa/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-alsa/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-alsa/locale/da-DK.ini|664|0|0|regular file
@@ -262,6 +267,7 @@ share/obs/obs-plugins/linux-alsa/locale|775|0|0|directory
 share/obs/obs-plugins/linux-alsa|775|0|0|directory
 share/obs/obs-plugins/linux-capture/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-capture/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/da-DK.ini|664|0|0|regular file
@@ -275,6 +281,7 @@ share/obs/obs-plugins/linux-capture/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-capture/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-capture/locale/it-IT.ini|664|0|0|regular file
@@ -301,6 +308,7 @@ share/obs/obs-plugins/linux-capture/locale|775|0|0|directory
 share/obs/obs-plugins/linux-capture|775|0|0|directory
 share/obs/obs-plugins/linux-decklink/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-decklink/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-decklink/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-decklink/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-decklink/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-decklink/locale/da-DK.ini|664|0|0|regular file
@@ -339,6 +347,7 @@ share/obs/obs-plugins/linux-decklink/locale|775|0|0|directory
 share/obs/obs-plugins/linux-decklink|775|0|0|directory
 share/obs/obs-plugins/linux-pulseaudio/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-pulseaudio/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/da-DK.ini|664|0|0|regular file
@@ -352,6 +361,7 @@ share/obs/obs-plugins/linux-pulseaudio/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-pulseaudio/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-pulseaudio/locale/it-IT.ini|664|0|0|regular file
@@ -378,6 +388,7 @@ share/obs/obs-plugins/linux-pulseaudio/locale|775|0|0|directory
 share/obs/obs-plugins/linux-pulseaudio|775|0|0|directory
 share/obs/obs-plugins/linux-v4l2/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-v4l2/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/da-DK.ini|664|0|0|regular file
@@ -391,6 +402,7 @@ share/obs/obs-plugins/linux-v4l2/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/linux-v4l2/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/linux-v4l2/locale/it-IT.ini|664|0|0|regular file
@@ -418,6 +430,7 @@ share/obs/obs-plugins/linux-v4l2|775|0|0|directory
 share/obs/obs-plugins/obs-ffmpeg/ffmpeg-mux|755|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-ffmpeg/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/da-DK.ini|664|0|0|regular file
@@ -431,6 +444,7 @@ share/obs/obs-plugins/obs-ffmpeg/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-ffmpeg/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-ffmpeg/locale/it-IT.ini|664|0|0|regular file
@@ -471,6 +485,7 @@ share/obs/obs-plugins/obs-filters/color_grade_filter.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/color_key_filter.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/crop_filter.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-filters/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/locale/da-DK.ini|664|0|0|regular file
@@ -511,6 +526,7 @@ share/obs/obs-plugins/obs-filters/mask_color_filter.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-filters/sharpness.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-filters|775|0|0|directory
 share/obs/obs-plugins/obs-outputs/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-outputs/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/da-DK.ini|664|0|0|regular file
@@ -524,6 +540,7 @@ share/obs/obs-plugins/obs-outputs/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-outputs/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/it-IT.ini|664|0|0|regular file
@@ -544,6 +561,7 @@ share/obs/obs-plugins/obs-outputs/locale/sv-SE.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/th-TH.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/tr-TR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/uk-UA.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-outputs/locale/ur-PK.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/vi-VN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/zh-CN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-outputs/locale/zh-TW.ini|664|0|0|regular file
@@ -552,6 +570,7 @@ share/obs/obs-plugins/obs-outputs|775|0|0|directory
 share/obs/obs-plugins/obs-transitions/fade_to_color_transition.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-transitions/fade_transition.effect|664|0|0|regular file
 share/obs/obs-plugins/obs-transitions/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-transitions/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-transitions/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-transitions/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-transitions/locale/da-DK.ini|664|0|0|regular file
@@ -628,6 +647,7 @@ share/obs/obs-plugins/obs-transitions/swipe_transition.effect|664|0|0|regular fi
 share/obs/obs-plugins/obs-transitions|775|0|0|directory
 share/obs/obs-plugins/obs-x264/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-x264/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/da-DK.ini|664|0|0|regular file
@@ -641,6 +661,7 @@ share/obs/obs-plugins/obs-x264/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-x264/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/it-IT.ini|664|0|0|regular file
@@ -661,12 +682,14 @@ share/obs/obs-plugins/obs-x264/locale/sv-SE.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/th-TH.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/tr-TR.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/uk-UA.ini|664|0|0|regular file
+share/obs/obs-plugins/obs-x264/locale/ur-PK.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/vi-VN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/zh-CN.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale/zh-TW.ini|664|0|0|regular file
 share/obs/obs-plugins/obs-x264/locale|775|0|0|directory
 share/obs/obs-plugins/obs-x264|775|0|0|directory
 share/obs/obs-plugins/rtmp-services/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/rtmp-services/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/da-DK.ini|664|0|0|regular file
@@ -680,6 +703,7 @@ share/obs/obs-plugins/rtmp-services/locale/fi-FI.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/fr-FR.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/gl-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/he-IL.ini|664|0|0|regular file
+share/obs/obs-plugins/rtmp-services/locale/hi-IN.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/hr-HR.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/hu-HU.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/it-IT.ini|664|0|0|regular file
@@ -700,6 +724,7 @@ share/obs/obs-plugins/rtmp-services/locale/sv-SE.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/th-TH.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/tr-TR.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/uk-UA.ini|664|0|0|regular file
+share/obs/obs-plugins/rtmp-services/locale/ur-PK.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/zh-CN.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale/zh-TW.ini|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/locale|775|0|0|directory
@@ -707,6 +732,7 @@ share/obs/obs-plugins/rtmp-services/package.json|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services/services.json|664|0|0|regular file
 share/obs/obs-plugins/rtmp-services|775|0|0|directory
 share/obs/obs-plugins/text-freetype2/locale/ar-SA.ini|664|0|0|regular file
+share/obs/obs-plugins/text-freetype2/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-plugins/text-freetype2/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-plugins/text-freetype2/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-plugins/text-freetype2/locale/da-DK.ini|664|0|0|regular file
@@ -752,6 +778,7 @@ share/obs/obs-studio/license|775|0|0|directory
 share/obs/obs-studio/locale.ini|664|0|0|regular file
 share/obs/obs-studio/locale/ar-SA.ini|664|0|0|regular file
 share/obs/obs-studio/locale/bg-BG.ini|664|0|0|regular file
+share/obs/obs-studio/locale/bn-BD.ini|664|0|0|regular file
 share/obs/obs-studio/locale/ca-ES.ini|664|0|0|regular file
 share/obs/obs-studio/locale/cs-CZ.ini|664|0|0|regular file
 share/obs/obs-studio/locale/da-DK.ini|664|0|0|regular file

@@ -1,11 +1,18 @@
 bin/libinput-debug-events|755|0|0|regular file
 bin/libinput-list-devices|755|0|0|regular file
+bin/libinput|755|0|0|regular file
 bin|755|0|0|directory
 include/libinput.h|644|0|0|regular file
 include|755|0|0|directory
-lib/libinput.so.10.12.4|755|0|0|regular file
+lib/libinput.so.10.13.0|755|0|0|regular file
 lib/libinput.so.10|777|0|0|symbolic link
 lib/libinput.so|777|0|0|symbolic link
+lib/libinput/libinput-debug-events|755|0|0|regular file
+lib/libinput/libinput-debug-gui|755|0|0|regular file
+lib/libinput/libinput-list-devices|755|0|0|regular file
+lib/libinput/libinput-measure-touchpad-tap|755|0|0|regular file
+lib/libinput/libinput-measure|755|0|0|regular file
+lib/libinput|755|0|0|directory
 lib/pkgconfig/libinput.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib/udev/hwdb.d/90-libinput-model-quirks.hwdb|644|0|0|regular file
@@ -18,7 +25,11 @@ lib/udev/rules.d|755|0|0|directory
 lib/udev|755|0|0|directory
 lib|755|0|0|directory
 share/man/man1/libinput-debug-events.1.gz|644|0|0|regular file
+share/man/man1/libinput-debug-gui.1.gz|644|0|0|regular file
 share/man/man1/libinput-list-devices.1.gz|644|0|0|regular file
+share/man/man1/libinput-measure-touchpad-tap.1.gz|644|0|0|regular file
+share/man/man1/libinput-measure.1.gz|644|0|0|regular file
+share/man/man1/libinput.1.gz|644|0|0|regular file
 share/man/man1|755|0|0|directory
 share/man|755|0|0|directory
 share|755|0|0|directory

@@ -1,5 +1,5 @@
 name=python-pyopenssl
-version=17.0.0
+version=17.1.0
 desc="wrapper module around the OpenSSL library"
 deps="python-cryptography"
 source="https://pypi.io/packages/source/p/pyOpenSSL/pyOpenSSL-$version.tar.gz"

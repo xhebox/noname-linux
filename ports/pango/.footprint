@@ -42,16 +42,16 @@ lib/girepository-1.0/PangoCairo-1.0.typelib|644|0|0|regular file
 lib/girepository-1.0/PangoFT2-1.0.typelib|644|0|0|regular file
 lib/girepository-1.0/PangoXft-1.0.typelib|644|0|0|regular file
 lib/girepository-1.0|755|0|0|directory
-lib/libpango-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpango-1.0.so.0.4000.7|755|0|0|regular file
 lib/libpango-1.0.so.0|777|0|0|symbolic link
 lib/libpango-1.0.so|777|0|0|symbolic link
-lib/libpangocairo-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangocairo-1.0.so.0.4000.7|755|0|0|regular file
 lib/libpangocairo-1.0.so.0|777|0|0|symbolic link
 lib/libpangocairo-1.0.so|777|0|0|symbolic link
-lib/libpangoft2-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangoft2-1.0.so.0.4000.7|755|0|0|regular file
 lib/libpangoft2-1.0.so.0|777|0|0|symbolic link
 lib/libpangoft2-1.0.so|777|0|0|symbolic link
-lib/libpangoxft-1.0.so.0.4000.5|755|0|0|regular file
+lib/libpangoxft-1.0.so.0.4000.7|755|0|0|regular file
 lib/libpangoxft-1.0.so.0|777|0|0|symbolic link
 lib/libpangoxft-1.0.so|777|0|0|symbolic link
 lib/pkgconfig/pango.pc|644|0|0|regular file

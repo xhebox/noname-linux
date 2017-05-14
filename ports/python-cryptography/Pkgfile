@@ -1,14 +1,10 @@
 name=python-cryptography
-version=1.8.1
+version=2.0
 desc="A package designed to expose cryptographic recipes and primitives to Python developers"
 deps="python-setuptools python-pyasn1 python-asn1crypto python-enum34 python-cffi python-idna python-ipaddress"
-source="https://pypi.io/packages/source/c/cryptography/cryptography-$version.tar.gz
-fix-libressl-2.5.3.patch"
+source="https://pypi.io/packages/source/c/cryptography/cryptography-$version.tar.gz"
 
 build() {
-	cd cryptography-$version
-	patch -p0 < ../fix-libressl-2.5.3.patch || die
-	cd -
 	cp -r cryptography-$version set3
 	cd cryptography-$version
 	/bin/python setup.py build || die

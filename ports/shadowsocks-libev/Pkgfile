@@ -1,5 +1,5 @@
 name=shadowsocks-libev
-version=3.0.6
+version=3.0.8
 deps="libcap libressl zlib libsodium asciidoc xmlto udns libpcre libev mbedtls libcorkipset libbloom"
 source="https://github.com/shadowsocks/shadowsocks-libev/archive/v$version.tar.gz"
 desc="A lightweight secured socks5 proxy for embedded devices and low end boxes"

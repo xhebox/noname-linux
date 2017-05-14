@@ -1,5 +1,5 @@
 name=confuse
-version=3.0
+version=3.2
 desc='C-library for parsing configuration files'
 deps=musl
 source="https://github.com/martinh/libconfuse/releases/download/v${version}/${name}-${version}.tar.gz"

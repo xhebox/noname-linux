@@ -1,6 +1,6 @@
 name=man-db
 version=2.7.6.1
-deps="pbzip2 pigz groff xz libpipeline gdbm coreutils gettext"
+deps="pbzip2 pigz groff xz libpipeline gdbm coreutils"
 desc="The on-line manual database"
 source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz"
 

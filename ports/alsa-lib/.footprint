@@ -89,6 +89,7 @@ share/alsa/cards/FWSpeakers.conf|644|0|0|regular file
 share/alsa/cards/FireWave.conf|644|0|0|regular file
 share/alsa/cards/GUS.conf|644|0|0|regular file
 share/alsa/cards/HDA-Intel.conf|644|0|0|regular file
+share/alsa/cards/HdmiLpeAudio.conf|644|0|0|regular file
 share/alsa/cards/ICE1712.conf|644|0|0|regular file
 share/alsa/cards/ICE1724.conf|644|0|0|regular file
 share/alsa/cards/ICH-MODEM.conf|644|0|0|regular file
@@ -120,6 +121,8 @@ share/alsa/cards/VXPocket440.conf|644|0|0|regular file
 share/alsa/cards/YMF744.conf|644|0|0|regular file
 share/alsa/cards/aliases.alisp|644|0|0|regular file
 share/alsa/cards/aliases.conf|644|0|0|regular file
+share/alsa/cards/pistachio-card.conf|644|0|0|regular file
+share/alsa/cards/vc4-hdmi.conf|644|0|0|regular file
 share/alsa/cards|755|0|0|directory
 share/alsa/pcm/center_lfe.conf|644|0|0|regular file
 share/alsa/pcm/default.conf|644|0|0|regular file
@@ -192,6 +195,11 @@ share/alsa/ucm/VEYRON-I2S|755|0|0|directory
 share/alsa/ucm/broadwell-rt286/HiFi|644|0|0|regular file
 share/alsa/ucm/broadwell-rt286/broadwell-rt286.conf|644|0|0|regular file
 share/alsa/ucm/broadwell-rt286|755|0|0|directory
+share/alsa/ucm/broxton-rt298/Hdmi1|644|0|0|regular file
+share/alsa/ucm/broxton-rt298/Hdmi2|644|0|0|regular file
+share/alsa/ucm/broxton-rt298/HiFi|644|0|0|regular file
+share/alsa/ucm/broxton-rt298/broxton-rt298.conf|644|0|0|regular file
+share/alsa/ucm/broxton-rt298|755|0|0|directory
 share/alsa/ucm/chtrt5645/HiFi.conf|644|0|0|regular file
 share/alsa/ucm/chtrt5645/chtrt5645.conf|644|0|0|regular file
 share/alsa/ucm/chtrt5645|755|0|0|directory

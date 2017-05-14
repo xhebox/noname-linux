@@ -60,6 +60,7 @@ lib/dri|755|0|0|directory
 lib/gallium-pipe/pipe_nouveau.so|755|0|0|regular file
 lib/gallium-pipe/pipe_radeonsi.so|755|0|0|regular file
 lib/gallium-pipe/pipe_swrast.so|755|0|0|regular file
+lib/gallium-pipe/pipe_vmwgfx.so|755|0|0|regular file
 lib/gallium-pipe|755|0|0|directory
 lib/libEGL.so.1.0.0|755|0|0|regular file
 lib/libEGL.so.1|777|0|0|symbolic link
@@ -79,16 +80,18 @@ lib/libMesaOpenCL.so|777|0|0|symbolic link
 lib/libOSMesa.so.8.0.0|755|0|0|regular file
 lib/libOSMesa.so.8|777|0|0|symbolic link
 lib/libOSMesa.so|777|0|0|symbolic link
-lib/libXvMCnouveau.so.1.0.0|755|0|0|regular file
-lib/libXvMCnouveau.so.1.0|777|0|0|symbolic link
-lib/libXvMCnouveau.so.1|777|0|0|symbolic link
-lib/libXvMCnouveau.so|777|0|0|symbolic link
 lib/libgbm.so.1.0.0|755|0|0|regular file
 lib/libgbm.so.1|777|0|0|symbolic link
 lib/libgbm.so|777|0|0|symbolic link
 lib/libglapi.so.0.0.0|755|0|0|regular file
 lib/libglapi.so.0|777|0|0|symbolic link
 lib/libglapi.so|777|0|0|symbolic link
+lib/libswrAVX.so.0.0.0|755|0|0|regular file
+lib/libswrAVX.so.0|777|0|0|symbolic link
+lib/libswrAVX.so|777|0|0|symbolic link
+lib/libswrAVX2.so.0.0.0|755|0|0|regular file
+lib/libswrAVX2.so.0|777|0|0|symbolic link
+lib/libswrAVX2.so|777|0|0|symbolic link
 lib/libvulkan_intel.so|755|0|0|regular file
 lib/libvulkan_radeon.so|755|0|0|regular file
 lib/libxatracker.so.2.3.0|755|0|0|regular file
@@ -122,6 +125,7 @@ lib/xorg/modules/dri/radeon_dri.so|755|0|0|regular file
 lib/xorg/modules/dri/radeonsi_dri.so|755|0|0|regular file
 lib/xorg/modules/dri/swrast_dri.so|755|0|0|regular file
 lib/xorg/modules/dri/virtio_gpu_dri.so|755|0|0|regular file
+lib/xorg/modules/dri/vmwgfx_dri.so|755|0|0|regular file
 lib/xorg/modules/dri|755|0|0|directory
 lib/xorg/modules|755|0|0|directory
 lib/xorg|755|0|0|directory

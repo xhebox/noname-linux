@@ -9,19 +9,19 @@ include/pcrecpp.h|644|0|0|regular file
 include/pcrecpparg.h|644|0|0|regular file
 include/pcreposix.h|644|0|0|regular file
 include|755|0|0|directory
-lib/libpcre.so.1.2.8|755|0|0|regular file
+lib/libpcre.so.1.2.9|755|0|0|regular file
 lib/libpcre.so.1|777|0|0|symbolic link
 lib/libpcre.so|777|0|0|symbolic link
-lib/libpcre16.so.0.2.8|755|0|0|regular file
+lib/libpcre16.so.0.2.9|755|0|0|regular file
 lib/libpcre16.so.0|777|0|0|symbolic link
 lib/libpcre16.so|777|0|0|symbolic link
-lib/libpcre32.so.0.0.8|755|0|0|regular file
+lib/libpcre32.so.0.0.9|755|0|0|regular file
 lib/libpcre32.so.0|777|0|0|symbolic link
 lib/libpcre32.so|777|0|0|symbolic link
 lib/libpcrecpp.so.0.0.1|755|0|0|regular file
 lib/libpcrecpp.so.0|777|0|0|symbolic link
 lib/libpcrecpp.so|777|0|0|symbolic link
-lib/libpcreposix.so.0.0.4|755|0|0|regular file
+lib/libpcreposix.so.0.0.5|755|0|0|regular file
 lib/libpcreposix.so.0|777|0|0|symbolic link
 lib/libpcreposix.so|777|0|0|symbolic link
 lib/pkgconfig/libpcre.pc|644|0|0|regular file

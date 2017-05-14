@@ -1,0 +1,39 @@
+bin/linux-boot-prober|755|0|0|regular file
+bin/os-prober|755|0|0|regular file
+bin|755|0|0|directory
+lib/linux-boot-probes/50mounted-tests|755|0|0|regular file
+lib/linux-boot-probes/mounted/40grub2|755|0|0|regular file
+lib/linux-boot-probes/mounted/40grub|755|0|0|regular file
+lib/linux-boot-probes/mounted/50lilo|755|0|0|regular file
+lib/linux-boot-probes/mounted/90fallback|755|0|0|regular file
+lib/linux-boot-probes/mounted|755|0|0|directory
+lib/linux-boot-probes|755|0|0|directory
+lib/os-prober/newns|755|0|0|regular file
+lib/os-prober|755|0|0|directory
+lib/os-probes/50mounted-tests|755|0|0|regular file
+lib/os-probes/init/10filesystems|755|0|0|regular file
+lib/os-probes/init|755|0|0|directory
+lib/os-probes/mounted/05efi|755|0|0|regular file
+lib/os-probes/mounted/10freedos|755|0|0|regular file
+lib/os-probes/mounted/10qnx|755|0|0|regular file
+lib/os-probes/mounted/20macosx|755|0|0|regular file
+lib/os-probes/mounted/20microsoft|755|0|0|regular file
+lib/os-probes/mounted/30utility|755|0|0|regular file
+lib/os-probes/mounted/40lsb|755|0|0|regular file
+lib/os-probes/mounted/70hurd|755|0|0|regular file
+lib/os-probes/mounted/80minix|755|0|0|regular file
+lib/os-probes/mounted/83haiku|755|0|0|regular file
+lib/os-probes/mounted/90linux-distro|755|0|0|regular file
+lib/os-probes/mounted/90solaris|755|0|0|regular file
+lib/os-probes/mounted/efi/10elilo|755|0|0|regular file
+lib/os-probes/mounted/efi/20microsoft|755|0|0|regular file
+lib/os-probes/mounted/efi|755|0|0|directory
+lib/os-probes/mounted|755|0|0|directory
+lib/os-probes|755|0|0|directory
+lib|755|0|0|directory
+share/os-prober/common.sh|755|0|0|regular file
+share/os-prober|755|0|0|directory
+share|755|0|0|directory
+var/lib/os-prober|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory

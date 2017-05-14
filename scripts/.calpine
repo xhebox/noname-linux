@@ -11,7 +11,7 @@ while true; do
 	[ "$t" -eq 5 ] && {
 		t=0
 		echo "$2: can not get" >> ./result
-		break
+		exit
 	}
 done
 source "./$2" &>/dev/null || true

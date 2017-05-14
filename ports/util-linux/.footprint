@@ -2,10 +2,12 @@ bin/addpart|755|0|0|regular file
 bin/agetty|755|0|0|regular file
 bin/blkdiscard|755|0|0|regular file
 bin/blkid|755|0|0|regular file
+bin/blkzone|755|0|0|regular file
 bin/blockdev|755|0|0|regular file
 bin/cal|755|0|0|regular file
 bin/cfdisk|755|0|0|regular file
 bin/chcpu|755|0|0|regular file
+bin/chmem|755|0|0|regular file
 bin/chrt|755|0|0|regular file
 bin/colcrt|755|0|0|regular file
 bin/colrm|755|0|0|regular file
@@ -18,6 +20,7 @@ bin/eject|755|0|0|regular file
 bin/fallocate|755|0|0|regular file
 bin/fdformat|755|0|0|regular file
 bin/fdisk|755|0|0|regular file
+bin/fincore|755|0|0|regular file
 bin/findfs|755|0|0|regular file
 bin/findmnt|755|0|0|regular file
 bin/flock|755|0|0|regular file
@@ -49,6 +52,7 @@ bin/lscpu|755|0|0|regular file
 bin/lsipc|755|0|0|regular file
 bin/lslocks|755|0|0|regular file
 bin/lslogins|755|0|0|regular file
+bin/lsmem|755|0|0|regular file
 bin/lsns|755|0|0|regular file
 bin/mcookie|755|0|0|regular file
 bin/mesg|755|0|0|regular file
@@ -75,6 +79,7 @@ bin/rtcwake|755|0|0|regular file
 bin/scriptreplay|755|0|0|regular file
 bin/script|755|0|0|regular file
 bin/setarch|755|0|0|regular file
+bin/setpriv|755|0|0|regular file
 bin/setsid|755|0|0|regular file
 bin/setterm|755|0|0|regular file
 bin/sfdisk|755|0|0|regular file
@@ -83,7 +88,6 @@ bin/swaplabel|755|0|0|regular file
 bin/swapoff|755|0|0|regular file
 bin/swapon|755|0|0|regular file
 bin/switch_root|755|0|0|regular file
-bin/tailf|755|0|0|regular file
 bin/taskset|755|0|0|regular file
 bin/ul|755|0|0|regular file
 bin/umount|4755|0|0|regular file
@@ -141,10 +145,12 @@ lib|755|0|0|directory
 share/bash-completion/completions/addpart|644|0|0|regular file
 share/bash-completion/completions/blkdiscard|644|0|0|regular file
 share/bash-completion/completions/blkid|644|0|0|regular file
+share/bash-completion/completions/blkzone|644|0|0|regular file
 share/bash-completion/completions/blockdev|644|0|0|regular file
 share/bash-completion/completions/cal|644|0|0|regular file
 share/bash-completion/completions/cfdisk|644|0|0|regular file
 share/bash-completion/completions/chcpu|644|0|0|regular file
+share/bash-completion/completions/chmem|644|0|0|regular file
 share/bash-completion/completions/chrt|644|0|0|regular file
 share/bash-completion/completions/colcrt|644|0|0|regular file
 share/bash-completion/completions/colrm|644|0|0|regular file
@@ -157,6 +163,8 @@ share/bash-completion/completions/eject|644|0|0|regular file
 share/bash-completion/completions/fallocate|644|0|0|regular file
 share/bash-completion/completions/fdformat|644|0|0|regular file
 share/bash-completion/completions/fdisk|644|0|0|regular file
+share/bash-completion/completions/fincore|644|0|0|regular file
+share/bash-completion/completions/findfs|644|0|0|regular file
 share/bash-completion/completions/findmnt|644|0|0|regular file
 share/bash-completion/completions/flock|644|0|0|regular file
 share/bash-completion/completions/fsck.cramfs|644|0|0|regular file
@@ -182,6 +190,7 @@ share/bash-completion/completions/lscpu|644|0|0|regular file
 share/bash-completion/completions/lsipc|644|0|0|regular file
 share/bash-completion/completions/lslocks|644|0|0|regular file
 share/bash-completion/completions/lslogins|644|0|0|regular file
+share/bash-completion/completions/lsmem|644|0|0|regular file
 share/bash-completion/completions/lsns|644|0|0|regular file
 share/bash-completion/completions/mcookie|644|0|0|regular file
 share/bash-completion/completions/mesg|644|0|0|regular file
@@ -208,13 +217,13 @@ share/bash-completion/completions/rtcwake|644|0|0|regular file
 share/bash-completion/completions/scriptreplay|644|0|0|regular file
 share/bash-completion/completions/script|644|0|0|regular file
 share/bash-completion/completions/setarch|644|0|0|regular file
+share/bash-completion/completions/setpriv|644|0|0|regular file
 share/bash-completion/completions/setsid|644|0|0|regular file
 share/bash-completion/completions/setterm|644|0|0|regular file
 share/bash-completion/completions/sfdisk|644|0|0|regular file
 share/bash-completion/completions/swaplabel|644|0|0|regular file
 share/bash-completion/completions/swapoff|644|0|0|regular file
 share/bash-completion/completions/swapon|644|0|0|regular file
-share/bash-completion/completions/tailf|644|0|0|regular file
 share/bash-completion/completions/taskset|644|0|0|regular file
 share/bash-completion/completions/ul|644|0|0|regular file
 share/bash-completion/completions/umount|644|0|0|regular file
@@ -318,6 +327,7 @@ share/man/man1/column.1.gz|644|0|0|regular file
 share/man/man1/dmesg.1.gz|644|0|0|regular file
 share/man/man1/eject.1.gz|644|0|0|regular file
 share/man/man1/fallocate.1.gz|644|0|0|regular file
+share/man/man1/fincore.1.gz|644|0|0|regular file
 share/man/man1/flock.1.gz|644|0|0|regular file
 share/man/man1/getopt.1.gz|644|0|0|regular file
 share/man/man1/hexdump.1.gz|644|0|0|regular file
@@ -333,6 +343,7 @@ share/man/man1/look.1.gz|644|0|0|regular file
 share/man/man1/lscpu.1.gz|644|0|0|regular file
 share/man/man1/lsipc.1.gz|644|0|0|regular file
 share/man/man1/lslogins.1.gz|644|0|0|regular file
+share/man/man1/lsmem.1.gz|644|0|0|regular file
 share/man/man1/mcookie.1.gz|644|0|0|regular file
 share/man/man1/mesg.1.gz|644|0|0|regular file
 share/man/man1/more.1.gz|644|0|0|regular file
@@ -345,9 +356,9 @@ share/man/man1/renice.1.gz|644|0|0|regular file
 share/man/man1/rev.1.gz|644|0|0|regular file
 share/man/man1/script.1.gz|644|0|0|regular file
 share/man/man1/scriptreplay.1.gz|644|0|0|regular file
+share/man/man1/setpriv.1.gz|644|0|0|regular file
 share/man/man1/setsid.1.gz|644|0|0|regular file
 share/man/man1/setterm.1.gz|644|0|0|regular file
-share/man/man1/tailf.1.gz|644|0|0|regular file
 share/man/man1/taskset.1.gz|644|0|0|regular file
 share/man/man1/ul.1.gz|644|0|0|regular file
 share/man/man1/unshare.1.gz|644|0|0|regular file
@@ -378,9 +389,11 @@ share/man/man8/addpart.8.gz|644|0|0|regular file
 share/man/man8/agetty.8.gz|644|0|0|regular file
 share/man/man8/blkdiscard.8.gz|644|0|0|regular file
 share/man/man8/blkid.8.gz|644|0|0|regular file
+share/man/man8/blkzone.8.gz|644|0|0|regular file
 share/man/man8/blockdev.8.gz|644|0|0|regular file
 share/man/man8/cfdisk.8.gz|644|0|0|regular file
 share/man/man8/chcpu.8.gz|644|0|0|regular file
+share/man/man8/chmem.8.gz|644|0|0|regular file
 share/man/man8/ctrlaltdel.8.gz|644|0|0|regular file
 share/man/man8/delpart.8.gz|644|0|0|regular file
 share/man/man8/fdformat.8.gz|644|0|0|regular file

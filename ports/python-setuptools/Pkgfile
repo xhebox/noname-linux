@@ -1,20 +1,12 @@
 name=python-setuptools
-version=35.0.2
+version=36.2.4
 deps="python-pip python-packaging python-appdirs"
 source="http://github.com/pypa/setuptools/archive/v$version.tar.gz"
 desc="Easily download, build, install, upgrade, and uninstall Python packages."
 
 build() {
 	cp -r setuptools-$version set3
-	cd setuptools-$version
-	/bin/python bootstrap.py
-	/bin/python setup.py build || die
-	/bin/python setup.py install \
-		--prefix= \
-		--root=$pkgdir \
-		--optimize=1 \
-		--skip-build || die
-	cd ../set3
+	cd set3
 	/bin/python3 bootstrap.py
 	/bin/python3 setup.py build || die
 	/bin/python3 setup.py install \
@@ -22,5 +14,12 @@ build() {
 		--root=$pkgdir \
 		--optimize=1 \
 		--skip-build || die
+	cd ../setuptools-$version
+	/bin/python bootstrap.py
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
 }
-

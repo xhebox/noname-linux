@@ -1,5 +1,5 @@
 name=python-numpy
-version=1.12.1
+version=1.13.1
 deps="python-setuptools lapack python-nose"
 source="https://github.com/numpy/numpy/archive/v${version}.tar.gz
 site.cfg"

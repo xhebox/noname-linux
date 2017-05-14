@@ -1,14 +1,14 @@
-lib32|755|0|0|directory
-lib32/libout123.so.0.1.4|755|0|0|regular file
-lib32/pkgconfig|755|0|0|directory
-lib32/pkgconfig/libout123.pc|644|0|0|regular file
-lib32/pkgconfig/libmpg123.pc|644|0|0|regular file
-lib32/libout123.so.0|777|0|0|symbolic link
-lib32/libmpg123.so.0.42.3|755|0|0|regular file
-lib32/mpg123|755|0|0|directory
-lib32/mpg123/output_pulse.so|755|0|0|regular file
-lib32/mpg123/output_dummy.so|755|0|0|regular file
-lib32/mpg123/output_alsa.so|755|0|0|regular file
+lib32/libmpg123.so.0.44.3|755|0|0|regular file
 lib32/libmpg123.so.0|777|0|0|symbolic link
-lib32/libout123.so|777|0|0|symbolic link
 lib32/libmpg123.so|777|0|0|symbolic link
+lib32/libout123.so.0.2.1|755|0|0|regular file
+lib32/libout123.so.0|777|0|0|symbolic link
+lib32/libout123.so|777|0|0|symbolic link
+lib32/mpg123/output_alsa.so|755|0|0|regular file
+lib32/mpg123/output_dummy.so|755|0|0|regular file
+lib32/mpg123/output_pulse.so|755|0|0|regular file
+lib32/mpg123|755|0|0|directory
+lib32/pkgconfig/libmpg123.pc|644|0|0|regular file
+lib32/pkgconfig/libout123.pc|644|0|0|regular file
+lib32/pkgconfig|755|0|0|directory
+lib32|755|0|0|directory

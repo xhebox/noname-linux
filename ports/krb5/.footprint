@@ -4,7 +4,6 @@ bin/k5srvutil|755|0|0|regular file
 bin/kadmin.local|755|0|0|regular file
 bin/kadmind|755|0|0|regular file
 bin/kadmin|755|0|0|regular file
-bin/kdb5_ldap_util|755|0|0|regular file
 bin/kdb5_util|755|0|0|regular file
 bin/kdestroy|755|0|0|regular file
 bin/kinit|755|0|0|regular file
@@ -78,7 +77,6 @@ include/verto.h|644|0|0|regular file
 include|755|0|0|directory
 lib/krb5/plugins/authdata|755|0|0|directory
 lib/krb5/plugins/kdb/db2.so|644|0|0|regular file
-lib/krb5/plugins/kdb/kldap.so|644|0|0|regular file
 lib/krb5/plugins/kdb|755|0|0|directory
 lib/krb5/plugins/libkrb5|755|0|0|directory
 lib/krb5/plugins/preauth/otp.so|644|0|0|regular file
@@ -109,9 +107,6 @@ lib/libkadm5srv_mit.so|777|0|0|symbolic link
 lib/libkdb5.so.8.0|644|0|0|regular file
 lib/libkdb5.so.8|777|0|0|symbolic link
 lib/libkdb5.so|777|0|0|symbolic link
-lib/libkdb_ldap.so.1.0|644|0|0|regular file
-lib/libkdb_ldap.so.1|777|0|0|symbolic link
-lib/libkdb_ldap.so|777|0|0|symbolic link
 lib/libkrad.so.0.0|644|0|0|regular file
 lib/libkrad.so.0|777|0|0|symbolic link
 lib/libkrad.so|777|0|0|symbolic link

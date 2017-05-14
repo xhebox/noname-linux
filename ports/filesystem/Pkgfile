@@ -14,7 +14,7 @@ resolv.conf
 securetty
 compressdoc
 "
-version=0.9
+version=1.0
 
 ext() {
 	curl -O -L http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
@@ -24,7 +24,7 @@ ext() {
 build() {
 	cd "$pkgdir/"
 	ln -s . usr
-	for d in boot dev etc home mnt var run/lock include share/misc lib lib32 bin; do
+	for d in boot dev etc/modprobe.d home mnt var run/lock include share/misc lib lib32 bin; do
 		mkdir -p "$d" && chmod 755 "$d"
 	done
 	for d in $(seq 8); do

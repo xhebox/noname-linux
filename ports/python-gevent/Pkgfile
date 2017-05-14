@@ -1,0 +1,34 @@
+name=python-gevent
+version=1.2.2
+source="https://github.com/gevent/gevent/archive/$version.tar.gz"
+desc="Python network library that uses greenlet and libev for easy and scalable concurrency"
+deps="python-setuptools python-cython python-greenlet"
+
+ext() {
+	sed -i 's/C.UTF-8/en_US.UTF-8/' gevent-$version/Makefile
+}
+
+build() {
+	cp -r gevent-$version py3
+	cd gevent-$version
+	EMBED=1 \
+	CYTHON=cython2 \
+	PYTHON=python \
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../py3
+	EMBED=1 \
+	CYTHON=cython3 \
+	PYTHON=python3 \
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

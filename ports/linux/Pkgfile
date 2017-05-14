@@ -1,7 +1,7 @@
 name=linux
-version=4.10.8
+version=4.12.4
 desc="Linux system kernel"
-_zenpatch=zen-4.10.8-3dba096c1a08bb6884978b4af803ae9ee9a43a38.diff
+_zenpatch=zen-4.12.4-8f864fa3f64096a858313dc72121e164919b0492.diff
 source="https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-${version%.*}.tar.xz
 https://www.kernel.org/pub/linux/kernel/v4.x/patch-${version}.xz
 https://raw.githubusercontent.com/dolohow/uksm/master/uksm-${version%.*}.patch
@@ -37,6 +37,7 @@ _ext() {
 	sed -i 's/# CONFIG_EXPERT is not set/CONFIG_EXPERT=y/g' .config
 	sed -i 's/# CONFIG_CFG80211_INTERNAL_REGDB is not set/CONFIG_CFG80211_INTERNAL_REGDB=y/g' .config
 
+	sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=n|" .config
 	sed -i 's/\$(LIBS)/& $(LDFLAGS)/' tools/power/cpupower/bench/Makefile
 	sed -i 's/SIGCLD/SIGCHLD/g' tools/usb/usbip/src/usbipd.c
 	curl -L https://raw.githubusercontent.com/Distrotech/wireless-regdb/master/db.txt -o net/wireless/db.txt || die

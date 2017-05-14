@@ -18,11 +18,13 @@ lib/cmake/KF5I18n/KF5I18nConfig.cmake|644|0|0|regular file
 lib/cmake/KF5I18n/KF5I18nConfigVersion.cmake|644|0|0|regular file
 lib/cmake/KF5I18n/KF5I18nTargets-release.cmake|644|0|0|regular file
 lib/cmake/KF5I18n/KF5I18nTargets.cmake|644|0|0|regular file
+lib/cmake/KF5I18n/build-pofiles.cmake|644|0|0|regular file
+lib/cmake/KF5I18n/build-tsfiles.cmake|644|0|0|regular file
 lib/cmake/KF5I18n/kf5i18nuic.cmake|644|0|0|regular file
 lib/cmake/KF5I18n/ts-pmap-compile.py|644|0|0|regular file
 lib/cmake/KF5I18n|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5I18n.so.5.33.0|755|0|0|regular file
+lib/libKF5I18n.so.5.36.0|755|0|0|regular file
 lib/libKF5I18n.so.5|777|0|0|symbolic link
 lib/libKF5I18n.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KI18n.pri|644|0|0|regular file
@@ -184,6 +186,9 @@ share/locale/it/LC_MESSAGES|755|0|0|directory
 share/locale/it|755|0|0|directory
 share/locale/ja/LC_MESSAGES/ki18n5.mo|644|0|0|regular file
 share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja/LC_SCRIPTS/ki18n5/ki18n5.js|644|0|0|regular file
+share/locale/ja/LC_SCRIPTS/ki18n5|755|0|0|directory
+share/locale/ja/LC_SCRIPTS|755|0|0|directory
 share/locale/ja|755|0|0|directory
 share/locale/ka/LC_MESSAGES/ki18n5.mo|644|0|0|regular file
 share/locale/ka/LC_MESSAGES|755|0|0|directory

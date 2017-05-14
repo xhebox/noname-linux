@@ -1,0 +1,17 @@
+name=marisa
+version=0.2.4
+desc="Static and space-efficient trie data structure library"
+source="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/marisa-trie/marisa-$version.tar.gz"
+
+build() {
+	cd marisa-$version
+	./configure --prefix= --disable-static
+
+	sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+	sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || die
+
+	install -d "${pkgdir}/share/doc/marisa-${version}"
+	install -m 644 docs/* README "${pkgdir}/share/doc/marisa-${version}/"
+}

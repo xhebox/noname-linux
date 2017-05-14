@@ -1,15 +1,15 @@
+lib/perl5/core_perl|755|0|0|directory
 lib/perl5/vendor_perl/ExtUtils/Depends.pm|444|0|0|regular file
+lib/perl5/vendor_perl/ExtUtils|755|0|0|directory
 lib/perl5/vendor_perl/auto/ExtUtils/Depends/.packlist|644|0|0|regular file
+lib/perl5/vendor_perl/auto/ExtUtils/Depends|755|0|0|directory
+lib/perl5/vendor_perl/auto/ExtUtils|755|0|0|directory
+lib/perl5/vendor_perl/auto|755|0|0|directory
+lib/perl5/vendor_perl|755|0|0|directory
+lib/perl5|755|0|0|directory
+lib|755|0|0|directory
 share/man/man3/perl/ExtUtils::Depends.3pm.gz|644|0|0|regular file
 share/man/man3/perl|755|0|0|directory
 share/man/man3|755|0|0|directory
 share/man|755|0|0|directory
 share|755|0|0|directory
-lib/perl5/vendor_perl/auto/ExtUtils/Depends|755|0|0|directory
-lib/perl5/vendor_perl/auto/ExtUtils|755|0|0|directory
-lib/perl5/vendor_perl/auto|755|0|0|directory
-lib/perl5/vendor_perl/ExtUtils|755|0|0|directory
-lib/perl5/vendor_perl|755|0|0|directory
-lib/perl5/core_perl|755|0|0|directory
-lib/perl5|755|0|0|directory
-lib|755|0|0|directory

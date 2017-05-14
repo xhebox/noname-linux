@@ -21,7 +21,7 @@ lib/cmake/KF5DBusAddons/KF5DBusAddonsTargets-release.cmake|644|0|0|regular file
 lib/cmake/KF5DBusAddons/KF5DBusAddonsTargets.cmake|644|0|0|regular file
 lib/cmake/KF5DBusAddons|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5DBusAddons.so.5.33.0|755|0|0|regular file
+lib/libKF5DBusAddons.so.5.36.0|755|0|0|regular file
 lib/libKF5DBusAddons.so.5|777|0|0|symbolic link
 lib/libKF5DBusAddons.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KDBusAddons.pri|644|0|0|regular file

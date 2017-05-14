@@ -72,7 +72,7 @@ lib/cmake/KF5CoreAddons/KF5CoreAddonsToolingTargets-release.cmake|644|0|0|regula
 lib/cmake/KF5CoreAddons/KF5CoreAddonsToolingTargets.cmake|644|0|0|regular file
 lib/cmake/KF5CoreAddons|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5CoreAddons.so.5.33.0|755|0|0|regular file
+lib/libKF5CoreAddons.so.5.36.0|755|0|0|regular file
 lib/libKF5CoreAddons.so.5|777|0|0|symbolic link
 lib/libKF5CoreAddons.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KCoreAddons.pri|644|0|0|regular file

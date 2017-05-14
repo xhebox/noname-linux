@@ -1,7 +1,7 @@
 name=libsasl
 version=2.1.26
 desc="Cyrus Simple Authentication Service Layer (SASL) library"
-deps="libressl db"
+deps="libressl krb5 sqlite db"
 source="ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${version}.tar.gz
 0010_maintainer_mode.patch
 0011_saslauthd_ac_prog_libtool.patch

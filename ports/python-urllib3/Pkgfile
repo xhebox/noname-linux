@@ -1,0 +1,23 @@
+name=python-urllib3
+version=1.21.1
+desc="HTTP library with thread-safe connection pooling and file post support"
+deps="python-setuptools python-ndg-httpsclient python-pyasn1 python-pyopenssl python-pysocks python-mock"
+source="https://github.com/shazow/urllib3/archive/$version.tar.gz"
+
+build() {
+	cp -a urllib3-$version set3
+	cd urllib3-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

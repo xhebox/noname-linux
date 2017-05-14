@@ -8,15 +8,63 @@ lib/python2.7/site-packages/easy_install.py|644|0|0|regular file
 lib/python2.7/site-packages/pkg_resources/__init__.pyc|644|0|0|regular file
 lib/python2.7/site-packages/pkg_resources/__init__.pyo|644|0|0|regular file
 lib/python2.7/site-packages/pkg_resources/__init__.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/__init__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/__init__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/__init__.py|644|0|0|regular empty file
+lib/python2.7/site-packages/pkg_resources/_vendor/appdirs.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/appdirs.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/appdirs.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__about__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__about__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__about__.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__init__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__init__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/__init__.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_compat.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_compat.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_compat.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_structures.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_structures.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/_structures.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/markers.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/markers.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/markers.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/requirements.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/requirements.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/requirements.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/specifiers.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/specifiers.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/specifiers.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/utils.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/utils.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/utils.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/version.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/version.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging/version.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/packaging|755|0|0|directory
+lib/python2.7/site-packages/pkg_resources/_vendor/pyparsing.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/pyparsing.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/pyparsing.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/six.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/six.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor/six.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/_vendor|755|0|0|directory
+lib/python2.7/site-packages/pkg_resources/extern/__init__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/extern/__init__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/extern/__init__.py|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/extern|755|0|0|directory
+lib/python2.7/site-packages/pkg_resources/py31compat.pyc|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/py31compat.pyo|644|0|0|regular file
+lib/python2.7/site-packages/pkg_resources/py31compat.py|644|0|0|regular file
 lib/python2.7/site-packages/pkg_resources|755|0|0|directory
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/PKG-INFO|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/SOURCES.txt|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/dependency_links.txt|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/entry_points.txt|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/requires.txt|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/top_level.txt|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info/zip-safe|644|0|0|regular file
-lib/python2.7/site-packages/setuptools-35.0.2.post20170507-py2.7.egg-info|755|0|0|directory
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/PKG-INFO|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/SOURCES.txt|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/dependency_links.txt|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/entry_points.txt|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/requires.txt|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/top_level.txt|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info/zip-safe|644|0|0|regular file
+lib/python2.7/site-packages/setuptools-36.2.4.post20170730-py2.7.egg-info|755|0|0|directory
 lib/python2.7/site-packages/setuptools/__init__.pyc|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/__init__.pyo|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/__init__.py|644|0|0|regular file
@@ -115,6 +163,10 @@ lib/python2.7/site-packages/setuptools/dist.py|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/extension.pyc|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/extension.pyo|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/extension.py|644|0|0|regular file
+lib/python2.7/site-packages/setuptools/extern/__init__.pyc|644|0|0|regular file
+lib/python2.7/site-packages/setuptools/extern/__init__.pyo|644|0|0|regular file
+lib/python2.7/site-packages/setuptools/extern/__init__.py|644|0|0|regular file
+lib/python2.7/site-packages/setuptools/extern|755|0|0|directory
 lib/python2.7/site-packages/setuptools/glob.pyc|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/glob.pyo|644|0|0|regular file
 lib/python2.7/site-packages/setuptools/glob.py|644|0|0|regular file
@@ -184,16 +236,67 @@ lib/python3.6/site-packages/easy_install.py|644|0|0|regular file
 lib/python3.6/site-packages/pkg_resources/__init__.py|644|0|0|regular file
 lib/python3.6/site-packages/pkg_resources/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
 lib/python3.6/site-packages/pkg_resources/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/__pycache__/py31compat.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/__pycache__/py31compat.cpython-36.pyc|644|0|0|regular file
 lib/python3.6/site-packages/pkg_resources/__pycache__|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/_vendor/__init__.py|644|0|0|regular empty file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/appdirs.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/appdirs.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/pyparsing.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/pyparsing.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/six.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__/six.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/__pycache__|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/_vendor/appdirs.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__about__.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__init__.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/__about__.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/__about__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/_compat.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/_compat.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/_structures.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/_structures.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/markers.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/markers.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/requirements.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/requirements.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/specifiers.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/specifiers.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/utils.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/utils.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/version.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__/version.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__pycache__|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/_compat.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/_structures.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/markers.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/requirements.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/specifiers.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/utils.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging/version.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/packaging|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/_vendor/pyparsing.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor/six.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/_vendor|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/extern/__init__.py|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/extern/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/extern/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/pkg_resources/extern/__pycache__|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/extern|755|0|0|directory
+lib/python3.6/site-packages/pkg_resources/py31compat.py|644|0|0|regular file
 lib/python3.6/site-packages/pkg_resources|755|0|0|directory
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/PKG-INFO|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/SOURCES.txt|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/dependency_links.txt|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/entry_points.txt|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/requires.txt|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/top_level.txt|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info/zip-safe|644|0|0|regular file
-lib/python3.6/site-packages/setuptools-35.0.2.post20170507-py3.6.egg-info|755|0|0|directory
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/PKG-INFO|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/SOURCES.txt|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/dependency_links.txt|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/entry_points.txt|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/requires.txt|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/top_level.txt|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info/zip-safe|644|0|0|regular file
+lib/python3.6/site-packages/setuptools-36.2.4.post20170730-py3.6.egg-info|755|0|0|directory
 lib/python3.6/site-packages/setuptools/__init__.py|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
@@ -330,6 +433,11 @@ lib/python3.6/site-packages/setuptools/dep_util.py|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/depends.py|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/dist.py|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/extension.py|644|0|0|regular file
+lib/python3.6/site-packages/setuptools/extern/__init__.py|644|0|0|regular file
+lib/python3.6/site-packages/setuptools/extern/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/setuptools/extern/__pycache__/__init__.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/setuptools/extern/__pycache__|755|0|0|directory
+lib/python3.6/site-packages/setuptools/extern|755|0|0|directory
 lib/python3.6/site-packages/setuptools/glob.py|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/gui-32.exe|644|0|0|regular file
 lib/python3.6/site-packages/setuptools/gui-64.exe|644|0|0|regular file

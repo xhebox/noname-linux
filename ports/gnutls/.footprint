@@ -27,7 +27,7 @@ include/gnutls/x509-ext.h|644|0|0|regular file
 include/gnutls/x509.h|644|0|0|regular file
 include/gnutls|755|0|0|directory
 include|755|0|0|directory
-lib/libgnutls.so.30.14.2|755|0|0|regular file
+lib/libgnutls.so.30.14.6|755|0|0|regular file
 lib/libgnutls.so.30|777|0|0|symbolic link
 lib/libgnutls.so|777|0|0|symbolic link
 lib/libgnutlsxx.so.28.1.0|755|0|0|regular file

@@ -1,0 +1,33 @@
+--- fcitx-4.2.9.1/src/im/pinyin/py.h	2015-12-12 08:02:09.000000000 +0000
++++ fcitx-4.2.9.1/src/im/pinyin/py.h	2015-12-12 08:02:09.000000000 +0000
+@@ -173,7 +173,7 @@
+     char strPYRemindMap[MAX_WORDS_USER_INPUT * 2 + 1];
+ 
+     PY_SELECTED pySelected[MAX_WORDS_USER_INPUT + 1];
+-    uint iPYSelected;
++    unsigned int iPYSelected;
+ 
+     char strPYAuto[MAX_WORDS_USER_INPUT * UTF8_MAX_LENGTH + 1];
+     char strPYAutoMap[MAX_WORDS_USER_INPUT * 2 + 1];
+--- fcitx-4.2.9.1/src/lib/fcitx/ui.c	2015-12-12 08:02:09.000000000 +0000
++++ fcitx-4.2.9.1/src/lib/fcitx/ui.c	2015-12-12 08:02:09.000000000 +0000
+@@ -72,7 +72,7 @@
+     /**
+      * number of message strings
+      **/
+-    uint msgCount;
++    unsigned int msgCount;
+     /**
+      * the messages is updated or not
+      **/
+--- fcitx-4.2.9.1/src/im/pinyin/py.c	2015-12-12 08:02:09.000000000 +0000
++++ fcitx-4.2.9.1/src/im/pinyin/py.c	2015-12-12 08:02:09.000000000 +0000
+@@ -1174,7 +1174,7 @@
+ 
+     char *pBase = NULL, *pPhrase = NULL;
+     char *pBaseMap = NULL, *pPhraseMap = NULL;
+-    uint *pIndex = NULL;
++    unsigned int *pIndex = NULL;
+     boolean bAddNewPhrase = true;
+     int i;
+     char strHZString[MAX_WORDS_USER_INPUT * UTF8_MAX_LENGTH + 1];

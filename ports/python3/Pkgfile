@@ -1,5 +1,5 @@
 name=python3
-version=3.6.1
+version=3.6.2
 desc="A high-level scripting language(3.x)"
 deps="expat libressl zlib ncurses bzip2 sqlite libffi gdbm expat"
 source="http://www.python.org/ftp/python/$version/Python-$version.tar.xz

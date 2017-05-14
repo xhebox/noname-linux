@@ -1,21 +1,21 @@
-lib/libite.so.3|777|0|0|symbolic link
-lib/libite.so|777|0|0|symbolic link
-include/lite/strlite.h|644|0|0|regular file
-include/lite/strdupa.h|644|0|0|regular file
-include/lite/tree.h|644|0|0|regular file
+include/lite/conio.h|644|0|0|regular file
 include/lite/lite.h|644|0|0|regular file
 include/lite/queue.h|644|0|0|regular file
-include/lite/conio.h|644|0|0|regular file
+include/lite/strdupa.h|644|0|0|regular file
+include/lite/strlite.h|644|0|0|regular file
 include/lite/strndupa.h|644|0|0|regular file
 include/lite/strnlen.h|644|0|0|regular file
-lib/libite.so.3.0.1|755|0|0|regular file
+include/lite/tree.h|644|0|0|regular file
+include/lite|755|0|0|directory
+include|755|0|0|directory
+lib/libite.so.4.0.0|755|0|0|regular file
+lib/libite.so.4|777|0|0|symbolic link
+lib/libite.so|777|0|0|symbolic link
 lib/pkgconfig/libite.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
 share/doc/libite/LICENSE|644|0|0|regular file
 share/doc/libite/README.md|644|0|0|regular file
 share/doc/libite|755|0|0|directory
 share/doc|755|0|0|directory
 share|755|0|0|directory
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory
-include/lite|755|0|0|directory
-include|755|0|0|directory

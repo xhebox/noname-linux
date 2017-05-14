@@ -1,5 +1,5 @@
 name=eigen
-version=3.3.3
+version=3.3.4
 desc="Lightweight C++ template library for vector and matrix math, a.k.a. linear algebra."
 deps="cmake freeglut gcc fftw suitesparse boost"
 source="http://bitbucket.org/eigen/eigen/get/${version}.tar.bz2"

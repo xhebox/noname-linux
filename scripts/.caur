@@ -3,6 +3,7 @@
 ___version=$version
 version="`curl -s -L "$3" | grep -Po '(Details.*)[^</h2>]' | cut -d ' ' -f 3 | cut -d '-' -f 1`"
 version=`echo $version | tr -d '\n'`
+version=${version#1:}
 if [ "$version" != "$___version" ]; then
 	echo "$2: update from $___version to $version" >> result
 fi

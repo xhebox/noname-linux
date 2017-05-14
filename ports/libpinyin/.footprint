@@ -2,14 +2,14 @@ bin/gen_binary_files|755|0|0|regular file
 bin/gen_unigram|755|0|0|regular file
 bin/import_interpolation|755|0|0|regular file
 bin|755|0|0|directory
-include/libpinyin-2.0.0/novel_types.h|644|0|0|regular file
-include/libpinyin-2.0.0/pinyin.h|644|0|0|regular file
-include/libpinyin-2.0.0/pinyin_custom2.h|644|0|0|regular file
-include/libpinyin-2.0.0|755|0|0|directory
+include/libpinyin-2.0.92/novel_types.h|644|0|0|regular file
+include/libpinyin-2.0.92/pinyin.h|644|0|0|regular file
+include/libpinyin-2.0.92/pinyin_custom2.h|644|0|0|regular file
+include/libpinyin-2.0.92|755|0|0|directory
 include|755|0|0|directory
 lib/libpinyin.a|644|0|0|regular file
-lib/libpinyin.so.11.0.0|755|0|0|regular file
-lib/libpinyin.so.11|777|0|0|symbolic link
+lib/libpinyin.so.12.0.0|755|0|0|regular file
+lib/libpinyin.so.12|777|0|0|symbolic link
 lib/libpinyin.so|777|0|0|symbolic link
 lib/libpinyin/data/addon_phrase_index.bin|644|0|0|regular file
 lib/libpinyin/data/addon_pinyin_index.bin|644|0|0|regular file

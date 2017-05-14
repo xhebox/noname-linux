@@ -1,10 +1,10 @@
 # 0 0 for initramfs will check it
-/dev/sda2           	/         	ext4      	rw,relatime,data=ordered	0 1
+/dev/sda2               /               ext4            rw,relatime,data=ordered        0 1
 
-/dev/sda3           	/home     	ext4      	rw,relatime,data=ordered	0 2
+/dev/sda3               /home     	ext4            rw,relatime,data=ordered        0 2
 
-/dev/sda1           	/boot     	vfat      	rw,relatime			0 2
+/dev/sda1               /boot     	vfat            rw,relatime	                0 2
 
-/dev/sda7           	/mnt/arch     	ext4      	rw,relatime,data=ordered	0 2
+/dev/sda5               /mnt/arch     	ext4            rw,relatime,data=ordered        0 2
 
-tmpfs                   /tmp            tmpfs           nodev,nosuid,size=512M          0 0
+tmpfs                   /tmp            tmpfs           nodev,nosuid,size=4G            0 0

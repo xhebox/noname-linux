@@ -5,13 +5,14 @@ source="
 https://www.musl-libc.org/releases/musl-$version.tar.gz
 musl.patch
 emoji.patch
+userfriendly_stdxx.patch
 tmpl.h
 __stack_chk_fail_local.c
 getconf.c
 iconv.c
 getent.c
 ldd"
-deps="linux-headers tzdata libc-dev filesystem fortify-headers gettext"
+deps="linux-headers tzdata libc-dev filesystem fortify-headers gettext-tiny"
 
 ext() {
 	cd musl-$version
@@ -99,6 +100,7 @@ build() {
 /lib/qt
 /lib/qt4
 /lib/opencollada
+/lib/anbox/translators/
 /lib/libgig
 EOF
 
@@ -108,6 +110,7 @@ EOF
 /lib32/opencollada
 /lib32/qt4
 /lib32/libgig
+/lib32/anbox/translators/
 EOF
 
 	ln -s ../lib/libc.so "$pkgdir"/lib/ldd

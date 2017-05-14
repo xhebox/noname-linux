@@ -1,5 +1,5 @@
 name=cmocka
-version=1.1.0
+version=1.1.1
 desc='an elegant unit testing framework for C with support for mock objects'
 deps="cmake musl"
 source="https://cmocka.org/files/${version%.*}/cmocka-$version.tar.xz"

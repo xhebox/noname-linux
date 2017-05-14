@@ -1,0 +1,23 @@
+name=python-mock
+version=2.0.0
+desc="Mocking and Patching Library for Testing"
+deps="python-setuptools"
+source="http://pypi.python.org/packages/source/m/mock/mock-$version.tar.gz"
+
+build() {
+	cp -a mock-$version set3
+	cd mock-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

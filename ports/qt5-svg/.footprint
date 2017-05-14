@@ -1,27 +1,27 @@
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvgfont_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvggraphics_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvghandler_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvgnode_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvgstructure_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvgstyle_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qsvgtinydocument_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private/qtsvgglobal_p.h|644|0|0|regular file
-include/qt/QtSvg/5.8.0/QtSvg/private|755|0|0|directory
-include/qt/QtSvg/5.8.0/QtSvg|755|0|0|directory
-include/qt/QtSvg/5.8.0|755|0|0|directory
-include/qt/QtSvg/QGraphicsSvgItem|644|0|0|regular file
-include/qt/QtSvg/QSvgGenerator|644|0|0|regular file
-include/qt/QtSvg/QSvgRenderer|644|0|0|regular file
-include/qt/QtSvg/QSvgWidget|644|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvgfont_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvggraphics_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvghandler_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvgnode_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvgstructure_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvgstyle_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qsvgtinydocument_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private/qtsvgglobal_p.h|664|0|0|regular file
+include/qt/QtSvg/5.9.1/QtSvg/private|755|0|0|directory
+include/qt/QtSvg/5.9.1/QtSvg|755|0|0|directory
+include/qt/QtSvg/5.9.1|755|0|0|directory
+include/qt/QtSvg/QGraphicsSvgItem|664|0|0|regular file
+include/qt/QtSvg/QSvgGenerator|664|0|0|regular file
+include/qt/QtSvg/QSvgRenderer|664|0|0|regular file
+include/qt/QtSvg/QSvgWidget|664|0|0|regular file
 include/qt/QtSvg/QtSvgDepends|644|0|0|regular file
-include/qt/QtSvg/QtSvgVersion|644|0|0|regular file
-include/qt/QtSvg/QtSvg|644|0|0|regular file
-include/qt/QtSvg/qgraphicssvgitem.h|644|0|0|regular file
-include/qt/QtSvg/qsvggenerator.h|644|0|0|regular file
-include/qt/QtSvg/qsvgrenderer.h|644|0|0|regular file
-include/qt/QtSvg/qsvgwidget.h|644|0|0|regular file
-include/qt/QtSvg/qtsvgglobal.h|644|0|0|regular file
-include/qt/QtSvg/qtsvgversion.h|644|0|0|regular file
+include/qt/QtSvg/QtSvgVersion|664|0|0|regular file
+include/qt/QtSvg/QtSvg|664|0|0|regular file
+include/qt/QtSvg/qgraphicssvgitem.h|664|0|0|regular file
+include/qt/QtSvg/qsvggenerator.h|664|0|0|regular file
+include/qt/QtSvg/qsvgrenderer.h|664|0|0|regular file
+include/qt/QtSvg/qsvgwidget.h|664|0|0|regular file
+include/qt/QtSvg/qtsvgglobal.h|664|0|0|regular file
+include/qt/QtSvg/qtsvgversion.h|664|0|0|regular file
 include/qt/QtSvg|755|0|0|directory
 include/qt|755|0|0|directory
 include|755|0|0|directory
@@ -32,8 +32,8 @@ lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake|644|0|0|regular file
 lib/cmake/Qt5Svg|755|0|0|directory
 lib/cmake|755|0|0|directory
 lib/libQt5Svg.prl|644|0|0|regular file
-lib/libQt5Svg.so.5.8.0|755|0|0|regular file
-lib/libQt5Svg.so.5.8|777|0|0|symbolic link
+lib/libQt5Svg.so.5.9.1|755|0|0|regular file
+lib/libQt5Svg.so.5.9|777|0|0|symbolic link
 lib/libQt5Svg.so.5|777|0|0|symbolic link
 lib/libQt5Svg.so|777|0|0|symbolic link
 lib/pkgconfig/Qt5Svg.pc|644|0|0|regular file

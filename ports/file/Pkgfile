@@ -1,5 +1,5 @@
 name=file
-version=5.30
+version=5.31
 _version=`echo $version | sed 's/\./_/g'`
 deps=zlib
 desc="File type identification utility"

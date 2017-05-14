@@ -1,5 +1,5 @@
 name=imlib2
-version=1.4.9
+version=1.4.10
 desc="Library that does image file loading and saving as well as rendering, manipulation, arbitrary polygon support"
 deps="bzip2 harfbuzz libjpeg-turbo libpng libtiff libxext giflib"
 source="http://downloads.sourceforge.net/enlightenment/$name-$version.tar.bz2"

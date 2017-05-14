@@ -8,7 +8,7 @@ disk:x:6:root
 lp:x:7:daemon
 mem:x:8:
 kmem:x:9:
-wheel:x:10:root,xhe
+wheel:x:10:root
 ftp:x:11:
 mail:x:12:
 uucp:x:14:
@@ -24,13 +24,13 @@ lock:x:54:
 uuidd:x:68:
 dbus:x:81:
 network:x:90:
-video:x:91:xhe
-audio:x:92:xhe
+video:x:91:libvirt
+audio:x:92:libvirt
 optical:x:93:
 floppy:x:94:
 storage:x:95:
 scanner:x:96:
-input:x:97:xhe
+input:x:97:
 power:x:98:
 nobody:x:99:
 users:x:100:
@@ -39,3 +39,4 @@ chrony:x:183:
 pdnsd:x:184:
 dnscrypt:x:999:
 ldap:x:439:
+libvirt:x:490:libvirt

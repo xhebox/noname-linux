@@ -1,5 +1,5 @@
 name=opencl-headers
-version=2.1.20161129
+version=2.2.20170516
 desc="OpenCL (Open Computing Language) header files"
 
 ext() {
@@ -9,12 +9,12 @@ ext() {
 
 build() {
 	install -dm755 "${pkgdir}"/include/CL
-
-	cd OpenCL-Headers
+	local ver=`echo ${version%.*} | sed 's/\.//g'`
+	cd OpenCL-Headers/opencl${ver}/CL
 	for h in $(ls -1 *.h); do
 		install -m 644 ${h} "${pkgdir}"/include/CL/
 	done
-	cd ../OpenCL-CLHPP
+	cd ../../../OpenCL-CLHPP
 	for h in $(ls -1 *.hpp); do
 		install -m 644 ${h} "${pkgdir}"/include/CL/
 	done

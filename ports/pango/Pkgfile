@@ -1,5 +1,5 @@
 name=pango
-version=1.40.5
+version=1.40.7
 desc="library for layout and rendering of text"
 deps="expat fontconfig glib cairo libxft libxext gobject-introspection"
 source="http://download.gnome.org/sources/$name/1.40/$name-$version.tar.xz"

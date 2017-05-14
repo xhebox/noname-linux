@@ -1,11 +1,12 @@
 name=diffutils
-version=3.5
+version=3.6
 deps="bash musl"
 desc="The GNU diff utilities"
 source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
 
 build() {
 	cd $name-$version
+	export ac_cv_libsigsegv=no
 	./configure --prefix= \
                 --libexecdir=/lib \
                 --disable-static 

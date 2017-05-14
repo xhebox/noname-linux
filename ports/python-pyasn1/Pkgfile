@@ -1,5 +1,5 @@
 name=python-pyasn1
-version=0.2.3
+version=0.3.1
 desc="ASN.1 library"
 deps="python-setuptools"
 source="https://pypi.io/packages/source/p/pyasn1/pyasn1-$version.tar.gz"

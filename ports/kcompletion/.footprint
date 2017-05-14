@@ -27,7 +27,7 @@ lib/cmake/KF5Completion/KF5CompletionTargets-release.cmake|644|0|0|regular file
 lib/cmake/KF5Completion/KF5CompletionTargets.cmake|644|0|0|regular file
 lib/cmake/KF5Completion|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5Completion.so.5.33.0|755|0|0|regular file
+lib/libKF5Completion.so.5.36.0|755|0|0|regular file
 lib/libKF5Completion.so.5|777|0|0|symbolic link
 lib/libKF5Completion.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KCompletion.pri|644|0|0|regular file

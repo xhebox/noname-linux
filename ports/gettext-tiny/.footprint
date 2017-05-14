@@ -1,6 +1,9 @@
+bin/autopoint|755|0|0|regular file
 bin/msgfmt|755|0|0|regular file
+bin/msgmerge|755|0|0|regular file
+bin/xgettext|755|0|0|regular file
 bin|755|0|0|directory
-include|755|0|0|directory
+lib/libintl.a|755|0|0|regular file
 lib|755|0|0|directory
 share/gettext-tiny/m4/ansi-c++.m4|644|0|0|regular file
 share/gettext-tiny/m4/codeset.m4|644|0|0|regular file

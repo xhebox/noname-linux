@@ -27,8 +27,6 @@ include/va/va_vpp.h|644|0|0|regular file
 include/va/va_x11.h|644|0|0|regular file
 include/va|755|0|0|directory
 include|755|0|0|directory
-lib/dri/dummy_drv_video.so|755|0|0|regular file
-lib/dri|755|0|0|directory
 lib/libva-drm.so.1.4000.0|755|0|0|regular file
 lib/libva-drm.so.1|777|0|0|symbolic link
 lib/libva-drm.so|777|0|0|symbolic link

@@ -1,5 +1,5 @@
 name=cmake
-version=3.8.0
+version=3.8.2
 deps="ncurses expat curl zlib bzip2 xz libarchive"
 desc="CMake is a cross-platform open-source make system"
 case $version in

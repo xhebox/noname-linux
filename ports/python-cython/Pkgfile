@@ -1,5 +1,5 @@
 name=python-cython
-version=0.25.2
+version=0.26
 deps="python-setuptools python3"
 source="https://github.com/cython/cython/archive/$version.tar.gz"
 desc="C-Extensions for Python"

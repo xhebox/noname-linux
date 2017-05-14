@@ -1,566 +1,221 @@
-diff -Naur iproute2-4.11.0.orig/bridge/fdb.c iproute2-4.11.0/bridge/fdb.c
---- iproute2-4.11.0.orig/bridge/fdb.c	2017-05-01 11:56:33.148926602 -0700
-+++ iproute2-4.11.0/bridge/fdb.c	2017-05-01 13:11:03.165848386 -0700
-@@ -17,7 +17,6 @@
- #include <net/if.h>
- #include <netinet/in.h>
- #include <linux/if_bridge.h>
--#include <linux/if_ether.h>
- #include <linux/neighbour.h>
- #include <string.h>
- #include <limits.h>
-diff -Naur iproute2-4.11.0.orig/bridge/link.c iproute2-4.11.0/bridge/link.c
---- iproute2-4.11.0.orig/bridge/link.c	2017-05-01 11:56:33.148926602 -0700
-+++ iproute2-4.11.0/bridge/link.c	2017-05-01 13:14:04.095744352 -0700
-@@ -3,10 +3,10 @@
- #include <stdlib.h>
- #include <unistd.h>
- #include <time.h>
-+#include <net/if.h>
- #include <sys/socket.h>
- #include <sys/time.h>
- #include <netinet/in.h>
--#include <linux/if.h>
- #include <linux/if_bridge.h>
- #include <string.h>
- #include <stdbool.h>
-diff -Naur iproute2-4.11.0.orig/bridge/mdb.c iproute2-4.11.0/bridge/mdb.c
---- iproute2-4.11.0.orig/bridge/mdb.c	2017-05-01 11:56:33.148926602 -0700
-+++ iproute2-4.11.0/bridge/mdb.c	2017-05-01 13:12:11.880568448 -0700
-@@ -10,7 +10,6 @@
- #include <net/if.h>
- #include <netinet/in.h>
- #include <linux/if_bridge.h>
--#include <linux/if_ether.h>
- #include <string.h>
- #include <arpa/inet.h>
+diff -Naur iproute2-4.12.0.orig/include/linux/if_ether.h iproute2-4.12.0/include/linux/if_ether.h
+--- iproute2-4.12.0.orig/include/linux/if_ether.h	2017-07-06 11:09:53.305214044 -0700
++++ iproute2-4.12.0/include/linux/if_ether.h	2017-07-06 16:30:06.651369931 -0700
+@@ -22,6 +22,7 @@
+ #define _LINUX_IF_ETHER_H
  
-diff -Naur iproute2-4.11.0.orig/bridge/vlan.c iproute2-4.11.0/bridge/vlan.c
---- iproute2-4.11.0.orig/bridge/vlan.c	2017-05-01 11:56:33.149926615 -0700
-+++ iproute2-4.11.0/bridge/vlan.c	2017-05-01 13:15:33.054676553 -0700
-@@ -6,7 +6,6 @@
- #include <net/if.h>
- #include <netinet/in.h>
- #include <linux/if_bridge.h>
--#include <linux/if_ether.h>
- #include <json_writer.h>
- #include <string.h>
- 
-diff -Naur iproute2-4.11.0.orig/include/linux/if_bridge.h iproute2-4.11.0/include/linux/if_bridge.h
---- iproute2-4.11.0.orig/include/linux/if_bridge.h	2017-05-01 11:56:33.169926894 -0700
-+++ iproute2-4.11.0/include/linux/if_bridge.h	2017-05-01 13:08:22.673166583 -0700
-@@ -13,9 +13,9 @@
- #ifndef _LINUX_IF_BRIDGE_H
- #define _LINUX_IF_BRIDGE_H
- 
-+#include <netinet/if_ether.h>
-+
  #include <linux/types.h>
--#include <linux/if_ether.h>
--#include <linux/in6.h>
++#include <linux/libc-compat.h>
  
- #define SYSFS_BRIDGE_ATTR	"bridge"
- #define SYSFS_BRIDGE_FDB	"brforward"
-diff -Naur iproute2-4.11.0.orig/include/linux/if_tunnel.h iproute2-4.11.0/include/linux/if_tunnel.h
---- iproute2-4.11.0.orig/include/linux/if_tunnel.h	2017-05-01 11:56:33.170926908 -0700
-+++ iproute2-4.11.0/include/linux/if_tunnel.h	2017-05-01 12:16:24.498639942 -0700
-@@ -2,9 +2,7 @@
+ /*
+  *	IEEE 802.3 Ethernet magic constants.  The frame sizes omit the preamble
+@@ -142,11 +143,13 @@
+  *	This is an Ethernet frame header.
+  */
+ 
++#if __UAPI_DEF_ETHHDR
+ struct ethhdr {
+ 	unsigned char	h_dest[ETH_ALEN];	/* destination eth addr	*/
+ 	unsigned char	h_source[ETH_ALEN];	/* source ether addr	*/
+ 	__be16		h_proto;		/* packet type ID field	*/
+ } __attribute__((packed));
++#endif
+ 
+ 
+ #endif /* _LINUX_IF_ETHER_H */
+diff -Naur iproute2-4.12.0.orig/include/linux/if_tunnel.h iproute2-4.12.0/include/linux/if_tunnel.h
+--- iproute2-4.12.0.orig/include/linux/if_tunnel.h	2017-07-06 11:09:53.305214044 -0700
++++ iproute2-4.12.0/include/linux/if_tunnel.h	2017-07-06 16:32:23.814172660 -0700
+@@ -2,7 +2,6 @@
  #define _IF_TUNNEL_H_
  
  #include <linux/types.h>
 -#include <linux/if.h>
  #include <linux/ip.h>
--#include <linux/in6.h>
+ #include <linux/in6.h>
  #include <asm/byteorder.h>
- 
- 
-diff -Naur iproute2-4.11.0.orig/include/linux/ip6_tunnel.h iproute2-4.11.0/include/linux/ip6_tunnel.h
---- iproute2-4.11.0.orig/include/linux/ip6_tunnel.h	2017-05-01 11:56:33.172926936 -0700
-+++ iproute2-4.11.0/include/linux/ip6_tunnel.h	2017-05-01 12:18:31.690988206 -0700
-@@ -2,8 +2,6 @@
+diff -Naur iproute2-4.12.0.orig/include/linux/ip6_tunnel.h iproute2-4.12.0/include/linux/ip6_tunnel.h
+--- iproute2-4.12.0.orig/include/linux/ip6_tunnel.h	2017-07-06 11:09:53.303214021 -0700
++++ iproute2-4.12.0/include/linux/ip6_tunnel.h	2017-07-06 16:33:41.630158864 -0700
+@@ -2,7 +2,6 @@
  #define _IP6_TUNNEL_H
  
  #include <linux/types.h>
 -#include <linux/if.h>		/* For IFNAMSIZ. */
--#include <linux/in6.h>		/* For struct in6_addr. */
+ #include <linux/in6.h>		/* For struct in6_addr. */
  
  #define IPV6_TLV_TNL_ENCAP_LIMIT 4
- #define IPV6_DEFAULT_TNL_ENCAP_LIMIT 4
-diff -Naur iproute2-4.11.0.orig/include/linux/l2tp.h iproute2-4.11.0/include/linux/l2tp.h
---- iproute2-4.11.0.orig/include/linux/l2tp.h	2017-05-01 11:56:33.172926936 -0700
-+++ iproute2-4.11.0/include/linux/l2tp.h	2017-05-01 12:35:54.919789280 -0700
-@@ -9,8 +9,6 @@
+diff -Naur iproute2-4.12.0.orig/include/linux/kernel.h iproute2-4.12.0/include/linux/kernel.h
+--- iproute2-4.12.0.orig/include/linux/kernel.h	2017-07-06 11:09:53.303214021 -0700
++++ iproute2-4.12.0/include/linux/kernel.h	2017-07-06 16:30:06.650369918 -0700
+@@ -1,7 +1,9 @@
+ #ifndef _LINUX_KERNEL_H
+ #define _LINUX_KERNEL_H
  
- #include <linux/types.h>
- #include <linux/socket.h>
--#include <linux/in.h>
--#include <linux/in6.h>
++#ifdef __GLIBC__
+ #include <linux/sysinfo.h>
++#endif
  
- #define IPPROTO_L2TP		115
+ /*
+  * 'kernel.h' contains some often-used function prototypes etc
+diff -Naur iproute2-4.12.0.orig/include/linux/libc-compat.h iproute2-4.12.0/include/linux/libc-compat.h
+--- iproute2-4.12.0.orig/include/linux/libc-compat.h	2017-07-06 11:09:53.302214010 -0700
++++ iproute2-4.12.0/include/linux/libc-compat.h	2017-07-06 16:30:06.650369918 -0700
+@@ -48,47 +48,57 @@
+ #ifndef _LIBC_COMPAT_H
+ #define _LIBC_COMPAT_H
  
-diff -Naur iproute2-4.11.0.orig/include/linux/netfilter.h iproute2-4.11.0/include/linux/netfilter.h
---- iproute2-4.11.0.orig/include/linux/netfilter.h	2017-05-01 11:56:33.174926964 -0700
-+++ iproute2-4.11.0/include/linux/netfilter.h	2017-05-01 13:00:54.521494478 -0700
-@@ -3,9 +3,6 @@
+-/* We have included glibc headers... */
+-#if defined(__GLIBC__)
++/* We're used from userspace... */
++#if !defined(__KERNEL__)
  
- #include <linux/types.h>
+-/* Coordinate with glibc net/if.h header. */
++/* Coordinate with libc net/if.h header. */
+ #if defined(_NET_IF_H) && defined(__USE_MISC)
  
--#include <linux/in.h>
--#include <linux/in6.h>
--
- /* Responses from hook functions. */
- #define NF_DROP 0
- #define NF_ACCEPT 1
-diff -Naur iproute2-4.11.0.orig/include/linux/xfrm.h iproute2-4.11.0/include/linux/xfrm.h
---- iproute2-4.11.0.orig/include/linux/xfrm.h	2017-05-01 11:56:33.182927075 -0700
-+++ iproute2-4.11.0/include/linux/xfrm.h	2017-05-01 12:24:33.590743764 -0700
-@@ -1,7 +1,6 @@
- #ifndef _LINUX_XFRM_H
- #define _LINUX_XFRM_H
+-/* GLIBC headers included first so don't define anything
++/* libc headers included first so don't define anything
+  * that would already be defined. */
  
--#include <linux/in6.h>
- #include <linux/types.h>
+ #define __UAPI_DEF_IF_IFCONF 0
+ #define __UAPI_DEF_IF_IFMAP 0
+ #define __UAPI_DEF_IF_IFNAMSIZ 0
+ #define __UAPI_DEF_IF_IFREQ 0
+-/* Everything up to IFF_DYNAMIC, matches net/if.h until glibc 2.23 */
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS 0
+-/* For the future if glibc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
++/* If libc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
++#if !defined(__GLIBC__)
++#define __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO 0
++#else
+ #ifndef __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO 1
+ #endif /* __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO */
++#endif /* !defined(__GLIBC__) */
  
- /* All of the structures in this file may not change size as they are
-diff -Naur iproute2-4.11.0.orig/ip/ip6tunnel.c iproute2-4.11.0/ip/ip6tunnel.c
---- iproute2-4.11.0.orig/ip/ip6tunnel.c	2017-05-01 11:56:33.184927103 -0700
-+++ iproute2-4.11.0/ip/ip6tunnel.c	2017-05-01 12:20:34.455279454 -0700
-@@ -23,13 +23,13 @@
- #include <string.h>
- #include <stdlib.h>
- #include <unistd.h>
-+#include <net/if.h>
-+#include <net/if_arp.h>
- #include <sys/types.h>
- #include <sys/socket.h>
- #include <arpa/inet.h>
- #include <sys/ioctl.h>
- #include <linux/ip.h>
--#include <linux/if.h>
--#include <linux/if_arp.h>
- #include <linux/if_tunnel.h>
- #include <linux/ip6_tunnel.h>
+ #else /* _NET_IF_H */
  
-diff -Naur iproute2-4.11.0.orig/ip/ipaddress.c iproute2-4.11.0/ip/ipaddress.c
---- iproute2-4.11.0.orig/ip/ipaddress.c	2017-05-01 11:56:33.185927117 -0700
-+++ iproute2-4.11.0/ip/ipaddress.c	2017-05-01 12:10:45.042068983 -0700
-@@ -16,18 +16,18 @@
- #include <syslog.h>
- #include <inttypes.h>
- #include <fcntl.h>
-+#include <net/if.h>
- #include <sys/ioctl.h>
- #include <sys/socket.h>
- #include <sys/ioctl.h>
- #include <sys/param.h>
- #include <errno.h>
- #include <netinet/in.h>
-+#include <netinet/if_ether.h>
- #include <arpa/inet.h>
- #include <string.h>
- #include <fnmatch.h>
+ /* Linux headers included first, and we must define everything
+- * we need. The expectation is that glibc will check the
++ * we need. The expectation is that libc will check the
+  * __UAPI_DEF_* defines and adjust appropriately. */
  
--#include <linux/netdevice.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
- #include <linux/net_namespace.h>
+ #define __UAPI_DEF_IF_IFCONF 1
+ #define __UAPI_DEF_IF_IFMAP 1
+ #define __UAPI_DEF_IF_IFNAMSIZ 1
+ #define __UAPI_DEF_IF_IFREQ 1
+-/* Everything up to IFF_DYNAMIC, matches net/if.h until glibc 2.23 */
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
+-/* For the future if glibc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
++/* If libc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO 1
  
-diff -Naur iproute2-4.11.0.orig/ip/ipl2tp.c iproute2-4.11.0/ip/ipl2tp.c
---- iproute2-4.11.0.orig/ip/ipl2tp.c	2017-05-01 11:56:33.185927117 -0700
-+++ iproute2-4.11.0/ip/ipl2tp.c	2017-05-01 12:36:17.271028686 -0700
-@@ -19,8 +19,6 @@
- #include <sys/socket.h>
- #include <arpa/inet.h>
- #include <sys/ioctl.h>
--#include <linux/if.h>
--#include <linux/if_arp.h>
- #include <linux/ip.h>
+ #endif /* _NET_IF_H */
  
- #include <linux/genetlink.h>
-diff -Naur iproute2-4.11.0.orig/ip/iplink_xdp.c iproute2-4.11.0/ip/iplink_xdp.c
---- iproute2-4.11.0.orig/ip/iplink_xdp.c	2017-05-01 11:56:33.188927159 -0700
-+++ iproute2-4.11.0/ip/iplink_xdp.c	2017-05-01 12:38:14.677281664 -0700
-@@ -11,6 +11,7 @@
+-/* Coordinate with glibc netinet/in.h header. */
++/* Coordinate with libc netinet/if_ether.h */
++#ifdef _NETINET_IF_ETHER_H
++#define __UAPI_DEF_ETHHDR 0
++#else
++/* glibc uses __NETINET_IF_ETHER_H and uses the uapi header */
++#define __UAPI_DEF_ETHHDR 1
++#endif /* _NETINET_IF_ETHER_H */
++
++/* Coordinate with libc netinet/in.h header. */
+ #if defined(_NETINET_IN_H)
  
- #include <stdio.h>
- #include <stdlib.h>
-+#include <sys/un.h>
+-/* GLIBC headers included first so don't define anything
++/* libc headers included first so don't define anything
+  * that would already be defined. */
+ #define __UAPI_DEF_IN_ADDR		0
+ #define __UAPI_DEF_IN_IPPROTO		0
+@@ -98,15 +108,7 @@
+ #define __UAPI_DEF_IN_CLASS		0
  
- #include <linux/bpf.h>
+ #define __UAPI_DEF_IN6_ADDR		0
+-/* The exception is the in6_addr macros which must be defined
+- * if the glibc code didn't define them. This guard matches
+- * the guard in glibc/inet/netinet/in.h which defines the
+- * additional in6_addr macros e.g. s6_addr16, and s6_addr32. */
+-#if defined(__USE_MISC) || defined (__USE_GNU)
+ #define __UAPI_DEF_IN6_ADDR_ALT		0
+-#else
+-#define __UAPI_DEF_IN6_ADDR_ALT		1
+-#endif
+ #define __UAPI_DEF_SOCKADDR_IN6		0
+ #define __UAPI_DEF_IPV6_MREQ		0
+ #define __UAPI_DEF_IPPROTO_V6		0
+@@ -117,7 +119,7 @@
+ #else
  
-diff -Naur iproute2-4.11.0.orig/ip/ipmaddr.c iproute2-4.11.0/ip/ipmaddr.c
---- iproute2-4.11.0.orig/ip/ipmaddr.c	2017-05-01 11:56:33.189927173 -0700
-+++ iproute2-4.11.0/ip/ipmaddr.c	2017-05-01 12:29:04.862528330 -0700
-@@ -15,15 +15,13 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if.h>
- #include <sys/ioctl.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
- #include <arpa/inet.h>
- #include <string.h>
+ /* Linux headers included first, and we must define everything
+- * we need. The expectation is that glibc will check the
++ * we need. The expectation is that libc will check the
+  * __UAPI_DEF_* defines and adjust appropriately. */
+ #define __UAPI_DEF_IN_ADDR		1
+ #define __UAPI_DEF_IN_IPPROTO		1
+@@ -127,7 +129,7 @@
+ #define __UAPI_DEF_IN_CLASS		1
  
--#include <linux/netdevice.h>
--#include <linux/if.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
+ #define __UAPI_DEF_IN6_ADDR		1
+-/* We unconditionally define the in6_addr macros and glibc must
++/* We unconditionally define the in6_addr macros and libc must
+  * coordinate. */
+ #define __UAPI_DEF_IN6_ADDR_ALT		1
+ #define __UAPI_DEF_SOCKADDR_IN6		1
+@@ -168,18 +170,20 @@
+ /* If we did not see any headers from any supported C libraries,
+  * or we are being included in the kernel, then define everything
+  * that we need. */
+-#else /* !defined(__GLIBC__) */
++#else /* defined(__KERNEL__) */
  
- #include "rt_names.h"
-diff -Naur iproute2-4.11.0.orig/ip/ipmroute.c iproute2-4.11.0/ip/ipmroute.c
---- iproute2-4.11.0.orig/ip/ipmroute.c	2017-05-01 11:56:33.189927173 -0700
-+++ iproute2-4.11.0/ip/ipmroute.c	2017-05-01 12:22:59.960779128 -0700
-@@ -22,9 +22,6 @@
- #include <arpa/inet.h>
- #include <string.h>
+ /* Definitions for if.h */
+ #define __UAPI_DEF_IF_IFCONF 1
+ #define __UAPI_DEF_IF_IFMAP 1
+ #define __UAPI_DEF_IF_IFNAMSIZ 1
+ #define __UAPI_DEF_IF_IFREQ 1
+-/* Everything up to IFF_DYNAMIC, matches net/if.h until glibc 2.23 */
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
+-/* For the future if glibc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
++/* If libc adds IFF_LOWER_UP, IFF_DORMANT and IFF_ECHO */
+ #define __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO 1
  
--#include <linux/netdevice.h>
--#include <linux/if.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
++/* Definitions for if/ether.h */
++#define __UAPI_DEF_ETHHDR 1
++
+ /* Definitions for in.h */
+ #define __UAPI_DEF_IN_ADDR		1
+ #define __UAPI_DEF_IN_IPPROTO		1
+@@ -208,6 +212,6 @@
+ /* Definitions for xattr.h */
+ #define __UAPI_DEF_XATTR		1
  
- #include <rt_names.h>
-diff -Naur iproute2-4.11.0.orig/ip/iproute_lwtunnel.c iproute2-4.11.0/ip/iproute_lwtunnel.c
---- iproute2-4.11.0.orig/ip/iproute_lwtunnel.c	2017-05-01 11:56:33.190927187 -0700
-+++ iproute2-4.11.0/ip/iproute_lwtunnel.c	2017-05-01 12:49:46.817592280 -0700
-@@ -16,6 +16,7 @@
- #include <unistd.h>
- #include <fcntl.h>
- #include <string.h>
-+#include <sys/un.h>
- #include <linux/ila.h>
- #include <linux/lwtunnel.h>
- #include <linux/mpls_iptunnel.h>
-diff -Naur iproute2-4.11.0.orig/ip/iprule.c iproute2-4.11.0/ip/iprule.c
---- iproute2-4.11.0.orig/ip/iprule.c	2017-05-01 11:56:33.190927187 -0700
-+++ iproute2-4.11.0/ip/iprule.c	2017-05-01 12:11:15.793405550 -0700
-@@ -15,12 +15,12 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
- #include <netinet/ip.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/if.h>
- #include <linux/fib_rules.h>
- #include <errno.h>
+-#endif /* __GLIBC__ */
++#endif /* defined(__KERNEL__) */
  
-diff -Naur iproute2-4.11.0.orig/ip/iptoken.c iproute2-4.11.0/ip/iptoken.c
---- iproute2-4.11.0.orig/ip/iptoken.c	2017-05-01 11:56:33.190927187 -0700
-+++ iproute2-4.11.0/ip/iptoken.c	2017-05-01 12:32:39.621698528 -0700
-@@ -16,12 +16,12 @@
- #include <syslog.h>
- #include <fcntl.h>
- #include <string.h>
-+#include <net/if.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
- #include <netinet/ip.h>
- #include <arpa/inet.h>
- #include <linux/types.h>
--#include <linux/if.h>
- 
- #include "rt_names.h"
- #include "utils.h"
-diff -Naur iproute2-4.11.0.orig/ip/iptuntap.c iproute2-4.11.0/ip/iptuntap.c
---- iproute2-4.11.0.orig/ip/iptuntap.c	2017-05-01 11:56:33.190927187 -0700
-+++ iproute2-4.11.0/ip/iptuntap.c	2017-05-01 12:31:35.701052593 -0700
-@@ -14,11 +14,11 @@
- #include <stdlib.h>
- #include <string.h>
- #include <unistd.h>
-+#include <net/if.h>
- #include <sys/types.h>
- #include <sys/socket.h>
- #include <arpa/inet.h>
- #include <sys/ioctl.h>
--#include <linux/if.h>
- #include <linux/if_tun.h>
- #include <pwd.h>
- #include <grp.h>
-diff -Naur iproute2-4.11.0.orig/ip/ipvrf.c iproute2-4.11.0/ip/ipvrf.c
---- iproute2-4.11.0.orig/ip/ipvrf.c	2017-05-01 11:56:33.191927201 -0700
-+++ iproute2-4.11.0/ip/ipvrf.c	2017-05-01 12:50:00.575735454 -0700
-@@ -13,6 +13,7 @@
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <sys/socket.h>
-+#include <sys/un.h>
- #include <sys/mount.h>
- #include <linux/bpf.h>
- #include <linux/if.h>
-diff -Naur iproute2-4.11.0.orig/ip/tcp_metrics.c iproute2-4.11.0/ip/tcp_metrics.c
---- iproute2-4.11.0.orig/ip/tcp_metrics.c	2017-05-01 11:56:33.193927228 -0700
-+++ iproute2-4.11.0/ip/tcp_metrics.c	2017-05-01 12:38:32.256468859 -0700
+ #endif /* _LIBC_COMPAT_H */
+diff -Naur iproute2-4.12.0.orig/include/linux/netfilter_ipv4/ip_tables.h iproute2-4.12.0/include/linux/netfilter_ipv4/ip_tables.h
+--- iproute2-4.12.0.orig/include/linux/netfilter_ipv4/ip_tables.h	2017-07-06 11:09:53.310214100 -0700
++++ iproute2-4.12.0/include/linux/netfilter_ipv4/ip_tables.h	2017-07-06 16:38:57.526211238 -0700
 @@ -17,7 +17,6 @@
- #include <sys/socket.h>
- #include <arpa/inet.h>
- #include <sys/ioctl.h>
+ 
+ #include <linux/types.h>
+ 
 -#include <linux/if.h>
+ #include <linux/netfilter_ipv4.h>
  
- #include <linux/genetlink.h>
- #include <linux/tcp_metrics.h>
-diff -Naur iproute2-4.11.0.orig/ip/tunnel.c iproute2-4.11.0/ip/tunnel.c
---- iproute2-4.11.0.orig/ip/tunnel.c	2017-05-01 11:56:33.193927228 -0700
-+++ iproute2-4.11.0/ip/tunnel.c	2017-05-01 12:25:55.244584318 -0700
-@@ -26,11 +26,11 @@
- #include <string.h>
- #include <unistd.h>
- #include <errno.h>
-+#include <net/if.h>
- #include <sys/types.h>
- #include <sys/socket.h>
- #include <sys/ioctl.h>
- #include <netinet/in.h>
--#include <linux/if.h>
- #include <linux/ip.h>
- #include <linux/if_tunnel.h>
- 
-diff -Naur iproute2-4.11.0.orig/lib/ll_addr.c iproute2-4.11.0/lib/ll_addr.c
---- iproute2-4.11.0.orig/lib/ll_addr.c	2017-05-01 11:56:33.196927270 -0700
-+++ iproute2-4.11.0/lib/ll_addr.c	2017-05-01 12:06:48.768439799 -0700
-@@ -14,6 +14,7 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if_arp.h>
- #include <sys/ioctl.h>
- #include <sys/socket.h>
- #include <sys/ioctl.h>
-@@ -21,8 +22,6 @@
- #include <arpa/inet.h>
- #include <string.h>
- 
--#include <linux/netdevice.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
- 
- #include "rt_names.h"
-diff -Naur iproute2-4.11.0.orig/lib/ll_proto.c iproute2-4.11.0/lib/ll_proto.c
---- iproute2-4.11.0.orig/lib/ll_proto.c	2017-05-01 11:56:33.196927270 -0700
-+++ iproute2-4.11.0/lib/ll_proto.c	2017-05-01 12:06:17.434119257 -0700
-@@ -14,15 +14,15 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if_arp.h>
- #include <sys/ioctl.h>
- #include <sys/socket.h>
- #include <sys/ioctl.h>
- #include <netinet/in.h>
-+#include <netinet/if_ether.h>
- #include <arpa/inet.h>
- #include <string.h>
- 
--#include <linux/netdevice.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
- 
- #include "utils.h"
-diff -Naur iproute2-4.11.0.orig/lib/ll_types.c iproute2-4.11.0/lib/ll_types.c
---- iproute2-4.11.0.orig/lib/ll_types.c	2017-05-01 11:56:33.196927270 -0700
-+++ iproute2-4.11.0/lib/ll_types.c	2017-05-01 12:05:13.530477053 -0700
-@@ -14,6 +14,7 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if_arp.h>
- #include <sys/ioctl.h>
- #include <sys/socket.h>
- #include <sys/ioctl.h>
-@@ -21,8 +22,6 @@
- #include <arpa/inet.h>
- #include <string.h>
- 
--#include <linux/netdevice.h>
--#include <linux/if_arp.h>
- #include <linux/sockios.h>
- 
- #include "rt_names.h"
-diff -Naur iproute2-4.11.0.orig/lib/utils.c iproute2-4.11.0/lib/utils.c
---- iproute2-4.11.0.orig/lib/utils.c	2017-05-01 11:56:33.197927284 -0700
-+++ iproute2-4.11.0/lib/utils.c	2017-05-01 12:04:24.147003781 -0700
-@@ -17,6 +17,7 @@
- #include <syslog.h>
- #include <fcntl.h>
- #include <limits.h>
-+#include <net/if_arp.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
- #include <string.h>
-@@ -25,7 +26,6 @@
- #include <asm/types.h>
- #include <linux/pkt_sched.h>
- #include <linux/param.h>
--#include <linux/if_arp.h>
- #include <linux/mpls.h>
- #include <time.h>
- #include <sys/time.h>
-diff -Naur iproute2-4.11.0.orig/misc/arpd.c iproute2-4.11.0/misc/arpd.c
---- iproute2-4.11.0.orig/misc/arpd.c	2017-05-01 11:56:33.216927549 -0700
-+++ iproute2-4.11.0/misc/arpd.c	2017-05-01 13:20:16.066643266 -0700
-@@ -17,6 +17,8 @@
- #include <stdlib.h>
- #include <netdb.h>
- #include <db_185.h>
-+#include <net/if.h>
-+#include <net/if_arp.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
- #include <errno.h>
-@@ -26,10 +28,8 @@
- #include <sys/time.h>
- #include <time.h>
- #include <signal.h>
--#include <linux/if.h>
--#include <linux/if_ether.h>
--#include <linux/if_arp.h>
- #include <netinet/in.h>
-+#include <netinet/if_ether.h>
- #include <arpa/inet.h>
- #include <linux/if_packet.h>
- #include <linux/filter.h>
-diff -Naur iproute2-4.11.0.orig/misc/ss.c iproute2-4.11.0/misc/ss.c
---- iproute2-4.11.0.orig/misc/ss.c	2017-05-01 11:56:33.217927563 -0700
-+++ iproute2-4.11.0/misc/ss.c	2017-05-01 13:17:27.544876297 -0700
-@@ -39,7 +39,6 @@
- #include <linux/sock_diag.h>
- #include <linux/inet_diag.h>
- #include <linux/unix_diag.h>
--#include <linux/netdevice.h>	/* for MAX_ADDR_LEN */
- #include <linux/filter.h>
- #include <linux/packet_diag.h>
- #include <linux/netlink_diag.h>
-diff -Naur iproute2-4.11.0.orig/tc/e_bpf.c iproute2-4.11.0/tc/e_bpf.c
---- iproute2-4.11.0.orig/tc/e_bpf.c	2017-05-01 11:56:33.221927618 -0700
-+++ iproute2-4.11.0/tc/e_bpf.c	2017-05-01 12:59:34.679672991 -0700
-@@ -11,6 +11,7 @@
- 
- #include <stdio.h>
- #include <unistd.h>
-+#include <sys/un.h>
- 
- #include "utils.h"
- 
-diff -Naur iproute2-4.11.0.orig/tc/f_basic.c iproute2-4.11.0/tc/f_basic.c
---- iproute2-4.11.0.orig/tc/f_basic.c	2017-05-01 11:56:33.222927632 -0700
-+++ iproute2-4.11.0/tc/f_basic.c	2017-05-01 12:51:36.993738825 -0700
-@@ -19,7 +19,6 @@
- #include <netinet/in.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/if.h>
- 
- #include "utils.h"
- #include "tc_util.h"
-diff -Naur iproute2-4.11.0.orig/tc/f_bpf.c iproute2-4.11.0/tc/f_bpf.c
---- iproute2-4.11.0.orig/tc/f_bpf.c	2017-05-01 11:56:33.222927632 -0700
-+++ iproute2-4.11.0/tc/f_bpf.c	2017-05-01 12:51:46.206834701 -0700
-@@ -11,6 +11,7 @@
- 
- #include <stdio.h>
- #include <stdlib.h>
-+#include <sys/un.h>
- 
- #include <linux/bpf.h>
- 
-diff -Naur iproute2-4.11.0.orig/tc/f_flower.c iproute2-4.11.0/tc/f_flower.c
---- iproute2-4.11.0.orig/tc/f_flower.c	2017-05-01 11:56:33.223927646 -0700
-+++ iproute2-4.11.0/tc/f_flower.c	2017-05-01 12:57:03.203114459 -0700
-@@ -15,8 +15,8 @@
+ #include <linux/netfilter/x_tables.h>
+diff -Naur iproute2-4.12.0.orig/tc/f_flower.c iproute2-4.12.0/tc/f_flower.c
+--- iproute2-4.12.0.orig/tc/f_flower.c	2017-07-06 11:09:53.289213865 -0700
++++ iproute2-4.12.0/tc/f_flower.c	2017-07-06 16:36:04.967030780 -0700
+@@ -15,7 +15,7 @@
  #include <syslog.h>
  #include <string.h>
  #include <net/if.h>
 -#include <linux/if_arp.h>
--#include <linux/if_ether.h>
 +#include <net/if_arp.h>
-+#include <netinet/if_ether.h>
+ #include <linux/if_ether.h>
  #include <linux/ip.h>
  #include <linux/tc_act/tc_vlan.h>
- 
-diff -Naur iproute2-4.11.0.orig/tc/f_fw.c iproute2-4.11.0/tc/f_fw.c
---- iproute2-4.11.0.orig/tc/f_fw.c	2017-05-01 11:56:33.223927646 -0700
-+++ iproute2-4.11.0/tc/f_fw.c	2017-05-01 12:54:55.697802565 -0700
-@@ -15,11 +15,11 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/if.h> /* IFNAMSIZ */
- #include "utils.h"
- #include "tc_util.h"
- 
-diff -Naur iproute2-4.11.0.orig/tc/f_matchall.c iproute2-4.11.0/tc/f_matchall.c
---- iproute2-4.11.0.orig/tc/f_matchall.c	2017-05-01 11:56:33.223927646 -0700
-+++ iproute2-4.11.0/tc/f_matchall.c	2017-05-01 12:59:52.125852494 -0700
-@@ -19,7 +19,6 @@
- #include <netinet/in.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/if.h>
- 
- #include "utils.h"
- #include "tc_util.h"
-diff -Naur iproute2-4.11.0.orig/tc/f_u32.c iproute2-4.11.0/tc/f_u32.c
---- iproute2-4.11.0.orig/tc/f_u32.c	2017-05-01 11:56:33.224927660 -0700
-+++ iproute2-4.11.0/tc/f_u32.c	2017-05-01 12:53:58.137207630 -0700
-@@ -16,12 +16,12 @@
- #include <unistd.h>
- #include <syslog.h>
- #include <fcntl.h>
-+#include <net/if.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
-+#include <netinet/if_ether.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/if.h>
--#include <linux/if_ether.h>
- 
- #include "utils.h"
- #include "tc_util.h"
-diff -Naur iproute2-4.11.0.orig/tc/m_bpf.c iproute2-4.11.0/tc/m_bpf.c
---- iproute2-4.11.0.orig/tc/m_bpf.c	2017-05-01 11:56:33.224927660 -0700
-+++ iproute2-4.11.0/tc/m_bpf.c	2017-05-01 12:59:17.771499024 -0700
-@@ -12,6 +12,7 @@
- 
- #include <stdio.h>
- #include <stdlib.h>
-+#include <sys/un.h>
- 
- #include <linux/bpf.h>
- #include <linux/tc_act/tc_bpf.h>
-diff -Naur iproute2-4.11.0.orig/tc/m_ife.c iproute2-4.11.0/tc/m_ife.c
---- iproute2-4.11.0.orig/tc/m_ife.c	2017-05-01 11:56:33.225927674 -0700
-+++ iproute2-4.11.0/tc/m_ife.c	2017-05-01 13:03:14.431936521 -0700
-@@ -17,9 +17,9 @@
- #include <fcntl.h>
- #include <sys/socket.h>
- #include <netinet/in.h>
-+#include <netinet/if_ether.h>
- #include <arpa/inet.h>
- #include <string.h>
--#include <linux/netdevice.h>
- 
- #include "rt_names.h"
- #include "utils.h"
-diff -Naur iproute2-4.11.0.orig/tc/m_xt.c iproute2-4.11.0/tc/m_xt.c
---- iproute2-4.11.0.orig/tc/m_xt.c	2017-05-01 11:56:33.227927702 -0700
-+++ iproute2-4.11.0/tc/m_xt.c	2017-05-01 13:06:33.494022493 -0700
-@@ -17,7 +17,7 @@
- #include <net/if.h>
- #include <limits.h>
- #include <linux/netfilter.h>
--#include <linux/netfilter_ipv4/ip_tables.h>
-+#include <linux/netfilter_ipv4.h>
- #include <xtables.h>
- #include "utils.h"
- #include "tc_util.h"

@@ -1,6 +1,4 @@
 lib/fcitx/fcitx-libpinyin.so|755|0|0|regular file
-lib/fcitx/qt/libfcitx-libpinyin-dictmanager.so|755|0|0|regular file
-lib/fcitx/qt|755|0|0|directory
 lib/fcitx|755|0|0|directory
 lib|755|0|0|directory
 share/fcitx/addon/fcitx-libpinyin.conf|644|0|0|regular file

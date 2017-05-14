@@ -1,8 +1,6 @@
+. $PORTS/libtiff/Pkgfile
 name=libtiff-32
-version=4.0.7
-desc="Library for manipulation of TIFF images"
 deps="libjpeg-turbo-32 zlib-32 xz-32 libtiff"
-source="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"
 
 build() {
 	cd tiff-$version

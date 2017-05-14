@@ -1,5 +1,5 @@
 name=libite
-version=1.8.3
+version=1.9.2
 deps=musl
 desc="init's dependence"
 source="https://github.com/troglobit/libite/releases/download/v$version/libite-$version.tar.xz"

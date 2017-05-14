@@ -1,5 +1,5 @@
 name=qt5-script
-version=5.8.0
+version=5.9.1
 desc='Classes for making Qt applications scriptable. Provided for Qt 4.x compatibility'
 deps="qt5-base"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtscript-opensource-src-$version.tar.xz"

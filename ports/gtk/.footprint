@@ -309,6 +309,427 @@ lib/libgdk-x11-2.0.so|777|0|0|symbolic link
 lib/libgtk-x11-2.0.so.0.2400.31|755|0|0|regular file
 lib/libgtk-x11-2.0.so.0|777|0|0|symbolic link
 lib/libgtk-x11-2.0.so|777|0|0|symbolic link
+lib/locale/af/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/af/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/af/LC_MESSAGES|755|0|0|directory
+lib/locale/af|755|0|0|directory
+lib/locale/am/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/am/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/am/LC_MESSAGES|755|0|0|directory
+lib/locale/am|755|0|0|directory
+lib/locale/ang/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ang/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ang/LC_MESSAGES|755|0|0|directory
+lib/locale/ang|755|0|0|directory
+lib/locale/ar/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ar/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ar/LC_MESSAGES|755|0|0|directory
+lib/locale/ar|755|0|0|directory
+lib/locale/as/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/as/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/as/LC_MESSAGES|755|0|0|directory
+lib/locale/ast/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ast/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ast/LC_MESSAGES|755|0|0|directory
+lib/locale/ast|755|0|0|directory
+lib/locale/as|755|0|0|directory
+lib/locale/az/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/az/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/az/LC_MESSAGES|755|0|0|directory
+lib/locale/az_IR/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/az_IR/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/az_IR/LC_MESSAGES|755|0|0|directory
+lib/locale/az_IR|755|0|0|directory
+lib/locale/az|755|0|0|directory
+lib/locale/be/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/be/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/be/LC_MESSAGES|755|0|0|directory
+lib/locale/be@latin/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/be@latin/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/be@latin/LC_MESSAGES|755|0|0|directory
+lib/locale/be@latin|755|0|0|directory
+lib/locale/be|755|0|0|directory
+lib/locale/bg/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/bg/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/bg/LC_MESSAGES|755|0|0|directory
+lib/locale/bg|755|0|0|directory
+lib/locale/bn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/bn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/bn/LC_MESSAGES|755|0|0|directory
+lib/locale/bn_IN/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/bn_IN/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/bn_IN/LC_MESSAGES|755|0|0|directory
+lib/locale/bn_IN|755|0|0|directory
+lib/locale/bn|755|0|0|directory
+lib/locale/br/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/br/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/br/LC_MESSAGES|755|0|0|directory
+lib/locale/br|755|0|0|directory
+lib/locale/bs/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/bs/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/bs/LC_MESSAGES|755|0|0|directory
+lib/locale/bs|755|0|0|directory
+lib/locale/ca/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ca/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ca/LC_MESSAGES|755|0|0|directory
+lib/locale/ca@valencia/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ca@valencia/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ca@valencia/LC_MESSAGES|755|0|0|directory
+lib/locale/ca@valencia|755|0|0|directory
+lib/locale/ca|755|0|0|directory
+lib/locale/crh/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/crh/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/crh/LC_MESSAGES|755|0|0|directory
+lib/locale/crh|755|0|0|directory
+lib/locale/cs/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/cs/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/cs/LC_MESSAGES|755|0|0|directory
+lib/locale/cs|755|0|0|directory
+lib/locale/cy/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/cy/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/cy/LC_MESSAGES|755|0|0|directory
+lib/locale/cy|755|0|0|directory
+lib/locale/da/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/da/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/da/LC_MESSAGES|755|0|0|directory
+lib/locale/da|755|0|0|directory
+lib/locale/de/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/de/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/de/LC_MESSAGES|755|0|0|directory
+lib/locale/de|755|0|0|directory
+lib/locale/dz/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/dz/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/dz/LC_MESSAGES|755|0|0|directory
+lib/locale/dz|755|0|0|directory
+lib/locale/el/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/el/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/el/LC_MESSAGES|755|0|0|directory
+lib/locale/el|755|0|0|directory
+lib/locale/en_CA/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/en_CA/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/en_CA/LC_MESSAGES|755|0|0|directory
+lib/locale/en_CA|755|0|0|directory
+lib/locale/en_GB/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/en_GB/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/en_GB/LC_MESSAGES|755|0|0|directory
+lib/locale/en_GB|755|0|0|directory
+lib/locale/eo/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/eo/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/eo/LC_MESSAGES|755|0|0|directory
+lib/locale/eo|755|0|0|directory
+lib/locale/es/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/es/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/es/LC_MESSAGES|755|0|0|directory
+lib/locale/es|755|0|0|directory
+lib/locale/et/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/et/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/et/LC_MESSAGES|755|0|0|directory
+lib/locale/et|755|0|0|directory
+lib/locale/eu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/eu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/eu/LC_MESSAGES|755|0|0|directory
+lib/locale/eu|755|0|0|directory
+lib/locale/fa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/fa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/fa/LC_MESSAGES|755|0|0|directory
+lib/locale/fa|755|0|0|directory
+lib/locale/fi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/fi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/fi/LC_MESSAGES|755|0|0|directory
+lib/locale/fi|755|0|0|directory
+lib/locale/fr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/fr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/fr/LC_MESSAGES|755|0|0|directory
+lib/locale/fr|755|0|0|directory
+lib/locale/ga/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ga/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ga/LC_MESSAGES|755|0|0|directory
+lib/locale/ga|755|0|0|directory
+lib/locale/gl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/gl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/gl/LC_MESSAGES|755|0|0|directory
+lib/locale/gl|755|0|0|directory
+lib/locale/gu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/gu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/gu/LC_MESSAGES|755|0|0|directory
+lib/locale/gu|755|0|0|directory
+lib/locale/he/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/he/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/he/LC_MESSAGES|755|0|0|directory
+lib/locale/he|755|0|0|directory
+lib/locale/hi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/hi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/hi/LC_MESSAGES|755|0|0|directory
+lib/locale/hi|755|0|0|directory
+lib/locale/hr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/hr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/hr/LC_MESSAGES|755|0|0|directory
+lib/locale/hr|755|0|0|directory
+lib/locale/hu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/hu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/hu/LC_MESSAGES|755|0|0|directory
+lib/locale/hu|755|0|0|directory
+lib/locale/hy/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/hy/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/hy/LC_MESSAGES|755|0|0|directory
+lib/locale/hy|755|0|0|directory
+lib/locale/ia/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ia/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ia/LC_MESSAGES|755|0|0|directory
+lib/locale/ia|755|0|0|directory
+lib/locale/id/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/id/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/id/LC_MESSAGES|755|0|0|directory
+lib/locale/id|755|0|0|directory
+lib/locale/io/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/io/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/io/LC_MESSAGES|755|0|0|directory
+lib/locale/io|755|0|0|directory
+lib/locale/is/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/is/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/is/LC_MESSAGES|755|0|0|directory
+lib/locale/is|755|0|0|directory
+lib/locale/it/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/it/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/it/LC_MESSAGES|755|0|0|directory
+lib/locale/it|755|0|0|directory
+lib/locale/ja/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ja/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ja/LC_MESSAGES|755|0|0|directory
+lib/locale/ja|755|0|0|directory
+lib/locale/ka/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ka/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ka/LC_MESSAGES|755|0|0|directory
+lib/locale/ka|755|0|0|directory
+lib/locale/kk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/kk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/kk/LC_MESSAGES|755|0|0|directory
+lib/locale/kk|755|0|0|directory
+lib/locale/kn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/kn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/kn/LC_MESSAGES|755|0|0|directory
+lib/locale/kn|755|0|0|directory
+lib/locale/ko/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ko/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ko/LC_MESSAGES|755|0|0|directory
+lib/locale/ko|755|0|0|directory
+lib/locale/ku/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ku/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ku/LC_MESSAGES|755|0|0|directory
+lib/locale/ku|755|0|0|directory
+lib/locale/li/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/li/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/li/LC_MESSAGES|755|0|0|directory
+lib/locale/li|755|0|0|directory
+lib/locale/lt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/lt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/lt/LC_MESSAGES|755|0|0|directory
+lib/locale/lt|755|0|0|directory
+lib/locale/lv/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/lv/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/lv/LC_MESSAGES|755|0|0|directory
+lib/locale/lv|755|0|0|directory
+lib/locale/mai/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/mai/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/mai/LC_MESSAGES|755|0|0|directory
+lib/locale/mai|755|0|0|directory
+lib/locale/mi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/mi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/mi/LC_MESSAGES|755|0|0|directory
+lib/locale/mi|755|0|0|directory
+lib/locale/mk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/mk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/mk/LC_MESSAGES|755|0|0|directory
+lib/locale/mk|755|0|0|directory
+lib/locale/ml/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ml/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ml/LC_MESSAGES|755|0|0|directory
+lib/locale/ml|755|0|0|directory
+lib/locale/mn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/mn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/mn/LC_MESSAGES|755|0|0|directory
+lib/locale/mn|755|0|0|directory
+lib/locale/mr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/mr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/mr/LC_MESSAGES|755|0|0|directory
+lib/locale/mr|755|0|0|directory
+lib/locale/ms/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ms/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ms/LC_MESSAGES|755|0|0|directory
+lib/locale/ms|755|0|0|directory
+lib/locale/my/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/my/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/my/LC_MESSAGES|755|0|0|directory
+lib/locale/my|755|0|0|directory
+lib/locale/nb/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/nb/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/nb/LC_MESSAGES|755|0|0|directory
+lib/locale/nb|755|0|0|directory
+lib/locale/nds/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/nds/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/nds/LC_MESSAGES|755|0|0|directory
+lib/locale/nds|755|0|0|directory
+lib/locale/ne/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ne/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ne/LC_MESSAGES|755|0|0|directory
+lib/locale/ne|755|0|0|directory
+lib/locale/nl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/nl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/nl/LC_MESSAGES|755|0|0|directory
+lib/locale/nl|755|0|0|directory
+lib/locale/nn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/nn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/nn/LC_MESSAGES|755|0|0|directory
+lib/locale/nn|755|0|0|directory
+lib/locale/nso/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/nso/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/nso/LC_MESSAGES|755|0|0|directory
+lib/locale/nso|755|0|0|directory
+lib/locale/oc/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/oc/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/oc/LC_MESSAGES|755|0|0|directory
+lib/locale/oc|755|0|0|directory
+lib/locale/or/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/or/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/or/LC_MESSAGES|755|0|0|directory
+lib/locale/or|755|0|0|directory
+lib/locale/pa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/pa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/pa/LC_MESSAGES|755|0|0|directory
+lib/locale/pa|755|0|0|directory
+lib/locale/pl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/pl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/pl/LC_MESSAGES|755|0|0|directory
+lib/locale/pl|755|0|0|directory
+lib/locale/ps/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ps/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ps/LC_MESSAGES|755|0|0|directory
+lib/locale/ps|755|0|0|directory
+lib/locale/pt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/pt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/pt/LC_MESSAGES|755|0|0|directory
+lib/locale/pt_BR/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/pt_BR/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+lib/locale/pt_BR|755|0|0|directory
+lib/locale/pt|755|0|0|directory
+lib/locale/ro/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ro/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ro/LC_MESSAGES|755|0|0|directory
+lib/locale/ro|755|0|0|directory
+lib/locale/ru/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ru/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ru/LC_MESSAGES|755|0|0|directory
+lib/locale/ru|755|0|0|directory
+lib/locale/rw/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/rw/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/rw/LC_MESSAGES|755|0|0|directory
+lib/locale/rw|755|0|0|directory
+lib/locale/si/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/si/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/si/LC_MESSAGES|755|0|0|directory
+lib/locale/si|755|0|0|directory
+lib/locale/sk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sk/LC_MESSAGES|755|0|0|directory
+lib/locale/sk|755|0|0|directory
+lib/locale/sl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sl/LC_MESSAGES|755|0|0|directory
+lib/locale/sl|755|0|0|directory
+lib/locale/sq/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sq/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sq/LC_MESSAGES|755|0|0|directory
+lib/locale/sq|755|0|0|directory
+lib/locale/sr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sr/LC_MESSAGES|755|0|0|directory
+lib/locale/sr@ije/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sr@ije/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sr@ije/LC_MESSAGES|755|0|0|directory
+lib/locale/sr@ije|755|0|0|directory
+lib/locale/sr@latin/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sr@latin/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sr@latin/LC_MESSAGES|755|0|0|directory
+lib/locale/sr@latin|755|0|0|directory
+lib/locale/sr|755|0|0|directory
+lib/locale/sv/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/sv/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/sv/LC_MESSAGES|755|0|0|directory
+lib/locale/sv|755|0|0|directory
+lib/locale/ta/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ta/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ta/LC_MESSAGES|755|0|0|directory
+lib/locale/ta|755|0|0|directory
+lib/locale/te/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/te/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/te/LC_MESSAGES|755|0|0|directory
+lib/locale/te|755|0|0|directory
+lib/locale/th/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/th/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/th/LC_MESSAGES|755|0|0|directory
+lib/locale/th|755|0|0|directory
+lib/locale/tk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/tk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/tk/LC_MESSAGES|755|0|0|directory
+lib/locale/tk|755|0|0|directory
+lib/locale/tr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/tr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/tr/LC_MESSAGES|755|0|0|directory
+lib/locale/tr|755|0|0|directory
+lib/locale/tt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/tt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/tt/LC_MESSAGES|755|0|0|directory
+lib/locale/tt|755|0|0|directory
+lib/locale/ug/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ug/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ug/LC_MESSAGES|755|0|0|directory
+lib/locale/ug|755|0|0|directory
+lib/locale/uk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/uk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/uk/LC_MESSAGES|755|0|0|directory
+lib/locale/uk|755|0|0|directory
+lib/locale/ur/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/ur/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/ur/LC_MESSAGES|755|0|0|directory
+lib/locale/ur|755|0|0|directory
+lib/locale/uz/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/uz/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/uz/LC_MESSAGES|755|0|0|directory
+lib/locale/uz@cyrillic/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/uz@cyrillic/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/uz@cyrillic/LC_MESSAGES|755|0|0|directory
+lib/locale/uz@cyrillic|755|0|0|directory
+lib/locale/uz|755|0|0|directory
+lib/locale/vi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/vi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/vi/LC_MESSAGES|755|0|0|directory
+lib/locale/vi|755|0|0|directory
+lib/locale/wa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/wa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/wa/LC_MESSAGES|755|0|0|directory
+lib/locale/wa|755|0|0|directory
+lib/locale/xh/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/xh/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/xh/LC_MESSAGES|755|0|0|directory
+lib/locale/xh|755|0|0|directory
+lib/locale/yi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/yi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/yi/LC_MESSAGES|755|0|0|directory
+lib/locale/yi|755|0|0|directory
+lib/locale/zh_CN/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/zh_CN/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+lib/locale/zh_CN|755|0|0|directory
+lib/locale/zh_HK/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/zh_HK/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/zh_HK/LC_MESSAGES|755|0|0|directory
+lib/locale/zh_HK|755|0|0|directory
+lib/locale/zh_TW/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
+lib/locale/zh_TW/LC_MESSAGES/gtk20.mo|644|0|0|regular file
+lib/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+lib/locale/zh_TW|755|0|0|directory
+lib/locale|755|0|0|directory
 lib/pkgconfig/gail.pc|644|0|0|regular file
 lib/pkgconfig/gdk-2.0.pc|644|0|0|regular file
 lib/pkgconfig/gdk-x11-2.0.pc|644|0|0|regular file
@@ -1009,427 +1430,6 @@ share/gtk-doc/html/gtk2/zoom-out.png|644|0|0|regular file
 share/gtk-doc/html/gtk2|755|0|0|directory
 share/gtk-doc/html|755|0|0|directory
 share/gtk-doc|755|0|0|directory
-share/locale/af/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/af/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/af/LC_MESSAGES|755|0|0|directory
-share/locale/af|755|0|0|directory
-share/locale/am/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/am/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/am/LC_MESSAGES|755|0|0|directory
-share/locale/am|755|0|0|directory
-share/locale/ang/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ang/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ang/LC_MESSAGES|755|0|0|directory
-share/locale/ang|755|0|0|directory
-share/locale/ar/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ar/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ar/LC_MESSAGES|755|0|0|directory
-share/locale/ar|755|0|0|directory
-share/locale/as/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/as/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/as/LC_MESSAGES|755|0|0|directory
-share/locale/ast/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ast/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ast/LC_MESSAGES|755|0|0|directory
-share/locale/ast|755|0|0|directory
-share/locale/as|755|0|0|directory
-share/locale/az/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/az/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/az/LC_MESSAGES|755|0|0|directory
-share/locale/az_IR/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/az_IR/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/az_IR/LC_MESSAGES|755|0|0|directory
-share/locale/az_IR|755|0|0|directory
-share/locale/az|755|0|0|directory
-share/locale/be/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/be/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/be/LC_MESSAGES|755|0|0|directory
-share/locale/be@latin/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/be@latin/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/be@latin/LC_MESSAGES|755|0|0|directory
-share/locale/be@latin|755|0|0|directory
-share/locale/be|755|0|0|directory
-share/locale/bg/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/bg/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/bg/LC_MESSAGES|755|0|0|directory
-share/locale/bg|755|0|0|directory
-share/locale/bn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/bn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/bn/LC_MESSAGES|755|0|0|directory
-share/locale/bn_IN/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/bn_IN/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/bn_IN/LC_MESSAGES|755|0|0|directory
-share/locale/bn_IN|755|0|0|directory
-share/locale/bn|755|0|0|directory
-share/locale/br/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/br/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/br/LC_MESSAGES|755|0|0|directory
-share/locale/br|755|0|0|directory
-share/locale/bs/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/bs/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/bs/LC_MESSAGES|755|0|0|directory
-share/locale/bs|755|0|0|directory
-share/locale/ca/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ca/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ca/LC_MESSAGES|755|0|0|directory
-share/locale/ca@valencia/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ca@valencia/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ca@valencia/LC_MESSAGES|755|0|0|directory
-share/locale/ca@valencia|755|0|0|directory
-share/locale/ca|755|0|0|directory
-share/locale/crh/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/crh/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/crh/LC_MESSAGES|755|0|0|directory
-share/locale/crh|755|0|0|directory
-share/locale/cs/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/cs/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/cs/LC_MESSAGES|755|0|0|directory
-share/locale/cs|755|0|0|directory
-share/locale/cy/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/cy/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/cy/LC_MESSAGES|755|0|0|directory
-share/locale/cy|755|0|0|directory
-share/locale/da/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/da/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/da/LC_MESSAGES|755|0|0|directory
-share/locale/da|755|0|0|directory
-share/locale/de/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/de/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/de/LC_MESSAGES|755|0|0|directory
-share/locale/de|755|0|0|directory
-share/locale/dz/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/dz/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/dz/LC_MESSAGES|755|0|0|directory
-share/locale/dz|755|0|0|directory
-share/locale/el/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/el/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/el/LC_MESSAGES|755|0|0|directory
-share/locale/el|755|0|0|directory
-share/locale/en_CA/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/en_CA/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/en_CA/LC_MESSAGES|755|0|0|directory
-share/locale/en_CA|755|0|0|directory
-share/locale/en_GB/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/en_GB/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/en_GB/LC_MESSAGES|755|0|0|directory
-share/locale/en_GB|755|0|0|directory
-share/locale/eo/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/eo/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/eo/LC_MESSAGES|755|0|0|directory
-share/locale/eo|755|0|0|directory
-share/locale/es/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/es/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/es/LC_MESSAGES|755|0|0|directory
-share/locale/es|755|0|0|directory
-share/locale/et/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/et/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/et/LC_MESSAGES|755|0|0|directory
-share/locale/et|755|0|0|directory
-share/locale/eu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/eu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/eu/LC_MESSAGES|755|0|0|directory
-share/locale/eu|755|0|0|directory
-share/locale/fa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/fa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/fa/LC_MESSAGES|755|0|0|directory
-share/locale/fa|755|0|0|directory
-share/locale/fi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/fi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/fi/LC_MESSAGES|755|0|0|directory
-share/locale/fi|755|0|0|directory
-share/locale/fr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/fr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/fr/LC_MESSAGES|755|0|0|directory
-share/locale/fr|755|0|0|directory
-share/locale/ga/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ga/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ga/LC_MESSAGES|755|0|0|directory
-share/locale/ga|755|0|0|directory
-share/locale/gl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/gl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/gl/LC_MESSAGES|755|0|0|directory
-share/locale/gl|755|0|0|directory
-share/locale/gu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/gu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/gu/LC_MESSAGES|755|0|0|directory
-share/locale/gu|755|0|0|directory
-share/locale/he/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/he/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/he/LC_MESSAGES|755|0|0|directory
-share/locale/he|755|0|0|directory
-share/locale/hi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/hi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/hi/LC_MESSAGES|755|0|0|directory
-share/locale/hi|755|0|0|directory
-share/locale/hr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/hr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/hr/LC_MESSAGES|755|0|0|directory
-share/locale/hr|755|0|0|directory
-share/locale/hu/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/hu/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/hu/LC_MESSAGES|755|0|0|directory
-share/locale/hu|755|0|0|directory
-share/locale/hy/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/hy/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/hy/LC_MESSAGES|755|0|0|directory
-share/locale/hy|755|0|0|directory
-share/locale/ia/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ia/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ia/LC_MESSAGES|755|0|0|directory
-share/locale/ia|755|0|0|directory
-share/locale/id/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/id/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/id/LC_MESSAGES|755|0|0|directory
-share/locale/id|755|0|0|directory
-share/locale/io/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/io/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/io/LC_MESSAGES|755|0|0|directory
-share/locale/io|755|0|0|directory
-share/locale/is/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/is/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/is/LC_MESSAGES|755|0|0|directory
-share/locale/is|755|0|0|directory
-share/locale/it/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/it/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/it/LC_MESSAGES|755|0|0|directory
-share/locale/it|755|0|0|directory
-share/locale/ja/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ja/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ja/LC_MESSAGES|755|0|0|directory
-share/locale/ja|755|0|0|directory
-share/locale/ka/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ka/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ka/LC_MESSAGES|755|0|0|directory
-share/locale/ka|755|0|0|directory
-share/locale/kk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/kk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/kk/LC_MESSAGES|755|0|0|directory
-share/locale/kk|755|0|0|directory
-share/locale/kn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/kn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/kn/LC_MESSAGES|755|0|0|directory
-share/locale/kn|755|0|0|directory
-share/locale/ko/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ko/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ko/LC_MESSAGES|755|0|0|directory
-share/locale/ko|755|0|0|directory
-share/locale/ku/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ku/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ku/LC_MESSAGES|755|0|0|directory
-share/locale/ku|755|0|0|directory
-share/locale/li/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/li/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/li/LC_MESSAGES|755|0|0|directory
-share/locale/li|755|0|0|directory
-share/locale/lt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/lt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/lt/LC_MESSAGES|755|0|0|directory
-share/locale/lt|755|0|0|directory
-share/locale/lv/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/lv/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/lv/LC_MESSAGES|755|0|0|directory
-share/locale/lv|755|0|0|directory
-share/locale/mai/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/mai/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/mai/LC_MESSAGES|755|0|0|directory
-share/locale/mai|755|0|0|directory
-share/locale/mi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/mi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/mi/LC_MESSAGES|755|0|0|directory
-share/locale/mi|755|0|0|directory
-share/locale/mk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/mk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/mk/LC_MESSAGES|755|0|0|directory
-share/locale/mk|755|0|0|directory
-share/locale/ml/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ml/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ml/LC_MESSAGES|755|0|0|directory
-share/locale/ml|755|0|0|directory
-share/locale/mn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/mn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/mn/LC_MESSAGES|755|0|0|directory
-share/locale/mn|755|0|0|directory
-share/locale/mr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/mr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/mr/LC_MESSAGES|755|0|0|directory
-share/locale/mr|755|0|0|directory
-share/locale/ms/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ms/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ms/LC_MESSAGES|755|0|0|directory
-share/locale/ms|755|0|0|directory
-share/locale/my/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/my/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/my/LC_MESSAGES|755|0|0|directory
-share/locale/my|755|0|0|directory
-share/locale/nb/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/nb/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/nb/LC_MESSAGES|755|0|0|directory
-share/locale/nb|755|0|0|directory
-share/locale/nds/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/nds/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/nds/LC_MESSAGES|755|0|0|directory
-share/locale/nds|755|0|0|directory
-share/locale/ne/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ne/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ne/LC_MESSAGES|755|0|0|directory
-share/locale/ne|755|0|0|directory
-share/locale/nl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/nl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/nl/LC_MESSAGES|755|0|0|directory
-share/locale/nl|755|0|0|directory
-share/locale/nn/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/nn/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/nn/LC_MESSAGES|755|0|0|directory
-share/locale/nn|755|0|0|directory
-share/locale/nso/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/nso/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/nso/LC_MESSAGES|755|0|0|directory
-share/locale/nso|755|0|0|directory
-share/locale/oc/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/oc/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/oc/LC_MESSAGES|755|0|0|directory
-share/locale/oc|755|0|0|directory
-share/locale/or/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/or/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/or/LC_MESSAGES|755|0|0|directory
-share/locale/or|755|0|0|directory
-share/locale/pa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/pa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/pa/LC_MESSAGES|755|0|0|directory
-share/locale/pa|755|0|0|directory
-share/locale/pl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/pl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/pl/LC_MESSAGES|755|0|0|directory
-share/locale/pl|755|0|0|directory
-share/locale/ps/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ps/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ps/LC_MESSAGES|755|0|0|directory
-share/locale/ps|755|0|0|directory
-share/locale/pt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/pt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/pt/LC_MESSAGES|755|0|0|directory
-share/locale/pt_BR/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/pt_BR/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
-share/locale/pt_BR|755|0|0|directory
-share/locale/pt|755|0|0|directory
-share/locale/ro/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ro/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ro/LC_MESSAGES|755|0|0|directory
-share/locale/ro|755|0|0|directory
-share/locale/ru/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ru/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ru/LC_MESSAGES|755|0|0|directory
-share/locale/ru|755|0|0|directory
-share/locale/rw/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/rw/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/rw/LC_MESSAGES|755|0|0|directory
-share/locale/rw|755|0|0|directory
-share/locale/si/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/si/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/si/LC_MESSAGES|755|0|0|directory
-share/locale/si|755|0|0|directory
-share/locale/sk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sk/LC_MESSAGES|755|0|0|directory
-share/locale/sk|755|0|0|directory
-share/locale/sl/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sl/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sl/LC_MESSAGES|755|0|0|directory
-share/locale/sl|755|0|0|directory
-share/locale/sq/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sq/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sq/LC_MESSAGES|755|0|0|directory
-share/locale/sq|755|0|0|directory
-share/locale/sr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sr/LC_MESSAGES|755|0|0|directory
-share/locale/sr@ije/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sr@ije/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sr@ije/LC_MESSAGES|755|0|0|directory
-share/locale/sr@ije|755|0|0|directory
-share/locale/sr@latin/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sr@latin/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sr@latin/LC_MESSAGES|755|0|0|directory
-share/locale/sr@latin|755|0|0|directory
-share/locale/sr|755|0|0|directory
-share/locale/sv/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/sv/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/sv/LC_MESSAGES|755|0|0|directory
-share/locale/sv|755|0|0|directory
-share/locale/ta/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ta/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ta/LC_MESSAGES|755|0|0|directory
-share/locale/ta|755|0|0|directory
-share/locale/te/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/te/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/te/LC_MESSAGES|755|0|0|directory
-share/locale/te|755|0|0|directory
-share/locale/th/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/th/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/th/LC_MESSAGES|755|0|0|directory
-share/locale/th|755|0|0|directory
-share/locale/tk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/tk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/tk/LC_MESSAGES|755|0|0|directory
-share/locale/tk|755|0|0|directory
-share/locale/tr/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/tr/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/tr/LC_MESSAGES|755|0|0|directory
-share/locale/tr|755|0|0|directory
-share/locale/tt/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/tt/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/tt/LC_MESSAGES|755|0|0|directory
-share/locale/tt|755|0|0|directory
-share/locale/ug/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ug/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ug/LC_MESSAGES|755|0|0|directory
-share/locale/ug|755|0|0|directory
-share/locale/uk/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/uk/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/uk/LC_MESSAGES|755|0|0|directory
-share/locale/uk|755|0|0|directory
-share/locale/ur/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/ur/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/ur/LC_MESSAGES|755|0|0|directory
-share/locale/ur|755|0|0|directory
-share/locale/uz/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/uz/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/uz/LC_MESSAGES|755|0|0|directory
-share/locale/uz@cyrillic/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/uz@cyrillic/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/uz@cyrillic/LC_MESSAGES|755|0|0|directory
-share/locale/uz@cyrillic|755|0|0|directory
-share/locale/uz|755|0|0|directory
-share/locale/vi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/vi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/vi/LC_MESSAGES|755|0|0|directory
-share/locale/vi|755|0|0|directory
-share/locale/wa/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/wa/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/wa/LC_MESSAGES|755|0|0|directory
-share/locale/wa|755|0|0|directory
-share/locale/xh/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/xh/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/xh/LC_MESSAGES|755|0|0|directory
-share/locale/xh|755|0|0|directory
-share/locale/yi/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/yi/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/yi/LC_MESSAGES|755|0|0|directory
-share/locale/yi|755|0|0|directory
-share/locale/zh_CN/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/zh_CN/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
-share/locale/zh_CN|755|0|0|directory
-share/locale/zh_HK/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/zh_HK/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/zh_HK/LC_MESSAGES|755|0|0|directory
-share/locale/zh_HK|755|0|0|directory
-share/locale/zh_TW/LC_MESSAGES/gtk20-properties.mo|644|0|0|regular file
-share/locale/zh_TW/LC_MESSAGES/gtk20.mo|644|0|0|regular file
-share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
-share/locale/zh_TW|755|0|0|directory
-share/locale|755|0|0|directory
 share/themes/Default/gtk-2.0-key/gtkrc|644|0|0|regular file
 share/themes/Default/gtk-2.0-key|755|0|0|directory
 share/themes/Default|755|0|0|directory

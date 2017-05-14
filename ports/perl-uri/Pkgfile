@@ -1,6 +1,6 @@
 name=perl-uri
 _realname=URI
-version=1.71
+version=1.72
 desc="Uniform Resource Identifiers (absolute and relative)"
 deps="perl"
 source="http://cpan.metacpan.org/authors/id/E/ET/ETHER/${_realname}-${version}.tar.gz"

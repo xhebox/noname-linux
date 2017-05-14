@@ -7,6 +7,7 @@ automake
 bash	
 bc	
 binutils	
+bridge-utils
 bison	
 bzip2	
 ca-certificates
@@ -27,12 +28,12 @@ filesystem
 findutils	
 finit
 flex	
+fontconfig
 fortify-headers	
 gawk	
 gcc	
 gdb	
 gdbm	
-gettext	
 gperf	
 grep	
 grub
@@ -41,6 +42,7 @@ gzip
 hwids	
 inetutils	
 iproute2	
+iptables
 iputils	
 kbd	
 kmod	
@@ -90,7 +92,6 @@ sed
 shadow	
 sudo	
 sysfsutils	
-syslinux
 tar	
 time	
 tzdata	

@@ -1,11 +1,11 @@
 name=librsvg
-version=2.40.17
+version=2.40.18
 desc="SAX-based renderer for SVG files into a GdkPixbuf"
 deps="glib cairo libcroco gdk-pixbuf pango gobject-introspection"
 source="http://ftp.gnome.org/pub/gnome/sources/$name/2.40/$name-$version.tar.xz"
 
 build() {
-	cd $name-$version
+	cd librsvg-$version
 	./configure \
 		--prefix= \
 		--enable-introspection \

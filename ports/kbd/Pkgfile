@@ -1,6 +1,6 @@
 name=kbd
 version=2.0.4
-deps="autoconf automake libtool gettext check"
+deps="autoconf automake libtool check"
 desc="Linux keyboard utilities"
 source="http://ftp.altlinux.org/pub/people/legion/kbd/${name}-${version}.tar.xz
 http://git.alpinelinux.org/cgit/aports/plain/main/kbd/error.h

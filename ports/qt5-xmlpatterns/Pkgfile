@@ -1,5 +1,5 @@
 name=qt5-xmlpatterns
-version=5.8.0
+version=5.9.1
 desc='Support for XPath, XQuery, XSLT and XML schema validation'
 deps="qt5-base"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtxmlpatterns-opensource-src-$version.tar.xz"

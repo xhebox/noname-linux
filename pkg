@@ -1,5 +1,4 @@
 #!/bin/sh
-{
 msg() {
 	printf "${GREEN}=::${NORMAL}${WHITE} %s\n${NORMAL}" "$1"
 }
@@ -139,8 +138,7 @@ main() {
 	[ "${PORTS}" ] || die '$PORTS not set'
 	[ "${DB}" ] || die '$DB not set'
 
-	flock -n 3 || die 'anther thread is running!'
-
+	local i
 	for i in ${ROOT} ${PORTS} ${DB}; do
 		check_dir $i
 	done
@@ -150,6 +148,7 @@ main() {
 
 	local ACTION=''
 	local QACTION='i'
+	local DBFILES="`ls -1 $DB`"
 	while getopts FEUMQSRvfemdpskiolah f; do
 		QACTION=$f
 		case $f in
@@ -164,32 +163,62 @@ main() {
 			h) opt_help;;
 		esac
 	done
+	case $ACTION in
+		Q) [ "$QACTION" = "a" ] && opt_query "$QACTION" && return;;
+		v) opt_version && return;;
+		\?) opt_help && return;;
+	esac
+	[ "$#" -eq 0 ] && opt_help && return
 	shift
 	for i in $@; do
 		i=${i%/}
 		[ "$ACTION" != "Q" ] && opt_readpkg "$i"
 		case $ACTION in
-		E) opt_extract "$i" ;;
-		U) opt_updatesums "$i" ;;
-		F) opt_fetch "$i" ;;
-		S) opt_install "$i" no || die "$i: failed to install package." ;;
-		R) opt_remove "$i" || die "$i: failed to remove package." ;;
-		M) opt_build "$i" || die "$i: failed to build package." ;;
+		E)
+			{
+				flock -n 3 || die 'anther thread is running!'
+				opt_extract "$i"
+			} 3<>/tmp/.${i}lock;;
+		U)
+			{
+				flock -n 3 || die 'anther thread is running!'
+				opt_updatesums "$i"
+			} 3<>/tmp/.${i}lock;;
+		F)
+			{
+				flock -n 3 || die 'anther thread is running!'
+				opt_fetch "$i" 
+			} 3<>/tmp/.${i}lock;;
+		M)
+			{
+				flock -n 3 || die 'anther thread is running!'
+				opt_build "$i" 
+			} 3<>/tmp/.${i}lock;;
+		S) 
+			{ 
+				flock -n 4 || die 'anther thread is running!'
+				opt_install "$i" no || die "$i: failed to install package."
+			} 4<>/tmp/.rilock;;
+		R)
+			{ 
+				flock -n 4 || die 'anther thread is running!'
+				opt_remove "$i" || die "$i: failed to remove package."
+			} 4<>/tmp/.rilock;;
 		Q) opt_query "$QACTION" "$i" || die "$i: failed to query package." ;;
-		v) opt_version ;;
-		\?) [ -z "$ACTION" ] && opt_help;;
 		esac
 	done
 	popd
 }
 
 _remove() {
-	if [ ! -d "$ROOT/${1}" ]; then
+	if [ -h "$ROOT/${1}" ]; then
+		rm -f "$ROOT"/"${1}" || die "$1: remove link $1 failed"
+	elif [ ! -d "$ROOT/${1}" ]; then
 		rm -f "$ROOT"/"${1}" || die "$1: remove file $1 failed"
-	else
-		[ -z "`ls $ROOT/$1`" ] && {
+	elif [ -z "${1##lib/modules|*}" ]; then
+		rm -rf "$ROOT"/"${1}" || die "$1: remove dir $1 failed"
+	elif [ -z "`ls $ROOT/$1`" ]; then
 		rmdir "$ROOT"/"${1}" || die "$1: remove dir $1 failed"
-		}
 	fi
 }
 
@@ -200,9 +229,13 @@ opt_readpkg() {
 	unset -f post
 	unset -f ext
 	unset -f pre
-	if [ -f "${PORTS}/${1}/Pkgfile" ]; then
-		cur_pkgpath="$PORTS/$1"
-	else
+	local i
+	for i in ${PORTS}; do
+		if [ -f "${i}/${1}/Pkgfile" ]; then
+			cur_pkgpath="${i}/$1"
+		fi
+	done
+	if [ ! -f "${cur_pkgpath}/Pkgfile" ]; then
 		die "Package $1 does not exist."
 	fi
 	. "$cur_pkgpath"/Pkgfile
@@ -219,7 +252,7 @@ opt_readpkgfp() {
 }
 
 url_fetch() {
-	[ -f "$1" ] || curl -O -L "$2" || {
+	[ -f "$1" ] || curl -L "$2" > "$1" || {
 		rm -f "$1"
 		die "Failed to fetch $1"
 	}
@@ -311,10 +344,13 @@ opt_updatesums() {
 opt_clean() {
 	if [ -z "$PKG_KEEP_WORK" ];then
 		local cur_pkgpath
-		if [ ! -f "${PORTS}/${1}/Pkgfile" ]; then
+		for i in ${PORTS}; do
+			if [ -f "${i}/${1}/Pkgfile" ]; then
+				cur_pkgpath="$i/$1"
+			fi
+		done
+		if [ ! -f "${cur_pkgpath}/Pkgfile" ]; then
 			die "Package $1 does not exist."
-		else
-			cur_pkgpath="$PORTS/$1"
 		fi
 		rm -rf "${cur_pkgpath}/.src" "${cur_pkgpath}/.pkg"
 		rm -f ${cur_pkgpath}/.list*
@@ -332,20 +368,8 @@ opt_remove() {
 	msg "$1: removed"
 }
 
-opt_post_rebuild() {
-	local dbak=$PKG_NO_DEPS
-	local lbak="$PKG_DEPSLISTS"
-	PKG_NO_DEPS=yes
-	PKG_DEPLISTS="`echo $PKG_DEPLISTS | sed s/$1//g`"
-	opt_readpkg $1
-	opt_build $1
-	opt_install $1 no
-	opt_readpkg $2
-	PKG_NO_DEPS=$dbak
-	PKG_DEPLISTS="$lbak"
-}
-
 opt_install() {
+	local i
 	for i in $conflicts;do
 		if [ -f "${DB}/${i}.metadata" ];then
 			die "$1: a conflicting package is installed -> $i!"
@@ -364,47 +388,45 @@ opt_install() {
 	fi
 
 	opt_readpkg "$1"
-
-	local rflags=''
-	[ "$PKG_NO_DEPS" ] && rflags="${rflags}d"
-	[ "$PKG_FORCE" ] && rflags="${rflags}f"
-	if [ ! -f "${cur_pkgpath}/${1}#$version.tgz" ] || [ ! -f "${cur_pkgpath}/.metadata" ];then
-		flock -u 3
-		env -i /bin/sh -c "/bin/pkg -M${rflags} $1" || die "$1: failed to build package."
-		flock -n 3 || die 'anther thread is running!'
-	fi
+	check_file "$cur_pkgpath/.footprint"
+	check_file "$cur_pkgpath/.metadata"
 
 	local UPD=0
-
-	if [ "`ls $DB`" = '' ]; then
-		tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
-	elif [ "$name" = "filesystem" ]; then
-		if [ -f "${DB}/${name}.metadata" ]; then
-			# do not override current config files
-			tar -xp -C "$ROOT/" \
-			--exclude=passwd \
-			--exclude=shadow \
-			--exclude=group \
-			--exclude=gshadow \
-			--exclude=resolv.conf \
-			--exclude=hosts \
-			--exclude=hostname \
-			-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+	if [ ! -f "${cur_pkgpath}/${1}#$version.tgz" ]; then
+		if [ "$PKG_BINARY" -eq 1 ]; then
+			url_fetch "${cur_pkgpath}/${1}#$version.tgz" "http://thunix.org/~xhe/tarballs/${1}%23${version}.tgz"
 		else
-			tar -xp -C "$ROOT/" \
-			-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+			die "$1: need to build package."
 		fi
-	elif [  "$PKG_FORCE" ];then
-		tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+	fi
+	if [ -f "${DB}/${name}.metadata" ]; then
+		[ "${cur_pkgpath}/.metadata" -nt "${DB}/${name}.metadata" ] && UPD=1
 	else
-		rm -f ${cur_pkgpath}/.list*
-		check_file "${cur_pkgpath}/.metadata"
-		if [ -f "${DB}/${name}.metadata" ]; then
-			[ ${cur_pkgpath}/.metadata -nt ${DB}/${name}.metadata ] && UPD=1
+		UPD=1
+	fi
+
+	rm -f ${cur_pkgpath}/.list*
+
+	if [ "$UPD" -eq 1 ]; then
+		if [ -z "$DBFILES" ] || [ "$PKG_FORCE" ]; then
+			tar -xp -C "$ROOT/" -f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+		elif [ "$name" = "filesystem" ]; then
+			if [ -f "${DB}/${name}.metadata" ]; then
+				# do not override current config files
+				tar -xp -C "$ROOT/" \
+				--exclude=passwd \
+				--exclude=shadow \
+				--exclude=group \
+				--exclude=gshadow \
+				--exclude=resolv.conf \
+				--exclude=hosts \
+				--exclude=hostname \
+				-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+			else
+				tar -xp -C "$ROOT/" \
+				-f "${cur_pkgpath}/$1#$version.tgz" || die "$1: failed to uncompress file"
+			fi
 		else
-			UPD=1
-		fi
-		if [ "$UPD" -eq 1 ]; then
 			cat ${cur_pkgpath}/.footprint | sort >> ${cur_pkgpath}/.list2
 			if [ -f "${DB}/${name}.metadata" ]; then
 				opt_readpkgfp "$1" | sort > ${cur_pkgpath}/.list1
@@ -448,7 +470,6 @@ opt_install() {
 		fi
 	fi
 
-	check_file "$cur_pkgpath/.footprint"
 	cp -r "$cur_pkgpath/.footprint" "${DB}/${1}.footprint" || die "$1: install footprint failed"
 
 	pushd /
@@ -482,8 +503,12 @@ opt_install() {
 		}
 		grep -q -F 'immodules' "${DB}/${1}.footprint" && {
 			msg 'Try to immodules cache'
-			[ -e "$ROOT/bin/gtk-query-immodules-3.0" ] && pchroot "$ROOT" /bin/gtk-query-immodules-3.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
-			[ -e "$ROOT/bin/gtk-query-immodules-2.0" ] && pchroot "$ROOT" /bin/gtk-query-immodules-2.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
+			[ -e "$ROOT/bin/gtk-query-immodules-3.0" ] && {
+				pchroot "$ROOT" /bin/gtk-query-immodules-3.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
+			}
+			[ -e "$ROOT/bin/gtk-query-immodules-2.0" ] && {
+				pchroot "$ROOT" /bin/gtk-query-immodules-2.0 --update-cache || die "$1: Failed to update gtk2 immodules cache!"
+			}
 		}
 		grep -q -F 'share/mime' "${DB}/${1}.footprint" && {
 			msg 'Update the MIME type database'
@@ -506,11 +531,15 @@ opt_install() {
 }
 
 opt_build() {
+	local i
 	if [ -z "$PKG_NO_DEPS" ]; then
-		for i in $deps;do
-			opt_readpkg "$i"
-			opt_install "$i" "no" || die "$i: failed to install package."
-		done
+		{ 
+			flock -n 4 || die 'anther thread is running!'
+			for i in $deps;do
+				opt_readpkg "$i"
+				opt_install "$i" "no" || die "$i: failed to install package."
+			done
+		} 4<>/tmp/.rilock
 	fi
 
 	opt_readpkg "$1"
@@ -536,10 +565,17 @@ opt_build() {
 	pushd "${pkgdir}"
 	[ -d "./share/man" ] && compressdoc -g "`pwd`"/share/man
 	if [ -z "$PKG_NO_REMOVELA" ]; then
-		find . -name "*.la" -type f -exec rm {} \;
+		local ldir=
+		[ -d lib ] && ldir="$ldir lib"
+		[ -d lib32 ] && ldir="$ldir lib32"
+		find $ldir -name "*.la" -type f -exec rm {} \;
 	fi
 	if [ -z "$PKG_NO_STRIP" ]; then
-		find . -type f | while read FILE; do
+		local sdir=
+		[ -d lib ] && sdir="$sdir lib"
+		[ -d bin ] && sdir="$sdir bin"
+		[ -d lib32 ] && sdir="$sdir lib32"
+		find $sdir -type f | while read FILE; do
 			case $(file -b "$FILE") in
 			*ELF*executable*not\ stripped)
 				strip --strip-all "$FILE";;
@@ -550,12 +586,11 @@ opt_build() {
 			esac
 		done
 	fi
-	find . -name "*.pc" -exec sed -i \
-		-e 's;//;/;g' \
-		-e 's;/usr;/;g' \
-		-e 's;/usr/local;/;g' \
-		-e 's;//;/;g' \
-		{} \;
+	local pdir=
+	[ -d lib/pkgconfig ] && pdir="$pdir lib/pkgconfig"
+	[ -d share/pkgconfig ] && pdir="$pdir share/pkgconfig"
+	[ -d lib32/pkgconfig ] && pdir="$pdir lib32/pkgconfig"
+	find $pdir -name "*.la" -type f -exec sed -i -e 's;//;/;g' -e 's;/usr;/;g' -e 's;/usr/local;/;g' -e 's;//;/;g' {} \;
 	rm -f lib/perl5/core_perl/perllocal.pod
 	rm -f lib32/perl5/core_perl/perllocal.pod
 	rm -f lib/charset.alias
@@ -581,7 +616,7 @@ opt_build() {
 opt_query() {
 	case $1 in
 	i) opt_query "$2";;
-	a) opt_query_installed "$2";;
+	a) opt_query_installed;;
 	l) opt_readpkgfp "$2";;
 	d) opt_query_deps "$2";;
 	o) printf "${BLUE}"
@@ -599,7 +634,7 @@ opt_query_normal() {
 
 opt_query_installed() {
 	printf "${BLUE}"
-	ls -1 "$DB" | cut -d '.' -f 1 | uniq
+	echo "$DBFILES" | cut -d '.' -f 1 | uniq
 	printf "${NORMAL}"
 }
 
@@ -623,6 +658,7 @@ opt_query_deps() {
 	local s="| $2"
 	opt_readpkg "$1"
 
+	local i
 	for i in $deps;do
 		opt_query_deps "$i" "$s"
 	done
@@ -631,7 +667,8 @@ opt_query_deps() {
 opt_regmo() {
 	rm $1/*.gmo
 	pushd $1
-	for i in `ls *.po`;do
+	local i
+	for i in *.po;do
 		make ${i%.po}.gmo
 	done
 	popd
@@ -671,4 +708,3 @@ opt_help() {
 }
 
 main "$@"
-} 3<>/tmp/.rilock

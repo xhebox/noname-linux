@@ -45,6 +45,7 @@ include/asm/e820.h|644|0|0|regular file
 include/asm/errno.h|644|0|0|regular file
 include/asm/fcntl.h|644|0|0|regular file
 include/asm/hw_breakpoint.h|644|0|0|regular file
+include/asm/hwcap2.h|644|0|0|regular file
 include/asm/hyperv.h|644|0|0|regular file
 include/asm/ioctl.h|644|0|0|regular file
 include/asm/ioctls.h|644|0|0|regular file
@@ -57,7 +58,6 @@ include/asm/ldt.h|644|0|0|regular file
 include/asm/mce.h|644|0|0|regular file
 include/asm/mman.h|644|0|0|regular file
 include/asm/msgbuf.h|644|0|0|regular file
-include/asm/msr-index.h|644|0|0|regular file
 include/asm/msr.h|644|0|0|regular file
 include/asm/mtrr.h|644|0|0|regular file
 include/asm/param.h|644|0|0|regular file
@@ -109,6 +109,7 @@ include/linux/android/binder.h|644|0|0|regular file
 include/linux/android|755|0|0|directory
 include/linux/apm_bios.h|644|0|0|regular file
 include/linux/arcfb.h|644|0|0|regular file
+include/linux/aspeed-lpc-ctrl.h|644|0|0|regular file
 include/linux/atalk.h|644|0|0|regular file
 include/linux/atm.h|644|0|0|regular file
 include/linux/atm_eni.h|644|0|0|regular file
@@ -129,12 +130,15 @@ include/linux/atmppp.h|644|0|0|regular file
 include/linux/atmsap.h|644|0|0|regular file
 include/linux/atmsvc.h|644|0|0|regular file
 include/linux/audit.h|644|0|0|regular file
+include/linux/auto_dev-ioctl.h|644|0|0|regular file
 include/linux/auto_fs.h|644|0|0|regular file
 include/linux/auto_fs4.h|644|0|0|regular file
 include/linux/auxvec.h|644|0|0|regular file
 include/linux/ax25.h|644|0|0|regular file
 include/linux/b1lli.h|644|0|0|regular file
+include/linux/batman_adv.h|644|0|0|regular file
 include/linux/baycom.h|644|0|0|regular file
+include/linux/bcache.h|644|0|0|regular file
 include/linux/bcm933xx_hcs.h|644|0|0|regular file
 include/linux/bfs_fs.h|644|0|0|regular file
 include/linux/binfmts.h|644|0|0|regular file
@@ -148,6 +152,7 @@ include/linux/bpqether.h|644|0|0|regular file
 include/linux/bsg.h|644|0|0|regular file
 include/linux/bt-bmc.h|644|0|0|regular file
 include/linux/btrfs.h|644|0|0|regular file
+include/linux/btrfs_tree.h|644|0|0|regular file
 include/linux/byteorder/big_endian.h|644|0|0|regular file
 include/linux/byteorder/little_endian.h|644|0|0|regular file
 include/linux/byteorder|755|0|0|directory
@@ -160,6 +165,7 @@ include/linux/can/error.h|644|0|0|regular file
 include/linux/can/gw.h|644|0|0|regular file
 include/linux/can/netlink.h|644|0|0|regular file
 include/linux/can/raw.h|644|0|0|regular file
+include/linux/can/vxcan.h|644|0|0|regular file
 include/linux/can|755|0|0|directory
 include/linux/capability.h|644|0|0|regular file
 include/linux/capi.h|644|0|0|regular file
@@ -170,6 +176,8 @@ include/linux/cec-funcs.h|644|0|0|regular file
 include/linux/cec.h|644|0|0|regular file
 include/linux/cgroupstats.h|644|0|0|regular file
 include/linux/chio.h|644|0|0|regular file
+include/linux/cifs/cifs_mount.h|644|0|0|regular file
+include/linux/cifs|755|0|0|directory
 include/linux/cm4000_cs.h|644|0|0|regular file
 include/linux/cn_proc.h|644|0|0|regular file
 include/linux/coda.h|644|0|0|regular file
@@ -177,7 +185,9 @@ include/linux/coda_psdev.h|644|0|0|regular file
 include/linux/coff.h|644|0|0|regular file
 include/linux/connector.h|644|0|0|regular file
 include/linux/const.h|644|0|0|regular file
+include/linux/coresight-stm.h|644|0|0|regular file
 include/linux/cramfs_fs.h|644|0|0|regular file
+include/linux/cryptouser.h|644|0|0|regular file
 include/linux/cuda.h|644|0|0|regular file
 include/linux/cyclades.h|644|0|0|regular file
 include/linux/cycx_cfm.h|644|0|0|regular file
@@ -191,6 +201,7 @@ include/linux/dlm_plock.h|644|0|0|regular file
 include/linux/dlmconstants.h|644|0|0|regular file
 include/linux/dm-ioctl.h|644|0|0|regular file
 include/linux/dm-log-userspace.h|644|0|0|regular file
+include/linux/dma-buf.h|644|0|0|regular file
 include/linux/dn.h|644|0|0|regular file
 include/linux/dqblk_xfs.h|644|0|0|regular file
 include/linux/dvb/audio.h|644|0|0|regular file
@@ -228,16 +239,20 @@ include/linux/flat.h|644|0|0|regular file
 include/linux/fou.h|644|0|0|regular file
 include/linux/fs.h|644|0|0|regular file
 include/linux/fsl_hypervisor.h|644|0|0|regular file
+include/linux/fsmap.h|644|0|0|regular file
 include/linux/fuse.h|644|0|0|regular file
 include/linux/futex.h|644|0|0|regular file
 include/linux/gameport.h|644|0|0|regular file
 include/linux/gen_stats.h|644|0|0|regular file
 include/linux/genetlink.h|644|0|0|regular file
+include/linux/genwqe/genwqe_card.h|644|0|0|regular file
+include/linux/genwqe|755|0|0|directory
 include/linux/gfs2_ondisk.h|644|0|0|regular file
 include/linux/gigaset_dev.h|644|0|0|regular file
 include/linux/gpio.h|644|0|0|regular file
 include/linux/gsmmux.h|644|0|0|regular file
 include/linux/gtp.h|644|0|0|regular file
+include/linux/hash_info.h|644|0|0|regular file
 include/linux/hdlc.h|644|0|0|regular file
 include/linux/hdlc/ioctl.h|644|0|0|regular file
 include/linux/hdlcdrv.h|644|0|0|regular file
@@ -291,6 +306,7 @@ include/linux/if_tun.h|644|0|0|regular file
 include/linux/if_tunnel.h|644|0|0|regular file
 include/linux/if_vlan.h|644|0|0|regular file
 include/linux/if_x25.h|644|0|0|regular file
+include/linux/ife.h|644|0|0|regular file
 include/linux/igmp.h|644|0|0|regular file
 include/linux/iio/events.h|644|0|0|regular file
 include/linux/iio/types.h|644|0|0|regular file
@@ -328,7 +344,9 @@ include/linux/ivtvfb.h|644|0|0|regular file
 include/linux/ixjuser.h|644|0|0|regular file
 include/linux/jffs2.h|644|0|0|regular file
 include/linux/joystick.h|644|0|0|regular file
+include/linux/kcm.h|644|0|0|regular file
 include/linux/kcmp.h|644|0|0|regular file
+include/linux/kcov.h|644|0|0|regular file
 include/linux/kd.h|644|0|0|regular file
 include/linux/kdev_t.h|644|0|0|regular file
 include/linux/kernel-page-flags.h|644|0|0|regular file
@@ -337,10 +355,12 @@ include/linux/kernelcapi.h|644|0|0|regular file
 include/linux/kexec.h|644|0|0|regular file
 include/linux/keyboard.h|644|0|0|regular file
 include/linux/keyctl.h|644|0|0|regular file
+include/linux/kfd_ioctl.h|644|0|0|regular file
 include/linux/kvm.h|644|0|0|regular file
 include/linux/kvm_para.h|644|0|0|regular file
 include/linux/l2tp.h|644|0|0|regular file
 include/linux/libc-compat.h|644|0|0|regular file
+include/linux/lightnvm.h|644|0|0|regular file
 include/linux/limits.h|644|0|0|regular file
 include/linux/lirc.h|644|0|0|regular file
 include/linux/llc.h|644|0|0|regular file
@@ -367,6 +387,7 @@ include/linux/mman.h|644|0|0|regular file
 include/linux/mmc/ioctl.h|644|0|0|regular file
 include/linux/mmc|755|0|0|directory
 include/linux/mmtimer.h|644|0|0|regular file
+include/linux/module.h|644|0|0|regular file
 include/linux/mpls.h|644|0|0|regular file
 include/linux/mpls_iptunnel.h|644|0|0|regular file
 include/linux/mqueue.h|644|0|0|regular file
@@ -376,6 +397,7 @@ include/linux/msdos_fs.h|644|0|0|regular file
 include/linux/msg.h|644|0|0|regular file
 include/linux/mtio.h|644|0|0|regular file
 include/linux/n_r3964.h|644|0|0|regular file
+include/linux/nbd-netlink.h|644|0|0|regular file
 include/linux/nbd.h|644|0|0|regular file
 include/linux/ncp.h|644|0|0|regular file
 include/linux/ncp_fs.h|644|0|0|regular file
@@ -551,7 +573,10 @@ include/linux/nfsd/export.h|644|0|0|regular file
 include/linux/nfsd/nfsfh.h|644|0|0|regular file
 include/linux/nfsd/stats.h|644|0|0|regular file
 include/linux/nfsd|755|0|0|directory
+include/linux/nilfs2_api.h|644|0|0|regular file
+include/linux/nilfs2_ondisk.h|644|0|0|regular file
 include/linux/nl80211.h|644|0|0|regular file
+include/linux/nsfs.h|644|0|0|regular file
 include/linux/nubus.h|644|0|0|regular file
 include/linux/nvme_ioctl.h|644|0|0|regular file
 include/linux/nvram.h|644|0|0|regular file
@@ -565,6 +590,7 @@ include/linux/parport.h|644|0|0|regular file
 include/linux/patchkey.h|644|0|0|regular file
 include/linux/pci.h|644|0|0|regular file
 include/linux/pci_regs.h|644|0|0|regular file
+include/linux/pcitest.h|644|0|0|regular file
 include/linux/perf_event.h|644|0|0|regular file
 include/linux/personality.h|644|0|0|regular file
 include/linux/pfkeyv2.h|644|0|0|regular file
@@ -584,12 +610,15 @@ include/linux/ppp-comp.h|644|0|0|regular file
 include/linux/ppp-ioctl.h|644|0|0|regular file
 include/linux/ppp_defs.h|644|0|0|regular file
 include/linux/pps.h|644|0|0|regular file
+include/linux/pr.h|644|0|0|regular file
 include/linux/prctl.h|644|0|0|regular file
+include/linux/psample.h|644|0|0|regular file
 include/linux/psci.h|644|0|0|regular file
 include/linux/ptp_clock.h|644|0|0|regular file
 include/linux/ptrace.h|644|0|0|regular file
 include/linux/qnx4_fs.h|644|0|0|regular file
 include/linux/qnxtypes.h|644|0|0|regular file
+include/linux/qrtr.h|644|0|0|regular file
 include/linux/quota.h|644|0|0|regular file
 include/linux/radeonfb.h|644|0|0|regular file
 include/linux/raid/md_p.h|644|0|0|regular file
@@ -608,16 +637,24 @@ include/linux/rio_mport_cdev.h|644|0|0|regular file
 include/linux/romfs_fs.h|644|0|0|regular file
 include/linux/rose.h|644|0|0|regular file
 include/linux/route.h|644|0|0|regular file
+include/linux/rpmsg.h|644|0|0|regular file
 include/linux/rtc.h|644|0|0|regular file
 include/linux/rtnetlink.h|644|0|0|regular file
 include/linux/scc.h|644|0|0|regular file
 include/linux/sched.h|644|0|0|regular file
+include/linux/sched/types.h|644|0|0|regular file
+include/linux/sched|755|0|0|directory
 include/linux/scif_ioctl.h|644|0|0|regular file
 include/linux/screen_info.h|644|0|0|regular file
 include/linux/sctp.h|644|0|0|regular file
 include/linux/sdla.h|644|0|0|regular file
 include/linux/seccomp.h|644|0|0|regular file
 include/linux/securebits.h|644|0|0|regular file
+include/linux/sed-opal.h|644|0|0|regular file
+include/linux/seg6.h|644|0|0|regular file
+include/linux/seg6_genl.h|644|0|0|regular file
+include/linux/seg6_hmac.h|644|0|0|regular file
+include/linux/seg6_iptunnel.h|644|0|0|regular file
 include/linux/selinux_netlink.h|644|0|0|regular file
 include/linux/sem.h|644|0|0|regular file
 include/linux/serial.h|644|0|0|regular file
@@ -627,6 +664,8 @@ include/linux/serio.h|644|0|0|regular file
 include/linux/shm.h|644|0|0|regular file
 include/linux/signal.h|644|0|0|regular file
 include/linux/signalfd.h|644|0|0|regular file
+include/linux/smc.h|644|0|0|regular file
+include/linux/smc_diag.h|644|0|0|regular file
 include/linux/smiapp.h|644|0|0|regular file
 include/linux/snmp.h|644|0|0|regular file
 include/linux/sock_diag.h|644|0|0|regular file
@@ -640,11 +679,13 @@ include/linux/spi/spidev.h|644|0|0|regular file
 include/linux/spi|755|0|0|directory
 include/linux/stat.h|644|0|0|regular file
 include/linux/stddef.h|644|0|0|regular file
+include/linux/stm.h|644|0|0|regular file
 include/linux/string.h|644|0|0|regular file
 include/linux/sunrpc/debug.h|644|0|0|regular file
 include/linux/sunrpc|755|0|0|directory
 include/linux/suspend_ioctls.h|644|0|0|regular file
 include/linux/swab.h|644|0|0|regular file
+include/linux/switchtec_ioctl.h|644|0|0|regular file
 include/linux/sync_file.h|644|0|0|regular file
 include/linux/synclink.h|644|0|0|regular file
 include/linux/sysctl.h|644|0|0|regular file
@@ -661,6 +702,7 @@ include/linux/tc_act/tc_ipt.h|644|0|0|regular file
 include/linux/tc_act/tc_mirred.h|644|0|0|regular file
 include/linux/tc_act/tc_nat.h|644|0|0|regular file
 include/linux/tc_act/tc_pedit.h|644|0|0|regular file
+include/linux/tc_act/tc_sample.h|644|0|0|regular file
 include/linux/tc_act/tc_skbedit.h|644|0|0|regular file
 include/linux/tc_act/tc_skbmod.h|644|0|0|regular file
 include/linux/tc_act/tc_tunnel_key.h|644|0|0|regular file
@@ -673,6 +715,7 @@ include/linux/tc_ematch/tc_em_text.h|644|0|0|regular file
 include/linux/tc_ematch|755|0|0|directory
 include/linux/tcp.h|644|0|0|regular file
 include/linux/tcp_metrics.h|644|0|0|regular file
+include/linux/tee.h|644|0|0|regular file
 include/linux/telephony.h|644|0|0|regular file
 include/linux/termios.h|644|0|0|regular file
 include/linux/thermal.h|644|0|0|regular file
@@ -713,6 +756,7 @@ include/linux/usbdevice_fs.h|644|0|0|regular file
 include/linux/usbip.h|644|0|0|regular file
 include/linux/usb|755|0|0|directory
 include/linux/userfaultfd.h|644|0|0|regular file
+include/linux/userio.h|644|0|0|regular file
 include/linux/utime.h|644|0|0|regular file
 include/linux/utsname.h|644|0|0|regular file
 include/linux/uuid.h|644|0|0|regular file
@@ -725,6 +769,7 @@ include/linux/v4l2-subdev.h|644|0|0|regular file
 include/linux/version.h|644|0|0|regular file
 include/linux/veth.h|644|0|0|regular file
 include/linux/vfio.h|644|0|0|regular file
+include/linux/vfio_ccw.h|644|0|0|regular file
 include/linux/vhost.h|644|0|0|regular file
 include/linux/videodev2.h|644|0|0|regular file
 include/linux/virtio_9p.h|644|0|0|regular file
@@ -736,6 +781,7 @@ include/linux/virtio_crypto.h|644|0|0|regular file
 include/linux/virtio_gpu.h|644|0|0|regular file
 include/linux/virtio_ids.h|644|0|0|regular file
 include/linux/virtio_input.h|644|0|0|regular file
+include/linux/virtio_mmio.h|644|0|0|regular file
 include/linux/virtio_net.h|644|0|0|regular file
 include/linux/virtio_pci.h|644|0|0|regular file
 include/linux/virtio_ring.h|644|0|0|regular file
@@ -744,11 +790,13 @@ include/linux/virtio_scsi.h|644|0|0|regular file
 include/linux/virtio_types.h|644|0|0|regular file
 include/linux/virtio_vsock.h|644|0|0|regular file
 include/linux/vm_sockets.h|644|0|0|regular file
+include/linux/vsockmon.h|644|0|0|regular file
 include/linux/vt.h|644|0|0|regular file
 include/linux/vtpm_proxy.h|644|0|0|regular file
 include/linux/wait.h|644|0|0|regular file
 include/linux/wanrouter.h|644|0|0|regular file
 include/linux/watchdog.h|644|0|0|regular file
+include/linux/wil6210_uapi.h|644|0|0|regular file
 include/linux/wimax.h|644|0|0|regular file
 include/linux/wimax/i2400m.h|644|0|0|regular file
 include/linux/wimax|755|0|0|directory
@@ -768,8 +816,10 @@ include/mtd/mtd-user.h|644|0|0|regular file
 include/mtd/nftl-user.h|644|0|0|regular file
 include/mtd/ubi-user.h|644|0|0|regular file
 include/mtd|755|0|0|directory
+include/rdma/bnxt_re-abi.h|644|0|0|regular file
 include/rdma/cxgb3-abi.h|644|0|0|regular file
 include/rdma/cxgb4-abi.h|644|0|0|regular file
+include/rdma/hfi/hfi1_ioctl.h|644|0|0|regular file
 include/rdma/hfi/hfi1_user.h|644|0|0|regular file
 include/rdma/hfi|755|0|0|directory
 include/rdma/hns-abi.h|644|0|0|regular file
@@ -785,6 +835,7 @@ include/rdma/ocrdma-abi.h|644|0|0|regular file
 include/rdma/qedr-abi.h|644|0|0|regular file
 include/rdma/rdma_netlink.h|644|0|0|regular file
 include/rdma/rdma_user_cm.h|644|0|0|regular file
+include/rdma/rdma_user_ioctl.h|644|0|0|regular file
 include/rdma/rdma_user_rxe.h|644|0|0|regular file
 include/rdma/vmw_pvrdma-abi.h|644|0|0|regular file
 include/rdma|755|0|0|directory
@@ -814,7 +865,6 @@ include/sound/snd_sst_tokens.h|644|0|0|regular file
 include/sound/tlv.h|644|0|0|regular file
 include/sound/usb_stream.h|644|0|0|regular file
 include/sound|755|0|0|directory
-include/uapi|755|0|0|directory
 include/video/edid.h|644|0|0|regular file
 include/video/sisfb.h|644|0|0|regular file
 include/video/uvesafb.h|644|0|0|regular file

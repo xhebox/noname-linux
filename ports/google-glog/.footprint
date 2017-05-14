@@ -1,0 +1,26 @@
+include/glog/log_severity.h|644|0|0|regular file
+include/glog/logging.h|644|0|0|regular file
+include/glog/raw_logging.h|644|0|0|regular file
+include/glog/stl_logging.h|644|0|0|regular file
+include/glog/vlog_is_on.h|644|0|0|regular file
+include/glog|755|0|0|directory
+include|755|0|0|directory
+lib/libglog.a|644|0|0|regular file
+lib/libglog.so.0.0.0|755|0|0|regular file
+lib/libglog.so.0|777|0|0|symbolic link
+lib/libglog.so|777|0|0|symbolic link
+lib/pkgconfig/libglog.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/glog-0.3.5/AUTHORS|644|0|0|regular file
+share/doc/glog-0.3.5/COPYING|644|0|0|regular file
+share/doc/glog-0.3.5/ChangeLog|644|0|0|regular file
+share/doc/glog-0.3.5/INSTALL|644|0|0|regular file
+share/doc/glog-0.3.5/NEWS|644|0|0|regular empty file
+share/doc/glog-0.3.5/README.windows|644|0|0|regular file
+share/doc/glog-0.3.5/README|644|0|0|regular file
+share/doc/glog-0.3.5/designstyle.css|644|0|0|regular file
+share/doc/glog-0.3.5/glog.html|644|0|0|regular file
+share/doc/glog-0.3.5|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

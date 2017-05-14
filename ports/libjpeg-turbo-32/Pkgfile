@@ -1,7 +1,5 @@
+. $PORTS/libjpeg-turbo/Pkgfile
 name=libjpeg-turbo-32
-version=1.5.1
-deps=nasm
-desc="Library of JPEG support functions."
 source="http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$version.tar.gz"
 
 build() {

@@ -12,10 +12,10 @@ include/pngconf.h|777|0|0|symbolic link
 include/pnglibconf.h|777|0|0|symbolic link
 include|755|0|0|directory
 lib/libpng.so|777|0|0|symbolic link
-lib/libpng16.so.16.29.0|755|0|0|regular file
+lib/libpng16.so.16.30.0|755|0|0|regular file
 lib/libpng16.so.16|777|0|0|symbolic link
 lib/libpng16.so|777|0|0|symbolic link
-lib/pkgconfig/libpng.pc|644|0|0|regular file
+lib/pkgconfig/libpng.pc|777|0|0|symbolic link
 lib/pkgconfig/libpng16.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory

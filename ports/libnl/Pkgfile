@@ -1,13 +1,20 @@
 name=libnl
-version=3.2.29
+version=3.3.0
 ver=`echo $version | sed 's/\./_/g'`
 deps="flex bison"
 desc="Netlink Protocol Library Suite"
 source="https://github.com/thom311/libnl/releases/download/libnl${ver}/libnl-${version}.tar.gz"
 
+ext() {
+	cd libnl-$version
+	sed -i '/linux-private\/linux\/libc-compat/d' Makefile.in Makefile.am
+	sed -i 's/linux-private\///g' lib/route/link/vrf.c
+	rm -r include/linux-private/linux/libc-compat.h
+}
+
 build() {
-	cd $name-$version
-	./configure --prefix= --disable-static --sbindir=/bin  
+	cd libnl-$version
+	./configure --prefix= --disable-static --sbindir=/bin
 	make  || die
 	make DESTDIR="$pkgdir" install  || die
 }

@@ -4,7 +4,10 @@
 #define UPDATE_INTERVAL 1
 
 /* text to show if no value can be retrieved */
-#define UNKNOWN_STR     "n/a"
+#define UNKNOWN_STR "n/a"
+
+/* maximum output string length */
+#define MAXLEN 2048
 
 static const struct arg args[] = {
 	/* function	format        argument */

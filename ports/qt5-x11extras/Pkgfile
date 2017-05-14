@@ -1,5 +1,5 @@
 name=qt5-x11extras
-version=5.8.0
+version=5.9.1
 deps="qt5-base"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtx11extras-opensource-src-$version.tar.xz
 "

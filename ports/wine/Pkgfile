@@ -1,18 +1,18 @@
 name=wine
-version=2.7
-d9version=$version
+version=2.13
+d9version=2.12
 _ver=`echo $version | sed 's/rc/-rc/g'`
 _d9ver=`echo $d9version | sed 's/rc/-rc/g'`
 desc="Based off wine-staging, including the gallium-nine patches and some more hacks"
 source="
 https://github.com/wine-compholio/${name}-patched/archive/staging-${_ver}.tar.gz
 https://github.com/sarnex/wine-d3d9-patches/archive/wine-d3d9-$_d9ver.tar.gz
-heap_perf.patch
+https://github.com/laino/wine-patches/archive/master.tar.gz
 steam.patch
 keybindings.patch
 wbemprox_query_v2.patch
 wine-dlclose.patch"
-deps="autoconf automake attr-32 freetype-32 libsm-32 alsa-lib-32 libpng-32 libx11-32 libxau-32 gettext-32 libxi-32 libxrender-32 libxext-32 libxcb-32 zlib-32 mesa-32 libxml2-32 libxslt-32 libjpeg-turbo-32 fontconfig-32 glu-32 libpcap-32 desktop-file-utils libxcursor-32 libxrandr-32 libxcomposite-32 libva-32 ncurses-32 libxinerama-32 eudev-32 lcms2-32 libva-intel-driver-32 mpg123-32 alsa-plugins-32 libtxc_dxtn-32 ocl-icd-32 giflib-32 v4l-utils-32 libldap-32 openal gsm-32"
+deps="autoconf automake attr-32 freetype-32 libsm-32 alsa-lib-32 libpng-32 libx11-32 libxau-32 libxi-32 libxrender-32 libxext-32 libxcb-32 zlib-32 mesa-32 libxml2-32 libxslt-32 libjpeg-turbo-32 fontconfig-32 glu-32 libpcap-32 desktop-file-utils libxcursor-32 libxrandr-32 libxcomposite-32 libva-32 ncurses-32 libxinerama-32 eudev-32 lcms2-32 libva-intel-driver-32 mpg123-32 alsa-plugins-32 libtxc_dxtn-32 ocl-icd-32 giflib-32 v4l-utils-32 libldap-32 openal gsm-32"
 
 ext() {
 	cd wine-patched-staging-$_ver
@@ -23,15 +23,19 @@ ext() {
 		*patch) patch -p1 < ../$i || die;;
 		esac
 	done
+	patch -p1 < "$srcdir/wine-patches-master/0003-wine-list.h-linked-list-cache-line-prefetching.patch" || die
 	patch -p1 < "$srcdir/wine-d3d9-patches-wine-d3d9-$_d9ver/staging-helper.patch" #for wine-staging || die
 	patch -p1 < "$srcdir/wine-d3d9-patches-wine-d3d9-$_d9ver/wine-d3d9.patch" || die
+	#./tools/make_requests
 	autoreconf -fi
+	sed 's|OpenCL/opencl.h|CL/opencl.h|g' -i configure*
 	cd ..
 	mv wine-patched-staging-$_ver wine32
 	cp -r wine32 wine64
 }
 
 build() {
+	export PKG_NO_STRIP=yes
 	mkdir 64build
 	cd 64build
 	export PKG_CONFIG_PATH="/lib/pkgconfig"
@@ -46,6 +50,7 @@ build() {
 	--without-gtk3 \
 	--with-gsm \
 	--with-xattr
+	sed -i 's/CFLAGS = /&-g2 /' server/Makefile
 	make || die
 	cd ..
 
@@ -63,6 +68,7 @@ build() {
 	--with-wine64="`pwd`/../64build" \
 	--with-gsm \
 	--with-xattr
+	sed -i 's/CFLAGS = /&-g2 /' server/Makefile
 	make || die
 	make -j1 prefix=/"$pkgdir/" libdir="$pkgdir"/lib32 dlldir="$pkgdir"/lib32/wine install || die
 	cd ..

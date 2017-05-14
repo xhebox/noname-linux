@@ -1,11 +1,13 @@
 name=libevent
-version=2.0.22
+version=2.1.8
 deps=musl
 desc="Event notification library"
-source="https://github.com/libevent/libevent/releases/download/release-$version-stable/$name-$version-stable.tar.gz"
+source="https://github.com/libevent/libevent/releases/download/release-$version-stable/$name-$version-stable.tar.gz
+libressl.patch"
 
 build() {
-	cd $name-$version-stable
+	cd libevent-$version-stable
+	patch -p0 < ../libressl.patch || die
 	./configure --prefix=/  --disable-static --disable-libevent-regress
 	make || die
 	make DESTDIR="$pkgdir" install || die

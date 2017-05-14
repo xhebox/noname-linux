@@ -166,6 +166,7 @@ include/gsl/gsl_sf_expint.h|644|0|0|regular file
 include/gsl/gsl_sf_fermi_dirac.h|644|0|0|regular file
 include/gsl/gsl_sf_gamma.h|644|0|0|regular file
 include/gsl/gsl_sf_gegenbauer.h|644|0|0|regular file
+include/gsl/gsl_sf_hermite.h|644|0|0|regular file
 include/gsl/gsl_sf_hyperg.h|644|0|0|regular file
 include/gsl/gsl_sf_laguerre.h|644|0|0|regular file
 include/gsl/gsl_sf_lambert.h|644|0|0|regular file
@@ -248,8 +249,8 @@ include/gsl/gsl_wavelet2d.h|644|0|0|regular file
 include/gsl|755|0|0|directory
 include|755|0|0|directory
 lib/libgsl.a|644|0|0|regular file
-lib/libgsl.so.19.3.0|755|0|0|regular file
-lib/libgsl.so.19|777|0|0|symbolic link
+lib/libgsl.so.23.0.0|755|0|0|regular file
+lib/libgsl.so.23|777|0|0|symbolic link
 lib/libgsl.so|777|0|0|symbolic link
 lib/libgslcblas.a|644|0|0|regular file
 lib/libgslcblas.so.0.0.0|755|0|0|regular file
@@ -260,12 +261,6 @@ lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory
 share/aclocal/gsl.m4|644|0|0|regular file
 share/aclocal|755|0|0|directory
-share/info/gsl-ref.info-1|644|0|0|regular file
-share/info/gsl-ref.info-2|644|0|0|regular file
-share/info/gsl-ref.info-3|644|0|0|regular file
-share/info/gsl-ref.info-4|644|0|0|regular file
-share/info/gsl-ref.info-5|644|0|0|regular file
-share/info/gsl-ref.info-6|644|0|0|regular file
 share/info/gsl-ref.info|644|0|0|regular file
 share/info|755|0|0|directory
 share/man/man1/gsl-config.1.gz|644|0|0|regular file

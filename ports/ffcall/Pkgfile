@@ -1,10 +1,10 @@
 name=ffcall
-version=1.10
+version=1.13
 desc="C library for implementing foreign function calls in embedded interpreters"
-source="http://www.haible.de/bruno/gnu/ffcall-${version}.tar.gz"
+source="https://ftp.gnu.org/gnu/libffcall/libffcall-$version.tar.gz"
 
 build() {
-	cd ffcall-${version}
+	cd libffcall-${version}
 	./configure --prefix= --mandir=/share/man --with-pic
 	make -j1 || die
 	install -d "${pkgdir}"/share/man

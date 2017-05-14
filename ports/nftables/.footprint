@@ -1,14 +1,14 @@
 bin/nft|755|0|0|regular file
+bin|755|0|0|directory
 etc/nftables.conf|644|0|0|regular file
-share/nftables/ipv4-nat|644|0|0|regular file
-share/nftables/ipv4-filter|644|0|0|regular file
-share/nftables/ipv6-filter|644|0|0|regular file
-share/nftables/ipv6-nat|644|0|0|regular file
-share/nftables/ipv4-mangle|644|0|0|regular file
-share/nftables/inet-filter|644|0|0|regular file
-share/nftables/ipv6-mangle|644|0|0|regular file
+etc|755|0|0|directory
 share/nftables/bridge-filter|644|0|0|regular file
+share/nftables/inet-filter|644|0|0|regular file
+share/nftables/ipv4-filter|644|0|0|regular file
+share/nftables/ipv4-mangle|644|0|0|regular file
+share/nftables/ipv4-nat|644|0|0|regular file
+share/nftables/ipv6-filter|644|0|0|regular file
+share/nftables/ipv6-mangle|644|0|0|regular file
+share/nftables/ipv6-nat|644|0|0|regular file
 share/nftables|755|0|0|directory
 share|755|0|0|directory
-etc|755|0|0|directory
-bin|755|0|0|directory

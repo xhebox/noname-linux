@@ -1,7 +1,7 @@
 include/sigsegv.h|644|0|0|regular file
 include|755|0|0|directory
 lib/libsigsegv.a|644|0|0|regular file
-lib/libsigsegv.so.2.0.3|755|0|0|regular file
+lib/libsigsegv.so.2.0.4|755|0|0|regular file
 lib/libsigsegv.so.2|777|0|0|symbolic link
 lib/libsigsegv.so|777|0|0|symbolic link
 lib|755|0|0|directory

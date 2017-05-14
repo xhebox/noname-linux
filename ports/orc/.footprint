@@ -1,93 +1,93 @@
-lib/liborc-test-0.4.so|777|0|0|symbolic link
-lib/liborc-0.4.so|777|0|0|symbolic link
-lib/liborc-0.4.so.0|777|0|0|symbolic link
-lib/liborc-test-0.4.so.0|777|0|0|symbolic link
-bin/orcc|755|0|0|regular file
 bin/orc-bugreport|755|0|0|regular file
-include/orc-0.4/orc-test/orctest.h|644|0|0|regular file
-include/orc-0.4/orc-test/orcrandom.h|644|0|0|regular file
+bin/orcc|755|0|0|regular file
+bin|755|0|0|directory
 include/orc-0.4/orc-test/orcarray.h|644|0|0|regular file
 include/orc-0.4/orc-test/orcprofile.h|644|0|0|regular file
-include/orc-0.4/orc/orclimits.h|644|0|0|regular file
-include/orc-0.4/orc/orcdebug.h|644|0|0|regular file
+include/orc-0.4/orc-test/orcrandom.h|644|0|0|regular file
+include/orc-0.4/orc-test/orctest.h|644|0|0|regular file
+include/orc-0.4/orc-test|755|0|0|directory
 include/orc-0.4/orc/orc-stdint.h|644|0|0|regular file
-include/orc-0.4/orc/orcfunctions.h|644|0|0|regular file
-include/orc-0.4/orc/orcx86.h|644|0|0|regular file
+include/orc-0.4/orc/orc.h|644|0|0|regular file
+include/orc-0.4/orc/orcarm.h|644|0|0|regular file
+include/orc-0.4/orc/orcbytecode.h|644|0|0|regular file
 include/orc-0.4/orc/orcbytecodes.h|644|0|0|regular file
-include/orc-0.4/orc/orcmips.h|644|0|0|regular file
-include/orc-0.4/orc/orcemulateopcodes.h|644|0|0|regular file
-include/orc-0.4/orc/orcrule.h|644|0|0|regular file
-include/orc-0.4/orc/orcpowerpc.h|644|0|0|regular file
-include/orc-0.4/orc/orcinstruction.h|644|0|0|regular file
-include/orc-0.4/orc/orcopcode.h|644|0|0|regular file
-include/orc-0.4/orc/orccpu.h|644|0|0|regular file
-include/orc-0.4/orc/orcexecutor.h|644|0|0|regular file
 include/orc-0.4/orc/orccode.h|644|0|0|regular file
-include/orc-0.4/orc/orcx86insn.h|644|0|0|regular file
+include/orc-0.4/orc/orccompiler.h|644|0|0|regular file
+include/orc-0.4/orc/orcconstant.h|644|0|0|regular file
+include/orc-0.4/orc/orccpu.h|644|0|0|regular file
+include/orc-0.4/orc/orccpuinsn.h|644|0|0|regular file
+include/orc-0.4/orc/orcdebug.h|644|0|0|regular file
+include/orc-0.4/orc/orcemulateopcodes.h|644|0|0|regular file
+include/orc-0.4/orc/orcexecutor.h|644|0|0|regular file
+include/orc-0.4/orc/orcfunctions.h|644|0|0|regular file
+include/orc-0.4/orc/orcinstruction.h|644|0|0|regular file
+include/orc-0.4/orc/orcinternal.h|644|0|0|regular file
+include/orc-0.4/orc/orclimits.h|644|0|0|regular file
+include/orc-0.4/orc/orcmips.h|644|0|0|regular file
 include/orc-0.4/orc/orcmmx.h|644|0|0|regular file
 include/orc-0.4/orc/orcneon.h|644|0|0|regular file
-include/orc-0.4/orc/orcconstant.h|644|0|0|regular file
 include/orc-0.4/orc/orconce.h|644|0|0|regular file
-include/orc-0.4/orc/orcarm.h|644|0|0|regular file
-include/orc-0.4/orc/orccompiler.h|644|0|0|regular file
-include/orc-0.4/orc/orc.h|644|0|0|regular file
-include/orc-0.4/orc/orcbytecode.h|644|0|0|regular file
-include/orc-0.4/orc/orcinternal.h|644|0|0|regular file
-include/orc-0.4/orc/orctarget.h|644|0|0|regular file
-include/orc-0.4/orc/orccpuinsn.h|644|0|0|regular file
+include/orc-0.4/orc/orcopcode.h|644|0|0|regular file
 include/orc-0.4/orc/orcparse.h|644|0|0|regular file
+include/orc-0.4/orc/orcpowerpc.h|644|0|0|regular file
 include/orc-0.4/orc/orcprogram.h|644|0|0|regular file
-include/orc-0.4/orc/orcutils.h|644|0|0|regular file
+include/orc-0.4/orc/orcrule.h|644|0|0|regular file
 include/orc-0.4/orc/orcsse.h|644|0|0|regular file
+include/orc-0.4/orc/orctarget.h|644|0|0|regular file
+include/orc-0.4/orc/orcutils.h|644|0|0|regular file
 include/orc-0.4/orc/orcvariable.h|644|0|0|regular file
-lib/liborc-test-0.4.so.0.25.0|755|0|0|regular file
-lib/liborc-0.4.so.0.25.0|755|0|0|regular file
+include/orc-0.4/orc/orcx86.h|644|0|0|regular file
+include/orc-0.4/orc/orcx86insn.h|644|0|0|regular file
+include/orc-0.4/orc|755|0|0|directory
+include/orc-0.4|755|0|0|directory
+include|755|0|0|directory
+lib/liborc-0.4.so.0.27.0|755|0|0|regular file
+lib/liborc-0.4.so.0|777|0|0|symbolic link
+lib/liborc-0.4.so|777|0|0|symbolic link
+lib/liborc-test-0.4.so.0.27.0|755|0|0|regular file
+lib/liborc-test-0.4.so.0|777|0|0|symbolic link
+lib/liborc-test-0.4.so|777|0|0|symbolic link
 lib/pkgconfig/orc-0.4.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
 share/aclocal/orc.m4|644|0|0|regular file
-share/gtk-doc/html/orc/orc-MMX.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-runninging.html|644|0|0|regular file
-share/gtk-doc/html/orc/ch05.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-Orc.html|644|0|0|regular file
+share/aclocal|755|0|0|directory
+share/gtk-doc/html/orc/ch01.html|644|0|0|regular file
 share/gtk-doc/html/orc/ch02.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-OrcExecutor.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-OrcProgram.html|644|0|0|regular file
-share/gtk-doc/html/orc/index.html|644|0|0|regular file
 share/gtk-doc/html/orc/ch03.html|644|0|0|regular file
+share/gtk-doc/html/orc/ch04.html|644|0|0|regular file
+share/gtk-doc/html/orc/ch05.html|644|0|0|regular file
+share/gtk-doc/html/orc/home.png|644|0|0|regular file
+share/gtk-doc/html/orc/index.html|644|0|0|regular file
 share/gtk-doc/html/orc/left-insensitive.png|644|0|0|regular file
 share/gtk-doc/html/orc/left.png|644|0|0|regular file
-share/gtk-doc/html/orc/ch01.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-SSE.html|644|0|0|regular file
-share/gtk-doc/html/orc/right.png|644|0|0|regular file
-share/gtk-doc/html/orc/orc-building.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-opcodes.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-PowerPC.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-program.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-ARM.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-MMX.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-Orc.html|644|0|0|regular file
 share/gtk-doc/html/orc/orc-OrcCompiler.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-OrcDebug.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-OrcExecutor.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-OrcOpcode.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-OrcProgram.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-OrcRule.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-PowerPC.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-SSE.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-Utility-functions.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-building.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-concepts.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-misc.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-opcodes.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-program.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-runninging.html|644|0|0|regular file
+share/gtk-doc/html/orc/orc-tutorial.html|644|0|0|regular file
 share/gtk-doc/html/orc/orc-x86.html|644|0|0|regular file
 share/gtk-doc/html/orc/orc.devhelp2|644|0|0|regular file
-share/gtk-doc/html/orc/orc-OrcRule.html|644|0|0|regular file
-share/gtk-doc/html/orc/home.png|644|0|0|regular file
-share/gtk-doc/html/orc/ch04.html|644|0|0|regular file
 share/gtk-doc/html/orc/right-insensitive.png|644|0|0|regular file
-share/gtk-doc/html/orc/orc-misc.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-Utility-functions.html|644|0|0|regular file
-share/gtk-doc/html/orc/up.png|644|0|0|regular file
-share/gtk-doc/html/orc/orc-tutorial.html|644|0|0|regular file
-share/gtk-doc/html/orc/up-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/orc/right.png|644|0|0|regular file
 share/gtk-doc/html/orc/style.css|644|0|0|regular file
-share/gtk-doc/html/orc/orc-OrcDebug.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-ARM.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-OrcOpcode.html|644|0|0|regular file
-share/gtk-doc/html/orc/orc-concepts.html|644|0|0|regular file
+share/gtk-doc/html/orc/up-insensitive.png|644|0|0|regular file
+share/gtk-doc/html/orc/up.png|644|0|0|regular file
 share/gtk-doc/html/orc|755|0|0|directory
 share/gtk-doc/html|755|0|0|directory
 share/gtk-doc|755|0|0|directory
-share/aclocal|755|0|0|directory
 share|755|0|0|directory
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory
-include/orc-0.4/orc|755|0|0|directory
-include/orc-0.4/orc-test|755|0|0|directory
-include/orc-0.4|755|0|0|directory
-include|755|0|0|directory
-bin|755|0|0|directory

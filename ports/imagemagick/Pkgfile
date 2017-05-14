@@ -1,5 +1,5 @@
 name=imagemagick
-version=6.9.8.4
+version=7.0.6.4
 desc="An image viewing/manipulation program"
 deps="libtool lcms2 libxt fontconfig libxext opencl-headers openexr librsvg libxml2 openjpeg2 glu libwebp ocl-icd liblqr ghostscript perl" 
 source="http://www.imagemagick.org/download/ImageMagick-${version%.*}-${version##*.}.tar.xz
@@ -8,7 +8,6 @@ perlmagick.rpath.patch"
 ext() {
 	cd ImageMagick-${version%.*}-${version##*.}
 	sed '/AC_PATH_XTRA/d' -i configure.ac
-	autoreconf --force --install
 	patch -p0 -i "${srcdir}/perlmagick.rpath.patch" || die
 }
 

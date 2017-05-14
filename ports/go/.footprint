@@ -984,6 +984,7 @@ lib/go/src/cmd/compile/internal/gc/testdata/break.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/chan.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/closure.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/cmp.go|644|0|0|regular file
+lib/go/src/cmd/compile/internal/gc/testdata/cmpConst.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/compound.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/copy.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/ctl.go|644|0|0|regular file
@@ -993,6 +994,7 @@ lib/go/src/cmd/compile/internal/gc/testdata/dupLoad.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/fp.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/gen/arithBoundaryGen.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/gen/arithConstGen.go|644|0|0|regular file
+lib/go/src/cmd/compile/internal/gc/testdata/gen/cmpConstGen.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/gen/constFoldGen.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/gen/copyGen.go|644|0|0|regular file
 lib/go/src/cmd/compile/internal/gc/testdata/gen/zeroGen.go|644|0|0|regular file

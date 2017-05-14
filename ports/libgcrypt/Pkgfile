@@ -1,5 +1,5 @@
 name=libgcrypt
-version=1.7.6
+version=1.7.8
 deps="libgpg-error"
 desc="GNU cryptographic library"
 source="

@@ -1,11 +1,12 @@
 name=exiv2
-version=0.25
+version=0.26
 desc="Exif, Iptc and XMP metadata manipulation library and tools"
 deps="zlib expat"
-source="http://www.exiv2.org/exiv2-${version}.tar.gz"
+source="http://www.exiv2.org/builds/exiv2-${version}-trunk.tar.gz"
 
 build() {
-	cd exiv2-$version 
+	cd exiv2-trunk
+	sed -i 's/PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP/\{\{PTHREAD_MUTEX_RECURSIVE\}\}/g' src/actions.cpp
 	./configure --prefix= --enable-video
 	make || die
 	make DESTDIR="${pkgdir}" install || die

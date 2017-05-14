@@ -2,10 +2,10 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"mononoki:size=10",
-	"Dejavu Sans Mono:size=10"
+	"mononoki:style=bold:size=12",
+	"Dejavu Sans Mono:style=bold:size=12"
 };
-static const char dmenufont[]       = "mononoki:size=10";
+static const char dmenufont[]       = "mononoki:size=12";
 static const char normbordercolor[] = "#2d2d2d";
 static const char normbgcolor[]     = "#2d2d2d";
 static const char normfgcolor[]     = "#FFFFFF";
@@ -44,7 +44,6 @@ static const Rule rules[] = {
 	{ "QQ.exe",  NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Chromium",  "chromium",       NULL,       1 << 1,       0,           -1 },
 	{ "Tilda",  NULL,       NULL,       NULL,       0,           -1 },
-	{ "qTox",  NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */

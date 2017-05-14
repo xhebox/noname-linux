@@ -72,6 +72,8 @@ lib/pkgconfig/libdrm_radeon.pc|644|0|0|regular file
 lib/pkgconfig/libkms.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory
+share/libdrm/amdgpu.ids|644|0|0|regular file
+share/libdrm|755|0|0|directory
 share/man/man3/drmAvailable.3.gz|644|0|0|regular file
 share/man/man3/drmHandleEvent.3.gz|644|0|0|regular file
 share/man/man3/drmModeGetResources.3.gz|644|0|0|regular file

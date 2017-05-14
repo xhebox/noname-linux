@@ -4,16 +4,11 @@ desc="lightweight replacements of the gnu gettext"
 
 ext(){
 	git clone https://github.com/sabotage-linux/gettext-tiny
+	cd gettext-tiny
 }
 
 build(){
 	cd gettext-tiny
-	PKG_NO_STRIP=yes
-	make CFLAGS="-O0 -g2" || die
-	make -j1 DESTDIR=$pkgdir prefix=/ install  || die
-	rm "$pkgdir"/lib/libintl.a
-	rm "$pkgdir"/bin/autopoint
-	rm "$pkgdir"/bin/msgmerge
-	rm "$pkgdir"/bin/xgettext
-	rm "$pkgdir"/include/libintl.h
+	make LIBINTL=MUSL -j1 prefix=/ || die
+	make LIBINTL=MUSL -j1 DESTDIR=$pkgdir prefix=/ install  || die
 }

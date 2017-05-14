@@ -1,0 +1,26 @@
+name=mlocate
+version=0.26
+desc='Merging locate/updatedb implementation'
+deps="musl"
+_commit=596d4ad222328e8bae7a00cc489a9f862edc82fb #tag=upstream/0.26
+source="updatedb.conf"
+
+ext() {
+	git clone https://anonscm.debian.org/cgit/collab-maint/mlocate
+	cd mlocate
+	git reset --hard $_commit
+	sed -i '/^groupname /s/mlocate/locate/' Makefile.in
+}
+
+build() {
+	cd mlocate
+	./configure --prefix= --sysconfdir=/etc --localstatedir=/var/lib
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+	chgrp 21 "${pkgdir}/bin/locate"
+	chmod 2755 "${pkgdir}/bin/locate"
+	ln -s locate "${pkgdir}/bin/slocate"
+	install -dm755 "${pkgdir}/var/lib"
+	install -dm750 -g21 "${pkgdir}/var/lib/locate"
+	install -Dm644 ../updatedb.conf "${pkgdir}/etc/updatedb.conf"
+}

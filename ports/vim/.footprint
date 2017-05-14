@@ -250,6 +250,7 @@ share/vim/doc/tabpage.txt|644|0|0|regular file
 share/vim/doc/tagsrch.txt|644|0|0|regular file
 share/vim/doc/tags|644|0|0|regular file
 share/vim/doc/term.txt|644|0|0|regular file
+share/vim/doc/terminal.txt|644|0|0|regular file
 share/vim/doc/tips.txt|644|0|0|regular file
 share/vim/doc/todo.txt|644|0|0|regular file
 share/vim/doc/uganda.txt|644|0|0|regular file
@@ -461,6 +462,7 @@ share/vim/ftplugin/rst.vim|644|0|0|regular file
 share/vim/ftplugin/ruby.vim|644|0|0|regular file
 share/vim/ftplugin/rust.vim|644|0|0|regular file
 share/vim/ftplugin/sass.vim|644|0|0|regular file
+share/vim/ftplugin/sbt.vim|644|0|0|regular file
 share/vim/ftplugin/scala.vim|644|0|0|regular file
 share/vim/ftplugin/scheme.vim|644|0|0|regular file
 share/vim/ftplugin/screen.vim|644|0|0|regular file
@@ -1400,6 +1402,7 @@ share/vim/syntax/msidl.vim|644|0|0|regular file
 share/vim/syntax/msmessages.vim|644|0|0|regular file
 share/vim/syntax/msql.vim|644|0|0|regular file
 share/vim/syntax/mupad.vim|644|0|0|regular file
+share/vim/syntax/murphi.vim|644|0|0|regular file
 share/vim/syntax/mush.vim|644|0|0|regular file
 share/vim/syntax/muttrc.vim|644|0|0|regular file
 share/vim/syntax/mysql.vim|644|0|0|regular file
@@ -1503,6 +1506,7 @@ share/vim/syntax/samba.vim|644|0|0|regular file
 share/vim/syntax/sas.vim|644|0|0|regular file
 share/vim/syntax/sass.vim|644|0|0|regular file
 share/vim/syntax/sather.vim|644|0|0|regular file
+share/vim/syntax/sbt.vim|644|0|0|regular file
 share/vim/syntax/scala.vim|644|0|0|regular file
 share/vim/syntax/scheme.vim|644|0|0|regular file
 share/vim/syntax/scilab.vim|644|0|0|regular file

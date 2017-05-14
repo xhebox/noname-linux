@@ -1,0 +1,33 @@
+bin/ebtables-restore|755|0|0|regular file
+bin/ebtables-save|755|0|0|regular file
+bin/ebtables|755|0|0|regular file
+bin|755|0|0|directory
+etc/ebtables.conf|644|0|0|regular empty file
+etc|755|0|0|directory
+lib/libebt_802_3.so|755|0|0|regular file
+lib/libebt_among.so|755|0|0|regular file
+lib/libebt_arp.so|755|0|0|regular file
+lib/libebt_arpreply.so|755|0|0|regular file
+lib/libebt_ip.so|755|0|0|regular file
+lib/libebt_ip6.so|755|0|0|regular file
+lib/libebt_limit.so|755|0|0|regular file
+lib/libebt_log.so|755|0|0|regular file
+lib/libebt_mark.so|755|0|0|regular file
+lib/libebt_mark_m.so|755|0|0|regular file
+lib/libebt_nat.so|755|0|0|regular file
+lib/libebt_nflog.so|755|0|0|regular file
+lib/libebt_pkttype.so|755|0|0|regular file
+lib/libebt_redirect.so|755|0|0|regular file
+lib/libebt_standard.so|755|0|0|regular file
+lib/libebt_stp.so|755|0|0|regular file
+lib/libebt_ulog.so|755|0|0|regular file
+lib/libebt_vlan.so|755|0|0|regular file
+lib/libebtable_broute.so|755|0|0|regular file
+lib/libebtable_filter.so|755|0|0|regular file
+lib/libebtable_nat.so|755|0|0|regular file
+lib/libebtc.so|755|0|0|regular file
+lib|755|0|0|directory
+share/man/man8/ebtables.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

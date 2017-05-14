@@ -1,6 +1,7 @@
 bin/fuser|755|0|0|regular file
 bin/killall|755|0|0|regular file
 bin/prtstat|755|0|0|regular file
+bin/pslog|755|0|0|regular file
 bin/pstree.x11|777|0|0|symbolic link
 bin/pstree|755|0|0|regular file
 bin|755|0|0|directory
@@ -93,6 +94,7 @@ share/man/man1/fuser.1.gz|644|0|0|regular file
 share/man/man1/killall.1.gz|644|0|0|regular file
 share/man/man1/peekfd.1.gz|644|0|0|regular file
 share/man/man1/prtstat.1.gz|644|0|0|regular file
+share/man/man1/pslog.1.gz|644|0|0|regular file
 share/man/man1/pstree.1.gz|644|0|0|regular file
 share/man/man1|755|0|0|directory
 share/man|755|0|0|directory

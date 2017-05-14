@@ -1,0 +1,20 @@
+name=yaml-cpp
+version=0.5.3
+desc="YAML parser and emitter in C++, written around the YAML 1.2 spec"
+deps="boost cmake"
+source="https://github.com/jbeder/yaml-cpp/archive/release-${version}.tar.gz
+500db60f899ae6845039d4eca503133d0db81dbd.patch
+1f4b6d5c855b59e849b7228090981c520928c2a4.patch"
+
+ext() {
+	cd yaml-cpp-release-$version
+	patch -Np1 < $srcdir/500db60f899ae6845039d4eca503133d0db81dbd.patch || die
+	patch -Np1 < $srcdir/1f4b6d5c855b59e849b7228090981c520928c2a4.patch || die
+}
+
+build() {
+	cd yaml-cpp-release-$version
+	cmake . -DCMAKE_INSTALL_PREFIX= -DBUILD_SHARED_LIBS=ON
+	make || die
+	make DESTDIR=$pkgdir install || die
+}

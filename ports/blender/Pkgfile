@@ -1,8 +1,8 @@
 name=blender
 version=2.78c
 desc="3D Creation/Animation/Publishing System"
-#deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo gettext libx11 libxi libxxf86vm mesa llvm openal openshadinglanguage"
-deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo gettext libx11 libxi libxxf86vm mesa llvm openal"
+#deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo libx11 libxi libxxf86vm mesa llvm openal openshadinglanguage"
+deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo libx11 libxi libxxf86vm mesa llvm openal"
 source="http://download.blender.org/source/blender-${version}.tar.gz
 musl.patch"
 

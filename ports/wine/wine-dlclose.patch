@@ -13,153 +13,54 @@
      dnl Check for the presence of OpenGL
      opengl_msg=""
      if test "x$with_opengl" != "xno"
---- a/include/winternl.h	2017-01-16 00:39:34.000000000 +0000
-+++ b/include/winternl.h	2017-01-16 00:39:34.000000000 +0000
-@@ -2095,6 +2095,9 @@
-     UNICODE_STRING      BaseDllName;
-     ULONG               Flags;
-     SHORT               LoadCount;
+--- a/dlls/ntdll/loader.c
++++ b/dlls/ntdll/loader.c
+@@ -2289,6 +2289,13 @@
+             if (mod->Flags & LDR_WINE_INTERNAL && mod->SectionHandle == handle)
+             {
+                 info.wm = CONTAINING_RECORD(mod, WINE_MODREF, ldr);
 +#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+    SHORT               UnLoadCount;
++                if (info.wm->ldr.LoadCount == 0) {
++                    RtlEnterCriticalSection( &loader_section );
++                    info.wm->ldr.LoadCount = 1;
++                    RtlLeaveCriticalSection( &loader_section );
++                }
 +#endif
-     SHORT               TlsIndex;
-     HANDLE              SectionHandle;
-     ULONG               CheckSum;
---- a/dlls/ntdll/loader.c	2017-01-27 06:56:42.057449375 +0000
-+++ b/dlls/ntdll/loader.c	2017-01-27 06:56:42.057449375 +0000
-@@ -1046,6 +1046,9 @@
-     wm->ldr.Flags         = LDR_DONT_RESOLVE_REFS;
-     wm->ldr.TlsIndex      = -1;
-     wm->ldr.LoadCount     = 1;
-+#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+    wm->ldr.UnLoadCount   = 0;
-+#endif
-     wm->ldr.SectionHandle = NULL;
-     wm->ldr.CheckSum      = 0;
-     wm->ldr.TimeDateStamp = 0;
-@@ -3095,9 +3095,34 @@
+                 TRACE( "Found %s at %p for builtin %s\n",
+                        debugstr_w(info.wm->ldr.FullDllName.Buffer), info.wm->ldr.BaseAddress, debugstr_w(path) );
+                 break;
+@@ -3199,6 +3199,9 @@
   *		LdrShutdownProcess (NTDLL.@)
   *
   */
-+static void free_modref( WINE_MODREF *wm );
++#ifdef NO_UNLOAD_AFTER_DLCLOSE
++static void MODULE_FlushModrefs(void);
++#endif
  void WINAPI LdrShutdownProcess(void)
  {
      TRACE("()\n");
+@@ -3194,6 +3203,12 @@
+     TRACE("()\n");
 +#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+    PLIST_ENTRY entry, mark, prev;
-+    PLDR_MODULE mod;
-+    WINE_MODREF*wm;
-+
-+    mark = &NtCurrentTeb()->Peb->LdrData->InInitializationOrderModuleList;
-+    for (entry = mark->Blink; entry != mark; entry = prev)
-+    {
-+        mod = CONTAINING_RECORD(entry, LDR_MODULE, InInitializationOrderModuleList);
-+        wm = CONTAINING_RECORD(mod, WINE_MODREF, ldr);
-+        prev = entry->Blink;
-+        if (mod->UnLoadCount) free_modref( wm );
-+    }
-+
-+    /* check load order list too for modules that haven't been initialized yet */
-+    mark = &NtCurrentTeb()->Peb->LdrData->InLoadOrderModuleList;
-+    for (entry = mark->Blink; entry != mark; entry = prev)
-+    {
-+        mod = CONTAINING_RECORD(entry, LDR_MODULE, InLoadOrderModuleList);
-+        wm = CONTAINING_RECORD(mod, WINE_MODREF, ldr);
-+        prev = entry->Blink;
-+        if (mod->UnLoadCount) free_modref( wm );
-+    }
++    RtlEnterCriticalSection( &loader_section );
++    process_detach();
++    MODULE_FlushModrefs();
++    RtlLeaveCriticalSection( &loader_section );
 +#endif
      process_detaching = TRUE;
      process_detach();
  }
-@@ -3135,6 +3135,30 @@
  
-     RtlEnterCriticalSection( &loader_section );
  
+@@ -3384,7 +3398,11 @@
+         if ( free_lib_count <= 1 )
+         {
 +#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+    PLIST_ENTRY prev;
-+    WINE_MODREF*wm;
-+
-+    mark = &NtCurrentTeb()->Peb->LdrData->InInitializationOrderModuleList;
-+    for (entry = mark->Blink; entry != mark; entry = prev)
-+    {
-+        mod = CONTAINING_RECORD(entry, LDR_MODULE, InInitializationOrderModuleList);
-+        wm = CONTAINING_RECORD(mod, WINE_MODREF, ldr);
-+        prev = entry->Blink;
-+        if (mod->UnLoadCount) free_modref( wm );
-+    }
-+
-+    /* check load order list too for modules that haven't been initialized yet */
-+    mark = &NtCurrentTeb()->Peb->LdrData->InLoadOrderModuleList;
-+    for (entry = mark->Blink; entry != mark; entry = prev)
-+    {
-+        mod = CONTAINING_RECORD(entry, LDR_MODULE, InLoadOrderModuleList);
-+        wm = CONTAINING_RECORD(mod, WINE_MODREF, ldr);
-+        prev = entry->Blink;
-+        if (mod->UnLoadCount) free_modref( wm );
-+    }
++            TRACE("apply no-op dlclose hacks on this platform\n");
++#else
+             process_detach();
+             MODULE_FlushModrefs();
 +#endif
-+
-     mark = &NtCurrentTeb()->Peb->LdrData->InInitializationOrderModuleList;
-     for (entry = mark->Blink; entry != mark; entry = entry->Blink)
-     {
-@@ -3233,6 +3233,39 @@
- }
+         }
  
-+#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+/***********************************************************************
-+ *           MODULE_IncRefCount
-+ *
-+ * The loader_section must be locked while calling this function.
-+ */
-+static void MODULE_IncRefCount( WINE_MODREF *wm )
-+{
-+    int i;
-+
-+    if ( wm->ldr.Flags & LDR_UNLOAD_IN_PROGRESS )
-+        return;
-+
-+    if ( wm->ldr.UnLoadCount > 0 )
-+        return;
-+
-+    ++wm->ldr.UnLoadCount;
-+    TRACE("(%s) ldr.UnLoadCount: %d\n", debugstr_w(wm->ldr.BaseDllName.Buffer), wm->ldr.UnLoadCount );
-+
-+    if ( wm->ldr.UnLoadCount == 1 )
-+    {
-+        wm->ldr.Flags |= LDR_UNLOAD_IN_PROGRESS;
-+
-+        for ( i = 0; i < wm->nDeps; i++ )
-+            if ( wm->deps[i] ) {
-+       	 MODULE_IncRefCount( wm );
-+	     }
-+
-+        wm->ldr.Flags &= ~LDR_UNLOAD_IN_PROGRESS;
-+    }
-+}
-+#endif
-+
- /***********************************************************************
-  *           MODULE_DecRefCount
-  *
-  * The loader_section must be locked while calling this function.
---- wine32/dlls/ntdll/loader.c
-+++ wine32/dlls/ntdll/loader.c
-@@ -3326,6 +3326,17 @@
-     if ( wm->ldr.LoadCount <= 0 )
-         return;
- 
-+#ifdef NO_UNLOAD_AFTER_DLCLOSE
-+    WCHAR env[512] = { 's','x','s','.','d','l','l','|','u','r','l','m','o','n','.','d','l','l','|','m','s','i','s','i','p','.','d','l','l','|','a','d','v','p','a','c','k','.','d','l','l','|','m','s','c','o','r','e','e','.','d','l','l','|','f','u','s','i','o','n','.','d','l','l','|','m','s','v','c','r','t','.','d','l','l','|','s','e','c','u','r','3','2','.','d','l','l','|','d','h','c','p','c','s','v','c','.','d','l','l',0 };
-+    char *env_p = getenv("WINE_DLL_NOUNLOAD");
-+    if (env_p) wine_utf8_mbstowcs(0, env_p, strlen(env_p), env, 512);
-+    TRACE("NOUNLOAD: %s, DLL: %s\n", debugstr_w(env), debugstr_w(wm->ldr.BaseDllName.Buffer));
-+    if ( strstrW(env, wm->ldr.BaseDllName.Buffer) != NULL ) {
-+        TRACE("%s: apply nounload hacks on this platform\n", debugstr_w(wm->ldr.BaseDllName.Buffer));
-+        MODULE_IncRefCount(wm);
-+	 return;
-+    }
-+#endif
-     --wm->ldr.LoadCount;
-     TRACE("(%s) ldr.LoadCount: %d\n", debugstr_w(wm->ldr.BaseDllName.Buffer), wm->ldr.LoadCount );
- 
+         TRACE("END\n");

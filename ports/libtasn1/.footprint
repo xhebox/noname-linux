@@ -5,7 +5,7 @@ bin|755|0|0|directory
 include/libtasn1.h|644|0|0|regular file
 include|755|0|0|directory
 lib/libtasn1.a|644|0|0|regular file
-lib/libtasn1.so.6.5.3|755|0|0|regular file
+lib/libtasn1.so.6.5.4|755|0|0|regular file
 lib/libtasn1.so.6|777|0|0|symbolic link
 lib/libtasn1.so|777|0|0|symbolic link
 lib/pkgconfig/libtasn1.pc|644|0|0|regular file

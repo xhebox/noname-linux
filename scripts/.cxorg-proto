@@ -7,13 +7,13 @@ tfff=0
 for i in ${list%EOF*}; do
 	echo "$source" | grep -q -F "$i" || {
 		sed -i -r "/${i%-*}.+tar.+/d" ../ports/xorg-proto/Pkgfile
-		sed -i "s/source=\"/&\n$i/g" ../ports/xorg-proto/Pkgfile
+		sed -i "s/source=\"/&\nhttp\:\/\/www\.x\.org\/archive\/individual\/proto\/$i/g" ../ports/xorg-proto/Pkgfile
 		rm ../ports/xorg-proto/*${i%-*}*tar*
 		tfff=1
 	}
 done
 [ "$tfff" -eq 1 ] && {
-	pkg -Muf xorg-proto
+	pkg -Ue xorg-proto
 	pkg -M xorg-proto
 	pkg -S xorg-proto
 }

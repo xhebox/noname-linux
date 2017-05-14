@@ -1,5 +1,5 @@
 name=libsass
-version=3.4.3
+version=3.4.5
 desc="C implementation of Sass CSS preprocessor"
 deps=musl
 source="https://github.com/sass/libsass/archive/${version}.tar.gz"

@@ -1,5 +1,5 @@
 name=x264
-version=148.20170121
+version=148.20170521
 deps="perl yasm l-smash"
 desc="Free library for encoding H264/AVC video streams"
 _commit='97eaef2ab82a46d13ea5e00270712d6475fbe42b'

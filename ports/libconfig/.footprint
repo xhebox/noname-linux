@@ -1,6 +1,11 @@
 include/libconfig.h++|644|0|0|regular file
 include/libconfig.h|644|0|0|regular file
 include|755|0|0|directory
+lib/cmake/libconfig++/libconfig++Config.cmake|644|0|0|regular file
+lib/cmake/libconfig++|755|0|0|directory
+lib/cmake/libconfig/libconfigConfig.cmake|644|0|0|regular file
+lib/cmake/libconfig|755|0|0|directory
+lib/cmake|755|0|0|directory
 lib/libconfig++.a|644|0|0|regular file
 lib/libconfig++.so.9.2.0|755|0|0|regular file
 lib/libconfig++.so.9|777|0|0|symbolic link
@@ -13,6 +18,5 @@ lib/pkgconfig/libconfig++.pc|644|0|0|regular file
 lib/pkgconfig/libconfig.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory
-share/info/libconfig.info|644|0|0|regular file
 share/info|755|0|0|directory
 share|755|0|0|directory

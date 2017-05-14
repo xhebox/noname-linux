@@ -1,5 +1,5 @@
 name=gnutls
-version=3.5.11
+version=3.5.14
 desc="A library that provides a secure layer over a reliable transport layer"
 source="http://www.ring.gr.jp/pub/net/gnupg/$name/v${version%.*}/$name-${version}.tar.xz"
 deps="nettle libgmp zlib libtasn1 p11-kit libidn"

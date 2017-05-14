@@ -1,7 +1,7 @@
 name=sdl2
 version=2.0.5
 desc="A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard (Version 2)"
-deps="musl libxext libxrender libx11 mesa libxcursor dbus pulseaudio"
+deps="libxext libxrender libx11 mesa libxcursor dbus pulseaudio"
 source="http://www.libsdl.org/release/SDL2-${version}.tar.gz"
 
 

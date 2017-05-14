@@ -1,7 +1,7 @@
 name=cairo
-version=1.14.8
+version=1.14.10
 desc="A 2D graphics library with support for multiple output devices"
-deps="fontconfig libpng pixman libx11 libxcb libxrender libjpeg-turbo libxext glib lzo"
+deps="libpng pixman libx11 libxcb libxrender libjpeg-turbo libxext glib lzo"
 source="https://cairographics.org/releases/$name-$version.tar.xz
 "
 
@@ -30,6 +30,6 @@ build() {
 		--enable-pdf \
 		--enable-gobject \
                 --disable-gtk-doc
-        make
-        make DESTDIR="$pkgdir" install
+        make || die
+        make DESTDIR="$pkgdir" install || die
 }

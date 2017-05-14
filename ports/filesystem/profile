@@ -1,7 +1,7 @@
 # /etc/profile
 
 umask 022
-PATH="/bin:/sbin"
+PATH="/bin:/sbin:~/.local/bin"
 export PATH
 MANPATH=/share/man
 export MANPATH

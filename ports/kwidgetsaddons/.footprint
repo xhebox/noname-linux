@@ -150,7 +150,7 @@ lib/cmake/KF5WidgetsAddons/KF5WidgetsAddonsTargets-release.cmake|644|0|0|regular
 lib/cmake/KF5WidgetsAddons/KF5WidgetsAddonsTargets.cmake|644|0|0|regular file
 lib/cmake/KF5WidgetsAddons|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5WidgetsAddons.so.5.33.0|755|0|0|regular file
+lib/libKF5WidgetsAddons.so.5.36.0|755|0|0|regular file
 lib/libKF5WidgetsAddons.so.5|777|0|0|symbolic link
 lib/libKF5WidgetsAddons.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KWidgetsAddons.pri|644|0|0|regular file

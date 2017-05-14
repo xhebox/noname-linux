@@ -1,5 +1,5 @@
 name=xterm
-version=327
+version=330
 desc="X Terminal Emulator"
 deps="xorg-app libxkbfile libxaw libxft ncurses"
 source="ftp://invisible-island.net/$name/$name-$version.tgz
@@ -34,6 +34,7 @@ build() {
 	--enable-narrowproto \
 	--enable-exec-xterm \
 	--enable-sixel-graphics \
+	--enable-regis-graphics \
 	--with-tty-group=tty \
 	--with-utempter
 

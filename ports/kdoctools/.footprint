@@ -13,7 +13,7 @@ lib/cmake/KF5DocTools/KF5DocToolsTargets-release.cmake|644|0|0|regular file
 lib/cmake/KF5DocTools/KF5DocToolsTargets.cmake|644|0|0|regular file
 lib/cmake/KF5DocTools|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5DocTools.so.5.33.0|755|0|0|regular file
+lib/libKF5DocTools.so.5.36.0|755|0|0|regular file
 lib/libKF5DocTools.so.5|777|0|0|symbolic link
 lib/libKF5DocTools.so|777|0|0|symbolic link
 lib|755|0|0|directory
