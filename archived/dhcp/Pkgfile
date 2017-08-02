@@ -1,0 +1,37 @@
+version="4.4.1"
+desc="A DHCP server, client, and relay agent"
+makedeps=["iproute2"]
+deps=["musl", "bash", "iproute2"]
+backs=["etc/dhcpd.conf", "etc/dhcpd6.conf"]
+source=[
+	{url="http://ftp.isc.org/isc/dhcp/${version}/dhcp-${version}.tar.gz"},
+	{url="0002-iproute2.patch"},
+	{url="dhcp-sysusers.conf"},
+	{url="dhcp-tmpfiles.conf"},
+	{url="dhclient.conf"},
+]
+
+ext='''
+	cd dhcp-${version}
+	patch -p1 -i ../0002-iproute2.patch
+'''
+
+build='''
+	cd dhcp-${version}
+	./configure \
+		--prefix=/ \
+		--sbindir=/bin \
+		--sysconfdir=/etc \
+		--enable-binary-leases \
+		--enable-paranoia \
+		--with-srv-lease-file=/var/lib/dhcp/dhcpd.leases \
+		--with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
+		--with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
+		--with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases
+
+	make -j1
+	make DESTDIR="${pkgdir}" install
+	install -D -m644 ../dhcp-sysusers.conf "${pkgdir}/lib/sysusers.d/dhcp.conf"
+	install -D -m644 ../dhcp-tmpfiles.conf "${pkgdir}/lib/tmpfiles.d/dhcp.conf"
+	install -D -m644 ../dhclient.conf "${pkgdir}/etc/finit.d/dhclient.conf"
+'''

@@ -1,37 +1,20 @@
-name=cmake
-version=3.8.2
-deps="ncurses expat curl zlib bzip2 xz libarchive"
+version="3.13.2"
+makedeps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
+deps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv", "shared-mime-info"]
 desc="CMake is a cross-platform open-source make system"
-case $version in
-*.*.*.*) _v=v${version%.*.*};;
-*.*.*) _v=v${version%.*};;
-esac
-source="http://www.cmake.org/files/$_v/cmake-${version}.tar.gz
-cmake-isystem.patch"
+source=[
+	{url="https://www.cmake.org/files/v${version%.*}/cmake-${version}.tar.gz"},
+	{url="cmake-isystem.patch"},
+]
 
-parallel_opt(){
-    local i n
-    for i in $MAKEFLAGS;do
-        case "$i" in
-            -j*) n=${i#-j};;
-        esac;
-    done
-    [ -n "$n" ] && echo "--parallel=$n"
-}
-
-build() {
-	cd $name-$version
-	patch -p1 < ../cmake-isystem.patch || die
+build='''
+	cd cmake-$version
+	patch -p1 < ../cmake-isystem.patch
 	./configure \
 		--prefix= \
-		--system-curl \
-		--system-expat \
+		--system-libs \
 		--no-system-jsoncpp \
-		--system-zlib \
-		--system-bzip2 \
-		--system-libarchive \
-		$(parallel_opt)
-	make || die
-	make DESTDIR="$pkgdir" install || die
-	rm -r "$pkgdir"/doc
-}
+		--no-system-librhash
+	make
+	make DESTDIR="$pkgdir" install
+'''

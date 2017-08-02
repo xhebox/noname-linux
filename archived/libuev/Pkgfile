@@ -1,0 +1,12 @@
+version="2.2.0"
+deps=["musl"]
+desc="init's dependence"
+source=[{url="https://github.com/troglobit/libuev/releases/download/v$version/libuev-$version.tar.xz"}]
+
+build='''
+	cd libuev-$version
+	./configure --prefix=/ --sbindir=/bin --disable-static 
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

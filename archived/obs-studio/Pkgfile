@@ -1,0 +1,21 @@
+name=obs-studio
+version=21.1.2
+deps="qt5-x11extras ffmpeg jansson libxinerama libxkbcommon curl pulseaudio x264 libxcomposite luajit"
+desc="Free, open source software for live streaming and recording"
+source="https://github.com/jp9000/obs-studio/archive/$version.tar.gz"
+
+build() {
+	cd obs-studio-$version
+	sed -i '15i #include <QAction>' UI/frontend-plugins/frontend-tools/scripts.cpp
+	mkdir -p build; cd build
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		..
+	make
+	make DESTDIR="$pkgdir" install
+	mv "$pkgdir"/usr/share/* "$pkgdir"/share
+	rmdir "$pkgdir"/usr/share
+	rmdir "$pkgdir"/usr
+	chmod 755 "$pkgdir"/bin
+	chmod 755 "$pkgdir"/lib
+}

@@ -1,13 +1,11 @@
-name=p7zip
-version=16.02
+version="16.02"
 desc="Command-line version of the 7zip compressed file archive"
-deps="yasm nasm"
-source="https://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version}_src_all.tar.bz2"
+makedeps=["nasm"]
+source=[{url="https://nchc.dl.sourceforge.net/project/p7zip/p7zip/$version/p7zip_${version}_src_all.tar.bz2"}]
 
-build() {
-	cd ${name}_$version
+build='''
+	cd p7zip_$version
 	cp makefile.linux_amd64_asm makefile.machine
-	make all3 OPTFLAGS="$CFLAGS" $MAKEFLAGS || die
-	make DEST_DIR="$pkgdir" DEST_HOME=/ DEST_MAN=/share/man install || die
-	rm -r "$pkgdir"/share/doc
-}
+	make all3 OPTFLAGS="$CFLAGS" $MAKEFLAGS
+	make DEST_DIR="$pkgdir" DEST_HOME=/ DEST_MAN=/share/man install
+'''

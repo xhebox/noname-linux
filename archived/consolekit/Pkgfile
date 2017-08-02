@@ -1,0 +1,28 @@
+name=consolekit
+version=1.2.1
+desc="A framework for defining and tracking users, login sessions, and seats"
+deps="dbus glib libx11 eudev zlib acl xmlto"
+source="https://github.com/ConsoleKit2/ConsoleKit2/releases/download/$version/ConsoleKit2-$version.tar.bz2"
+
+build(){
+	cd $srcdir/ConsoleKit2-$version
+
+	./configure  \
+		--prefix= \
+		--sysconfdir=/etc \
+		--sbindir=/bin \
+		--with-rundir=/run \
+		--libexecdir=/lib/ConsoleKit \
+		--localstatedir=/var \
+		--enable-polkit \
+		--enable-udev-acl \
+		--with-dbus-services=/share/dbus-1/services \
+		--with-xinitrc-dir=/etc/X11/xinit/xinitrc.d \
+		--with-pam-module-dir=/lib/security \
+		--without-systemdsystemunitdir \
+		--disable-cgroups
+
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm -rf "${pkgdir}"/run
+}

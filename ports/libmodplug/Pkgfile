@@ -1,12 +1,11 @@
-name=libmodplug
-version=0.8.9.0
+version="0.8.9.0"
 desc="A MOD playing library"
-deps="musl"
-source="http://downloads.sourceforge.net/modplug-xmms/${name}-${version}.tar.gz"
+deps=["musl"]
+source=[{url="http://nchc.dl.sourceforge.net/modplug-xmms/${name}-${version}.tar.gz"}]
 
-build() {
+build='''
 	cd libmodplug-$version
 	./configure --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

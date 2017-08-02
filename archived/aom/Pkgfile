@@ -1,0 +1,15 @@
+version="1.0.0"
+makedeps=["yasm"]
+desc="Alliance for Open Media video codec"
+source=[{url="https://aomedia.googlesource.com/aom/+archive/d14c5bb4f336ef1842046089849dee4a301fbbf0.tar.gz"}]
+
+build='''
+	mkdir aombuild
+	cd aombuild
+	cmake -G Ninja .. \
+		-DCMAKE_INSTALL_PREFIX=" " \
+		-DBUILD_SHARED_LIBS=1 \
+		-DENABLE_TESTS=0
+	ninja
+	DESTDIR=$pkgdir ninja install
+'''

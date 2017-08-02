@@ -1,17 +1,14 @@
-name=usbutils
-version=008
+version="010"
 desc="USB Device Utilities"
-deps="libusb eudev hwids"
-source="http://www.kernel.org/pub/linux/utils/usb/usbutils/${name}-${version}.tar.xz
-fix-python2.patch"
+makedeps=["libusb", "hwids"]
+deps=["libusb", "hwids"]
+source=[{url="http://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz"}]
 
-build() {
-	cd $name-$version
-	patch -Np1 -i $srcdir/fix-python2.patch 
+build='''
+	cd usbutils-$version
 	./configure --prefix=/ --datadir=/share/hwdata --disable-zlib --without-python 
-	make  || die
-	make DESTDIR=$pkgdir install  || die
+	make
+	make DESTDIR=$pkgdir install
 	rm -rf $pkgdir/share/hwdata
 	rm -rf $pkgdir/share/sbin
-}
-
+'''

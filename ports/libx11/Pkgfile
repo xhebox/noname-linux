@@ -1,18 +1,16 @@
-name=libx11
-version=1.6.5
+version="1.6.7"
 desc="X client library"
-deps="xorg-proto xtrans libxcb perl"
-source="http://xorg.freedesktop.org/releases/individual/lib/libX11-$version.tar.bz2"
+makedeps=["xtrans", "xorgproto", "libxcb", "util-macros"]
+deps=["libxcb"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libX11-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libX11-$version
 
 	./configure --prefix= \
 	--enable-ipv6 --enable-xlocaledir --without-xmlto \
 	--disable-secure-rpc --disable-static --enable-malloc0returnsnul
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-
-	rm -r "$pkgdir"/share/doc
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

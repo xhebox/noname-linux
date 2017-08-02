@@ -1,0 +1,10 @@
+--- sddm-0.17.0/src/helper/HelperApp.cpp	2017-12-05 16:00:16.000000000 +0000
++++ sddm-0.17.0/src/helper/HelperApp.cpp	2017-12-05 16:00:16.000000000 +0000
+@@ -32,6 +32,7 @@
+ 
+ #include <iostream>
+ #include <unistd.h>
++#include <sys/time.h>
+ #include <sys/socket.h>
+ 
+ #include <utmp.h>

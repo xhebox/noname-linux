@@ -1,23 +1,20 @@
-name=attr
-version=2.4.47
+version="2.4.48"
 desc="Extented attributes library"
-source="http://download-mirror.savannah.gnu.org/releases/$name/$name-$version.src.tar.gz
-attr-2.4.46-ifdef_cplusplus.patch
-attr-2.4.47-fix-missing-sys_types_h.patch
-"
-deps="musl"
+deps=["musl"]
+source=[{url="http://download-mirror.savannah.gnu.org/releases/attr/attr-$version.tar.gz"}]
 
-ext() {
-	cd $name-$version
+ext='''
+	cd attr-$version
 	for i in $source;do
+		echo $i
 		case $i in
-		*patch) patch -p1 < ../$i || die;;
+		*patch) patch -p1 < ../$i;;
 		esac
 	done
-}
+'''
 
-build() {
-	cd $name-$version
+build='''
+	cd attr-$version
 	unset PLATFORM #184564
 	export DEBUG=-DNDEBUG
 	export OPTIMIZER="$CFLAGS"
@@ -30,7 +27,6 @@ build() {
 		--enable-gettext \
 		--enable-nls \
 		--libexecdir=/lib 
-	make  || die
-	make -j1 DIST_ROOT="$pkgdir" install install-lib install-dev  || die
-	rm -r "$pkgdir"/share/doc 
-}
+	make
+	make -j1 DESTDIR="$pkgdir" install
+'''

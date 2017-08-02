@@ -1,15 +1,14 @@
-name=libfontenc
-version=1.1.3
+version="1.1.3"
 desc="xorg lib libfontenc"
-deps="xorg-proto zlib"
-source="http://xorg.freedesktop.org/releases/individual/lib/libfontenc-$version.tar.bz2"
+deps=["zlib"]
+makedeps=["xorgproto", "zlib"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libfontenc-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libfontenc-$version
 
-	./configure --prefix= --disable-static
+	./configure --prefix= --disable-static --with-encodingsdir=/share/fonts/encodings 
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

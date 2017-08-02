@@ -1,0 +1,6 @@
+pattern=["share/man"]
+noarg=true
+script='''
+mkdir -p /var/cache/man
+mandb -q
+'''

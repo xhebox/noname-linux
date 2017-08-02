@@ -1,0 +1,31 @@
+. ../dbus/Pkgfile
+name=dbus-32
+deps="expat-32 python util-linux-32 autoconf automake libtool libsm-32 xmlto"
+
+build() {
+  cd dbus-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static \
+  --target=$TARGET32 \
+  --libdir=/lib32 \
+  --libexecdir=/lib32 \
+  --with-dbus-user=dbus \
+  --with-system-pid-file=/run/dbus/dbus-daemon.pid \
+  --with-system-socket=/run/dbus/system_bus_socket \
+  --with-console-auth-dir=/run/console/ \
+  --disable-verbose-mode \
+  --enable-user-session \
+  --enable-inotify \
+  --disable-dnotify \
+  --disable-tests \
+  --disable-asserts
+  make
+  make -j1 DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/etc
+  rm -rf "$pkgdir"/var
+  rm -r "$pkgdir"/bin
+}

@@ -1,0 +1,21 @@
+name=spice-gtk
+version=0.34
+deps="automake libtool intltool glib spice-protocol acl pixman libressl gtk3 libjpeg-turbo spice-protocol hwids pulseaudio gobject-introspection"
+source="http://spice-space.org/download/gtk/${name}-${version}.tar.bz2"
+desc="GTK+ SPICE widget"
+
+build() {
+	cd spice-gtk-$version
+
+	./configure --prefix=/ \
+		--datarootdir=/lib \
+		--localedir=/share/locale \
+		--with-gtk=3.0 \
+		--enable-pulse \
+		--with-coroutine=gthread --sbindir=/bin \
+		--disable-smartcard \
+		--disable-static --disable-celt051
+
+	make
+	make DESTDIR=$pkgdir install
+}

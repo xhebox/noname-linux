@@ -1,0 +1,11 @@
+name=liblogging
+version=1.0.6
+desc="easy to use, portable, open source library for system logging"
+source="http://download.rsyslog.com/liblogging/liblogging-$version.tar.gz"
+
+build() {
+	cd liblogging-$version
+	./configure --prefix=
+	make
+	make install DESTDIR="$pkgdir"
+}

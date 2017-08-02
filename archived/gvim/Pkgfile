@@ -1,0 +1,34 @@
+. ../vim/Pkgfile
+conflicts=vim
+name=gvim
+deps="acl ncurses gzip acl perl python gtk3 libxt ruby"
+
+build() {
+	cd vim*/src
+
+	./configure \
+		--prefix=/ \
+								--with-features=huge \
+								--with-vim-name=vim \
+								--with-x=yes \
+		--enable-gui=gtk3 \
+		--enable-acl \
+								--enable-multibyte \
+		--enable-perlinterp=dynamic \
+		--enable-pythoninterp=dynamic \
+								--enable-cscope \
+		--enable-nls \
+								--enable-gpm 
+
+	make VIMRTDIR= 
+	make -j1 VIMRTDIR= DESTDIR="$pkgdir" install
+	rm -r "$pkgdir"/share/man/??
+	rm -r "$pkgdir"/share/man/??.*
+	rm "$pkgdir"/share/vim/*/README.txt
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/ex.1.gz
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/vi.1.gz
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/rvim.1.gz
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/view.1.gz
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/rview.1.gz
+	ln -sf vim.1.gz "$pkgdir"/share/man/man1/gvim.1.gz
+}

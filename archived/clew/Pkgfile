@@ -1,0 +1,15 @@
+name=clew
+version=git
+deps=cmake
+desc="opencl extension wrangler library"
+
+ext() {
+	git clone --depth=1 https://github.com/martijnberger/clew
+}
+
+build() {
+	cd $name
+	cmake . -DCMAKE_INSTALL_PREFIX=
+	make
+	make DESTDIR="$pkgdir" install
+}

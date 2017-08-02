@@ -1,0 +1,14 @@
+version="1.47.7"
+desc="Conversion tool to create man files"
+deps=["perl-locale-gettext"]
+source=[{url="http://mirrors.ustc.edu.cn/gnu/help2man/help2man-${version}.tar.xz"}]
+
+build='''
+	cd help2man-${version}
+	./configure --prefix= \
+		--mandir=/share/man \
+		--infodir=/share/info \
+		--libdir=/lib
+	make
+	make DESTDIR="${pkgdir}" install
+'''

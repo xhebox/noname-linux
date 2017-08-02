@@ -1,0 +1,31 @@
+name=tinyxml
+version=2.6.2
+_realver=`echo $version | sed 's|\.|_|g'`
+desc="A simple, small, C++ XML parser"
+deps="musl"
+source="http://nchc.dl.sourceforge.net/tinyxml/tinyxml_$_realver.tar.gz
+tinyxml-2.6.2-defineSTL.patch
+tinyxml-2.6.1-entity.patch"
+
+ext() {
+	cd tinyxml
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i "$srcdir"/$i;;
+		esac
+	done
+	sed -i -e '/^TINYXML_USE_STL/ s|=.*|=YES|' -e "s|^RELEASE_CFLAGS.*|& ${CXXFLAGS} -fPIC|" Makefile
+}
+
+build() {
+	cd tinyxml
+	make
+	g++ -fPIC ${CXXFLAGS} -shared -o libtinyxml.so.0.$version \
+		-Wl,-soname,libtinyxml.so.0 $(ls *.o | grep -v xmltest)
+	install -d -m 0755 "$pkgdir"/lib "$pkgdir"/include
+	install -m 0755 libtinyxml.so.0.2.6.2 "$pkgdir"/lib/
+	install -m 0644 tinyxml.h tinystr.h "$pkgdir"/include/
+	cd "$pkgdir"/lib
+	ln -s libtinyxml.so.0.2.6.2 libtinyxml.so
+	ln -s libtinyxml.so.0.2.6.2 libtinyxml.so.0
+}

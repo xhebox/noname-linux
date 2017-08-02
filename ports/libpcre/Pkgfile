@@ -1,15 +1,20 @@
-name=libpcre
-version=8.41
+version="8.42"
 desc="Perl Compatible Regular Expressions"
-deps=musl
-source="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$version.tar.bz2"
+makedeps=["bzip2", "zlib", "readline"]
+deps=["musl", "bash", "bzip2", "zlib", "readline"]
+source=[{url="https://ftp.pcre.org/pub/pcre/pcre-$version.tar.bz2"}]
 
-build(){
+build='''
 	cd pcre-$version
 	./configure \
 		--prefix= \
-		--disable-static --enable-jit --enable-utf  --enable-unicode-properties --enable-pcre16 --enable-pcre32 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/doc
-}
+		--enable-unicode-properties \
+		--enable-pcre16 \
+		--enable-pcre32 \
+		--enable-jit \
+		--enable-pcregrep-libz \
+		--enable-pcregrep-libbz2 \
+		--enable-pcretest-libreadline
+	make
+	make DESTDIR="$pkgdir" install
+'''

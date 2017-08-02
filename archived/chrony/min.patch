@@ -1,0 +1,10 @@
+--- a/hash_intmd5.c	2018-09-19 22:38:15.000000000 +0800
++++ b/hash_intmd5.c	2018-09-19 22:38:15.000000000 +0800
+@@ -28,6 +28,7 @@
+ #include "config.h"
+ #include "sysincl.h"
+ #include "hash.h"
++#include "util.h"
+ #include "memory.h"
+ 
+ #include "md5.c"

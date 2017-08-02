@@ -1,16 +1,18 @@
-name=elfutils
-version=0.169
+version="0.175"
 desc="Libraries/utilities to handle ELF objects (drop in replacement for libelf)"
-source="https://fedorahosted.org/releases/e/l/${name}/${version}/${name}-${version}.tar.bz2
-elfutils-0.169-musl-libs.patch
-elfutils-0.168-musl-obstack-fts.patch
-elfutils-0.168-musl-utils.patch
-"
-deps="zlib xz bzip2 m4 argp-standalone musl-obstack musl-fts"
+source=[
+	{url="https://fedorahosted.org/releases/e/l/elfutils/${version}/elfutils-${version}.tar.bz2"},
+	{url="elfutils-0.171-musl-libs.patch"},
+	{url="elfutils-0.170-musl-obstack-fts.patch"},
+	{url="elfutils-0.171-musl-utils.patch"},
+]
+makedeps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
+deps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
 
-ext () {
+ext='''
 	cd elfutils-$version
 	for i in $source;do
+		echo $i
 		case $i in
 		*.patch)patch -p1 < ../$i ;;
 		esac
@@ -18,12 +20,12 @@ ext () {
 	sed -i 's:-Werror::' */Makefile.in
 	autoreconf -fi
 	export CFLAGS="$CFLAGS -Wno-null-dereference"
-}
+'''
 
-build() {
+build='''
 	cd elfutils-$version
 	./configure --prefix= \
 	--program-prefix=eu-
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

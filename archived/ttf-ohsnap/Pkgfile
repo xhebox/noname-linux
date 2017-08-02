@@ -1,0 +1,13 @@
+name=ttf-ohsnap
+version=1.8.0
+desc="Monospaced font based on Artwiz Snap."
+deps="fontconfig"
+source="http://sourceforge.net/projects/osnapfont/files/ohsnap-$version.tar.gz"
+
+build() {
+	cd ohsnap-$version
+	install -d "$pkgdir/share/fonts/local"
+	install -d "$pkgdir/share/kbd/consolefonts"
+	install -m644 *.pcf "$pkgdir/share/fonts/local"
+	install -m644 *.psfu "$pkgdir/share/kbd/consolefonts"
+}

@@ -1,0 +1,30 @@
+name=libgit2
+version=0.27.0
+desc="A linkable library for Git"
+deps="curl libssh2 python cmake zlib libressl"
+source="libgit2-$version.tar.gz::https://github.com/libgit2/libgit2/archive/v$version.tar.gz
+libressl-2.7.patch
+"
+
+ext() {
+	cd libgit2-$version
+	for i in $source; do
+		msg $i
+		case $i in
+		*openssl*) patch -p0 < ../$i;;
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd libgit2-$version
+	cmake \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+		-DCMAKE_C_FLAGS="$CFLAGS"
+	make
+	make DESTDIR="$pkgdir" install
+}

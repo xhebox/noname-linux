@@ -1,0 +1,12 @@
+name=audacity
+version=2.2.0
+desc="A program that lets you manipulate digital audio waveforms"
+deps="libmad lame wxgtk lilv soundtouch ffmpeg vamp-plugin-sdk sbsms flac desktop-file-utils expat suil libid3tag"
+source="https://github.com/audacity/audacity/archive/Audacity-${version}.zip"
+
+build() {
+	cd audacity-Audacity-${version}
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

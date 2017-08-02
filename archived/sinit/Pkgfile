@@ -1,0 +1,12 @@
+version="1.1"
+desc="a suckless init daemon that doesn't complicate with runlevels and inittabs"
+deps=["musl"]
+source=[{url="git://git.suckless.org/sinit"}]
+
+build='''
+	cd sinit
+	sed -i 's/\/bin/\/etc/g' config.def.h
+	make clean
+	make
+	make PREFIX=/ DESTDIR="${pkgdir}" install
+'''

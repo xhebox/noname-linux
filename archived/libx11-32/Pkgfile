@@ -1,0 +1,21 @@
+. ../libx11/Pkgfile
+name=libx11-32
+deps="xorgproto xtrans libx11 libxcb-32 perl"
+
+build() {
+  cd libX11-$version
+  PKG_NO_REMOVELA=yes
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --libdir=/lib32 \
+  --enable-ipv6 --enable-xlocaledir --without-xmlto \
+  --disable-secure-rpc --disable-static --enable-malloc0returnsnul
+
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}
+

@@ -1,0 +1,10 @@
+version="git"
+desc="extracted libuargp"
+source=[{url="https://github.com/xhebox/libuargp", protocol="git"}]
+
+build='''
+	cd libuargp
+	make
+	make prefix=/ DESTDIR="$pkgdir" install
+	ln -s libargp.so "$pkgdir"/lib/libargp.so.0
+'''

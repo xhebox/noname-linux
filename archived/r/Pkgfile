@@ -1,0 +1,49 @@
+name=r
+version=3.4.1
+desc="Language and environment for statistical computing and graphics"
+deps="lapack bzip2 libpng libjpeg-turbo libtiff ncurses libpcre readline zlib perl libxt libxmu pango xz desktop-file-utils zip unzip tk texlive"
+source="http://cran.r-project.org/src/base/R-${version%%.*}/R-${version}.tar.gz"
+
+ext() {
+	cd R-${version}
+# set texmf dir correctly in makefile
+	sed -i 's|$(rsharedir)/texmf|${datarootdir}/texmf|' share/Makefile.in
+# fix for texinfo 5.X
+	sed -i 's|test ${makeinfo_version_min} -lt 7|test ${makeinfo_version_min} -lt 0|' configure
+}
+
+build() {
+	cd R-${version}
+	./configure  --prefix= \
+	       --libdir=/lib \
+	       --sysconfdir=/etc/R \
+	       --datarootdir=/share \
+	       rsharedir=/share/R/ \
+	       rincludedir=/include/R/ \
+	       rdocdir=/share/doc/R/ \
+	       --disable-java \
+	       --with-x \
+	       --enable-R-shlib \
+	       --with-lapack \
+	       --with-blas \
+	       F77=gfortran \
+	       LIBnn=lib
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+
+	cd src/nmath/standalone
+	make shared || die
+	make DESTDIR="${pkgdir}" install || die
+
+	sed -i "s|${pkgdir} ||" "${pkgdir}/bin/R"
+	rm "${pkgdir}/lib/R/bin/R"
+	cd "${pkgdir}/lib/R/bin"
+	ln -s ../../../bin/R
+
+	install -d "${pkgdir}/etc/R"
+	cd "${pkgdir}/lib/R/etc"
+	for i in *; do
+		mv -f ${i} "${pkgdir}/etc/R"
+		ln -s /etc/R/${i} ${i}
+	done
+}

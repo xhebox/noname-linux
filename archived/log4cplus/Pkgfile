@@ -1,0 +1,13 @@
+name=log4cplus
+version=2.0.0
+_version=`echo "$version" | sed 's/\./\_/g'`
+desc="A C++ logger very close to Java's log4j"
+deps="musl"
+source="https://github.com/log4cplus/log4cplus/releases/download/REL_$_version/log4cplus-$version.tar.xz"
+
+build() {
+	cd log4cplus-$version
+	./configure --prefix= --with-working-locale
+	make
+	make DESTDIR="${pkgdir}" install
+}

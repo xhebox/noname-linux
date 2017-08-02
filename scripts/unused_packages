@@ -1,0 +1,8 @@
+#!/bin/sh
+rm -f unused
+list=`ls -1 ../ports`
+for i in $list; do
+	con=""
+	con=`find ../ports -name Pkgfile  ! -path "*/$i/*" -exec grep -r -H "$i" {} \;`
+	[ -z "$con" ] && echo $i >> unused
+done

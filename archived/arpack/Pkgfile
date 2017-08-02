@@ -1,0 +1,21 @@
+name=arpack
+version=3.5.0
+desc="Fortran77 subroutines for solving large scale eigenvalue problems"
+deps="lapack openmpi"
+source="https://github.com/opencollab/arpack-ng/archive/$version.tar.gz"
+
+ext() {
+	cd arpack-ng-$version
+	./bootstrap || die
+}
+
+build() {
+	cd arpack-ng-$version
+
+	./configure --prefix=/ --enable-mpi
+	make \
+	F77="mpif77" \
+	CFLAGS+=" `pkg-config --cflags ompi-f77` " \
+	LIBS+=" `pkg-config --libs ompi-f77` " || die
+	make DESTDIR="$pkgdir" install || die
+}

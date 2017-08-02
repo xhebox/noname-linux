@@ -1,48 +1,49 @@
-name=lvm2
-version=2.02.173
-deps="eudev util-linux readline"
+version="2.02.177"
+makedeps=["systemd", "util-linux", "readline"]
+deps=["systemd", "util-linux", "readline"]
 desc="Logical Volume Manager 2 utilities"
-source="
-fix-stdio-usage.patch
-portability.patch
-11-dm-initramfs.rules
-lvm2_hook
-lvm2_install
-sd-lvm2_install
-https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${version}.tgz
-"
+source=[
+	{url="fix-stdio-usage.patch"},
+	{url="portability.patch"},
+	{url="11-dm-initramfs.rules"},
+	{url="lvm2_hook"},
+	{url="lvm2_install"},
+	{url="sd-lvm2_install"},
+	{url="https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${version}.tgz"},
+]
 
-ext() {
+ext='''
 	cd LVM2.$version
 	for i in $source; do
 		case $i in
 		*.patch) patch -p0 -i "$srcdir"/$i ;;
 		esac
 	done
-	sed -i 's|use_lvmetad = 0|use_lvmetad = 1|' conf/example.conf.in
+	sed -i 's|use_lvmetad=0|use_lvmetad=1|' conf/example.conf.in
 	cd ..
 	cp -a LVM2.${version} LVM2-initramfs
-}
+'''
 
-build() {
+build='''
 	cd LVM2.$version
-	local  CONFIGUREOPTS="--prefix= --sysconfdir=/etc --localstatedir=/var --sbindir=/bin \
+	CONFIGUREOPTS="--prefix= --sysconfdir=/etc --localstatedir=/var --sbindir=/bin \
 		--with-udev-prefix= \
 		--with-default-pid-dir=/run --with-default-dm-run-dir=/run --with-default-run-dir=/run/lvm \
 		--enable-pkgconfig --enable-readline --enable-dmeventd --enable-cmdlib --enable-applib \
 		--enable-udev_sync --enable-udev_rules --with-default-locking-dir=/run/lock/lvm \
+		--with-systemdsystemunitdir=/lib/systemd/system \
 		--enable-lvmetad --with-thin=internal --with-cache=internal"
 
 	./configure $CONFIGUREOPTS
 
-	make SHELL=/bin/bash || die
-	make SHELL=/bin/bash DESTDIR="$pkgdir" install || die
-	make -C liblvm DESTDIR="${pkgdir}" install || die
+	make SHELL=/bin/bash
+	make SHELL=/bin/bash DESTDIR="$pkgdir" install
+	make -C liblvm DESTDIR="${pkgdir}" install
 
 	cd ../LVM2-initramfs
 	./configure $CONFIGUREOPTS --enable-udev-systemd-background-jobs=no
 	cd udev
-	make 69-dm-lvm-metad.rules || die
+	make 69-dm-lvm-metad.rules
 
 	install -D -m644 "${srcdir}/11-dm-initramfs.rules" "${pkgdir}/lib/initcpio/udev/11-dm-initramfs.rules"
 	install -d "${pkgdir}"/etc/lvm/archive
@@ -51,4 +52,4 @@ build() {
 	install -D -m644 "${srcdir}/lvm2_install" "${pkgdir}/lib/initcpio/install/lvm2"
 	install -D -m644 "${srcdir}/sd-lvm2_install" "${pkgdir}/lib/initcpio/install/sd-lvm2"
 	install -D -m644 "${srcdir}/LVM2-initramfs/udev/69-dm-lvm-metad.rules" "${pkgdir}/lib/initcpio/udev/69-dm-lvm-metad.rules"
-}
+'''

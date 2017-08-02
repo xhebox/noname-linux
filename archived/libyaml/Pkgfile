@@ -1,0 +1,11 @@
+name=libyaml
+version=0.2.1
+desc="YAML 1.1 library"
+source="https://pyyaml.org/download/libyaml/yaml-$version.tar.gz"
+
+build() {
+	cd yaml-$version
+	./configure --prefix=/
+	make
+	make DESTDIR=$pkgdir install
+}

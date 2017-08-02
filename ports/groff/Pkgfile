@@ -1,16 +1,22 @@
-name=groff
-version=1.22.3
-deps="perl gcc"
+version="1.22.3"
+makedeps=["perl"]
+deps=["perl", "musl"]
 desc="GNU troff text-formatting system"
-source="ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/groff/groff-$version.tar.gz"},
+	{url="site.tmac"}
+]
 
-build() {
-	cd $name-$version
-	./configure \
-		--prefix= \
-		--without-x 
-	make arch/misc && make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/share/info
-	rm -rf "$pkgdir"/share/doc
-}
+build='''
+	cd groff-$version
+	./configure --prefix= --without-x
+	make arch/misc && make
+	make DESTDIR="$pkgdir" install
+
+	ln -s eqn $pkgdir/bin/geqn
+	ln -s tbl $pkgdir/bin/gtbl
+	ln -s soelim $pkgdir/bin/zsoelim
+
+	cat ../site.tmac >>	$pkgdir/share/groff/site-tmac/man.local
+	cat ../site.tmac >> $pkgdir/share/groff/site-tmac/mdoc.local
+'''

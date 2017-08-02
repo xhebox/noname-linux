@@ -1,0 +1,13 @@
+name=faad2
+version=2.8.8
+desc="ISO AAC audio decoder"
+source="https://nchc.dl.sourceforge.net/sourceforge/faac/faad2-${version}.tar.gz
+fix-stack_usage.patch"
+
+build() {
+	cd faad2-$version
+	patch -p0 < ../fix-stack_usage.patch
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

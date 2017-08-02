@@ -1,0 +1,24 @@
+version="0.4.7"
+desc="a standalone utility for handling systemd-style sysusers.d settings"
+makedeps=["docbook-xsl"]
+deps=["bash"]
+source=[
+	{url="https://github.com/artix-linux/opensysusers/archive/$version.tar.gz"},
+	{url="https://github.com/artix-linux/opensysusers/commit/4071c407ebb53b2a08d4093915561eaf74839d20.patch", name="no-rlvl.patch"},
+	{url="sysusers.toml"},
+	{url="sysusers-init.sh"},
+]
+
+ext='''
+	cd opensysusers-$version
+	patch -p1 < ../no-rlvl.patch
+'''
+
+build='''
+	cd opensysusers-$version
+	make PREFIX= SHELL=/bin/bash HAVEOPENRC=no
+	make -j1 PREFIX= SHELL=/bin/bash DESTDIR="$pkgdir" install
+	sed -i 's|/bin/sh|/bin/bash|g' "$pkgdir"/bin/sysusers
+	install -Dm755 ../sysusers.toml "$pkgdir/${HOOKS#$ROOT}"/sysusers.toml
+	install -Dm755 ../sysusers-init.sh "$pkgdir"/etc/init.d/sysusers-init.sh
+'''

@@ -1,0 +1,41 @@
+name=dnsmasq
+version=2.79
+desc="Lightweight, easy to configure DNS forwarder and DHCP server"
+deps="musl libgmp libidn dbus libnetfilter_conntrack nettle"
+source="http://www.thekelleys.org.uk/dnsmasq/dnsmasq-$version.tar.xz
+dnsmasq.conf
+dnsmasq.service.conf"
+
+_build_copts="-DHAVE_DNSSEC -DHAVE_DBUS -DHAVE_IDN -DHAVE_CONNTRACK"
+
+ext() {
+	cd dnsmasq-$version
+	autopoint
+}
+
+build() {
+	cd dnsmasq-$version
+	make \
+		CFLAGS="$CPPFLAGS $CFLAGS" \
+		LDFLAGS="$LDFLAGS" \
+		COPTS="$_build_copts" \
+		PREFIX=/ \
+		MANDIR=/share/man \
+		BINDIR=/bin \
+		SBINDIR=/bin \
+		all-i18n || die
+	make \
+		COPTS="$_build_copts" \
+		PREFIX=/ \
+		MANDIR=/share/man \
+		BINDIR=/bin \
+		SBINDIR=/bin \
+		DESTDIR="$pkgdir" \
+		install install-i18n || die
+
+	install -Dm644 "dbus/dnsmasq.conf" "$pkgdir"/etc/dbus-1/system.d/dnsmasq.conf
+	install -Dm644 ../dnsmasq.conf "$pkgdir"/etc/dnsmasq.conf
+	sed -i 's,%%PREFIX%%,/,' "$pkgdir"/etc/dnsmasq.conf
+	install -Dm644 "trust-anchors.conf" "$pkgdir"/share/dnsmasq/trust-anchors.conf
+	install -Dm644 ../dnsmasq.service.conf "$pkgdir"/etc/finit.d/dnsmasq.conf
+}

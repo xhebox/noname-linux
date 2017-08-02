@@ -1,0 +1,14 @@
+name=arc-icon
+version=20161122
+deps="gtk3"
+desc="Official Arc icon theme"
+source="https://github.com/horst3180/${name}-theme/archive/$version.tar.gz"
+
+build() {
+	cd ${name}-theme-$version
+
+	./autogen.sh --prefix=/ --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}

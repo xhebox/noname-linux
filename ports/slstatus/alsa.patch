@@ -1,0 +1,122 @@
+--- slstatus-git/components/alsa.c	1970-01-01 08:00:00.000000000 +0800
++++ slstatus-git/components/alsa.c	2018-04-27 23:17:34.869619063 +0800
+@@ -0,0 +1,89 @@
++#include <unistd.h>
++#include <fcntl.h>
++#include <alsa/asoundlib.h>
++#include "../util.h"
++
++snd_mixer_t* handle = NULL;
++snd_mixer_selem_id_t* sid = NULL;
++snd_mixer_elem_t* elem = NULL;
++const char *card = "default";
++const char *selem_name = "Master";
++long ttdiv(const long n, const long d)
++{
++  return ((n < 0) ^ (d < 0)) ? ((n - d/2)/d) : ((n + d/2)/d);
++}
++
++void vol_end() {
++    if (handle) {
++        snd_mixer_close(handle);
++        sid = NULL; elem = NULL; handle = NULL;
++    }
++}
++
++void vol_sid() {
++    if (sid == NULL) {
++      snd_mixer_selem_id_alloca(&sid);
++
++      //sets simple-mixer index and name
++      snd_mixer_selem_id_set_index(sid, 0);
++      snd_mixer_selem_id_set_name(sid, selem_name);
++    }
++}
++
++void vol_handle() {
++    if (handle == NULL) {
++      if ((snd_mixer_open(&handle, 0)) < 0) {
++          vol_end();
++      }
++
++      if ((snd_mixer_attach(handle, card)) < 0) {
++          vol_end();
++      }
++
++      if ((snd_mixer_selem_register(handle, NULL, NULL)) < 0) {
++          vol_end();
++      }
++
++      if (snd_mixer_load(handle) < 0) {
++          vol_end();
++      }
++    }
++    snd_mixer_handle_events(handle);
++}
++
++const char* vol_icon() {
++    vol_handle();
++    vol_sid();
++    if (!elem) elem = snd_mixer_find_selem(handle, sid);
++
++    if (elem && snd_mixer_selem_has_playback_switch(elem)) {
++         int mute_state;
++         snd_mixer_selem_get_playback_switch(elem, 0, &mute_state);
++         if (!mute_state) return bprintf("\u00eb");
++         else return bprintf("\u00ec");
++    }
++    return bprintf("\u00eb");
++}
++
++const char* vol_alsa() {
++    vol_handle();
++    vol_sid();
++    if (!elem) elem = snd_mixer_find_selem(handle, sid);
++    if (!elem) return bprintf("0");
++
++    long ret = 0;
++    long minv, maxv;
++    snd_mixer_selem_get_playback_volume_range (elem, &minv, &maxv);
++
++    if (snd_mixer_selem_get_playback_volume(elem, 0, &ret) < 0) {
++         vol_end();
++         return bprintf("0");
++    }
++
++    ret -= minv;
++    maxv -= minv;
++    minv = 0;
++    ret = ttdiv(100*ret, maxv);
++
++    return bprintf("%ld", ret);
++}
+--- slstatus-git/Makefile	2018-04-30 19:19:57.711918299 +0800
++++ slstatus-git/Makefile	2018-04-30 19:19:57.711918299 +0800
+@@ -25,5 +25,6 @@
+ 	components/user\
+ 	components/volume\
++	components/alsa\
+ 	components/wifi
+ 
+ all: slstatus
+--- slstatus-git/slstatus.h	2018-04-30 19:12:41.850679455 +0800
++++ slstatus-git/slstatus.h	2018-04-30 19:12:41.850679455 +0800
+@@ -81,3 +81,7 @@
+ const char *wifi_icon(const char *);
+ const char *wifi_perc(const char *interface);
+ const char *wifi_essid(const char *interface);
++
++const char *vol_alsa();
++const char *vol_icon();
++void vol_end();
+--- slstatus-git/slstatus.c	2018-04-30 18:53:25.280541471 +0800
++++ slstatus-git/slstatus.c	2018-04-30 18:53:25.280541471 +0800
+@@ -27,7 +27,7 @@
+ terminate(const int signo)
+ {
+ 	(void)signo;
+-
++	vol_end();
+ 	done = 1;
+ }
+ 

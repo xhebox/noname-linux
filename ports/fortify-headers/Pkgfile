@@ -1,11 +1,11 @@
-name=fortify-headers
-version=0.7
-deps="filesystem"
+version="0.9"
 desc="A standalone fortify source implementation"
-source="http://dl.2f30.org/releases/$name-$version.tar.gz"
+deps=[
+	"filesystem"
+]
+source=[{url="http://dl.2f30.org/releases/fortify-headers-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-
-	make PREFIX= DESTDIR="$pkgdir" install  || die
-}
+build='''
+	cd fortify-headers-$version
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

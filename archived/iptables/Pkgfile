@@ -1,0 +1,26 @@
+name=iptables
+version=1.6.2
+desc='Linux kernel packet control tool'
+deps="bash libnftnl libpcap"
+source="http://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.bz2"
+
+ext() {
+	cd iptables-$version
+	rm include/linux/types.h
+}
+
+build() {
+	cd iptables-$version
+
+	./configure --prefix= \
+		--sysconfdir=/etc \
+		--sbindir=/bin \
+		--libexecdir=/lib/iptables \
+		--with-xtlibdir=/lib/iptables \
+		--enable-bpf-compiler \
+		--enable-devel \
+		--enable-shared
+
+	make
+	make DESTDIR="$pkgdir" install
+}

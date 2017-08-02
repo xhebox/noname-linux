@@ -1,0 +1,11 @@
+--- TLP-1.1/tlp-functions.in	2018-01-24 13:50:43.000000000 +0800
++++ TLP-1.1/tlp-functions.in	2018-01-24 13:50:43.000000000 +0800
+@@ -187,7 +187,7 @@
+ 
+ check_upstart () { # check if upstart is active init system (PID 1)
+                    # rc: 0=yes, 1=no
+-    cmd_exists $INITCTL && $INITCTL --version | grep -q upstart
++    return 1
+ }
+ 
+ check_openrc () { # check if openrc is the active init system (PID 1)

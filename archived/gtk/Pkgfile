@@ -1,0 +1,27 @@
+name=gtk
+version=2.24.32
+desc="A multi-platform toolkit for creating graphical user interfaces"
+deps="atk gdk-pixbuf pixman libxcursor libxrandr libxdamage libxcomposite hicolor-icon-theme pango libxi expat libxinerama gobject-introspection"
+source="http://ftp.gnome.org/pub/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz
+gtk2-immodules.sh
+"
+
+build() {
+	cd gtk+-$version
+	./configure --prefix=/ \
+	--enable-x11-backend \
+	--enable-xkb \
+	--enable-xinerama \
+	--enable-xrandr \
+	--enable-xfixes \
+	--enable-xcomposite \
+	--enable-xdamage \
+	--disable-cups \
+	--enable-introspection \
+	--disable-static
+	sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR="$pkgdir" install || die
+	rm "$pkgdir"/bin/gtk-update-icon-cache
+	install -Dm755 ../gtk2-immodules.sh "$pkgdir/${HOOKS#$ROOT}"/gtk2-immodules.sh
+}

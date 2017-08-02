@@ -1,0 +1,23 @@
+name=python-cffi
+version=1.11.4
+desc="Foreign Function Interface for Python calling C code"
+deps="python-pycparser"
+source="https://bitbucket.org/cffi/cffi/get/v$version.tar.gz"
+
+build() {
+	cp -r cffi* set3
+	cd cffi*
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

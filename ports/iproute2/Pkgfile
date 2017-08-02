@@ -1,25 +1,27 @@
-name=iproute2
-version=4.12.0
+version="4.19.0"
 desc="IP Routing Utilities"
-source="http://www.kernel.org/pub/linux/utils/net/${name}/${name}-${version}.tar.xz
-musl.patch
-iproute2-3.1.0-mtu.patch
-"
-deps="libmnl xz bison flex"
+source=[
+	{url="http://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz"},
+	{url="nodep.patch"},
+]
+makedeps=["bison", "flex", "libcap", "libmnl", "xz"]
+deps=["libmnl", "libcap", "xz"]
 
-build() {
-	cd $name-$version
-	patch -p1 < ../musl.patch || die|| die|| die
-	patch -p1 < ../iproute2-3.1.0-mtu.patch  || die
+ext='''
+	cd iproute2-$version
+	patch -p1 -i ../nodep.patch
+'''
+
+build='''
+	cd iproute2-$version
 	sed -i 's,CCOPTS,HOSTCCOPTS,g' netem/Makefile
 	./configure --prefix= \
-                --libdir=/lib \
-                --sbindir=/bin \
-                --bindir=/bin \
+		--libdir=/lib \
+		--sbindir=/bin \
+		--bindir=/bin \
 		--datadir=/share \
-                --libexecdir=/lib \
-		--disable-static 
-	make CCOPTS="-D_GNU_SOURCE $CFLAGS" LIBDIR=/lib  || die
-	make -j1 DESTDIR="$pkgdir" LIBDIR=/lib PREFIX=/ install  || die
+		--libexecdir=/lib
+	make CCOPTS="-D_GNU_SOURCE $CFLAGS" LIBDIR=/lib
+	make -j1 DESTDIR="$pkgdir" LIBDIR=/lib PREFIX=/ install
 	mv "$pkgdir"/sbin "$pkgdir"/bin
-}
+'''

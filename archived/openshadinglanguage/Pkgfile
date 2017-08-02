@@ -1,0 +1,34 @@
+name=openshadinglanguage
+version=1.9.8
+desc="Advanced shading language for production GI renderers"
+deps="boost openimageio openexr tbb harfbuzz libpng libtiff zlib ncurses cmake llvm"
+source="openshadinglanguage-$version.tar.gz::https://github.com/imageworks/OpenShadingLanguage/archive/Release-${version}.tar.gz
+noname.patch"
+
+ext() {
+	cd OpenShadingLanguage-Release-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 -i ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd OpenShadingLanguage-Release-$version
+
+	sed -i 's/-isystem/-I/g' CMakeLists.txt src/cmake/compiler.cmake
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. -DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_INSTALL_LIBDIR=/lib \
+	-DCMAKE_INSTALL_DATAROOTDIR=/share \
+	-DLLVM_STATIC=0 \
+	-DOSL_BUILD_CPP11=1 \
+	-DENABLERTTI=ON \
+	-DSTOP_ON_WARNING=OFF
+
+	make
+	make DESTDIR="${pkgdir}" install
+}

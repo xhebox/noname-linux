@@ -1,34 +1,56 @@
-name=wpa_supplicant
-version=2.6
+version="2.6"
 desc="WPA/WPA2/IEEE 802.1X Supplicant"
-deps="libressl libnl"
-source="http://hostap.epitest.fi/releases/$name-$version.tar.gz
-libressl.patch
-patch-src_utils_eloop_c
-config
-"
+makedeps=["dbus", "libressl", "libnl"]
+deps=["dbus", "libressl", "libnl"]
+source=[
+	{url="http://hostap.epitest.fi/releases/$name-$version.tar.gz"},
+	{url="0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch"},
+	{url="0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch"},
+	{url="0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch"},
+	{url="0004-Prevent-installation-of-an-all-zero-TK.patch"},
+	{url="0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch"},
+	{url="0006-TDLS-Reject-TPK-TK-reconfiguration.patch"},
+	{url="0007-WNM-Ignore-WNM-Sleep-Mode-Response-without-pending-r.patch"},
+	{url="0008-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch"},
+	{url="0009-WPA-Ignore-unauthenticated-encrypted-EAPOL-Key-data.patch"},
+	{url="libressl.patch"},
+	{url="config"},
+]
 
-build() {
-	cd $name-$version
-	patch -p0 -i "$srcdir"/patch-src_utils_eloop_c 
+ext='''
+	cd wpa_supplicant-$version
 	for i in $source;do
 		case $i in
-		*.patch) patch -p0 -i "$srcdir/$i" ;;
+		libressl.patch) patch -p0 -i ../"$i" ;;
+		*.patch) patch -p1 -i ../"$i" ;;
 		esac
 	done
-	cd $name
+'''
+
+build='''
+	cd wpa_supplicant-$version/wpa_supplicant
 	cp ../../config .config
-	make  || die
-	make BINDIR=/bin LIBDIR=/lib DESTDIR="$pkgdir" install  || die
+	make
+	make BINDIR=/bin LIBDIR=/lib DESTDIR="$pkgdir" install
+
 	install -d -m755 "${pkgdir}/share/man/man5"
 	install -d -m755 "${pkgdir}/share/man/man8"
 	install -m644 doc/docbook/*.5 "${pkgdir}/share/man/man5/"
 	install -m644 doc/docbook/*.8 "${pkgdir}/share/man/man8/"
 	rm -f "${pkgdir}/share/man/man8/wpa_priv.8
 	rm -f "${pkgdir}/share/man/man8/wpa_gui.8
-	install -d -m755 "${pkgdir}/share/dbus-1/system-services"
-	install -m644 dbus/fi.epitest.hostap.WPASupplicant.service "${pkgdir}/share/dbus-1/system-services/"
-	install -m644 dbus/fi.w1.wpa_supplicant1.service "${pkgdir}/share/dbus-1/system-services/"
-	install -d -m755 "${pkgdir}/etc/dbus-1/system.d"
-	install -m644 dbus/dbus-wpa_supplicant.conf "${pkgdir}/etc/dbus-1/system.d/wpa_supplicant.conf"
-}
+
+
+	install -d -m755 "$pkgdir/share/dbus-1/system-services"
+	install -m644 \
+	dbus/fi.epitest.hostap.WPASupplicant.service \
+	dbus/fi.w1.wpa_supplicant1.service \
+	"$pkgdir/share/dbus-1/system-services/"
+
+	install -Dm644 dbus/dbus-wpa_supplicant.conf \
+	"$pkgdir/etc/dbus-1/system.d/wpa_supplicant.conf"
+
+	install -d -m755 "$pkgdir/lib/systemd/system"
+	install -m644 systemd/*.service "$pkgdir/lib/systemd/system/"
+	sed -i 's;/usr/local;;g' "$pkgdir"/lib/systemd/system/*.service
+'''

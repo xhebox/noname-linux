@@ -1,0 +1,11 @@
+version="2.8.1"
+desc="HTTP request/response parser for c"
+source=[{url="https://github.com/joyent/http-parser/archive/v${version}.tar.gz"}]
+
+build='''
+	cd http-parser-$version
+
+	make library
+	make PREFIX=$pkgdir install
+	ln -sf libhttp_parser.so.$version "${pkgdir}/lib/libhttp_parser.so"
+'''

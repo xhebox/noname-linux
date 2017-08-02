@@ -1,13 +1,13 @@
-name=itstool
-version=2.0.2
+version="2.0.2"
 desc="XML to PO and back again"
-deps="python libxml2"
-source="https://github.com/itstool/itstool/archive/$version.tar.gz"
+makedeps=["python", "libxml2"]
+deps=["python", "libxml2"]
+source=[{url="https://github.com/itstool/itstool/archive/$version.tar.gz"}]
 
-build() {
+build='''
 	cd itstool-$version
 	NOCONFIGURE=1 ./autogen.sh
 	./configure --prefix=
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

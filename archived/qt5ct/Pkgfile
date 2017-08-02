@@ -1,0 +1,15 @@
+name=qt5ct
+version=0.35
+desc="Qt5 Configuration Utility"
+deps="qt5-svg qt5-tools"
+source="https://downloads.sourceforge.net/project/qt5ct/qt5ct-$version.tar.bz2"
+
+build() {
+	cd qt5ct-$version
+	mkdir build
+	cd build
+	qmake PREFIX=/ ../qt5ct.pro
+	make || die
+	make INSTALL_ROOT="$pkgdir" install || die
+} 
+

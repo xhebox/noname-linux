@@ -1,0 +1,28 @@
+version="3.4"
+makedeps=["readline", "libcap"]
+deps=["readline", "libcap"]
+desc="Lightweight NTP client and server"
+source=[
+	{url="http://download.tuxfamily.org/chrony/${name}-${version}.tar.gz"},
+	{url="chrony.sysusers"},
+	{url="min.patch"},
+	{url="chrony.tmpfiles"},
+	{url="chrony.conf"},
+]
+
+build='''
+	cd chrony-$version
+	patch -p1 -i ../min.patch
+	./configure \
+		--prefix=/ \
+		--runstatedir=/run \
+		--sbindir=/bin \
+		--without-nss \
+		--disable-static 
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 examples/chrony.conf.example1 "$pkgdir"/etc/chrony.conf
+	install -Dm644 ../chrony.conf "$pkgdir"/etc/finit.d/chrony.conf
+	install -Dm644 ../chrony.sysusers "$pkgdir"/lib/sysusers.d/chrony.conf
+	install -Dm644 ../chrony.tmpfiles "$pkgdir"/lib/tmpfiles.d/chrony.conf
+'''

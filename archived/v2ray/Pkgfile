@@ -1,0 +1,27 @@
+name=v2ray
+version=3.21
+desc="A platform for building proxies to bypass network restrictions."
+source="https://github.com/v2ray/v2ray-core/archive/v$version.tar.gz"
+
+ext() {
+	export GOPATH=`pwd`/go
+	#git config --global http.proxy 'socks5://127.0.0.1:1080'
+	#git config --global https.proxy 'socks5://127.0.0.1:1080'
+	#http_proxy=socks5://127.0.0.1:1080 go get -v v2ray.com/core github.com/miekg/dns golang.org/x/sys/unix v2ray.com/ext/assert \
+	go get -v v2ray.com/core github.com/miekg/dns golang.org/x/sys/unix v2ray.com/ext/assert \
+		github.com/gorilla/websocket golang.org/x/crypto/chacha20poly1305 golang.org/x/crypto/sha3 \
+		v2ray.com/ext golang.org/x/net/proxy github.com/google/go-github/github golang.org/x/oauth2 \
+		github.com/gogo/protobuf/proto google.golang.org/grpc
+	#git config --global --unset http.proxy
+	#git config --global --unset https.proxy
+
+	go install v2ray.com/ext/tools/build/vbuild
+}
+
+build() {
+	cd v2ray-core-$version
+	$GOPATH/bin/vbuild
+	install -Dm644 release/config/geoip.dat release/config/geosite.dat release/config/*.json -t "$pkgdir"/etc/v2ray/
+	install -D -m755 $GOPATH/bin/v2ray-custom-linux-64/v2ray "$pkgdir"/bin/v2ray
+	install -D -m755 $GOPATH/bin/v2ray-custom-linux-64/v2ctl "$pkgdir"/bin/v2ctl
+}

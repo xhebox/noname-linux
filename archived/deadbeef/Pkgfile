@@ -1,0 +1,14 @@
+name=deadbeef
+version=0.7.2
+desc='A GTK+ audio player for GNU/Linux.'
+deps="alsa-lib hicolor-icon-theme desktop-file-utils jansson libvorbis libmad flac curl imlib2 libsndfile libx11 intltool zlib pkgconf pulseaudio zip libsamplerate yasm ffmpeg gtk gtk3 dbus faad2"
+source="http://downloads.sourceforge.net/project/deadbeef/deadbeef-${version}.tar.bz2
+musl-stacksize.patch"
+
+build() {
+	cd deadbeef-$version
+	patch -p1 < ../musl-stacksize.patch || die
+	./configure --prefix=
+	make || die
+	make prefix="${pkgdir}" install || die
+}

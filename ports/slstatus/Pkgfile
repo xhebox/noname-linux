@@ -1,15 +1,20 @@
-name=slstatus
-version=git
+version="git"
 desc="dwm status"
-deps="xorg-server"
-source="config.h"
+deps=["alsa-lib", "xorg-server"]
+source=[
+	{url="https://github.com/drkhsh/slstatus", protocol="git"},
+	{url="config.h"},
+	{url="icon.patch"},
+	{url="alsa.patch"},
+]
 
-ext() {
-	git clone --depth=1 http://github.com/drkhsh/slstatus $name-$version
-}
-
-build(){
-	cd $name-$version
-	cp -r "$srcdir"/config.h .
-	make PREFIX=/ DESTDIR="$pkgdir" install || die
-}
+build='''
+	cd slstatus
+	cp -r ../config.h .
+	sed -i 's/\-lX11/& \-lasound/g' config.mk
+	echo 1
+	patch -p1 -i ../icon.patch
+	echo 2
+	patch -p1 -i ../alsa.patch
+	make PREFIX=/ DESTDIR="$pkgdir" install
+'''

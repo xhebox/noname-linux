@@ -1,12 +1,12 @@
-name=libusb
-version=1.0.21
+version="1.0.22"
 desc="Library that provides generic access to USB devices"
-source="https://github.com/libusb/libusb/releases/download/v$version/libusb-$version.tar.bz2"
-deps="eudev"
+makedeps=["systemd"]
+deps=["systemd"]
+source=[{url="https://github.com/libusb/libusb/releases/download/v$version/libusb-$version.tar.bz2"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libusb-$version
 	./configure --prefix= 
-	make -j1  || die
-	make DESTDIR=$pkgdir install  || die
-}
+	make -j1
+	make DESTDIR=$pkgdir install
+'''

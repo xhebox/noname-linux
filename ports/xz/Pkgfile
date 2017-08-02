@@ -1,23 +1,27 @@
-name=xz
-version=5.2.3
-deps="libressl"
+version="5.2.4"
+deps=["dash"]
 desc="Compression utility using the lzma algorithm, successor of lzma-utils"
-source="http://tukaani.org/xz/$name-$version.tar.gz
-default-threading.patch
-io-size.patch
-speedup.patch"
+source=[
+	{url="http://tukaani.org/xz/xz-$version.tar.gz"},
+	{url="default-threading.patch"},
+	{url="io-size.patch"},
+	{url="speedup.patch"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd xz-$version
 	for i in $source;do
 		case $i in
 		*.patch) patch -p1 -i "$srcdir"/"$i" ;;
 		esac
 	done
+'''
+
+build='''
+	cd xz-$version
 	./configure \
-		--disable-static --enable-assume-ram=1024 \
+		--disable-rpath \
 		--prefix= 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/doc
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

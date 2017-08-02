@@ -1,17 +1,14 @@
-name=libvorbis
-version=1.3.5
-deps="libogg"
-source="http://downloads.xiph.org/releases/vorbis/$name-$version.tar.xz"
+version="1.3.6"
+makedeps=["libogg"]
+deps=["libogg"]
+source=[{url="http://downloads.xiph.org/releases/vorbis/libvorbis-$version.tar.xz"}]
 desc="Vorbis codec library"
 
-build() {
-	cd $name-$version
+build='''
+	cd libvorbis-$version
 
 	./configure --prefix=/
 
-	make || die
-	make DESTDIR=$pkgdir install || die
-
-	rm -r $pkgdir/share/doc
-}
-
+	make
+	make DESTDIR=$pkgdir install
+'''

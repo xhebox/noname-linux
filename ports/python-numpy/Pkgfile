@@ -1,11 +1,13 @@
-name=python-numpy
-version=1.13.1
-deps="python-setuptools lapack python-nose"
-source="https://github.com/numpy/numpy/archive/v${version}.tar.gz
-site.cfg"
+version="1.14.3"
+deps=["python-setuptools", "python-cython"]
+#lapack python-nose python-cython"
+source=[
+	{url="https://github.com/numpy/numpy/archive/v${version}.tar.gz"},
+	{url="site.cfg"},
+]
 desc="Scientific tools for Python"
 
-build() {
+build='''
 	sed -i 's/xlocale/locale/g' numpy-$version/numpy/core/src/multiarray/numpyos.c
 	cp site.cfg numpy-$version/numpy-$version 
 	export LDFLAGS="$LDFLAGS -shared"
@@ -20,25 +22,23 @@ build() {
 
 	/bin/python setup.py \
 		build \
-		config_fc --fcompiler=gnu95 \
 		install \
 		--prefix= \
 		--root=$pkgdir \
 		--optimize=1 \
-		--skip-build || die
+		--skip-build
 	install -m755 -d "${pkgdir}/include/python2.7"
 	ln -s ../../../lib/python2.7/site-packages/numpy/core/include/numpy "${pkgdir}/include/python2.7/numpy"
-
-	cd ../numpy3
-	/bin/python3 setup.py \
-		build \
-		config_fc --fcompiler=gnu95 \
-		install \
-		--prefix= \
-		--root=$pkgdir \
-		--optimize=1 \
-		--skip-build || die
-	install -m755 -d "${pkgdir}/include/python3.6m"
-	ln -s ../../../lib/python3.6/site-packages/numpy/core/include/numpy "${pkgdir}/include/python3.6m/numpy"
-}
-
+ 
+	#cd ../numpy3
+	#/bin/python3 setup.py \
+	#	build \
+	#	config_fc --fcompiler=gnu95 \
+	#	install \
+	#	--prefix= \
+	#	--root=$pkgdir \
+	#	--optimize=1 \
+	#	--skip-build
+	#install -m755 -d "${pkgdir}/include/python3.6m"
+	#ln -s ../../../lib/python3.6/site-packages/numpy/core/include/numpy "${pkgdir}/include/python3.6m/numpy"
+'''

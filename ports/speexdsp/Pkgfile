@@ -1,17 +1,15 @@
-name=speexdsp
-version=1.2rc3
+version="1.2rc3"
 desc="A free codec library for speech - DSP."
-source="http://downloads.us.xiph.org/releases/speex/$name-$version.tar.gz"
-deps=musl
+deps=["musl"]
+source=[{url="http://downloads.us.xiph.org/releases/speex/speexdsp-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd speexdsp-$version
 
 	./configure \
 		--prefix= \
 		--disable-static
 
-	make || die
-	make prefix=$pkgdir install || die
-}
-
+	make
+	make prefix=$pkgdir install
+'''

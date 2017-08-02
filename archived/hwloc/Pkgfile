@@ -1,0 +1,12 @@
+name=hwloc
+version=1.11.10
+desc="Portable Hardware Locality is a portable abstraction of hierarchical architectures"
+deps="libtool libxml2 cairo pciutils"
+source="http://www.open-mpi.org/software/hwloc/v${version%.*}/downloads/hwloc-${version}.tar.bz2"
+
+build() {
+	cd hwloc-$version
+	./configure --prefix= --sbindir=/bin --enable-plugins
+	make
+	make DESTDIR="$pkgdir" install
+}

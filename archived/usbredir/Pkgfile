@@ -1,0 +1,12 @@
+name=usbredir
+version=0.7.1
+desc="USB traffic redirection protocol"
+deps="libusb"
+source="http://spice-space.org/download/usbredir/usbredir-$version.tar.bz2"
+
+build() {
+	cd usbredir-$version
+	./configure --prefix= --sbindir=/bin
+	make
+	make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,11 @@
+name=libestr
+version=0.1.10
+desc="essentials for string handling (and a bit more)"
+source="http://libestr.adiscon.com/files/download/libestr-$version.tar.gz"
+
+build() {
+	cd libestr-$version
+	./configure --prefix=
+	make
+	make install DESTDIR="$pkgdir"
+}

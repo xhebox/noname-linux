@@ -1,0 +1,12 @@
+name=ethtool
+version=4.16
+deps=musl
+desc="nl80211 based CLI configuration utility for wireless devices"
+source="https://www.kernel.org/pub/software/network/$name/$name-$version.tar.xz"
+
+build() {
+	cd ethtool-$version
+	./configure --prefix= --mandir=/share/man --sbindir=/bin
+	make
+	make DESTDIR="$pkgdir" install
+}

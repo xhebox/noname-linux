@@ -1,0 +1,15 @@
+. ../libxcursor/Pkgfile
+name=libxcursor-32
+deps="libxfixes-32 libxrender-32 libxcursor"
+
+build() {
+  cd libXcursor-$version
+  export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static --libdir=/lib32
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}

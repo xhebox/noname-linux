@@ -1,0 +1,20 @@
+name=libxxf86vm-32
+version=1.1.4
+desc="X11 XFree86 video mode extension library"
+deps="libxext-32 xorgproto libxxf86vm"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-$version.tar.bz2"
+
+build() {
+  cd libXxf86vm-$version
+  PKG_NO_REMOVELA=yes
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static --libdir=/lib32
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}
+

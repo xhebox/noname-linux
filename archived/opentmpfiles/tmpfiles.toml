@@ -1,0 +1,4 @@
+pattern=["lib/tmpfiles.d/[^/]+"]
+script='''
+tmpfiles --create
+'''

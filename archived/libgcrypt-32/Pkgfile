@@ -1,0 +1,20 @@
+. ../libgcrypt/Pkgfile
+name=libgcrypt-32
+deps="libgpg-error-32 libgcrypt"
+
+build() {
+  cd libgcrypt-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure \
+    --target=$TARGET32 \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/bin
+  rm -r "$pkgdir"/include
+}

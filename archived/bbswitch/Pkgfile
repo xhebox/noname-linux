@@ -1,0 +1,16 @@
+name=bbswitch
+version=0.8
+desc="Kernel module allowing to switch dedicated graphics card on Optimus laptops"
+deps="linux"
+source="https://github.com/Bumblebee-Project/bbswitch/archive/v${version}.tar.gz
+bbswitch_modules.conf"
+
+build() {
+	cd bbswitch-$version
+	local _extramodules=extramodules-noname
+	local _kernver="`cat /lib/modules/${_extramodules}/version`"
+	make KDIR="$ROOT"/lib/modules/"$_kernver"/build
+	install -Dt "${pkgdir}/lib/modules/${_extramodules}" -m644 *.ko
+	find "${pkgdir}" -name '*.ko' -exec xz {} +
+	install -Dt "$pkgdir"/etc/finit.d/ -m644 ../bbswitch_modules.conf 
+}

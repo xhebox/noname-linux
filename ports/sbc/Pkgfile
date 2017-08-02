@@ -1,0 +1,10 @@
+version="1.3"
+desc="Bluetooth Subband Codec (SBC) library"
+source=[{url="http://www.kernel.org/pub/linux/bluetooth/sbc-$version.tar.xz"}]
+
+build='''
+	cd sbc-$version
+	./configure --prefix= --disable-static --disable-tester
+	make
+	make DESTDIR="$pkgdir" install
+'''

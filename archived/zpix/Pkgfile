@@ -1,0 +1,15 @@
+name=zpix
+version=git
+desc="A bitmapp Chinese font"
+deps="xorg-fonts fontconfig"
+
+ext() {
+	git clone --depth=1 --single-branch https://github.com/SolidZORO/zpix-pixel-font
+}
+
+build() {
+	cd zpix-pixel-font
+	mkdir -p  "$pkgdir"/share/fonts/zpix
+	cp dist/*.ttf "$pkgdir"/share/fonts/zpix
+	cp src/*.bdf "$pkgdir"/share/fonts/zpix
+}

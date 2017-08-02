@@ -1,12 +1,13 @@
-name=json-c
-version=0.12.1
-deps=musl
+version="0.13.1"
+deps=["musl"]
 desc="JSON implementation in C"
-source="https://s3.amazonaws.com/json-c_releases/releases/$name-$version.tar.gz"
+keepla=true
+source=[{url="https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd json-c-$version
+	CFLAGS="$CFLAGS -Wno-error"
 	./configure --prefix=/ --disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,11 @@
+version="0.20"
+desc='Library for easy processing of keyboard entry from terminal-based programs'
+makedeps=["unibilium"]
+deps=["unibilium"]
+source=[{url="http://www.leonerd.org.uk/code/libtermkey/libtermkey-${version}.tar.gz"}]
+
+build='''
+	cd libtermkey-$version
+	make PREFIX=/
+	make PREFIX=/ DESTDIR="${pkgdir}" install
+'''

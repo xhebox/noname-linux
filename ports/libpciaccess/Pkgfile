@@ -1,23 +1,12 @@
-name=libpciaccess
-version=0.13.5
+version="0.14"
 desc="X11 PCI access library"
-deps=musl
-source="http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2
-fix-arm.patch
-"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libpciaccess-$version.tar.bz2"}]
 
-build() {
-	cd "$name-$version"
-	for i in $source; do
-		case $i in
-		*.patch) patch -p1 -i "$srcdir"/$i;;
-		esac
-	done
-
-	sed -i -E 's/#include <unistd.h>/#include <unistd.h>\n#include <limits.h>/g' src/linux_sysfs.c
+build='''
+	cd libpciaccess-$version
 	./configure \
 		--prefix= \
 		--disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

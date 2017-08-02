@@ -1,0 +1,14 @@
+name=glpk
+version=4.63
+desc="GNU Linear Programming Kit : solve LP, MIP and other problems."
+deps="libgmp"
+source="http://ftp.gnu.org/gnu/glpk/glpk-${version}.tar.gz"
+
+build() {
+	cd glpk-$version
+	./configure --prefix= --with-gmp
+	make CFLAGS="$CFLAGS -fPIC" || die
+	make DESTDIR="${pkgdir}" install || die
+	install -Dm644 doc/glpk.pdf "${pkgdir}/share/doc/glpk/glpk.pdf"
+	install -Dm644 doc/gmpl.pdf "${pkgdir}/share/doc/glpk/gmpl.pdf"
+}

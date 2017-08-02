@@ -1,0 +1,6 @@
+pattern=["lib/sysctl.d/*.conf"]
+script='''
+if [ -d /run/systemd/system ]; then
+	/lib/systemd/systemd-sysctl 
+fi
+'''

@@ -1,0 +1,10 @@
+version="2.0.5"
+desc='Just-in-time compiler and drop-in replacement for Lua 5.1'
+deps=["musl"]
+source=[{url="https://luajit.org/download/LuaJIT-$version.tar.gz"}]
+
+build='''
+	cd LuaJIT-$version
+	make amalg PREFIX=/
+	make install DESTDIR="$pkgdir" PREFIX=/
+'''

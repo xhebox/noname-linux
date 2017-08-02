@@ -1,19 +1,24 @@
-name=linux-firmware
-conflicts=
-version=20170622.7d2c913
+version="20180825"
 desc="Firmware files for Linux"
+source=[
+	{
+		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git",
+		commit="fea76a04f25fd0a217c0d566ff5ff8f23ad3e648",
+		protocol="git"
+	}
+]
 
-ext() {
-	git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-	cd $name
-	git reset --hard ${version#*.}
-}
+build='''
+	cd linux-firmware*
+	make DESTDIR="${pkgdir}" FIRMWAREDIR=/lib/firmware install
+	rm "${pkgdir}"/lib/firmware/Makefile
+	rm "${pkgdir}"/lib/firmware/README
+	rm "${pkgdir}"/lib/firmware/configure
+	rm "${pkgdir}"/lib/firmware/GPL-3
 
-build() {
-	cd $name
-	make DESTDIR="${pkgdir}" FIRMWAREDIR=/lib/firmware install || die
-	rm "${pkgdir}/lib/firmware/"Makefile
-	rm "${pkgdir}/lib/firmware/"README
-	rm "${pkgdir}/lib/firmware/"configure
-	rm "${pkgdir}/lib/firmware/"GPL-3
-}
+	mkdir -p kernel/x86/microcode
+	cat amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin
+	echo kernel/x86/microcode/AuthenticAMD.bin | bsdcpio -o -H newc -R 0:0 > amd-ucode.img
+	install -d "${pkgdir}/lib/tmpfiles.d"
+	install -D -m0644 amd-ucode.img "${pkgdir}"/boot/amd-ucode.img	
+'''

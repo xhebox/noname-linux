@@ -1,0 +1,15 @@
+name=bucklespring
+version=git
+desc="Nostalgia bucklespring keyboard sound, sampled from IBM's Model-M"
+deps="openal alure libxtst"
+
+ext() {
+	git clone --depth=1 https://github.com/zevv/bucklespring
+}
+
+build() {
+	cd bucklespring
+	make PATH_AUDIO=/share/bucklespring || die
+	install -Dm755 buckle "$pkgdir"/bin/buckle
+	install -Dm644 -t "$pkgdir"/share/bucklespring/ wav/*
+}

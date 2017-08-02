@@ -1,0 +1,12 @@
+name=gsl
+version=2.4
+desc="The GNU Scientific Library (GSL) is a modern numerical library for C and C++ programmers"
+deps="musl bash"
+source="http://ftp.gnu.org/gnu/gsl/gsl-$version.tar.gz"
+
+build() {
+	cd gsl-$version
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

@@ -1,0 +1,26 @@
+name=gnuplot
+version=5.2.0
+desc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others" 
+deps="readline gd zlib gnutls wxgtk qt5-base"
+source="http://downloads.sourceforge.net/sourceforge/gnuplot/gnuplot-$version.tar.gz"
+
+ext() {
+	cd gnuplot-$version
+	sed -i 's|/usr/X11R6/lib/X11/fonts/truetype|/share/fonts/TTF|' src/variable.c
+	sed -i -e 's|/usr/X11R6/lib/X11/fonts/Type1|/share/fonts/Type1|' \
+		-e 's|$(X11ROOT)/X11R6/lib/X11/fonts/Type1|$(X11ROOT)/share/fonts/Type1|' \
+		src/variable.c
+}
+
+build() {
+	cd gnuplot-$version
+
+	./configure --prefix= \
+		--libexecdir=/bin \
+		--with-gihdir=/share/gnuplot \
+		--with-readline=gnu \
+		--with-bitmap-terminals
+	make pkglibexecdir=/bin || die
+	make pkglibexecdir=/bin DESTDIR="${pkgdir}" install || die
+	rm -f "${pkgdir}/share/texmf-dist/ls-R"
+}

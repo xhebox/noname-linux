@@ -1,0 +1,34 @@
+--- sway/meson.build	2018-04-21 17:44:24.176125658 +0000
++++ sway/meson.build	2018-04-21 17:44:24.176125658 +0000
+@@ -5,7 +5,6 @@
+ 	default_options: [
+ 		'c_std=c11',
+ 		'warning_level=2',
+-		'werror=true',
+ 	],
+ )
+ 
+@@ -36,7 +36,6 @@
+ pixman         = dependency('pixman-1')
+ libcap         = dependency('libcap')
+ libinput       = dependency('libinput')
+-libpam         = cc.find_library('libpam')
+ math           = cc.find_library('m')
+ rt             = cc.find_library('rt')
+ git = find_program('git', required: false)
+@@ -106,7 +107,6 @@
+ subdir('client')
+ subdir('swaybg')
+ subdir('swaybar')
+-subdir('swaylock')
+ 
+ config = configuration_data()
+ config.set('sysconfdir', join_paths(prefix, sysconfdir))
+@@ -160,7 +162,6 @@
+ 	zsh_files = files(
+ 		'completions/zsh/_sway',
+ 		'completions/zsh/_swaygrab',
+-		'completions/zsh/_swaylock',
+ 		'completions/zsh/_swaymsg',
+ 	)
+ 	zsh_install_dir = datadir + '/zsh/site-functions'

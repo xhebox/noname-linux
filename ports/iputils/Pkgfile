@@ -1,38 +1,42 @@
-name=iputils
-version=20161105
-deps="libcap libressl"
+version="20180629"
+makedeps=["libcap", "libressl", "docbook-xsl", "perl-sgmls", "kernel-libc-headers"]
+deps=["libcap", "libressl"]
 desc="IP Configuration Utilities (and ping)"
-source="https://github.com/iputils/iputils/archive/s$version.tar.gz
-manpages-$version.patch
-021109-uclibc-no-ether_ntohost.patch
-iputils-20150815-missing-AI_IDN-AI_CANONIDN-NI_IDN.patch
-iputils-20150815-nonroot-floodping.patch
-iputils-20150815-remove-rdisc-glibc-assumption.patch
-"
-#iputils-20150815-scope-delimiter.patch
+source=[
+	{
+		url="https://github.com/iputils/iputils",
+		protocol="git",
+		commit="f6aac8dbe3f8c45c53424854a3312bdd8cdd58d3"
+	},
+	{url="musl.patch"},
+	{url="iputils-ping.toml"},
+]
 
-ext() {
-	cd $name-s$version
+ext='''
+	cd iputils
 	for i in $source;do
-		msg $i
 		case $i in
-		*.patch) patch -Np1 < ../$i || die;;
+		*.patch) patch -p1 -i ../$i;;
 		esac
 	done
-}
+'''
 
-build() {
-	cd $name-s$version
+build='''
+	cd iputils
 	make \
+	USE_IDN=no \
+	USE_SYSFS=no \
 	USE_GNUTLS=no \
 	USE_GCRYPT=no \
-	USE_NETTLE=no \
-	|| die
+	USE_NETTLE=no
+	sed -i -e 's#sgmlspl#sgmlspl.pl#g' doc/Makefile
+	make -C doc man
 
 	install -dm755 "${pkgdir}"/bin
-	install -m755 arping clockdiff rarpd rdisc tftpd tracepath "${pkgdir}"/bin/
+	install -m755 ping arping clockdiff rarpd rdisc tftpd tracepath "${pkgdir}"/bin/
 	install -dm755 "${pkgdir}"/share/man/man8
-	for f in arping clockdiff rarpd rdisc tftpd tracepath; do
-		install -Dm644 doc/${f}.8 "$pkgdir"/share/man/man8/${f}
+	for f in arping ping clockdiff rarpd rdisc tftpd tracepath; do
+		install -Dm644 doc/${f}.8 "$pkgdir"/share/man/man8/${f}.8
 	done
-}
+	install -Dm644 ../iputils-ping.toml "$pkgdir/${HOOKS#$ROOT}"/iputils-ping.toml
+'''

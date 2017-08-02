@@ -1,19 +1,18 @@
-name=xkeyboard-config
-version=2.21
-deps="xorg-app intltool"
+version="2.23.1"
+makedeps=["xorg-app"]
+deps=["xorg-app"]
 desc="X keyboard configuration database"
-source="http://xorg.freedesktop.org/releases/individual/data/$name/$name-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-$version.tar.bz2"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd xkeyboard-config-$version
 
 	./configure --prefix= \
-	            --with-xkb-base=/share/X11/xkb \
-	            --with-xkb-rules-symlink=xorg
+		--with-xkb-base=/share/X11/xkb \
+		--with-xkb-rules-symlink=xorg
 
-	make -j1 || die
-	make DESTDIR="$pkgdir" install || die
+	make -j1
+	make DESTDIR="$pkgdir" install
 
 	ln -s /var/lib/xkb "$pkgdir"/share/X11/xkb/compiled
-	find "$pkgdir" -name README -delete
-}
+'''

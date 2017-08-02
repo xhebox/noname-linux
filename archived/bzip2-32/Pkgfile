@@ -1,0 +1,44 @@
+name=bzip2-32
+version=1.0.6
+desc="A high-quality data compression program"
+source="http://www.bzip.org/$version/bzip2-$version.tar.gz
+  bzip2-1.0.4-makefile-CFLAGS.patch
+  bzip2-1.0.6-saneso.patch
+  bzip2-1.0.4-man-links.patch
+  bzip2-1.0.2-progress.patch
+  bzip2-1.0.3-no-test.patch
+  fasterfile.patch
+  bzip2-1.0.4-POSIX-shell.patch"
+deps="bzip2 musl"
+
+build() {
+  cd bzip2-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export CFLAGS="$CFLAGS -m32"
+  export LDFLAGS="$LDFLAGS -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  for i in ${source}; do
+    case $i in
+    *.patch) patch -p1 -i "$srcdir"/$i  ;;
+    esac
+  done
+  sed -i \
+    -e 's:\$(PREFIX)/man:\$(PREFIX)/share/man:g' \
+    -e 's:ln -s -f $(PREFIX)/bin/:ln -s :' \
+    Makefile
+  sed -i \
+    -e "s:1\.0\.4:$version:" \
+    bzip2.1 bzip2.txt Makefile-libbz2_so manual.*
+  make -f Makefile-libbz2_so all
+  make CFLAGS="$CFLAGS"
+  make PREFIX="$pkgdir" install
+  install -D libbz2.so.$version "$pkgdir"/lib32/libbz2.so.$version
+  ln -s libbz2.so.$version "$pkgdir"/lib32/libbz2.so
+  ln -s libbz2.so.$version "$pkgdir"/lib32/libbz2.so.${version%%.*}
+  rm -rf "$pkgdir"/bin
+  rm -rf "$pkgdir"/include
+  rm -rf "$pkgdir"/share
+  mv "$pkgdir"/lib/* "$pkgdir"/lib32
+  rmdir "$pkgdir"/lib
+}

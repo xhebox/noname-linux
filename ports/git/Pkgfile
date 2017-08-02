@@ -1,11 +1,11 @@
-name=git
-version=2.13.3
-deps="curl libpcre expat perl perl-error xmlto asciidoc tcl tk"
+version="2.20.1"
+makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "xmlto", "shadow", "libressl"]
+deps=["curl", "pcre2", "grep", "expat", "perl", "perl-error", "shadow", "libressl"]
 desc="Directory content manager"
-source="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"
+source=[{url="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd git-$version
 	make \
 		bindir=/bin \
 		prefix= gitexecdir=/lib/git-core \
@@ -17,7 +17,7 @@ build() {
 		MAN_BOLD_LITERAL=1 \
 		NO_REGEX=NeedsStartEnd \
 		NEEDS_SSL_WITH_CURL=1 \
-	all || die
+	all
 	make DESTDIR="$pkgdir" \
 		bindir=/bin \
 		prefix= gitexecdir=/lib/git-core \
@@ -29,5 +29,5 @@ build() {
 		NO_REGEX=NeedsStartEnd \
 		MAN_BOLD_LITERAL=1 \
 		NEEDS_SSL_WITH_CURL=1 \
-	install || die
-}
+	install
+'''

@@ -1,0 +1,14 @@
+name=libgme
+version=0.6.2
+desc="Video game music file emulation/playback library"
+deps="cmake"
+source="https://bitbucket.org/mpyne/game-music-emu/downloads/game-music-emu-$version.tar.xz"
+
+build() {
+	cd game-music-emu-$version
+	mkdir build
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX=
+	make
+	make DESTDIR="${pkgdir}" install
+}

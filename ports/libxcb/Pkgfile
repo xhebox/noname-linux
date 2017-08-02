@@ -1,20 +1,17 @@
-name=libxcb
-version=1.12
+version="1.13.1"
 desc="X11 client-side library"
-deps="pthread-stubs xcb-proto libxdmcp libxau"
-source="http://xcb.freedesktop.org/dist/libxcb-$version.tar.bz2"
+makedeps=["xcb-proto", "libxdmcp", "libxau", "libxslt", "python", "util-macros"]
+deps=["xcb-proto", "libxdmcp", "libxau"]
+source=[{url="http://xcb.freedesktop.org/dist/libxcb-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libxcb-$version
 
 	./configure --prefix= --disable-static --without-doxygen \
 		--sysconfdir=/etc \
-		--disable-build-docs \
 		--enable-xinput \
 		--localstatedir=/var 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/doc
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,18 @@
+version="2.2.3"
+desc="A wrapper library for generic spell checking"
+deps=["glib"]
+makedeps=["glib"]
+source=[
+	{url="https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz"}
+]
+
+build='''
+	cd enchant-$version
+	./configure --prefix= \
+	     --disable-static \
+	     --disable-ispell \
+	     --with-myspell-dir=/share/myspell
+	     sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make
+	make DESTDIR="$pkgdir" install
+'''

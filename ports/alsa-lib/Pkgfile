@@ -1,25 +1,25 @@
-name=alsa-lib
-version=1.1.4.1
+version="1.1.8"
 desc="ALSA libraries"
-source="ftp://ftp.alsa-project.org/pub/lib/alsa-lib-$version.tar.bz2
-alsa-lib-poll.patch
-alsa-lib-stdint.patch"
-deps="python"
+source=[
+	{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/lib/alsa-lib-$version.tar.bz2"},
+	{url="alsa-lib-stdint.patch"},
+]
+makedeps=["python"]
+deps=["python"]
 
-ext() {
+ext='''
 	cd alsa-lib-$version
 	for i in $source; do
 		case $i in
-		*musl*.patch) msg $i; patch -p0 -i "$srcdir"/$i  || die;;
-		*.patch) msg $i; patch -p1 -i "$srcdir"/$i  || die;;
+		*-stdint.patch) patch -p0 -i "$srcdir"/$i;;
+		*.patch) patch -p1 -i "$srcdir"/$i;;
 		esac
 	done
-}
+'''
 
-build() {
+build='''
 	cd alsa-lib-$version
-	./configure --prefix= \
-		--disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	./configure --prefix= 
+	make
+	make DESTDIR="$pkgdir" install
+'''

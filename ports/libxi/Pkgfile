@@ -1,14 +1,14 @@
-name=libxi
-version=1.7.9
-deps="libxext libxfixes xmlto"
+version="1.7.9"
+makedeps=["libxext", "libxfixes", "xmlto"]
+deps=["libxext", "libxfixes"]
 desc="X11 Input extension library"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXi-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXi-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXi-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

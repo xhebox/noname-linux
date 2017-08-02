@@ -1,0 +1,19 @@
+version="7.0.7.35"
+desc="An image viewing/manipulation program"
+keepla=true
+deps="libtool lcms2 libxt fontconfig libxext opencl-headers openexr libxml2 openjpeg2 glu libwebp ocl-icd liblqr perl libraw"
+source="http://www.imagemagick.org/download/ImageMagick-${version%.*}-${version##*.}.tar.xz"
+
+build() {
+	cd ImageMagick-${version%.*}-${version##*.}
+
+	PKG_NO_REMOVELA=yes
+	./configure --prefix= --sysconfdir=/etc --with-modules \
+		--enable-hdri --with-openexr --with-xml \
+		--with-webp --with-gslib --with-gs-font-dir=/share/fonts/Type1 \
+		--with-perl --with-perl-options="INSTALLDIRS=vendor" --with-lqr --without-rsvg \
+		--enable-opencl --with-openjp2 --without-gvc --without-djvu --without-autotrace \
+		--without-jbig --without-fpx --without-dps --without-fftw
+	make
+	make -j1 DESTDIR="${pkgdir}" install
+}

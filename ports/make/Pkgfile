@@ -1,18 +1,27 @@
-name=make
-version=4.2.1
-deps=musl
+version="4.2.1"
+deps=["musl"]
 desc="Controls the generation of executables and other compile-related tasks"
-source="http://mirrors.ustc.edu.cn/gnu/make/make-$version.tar.bz2
-fix-atexit-exit.patch"
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/make/make-$version.tar.bz2"},
+	{url="fix-atexit-exit.patch"},
+	{url="make-4.2.1-glob1.patch"},
+	{url="make-4.2.1-glob2.patch"},
+]
 
-build() {
-	cd $name-$version
-	patch -p1 -i "$srcdir"/fix-atexit-exit.patch 
+ext='''
+	cd make-$version
+	for i in $source; do
+		case "$i" in *.patch) patch -p1 -i ../"$i";; esac
+	done
+	autoreconf -fi
+'''
+
+build='''
+	cd make-$version
 	./configure \
 		--prefix= \
 		--mandir=/share/man \
 		--infodir=/share/info 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

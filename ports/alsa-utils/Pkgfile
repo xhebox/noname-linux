@@ -1,23 +1,22 @@
-name=alsa-utils
-version=1.1.4
+version="1.1.6"
 desc="ALSA utils"
-source="ftp://ftp.alsa-project.org/pub/utils/$name-$version.tar.bz2"
-deps="alsa-lib fftw pciutils psmisc ncurses libsamplerate xmlto"
+source=[{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/utils/alsa-utils-$version.tar.bz2"}]
+makedeps=["alsa-lib", "fftw", "pciutils", "psmisc", "ncurses", "libsamplerate", "xmlto"]
+deps=["alsa-lib", "fftw", "pciutils", "psmisc", "ncurses", "libsamplerate", "xmlto"]
 
-build() {
-	cd $name-$version
+build='''
+	cd alsa-utils-$version
 	./configure --prefix= \
-	    --sbindir=/bin \
-	    --with-udev-rules-dir=/lib/udev/rules.d \
-	    --with-alsactl-lock-dir=/run/lock \
-	    --disable-alsaconf \
-	    --disable-bat
-	make || die
-	make DESTDIR="$pkgdir" install || die
+			--sbindir=/bin \
+			--with-udev-rules-dir=/lib/udev/rules.d \
+			--with-alsactl-lock-dir=/run/lock \
+			--disable-alsaconf \
+			--disable-bat
+	make
+	make DESTDIR="$pkgdir" install
 	mkdir -p "$pkgdir"/var/lib/alsa
 	cd alsactl
-	make 90-alsa-restore.rules || die
+	make 90-alsa-restore.rules
 	cd ..
-	install -Dm644 alsactl/90-alsa-restore.rules \
-	${pkgdir}/lib/udev/rules.d/90-alsa-restore.rules || die
-}
+	install -Dm644 alsactl/90-alsa-restore.rules ${pkgdir}/lib/udev/rules.d/90-alsa-restore.rules
+'''

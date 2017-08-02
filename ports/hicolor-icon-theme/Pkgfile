@@ -1,10 +1,9 @@
-name=hicolor-icon-theme
-version=0.15
+version="0.17"
 desc="default fallback used by the icon theme specification"
-source="http://icon-theme.freedesktop.org/releases/$name-$version.tar.xz"
+source=[{url="http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd hicolor-icon-theme-$version
 	./configure --prefix=
-	make DESTDIR="$pkgdir" install || die
-}
+	make DESTDIR="$pkgdir" install
+'''

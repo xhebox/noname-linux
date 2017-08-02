@@ -1,17 +1,16 @@
-name=libxpm
-version=3.5.12
-deps="libxext libxt"
+version="3.5.12"
+makedeps=["libxext", "libxt"]
+deps=["libxext", "libxt"]
 desc="xorg lib libXpm"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXpm-$version.tar.bz2
-gettext.patch"
+source=[
+	{url="http://xorg.freedesktop.org/releases/individual/lib/libXpm-$version.tar.bz2"}
+]
 
-build() {
+build='''
 	cd libXpm-$version
-	patch -p1 < ../gettext.patch
 
 	./configure --prefix=/ --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

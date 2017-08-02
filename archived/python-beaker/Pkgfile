@@ -1,0 +1,20 @@
+version="1.9.1"
+makedeps=["python-setuptools"]
+deps=["python-setuptools"]
+desc="Caching and sessions WSGI middleware for use with web applications and stand-alone Python scripts and applications"
+source=[
+	{
+		url="https://github.com/bbangert/beaker/archive/$version.tar.gz",
+		name="python-beaker-$version.tar.gz"
+	}
+]
+
+build='''
+	cd beaker-$version
+	/bin/python setup.py build
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+'''

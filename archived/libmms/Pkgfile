@@ -1,0 +1,11 @@
+name=libmms
+version=0.6.4
+desc="MMS stream protocol library"
+source="https://download.sourceforge.net/libmms/libmms-$version.tar.gz"
+
+build() {
+	cd libmms-$version
+	./configure --prefix= --disable-static
+	make
+	make DESTDIR="${pkgdir}" install
+}

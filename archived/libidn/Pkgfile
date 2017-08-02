@@ -1,0 +1,12 @@
+name=libidn
+version=1.34
+desc="Implementation of the Stringprep, Punycode and IDNA specifications"
+deps=musl
+source="http://ftp.gnu.org/gnu/libidn/libidn-${version}.tar.gz"
+
+build() {
+	cd libidn-$version
+	./configure --prefix=
+	make
+	make DESTDIR=${pkgdir} install
+}

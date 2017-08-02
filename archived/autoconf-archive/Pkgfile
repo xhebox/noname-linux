@@ -1,0 +1,12 @@
+version="2018.03.13"
+desc="A collection of freely re-usable Autoconf macros"
+deps=["autoconf", "automake"]
+source=[{url="http://mirrors.ustc.edu.cn/gnu/autoconf-archive/autoconf-archive-${version}.tar.xz"}]
+
+build='''
+	cd autoconf-archive-$version
+	autoreconf -fi
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+'''

@@ -1,0 +1,11 @@
+version="2.30.0"
+makedeps=["intltool", "gobject-introspection", "dbus", "libxtst", "xorgproto"]
+deps=["glib", "dbus", "libxtst"]
+desc="A set of interfaces for accessibility"
+source=[{url="http://download.gnome.org/sources/at-spi2-core/${version%.*}/at-spi2-core-$version.tar.xz"}]
+
+build='''
+	noname-meson at-spi2-core-$version build -Denable_docs=false -D default_bus=dbus-broker
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

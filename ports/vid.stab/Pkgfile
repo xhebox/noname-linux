@@ -1,23 +1,15 @@
-name=vid.stab
-version=1.1
+version="1.1"
 desc='Video stabilization library'
-deps="musl cmake"
-_hash='2d82492533bf5004bc2c4f8213a1b622c45f6a44'
+deps=["musl"]
+source=[{url="https://github.com/georgmartius/vid.stab", protocol="git", commit="2d82492533bf5004bc2c4f8213a1b622c45f6a44"}]
 
-ext() {
-	git clone git://github.com/georgmartius/vid.stab.git
-	cd vid.stab
-	git reset --hard $_hash
-}
-
-build() {
+build='''
 	cd vid.stab
 	mkdir build
 	cd build
 
 	cmake .. \
 	-DCMAKE_INSTALL_PREFIX=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
-
+	make
+	make DESTDIR="${pkgdir}" install
+'''

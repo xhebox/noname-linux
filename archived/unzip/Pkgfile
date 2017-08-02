@@ -1,0 +1,24 @@
+version="6.0"
+desc="Decompress utility for zipfiles"
+source=[
+	{url="http://nchc.dl.sourceforge.net/sourceforge/infozip/src/unzip60.tar.gz"},
+	{url="10-unzip-handle-pkware-verify.patch"},
+	{url="20-unzip-uidgid-fix.patch"},
+	{url="unzip-6.0-heap-overflow-infloop.patch"},
+]
+
+ext='''
+	cd unzip60
+	for i in $source; do
+		case $i in
+			*.patch) patch -p1 -i "$srcdir"/$i ;;
+		esac
+	done
+'''
+
+build='''
+	cd unzip60
+	make -f unix/Makefile LOCAL_UNZIP="$CFLAGS" generic
+	make -f unix/Makefile prefix="$pkgdir" MANDIR="$pkgdir"/share/man/man1 install
+	ln -sf unzip "$pkgdir"/bin/zipinfo
+'''

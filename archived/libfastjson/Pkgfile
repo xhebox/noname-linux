@@ -1,0 +1,13 @@
+name=libfastjson
+version=0.99.8
+desc="A performance-focused json library for C"
+source="libfastjson-$version.tar.gz::https://github.com/rsyslog/libfastjson/archive/v$version.tar.gz"
+
+build() {
+	cd libfastjson-$version
+	autoreconf -fvi
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir/" install
+}
+

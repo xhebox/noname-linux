@@ -1,29 +1,24 @@
-name=icu
-version=59.1
+version="63.1"
+ver="`echo $version | tr . _`"
 desc="International Components for Unicode library"
-ver=` echo $version | sed 's/\./_/g'`
-source="http://download.icu-project.org/files/icu4c/${version}/${name}4c-$ver-src.tgz
-icu-58.1-remove-bashisms.patch
-"
+deps=["dash"]
+source=[
+	{
+		url="https://sourceforge.net/projects/icu/files/ICU4C/$version/icu4c-$ver-src.tgz/download",
+		name="icu4c-$version.tar.gz"
+	},
+	{url="icu-58.1-remove-bashisms.patch"},
+]
 
-build() {
+build='''
 	cd icu/source
-	for x in ARFLAGS CFLAGS CPPFLAGS CXXFLAGS FFLAGS LDFLAGS; do
-		sed -i -e "/^${x} =.*/s:@${x}@::" "config/Makefile.inc.in"
-	done
-	sed -i -e 's,DU_HAVE_STRTOD_L=1,DU_HAVE_STRTOD_L=0,' configure.ac
-	sed -i -e 's,DU_HAVE_STRTOD_L=1,DU_HAVE_STRTOD_L=0,' configure
-	patch -p1 -i ${srcdir}/icu-58.1-remove-bashisms.patch || die
+	patch -p1 -i ${srcdir}/icu-58.1-remove-bashisms.patch
 
 	./configure \
 		--prefix= \
 		--sbindir=/bin \
 		--sysconfdir=/etc \
-		--with-data-packaging=library \
-		--disable-debug \
-		--disable-static \
-		--disable-samples
-	make || die
-	make -j1 DESTDIR="$pkgdir" install || die
-	chmod +x "$pkgdir"/bin/icu-config
-}
+		--with-data-packaging=library
+	make
+	make -j1 DESTDIR="$pkgdir" install
+'''

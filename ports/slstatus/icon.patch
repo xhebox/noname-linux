@@ -1,0 +1,106 @@
+--- slstatus-git/slstatus.h	2018-04-30 00:51:26.176265914 +0800
++++ slstatus-git/slstatus.h	2018-04-30 00:51:26.176265914 +0800
+@@ -1,6 +1,7 @@
+ /* See LICENSE file for copyright and license details. */
+ 
+ /* battery */
++const char *bat_icon(const char *);
+ const char *battery_perc(const char *);
+ const char *battery_state(const char *);
+ const char *battery_remaining(const char *);
+@@ -77,6 +78,7 @@
+ const char *vol_perc(const char *card);
+ 
+ /* wifi */
++const char *wifi_icon(const char *);
+ const char *wifi_perc(const char *interface);
+ const char *wifi_essid(const char *interface);
+ 
+--- slstatus-git/components/battery.c	2018-04-30 01:06:14.073294574 +0800
++++ slstatus-git/components/battery.c	2018-04-30 01:06:14.073294574 +0800
+@@ -9,6 +9,22 @@
+ 	#include <limits.h>
+ 
+ 	const char *
++	bat_icon(const char *bat) {
++		char path[PATH_MAX], state = 'U';
++
++		snprintf(path, sizeof(path), "%s%s%s", "/sys/class/power_supply/", bat, "/status");
++		pscanf(path, "%c", &state);
++
++		switch (state) {
++			case 'U':
++			case 'C':
++				return bprintf("\u00c2");
++			default:
++				return bprintf("\u00b2");
++		}
++	}
++
++	const char *
+ 	battery_perc(const char *bat)
+ 	{
+ 		int perc;
+--- slstatus-git/components/wifi.c	2018-04-30 01:11:12.621621987 +0800
++++ slstatus-git/components/wifi.c	2018-04-30 01:11:12.621621987 +0800
+@@ -95,6 +95,60 @@
+ 
+ 		return id;
+ 	}
++
++ 	const char *
++	wifi_icon(const char *iface)
++	{
++		int i, cur;
++		float perc;
++		int total = 70; /* the max of /proc/net/wireless */
++		char *p, *datastart;
++		char path[PATH_MAX];
++		char status[5];
++		FILE *fp;
++
++		snprintf(path, sizeof(path), "%s%s%s", "/sys/class/net/", iface, "/operstate");
++		fp = fopen(path, "r");
++		if (fp == NULL) {
++			perror("fopen\n");
++			return NULL;
++		}
++		p = fgets(status, 5, fp);
++		fclose(fp);
++		if(!p || strcmp(status, "up\n") != 0) {
++			return NULL;
++		}
++
++		fp = fopen("/proc/net/wireless", "r");
++		if (fp == NULL) {
++			perror("fopen '/proc/net/wireless'\n");
++			return NULL;
++		}
++
++		for (i = 0; i < 3; i++) {
++			if (!(p = fgets(buf, sizeof(buf) - 1, fp)))
++				break;
++		}
++		fclose(fp);
++		if (i < 2 || !p)
++			return NULL;
++
++		if ((datastart = strstr(buf, iface)) == NULL)
++			return NULL;
++
++		datastart = (datastart+(strlen(iface)+1));
++		sscanf(datastart + 1, " %*d   %d  %*d  %*d		  %*d	   %*d		%*d		 %*d	  %*d		 %*d", &cur);
++
++		perc = (float)cur / total * 100.0;
++
++		if (perc <= 30) {
++			return bprintf("\u00a2");
++		} else if (perc <= 60) {
++			return bprintf("\u00a3");
++		} else {
++			return bprintf("\u00a4");
++		}
++	}
+ #elif defined(__OpenBSD__)
+ 	#include <net/if.h>
+ 	#include <net/if_media.h>

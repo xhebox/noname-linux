@@ -1,0 +1,14 @@
+name=libpinyin
+version=2.1.91
+deps="db glib"
+desc="Library to deal with pinyin"
+source="https://github.com/libpinyin/libpinyin/archive/$version.tar.gz"
+
+build() {
+	cd $name-$version
+	sed -i "s/wget/curl -L -O/g" data/Makefile.am
+	aclocal && libtoolize --force && autoheader && automake -a && autoconf
+	./configure --prefix=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

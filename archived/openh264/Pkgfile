@@ -1,0 +1,13 @@
+name=openh264
+version=1.8.0
+desc='OpenH264 is a codec library which supports H.264 encoding and decoding'
+deps="nasm"
+source="https://github.com/cisco/openh264/archive/v${version}.tar.gz"
+
+build() {
+	cd openh264-$version
+	make
+	make DESTDIR="$pkgdir" PREFIX=/ install
+	install -Dm755 h264dec "$pkgdir"/bin/h264dec
+	install -Dm755 h264enc "$pkgdir"/bin/h264enc
+}

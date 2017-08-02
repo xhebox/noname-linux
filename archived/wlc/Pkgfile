@@ -1,0 +1,17 @@
+name=wlc
+version=0.0.11
+desc="Wayland Compositor Library"
+deps="libdrm pixman xcb-util-image xcb-util-wm wayland wayland-protocols libxkbcommon libinput mesa cmake"
+source="https://github.com/Cloudef/wlc/releases/download/v$version/wlc-$version.tar.bz2"
+
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../wlc-$version \
+		-DCMAKE_BUILD_TYPE=Upstream \
+		-DCMAKE_INSTALL_LIBDIR=/lib \
+		-DCMAKE_INSTALL_PREFIX=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

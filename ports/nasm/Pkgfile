@@ -1,11 +1,10 @@
-name=nasm
-version=2.13.01
+version="2.13.03"
 desc="80x86 assembler"
-source="http://www.nasm.us/pub/nasm/releasebuilds/$version/$name-$version.tar.xz"
+source=[{url="http://www.nasm.us/pub/nasm/releasebuilds/$version/nasm-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd nasm-$version
 	./configure --prefix= --disable-static 
-	make  || die
-	make INSTALLROOT="$pkgdir" install  || die
-}
+	make CFLAGS="$CFLAGS -Wno-attributes"
+	make INSTALLROOT="$pkgdir" install
+'''

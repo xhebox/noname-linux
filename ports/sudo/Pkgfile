@@ -1,26 +1,45 @@
-name=sudo
-version=1.8.20.p2
-_version="`echo $version | sed 's/.p/p/g'`"
-deps="zlib groff libldap"
-source="http://www.courtesan.com/sudo/dist/$name-$_version.tar.gz
-sudoers
-musl.patch"
+version="1.8.27"
+makedeps=["pam", "libressl"]
+deps=["pam", "libressl"]
+source=[
+ {url="http://www.courtesan.com/sudo/dist/sudo-$version.tar.gz"},
+ {url="sudo.pam"},
+ {url="musl.patch"},
+]
 
-build() {
-	cd $name-$_version
-	patch -p0 < ../musl.patch || die
-	./configure --with-ignore-dot -with-all-insults --with-env-editor \
-	--enable-shell-sets-home --enable-noargs-shell --without-sendmail \
-	--with-logfac=auth --disable-root-mailer --enable-pie --with-mdoc \
-	--without-pam \
+ext='''
+	cd sudo-$version
+	for i in $source; do
+		case $i in
+		musl*patch) patch -p0 -i ../$i;;
+		*patch) patch -p1 -i ../$i;;
+		esac
+	done
+'''
+
+build='''
+	cd sudo-$version
+	./configure \
+	--prefix=/ \
 	--sbindir=/bin \
- 	--prefix=  --libexecdir=/lib
-	find . -name Makefile -exec sed -i 's,$(INSTALL_OWNER),,g' {} \;
-	make || die
-	make DESTDIR="$pkgdir" install || die
-	install -Dm0440 ../sudoers "$pkgdir"/etc/sudoers
-	chmod 4111 "$pkgdir"/bin/sudo "$pkgdir"/bin/sudoedit
-	rm -r ${pkgdir}/share/doc
-	rm -r ${pkgdir}/include
-	rm -rf ${pkgdir}/var/run
-}
+	--libdir=/lib \
+	--libexecdir=/lib \
+	--with-rundir=/run/sudo \
+	--with-vardir=/var/db/sudo \
+	--with-logfac=auth \
+	--enable-openssl \
+	--enable-tmpfiles.d=/lib/tmpfiles.d/ \
+	--with-pam \
+	--with-sssd \
+	--with-env-editor \
+	--with-passprompt="[sudo] password for %p: " \
+	--with-all-insults
+
+	make
+	make DESTDIR="$pkgdir" install
+	chmod +s /bin/sudo
+	rm "$pkgdir/etc/sudoers.dist"
+	rmdir "$pkgdir/run/sudo"
+	rmdir "$pkgdir/run"
+	install -Dm644 "$srcdir/sudo.pam" "$pkgdir/etc/pam.d/sudo"
+'''

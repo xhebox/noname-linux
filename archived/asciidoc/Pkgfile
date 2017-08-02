@@ -1,0 +1,16 @@
+name=asciidoc
+desc="Text based document generation."
+version=8.6.10
+deps="python docbook-xml docbook-xsl lynx"
+source="https://github.com/asciidoc/asciidoc/archive/${version}.tar.gz"
+
+build() {
+	cd $name-$version
+	autoreconf
+	./configure \
+		--prefix=/
+
+	make || die
+	make DESTDIR=$pkgdir install || die
+	rm $pkgdir/etc/asciidoc/images/icons/README
+}

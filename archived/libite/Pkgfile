@@ -1,0 +1,12 @@
+version="2.0.2"
+deps=["musl"]
+desc="init's dependence"
+source=[{url="https://github.com/troglobit/libite/releases/download/v$version/libite-$version.tar.xz"}]
+
+build='''
+	cd libite-$version
+	./configure --prefix=/ --sbindir=/bin --disable-static 
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

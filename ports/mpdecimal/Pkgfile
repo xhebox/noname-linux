@@ -1,0 +1,11 @@
+version="2.4.2"
+desc="Package for correctly-rounded arbitrary precision decimal floating point arithmetic"
+deps=["musl"]
+source=[{url="http://www.bytereef.org/software/mpdecimal/releases/mpdecimal-$version.tar.gz"}]
+
+build='''
+	cd mpdecimal-$version
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,31 @@
+. ../eudev/Pkgfile
+name=eudev-32
+deps="gperf coreutils hwids eudev"
+
+build() {
+  cd eudev-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= \
+      --exec-prefix= \
+      --sysconfdir=/etc \
+      --libdir=/lib32 \
+      --sbindir=/bin \
+      --with-rootrundir=/run \
+      --disable-manpages \
+      --disable-static \
+      --disable-kmod \
+      --disable-introspection 
+
+  make CFLAGS="$CFLAGS -D_GNU_SOURCE"
+  make install DESTDIR="$pkgdir"
+  make -C man install DESTDIR="$pkgdir"
+  sed -i 's#GROUP="dialout"#GROUP="uucp"#g;
+  s#GROUP="tape"#GROUP="storage"#g;
+  s#GROUP="cdrom"#GROUP="optical"#g' "$pkgdir"/lib32/udev/rules.d/*.rules
+  rm -r "$pkgdir"/bin
+  rm -r "$pkgdir"/etc
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/share
+}

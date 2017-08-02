@@ -1,0 +1,11 @@
+--- libime/src/libime/core/kenlm/util/file.cc	2019-02-24 11:02:20.927861273 +0800
++++ libime/src/libime/core/kenlm/util/file.cc	2019-02-24 11:02:20.927861273 +0800
+@@ -540,7 +540,7 @@
+   const char *const vars[] = {"TMPDIR", "TMP", "TEMPDIR", "TEMP", 0};
+   for (int i=0; vars[i]; ++i) {
+     char *val =
+-#if defined(_GNU_SOURCE)
++#if defined(_GNU_SOURCE) && defined(__GLIBC__)
+ #if __GLIBC_PREREQ(2,17)
+       secure_getenv
+ #else // __GLIBC_PREREQ

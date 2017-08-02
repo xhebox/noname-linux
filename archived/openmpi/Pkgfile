@@ -1,0 +1,37 @@
+name=openmpi
+version=3.1.0
+desc="High performance message passing library (MPI)"
+deps="libtool inetutils valgrind hwloc"
+source="http://www.open-mpi.org/software/ompi/v${version%.*}/downloads/openmpi-${version}.tar.bz2"
+
+build() {
+	cd openmpi-$version
+	sed -i 's,sys/unistd.h,unistd.h,g' opal/include/opal/sys/cma.h
+	sed -i '1i#include <unistd.h>' opal/mca/pmix/pmix112/pmix/include/pmix_server.h
+
+	./configure --prefix=/ \
+		--sysconfdir=/etc/openmpi \
+		--enable-mpi-fortran=all \
+		--libdir=/lib/openmpi \
+		--with-threads=posix \
+		--enable-mpi-thread-multiple \
+		--enable-smp-locks \
+		--enable-builtin-atomics \
+		--enable-mpi-cxx \
+		--with-valgrind \
+		--enable-memchecker \
+		--enable-pretty-print-stacktrace \
+		--without-slurm \
+		--with-hwloc= \
+		--with-libltdl=	\
+		FC=/bin/gfortran \
+		LDFLAGS="$LDFLAGS -Wl,-z,noexecstack"
+
+	make
+	make DESTDIR="$pkgdir" install
+
+	install -d -m 755 "$pkgdir"/lib/pkgconfig
+	for i in ompi-c.pc ompi-cxx.pc ompi-f77.pc ompi-f90.pc ompi.pc; do
+		ln -sf /lib/openmpi/pkgconfig/$i "$pkgdir"/lib/pkgconfig/
+	done
+}

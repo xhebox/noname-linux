@@ -1,0 +1,14 @@
+name=cabextract
+version=1.6
+deps=musl
+desc="A program to extract Microsoft cabinet (.CAB) files"
+source="http://www.cabextract.org.uk/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/ --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}

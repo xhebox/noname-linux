@@ -1,12 +1,11 @@
-name=opencc
-version=1.0.5
-deps="cmake python"
+version="1.0.5"
+makedeps=["cmake", "python3"]
 desc="Library for Open Chinese Convert"
-source="https://github.com/BYVoid/OpenCC/archive/ver.$version.tar.gz"
+source=[{url="https://github.com/BYVoid/OpenCC/archive/ver.$version.tar.gz"}]
 
-build() {
+build='''
 	cd OpenCC-ver.$version
 	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=OFF
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

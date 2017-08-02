@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+export PATH=/bin
+dmesg -n warn
+grep -q " verbose" /proc/cmdline && dmesg -n info
+grep -q " debug" /proc/cmdline && dmesg -n debug
+
+mkdir -p /proc /sys /dev /run
+mount -t proc -o nosuid,noexec,nodev proc /proc
+mount -t sysfs -o nosuid,noexec,nodev sysfs /sys
+mount -t devtmpfs -o mode=0755,nosuid udev /dev
+mount -t devpts -o nosuid,noexec,mode=0620,gid=5 devpts /dev/pts
+mount -t tmpfs -o nosuid,nodev,mode=1777 shm /dev/shm
+mount -t tmpfs -o nosuid,nodev,mode=0755 run /run
+mount -t tmpfs -o nosuid,nodev,nostrictatime,mode=1777 tmp /tmp
+
+if [ -e /sys/firmware/efi/efivars ]; then
+	mount -t efivarfs -o nosuid,noexec,nodev efivars /sys/firmware/efi/efivarfs
+fi
+
+udevadm info --cleanup-db
+udevadm trigger -c add -t devices
+udevadm trigger -c add -t subsystems
+udevadm settle
+
+hwclock -u -s
+hostname `cat /etc/hostname`
+ip link set dev lo up
+
+cryptmount -M
+
+fsck -A -T -C -p
+mount -o remount,rw /
+
+swapon -a
+mount -a
+
+for i in /etc/init.d /etc/rc.local ; do
+	[ -x "$i" ] && "$i"
+done

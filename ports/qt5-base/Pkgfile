@@ -1,25 +1,31 @@
-name=qt5-base
-version=5.9.1
-deps="dbus mesa libxi libxrender xcb-util-image xcb-util-keysyms xcb-util-wm libressl harfbuzz sqlite python libpng libjpeg-turbo zlib gtk hicolor-icon-theme icu alsa-lib fontconfig libinput pulseaudio"
-source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtbase-opensource-src-$version.tar.xz
-libressl-compat.patch
-qt-musl-iconv-no-bom.patch
-"
+version="5.12.1"
 desc="Qt Free Edition, version 5.x"
+makedeps=["dbus", "mesa", "libxi", "libxrender", "xcb-util-image", "xcb-util-keysyms", "xcb-util-wm", "libressl", "harfbuzz", "sqlite", "python", "libpng", "libjpeg-turbo", "zlib", "hicolor-icon-theme", "icu", "alsa-lib", "fontconfig", "libinput", "pulseaudio", "double-conversion"]
+deps=["dbus", "mesa", "libxi", "libxrender", "xcb-util-image", "xcb-util-keysyms", "xcb-util-wm", "libressl", "harfbuzz", "sqlite", "python", "libpng", "libjpeg-turbo", "zlib", "hicolor-icon-theme", "icu", "alsa-lib", "fontconfig", "libinput", "pulseaudio", "double-conversion"]
+source=[
+	{url="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtbase-everywhere-src-$version.tar.xz"},
+	{url="libressl-const-bio.patch"},
+	{url="libressl.patch"},
+	{url="qt-musl-iconv-no-bom.patch"},
+]
 
-build() {
-	cd qtbase-opensource-src-$version
-
+ext='''
+	cd qtbase-everywhere-src-$version
 	for i in $source;do
 		case $i in
-		*qtbug*.patch) msg $i && patch -p1 -i $srcdir/$i || die;;
-		*.patch) msg $i && patch -p1 -i $srcdir/$i || die ;;
+		*.diff|*.patch) patch -p1 -i ../$i ;;
 		esac
 	done
-	CFLAGS="$CFLAGS -DOPENSSL_NO_SSL3_METHOD"
-	CXXFLAGS="$CXXFLAGS -DOPENSSL_NO_SSL3_METHOD"
+'''
 
-	sed -i '/OPENSSL_VERSION_NUMBER-0 >= 0x10002000L && !defined(OPENSSL_NO_EC) && !defined(SSL_CTRL_SET_CURVES)/,+2d' config.tests/unix/openssl/openssl.cpp || die
+build='''
+	cd qtbase-everywhere-src-$version
+	CFLAGS="$CFLAGS -DOPENSSL_NO_PSK -DOPENSSL_NO_NEXTPROTONEG"
+	LDFLAGS="$LDFLAGS -fPIE"
+	sed -i -e "s|-O2|$CXXFLAGS|" \
+	-e "/^QMAKE_RPATH/s| -Wl,-rpath,||g" \
+	-e "/^QMAKE_LFLAGS\s/s|+=|+= $LDFLAGS|g" \
+	mkspecs/common/*.conf
 
 	# Respect system CXXFLAGS
 	sed -i "s|^\(QMAKE_CFLAGS_RELEASE.*\)|\1 ${CXXFLAGS}|" mkspecs/common/gcc-base.conf
@@ -27,33 +33,33 @@ build() {
 
 	./configure \
 		-prefix / \
-	 	-bindir /bin \
+		-bindir /bin \
 		-docdir /share/doc/qt \
 		-headerdir /include/qt \
 		-archdatadir /lib/qt \
 		-datadir /share/qt \
 		-sysconfdir /etc/xdg \
 		-system-sqlite \
-		-nomake examples \
 		-system-harfbuzz \
 		-no-use-gold-linker \
 		-openssl-linked \
 		-dbus-linked \
 		-optimized-qmake \
-		-nomake examples \
 		-no-pch \
 		-no-cups \
 		-no-strip \
 		-shared -no-rpath \
-		-no-separate-debug-info \
-		-no-reduce-relocations \
+		-reduce-relocations \
 		-opensource -confirm-license
 
-	make || die
-	make INSTALL_ROOT=$pkgdir install || die
-    
+	make
+	make INSTALL_ROOT=$pkgdir install
+		
 	# Drop QMAKE_PRL_BUILD_DIR because reference the build dir
 	find "${pkgdir}/lib" -type f -name '*.prl' -exec sed -i '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 	sed -i "$pkgdir"/lib/qt/mkspecs/common/gcc-base.conf \
 		-e '/^QMAKE_CFLAGS_ISYSTEM/s;-isystem;-I;'
-}
+
+	install -d -m755 "$pkgdir"/include/qtxcb-private
+	cp -r src/plugins/platforms/xcb/*.h "$pkgdir"/include/qtxcb-private/
+'''

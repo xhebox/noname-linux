@@ -1,0 +1,18 @@
+. ../libxml2/Pkgfile
+name=libxml2-32
+deps="zlib-32 libxml2"
+
+build() {
+  cd libxml2
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  NOCONFIGURE=1 ./autogen.sh
+  ./configure --target=$TARGET32 --prefix= --disable-static --with-threads --libdir=/lib32 --without-lzma --without-python
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/bin
+}

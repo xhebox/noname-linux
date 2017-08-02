@@ -1,12 +1,11 @@
-name=libinput
-version=1.8.1
-deps="mtdev libevdev eudev graphviz"
+version="1.12.1"
+makedeps=["mtdev", "libevdev", "systemd"]
+deps=["mtdev", "libevdev", "systemd"]
 desc="Libinput translates evdev events into Wayland events"
-source="http://www.freedesktop.org/software/$name/$name-$version.tar.xz"
+source=[{name="libinput-$version.tar.gz", url="https://github.com/wayland-project/libinput/archive/$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-	./configure --prefix=/ --libexecdir=/lib --enable-libwacom=disable --disable-static --disable-documentation
-	make || die
-	make install DESTDIR="$pkgdir" || die
-}
+build='''
+	noname-meson libinput-$version build -Dtests=false -Ddebug-gui=false -Dlibwacom=false -Ddocumentation=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

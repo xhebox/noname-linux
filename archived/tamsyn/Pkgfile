@@ -1,0 +1,11 @@
+name=tamsyn
+version=1.7
+desc="Tamsyn font with added status icons."
+deps="xorg-fonts fontconfig"
+source="https://sourceforge.net/projects/tamsynmod/files/tamsynmod-$version.tar.gz"
+
+build() {
+	cd tamsynmod-$version
+	install -d "$pkgdir/share/fonts/misc"
+	install -m644 *.pcf "$pkgdir/share/fonts/misc/"
+}

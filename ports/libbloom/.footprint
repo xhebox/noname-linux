@@ -1,6 +1,0 @@
-include/bloom.h|644|0|0|regular file
-include|755|0|0|directory
-lib/libbloom.so.1.4|755|0|0|regular file
-lib/libbloom.so.1|777|0|0|symbolic link
-lib/libbloom.so|777|0|0|symbolic link
-lib|755|0|0|directory

@@ -1,0 +1,14 @@
+name=qgnomeplatform
+version=0.3
+desc="GTK3 for qt5"
+deps="qt5-x11extras gtk3"
+source="https://github.com/FedoraQt/QGnomePlatform/archive/$version.tar.gz"
+
+build() {
+	cd QGnomePlatform-$version
+	mkdir build
+	cd build
+	qmake ..
+	make || die
+	make INSTALL_ROOT="${pkgdir}" install || die
+}

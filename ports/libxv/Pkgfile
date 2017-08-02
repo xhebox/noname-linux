@@ -1,14 +1,14 @@
-name=libxv
-version=1.0.11
+version="1.0.11"
 desc="Xv library"
-deps="xorg-proto libxext"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXv-$version.tar.bz2"
+makedeps=["xorgproto", "libxext"]
+deps=["libxext"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXv-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXv-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

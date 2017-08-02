@@ -1,17 +1,24 @@
-name=db
-version=5.3.28
+version="5.3.28"
 desc="The db library"
-source="http://download.oracle.com/berkeley-db/db-${version}.tar.gz"
-deps="bash"
+source=[
+	{url="http://download.oracle.com/berkeley-db/db-${version}.tar.gz"},
+	{url="atomic.patch"},
+]
+deps=["dash", "musl"]
 
-build() {
-	cd $name-$version
+ext='''
+	cd db-$version
+	patch -p0 -i ../atomic.patch
+'''
+
+build='''
+	cd db-$version
+
 	cd build_unix
 	../dist/configure --prefix=/ --enable-compat185 \
 	--enable-shared --enable-static --enable-cxx --enable-dbm \
 	--enable-stl 
 
-	make LIBSO_LIBS=-lpthread  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/docs
-}
+	make LIBSO_LIBS=-lpthread
+	make DESTDIR="$pkgdir" install
+'''

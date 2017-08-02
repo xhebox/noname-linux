@@ -1,0 +1,16 @@
+. ../giflib/Pkgfile
+name=giflib-32
+deps="giflib"
+
+build() {
+  cd giflib-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --libdir=/lib32 --disable-static
+  make
+  make DESTDIR="$pkgdir" install
+  rm -rf "${pkgdir}"/include
+  rm -rf "${pkgdir}"/share
+  rm -rf "${pkgdir}"/bin
+}

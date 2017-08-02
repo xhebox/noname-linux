@@ -1,21 +1,15 @@
-name=gdk-pixbuf
-version=2.36.6
-deps="libpng libx11 glib libjpeg-turbo libtiff gobject-introspection"
+version="2.38.0"
+makedeps=["libpng", "libx11", "glib", "libjpeg-turbo", "libtiff", "gobject-introspection"]
+deps=["libpng", "libx11", "glib", "libjpeg-turbo", "libtiff"]
 desc="An image loading library for GTK+"
-source="http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz"
+source=[
+	{url="http://download.gnome.org/sources/gdk-pixbuf/${version%.*}/gdk-pixbuf-$version.tar.xz"},
+	{url="gdk-pixbuf-loaders.toml"},
+]
 
-build() {
-	cd $name-$version
-	./configure --disable-static \
-	--prefix=/ \
-	--disable-installed-tests \
-	--with-libjpeg \
-	--without-libjasper \
-	--with-libpng \
-	--with-x11 \
-	--disable-static
-
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+build='''
+	noname-meson gdk-pixbuf-$version build -Ddocs=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+	install -Dm755 ../gdk-pixbuf-loaders.toml "$pkgdir/${HOOKS#$ROOT}"/gdk-pixbuf-loaders.toml
+'''

@@ -1,0 +1,17 @@
+name=dotconf
+version=1.3
+source="https://github.com/williamh/$name/archive/v$version.zip"
+desc="A C library for parsing configuration files"
+deps=musl
+
+build() {
+	cd $name-$version
+
+	autoreconf -fi	
+	./configure --prefix=/
+
+	make
+	make DESTDIR=$pkgdir install
+
+	rm -r $pkgdir/share
+}

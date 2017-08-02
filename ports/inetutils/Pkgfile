@@ -1,26 +1,34 @@
-name=inetutils
-version=1.9.4
-deps="libcap"
+version="1.9.4"
+makedeps=["libcap", "pam", "help2man"]
+deps=["libcap", "pam"]
 desc="A collection of common network programs"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.gz"
+source=[{url="http://ftp.gnu.org/pub/gnu/inetutils/inetutils-$version.tar.gz"}, {url="argp.patch"}]
 
-build() {
-	cd $name-$version
+ext='''
+	cd inetutils-$version
+	patch -p1 -i ../argp.patch
 	sed -i 's|_GL_WARN_ON_USE (gets|//_GL_WARN_ON_USE (gets|' lib/stdio.in.h
 	echo '#define PATH_PROCNET_DEV "/proc/net/dev"' >> ifconfig/system/linux.h
+'''
+
+build='''
+	cd inetutils-$version
 	./configure --prefix= --libexec=/bin \
 		--localstatedir=/var --sysconfdir=/etc \
-		--without-wrap --without-pam \
+		--without-wrap --with-pam \
 		--enable-ftp --enable-ftpd \
 		--enable-telnet --enable-telnetd \
-		--disable-rcp --disable-rlogin --disable-rlogind --disable-rsh --disable-rshd --disable-talk --disable-talkd \
+		--disable-rcp --disable-rlogin \
+		--disable-rlogind --disable-rsh \
+		--disable-rshd \
+		--disable-talk --disable-talkd \
+		--disable-ping --disable-ping6 \
 		--enable-hostname --enable-dnsdomainname \
 		--disable-rexec --disable-rexecd \
 		--disable-tftp --disable-tftpd \
 		--disable-logger --disable-syslogd \
 		--disable-inetd --disable-whois \
 		--disable-uucpd --disable-ifconfig
-	make  || die
-	make DESTDIR="$pkgdir" install   || die
-	rm -r "$pkgdir"/share/info
-}
+	make
+	make DESTDIR="$pkgdir" install 
+'''

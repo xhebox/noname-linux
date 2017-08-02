@@ -1,0 +1,15 @@
+version="1.0.1"
+makedeps=["lua51"]
+source=[{url="http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-$version.tar.gz"}]
+
+ext='''
+	sed 's/^CFLAGS =/CFLAGS +=/' -i lpeg-$version/makefile
+	sed 's/^COPT =/# COPT =/' -i lpeg-$version/makefile
+'''
+
+build='''
+	cd lpeg-$version
+	make LUADIR=/include/lua5.1
+	install -Dm755 lpeg.so "$pkgdir"/lib/lua/5.1/lpeg.so
+	install -Dm644 re.lua "$pkgdir"/share/lua/5.1/re.lua
+'''

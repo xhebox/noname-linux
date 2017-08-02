@@ -1,0 +1,12 @@
+name=spice-protocol
+version=0.12.13
+desc="protocol headers for interaction with virtualized desktop devices"
+source="http://spice-space.org/download/releases/spice-protocol-$version.tar.bz2"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ \
+		--datarootdir=/lib
+	make
+	make DESTDIR=$pkgdir install
+}

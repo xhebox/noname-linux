@@ -1,9 +1,0 @@
-include/SDL2/SDL_image.h|644|0|0|regular file
-include/SDL2|755|0|0|directory
-include|755|0|0|directory
-lib/libSDL2_image-2.0.so.0.0.1|755|0|0|regular file
-lib/libSDL2_image-2.0.so.0|777|0|0|symbolic link
-lib/libSDL2_image.so|777|0|0|symbolic link
-lib/pkgconfig/SDL2_image.pc|644|0|0|regular file
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory

@@ -1,0 +1,10 @@
+--- firefox-57.0.1/security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2017-11-02 16:16:32.000000000 +0000
++++ firefox-57.0.1/security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2017-11-02 16:16:32.000000000 +0000
+@@ -164,6 +164,7 @@
+   policy->AddDir(rdonly, "/usr/X11R6/lib/X11/fonts");
+   policy->AddDir(rdonly, "/nix/store");
+   policy->AddDir(rdonly, "/run/host/fonts");
++  policy->AddDir(rdonly, "/share/fonts");
+   policy->AddDir(rdonly, "/run/host/user-fonts");
+ 
+   AddMesaSysfsPaths(policy);

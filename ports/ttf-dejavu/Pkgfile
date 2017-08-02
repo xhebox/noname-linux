@@ -1,22 +1,19 @@
-name=ttf-dejavu
-version=2.37
+version="2.37"
 desc="Font family based on the Bitstream Vera Fonts with a wider range of characters"
-deps="fontconfig xorg-fonts xorg-app"
-source="http://downloads.sourceforge.net/project/dejavu/dejavu/${version}/dejavu-fonts-ttf-${version}.tar.bz2"
+deps=["fontconfig"]
+source=[{url="http://nchc.dl.sourceforge.net/project/dejavu/dejavu/${version}/dejavu-fonts-ttf-${version}.tar.bz2"}]
 
-build() {
+build='''
 	install -dm755 "${pkgdir}"/etc/fonts/conf.avail
 	install -dm755 "${pkgdir}"/etc/fonts/conf.d
 	install -dm755 "${pkgdir}"/share/fonts/TTF
-
-	cd "${srcdir}"/dejavu-fonts-ttf-${version}
+	cd dejavu-fonts-ttf-${version}
 
 	install -m644 ttf/*.ttf "${pkgdir}"/share/fonts/TTF/
 	install -m644 fontconfig/*.conf "${pkgdir}"/etc/fonts/conf.avail/
 
-	pushd "${pkgdir}"/etc/fonts/conf.avail
+	cd "${pkgdir}"/etc/fonts/conf.avail
 	for config in *; do
 		ln -sf ../conf.avail/${config} ../conf.d/${config}
 	done
-	popd
-}
+'''

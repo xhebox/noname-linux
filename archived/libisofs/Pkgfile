@@ -1,0 +1,13 @@
+version="1.5.0"
+desc="Library to pack up hard disk files and directories into a ISO 9660 disk image"
+source=[{url="http://files.libburnia-project.org/releases/libisofs-${version}.tar.gz"}]
+makedeps=["acl", "zlib"]
+deps=["acl", "zlib"]
+
+build='''
+	cd libisofs-${version}
+	./configure --prefix= \
+	--enable-libacl --enable-xattr --disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

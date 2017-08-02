@@ -1,0 +1,14 @@
+version="3.1.1"
+desc='An efficient object serialization library'
+source=[{url="https://github.com/msgpack/msgpack-c/releases/download/cpp-${version}/msgpack-${version}.tar.gz"}]
+
+
+build='''
+	cd msgpack-${version}
+	cmake -DCMAKE_INSTALL_PREFIX= \
+		-DMSGPACK_CXX11=ON \
+		-DMSGPACK_BUILD_EXAMPLES=OFF \
+		.
+	make
+	make DESTDIR="$pkgdir" install
+'''

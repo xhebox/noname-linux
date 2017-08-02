@@ -1,20 +1,30 @@
-name=e2fsprogs
-version=1.43.4
-deps="util-linux bash"
+version="1.44.4"
 desc="ext utils"
-source="http://downloads.sourceforge.net/sourceforge/e2fsprogs/e2fsprogs-$version.tar.gz"
+makedeps=["util-linux"]
+deps=["util-linux", "dash"]
+source=[
+	{url="https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${version}/e2fsprogs-${version}.tar.xz"},
+	{url="fix-glibcism.patch"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd e2fsprogs-$version
+	patch -p0 -i ../fix-glibcism.patch
 	sed -i '/init\.d/s|^|#|' misc/Makefile.in
+'''
+
+build='''
+	cd e2fsprogs-$version
 	./configure \
 	--prefix=/ \
-	--sbindir=/bin --disable-uuidd \
-	--disable-libuuid --disable-libblkid \
+	--sbindir=/bin \
 	--enable-elf-shlibs \
+	--disable-uuidd \
+	--disable-libuuid \
+	--disable-libblkid \
 	--disable-fsck 
-	make || die
-	make -j1 DESTDIR="$pkgdir" install install-libs || die
+	make
+	make -j1 DESTDIR="$pkgdir" install install-libs
 	sed -i -e 's/^AWK=.*/AWK=awk/' "${pkgdir}/bin/compile_et"
 	sed -i -e 's#^SS_DIR=.*#SS_DIR="/share/ss"#' "${pkgdir}/bin/mk_cmds"
 	sed -i -e 's#^ET_DIR=.*#ET_DIR="/share/et"#' "${pkgdir}/bin/compile_et"
@@ -22,5 +32,4 @@ build() {
 	rm "${pkgdir}"/lib/libe2p.a
 	rm "${pkgdir}"/lib/libext2fs.a
 	rm "${pkgdir}"/lib/libss.a
-	rm -r "$pkgdir"/share/info
-}
+'''

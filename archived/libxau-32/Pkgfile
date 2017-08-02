@@ -1,0 +1,19 @@
+name=libxau-32
+version=1.0.8
+desc="X Authorization routines"
+deps=libxau
+source="http://xorg.freedesktop.org/releases/individual/lib/libXau-$version.tar.bz2"
+
+build() {
+  cd libXau-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --sysconfdir=/etc --libdir=/lib32 \
+    --localstatedir=/var --disable-static
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}

@@ -1,0 +1,13 @@
+--- CMakeLists.txt	2014-01-05 06:13:04.000000000 +0800
++++ CMakeLists.txt	2014-01-05 06:13:04.000000000 +0800
+@@ -298,7 +298,9 @@
+ 
+ add_subdirectory(sbuild)
+ add_subdirectory(bin)
+-add_subdirectory(test)
++if(BUILD_TESTS)
++	add_subdirectory(test)
++endif(BUILD_TESTS)
+ add_subdirectory(doc)
+ add_subdirectory(etc)
+ add_subdirectory(po)

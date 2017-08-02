@@ -1,0 +1,39 @@
+name=opencolorio
+version=1.1.0
+desc="A color management framework for visual effects and animation"
+deps="python cmake tinyxml yaml-cpp lcms2"
+source="opencolorio-$version.tar.gz::https://github.com/imageworks/OpenColorIO/archive/v${version}.tar.gz
+OpenColorIO-gcc.patch
+ocio-1.1.0-yamlcpp060.patch
+8d48ee8da42de2d878db7b42586db8b3c67f83e1.patch
+"
+
+ext() {
+	cd OpenColorIO-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd OpenColorIO-$version
+	rm -f ext/lcms* ext/tinyxml* ext/yaml*
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX= \
+	-DPYTHON=/bin/python2 \
+	-DCMAKE_INSTALL_LIBDIR=lib \
+	-DUSE_EXTERNAL_YAML=ON \
+	-DUSE_EXTERNAL_TINYXML=ON \
+	-DUSE_EXTERNAL_LCMS=ON
+
+	make
+	make DESTDIR="${pkgdir}" install
+
+	mv "$pkgdir"/lib/static/libOpenColorIO.a "$pkgdir"/lib/libOpenColorIO.a
+	rmdir "$pkgdir"/lib/static
+}

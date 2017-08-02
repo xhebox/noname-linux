@@ -1,0 +1,11 @@
+name=cppunit
+version=1.14.0
+desc="A C++ unit testing framework"
+source="https://dev-www.libreoffice.org/src/cppunit-${version}.tar.gz"
+
+build() {
+	cd cppunit-$version
+	./configure --prefix= --disable-static
+	make
+	make DESTDIR="${pkgdir}" install
+}

@@ -1,13 +1,12 @@
-name=libssh2
-version=1.8.0
+version="1.8.0"
 desc="A library implementing the SSH2 protocol as defined by Internet Drafts"
-deps="libressl zlib"
-source="https://www.libssh2.org/download/libssh2-$version.tar.gz"
+makedeps=["libressl", "zlib"]
+deps=["libressl", "zlib"]
+source=[{url="https://www.libssh2.org/download/libssh2-$version.tar.gz"}]
 
-build() {
+build='''
 	cd libssh2-$version
-
 	./configure --prefix=
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

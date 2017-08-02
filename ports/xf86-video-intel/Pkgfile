@@ -1,20 +1,15 @@
-name=xf86-video-intel
-version=2.99.917+777+g6babcf15
-deps="xorg-server xcb-util libxscrnsaver libxvmc libxcb xcb-util"
+version="2.99.917+859+g33ee0c3b"
+makedeps=["xorg-server", "xcb-util", "libxscrnsaver", "libxcb", "util-macros", "xorgproto"]
+deps=["xorg-server", "xcb-util", "libxscrnsaver", "libxcb"]
 desc="Intel graphics video driver"
+source=[{url="git://anongit.freedesktop.org/xorg/driver/xf86-video-intel", protocol="git", commit="33ee0c3b21ea279e08d0863fcb2e874f0974b00e"}]
 
-ext() {
-	git clone git://anongit.freedesktop.org/xorg/driver/xf86-video-intel
-	cd xf86-video-intel
-	git reset --hard ${version#*+g}
-}
-
-build() {
+build='''
 	cd xf86-video-intel
 	./autogen.sh --prefix=/ --libexecdir=/lib --disable-static \
 	--with-default-accel=sna --enable-uxa --enable-sna \
-	--enable-xvmc --enable-kms-only \
+	--disable-xvmc --enable-kms-only \
 	--enable-dri3 --with-default-dri=3
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

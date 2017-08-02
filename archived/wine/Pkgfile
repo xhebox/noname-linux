@@ -1,0 +1,61 @@
+name=wine
+version=3.3
+desc="A compatibility layer for running Windows programs"
+source="
+https://dl.winehq.org/wine/source/3.x/wine-$version.tar.xz
+harmony-fix.diff
+"
+deps="autoconf automake attr-32 freetype-32 libsm-32 alsa-lib-32 libpng-32 libx11-32 libxau-32 libxi-32 libxrender-32 libxext-32 libxcb-32 zlib-32 mesa-32 libxml2-32 libxslt-32 libjpeg-turbo-32 fontconfig-32 glu-32 libpcap-32 desktop-file-utils libxcursor-32 libxrandr-32 libxcomposite-32 libva-32 ncurses-32 libxinerama-32 eudev-32 lcms2-32 libva-intel-driver-32 mpg123-32 alsa-plugins-32 libtxc_dxtn-32 ocl-icd-32 giflib-32 v4l-utils-32 openal gsm-32 gnutls-32"
+
+ext() {
+  cd wine-$version
+  for i in $source;do
+    msg $i
+    case $i in
+    *keybindings.patch) patch -p1 -R < ../$i;;
+    *patch) patch -p1 < ../$i;;
+    *diff) patch -p1 < ../$i;;
+    esac
+  done
+  sed 's|OpenCL/opencl.h|CL/opencl.h|g' -i configure*
+  cd ..
+  mv wine-$version wine32
+  cp -r wine32 wine64
+}
+
+build() {
+  export PKG_NO_STRIP=yes
+  mkdir 64build
+  cd 64build
+  export PKG_CONFIG_PATH="/lib/pkgconfig"
+  ../wine64/configure --prefix= \
+  --libdir=/lib \
+  --enable-win64 \
+  --with-x \
+  --disable-tests \
+  --without-hal \
+  --without-gtk3 \
+  --with-gsm \
+  --with-xattr
+  make
+  cd ..
+
+  mkdir 32build
+  cd 32build
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ../wine32/configure --prefix= \
+  --libdir=/lib32 \
+  --with-x \
+  --disable-tests \
+  --without-hal \
+  --without-gtk3 \
+  --with-wine64="`pwd`/../64build" \
+  --with-gsm \
+  --with-xattr
+  make
+  make -j1 prefix=/"$pkgdir/" libdir="$pkgdir"/lib32 dlldir="$pkgdir"/lib32/wine install
+  cd ..
+  cd 64build
+  make -j1 prefix=/"$pkgdir/" libdir="$pkgdir"/lib dlldir="$pkgdir"/lib/wine install
+  rm -fr "$pkgdir"/share/man/*.UTF-8
+}

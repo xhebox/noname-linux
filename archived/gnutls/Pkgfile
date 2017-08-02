@@ -1,0 +1,18 @@
+name=gnutls
+version=3.5.18
+desc="A library that provides a secure layer over a reliable transport layer"
+source="http://www.ring.gr.jp/pub/net/gnupg/$name/v${version%.*}/$name-${version}.tar.xz"
+deps="nettle libgmp zlib libtasn1 p11-kit libidn"
+
+build() {
+	cd $name-$version
+	./configure --prefix=/ --disable-static \
+	--with-included-unistring \
+	--with-p11-kit \
+	--with-zlib \
+	--disable-guile
+
+	make
+	make DESTDIR="$pkgdir" install
+	rm -r "$pkgdir"/share/info
+}

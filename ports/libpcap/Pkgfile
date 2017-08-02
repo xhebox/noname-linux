@@ -1,12 +1,12 @@
-name=libpcap
-version=1.8.1
-deps="flex bison libnl"
+version="1.8.1"
+makedeps=["libnl"]
+deps=["libnl"]
 desc="Packet capture library"
-source="http://www.tcpdump.org/release/$name-$version.tar.gz"
+source=[{url="http://www.tcpdump.org/release/libpcap-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libpcap-$version
 	bash ./configure --prefix= --disable-dbus
-	make || die
-	make DESTDIR="$pkgdir" install install-shared || die
-}
+	make
+	make DESTDIR="$pkgdir" install install-shared
+'''

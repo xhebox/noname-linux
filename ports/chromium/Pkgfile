@@ -1,86 +1,90 @@
-name=chromium
-version=59.0.3071.115
-deps="alsa-lib bzip2 gtk gtk3 snappy harfbuzz perl pciutils dbus libexif gperf mesa python yasm libvpx nss ninja libcap libva-intel-driver flac libva libjpeg-turbo libpng xdg-utils libxslt ffmpeg expat libwebp elfutils speex mesa hwids libxscrnsaver desktop-file-utils glib libevent libvdpau-va-gl libxfont2 icu ttf-dejavu krb5 nodejs"
+version="72.0.3626.109"
+nostrip=true
+makedeps=["alsa-lib", "bzip2", "gtk3", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "nodejs", "opus", "gn", "icu", "minizip", "llvm", "nss", "xorgproto", "wayland-protocols"]
+deps=["alsa-lib", "bzip2", "gtk3", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "opus", "icu", "minizip", "nss"]
 desc="The open-source project behind Google Chrome"
-source="
-https://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-$version.tar.xz
-chromium-gn-bootstrap-r2.patch
-chromium-dma-buf-r1.patch
-chromium-system-icu-r1.patch
-chromium-system-ffmpeg-r6.patch
-chromium-blink-gcc7.patch
-chromium-v8-gcc7.patch
-chromium-widevine.patch
-default-pthread-stacksize.patch
-gn_bootstrap.patch
-gn_fix_for_noname.patch
-last-commit-position.patch
-musl-fixes.patch
-musl-sandbox.patch
-no-execinfo.patch
-no-getcontext.patch
-no-mallinfo.patch
-resolver.patch
-swiftshader.patch
-vaapi_patch_r2.patch
-chromium.sh
-chromium.desktop
-"
+source=[
+	{url="chromium-skia-harmony.patch"},
+	{url="chromium-swiftshader-default-visibility.patch"},
+	{url="musl-v8-fix-deadlock.patch"},
+	{url="musl-v8-monotonic-pthread-cont_timedwait.patch"},
+	{url="chromium-system-icu.patch"},
+	{url="chromium-vaapi.patch"},
+	{url="chromium-vaapi-relax-the-version-check-for-VA-API.patch"},
+	{url="chromium-enable-mojo-video-decoders-by-default.patch"},
+	{url="chromium-vaapi-fix-the-VA_CHECK_VERSION.patch"},
+	{url="chromium-webrtc-r0.patch"},
+	{url="chromium-widevine.patch"},
+	{url="default-pthread-stacksize.patch"},
+	{url="dont-assume-secure-getenv.patch"},
+	{url="musl-crashpad.patch"},
+	{url="musl-fixes.patch"},
+	{url="musl-libcpp.patch"},
+	{url="musl-sandbox.patch"},
+	{url="no-execinfo.patch"},
+	{url="no-getcontext.patch"},
+	{url="no-mallinfo.patch"},
+	{url="resolver.patch"},
+	{url="chromium.sh"},
+	{url="chromium.desktop"},
+	{url="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$version.tar.xz"},
+]
 
-ext() {
-	cd $name-$version
+ext='''
+	cd chromium-$version
 
-	curl -O -L http://git.savannah.gnu.org/cgit/freetype/freetype2.git/plain/src/psnames/pstables.h
-	mkdir -p third_party/freetype/src/src/psnames
-	mv pstables.h third_party/freetype/src/src/psnames/pstables.h
-
-	sed "s/@WIDEVINE_VERSION@/Pinkie Pie/" -i ../chromium-widevine.patch || die
 	for i in $source; do
-		msg $i
 		case $i in
-		0001*patch) patch -Np1 -d third_party/skia < ../0001-Clip-FreeType-glyph-bitmap-to-mask.patch || die;;
-		00??-*|chromium-*|*ffmpeg*|chromium-*gn*|icu*|*getrlimit*|*allocator*|*vaapi*) patch -p1 -i "$srcdir"/$i || die;;
-		*.patch|*.diff) patch -p0 -i "$srcdir"/$i || die;;
+		*swift*|*skia*) patch -p0 -i ../$i;;
+		fix*|00??-*|chromium-*patch|icu*|*getrlimit*|*vaapi*) patch -p1 -i ../$i;;
+		*.patch|*.diff) patch -p0 -i ../$i;;
 		esac
 	done
 
-	sed -i '/config("compiler")/ a cflags_cc = [ "-fno-delete-null-pointer-checks" ]' build/config/linux/BUILD.gn
-	local _system_libs="flac harfbuzz-ng libjpeg libpng libwebp libxslt snappy yasm zlib ffmpeg libevent"
-	local _lib
-	for _lib in $_system_libs libjpeg_turbo; do
-		find -type f -path "*third_party/$_lib/*" \
-			\! -path "*third_party/$_lib/chromium/*" \
-			\! -path "*third_party/$_lib/google/*" \
-			\! -path "*base/third_party/icu/*" \
-			\! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
-		-delete
-	done
-	python2.7 build/linux/unbundle/replace_gn_files.py --system-libraries ${_system_libs} || die
-	python2.7 third_party/libaddressinput/chromium/tools/update-strings.py
+	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
+	sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' \
+		third_party/blink/renderer/core/xml/*.cc \
+		third_party/blink/renderer/core/xml/parser/xml_document_parser.cc \
+		third_party/libxml/chromium/libxml_utils.cc
+	sed -i -e '/"-Wno-defaulted-function-deleted"/d' build/config/compiler/BUILD.gn
+	sed 's|//third_party/usb_ids/usb.ids|/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
+
 	mkdir -p third_party/node/linux/node-linux-x64/bin
 	ln -s /bin/node third_party/node/linux/node-linux-x64/bin/
-	sed 's|//third_party/usb_ids/usb.ids|/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
-	touch chrome/test/data/webui/i18n_process_css_test.html
-	export LDFLAGS="$LDFLAGS -Wl,--no-keep-memory"
-}
 
-build() {
-	cd $name-$version
-	PKG_NO_STRIP=yes
+	# libvpx libevent
+	_system_libs="icu zlib libxml freetype flac harfbuzz-ng libjpeg libwebp libxslt opus yasm libdrm fontconfig ffmpeg libpng"
+	for _lib in $_system_libs libjpeg_turbo; do
+		find "third_party/$_lib" -type f \
+		\! -path "third_party/$_lib/chromium/*" \
+		\! -path "third_party/$_lib/google/*" \
+		\! -path './base/third_party/icu/*' \
+		\! -path 'third_party/yasm/run_yasm.py' \
+    \! -path './third_party/pdfium/third_party/freetype/include/pstables.h' \
+		\! -regex '.*\.\(gn\|gni\|isolate\)' \
+		-delete || true
+	done
+	python2 build/linux/unbundle/replace_gn_files.py --system-libraries ${_system_libs}
+	third_party/libaddressinput/chromium/tools/update-strings.py
+'''
+
+build='''
+	cd chromium-$version
 	# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 	# To be honest, i am too poor to get a complete set of keys..
 	# you can get your own keys, and put them here...
 	# or set env vars like GOOGLE_API_KEY, uppercase, same as the followings...
-	#conf="$conf -Dgoogle_api_key=
+	#-Dgoogle_api_key=
 	#-Dgoogle_default_client_id=
 	#-Dgoogle_default_client_secret="
-	export TMPDIR="$srcdir/temp"
-	mkdir -p "$TMPDIR"
-	local _flags='is_clang=false clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true linux_use_bundled_binutils=false use_cups=false use_gconf=false use_gnome_keyring=false use_gold=false use_gtk3=true use_kerberos=true use_pulseaudio=true use_sysroot=false enable_hangout_services_extension=true enable_widevine=true enable_nacl=false enable_nacl_nonsfi=false symbol_level=0 use_allocator="none" use_experimental_allocator_shim=false'
+	export CCACHE_SLOPPINESS=time_macros
+	export CC=clang
+	export CXX=clang++
+	export AR=ar
+	export NM=nm
 
-	python2.7 tools/gn/bootstrap/bootstrap.py --gn-gen-args "${_flags}" || die
-	out/Release/gn gen out/Release --args="${_flags}" || die
-	ninja -j 4 -C out/Release chrome chrome_sandbox chromedriver widevinecdmadapter pdf || die
+	gn gen out/Release --args='is_desktop_linux=true use_lld=false use_gold=false remove_webcore_debug_symbols=true symbol_level=0 linux_use_bundled_binutils=false closure_compile=false binutils_path="/bin" use_jumbo_build=true is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=true use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=true enable_swiftshader=true enable_hangout_services_extension=true custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default"'
+	ninja -j3 -C out/Release chrome chrome_sandbox chromedriver
 	
 	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
 
@@ -88,17 +92,20 @@ build() {
 
 	install -D out/Release/chromedriver "$pkgdir/lib/chromium/chromedriver"
 
-	cp out/Release/*.pak out/Release/*.bin out/Release/libwidevinecdmadapter.so \
-	out/Release/icudtl.dat \
-	out/Release/gen/content/content_resources.pak \
-	"$pkgdir/lib/chromium/"
+	cp -a out/Release/*.pak out/Release/*.bin out/Release/*.so out/Release/locales "$pkgdir/lib/chromium/"
+	[ -e "out/Release/icudtl.dat" ] && cp -a out/Release/icudtl.dat "$pkgdir/lib/chromium/"
+	[ -e "out/Release/resources" ] && cp -a out/Release/resources "$pkgdir/lib/chromium/"
+	[ -e "out/Release/swiftshader" ] && cp -a out/Release/swiftshader "$pkgdir/lib/chromium/"
 
-	cp -a out/Release/locales "$pkgdir/lib/chromium/"
+	install -Dm644 chrome/app/resources/manpage.1.in "$pkgdir/share/man/man1/chromium.1"
+	install -Dm644 "$srcdir/chromium.desktop" "$pkgdir/share/applications/chromium.desktop"
 
-	install -Dm644 out/Release/chrome.1 "$pkgdir/share/man/man1/chromium.1"
-
-	install -Dm644 "$srcdir/chromium.desktop" \
-	"$pkgdir/share/applications/chromium.desktop"
+	sed -i \
+	-e "s/@@MENUNAME@@/Chromium/g" \
+	-e "s/@@PACKAGE@@/chromium/g" \
+	-e "s/@@USR_BIN_SYMLINK_NAME@@/chromium/g" \
+	"$pkgdir/share/applications/chromium.desktop" \
+	"$pkgdir/share/man/man1/chromium.1"
 
 	install -Dm755 "$srcdir/chromium.sh" \
 	"$pkgdir/bin/chromium"
@@ -114,4 +121,4 @@ build() {
 	done
 
 	ln -s /lib/chromium/chromedriver "$pkgdir/bin/chromedriver"
-}
+'''

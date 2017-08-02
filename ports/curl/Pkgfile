@@ -1,21 +1,24 @@
-name=curl
-version=7.54.1
-deps="libressl zlib libssh2 krb5 groff"
+version="7.60.0"
 desc="A tool for transfering files with URL syntax"
-source="http://curl.haxx.se/download/curl-$version.tar.bz2"
+makedeps=["libressl", "zlib", "libssh2", "libnghttp2"]
+deps=["ca-certificates", "libressl", "zlib", "libssh2", "libnghttp2"]
+source=[{url="http://curl.haxx.se/download/curl-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd curl-${version}
 	./configure \
 		--prefix=/ \
 		--with-gssapi \
+		--with-libssh2 \
+		--with-random=/dev/urandom \
+		--disable-ldap \
+		--disable-ldaps \
+		--disable-manual \
+		--disable-versioned-symbols \
 		--enable-ipv6 \
 		--enable-manual \
-		--enable-versioned-symbols \
-		--enable-threaded-resolver \
-		--disable-ldap \
-		--disable-static \
-		--with-random=/dev/urandom
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+		--enable-threaded-resolver
+	make
+	make DESTDIR="$pkgdir" install
+	make DESTDIR="$pkgdir" install -C scripts
+'''

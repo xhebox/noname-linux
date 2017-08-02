@@ -1,0 +1,14 @@
+version="1.0"
+deps=["python-setuptools"]
+desc="Implements a XML/HTML/XHTML Markup safe string for Python"
+source=[{url="https://pypi.io/packages/source/M/MarkupSafe/MarkupSafe-${version}.tar.gz"}]
+
+build='''
+	cd MarkupSafe-$version
+	/bin/python setup.py build
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+'''

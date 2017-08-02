@@ -1,9 +1,0 @@
-bin/dmenu_run|755|0|0|regular file
-bin/dmenu|755|0|0|regular file
-bin/stest|755|0|0|regular file
-bin|755|0|0|directory
-share/man/man1/dmenu.1.gz|644|0|0|regular file
-share/man/man1/stest.1.gz|644|0|0|regular file
-share/man/man1|755|0|0|directory
-share/man|755|0|0|directory
-share|755|0|0|directory

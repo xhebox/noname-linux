@@ -1,0 +1,47 @@
+. ../mesa/Pkgfile
+name=mesa-32
+deps="expat-32 libdrm-32 xorgproto libxshmfence-32 libxcb-32 libx11-32 libxfixes-32 libxext-32 libxdamage-32 libxxf86vm-32 libxvmc-32 wayland-32 python mesa libgcrypt-32 elfutils-32 llvm-32 lm_sensors-32 libclc"
+
+build() {
+  export LLVM_CONFIG="/bin/llvm-config-32"
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  noname-meson mesa-$version build \
+    --libdir=/lib32 \
+    -D b_lundef=false \
+    -D b_ndebug=true \
+    -D platforms=x11,drm,wayland,surfaceless \
+    -D dri-drivers=i915,i965,r100,r200,nouveau \
+    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast \
+    -D vulkan-drivers=amd,intel \
+    -D swr-arches=avx,avx2 \
+    -D dri3=true \
+    -D egl=true \
+    -D gallium-extra-hud=true \
+    -D gallium-nine=true \
+    -D gallium-omx=disabled \
+    -D gallium-opencl=disabled \
+    -D gallium-va=true \
+    -D gallium-vdpau=true \
+    -D gallium-xa=true \
+    -D gallium-xvmc=false \
+    -D gbm=true \
+    -D gles1=true \
+    -D gles2=true \
+    -D glx=dri \
+    -D libunwind=false \
+    -D llvm=true \
+    -D lmsensors=true \
+    -D osmesa=gallium \
+    -D shared-glapi=true \
+    -D texture-float=true \
+    -D valgrind=false
+    #-D gallium-omx=disabled \
+
+  meson configure build
+  ninja -C build
+  DESTDIR="$pkgdir" ninja -C build install
+  rm -r "$pkgdir"/include
+  rm "$pkgdir"/etc/drirc
+}

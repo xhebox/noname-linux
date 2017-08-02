@@ -1,9 +1,0 @@
-include/mesode.h|644|0|0|regular file
-include|755|0|0|directory
-lib/libmesode.a|644|0|0|regular file
-lib/libmesode.so.0.0.0|755|0|0|regular file
-lib/libmesode.so.0|777|0|0|symbolic link
-lib/libmesode.so|777|0|0|symbolic link
-lib/pkgconfig/libmesode.pc|644|0|0|regular file
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory

@@ -1,7 +1,0 @@
-bin/proxychains|777|0|0|symbolic link
-bin/proxychains4|755|0|0|regular file
-etc/proxychains.conf|644|0|0|regular file
-lib/libproxychains4.so|644|0|0|regular file
-lib|755|0|0|directory
-etc|755|0|0|directory
-bin|755|0|0|directory

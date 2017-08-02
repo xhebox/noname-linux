@@ -1,6 +1,0 @@
-#!/bin/sh
-for i in 1 2 3 4;do
-	setleds -D +num < /dev/tty$i
-done
-swapon /dev/sda4
-polipo -c /etc/polipo.conf >/dev/null &

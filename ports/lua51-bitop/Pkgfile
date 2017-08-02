@@ -1,0 +1,9 @@
+version="1.0.2"
+makedeps=["lua51"]
+source=[{url="https://bitop.luajit.org/download/LuaBitOp-$version.tar.gz"}]
+
+build='''
+	cd LuaBitOp-$version
+	make INCLUDES=' -I/include/lua5.1' LUA='lua5.1'
+	install -Dm 644 bit.so "$pkgdir/lib/lua/5.1/bit.so"
+'''

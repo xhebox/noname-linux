@@ -1,0 +1,55 @@
+. ../llvm/Pkgfile
+name=llvm-32
+deps="python cmake flex bison libffi-32 zlib-32 libxml2-32 llvm"
+
+build() {
+  cd llvm-$version.src
+  mkdir -p build
+  cd build
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX= \
+    -DLLVM_BINUTILS_INCDIR=/include \
+    -DLLVM_LIBDIR_SUFFIX=32 \
+    -DCMAKE_C_FLAGS:STRING=-m32 \
+    -DCMAKE_CXX_FLAGS:STRING=-m32 \
+    -DLLVM_TARGET_ARCH:STRING=i686 \
+    -DLLVM_TARGETS_TO_BUILD='X86;AMDGPU;BPF' \
+    -DLLVM_BUILD_DOCS=YES \
+    -DLLVM_BUILD_TESTS=OFF \
+    -DLLVM_BUILD_LLVM_DYLIB=ON \
+    -DLLVM_LINK_LLVM_DYLIB=ON \
+    -DLLVM_INSTALL_UTILS=ON \
+    -DLLVM_ENABLE_FFI=YES \
+    -DLLVM_ENABLE_RTTI=YES \
+    -DLLVM_ENABLE_ZLIB=YES \
+    -DLLVM_APPEND_VC_REV=NO \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET32" \
+    -DFFI_INCLUDE_DIR="$(pkg-config --cflags-only-I libffi | sed 's|^-I||g')" \
+    ..
+  
+  make
+  make DESTDIR="$pkgdir" install
+
+  find "$pkgdir" -name .dir -delete
+
+  rm "$pkgdir"/lib32/LLVMHello.so
+  mv $pkgdir/bin/llvm-config $pkgdir/
+  mv $pkgdir/include/llvm/Config/llvm-config.h $pkgdir/
+  rm -r $pkgdir/bin
+  rm -r $pkgdir/share
+  rm -r $pkgdir/include
+  rm -rf $pkgdir/docs
+  rm -r "$pkgdir/libexec"
+
+  install -d $pkgdir/bin
+  install -d $pkgdir/include/llvm/Config
+  mv $pkgdir/llvm-config $pkgdir/bin/llvm-config-32
+  mv $pkgdir/llvm-config.h $pkgdir/include/llvm/Config/llvm-config-32.h
+
+  install -d "$pkgdir"/lib32/bfd-plugins
+  ln -s ../LLVMgold.so "$pkgdir"/lib32/bfd-plugins/LLVMgold.so
+  chmod -x ${pkgdir}/lib32/*.a
+}

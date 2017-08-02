@@ -6,20 +6,20 @@ include/pcre2.h|644|0|0|regular file
 include/pcre2posix.h|644|0|0|regular file
 include|755|0|0|directory
 lib/libpcre2-16.a|644|0|0|regular file
-lib/libpcre2-16.so.0.5.0|755|0|0|regular file
+lib/libpcre2-16.so.0.7.0|755|0|0|regular file
 lib/libpcre2-16.so.0|777|0|0|symbolic link
 lib/libpcre2-16.so|777|0|0|symbolic link
 lib/libpcre2-32.a|644|0|0|regular file
-lib/libpcre2-32.so.0.5.0|755|0|0|regular file
+lib/libpcre2-32.so.0.7.0|755|0|0|regular file
 lib/libpcre2-32.so.0|777|0|0|symbolic link
 lib/libpcre2-32.so|777|0|0|symbolic link
 lib/libpcre2-8.a|644|0|0|regular file
-lib/libpcre2-8.so.0.5.0|755|0|0|regular file
+lib/libpcre2-8.so.0.7.0|755|0|0|regular file
 lib/libpcre2-8.so.0|777|0|0|symbolic link
 lib/libpcre2-8.so|777|0|0|symbolic link
 lib/libpcre2-posix.a|644|0|0|regular file
-lib/libpcre2-posix.so.1.0.1|755|0|0|regular file
-lib/libpcre2-posix.so.1|777|0|0|symbolic link
+lib/libpcre2-posix.so.2.0.0|755|0|0|regular file
+lib/libpcre2-posix.so.2|777|0|0|symbolic link
 lib/libpcre2-posix.so|777|0|0|symbolic link
 lib/pkgconfig/libpcre2-16.pc|644|0|0|regular file
 lib/pkgconfig/libpcre2-32.pc|644|0|0|regular file
@@ -47,6 +47,10 @@ share/doc/pcre2/html/pcre2_compile_context_copy.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_compile_context_create.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_compile_context_free.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_config.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_convert_context_copy.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_convert_context_create.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_convert_context_free.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_converted_pattern_free.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_dfa_match.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_general_context_copy.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_general_context_create.html|644|0|0|regular file
@@ -70,6 +74,7 @@ share/doc/pcre2/html/pcre2_match_context_free.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_match_data_create.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_match_data_create_from_pattern.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_match_data_free.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_pattern_convert.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_pattern_info.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_serialize_decode.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_serialize_encode.html|644|0|0|regular file
@@ -78,7 +83,12 @@ share/doc/pcre2/html/pcre2_serialize_get_number_of_codes.html|644|0|0|regular fi
 share/doc/pcre2/html/pcre2_set_bsr.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_callout.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_character_tables.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_set_compile_extra_options.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_compile_recursion_guard.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_set_depth_limit.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_set_glob_escape.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_set_glob_separator.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2_set_heap_limit.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_match_limit.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_max_pattern_length.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2_set_newline.html|644|0|0|regular file
@@ -102,6 +112,7 @@ share/doc/pcre2/html/pcre2api.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2build.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2callout.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2compat.html|644|0|0|regular file
+share/doc/pcre2/html/pcre2convert.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2demo.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2grep.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2jit.html|644|0|0|regular file
@@ -113,7 +124,6 @@ share/doc/pcre2/html/pcre2perform.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2posix.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2sample.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2serialize.html|644|0|0|regular file
-share/doc/pcre2/html/pcre2stack.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2syntax.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2test.html|644|0|0|regular file
 share/doc/pcre2/html/pcre2unicode.html|644|0|0|regular file
@@ -138,6 +148,10 @@ share/man/man3/pcre2_compile_context_copy.3.gz|644|0|0|regular file
 share/man/man3/pcre2_compile_context_create.3.gz|644|0|0|regular file
 share/man/man3/pcre2_compile_context_free.3.gz|644|0|0|regular file
 share/man/man3/pcre2_config.3.gz|644|0|0|regular file
+share/man/man3/pcre2_convert_context_copy.3.gz|644|0|0|regular file
+share/man/man3/pcre2_convert_context_create.3.gz|644|0|0|regular file
+share/man/man3/pcre2_convert_context_free.3.gz|644|0|0|regular file
+share/man/man3/pcre2_converted_pattern_free.3.gz|644|0|0|regular file
 share/man/man3/pcre2_dfa_match.3.gz|644|0|0|regular file
 share/man/man3/pcre2_general_context_copy.3.gz|644|0|0|regular file
 share/man/man3/pcre2_general_context_create.3.gz|644|0|0|regular file
@@ -161,6 +175,7 @@ share/man/man3/pcre2_match_context_free.3.gz|644|0|0|regular file
 share/man/man3/pcre2_match_data_create.3.gz|644|0|0|regular file
 share/man/man3/pcre2_match_data_create_from_pattern.3.gz|644|0|0|regular file
 share/man/man3/pcre2_match_data_free.3.gz|644|0|0|regular file
+share/man/man3/pcre2_pattern_convert.3.gz|644|0|0|regular file
 share/man/man3/pcre2_pattern_info.3.gz|644|0|0|regular file
 share/man/man3/pcre2_serialize_decode.3.gz|644|0|0|regular file
 share/man/man3/pcre2_serialize_encode.3.gz|644|0|0|regular file
@@ -169,7 +184,12 @@ share/man/man3/pcre2_serialize_get_number_of_codes.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_bsr.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_callout.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_character_tables.3.gz|644|0|0|regular file
+share/man/man3/pcre2_set_compile_extra_options.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_compile_recursion_guard.3.gz|644|0|0|regular file
+share/man/man3/pcre2_set_depth_limit.3.gz|644|0|0|regular file
+share/man/man3/pcre2_set_glob_escape.3.gz|644|0|0|regular file
+share/man/man3/pcre2_set_glob_separator.3.gz|644|0|0|regular file
+share/man/man3/pcre2_set_heap_limit.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_match_limit.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_max_pattern_length.3.gz|644|0|0|regular file
 share/man/man3/pcre2_set_newline.3.gz|644|0|0|regular file
@@ -193,6 +213,7 @@ share/man/man3/pcre2api.3.gz|644|0|0|regular file
 share/man/man3/pcre2build.3.gz|644|0|0|regular file
 share/man/man3/pcre2callout.3.gz|644|0|0|regular file
 share/man/man3/pcre2compat.3.gz|644|0|0|regular file
+share/man/man3/pcre2convert.3.gz|644|0|0|regular file
 share/man/man3/pcre2demo.3.gz|644|0|0|regular file
 share/man/man3/pcre2jit.3.gz|644|0|0|regular file
 share/man/man3/pcre2limits.3.gz|644|0|0|regular file
@@ -203,7 +224,6 @@ share/man/man3/pcre2perform.3.gz|644|0|0|regular file
 share/man/man3/pcre2posix.3.gz|644|0|0|regular file
 share/man/man3/pcre2sample.3.gz|644|0|0|regular file
 share/man/man3/pcre2serialize.3.gz|644|0|0|regular file
-share/man/man3/pcre2stack.3.gz|644|0|0|regular file
 share/man/man3/pcre2syntax.3.gz|644|0|0|regular file
 share/man/man3/pcre2unicode.3.gz|644|0|0|regular file
 share/man/man3|755|0|0|directory

@@ -1,0 +1,39 @@
+name=openvdb
+version=5.1.0
+desc="A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
+deps="openexr zlib tbb blosc log4cplus python-numpy boost ghostscript cppunit"
+source="https://github.com/dreamworksanimation/openvdb/archive/v${version}.tar.gz
+"
+
+ext() {
+	cd openvdb-$version/
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd openvdb-$version/
+	export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY"
+	mkdir build && cd build
+	cmake .. \
+		-DBLOSC_LOCATION=/ \
+		-DTBB_LOCATION=/ \
+		-DUSE_GLFW3=ON \
+		-DGLFW3_LOCATION=/ \
+		-DILMBASE_NAMESPACE_VERSIONING=OFF \
+		-DOPENEXR_NAMESPACE_VERSIONING=OFF \
+		-DILMBASE_LOCATION=/ \
+		-DOPENEXR_LOCATION=/ \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCPPUNIT_LOCATION=/ \
+		-DOPENVDB_BUILD_UNITTESTS=OFF \
+		-DOPENVDB_BUILD_PYTHON_MODULE=ON \
+		-DOPENVDB_BUILD_DOCS=OFF
+
+	make
+	make DESTDIR="$pkgdir" install
+	mv "$pkgdir"/include/python "$pkgdir"/include/python2.7
+}

@@ -1,13 +1,11 @@
-name=gzip
-version=1.8
-deps=less
+version="1.9"
+deps=["less", "bash", "musl"]
 desc="GNU compression utility(replacement for compress)"
-source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+source=[{url="http://mirrors.ustc.edu.cn/gnu/gzip/gzip-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd gzip-$version
 	./configure --prefix= 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,12 +1,12 @@
-name=libtiff
-version=4.0.8
+version="4.0.10"
 desc="Library for manipulation of TIFF images"
-deps="libjpeg-turbo zlib xz glu freeglut mesa"
-source="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"
+makedeps=["libjpeg-turbo", "zlib", "xz"]
+deps=["libjpeg-turbo", "zlib", "xz"]
+source=[{url="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"}]
 
-build() {
+build='''
 	cd tiff-$version
 	./configure --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

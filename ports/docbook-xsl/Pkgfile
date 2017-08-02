@@ -1,42 +1,60 @@
-name=docbook-xsl
-version=1.79.2
+version="1.79.2"
 desc='XML stylesheets for Docbook-xml transformations'
-dep="libxml2 libxslt docbook-xml"
-source="https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F$version/docbook-xsl-nons-$version.tar.gz
-765567_non-recursive_string_subst.patch"
+deps=["libxml2", "libxslt", "sed", "docbook-xml"]
+source=[
+	{url="https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F$version/docbook-xsl-nons-$version.tar.gz"},
+	{url="765567_non-recursive_string_subst.patch"},
+]
 
-ext() {
+ext='''
 	cd docbook-xsl-nons-$version
-	patch -Np2 -i ../765567_non-recursive_string_subst.patch || die
-}
+	patch -Np2 -i ../765567_non-recursive_string_subst.patch
+'''
 
-build() {
+build='''
 	cd docbook-xsl-nons-$version
-	_pkgroot=${pkgdir}/share/xml/docbook/xsl-stylesheets-${version}
+	_pkgroot="${pkgdir}/share/xml/docbook/xsl-stylesheets-${version}"
 
-        install -dm755 ${_pkgroot}
-	install -m644 VERSION VERSION.xsl ${_pkgroot}
-
-	for fn in assembly common eclipse epub epub3 fo highlighting html htmlhelp javahelp lib \
-                  manpages params profiling roundtrip template website xhtml xhtml-1_1 xhtml5; do
-		install -dm755 ${_pkgroot}/${fn}
-		install -m644 ${fn}/*.xml ${_pkgroot}/${fn} || true
-		install -m644 ${fn}/*.xsl ${_pkgroot}/${fn} || true
-		install -m644 ${fn}/*.dtd ${_pkgroot}/${fn} || true
-		install -m644 ${fn}/*.ent ${_pkgroot}/${fn} || true
-	done
-}
-
-post() {
-	[ ! -f /etc/xml/catalog ] && xmlcatalog --noout --create /etc/xml/catalog
-
+	mkdir -p "$pkgdir"/etc/xml
+	xmlcatalog --noout --create "$pkgdir"/etc/xml/docbook-xsl
 	xmlcatalog --noout --add "rewriteSystem" \
-	"http://docbook.sourceforge.net/release/xsl/current" \
-	"/share/xml/docbook/xsl-stylesheets-${version}" \
-	/etc/xml/catalog &&
+        	"http://cdn.docbook.org/release/xsl/${version}" \
+	        "/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
 
 	xmlcatalog --noout --add "rewriteURI" \
-	"http://docbook.sourceforge.net/release/xsl/current" \
-	"/share/xml/docbook/xsl-stylesheets-${version}" \
-	/etc/xml/catalog
-}
+		"http://cdn.docbook.org/release/xsl/${version}" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteSystem" \
+		"http://cdn.docbook.org/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteURI" \
+		"http://cdn.docbook.org/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteSystem" \
+		"http://docbook.sourceforge.net/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteURI" \
+		"http://docbook.sourceforge.net/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	install -dm755 "${_pkgroot}"
+	install -m644 VERSION VERSION.xsl "${_pkgroot}"
+
+	for fn in assembly common eclipse epub epub3 fo highlighting html htmlhelp javahelp lib \
+									manpages params profiling roundtrip template website xhtml xhtml-1_1 xhtml5; do
+		install -d "${_pkgroot}/${fn}"
+		for i in "${fn}"/*.xml "$fn"/*.xsl "$fn"/*.dtd "$fn"/*.ent; do
+			[ -e "$i" ] && install -m644 "$i" "${_pkgroot}/${fn}" || true
+		done
+	done
+'''

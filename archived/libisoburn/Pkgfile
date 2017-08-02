@@ -1,0 +1,12 @@
+version="1.5.0"
+desc="frontend for libraries libburn and libisofs"
+source=[{url="http://files.libburnia-project.org/releases/libisoburn-${version}.tar.gz"}]
+makedeps=["readline", "libburn", "libisofs"]
+deps=["readline", "libburn", "libisofs"]
+
+build='''
+	cd libisoburn-${version}
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,25 +1,29 @@
-name=procps-ng
-version=3.3.12
-deps="ncurses"
+version="3.3.15"
+makedeps=["ncurses", "systemd"]
+deps=["ncurses", "systemd"]
 desc="Utilities for monitoring your system and its processes"
-source="http://downloads.sourceforge.net/project/${name}/Production/${name}-${version}.tar.xz"
+source=[{url="http://nchc.dl.sourceforge.net/project/procps-ng/Production/procps-ng-${version}.tar.xz"}]
 
-build() {
-	cd $name-$version
-	PKG_NO_STRIP=yes
-	CFLAGS="$CFLAGS -g2"
+ext='''
+	cd procps-ng-$version
+	for i in $source;do
+		case $i in
+		*patch) patch -p1 -i ../$i;;
+		esac
+	done
+'''
+
+build='''
+	cd procps-ng-$version
 	sed 's:<ncursesw/:<:g' -i watch.c
 	./configure --prefix= \
 		--sbindir=/bin \
 		--libexecdir=/lib \
 		--disable-kill \
 		--disable-static \
-		--without-systemd \
 		--enable-nls \
 		--enable-debug \
 		--enable-watch8bit 
-	opt_regmo po
-	make  || die
-	make DESTDIR="$pkgdir" install   || die
-	rm -r "${pkgdir}/share/doc"
-}
+	make
+	make DESTDIR="$pkgdir" install 
+'''

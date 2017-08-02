@@ -1,16 +1,24 @@
-name=tzdata
-version=2017b
+version="2018i"
 desc="Sources for Time Zone and Daylight Saving Time Data"
-source="http://www.iana.org/time-zones/repository/releases/$name$version.tar.gz
-http://www.iana.org/time-zones/repository/releases/tzcode$version.tar.gz"
+source= [
+	{url="http://www.iana.org/time-zones/repository/releases/tzdata$version.tar.gz"},
+	{url="http://www.iana.org/time-zones/repository/releases/tzcode$version.tar.gz"},
+]
 
-build() {
-	make -j1 install \
-		CFLAGS="$CFLAGS" \
-		DESTDIR=$pkgdir \
-		TOPDIR=/ \
-		TZDIR=/share/zoneinfo \
-		ETCDIR=/bin \
-		MANDIR=/share/man || die
-}
+build='''
+	sed -i "s:sbin:bin:g" Makefile
+	make
+	make USRDIR= DESTDIR="${pkgdir}" install
 
+	timezones="africa antarctica asia australasia backward europe northamerica southamerica pacificnew etcetera systemv factory"
+	./zic -d ${pkgdir}/share/zoneinfo ${timezones}
+	./zic -d ${pkgdir}/share/zoneinfo/posix ${timezones}
+	./zic -d ${pkgdir}/share/zoneinfo/right -L leapseconds ${timezones}
+	
+	./zic -d ${pkgdir}/share/zoneinfo -p America/New_York
+	install -m444 -t ${pkgdir}/share/zoneinfo iso3166.tab zone1970.tab zone.tab
+	
+	# cleanup
+	mkdir -p "$pkgdir"/etc
+	ln -sf ../share/zoneinfo/UTC "$pkgdir"/etc/localtime
+'''

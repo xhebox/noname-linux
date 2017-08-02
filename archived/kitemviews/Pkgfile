@@ -1,0 +1,19 @@
+name=kitemviews
+version=5.38.0
+desc='Widget addons for Qt Model/View'
+deps="qt5-base shared-mime-info extra-cmake-modules qt5-tools llvm"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kitemviews-${version}.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../kitemviews-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DKDE_INSTALL_LIBEXECDIR=lib \
+		-D_KDE4_DEFAULT_HOME_POSTFIX=4 \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

@@ -1,0 +1,24 @@
+name=python-pyparsing
+version=2.2.0
+deps="python python3"
+desc="General parsing module for Python"
+source="https://sourceforge.net/projects/pyparsing/files/pyparsing/pyparsing-$version/pyparsing-$version.tar.gz"
+
+build() {
+	cp -a pyparsing-$version p3
+	cd p3
+	/bin/python3 setup.py build
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+	cd ../pyparsing-$version
+	/bin/python setup.py build
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+}
+

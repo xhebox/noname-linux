@@ -1,0 +1,17 @@
+version="1.8.4"
+makedeps=["libgpg-error"]
+deps=["libgpg-error"]
+desc="GNU cryptographic library"
+source=[
+  {url="https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-${version}.tar.bz2"}
+]
+
+build='''
+  cd libgcrypt-$version
+  ./configure \
+    --prefix= \
+    --disable-static \
+    --disable-padlock-support
+  make
+  make DESTDIR="$pkgdir" install
+'''

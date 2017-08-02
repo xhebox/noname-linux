@@ -1,0 +1,50 @@
+name=js52
+version=52.6.0
+_ffver=${version%%.*}
+desc="JavaScript interpreter and libraries - Version $_ffver"
+deps="readline zlib python zip autoconf2.13"
+source="http://mirrors.ustc.edu.cn/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-${version}gnome1.tar.xz
+mozjs52-copy-headers.patch
+mozjs52-disable-mozglue.patch
+mozjs52-fix-soname.patch
+mozjs52-include-configure-script.patch"
+
+ext() {
+	for i in $source; do
+		msg $i
+		case $i in
+		*patch) patch -Np1 < ../$i || true;;
+		esac
+	done
+}
+
+build() {
+	unset CPPFLAGS
+	CFLAGS="$CFLAGS -fpermissive -fno-delete-null-pointer-checks -fno-tree-vrp -fno-strict-aliasing -fuse-ld=bfd"
+	CXXFLAGS="$CXXFLAGS -fpermissive -fno-delete-null-pointer-checks -fno-tree-vrp -fno-strict-aliasing -fuse-ld=bfd"
+	cd js/src
+	sh configure \
+	--prefix=/ \
+	--disable-debug \
+	--disable-debug-symbols \
+	--disable-strip \
+	--disable-jemalloc \
+	--disable-gold \
+	--enable-optimize="-O2" \
+	--enable-pie \
+	--enable-posix-nspr-emulation \
+	--enable-readline \
+	--enable-release \
+	--enable-shared-js \
+	--enable-tests \
+	--with-intl-api \
+	--with-system-zlib \
+	--without-system-icu
+	make
+	make DESTDIR="$pkgdir" install
+	rm "$pkgdir"/lib/*.ajs
+	find "$pkgdir"/lib/pkgconfig -type f -exec chmod -c a-x {} +
+	find "$pkgdir"/include -type f -exec chmod -c a-x {} +
+	mv "$pkgdir"/lib/libmozjs-52.so "$pkgdir"/lib/libmozjs-52.so.0
+	ln -sr "$pkgdir"/lib/libmozjs-52.so.0 "$pkgdir"/lib/libmozjs-52.so
+}

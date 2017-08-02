@@ -1,0 +1,19 @@
+name=libxfixes-32
+version=5.0.3
+deps="xorgproto libx11-32 libxfixes"
+desc="X Fixes extension client library"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXfixes-$version.tar.bz2"
+
+build() {
+  cd libXfixes-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static --libdir=/lib32
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}
+

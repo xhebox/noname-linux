@@ -1,19 +1,14 @@
-name=intel-ucode
-version=20170707
-_dlid=26925
-deps="libarchive"
+version="20180807a"
+makedeps=["iucode-tool", "libarchive"]
 desc="Microcode update files for Intel CPUs"
-source="
-intel-microcode2ucode.c
-http://downloadmirror.intel.com/${_dlid}/eng/microcode-${version}.tgz
-"
+source=[
+	{url="https://downloadmirror.intel.com/28087/eng/microcode-${version}.tgz"},
+]
 
-build() {
-	gcc -Wall ${CFLAGS} -o intel-microcode2ucode intel-microcode2ucode.c
-	./intel-microcode2ucode ./microcode.dat
-	install -d -m755 "${pkgdir}"/boot
-
+build='''
+	rm -f intel-ucode/list intel-ucode-with-caveats/list
 	mkdir -p kernel/x86/microcode
-	mv microcode.bin kernel/x86/microcode/GenuineIntel.bin
+	iucode_tool -w kernel/x86/microcode/GenuineIntel.bin intel-ucode intel-ucode-with-caveats
+	install -d -m755 "${pkgdir}"/boot
 	echo kernel/x86/microcode/GenuineIntel.bin | bsdcpio -o -H newc -R 0:0 > "${pkgdir}"/boot/intel-ucode.img
-}
+'''

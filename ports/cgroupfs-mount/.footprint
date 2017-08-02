@@ -1,8 +1,0 @@
-bin/cgroupfs-mount|755|0|0|regular file
-bin/cgroupfs-umount|755|0|0|regular file
-bin|755|0|0|directory
-share/man/man8/cgroupfs-mount.8.gz|644|0|0|regular file
-share/man/man8/cgroupfs-umount.8.gz|777|0|0|symbolic link
-share/man/man8|755|0|0|directory
-share/man|755|0|0|directory
-share|755|0|0|directory

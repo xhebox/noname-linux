@@ -1,0 +1,23 @@
+name=wlroots
+version=r2339.7efd9885
+desc='Modular Wayland compositor library'
+deps="eudev wayland xcb-util-image xcb-util-wm libxkbcommon libinput pixman mesa meson ninja libcap"
+
+ext() {
+	proxychains git clone https://github.com/swaywm/wlroots
+	cd wlroots
+	git reset --hard 5f48c7fddd6a28b529eb02ca156db577b76edfb6
+}
+
+build () {
+	cd wlroots
+	noname-meson build \
+		-Denable-libcap=false \
+		-Denable-systemd=false \
+		-Denable-elogind=false \
+		-Denable-xcb_errors=false \
+		-Denable-xwayland=true \
+		-Denable-x11_backend=true
+	ninja -C build || die
+	DESTDIR="${pkgdir}" ninja -C build install || die
+}

@@ -1,0 +1,13 @@
+version="1.32"
+desc="Support library for libgcrypt"
+deps=["musl", "dash"]
+source=[
+  {url="https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${version}.tar.bz2"}
+]
+
+build='''
+  cd libgpg-error-$version
+  ./configure --prefix=
+  make
+  make DESTDIR="$pkgdir" install
+'''

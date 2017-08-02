@@ -1,19 +1,21 @@
-name=aria2
-version=1.32.0
+version="1.34.0"
 desc="Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink."
-deps="expat libgmp libxml2 libressl sqlite libssh2 c-ares"
-source="https://github.com/aria2/aria2/releases/download/release-$version/$name-$version.tar.xz"
+makedeps=["expat", "libgmp", "libxml2", "libressl", "sqlite", "libssh2"]
+deps=["expat", "libgmp", "libxml2", "libressl", "sqlite", "libssh2"]
+source=[
+	{url="https://github.com/aria2/aria2/releases/download/release-$version/aria2-$version.tar.xz"},
+	{url="patch-src_libssl_compat_h.patch"}
+]
 
-build() {
-	cd $name-$version
+build='''
+	cd aria2-$version
+	patch -p0 -i ../patch-src_libssl_compat_h.patch
 
 	./configure \
 		--prefix=/ \
 		--with-openssl --with-libexpat \
 		--with-bashcompletiondir=/share/bash-completion/completions
 
-	make || die
-	make prefix=/$pkgdir install || die
-
-	rm -r $pkgdir/share/doc $pkgdir/share/man/ru $pkgdir/share/man/pt
-}
+	make
+	make prefix=/$pkgdir install
+'''

@@ -1,0 +1,22 @@
+name=libasyncns-32
+version=0.8
+deps=libasyncns
+source="
+http://0pointer.de/lennart/projects/libasync/libasyncns-$version.tar.gz
+"
+
+build() {
+  cd libasyncns-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}

@@ -1,0 +1,39 @@
+name=dnscrypt-proxy
+version=2.0.5
+dsc="A tool for securing communications between a client and a DNS resolver"
+deps="git go"
+source="https://github.com/jedisct1/dnscrypt-proxy/archive/$version.tar.gz
+dnscrypt-proxy.conf"
+
+build() {
+	cd dnscrypt-proxy-$version/dnscrypt-proxy/
+	sed -i 's|\['\''127\.0\.0\.1:53'\'', '\''\[::1\]:53'\''\]|\['\''127\.0\.0\.1:3535'\'', '\''\[::1\]:3535'\''\]|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''dnscrypt-proxy\.log'\''|'\''/var/log/dnscrypt-proxy/dnscrypt-proxy\.log'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''forwarding-rules\.txt'\''|'\''/etc/dnscrypt-proxy/forwarding-rules\.txt'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''cloaking-rules\.txt'\''|'\''/etc/dnscrypt-proxy/cloaking-rules\.txt'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''query\.log'\''|'\''/var/log/dnscrypt-proxy/query\.log'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''nx\.log'\''|'\''/var/log/dnscrypt-proxy/nx\.log'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''blacklist\.txt'\''|'\''/etc/dnscrypt-proxy/blacklist\.txt'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''blocked\.log'\''|'\''/var/log/dnscrypt-proxy/blocked\.log'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''ip-blacklist\.txt'\''|'\''/etc/dnscrypt-proxy/ip-blacklist\.txt'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''ip-blocked\.log'\''|'\''/var/log/dnscrypt-proxy/ip-blocked\.log'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''public-resolvers\.md'\''|'\''/etc/dnscrypt-proxy/public-resolvers\.md'\''|g' example-dnscrypt-proxy.toml
+	sed -i 's|'\''parental-control\.md'\''|'\''/etc/dnscrypt-proxy/parental-control\.md'\''|g' example-dnscrypt-proxy.toml
+
+	mkdir -p "$srcdir/gopath"
+	export GOPATH="$srcdir/gopath"
+	PATH="$srcdir/gopath/bin:$PATH"
+	mkdir -p "${GOPATH}/src/github.com/jedisct1"
+	ln -sfn "$srcdir/dnscrypt-proxy-${version}" "${GOPATH}/src/github.com/jedisct1/dnscrypt-proxy"
+	cd "${GOPATH}/src/github.com/jedisct1/dnscrypt-proxy/dnscrypt-proxy"
+	go get -u -v github.com/kardianos/govendor
+	govendor build || die
+
+	install -Dm755 "dnscrypt-proxy" "$pkgdir/bin/dnscrypt-proxy"
+	install -Dm644 "example-dnscrypt-proxy.toml" "$pkgdir/etc/dnscrypt-proxy/dnscrypt-proxy.toml"
+	install -Dm644 "example-forwarding-rules.txt" "$pkgdir/share/doc/dnscrypt-proxy/example-forwarding-rules.txt"
+	install -Dm644 "example-blacklist.txt" "$pkgdir/share/doc/dnscrypt-proxy/example-blacklist.txt"
+	install -Dm644 "example-cloaking-rules.txt" "$pkgdir/share/doc/dnscrypt-proxy/example-cloaking-rules.txt"
+
+	install -Dm644 ../../dnscrypt-proxy.conf "$pkgdir"/etc/finit.d/dnscrypt-proxy.conf
+}

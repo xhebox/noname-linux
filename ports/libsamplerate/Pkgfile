@@ -1,13 +1,13 @@
-name=libsamplerate
-version=0.1.9
+version="0.1.9"
 desc="sample rate converter."
-deps=libsndfile
-source="http://www.mega-nerd.com/SRC/libsamplerate-$version.tar.gz"
+makedeps=["libsndfile"]
+deps=["libsndfile"]
+source=[{url="http://www.mega-nerd.com/SRC/libsamplerate-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libsamplerate-$version
 	./configure --prefix= \
 	--sbindir=/bin
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

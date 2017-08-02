@@ -1,0 +1,48 @@
+. ../pulseaudio/Pkgfile
+name=pulseaudio-32
+deps="libcap-32 libressl-32 eudev-32 dbus-32 libsndfile-32 json-c-32 intltool libtool-32 glib-32 speexdsp-32 libxtst-32 libasyncns-32 libsm-32 libsamplerate-32"
+
+build(){
+  cd pulseaudio-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  patch -p0 < ../0001-padsp-Make-it-compile-on-musl.patch
+  ./configure \
+  --prefix=  \
+  --sysconfdir=/etc \
+  --libdir=/lib32 \
+  --libexecdir=/lib32 \
+  --localstatedir=/var \
+  --with-udev-rules-dir=/lib/udev/rules.d \
+  --with-database=tdb \
+  --disable-tcpwrap \
+  --disable-bluez4 \
+  --enable-samplerate \
+  --disable-default-build-tests \
+  DATADIRNAME=share \
+  --disable-systemd --disable-systemd-journal \
+  --enable-nls \
+  --with-bash-completion-dir=/share/bash-completion/completions
+
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  sed -i '/seems to be moved/d' libtool
+
+  _pulsever=$version
+  [ "$_pulsever"="*.*.*" ] && _pulsever=${_pulsever%.*}
+
+  _libs="libpulse.la libpulse-simple.la libpulse-mainloop-glib.la"
+  _pkglibs="libpulsecommon-${_pulsever}.la libpulsedsp.la"
+
+  make -C src $_libs $_pkglibs
+  make -j1 -C src DESTDIR="$pkgdir" \
+  lib_LTLIBRARIES="$_libs" install-libLTLIBRARIES
+  make -j1 -C src DESTDIR="$pkgdir" \
+  pkglib_LTLIBRARIES="$_pkglibs" install-pkglibLTLIBRARIES
+  make -j1 DESTDIR="$pkgdir" install-pkgconfigDATA
+  rm -rf ${pkgdir}/etc
+  rm -rf ${pkgdir}/share
+  rm -rf ${pkgdir}/include
+  rm -rf ${pkgdir}/bin
+  rm -rf ${pkgdir}/lib
+}

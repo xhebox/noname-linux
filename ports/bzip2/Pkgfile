@@ -1,34 +1,48 @@
-name=bzip2
-version=1.0.6
+version="1.0.6"
 desc="A high-quality data compression program"
-source="http://www.bzip.org/$version/$name-$version.tar.gz
-	bzip2-1.0.4-makefile-CFLAGS.patch
-	bzip2-1.0.6-saneso.patch
-	bzip2-1.0.4-man-links.patch
-	bzip2-1.0.2-progress.patch
-	bzip2-1.0.3-no-test.patch
-	fasterfile.patch
-	bzip2-1.0.4-POSIX-shell.patch"
-deps="musl"
+source=[
+	{url="https://sources.archlinux.org/other/packages/bzip2/bzip2-$version.tar.gz"},
+	{url="bzip2-1.0.4-bzip2recover.patch"},
+	{url="CVE-2016-3189.patch"}
+]
+deps=["musl", "dash"]
 
-build() {
-	cd $name-$version
+ext='''
+	cd bzip2-$version
 	for i in ${source}; do
 		case $i in
-		*.patch) patch -p1 -i "$srcdir"/$i  ;;
+		*.patch) patch -p1 -i "$srcdir"/$i;;
 		esac
 	done
-	sed -i \
-		-e 's:\$(PREFIX)/man:\$(PREFIX)/share/man:g' \
-		-e 's:ln -s -f $(PREFIX)/bin/:ln -s :' \
-		Makefile
-	sed -i \
-		-e "s:1\.0\.4:$version:" \
-		bzip2.1 bzip2.txt Makefile-libbz2_so manual.*
-	make -f Makefile-libbz2_so all  || die
-	make CFLAGS="$CFLAGS"  || die
-	make PREFIX="$pkgdir" install  || die
-	install -D libbz2.so.$version "$pkgdir"/lib/libbz2.so.$version
-	ln -s libbz2.so.$version "$pkgdir"/lib/libbz2.so
-	ln -s libbz2.so.$version "$pkgdir"/lib/libbz2.so.${version%%.*}
-}
+'''
+
+build='''
+	cd bzip2-$version
+	sed -i -e 's:\$(PREFIX)/man:\$(PREFIX)/share/man:g' -e 's:ln -s -f $(PREFIX)/bin/:ln -s :' Makefile
+	sed -e 's/^CFLAGS=\(.*\)$/CFLAGS=\1 \$(BIGFILES)/' -i ./Makefile-libbz2_so
+	sed -i "s|-O2|${CFLAGS}|g" Makefile
+	sed -i "s|-O2|${CFLAGS}|g" Makefile-libbz2_so
+	sed -i -e "s:1\.0\.4:$version:" bzip2.1 bzip2.txt Makefile-libbz2_so manual.*
+
+	make -f Makefile-libbz2_so all
+	make bzip2 bzip2recover
+
+	install -dm755 $pkgdir/bin $pkgdir/lib $pkgdir/include $pkgdir/share/man/man1 
+	install -m755 bzip2-shared $pkgdir/bin/bzip2
+	install -m755 bzip2recover bzdiff bzgrep bzmore $pkgdir/bin
+
+	ln -sf bzip2 $pkgdir/bin/bunzip2
+	ln -sf bzip2 $pkgdir/bin/bzcat
+
+	install -m755 libbz2.so.1.0.6 $pkgdir/lib
+	ln -s libbz2.so.1.0.6 $pkgdir/lib/libbz2.so
+	ln -s libbz2.so.1.0.6 $pkgdir/lib/libbz2.so.1
+	ln -s libbz2.so.1.0.6 $pkgdir/lib/libbz2.so.1.0
+
+	install -m644 bzlib.h $pkgdir/include/
+
+	install -m644 bzip2.1 $pkgdir/share/man/man1/
+	ln -sf bzip2.1 $pkgdir/share/man/man1/bunzip2.1
+	ln -sf bzip2.1 $pkgdir/share/man/man1/bzcat.1
+	ln -sf bzip2.1 $pkgdir/share/man/man1/bzip2recover.1
+'''

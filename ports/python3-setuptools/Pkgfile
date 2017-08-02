@@ -1,0 +1,15 @@
+version="40.6.3"
+source=[{url="http://github.com/pypa/setuptools/archive/v$version.tar.gz"}]
+desc="Easily download, build, install, upgrade, and uninstall Python packages."
+
+build='''
+	cd setuptools-$version
+	/bin/python3 bootstrap.py
+	/bin/python3 setup.py build
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+	rm "$pkgdir"/bin/easy_install
+'''

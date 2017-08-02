@@ -1,15 +1,13 @@
-name=libxdmcp
-version=1.1.2
-deps=xorg-proto
+version="1.1.2"
+makedeps=["xorgproto", "util-macros"]
 desc="xorg lib libXdmcp"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXdmcp-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXdmcp-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXdmcp-$version
 
-	./configure --prefix= --sysconfdir=/etc \
-		--localstatedir=/var --disable-static 
+	./configure --prefix= --sysconfdir=/etc --localstatedir=/var --disable-static 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,16 @@
+name=reaver
+version=git
+deps="libpcap pixiewps"
+desc="Brute force attack against Wifi Protected Setup"
+
+ext() {
+	git clone --depth=1 https://github.com/t6x/reaver-wps-fork-t6x
+}
+
+build() {
+	cd "$srcdir/reaver-wps-fork-t6x/src"
+	./configure --prefix= --sysconfdir=/etc
+	make -j1
+	install -Dm755 "$srcdir/reaver-wps-fork-t6x/src/reaver" "$pkgdir/bin/reaver"
+	install -Dm755 "$srcdir/reaver-wps-fork-t6x/src/wash" "$pkgdir/bin/wash"
+}

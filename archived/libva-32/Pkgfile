@@ -1,0 +1,16 @@
+. ../libva/Pkgfile
+name=libva-32
+deps="xorgproto libxfixes-32 libx11-32 libdrm-32 libva"
+
+build() {
+  cd libva-$version
+  export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  ./configure --prefix= --disable-static --libdir=/lib32
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/include
+}

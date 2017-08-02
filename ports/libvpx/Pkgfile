@@ -1,20 +1,22 @@
-name=libvpx
-version=1.6.1
-deps="bash perl yasm"
+version="1.7.0"
+makedeps=["perl", "yasm"]
+deps=["bash"]
 desc="Library for the vp8 codec"
-source="
-https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Fix-for-issue-1114-compile-error.patch?h=packages/libvpx
-https://github.com/webmproject/libvpx/archive/v${version}.tar.gz
-"
+source=[
+	{url="https://github.com/webmproject/libvpx/archive/v${version}.tar.gz"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd libvpx-$version
 	for i in $source; do
 		case $i in
-		libvpx) patch -p1 -i "$srcdir"/$i ;;
 		*.patch) patch -p1 -i "$srcdir"/$i ;;
 		esac
 	done
+'''
+
+build='''
+	cd libvpx-$version
 	export CROSS=" "
 	bash ./configure \
 		--prefix= \
@@ -29,6 +31,6 @@ build() {
 		--disable-install-docs \
 		--disable-install-srcs \
 		--disable-static
-	make || die
-	make DIST_DIR="$pkgdir" install || die
-}
+	make
+	make DIST_DIR="$pkgdir" install
+'''

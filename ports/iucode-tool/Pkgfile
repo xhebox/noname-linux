@@ -1,0 +1,20 @@
+version="2.3.1"
+desc='Tool to manipulate Intel® IA-32/X86-64 microcode bundles'
+source=[
+	{url="https://gitlab.com/iucode-tool/releases/raw/master/iucode-tool_${version}.tar.xz"},
+	{url="musl-limits_h.patch"},
+]
+
+ext='''
+	cd iucode-tool-$version
+	patch -p0 < ../musl-limits_h.patch
+'''
+
+build='''
+	cd iucode-tool-$version
+	./configure \
+		--prefix= \
+		--sbindir=/bin
+	make
+	make DESTDIR="$pkgdir/" install
+'''

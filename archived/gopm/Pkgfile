@@ -1,0 +1,10 @@
+name=gopm
+version=go
+desc="a Go package manage and build tool for Go."
+
+build() {
+	export GOPATH=`pwd`/go
+	go get -u github.com/gpmgo/gopm
+	go install github.com/gpmgo/gopm || die
+	install -D -m755 $GOPATH/bin/gopm "$pkgdir"/bin/gopm
+}

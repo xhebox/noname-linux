@@ -1,0 +1,13 @@
+name=gts
+version=0.7.6
+desc='Provides useful functions to deal with 3D surfaces meshed with interconnected triangles'
+deps="glib"
+source="http://nchc.dl.sourceforge.net/project/gts/gts/${version}/gts-${version}.tar.gz"
+
+build() {
+	cd "gts-${version}"
+	#export LDFLAGS=${LDFLAGS//--as-needed,}
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

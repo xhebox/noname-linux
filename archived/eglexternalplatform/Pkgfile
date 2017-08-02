@@ -1,0 +1,18 @@
+name=eglexternalplatform
+version=1.0+3+g7c8f8e2
+desc="EGL External Platform interface"
+deps="mesa"
+
+ext() {
+	git clone https://github.com/NVIDIA/eglexternalplatform
+	cd eglexternalplatform
+	git tag -f 1.0 53bf47ccd349b7525248687ba0058860168c8580 
+}
+
+build() {
+	cd eglexternalplatform
+	install -Dt "$pkgdir/include/EGL" -m644 interface/*
+	install -Dt "$pkgdir/share/pkgconfig" -m644 *.pc
+}
+
+

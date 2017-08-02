@@ -1,47 +1,40 @@
-name=bash
-_basever=4.4
-_patchlevel=012
-version=${_basever}.${_patchlevel}
+version="4.4"
 desc="An sh-compatible command language interpreter"
-source="http://ftp.gnu.org/gnu/$name/$name-$_basever.tar.gz
-bash_logout
-dot.bash_logout
-dot.bash_profile
-dot.bashrc
-bashrc
-"
-deps="ncurses readline"
-url="http://ftp.gnu.org/gnu/$name/$name-$_basever-patches"
-if [ "$_patchlevel" -gt 000 ]; then
-	for p in $(seq -w 001 $_patchlevel); do
-		source="$source
-		$url/bash`echo ${_basever} | sed 's/\.//g'`-${p}
-		"
-	done
-fi
+makedeps=["ncurses", "readline"]
+deps=["ncurses", "readline", "musl"]
+source=[
+	{url="http://ftp.gnu.org/gnu/bash/bash-$version.tar.gz"},
+	{url="bash_logout"},
+	{url="dot.bash_logout"},
+	{url="dot.bash_profile"},
+	{url="dot.bashrc"},
+	{url="bashrc"},
+]
 
-ext(){
-	cd $name-$_basever
-	for p in $(seq -w 001 ${_patchlevel}); do
-		patch -p0 -i ../bash`echo ${_basever} | sed 's/\.//g'`-${p} || die
+ext='''
+	cd bash-$version
+	url="http://ftp.gnu.org/gnu/bash/bash-$version-patches"
+	for p in $(seq -w 001 023); do
+		curl "$url/bash`echo $version | tr -d '.'`-${p}" | patch -p0 -i -
 	done
+
 	for i in $source; do
 		case $i in
-		*memleak*.patch) patch -p1 -i "$srcdir"/"`basename $i`" || die;;
-		*.patch) patch -p0 -i "$srcdir"/"`basename $i`" || die;;
+		*memleak*.patch) patch -p1 -i "$srcdir/$i";;
+		*.patch) patch -p0 -i "$srcdir/$i";;
 		esac
 	done
-}
+'''
 
-build(){
-	cd $name-$_basever
+build='''
+	cd bash-$version
 	export CFLAGS="$CFLAGS -DSYS_BASHRC='\"/etc/bashrc\"' -DDEFAULT_PATH_VALUE=\'\"/sbin:/bin\"\' -DSTANDARD_UTILS_PATH=\'\"/bin\"\'"
 	./configure --prefix=/ --without-bash-malloc --with-installed-readline --with-curses --enable-readline
-	make || die
-	make DESTDIR="$pkgdir" install || die
+	make
+	make DESTDIR="$pkgdir" install
 	install -D -m644 "$srcdir"/bashrc "$pkgdir"/etc/bashrc
 	install -dm755 "$pkgdir"/etc/skel/
 	install -D -m644 "$srcdir"/dot.bashrc "$pkgdir"/etc/skel/.bashrc
 	install -D -m644 "$srcdir"/dot.bash_profile "$pkgdir"/etc/skel/.bash_profile
 	install -D -m644 "$srcdir"/dot.bash_logout "$pkgdir"/etc/skel/.bash_logout
-}
+'''

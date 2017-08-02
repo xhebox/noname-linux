@@ -1,0 +1,31 @@
+version="35"
+desc="Tools and library to manipulate EFI variables"
+makedeps=["popt"]
+deps=["popt"]
+source=[
+	{url="https://github.com/rhboot/efivar/archive/$version.tar.gz"},
+	{url="bswap_constant.h"},
+	{url="makeguids.patch"},
+	{url="musl-strndupa.patch"},
+]
+
+ext='''
+	cd efivar-$version
+	cp ../bswap_constant.h src/include/
+	patch -p0 < ../makeguids.patch
+	patch -p0 < ../musl-strndupa.patch
+'''
+
+build='''
+	cd efivar-$version
+	sed 's|-O0|-Os|g' -i Make.defaults || true
+	sed 's|-rpath,$(TOPDIR)/src|-rpath,$(libdir)|g' -i src/test/Makefile || true
+	CFLAGS="$CFLAGS -Wno-stringop-truncation"
+
+	make libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" -j1
+	make -C src/test libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" -j1
+	make -j1 DESTDIR="${pkgdir}/" libdir="/lib/" bindir="/bin/" mandir="/share/man/" includedir="/include/" install
+	
+	install -d "${pkgdir}/bin"
+	install -D -m0755 "src/test/tester" "${pkgdir}/bin/efivar-tester"
+'''

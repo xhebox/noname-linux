@@ -1,14 +1,16 @@
-name=gettext-tiny
-version=git
+version="git"
 desc="lightweight replacements of the gnu gettext"
+nostrip=true
+source=[
+	{
+		url="git://github.com/sabotage-linux/gettext-tiny",
+		branch="stubmode",
+		protocol="git"
+	},
+]
 
-ext(){
-	git clone https://github.com/sabotage-linux/gettext-tiny
+build='''
 	cd gettext-tiny
-}
-
-build(){
-	cd gettext-tiny
-	make LIBINTL=MUSL -j1 prefix=/ || die
-	make LIBINTL=MUSL -j1 DESTDIR=$pkgdir prefix=/ install  || die
-}
+	make CFLAGS="-O0 -g2" LIBINTL=MUSL prefix=/
+	make CFLAGS="-O0 -g2" LIBINTL=MUSL DESTDIR="$pkgdir" prefix=/ install
+'''

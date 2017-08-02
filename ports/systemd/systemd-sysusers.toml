@@ -1,0 +1,4 @@
+pattern=["lib/sysusers.d/*.conf"]
+script='''
+/bin/systemd-sysusers
+'''

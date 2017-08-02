@@ -1,36 +1,41 @@
-name=schroot
 desc="Allows users to execute commands in different chroots"
-deps="elfutils e2fsprogs boost gtest lvm2"
-version=1.7.2
-source="http://ftp.debian.org/debian/pool/main/s/$name/${name}_${version}.orig.tar.xz
-arch
-copyfiles
-nssdatabases
-fstab
-0001-getent.patch
-0001-getmntent-fix.patch
-fix-bash-completion.patch
-musl.patch
-"
+version="1.6.10"
+deps=["elfutils", "e2fsprogs", "boost", "lvm2", "pam"]
+makedeps=["elfutils", "e2fsprogs", "boost", "lvm2", "pam"]
+source=[
+	{url="http://http.debian.net/debian/pool/main/s/schroot/schroot_${version}.orig.tar.xz"},
+	{url="http://http.debian.net/debian/pool/main/s/schroot/schroot_${version}-3+deb9u1.debian.tar.xz"},
+	{url="arch"},
+	{url="copyfiles"},
+	{url="nssdatabases"},
+	{url="fstab"},
+	{url="schroot.pam"},
+	{url="notest.patch"},
+	{url="getent.patch"},
+	{url="getmntent.patch"},
+	{url="musl.patch"},
+	{url="remove-networks.patch"},
+	{url="schroot-cppunit.patch"},
+]
 
-ext() {
-	cd $name-$version
-	for i in $source; do
+ext='''
+	cd schroot-$version
+	for i in $source ../debian/patches/*; do
 		case $i in
-		*bash*) patch -p1 -i $srcdir/$i || die;;
-		*.patch) patch -p0 -i $srcdir/$i || die;;
+		*debian*patch) patch -p1 -i $i;;
+		*.patch) patch -p0 -i ../$i;;
 		esac
 	done
-	export LDFLAGS="$LDFLAGS -Wl,--no-as-needed -lboost_regex"
 	sed -i 's/warn/message/g' man/CMakeLists.txt
 	sed -i '/networks/d' \
 		etc/profile-templates/default/all/nssdatabases \
 		etc/profile-templates/desktop/all/nssdatabases \
 		etc/profile-templates/buildd/all/copyfiles
-}
+'''
 
-build() {
-	cd $name-$version
+build='''
+	export LDFLAGS="$LDFLAGS -Wl,--no-as-needed -lboost_regex"
+	cd schroot-$version
 	mkdir build
 	cd build
 	cmake \
@@ -43,12 +48,11 @@ build() {
 		-Dbash_completion_dir=/share/bash-completion/completions \
 		-Dlvm-snapshot=ON \
 		..
-	make || die
-	make DESTDIR="$pkgdir" install || die
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 ../../schroot.pam "$pkgdir"/etc/pam.d/schroot
 	install -Dm644 ../../arch "$pkgdir"/etc/schroot/chroot.d/arch.conf
 	install -Dm644 ../../fstab "$pkgdir"/etc/schroot/arch/fstab
 	install -Dm644 ../../nssdatabases "$pkgdir"/etc/schroot/arch/nssdatabases
 	install -Dm644 ../../copyfiles "$pkgdir"/etc/schroot/arch/copyfiles
-	chmod 4755 "$pkgdir"/bin/schroot
-	rm -r "$pkgdir"/etc/pam.d
-}
+'''

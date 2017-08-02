@@ -1,0 +1,21 @@
+name=wxgtk
+version=3.0.3.1
+desc="GTK+ implementation of wxWidgets API for GUI"
+deps="gtk libsm glu libnotify"
+source="https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2"
+
+build() {
+	cd wxWidgets-${version}
+	NOCONFIGURE=1 ./autogen.sh
+	./configure --prefix= --libdir=/lib --with-gtk=2 --with-opengl --enable-unicode \
+		--enable-graphics_ctx --enable-mediactrl --enable-webview --with-regex=builtin \
+		--with-libpng=sys --with-libxpm=sys --with-libjpeg=sys --with-libtiff=sys \
+		--without-gnomevfs --without-gnomeprint \
+		--disable-precomp-headers \
+		--disable-mediactrl \
+		--disable-webview
+	make || die
+	make -C locale allmo || die
+	make DESTDIR="${pkgdir}" install || die
+	rm -rf "$pkgdir"/share/locale/zh
+}

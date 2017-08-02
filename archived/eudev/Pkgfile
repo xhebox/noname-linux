@@ -1,0 +1,34 @@
+version="3.2.5"
+desc="Userspace device management daemon"
+makedeps=["kbd", "kmod", "gperf", "hwids", "util-linux", "kernel-libc-headers"]
+deps=["kbd", "kmod", "hwids", "util-linux"]
+source=[
+	{url="http://dev.gentoo.org/~blueness/eudev/eudev-$version.tar.gz"},
+	{url="initcpio-hook-udev"},
+	{url="initcpio-install-udev"},
+	{url="eudev.toml"},
+]
+
+build='''
+	cd eudev-$version
+	./configure --prefix= \
+			--sysconfdir=/etc \
+			--sbindir=/bin \
+			--enable-manpages \
+			--enable-split-usr \
+			--enable-kmod \
+			--enable-hwdb \
+			--disable-introspection 
+	make CFLAGS="$CFLAGS -D_GNU_SOURCE"
+	make install DESTDIR="$pkgdir"
+	make -C man install DESTDIR="$pkgdir"
+	install -d "$pkgdir"/lib/firmware
+	install -d "$pkgdir"/lib/udev/devices/pts
+	install -d "$pkgdir"/lib/udev/devices/shm
+	sed -i 's#GROUP="dialout"#GROUP="uucp"#g;
+	s#GROUP="tape"#GROUP="storage"#g;
+	s#GROUP="cdrom"#GROUP="optical"#g' "$pkgdir"/lib/udev/rules.d/*.rules
+	install -Dm755 ../eudev.toml "$pkgdir/${HOOKS#$ROOT}"/eudev.toml
+	install -Dm644 ../initcpio-install-udev "$pkgdir/lib/initcpio/install/udev"
+	install -Dm644 ../initcpio-hook-udev "$pkgdir/lib/initcpio/hooks/udev"
+'''

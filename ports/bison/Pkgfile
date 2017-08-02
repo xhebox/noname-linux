@@ -1,18 +1,12 @@
-name=bison
-version=3.0.4
+version="3.2"
 desc="The GNU Project parser generator"
-source="https://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.xz"
-deps="m4 perl"
+source=[{url="https://mirrors.ustc.edu.cn/gnu/bison/bison-$version.tar.xz"}]
+makedeps=["help2man"]
+deps=["m4", "dash", "musl"]
 
-build() {
+build='''
 	cd bison-$version
-	./configure \
-		--prefix= \
-		--disable-static \
-		--disable-texinfo 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-	rm -r "$pkgdir"/share/doc
-	rm -r "$pkgdir"/share/bison/README
-}
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

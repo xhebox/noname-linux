@@ -1,0 +1,33 @@
+name=polkit
+version=0.114
+desc="Application development toolkit for controlling system-wide privileges"
+deps="glib pam expat js52 intltool gobject-introspection elogind"
+source="https://www.freedesktop.org/software/polkit/releases/polkit-$version.tar.gz
+polkitd.conf
+make-innetgr-optional.patch
+99-noname.rules"
+
+ext() {
+	cd polkit-$version
+	patch -p0 < ../make-innetgr-optional.patch
+}
+
+build() {
+	cd polkit-$version
+	./configure --prefix= --sysconfdir=/etc \
+		--localstatedir=/var --libexecdir=/lib \
+		--disable-libsystemd-login --enable-libelogind --disable-static \
+		--with-authfw=pam \
+		--disable-gtk-doc --with-os-type=rethat
+
+	make
+	make DESTDIR="$pkgdir" install
+
+	install -d -o root -g 102 -m 750 "$pkgdir"/etc/polkit-1/rules.d
+	install -d -o root -g 102 -m 750 "$pkgdir"/share/polkit-1/rules.d
+	install -Dm644 ../99-noname.rules "$pkgdir"/etc/polkit-1/rules.d
+	install -Dm644 ../polkitd.conf "$pkgdir"/etc/finit.d/polkitd.conf
+	install -Dm644 /dev/stdin "$pkgdir/lib/sysusers.d/polkit.conf" <<END
+u polkitd 102 "PolicyKit daemon"
+END
+}

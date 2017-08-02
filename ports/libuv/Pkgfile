@@ -1,15 +1,14 @@
-name=libuv
-version=1.13.1
-deps="libtool pthread-stubs"
+version="1.25.0"
+deps=["musl"]
 desc="Multi-platform support library with a focus on asynchronous I/O"
-source="http://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"
+source=[{url="http://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"}]
 
-build() {
+build='''
 	cd libuv-v$version
 
 	NOCONFIGURE=1 ./autogen.sh 
 	./configure --prefix=/
 
-	make || die
-	make DESTDIR=$pkgdir install || die
-}
+	make
+	make DESTDIR=$pkgdir install
+'''

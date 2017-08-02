@@ -1,23 +1,24 @@
-name=nspr
-version=4.15
-deps=musl
+version="4.20"
+deps=["musl"]
 desc="Netscape Portable Runtime library"
-source="http://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v$version/src/$name-$version.tar.gz
-fix-getproto.patch"
+source=[
+	{url="http://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v$version/src/$name-$version.tar.gz"},
+	{url="fix-getproto.patch"},
+]
 
-build() {
-	cd $name-$version/nspr
+build='''
+	cd nspr-$version/nspr
 	patch -p2 -i ../../fix-getproto.patch 
 	sed -i 's#$(LIBRARY) ##' config/rules.mk
 
 	CFLAGS="$CFLAGS -D_PR_POLL_AVAILABLE -D_PR_HAVE_OFF64_T -D_PR_INET6 -D_PR_HAVE_INET_NTOP -D_PR_HAVE_GETHOSTBYNAME2 -D_PR_HAVE_GETADDRINFO -D_PR_INET6_PROBE" \
 	./configure --prefix=/ --libdir=/lib \
 		--includedir=/include/nspr --enable-optimize \
-		--disable-debug --enable-ipv6  \
+		--disable-debug --enable-ipv6	\
 		--enable-64bit 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
+	make
+	make DESTDIR="$pkgdir" install
 	cd "$pkgdir"/lib/pkgconfig/
 	ln -s nspr.pc mozilla-nspr.pc
-}
+'''

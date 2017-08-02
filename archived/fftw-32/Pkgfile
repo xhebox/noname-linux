@@ -1,0 +1,37 @@
+. ../fftw/Pkgfile
+name=fftw-32
+deps=fftw
+
+build() {
+  cp -a fftw-${version} fftw-${version}-double
+  cp -a fftw-${version} fftw-${version}-long-double
+  mv fftw-${version} fftw-${version}-single
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  CFLAGS="$CFLAGS -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
+
+  CONFIGURE="./configure --prefix=  \
+    --libdir=/lib32 \
+    --enable-shared --enable-threads \
+    --enable-openmp"
+
+  cd ${srcdir}/fftw-${version}-double
+  $CONFIGURE --enable-sse2 --enable-avx
+  make
+  make DESTDIR=$pkgdir install
+
+  cd ${srcdir}/fftw-${version}-long-double
+  $CONFIGURE --enable-long-double
+  make
+  make DESTDIR=$pkgdir install
+
+  cd ${srcdir}/fftw-${version}-single
+  $CONFIGURE --enable-float --enable-sse --enable-avx
+  make
+  make DESTDIR=$pkgdir install
+  rm -r $pkgdir/share
+  rm -r $pkgdir/bin
+  rm -r $pkgdir/include
+}

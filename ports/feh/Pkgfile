@@ -1,11 +1,11 @@
-name=feh
-version=2.19.1
+version="2.26.3"
 desc="Fast and light imlib2-based image viewer"
-deps="imlib2 curl libxinerama libexif libxt imagemagick"
-source="https://feh.finalrewind.org/${name}-${version}.tar.bz2"
+makedeps=["imlib2", "curl", "libxt", "xorgproto"]
+deps=["imlib2", "curl", "libxt"]
+source=[{url="https://feh.finalrewind.org/${name}-${version}.tar.bz2"}]
 
-build() {
+build='''
 	cd feh-$version
-	make PREFIX=/ exif=1 help=1 || die
-	make PREFIX=/ DESTDIR="$pkgdir" docsdir=/share/doc/giblib install || die
-}
+	make PREFIX=/ help=1 xinerama=0
+	make PREFIX=/ DESTDIR="$pkgdir" docsdir=/share/doc/giblib install
+'''

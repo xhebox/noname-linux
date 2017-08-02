@@ -1,0 +1,101 @@
+name=firefox
+version=58.0.2
+desc="Firefox web browser"
+deps="alsa-lib autoconf2.13 automake bzip2 cargo llvm dbus-glib gtk3 icu libevent libjpeg-turbo libogg libtool libvorbis libvpx libxt libxcomposite mesa nspr nss python sqlite yasm zip rust pulseaudio inetutils shared-mime-info unzip"
+source="https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
+stab.h
+0001-Bug-1430274-Define-MOZ_ALSA-for-more-source-files.-r.patch
+no-crmf.patch
+firefox-install-dir.patch
+noname-font.patch
+fix-fortify-inline.patch
+disable-hunspell_hooks.patch
+fix-seccomp-bpf.patch
+fix-toolkit.patch
+fix-tools.patch
+mallinfo.patch
+disable-moz-stackwalk.patch
+fix-bug-1261392.patch
+"
+
+ext() {
+	cd firefox-$version
+        for i in $source; do
+                case $i in
+                *.patch) patch -p1 -i "$srcdir"/$i || die;
+                esac
+        done
+
+	cp "$srcdir"/stab.h toolkit/crashreporter/google-breakpad/src/
+	echo "ac_add_options BINDGEN_CFLAGS='-I/include/nspr -I/include/pixman-1'" >>.mozconfig
+	contains "$PATH" "ccache" && acflag="ac_add_options --with-ccache=/bin/ccache"
+	cat > .mozconfig << END
+ac_add_options --enable-application=browser
+
+ac_add_options --prefix=
+ac_add_options --enable-release
+ac_add_options --enable-pie
+ac_add_options --enable-optimize="-O2"
+ac_add_options --enable-rust-simd
+$acflag
+
+# Branding
+ac_add_options --enable-official-branding
+ac_add_options --enable-update-channel=release
+ac_add_options --with-distribution-id=nonamelinux
+export MOZILLA_OFFICIAL=1
+export MOZ_TELEMETRY_REPORTING=0
+
+# System libraries
+ac_add_options --with-system-zlib
+ac_add_options --with-system-bz2
+ac_add_options --enable-system-sqlite
+ac_add_options --enable-system-ffi
+
+# Features
+ac_add_options --enable-alsa
+ac_add_options --disable-jack
+ac_add_options --disable-gold
+ac_add_options --disable-startup-notification
+ac_add_options --disable-crashreporter
+ac_add_options --disable-tests
+ac_add_options --disable-gconf
+ac_add_options --disable-profiling
+ac_add_options --disable-jemalloc
+ac_add_options --disable-updater
+ac_add_options --host=x86_64-unknown-linux-musl
+ac_add_options --target=x86_64-unknown-linux-musl
+END
+}
+
+build() {
+	cd firefox-$version
+	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
+	export CXXFLAGS="$CXXFLAGS -fno-delete-null-pointer-checks -fno-schedule-insns2"
+	export CFLAGS="$CFLAGS -fno-delete-null-pointer-checks -fno-schedule-insns2"
+
+	./mach build || die
+	./mach buildsymbols || die
+	DESTDIR="$pkgdir" ./mach install || die
+	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
+	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END
+// Use LANG environment variable to choose locale
+pref("intl.locale.matchOS", true);
+
+// Disable default browser checking.
+pref("browser.shell.checkDefaultBrowser", false);
+
+// Opt all of us into e10s, instead of just 50%
+pref("browser.tabs.remote.autostart", true);
+END
+
+	for i in 16 22 24 32 48 256; do
+		install -Dm644 browser/branding/official/default$i.png "$pkgdir/share/icons/hicolor/${i}x${i}/apps/$pkgname.png"
+	done
+	install -Dm644 browser/branding/official/content/icon64.png "$pkgdir/share/icons/hicolor/64x64/apps/firefox.png"
+	install -Dm644 browser/branding/official/mozicon128.png "$pkgdir/share/icons/hicolor/128x128/apps/firefox.png"
+	install -Dm644 browser/branding/official/content/about-logo.png "$pkgdir/share/icons/hicolor/192x192/apps/firefox.png"
+	install -Dm644 browser/branding/official/content/about-logo@2x.png "$pkgdir/share/icons/hicolor/384x384/apps/firefox.png"
+	ln -srf "$pkgdir/bin/firefox" "$pkgdir/lib/firefox/firefox-bin"
+	ln -srf "$pkgdir/lib/libnssckbi.so" "$pkgdir/lib/firefox/libnssckbi.so"
+}

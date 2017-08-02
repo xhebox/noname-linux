@@ -1,0 +1,5 @@
+pattern=["lib/systemd/catalog/*"]
+operation=["install", "remove"]
+script='''
+/bin/journalctl --update-catalog
+'''

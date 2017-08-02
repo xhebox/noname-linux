@@ -1,15 +1,13 @@
-name=libseccomp
-version=2.3.2
+version="2.3.3"
 desc="High level interface to the Linux Kernel's seccomp filter"
-source="https://github.com/seccomp/${name}/archive/v${version}.tar.gz"
+source=[{url="https://github.com/seccomp/libseccomp/releases/download/v$version/libseccomp-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libseccomp-$version
 	sed -i '/<linux\/prctl.h>/d' src/system.h
-	NOCONFIGURE=1 ./autogen.sh 
-	./configure  \
-	--prefix=/ \
-	--datarootdir=/lib
-	make || die
-	make DESTDIR=$pkgdir install || die
-}
+	./configure \
+		--prefix=/ \
+		--datarootdir=/lib
+	make
+	make DESTDIR=$pkgdir install
+'''

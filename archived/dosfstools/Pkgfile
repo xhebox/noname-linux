@@ -1,0 +1,11 @@
+version="4.1"
+deps=["musl"]
+desc="DOS filesystem utilities"
+source=[{url="https://github.com/dosfstools/dosfstools/releases/download/v$version/dosfstools-$version.tar.xz"}]
+
+build='''
+	cd dosfstools-$version
+	./configure --prefix= --libexecdir=/lib --sbindir=/bin --enable-compat-symlinks
+	make
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

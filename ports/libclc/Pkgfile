@@ -1,19 +1,12 @@
-name=libclc
-version=0.2.0+344+17648cd
-deps="llvm python"
+version="0.2.0-dabae5a"
+deps=["llvm", "python"]
+makedeps=["llvm", "python"]
 desc="Library requirements of the OpenCL C programming language"
+source=[{url="https://github.com/llvm-mirror/libclc", protocol="git", commit="dabae5a2afb78cba0320a86e3f5f0b5dc83e077c"}]
 
-ext() {
-	git clone --single-branch https://github.com/llvm-mirror/libclc
+build='''
 	cd libclc
-	git reset --hard `echo $version | cut -d '+' -f 3`
-	cd ..
-}
-
-build() {
-	cd libclc
-
 	python ./configure.py --prefix=/
-	make || die
-	make DESTDIR=$pkgdir install || die
-}
+	make V=s
+	make DESTDIR=$pkgdir install
+'''

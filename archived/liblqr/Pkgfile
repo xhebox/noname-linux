@@ -1,0 +1,12 @@
+name=liblqr
+version=0.4.2
+desc="A seam-carving C/C++ library called Liquid Rescale"
+deps="glib"
+source="http://liblqr.wikidot.com/local--files/en:download-page/liblqr-1-$version.tar.bz2"
+
+build() {
+	cd liblqr-1-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir/" install
+}

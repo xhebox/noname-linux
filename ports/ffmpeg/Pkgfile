@@ -1,11 +1,11 @@
-name=ffmpeg
-version=3.3.2
-deps="libgmp fontconfig libressl harfbuzz mesa pthread-stubs libva libvdpau opus libvpx speex gnutls celt x264 sdl2 libvorbis fontconfig pulseaudio bzip2 x265 xvidcore libmodplug libsoxr lame libwebp ladspa v4l-utils fribidi libtheora opencore-amr libass libssh vid.stab schroedinger openjpeg2 gsm"
+version="4.1"
+makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
+deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
 desc="Complete solution to record, convert and stream audio and video."
-source="http://ffmpeg.org/releases/$name-$version.tar.bz2"
+source=[{url="http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd ffmpeg-$version
 	./configure \
 		--prefix=/ \
 		--bindir=/bin \
@@ -21,9 +21,9 @@ build() {
 		--enable-avresample \
 		--enable-fontconfig \
 		--enable-gmp \
-		--enable-gnutls \
+		--disable-gnutls \
 		--enable-gpl \
-		--enable-ladspa \
+		--disable-ladspa \
 		--enable-libass \
 		--enable-libfreetype \
 		--enable-libfribidi \
@@ -35,10 +35,9 @@ build() {
 		--enable-libopenjpeg \
 		--enable-libopus \
 		--enable-libpulse \
-		--enable-libschroedinger \
 		--enable-libsoxr \
 		--enable-libspeex \
-		--enable-libssh \
+		--disable-libssh \
 		--enable-libtheora \
 		--enable-libv4l2 \
 		--enable-libvidstab \
@@ -55,6 +54,6 @@ build() {
 		--enable-vdpau \
 		--enable-vaapi
 
-	make CC="$CC" SHARED_PP='yes' $MAKEFLAGS || die
-	make DESTDIR="$pkgdir" install install-man || die
-}
+	make
+	make DESTDIR="$pkgdir" install install-man
+'''

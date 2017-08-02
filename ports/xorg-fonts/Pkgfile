@@ -1,28 +1,24 @@
-name=xorg-fonts
-version=7.6
-desc="Basic fonts and utils"
-deps="harfbuzz fontconfig xorg-app"
-source="
-http://xorg.freedesktop.org/releases/individual/font/font-adobe-utopia-type1-1.0.4.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-bh-ttf-1.0.3.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-bh-type1-1.0.3.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-ibm-type1-1.0.3.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-misc-ethiopic-1.0.3.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-xfree86-type1-1.0.4.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-util-1.3.1.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/encodings-1.0.4.tar.bz2
-http://xorg.freedesktop.org/releases/individual/font/font-alias-1.0.3.tar.bz2
-"
+version="7.6"
+desc="Basic font utils"
+makedeps=["fontconfig", "libfontenc"]
+deps=["fontconfig", "libfontenc"]
+source=[
+	{url="https://xorg.freedesktop.org/archive/individual/app/bdftopcf-1.1.tar.bz2"},
+	{url="http://xorg.freedesktop.org/releases/individual/app/mkfontdir-1.0.7.tar.bz2"},
+	{url="http://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.2.tar.bz2"},
+	{url="http://xorg.freedesktop.org/releases/individual/font/font-util-1.3.1.tar.bz2"},
+	{url="font-dirs.sh"},
+]
 
-build() {
-	for package in $source
-	do
-	  packagedir="`basename ${package%.tar.bz2}`"
-	  pushd $packagedir
-	  ./configure --prefix=/ --sysconfdir=/etc \
-		--localstatedir=/var --disable-static
-	  make
-	  make DESTDIR="$pkgdir" install
-	  popd
+build='''
+	for package in bdftopcf-1.1 mkfontdir-1.0.7 mkfontscale-1.1.2 font-util-1.3.1; do
+		cd $package
+		./configure --prefix=/ --sysconfdir=/etc \
+			--with-fontrootdir=/share/fonts \
+			--localstatedir=/var --disable-static
+		make
+		make DESTDIR="$pkgdir" install
+		cd -
 	done
-}
+	install -Dm755 ../font-dirs.sh "$pkgdir/${HOOKS#$ROOT}"/font-dirs.sh
+'''

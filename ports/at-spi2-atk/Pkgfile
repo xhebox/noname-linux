@@ -1,0 +1,11 @@
+version="2.30.0"
+deps=["at-spi2-core", "atk", "libx11", "libxml2"]
+makedeps=["at-spi2-core", "atk", "libx11", "libxml2"]
+desc="A set of interfaces for accessibility"
+source=[{url="http://download.gnome.org/sources/at-spi2-atk/${version%.*}/at-spi2-atk-$version.tar.xz"}]
+
+build='''
+	noname-meson at-spi2-atk-$version build
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

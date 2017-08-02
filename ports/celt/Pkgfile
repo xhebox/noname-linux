@@ -1,15 +1,15 @@
-name=celt
-version=0.11.3
+version="0.11.3"
 desc="low-lantency audio communication codec"
-source="http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz"
-deps="libogg"
+source=[{url="http://downloads.us.xiph.org/releases/celt/celt-$version.tar.gz"}]
+makedeps=["libogg"]
+deps=["libogg"]
 
-build() {
-	cd $name-$version
+build='''
+	cd celt-$version
 	./configure --prefix= \
-	    --sbindir=/bin \
-	    --enable-custom-modes \
-	    --disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+			--sbindir=/bin \
+			--enable-custom-modes \
+			--disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

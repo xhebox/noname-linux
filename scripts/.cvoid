@@ -1,16 +1,15 @@
-#!/bin/bash
-. $1/$2/Pkgfile
+#!/bin/sh
+cd $1/$2
+. ./Pkgfile
+cd ../../scripts
 ___version=$version
-t=0
+
 while true;do
-	version=`curl -s -L https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/$3/template | grep -P '^version=' -m 1 | cut -d '=' -f 2`
+	version=`curl  --compressed --connect-timeout 10 --retry 3 -s -L https://github.com/void-linux/void-packages/raw/master/srcpkgs/$3/template | grep -P '^version=' -m 1 | cut -d '=' -f 2`
 	[ "$version" ] && break
-	t=$((t+1))
-	[ "$t" -eq 5 ] && {
-		t=0
-		echo "$2: can not get" >> ./result
-		exit
-	}
+
+	echo "$2: can not get" >> ./result
+	exit
 done
 version=`echo $version | tr -d '\n'`
 if [ "$version" != "$___version" ]; then

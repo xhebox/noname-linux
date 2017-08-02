@@ -1,17 +1,19 @@
-name=libdrm
-version=2.4.82
+version="2.4.96"
 desc="Userspace interface to kernel DRM services"
-deps="libpciaccess pthread-stubs"
-source="http://dri.freedesktop.org/$name/$name-$version.tar.bz2
-musl.patch"
+makedeps=["libpciaccess"]
+deps=["libpciaccess"]
+source=[
+	{url="http://dri.freedesktop.org/libdrm/libdrm-$version.tar.bz2"},
+	{url="musl.patch"},
+]
 
-ext() {
-	cd "$srcdir"/libdrm-$version
-	patch -p0 -i "$srcdir/musl.patch" || die
-}
+ext='''
+	cd libdrm-$version
+	patch -p0 -i "$srcdir/musl.patch"
+'''
 
-build() {
-	cd "$srcdir"/$name-$version
+build='''
+	cd libdrm-$version
 	./configure \
 		--prefix= \
 		--disable-static --disable-udev \
@@ -19,6 +21,6 @@ build() {
 		--enable-libkms \
 		--disable-valgrind
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

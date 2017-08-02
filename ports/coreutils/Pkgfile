@@ -1,18 +1,23 @@
-name=coreutils
-version=8.27
+version="8.30"
 desc="A collection of core GNU utilities"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
-deps="attr libgmp acl libcap libressl"
+deps=[
+	"attr",
+	"libgmp",
+	"acl",
+	"libcap",
+	"libressl"
+]
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/coreutils/coreutils-$version.tar.xz"}
+]
 
-build() {
-	cd $name-$version
+build='''
+	cd coreutils-$version
 	export FORCE_UNSAFE_CONFIGURE=1
 	./configure --prefix= \
-                --libexecdir=/lib \
-                --disable-static \
-		--enable-nls \
-                --enable-no-install-program=groups,hostname,kill,uptime 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+		--libexecdir=/lib \
+		--with-libressl \
+		--enable-no-install-program=groups,hostname,kill,uptime 
+	make
+	make DESTDIR="$pkgdir" install
+'''

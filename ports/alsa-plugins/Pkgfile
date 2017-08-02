@@ -1,16 +1,16 @@
-name=alsa-plugins
-version=1.1.4
-deps="alsa-lib speex libsamplerate pulseaudio"
+version="1.1.6"
+makedeps=["alsa-lib", "speex", "libsamplerate", "pulseaudio", "ffmpeg"]
+deps=["alsa-lib", "speex", "libsamplerate", "pulseaudio", "ffmpeg"]
 desc="ALSA plugins"
-source="ftp://ftp.alsa-project.org/pub/plugins/$name-$version.tar.bz2
-alsaconf"
+source=[
+	{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/plugins/alsa-plugins-$version.tar.bz2"},
+	{url="alsaconf"},
+]
 
-build() {
-	cd $name-$version
-	./configure --prefix= \
-	--disable-maemo-plugin \
-	--disable-avcodec
-	make || die
-	make DESTDIR="$pkgdir" install || die
+build='''
+	cd alsa-plugins-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
 	install -Dm644 ../alsaconf "$pkgdir"/etc/asound.conf
-}
+'''

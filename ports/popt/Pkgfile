@@ -1,12 +1,11 @@
-name=popt
-version=1.16
-deps=musl
+version="1.16"
+deps=["musl"]
 desc="A commandline option parser"
-source="http://rpm5.org/files/${name}/${name}-${version}.tar.gz"
+source=[{url="http://rpm5.org/files/popt/popt-${version}.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd popt-$version
 	./configure --prefix=
-	make  || die
-	make PREFIX= DESTDIR="$pkgdir" install  || die
-}
+	make
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

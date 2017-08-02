@@ -1,14 +1,14 @@
-name=xcb-util-cursor
-version=0.1.3
-deps="xcb-util-renderutil xcb-util-image"
+version="0.1.3"
+makedeps=["libxcb", "xcb-util-renderutil", "xcb-util-image"]
+deps=["libxcb", "xcb-util-renderutil", "xcb-util-image"]
 desc="XCB utilities library"
-source="http://xcb.freedesktop.org/dist/xcb-util-cursor-$version.tar.bz2"
+source=[{url="http://xcb.freedesktop.org/dist/xcb-util-cursor-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd xcb-util-cursor-$version
 
 	./configure --prefix=/ --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

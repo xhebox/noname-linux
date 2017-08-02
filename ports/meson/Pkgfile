@@ -1,0 +1,38 @@
+version="0.49.0"
+desc='High productivity build system'
+makedeps=["python3-setuptools", "ninja"]
+deps=["python3-setuptools", "ninja"]
+source=[{url="https://github.com/mesonbuild/meson/releases/download/${version}/meson-${version}.tar.gz"}]
+
+build='''
+	cd meson-$version
+	python3 setup.py build
+	python3 setup.py install \
+		--prefix= \
+		--root="$pkgdir" \
+		--optimize=1 \
+		--skip-build
+	cat >> "$pkgdir"/bin/noname-meson << "EOF"
+#!/bin/sh
+meson setup \
+	--prefix				 // \
+	--libdir				 lib \
+	--libexecdir		 lib \
+	--bindir				 bin \
+	--sbindir				bin \
+	--includedir		 include \
+	--datadir				share \
+	--mandir				 share/man \
+	--infodir				share/info \
+	--localedir			share/locale \
+	--sysconfdir		 etc \
+	--localstatedir	var \
+	--sharedstatedir var/lib \
+	--buildtype			release \
+	--warnlevel			2 \
+	--wrap-mode			nofallback \
+	"$@" \
+	-D b_lto=true
+EOF
+	chmod +x "$pkgdir"/bin/noname-meson
+'''

@@ -1,0 +1,32 @@
+name=fcitx
+version=4.2.9.6
+desc="A Flexible Input Method Framework"
+deps="gtk3 cairo pango libxrender libxfixes icu python libxkbcommon extra-cmake-modules dbus iso-codes shared-mime-info opencc gobject-introspection"
+source="https://download.fcitx-im.org/fcitx/fcitx-$version.tar.xz"
+
+ext() {
+  cd fcitx-$version
+  for i in $source; do
+    case $i in
+    *patch) patch -p1 < ../$i;;
+    esac
+  done
+}
+
+build(){
+  cd fcitx-$version
+  sed -i '/Libexecinfo/d' CMakeLists.txt
+  mkdir build
+  cd build
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX= \
+    -DSYSCONFDIR=/etc \
+    -DENABLE_GTK2_IM_MODULE=OFF -DENABLE_GTK3_IM_MODULE=ON -DENABLE_QT_IM_MODULE=OFF \
+    -DENABLE_QT=OFF \
+    -DENABLE_ENCHANT=OFF \
+    -DENABLE_OPENCC=ON -DENABLE_PRESAGE=OFF \
+    -DENABLE_GIR=ON
+
+  make
+  make DESTDIR="$pkgdir" install
+}

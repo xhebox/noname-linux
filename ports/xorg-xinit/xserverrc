@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "$XDG_VTNR" ]; then
-	exec /bin/X -nolisten tcp "$@"
+	exec /bin/Xorg -nolisten tcp "$@"
 else
-	exec /bin/X -nolisten tcp "$@" vt$XDG_VTNR
+	exec /bin/Xorg -nolisten tcp "$@" vt$XDG_VTNR
 fi

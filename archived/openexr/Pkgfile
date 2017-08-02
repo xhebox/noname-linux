@@ -1,0 +1,20 @@
+name=openexr
+version=2.2.1
+desc="High dynamic-range (HDR) image file format"
+deps="zlib ilmbase"
+source="https://github.com/openexr/openexr/releases/download/v$version/openexr-$version.tar.gz"
+
+build() {
+	cd openexr-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i;;
+		esac
+	done
+	find * -type f -exec sed -i 's/bin\/sh/bin\/bash/g' {} \;
+	CFLAGS="`echo $CFLAGS | sed 's/O2/Os/g'`"
+	CXXFLAGS="`echo $CXXFLAGS | sed 's/O2/Os/g'`"
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

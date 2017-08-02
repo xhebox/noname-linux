@@ -1,19 +1,15 @@
-name=libffi
-version=3.2.1
-deps=musl
+version="3.2.1"
+deps=["musl"]
 desc="Portable Foreign Function Interface Library"
-source="ftp://sourceware.org/pub/libffi/libffi-$version.tar.gz
-gnu-linux-define.patch"
+source=[
+	{url="http://sourceware.org/pub/libffi/libffi-$version.tar.gz"},
+	{url="gnu-linux-define.patch"},
+]
 
-ext() {
+build='''
 	cd libffi-$version
-	patch -p1 < ../gnu-linux-define.patch || die
-}
-
-build() {
-	cd libffi-$version
-	./configure --prefix= --disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+	patch -p1 < ../gnu-linux-define.patch
+	./configure --prefix= --disable-static --enable-pax_emutramp
+	make
+	make DESTDIR="$pkgdir" install
+'''

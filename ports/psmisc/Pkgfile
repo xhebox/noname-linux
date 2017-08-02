@@ -1,23 +1,28 @@
-name=psmisc
-version=23.1
-deps="ncurses"
+version="23.2"
+makedeps=["ncurses", "acl"]
+deps=["ncurses", "acl"]
 desc="Small set of utilities that use the linux proc filesystem"
-source="http://downloads.sourceforge.net/psmisc/${name}-${version}.tar.xz
-fuser.patch
-musl.patch"
+source=[
+	{url="https://nchc.dl.sourceforge.net/project/psmisc/psmisc/psmisc-$version.tar.xz"},
+	{url="musl.patch"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd psmisc-$version
 	for i in $source;do
 		case $i in
 		*.patch) patch -p0 < ../`basename $i` ;;
 		esac
 	done
+'''
+
+build='''
+	cd psmisc-$version
 	./configure --prefix=/ \
 		--libexecdir=/lib \
 		--bindir=/bin --sbindir=/bin \
 		--libdir=/lib --enable-shared --disable-static \
 		--without-selinux --with-acl --with-attr --enable-subordinate-ids 
-	make  || die
-	make DESTDIR="$pkgdir" install   || die
-}
+	make
+	make DESTDIR="$pkgdir" install 
+'''

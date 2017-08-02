@@ -1,14 +1,12 @@
-name=shadowsocks-libev
-version=3.0.8
-deps="libcap libressl zlib libsodium asciidoc xmlto udns libpcre libev mbedtls libcorkipset libbloom"
-source="https://github.com/shadowsocks/shadowsocks-libev/archive/v$version.tar.gz"
+version="3.2.3"
+makedeps=["libcap", "libressl", "zlib", "libpcre", "mbedtls", "libsodium", "c-ares", "libev"]
+deps=["libcap", "libressl", "zlib", "libpcre", "mbedtls", "libsodium", "c-ares", "libev"]
+source=[{url="https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$version/shadowsocks-libev-$version.tar.gz"}]
 desc="A lightweight secured socks5 proxy for embedded devices and low end boxes"
 
-build() {
+build='''
 	cd shadowsocks-libev-$version
-	sed -i 's|AC_CONFIG_FILES(\[libbloom/Makefile libcork/Makefile libipset/Makefile\])||' configure.ac
-	./autogen.sh
-	./configure --prefix=/ --enable-shared --enable-system-shared-lib
+	./configure --prefix=/ --enable-shared --disable-documentation
 	make || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	make DESTDIR="$pkgdir" install || die
+'''

@@ -1,0 +1,32 @@
+From 4071c407ebb53b2a08d4093915561eaf74839d20 Mon Sep 17 00:00:00 2001
+From: udeved <artoo@cromnix.org>
+Date: Wed, 25 Apr 2018 22:45:16 +0200
+Subject: [PATCH] Makefile: don't install openrc runlevel
+
+---
+ Makefile | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index fd7b15b..8bb652d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -85,9 +85,8 @@ install-custom-bin:
+ 	$(INSTALL) -m $(BINMODE) $(BINPROGS) $(DESTDIR)$(BINDIR)/$(BINNAME)
+ 
+ install-openrc:
+-	$(INSTALL) -d $(DESTDIR)$(SYSCONFDIR)/{init.d,runlevels/boot}
++	$(INSTALL) -d $(DESTDIR)$(SYSCONFDIR)/init.d
+ 	$(INSTALL) -m $(BINMODE) $(INITD) $(DESTDIR)$(SYSCONFDIR)/init.d/opensysusers
+-	ln -sf $(DESTDIR)$(SYSCONFDIR)/init.d/opensysusers $(DESTDIR)$(SYSCONFDIR)/runlevels/boot/
+ 
+ install-man:
+ 	+$(MAKE) INSTALL=$(INSTALL) DOCMODE=$(MODE) MANDIR=$(MANDIR) DOCDIR=$(DOCDIR) DESTDIR=$(DESTDIR) -C man install
+@@ -108,7 +107,6 @@ uninstall-custom-bin:
+ 
+ uninstall-openrc:
+ 	$(RM) $(DESTDIR)$(SYSCONFDIR)/init.d/opensysusers
+-	$(RM) $(DESTDIR)$(SYSCONFDIR)/runlevels/boot/opensysusers
+ 
+ uninstall-man:
+ 	+$(MAKE) INSTALL=$(INSTALL) DOCMODE=$(MODE) MANDIR=$(MANDIR) DOCDIR=$(DOCDIR) DESTDIR=$(DESTDIR) -C man uninstall

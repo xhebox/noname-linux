@@ -1,0 +1,14 @@
+version="3.0.0"
+desc='Binary-decimal and decimal-binary routines for IEEE doubles'
+source=[{url="https://github.com/google/double-conversion/archive/v$version.tar.gz"}]
+
+build='''
+	cd double-conversion-$version
+	cmake . \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_SHARED_LIBS=ON \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,17 @@
+version="0.3.4"
+desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
+makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "xsel", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
+deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "xsel", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
+source=[
+	{url="https://github.com/neovim/neovim/archive/v${version}.tar.gz"},
+]
+
+build='''
+	cmake -Hneovim-${version} -Bbuild -GNinja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DENABLE_JEMALLOC=OFF \
+		-DPREFER_LUA=ON \
+		-DCMAKE_INSTALL_PREFIX=
+	ninja -C build
+	DESTDIR="${pkgdir}" ninja -C build install
+'''

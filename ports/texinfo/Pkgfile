@@ -1,0 +1,24 @@
+version="6.5"
+desc='GNU documentation system for on-line information and printed output'
+deps=["ncurses", "gzip", "perl", "dash"]
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/texinfo/texinfo-$version.tar.xz"},
+	{url="texinfo-install.toml"},
+	{url="texinfo-remove.toml"},
+	{url="r8006.patch"},
+]
+
+ext='''
+	cd texinfo-$version
+	patch -p1 -i ../r8006.patch
+'''
+
+build='''
+	cd texinfo-$version
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
+
+	install -Dm644 ../texinfo-install.toml "$pkgdir/${HOOKS#$ROOT}"/texinfo-install.toml
+	install -Dm644 ../texinfo-remove.toml "$pkgdir/${HOOKS#$ROOT}"/texinfo-remove.toml
+'''

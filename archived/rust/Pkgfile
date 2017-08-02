@@ -1,0 +1,82 @@
+. ../cargo/Pkgfile
+C_STAGE0_VERSION=$STAGE0_VERSION
+name=rust
+version=1.26.0
+STAGE0_VERSION=1.25.0
+desc="The Rust Programming Language (compiler)"
+deps="llvm musl cmake file libffi python tar zlib ccache ninja"
+source="https://static.rust-lang.org/dist/rustc-$version-src.tar.gz
+https://repo.voidlinux.eu/distfiles/cargo-${C_STAGE0_VERSION}-x86_64-unknown-linux-musl.tar.gz
+https://portage.smaeul.xyz/distfiles/rust-${STAGE0_VERSION}-x86_64-unknown-linux-musl.tar.xz
+
+0001-Require-static-native-libraries-when-linking-static-.patch
+0002-Remove-nostdlib-and-musl_root-from-musl-targets.patch
+0003-Switch-musl-targets-to-link-dynamically-by-default.patch
+0004-Prefer-libgcc_eh-over-libunwind-for-musl.patch
+0006-Fix-rustdoc-for-cross-targets.patch
+0007-Add-openssl-configuration-for-musl-targets.patch
+0008-fix.patch
+0009-liblibc.patch
+llvm-with-ffi.patch
+"
+
+ext() {
+	mkdir -p stage0
+	./rust-${STAGE0_VERSION}-x86_64-unknown-linux-musl/install.sh \
+							 --prefix="`pwd`/stage0" \
+							 --components=rustc,rust-std-x86_64-unknown-linux-musl \
+							 --disable-ldconfig
+
+	mkdir -p stage0/bin
+	mv cargo stage0/bin
+	mkdir -p stage0/lib
+	local libn=`ldd stage0/bin/cargo 2>&1 | grep library | cut -d ' ' -f 5 | sed 's/://'`
+	ln -s /lib/libgit2.so stage0/lib/$libn
+
+	cd rustc-$version-src
+	for i in $source; do
+		msg $i
+		case $i in
+		*patch) patch -Np1 < ../$i;;
+		esac
+	done
+	cat <<- EOF > config.toml
+	[target.x86_64-unknown-linux-musl]
+		llvm-config="/bin/llvm-config"
+	[build]
+		build="x86_64-unknown-linux-musl"
+		host=["x86_64-unknown-linux-musl"]
+		target=["x86_64-unknown-linux-musl"]
+		docs=false
+		locked-deps=true
+		submodules=false
+		vendor=true
+		verbose=2
+		cargo="$srcdir/stage0/bin/cargo"
+		rustc="$srcdir/stage0/bin/rustc"
+	[install]
+		prefix="/"
+		libdir="lib"
+		mandir="share/man"
+	[rust]
+		optimize=true
+		debug-assertions=false
+		debuginfo=false
+		use-jemalloc=false
+		channel="stable"
+		rpath=false
+	[dist]
+		src-tarball=false
+	EOF
+}
+
+build() {
+	cd rustc-$version-src
+	export CARGO_HOME="$srcdir/.cargo"
+	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
+	export PATH="$srcdir/stage0/bin:$PATH"
+	export RUST_BACKTRACE=1
+	./x.py build $MAKEFLAGS -v
+	DESTDIR="$pkgdir" ./x.py install
+}
+

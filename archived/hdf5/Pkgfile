@@ -1,0 +1,27 @@
+name=hdf5
+version=1.10.1
+desc="General purpose library and file format for storing scientific data"
+deps="zlib bash time"
+source="https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${version%.*}/hdf5-${version}/src/hdf5-${version}.tar.bz2"
+
+build() {
+	cd hdf5-$version
+
+	./configure \
+		--prefix= \
+		--disable-static \
+		--enable-hl \
+		--enable-build-mode=production \
+		--with-pic \
+		--docdir=/share/doc/hdf5/ \
+		--disable-sharedlib-rpath \
+		--enable-cxx \
+		--enable-fortran \
+		--with-zlib
+	make || die
+	make -j1 DESTDIR="${pkgdir}" install || die
+
+	rm -rf "${pkgdir}"/lib/libdynlib*.so
+	install -dm755 "${pkgdir}"/share/hdf5
+	mv "${pkgdir}"/share/hdf5_examples "${pkgdir}"/share/examples}
+}

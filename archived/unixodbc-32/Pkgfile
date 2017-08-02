@@ -1,0 +1,17 @@
+. ../unixodbc/Pkgfile
+name=unixodbc-32
+deps="unixodbc"
+
+build() {
+	cd unixODBC-${version}
+	export CC="gcc -m32"
+	export CXX="g++ -m32"
+	export PKG_CONFIG_PATH="/lib32/pkgconfig"
+	./configure --prefix= --sysconfdir=/etc --libdir=/lib32
+	make || die
+	make DESTDIR=${pkgdir} install || die
+	rm -r "$pkgdir"/bin
+	rm -r "$pkgdir"/etc
+	rm -r "$pkgdir"/include
+	rm -r "$pkgdir"/share
+}

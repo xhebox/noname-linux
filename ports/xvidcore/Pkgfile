@@ -1,12 +1,12 @@
-name=xvidcore
-version=1.3.4
+version="1.3.5"
 desc="XviD is an open source MPEG-4 video codec"
-deps="nasm musl"
-source="http://downloads.xvid.org/downloads/$name-$version.tar.bz2"
+makedeps=["nasm"]
+deps=["musl"]
+source=[{url="http://downloads.xvid.org/downloads/xvidcore-$version.tar.bz2"}]
 
-build() {
-	cd $name/build/generic
+build='''
+	cd xvidcore/build/generic
 	./configure --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

@@ -1,27 +1,37 @@
-name=sqlite
-version=3.19.3
-_verr=$(echo ${version} | sed 's/\./ /g')
-_ver=$(printf "%d%02d%02d00\n" ${_verr})
-deps="readline ncurses"
+version="3.25.3"
+ver="`echo $version | tr . ' '`"
+_ver="`printf \"%d%02d%02d00\n\" $ver`"
+deps=["readline", "zlib"]
 desc="SQL database engine"
-source="http://www.sqlite.org/2017/sqlite-autoconf-${_ver}.tar.gz
-defaults.patch
-walmode.patch"
+source=[
+	{url="http://www.sqlite.org/2018/sqlite-autoconf-${_ver}.tar.gz"},
+	{url="defaults.patch"},
+	{url="walmode.patch"},
+]
 
-build() {
+ext='''
+	ver=`echo $version | tr . ' '`
+	_ver=`printf "%d%02d%02d00\n" $ver`
+
 	cd sqlite-autoconf-${_ver}
 	for i in $source;do
 		case $i in
-		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		*.patch) patch -p1 -i "$srcdir"/"$i";;
 		esac
 	done
+'''
+
+build='''
+	ver=`echo $version | tr . ' '`
+	_ver=`printf "%d%02d%02d00\n" $ver`
+
+	cd sqlite-autoconf-${_ver}
 	export CFLAGS="$CFLAGS -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_RTREE -DSQLITE_MAX_WORKER_THREADS=16 -DSQLITE_DEFAULT_WORKER_THREADS=4 -DSQLITE_DEFAULT_PAGE_SIZE=4096 -DSQLITE_TEMP_STORE=2 -DSQLITE_DISABLE_DIRSYNC=1 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_MAX_DEFAULT_PAGE_SIZE=32768 -DSQLITE_DEFAULT_SYNCHRONOUS=1 -DSQLITE_DEFAULT_MMAP_SIZE=67108864 -DSQLITE_ENABLE_DBSTAT_VTAB -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_UNLOCK_NOTIFY -DSQLITE_SECURE_DELETE -DSQLITE_ENABLE_JSON1 -DHAVE_FDATASYNC"
 	./configure --prefix= \
 		--enable-threadsafe \
-		--enable-readline --enable-dynamic-extensions \
-		--disable-static 
+		--enable-readline --enable-dynamic-extensions
 	sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 	sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

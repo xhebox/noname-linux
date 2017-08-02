@@ -1,0 +1,13 @@
+version="2.44"
+desc="XML::Parser"
+makedeps=["expat", "perl"]
+deps=["expat", "perl"]
+source=[{url="http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-$version.tar.gz"}]
+
+build='''
+	cd XML-Parser-$version
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make DESTDIR="$pkgdir" install
+	find "$pkgdir" -name .packlist -o -name README -o -name '*.bs' | xargs rm
+'''

@@ -1,11 +1,12 @@
-name=hardlink
-version=0.3.0
-deps="libpcre bash"
+version="0.3.0"
+makedeps=["libpcre", "attr", "bash"]
+deps=["libpcre", "attr", "bash"]
 desc="Replace file copies using hardlinks"
-source="http://jak-linux.org/projects/hardlink/hardlink_$version.tar.xz"
+source=[{url="http://jak-linux.org/projects/hardlink/hardlink_$version.tar.xz"}]
 
-build() {
+build='''
 	cd hardlink-$version
-	make  || die
-	make PREFIX= DESTDIR="$pkgdir" install  || die
-}
+	sed -i 's/attr\/xattr/sys\/xattr/g' hardlink.c
+	make
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

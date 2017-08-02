@@ -1,17 +1,11 @@
-name=zlib
-version=1.2.11
+version="1.2.11"
 desc="zlib"
-source="http://www.zlib.net/zlib-$version.tar.gz"
-deps=musl
+source=[{url="http://www.zlib.net/zlib-$version.tar.gz"}]
+deps=["musl"]
 
-build() {
-	cd $name-$version
-	for i in $source;do
-		case $i in
-		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
-		esac
-	done
+build='''
+	cd zlib-$version
 	./configure --prefix= --shared 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

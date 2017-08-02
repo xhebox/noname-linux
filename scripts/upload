@@ -1,7 +1,16 @@
 #!/bin/sh
 set -x
-list="`git diff --name-only HEAD~ HEAD | grep metadata | cut -d '/' -f 2`"
+if [ ! "$#" -eq 1 ]; then
+	echo "set HEAD~n"
+	exit
+fi
+list=`git diff --name-only HEAD~$1 HEAD | grep metadata | cut -d '/' -f 2 | sed '/texlive/d' | uniq`
+rm -r /tmp/ttmp
+mkdir -p /tmp/ttmp
 for i in $list; do
-	sshpass -f ~/scripts/sshpass ssh thunix.org "./rm.sh ${i}#"
-	sshpass -f ~/scripts/sshpass scp "`ls ../tarballs/${i}#*tgz`" xhe@thunix.org:/home/x/xhe/www/tarballs
+	ln -s `readlink -f ../tarballs/${i}#*tgz` /tmp/ttmp
 done
+ssh xhe@thunix.org ./rm.sh ${list}
+scp -r /tmp/ttmp xhe@thunix.org:/home/x/xhe/www/tarballs
+ssh xhe@thunix.org ./mv.sh
+rm -r /tmp/ttmp

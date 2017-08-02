@@ -1,10 +1,8 @@
-name=libsoxr
-version=0.1.2
+version="0.1.3"
 desc="The SoX Resampler library that aims to give fast and high quality results for any constant resampling ratio"
-deps="cmake"
-source="http://downloads.sourceforge.net/project/soxr/soxr-$version-Source.tar.xz"
+source=[{url="http://nchc.dl.sourceforge.net/project/soxr/soxr-$version-Source.tar.xz"}]
 
-build() {
+build='''
 	cd soxr-$version-Source
 	cmake \
 		-DCMAKE_INSTALL_PREFIX= \
@@ -19,6 +17,6 @@ build() {
 		-DWITH_PFFFT=ON \
 		-DWITH_SIMD=ON \
 		.
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

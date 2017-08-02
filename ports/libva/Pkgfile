@@ -1,14 +1,14 @@
-name=libva
-version=1.8.3
+version="2.4.0"
 desc="vaapi"
-deps="xorg-proto libxfixes libx11 libdrm"
-source="https://github.com/01org/libva/releases/download/$version/libva-$version.tar.bz2"
+deps=["libxfixes", "libx11", "libxext", "libdrm", "wayland"]
+makedeps=["libxfixes", "libx11", "libxext", "libdrm", "wayland-protocols"]
+source=[{url="https://github.com/01org/libva/releases/download/$version/libva-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libva-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

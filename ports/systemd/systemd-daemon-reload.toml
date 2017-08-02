@@ -1,0 +1,7 @@
+pattern=["lib/systemd/system/*"]
+operation=["install", "remove"]
+script='''
+if [ -d /run/systemd/system ]; then
+	/bin/systemctl daemon-reload
+fi
+'''

@@ -1,0 +1,20 @@
+. ../libpcre/Pkgfile
+name=libpcre-32
+deps=libpcre
+
+build(){
+  cd pcre-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static --enable-jit --enable-utf  --enable-unicode-properties --enable-pcre16 --enable-pcre32 
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/bin
+  rm -r "$pkgdir"/include
+}

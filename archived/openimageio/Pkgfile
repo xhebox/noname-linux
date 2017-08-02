@@ -1,0 +1,34 @@
+name=openimageio
+version=1.8.9
+desc="A library for reading and writing images, including classes, utilities, and applications"
+deps="libressl boost openexr cmake libpng libjpeg-turbo opencolorio libtiff"
+source="openimageio-$version.tar.gz::https://github.com/OpenImageIO/oiio/archive/Release-${version}.tar.gz"
+
+ext() {
+	cd oiio-Release-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 < ../$i;;
+		esac
+	done
+	sed -i 's/CODEC_CAP_DELAY/AV_CODEC_CAP_DELAY/g' src/ffmpeg.imageio/ffmpeginput.cpp
+}
+
+build() {
+	cd oiio-Release-$version
+	[ -d build ] && rm -r build
+	mkdir build && cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_INSTALL_LIBDIR=lib \
+	-DUSE_PYTHON=OFF \
+	-DSTOP_ON_WARNING=OFF \
+	-DCMAKE_SYSTEM_PROCESSOR=$TARGET \
+	-DUSE_SIMD=sse2 \
+	-DUSE_OPENGL=OFF \
+	-DOIIO_BUILD_TOOLS=ON
+
+	make
+	make DESTDIR="${pkgdir}" install
+}

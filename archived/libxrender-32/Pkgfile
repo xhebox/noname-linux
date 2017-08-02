@@ -1,0 +1,18 @@
+name=libxrender-32
+version=0.9.10
+desc="Render extension client library"
+deps="libx11-32 libxrender"
+source="http://xorg.freedesktop.org/releases/individual/lib/libXrender-$version.tar.bz2"
+
+build() {
+  cd libXrender-$version
+  export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static --libdir=/lib32
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}

@@ -1,21 +1,23 @@
-name=fontconfig
-version=2.12.4
+version="2.13.0"
 desc="A library for configuring and customizing font access"
-deps="freetype expat autoconf automake libtool"
-source="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.bz2
-"
+makedeps=["freetype", "expat", "gperf"]
+deps=["freetype", "expat"]
+source=[
+	{url="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.bz2"},
+	{url="font-cache.toml"},
+]
 
-ext() {
+ext='''
 	cd fontconfig-$version
 	for i in $source; do
 		case $i in
-		*.patch) patch -p1 -i ../"$i" || die;;
+		*.patch) patch -p1 -i ../"$i";;
 		esac
 	done
 	rm -f src/fcobjshash.h
-}
+'''
 
-build() {
+build='''
 	cd fontconfig-$version
 	./configure \
 		--prefix= \
@@ -28,14 +30,7 @@ build() {
 		--with-add-fonts=/share/fonts \
 		--disable-docs 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-
-	rm -f "$pkgdir"/etc/fonts/conf.d/README
-}
-
-post() {
-	if [ "$UPD" -eq 1 ]; then
-		pchroot "$ROOT" /bin/fc-cache -f || die
-	fi
-}
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm755 ../font-cache.toml "$pkgdir/${HOOKS#$ROOT}"/font-cache.toml
+'''

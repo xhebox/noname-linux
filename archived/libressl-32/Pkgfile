@@ -1,0 +1,19 @@
+. ../libressl/Pkgfile
+name=libressl-32
+deps="libressl"
+
+build() {
+  cd libressl-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  ./configure --prefix= --disable-static --enable-shared --libdir=/lib32 --target=$TARGET32
+
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/bin
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/etc
+}

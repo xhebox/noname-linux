@@ -1,0 +1,23 @@
+name=speexdsp-32
+version=1.2rc3
+desc="A free codec library for speech - DSP."
+source="http://downloads.us.xiph.org/releases/speex/speexdsp-$version.tar.gz"
+deps=speexdsp
+
+build() {
+  cd speexdsp-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+
+  make
+  make prefix=$pkgdir libdir=$pkgdir/lib32 install
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/share
+}
+

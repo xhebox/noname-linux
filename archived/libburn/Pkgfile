@@ -1,0 +1,11 @@
+version="1.5.0"
+desc="Library for reading, mastering and writing optical discs"
+source=[{url="http://files.libburnia-project.org/releases/libburn-${version}.tar.gz"}]
+deps=["musl"]
+
+build='''
+	cd libburn-${version}
+	./configure --prefix= --disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

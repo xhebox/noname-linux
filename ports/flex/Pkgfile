@@ -1,19 +1,22 @@
-name=flex
-version=2.6.4
-deps="m4 bison"
+version="2.6.4"
+makdeps=["help2man"]
+deps=["m4", "dash", "musl"]
 desc="Fast Lexical Analyzer Generator"
-source="https://github.com/westes/flex/releases/download/v$version/flex-$version.tar.gz"
+source=[
+	{url="https://github.com/westes/flex/releases/download/v$version/flex-$version.tar.gz"},
+	{url="flex-pie.patch"}
+]
 
-build() {
-	cd $name-$version
-    
-	./configure --prefix= \
-	--disable-static \
-	--enable-shared 
-    
-	make || die
-	make DESTDIR="$pkgdir" install || die
-	rm -r "$pkgdir"/share/info
-	rm -r "$pkgdir"/share/doc
+ext='''
+	cd flex-$version
+	patch -p1 -i ../flex-pie.patch
+'''
+
+build='''
+	cd flex-$version
+	autoreconf 
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
 	ln -s flex "$pkgdir"/bin/lex
-}
+'''

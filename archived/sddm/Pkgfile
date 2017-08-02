@@ -1,0 +1,35 @@
+name=sddm
+version=0.17.0
+desc='QML based X11 and Wayland display manager'
+deps="qt5-declarative xorg-xinit xorg-server extra-cmake-modules qt5-tools"
+source="https://github.com/sddm/sddm/archive/v${version}.tar.gz
+musl.patch"
+
+ext() {
+	cd sddm-$version
+	patch -p1 < ../musl.patch || die
+}
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../sddm-$version \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_LIBEXECDIR=/lib/sddm \
+		-DNO_SYSTEMD=ON -DUSE_ELOGIND=ON \
+		-DENABLE_PAM=OFF \
+		-DDBUS_CONFIG_FILENAME=sddm_org.freedesktop.DisplayManager.conf
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+
+# Move sddm.conf to /lib https://bugs.archlinux.org/task/56609
+	mkdir "$pkgdir"/lib/sddm/sddm.conf.d
+	mv "$pkgdir"/etc/sddm.conf "$pkgdir"/lib/sddm/sddm.conf.d
+
+# Don't set PATH in sddm.conf
+	sed -r 's|DefaultPath=.*|DefaultPath=/sbin:/bin|g' -i "$pkgdir"/lib/sddm/sddm.conf.d/sddm.conf
+
+# Unset InputMethod https://github.com/sddm/sddm/issues/952
+	sed -e "/^InputMethod/s/qtvirtualkeyboard//" -i "$pkgdir"/lib/sddm/sddm.conf.d/sddm.conf
+}

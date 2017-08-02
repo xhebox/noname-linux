@@ -14,3 +14,5 @@ if test -d /etc/profile.d/; then
 fi
 
 unset TERMCAP
+
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/bus

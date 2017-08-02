@@ -1,31 +1,39 @@
-name=dbus
-version=1.10.18
-deps="expat python util-linux autoconf automake libtool xmlto"
+version="1.12.12"
+deps=["expat", "util-linux", "systemd"]
+makedeps=["expat", "util-linux", "python3", "docbook-xsl", "xmlto", "systemd"]
 desc="Freedesktop.org message bus system"
-source="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz
-fix-int64-print.patch
-"
+source=[
+	{url="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz"},
+	{url="dbus.sysusers"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd dbus-$version
+	for i in $source;do
+		echo $i
+		case $i in
+		*patch) patch -p1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build='''
+	cd dbus-$version
 	./configure --prefix= --disable-static \
+	--sysconfdir=/etc \
 	--libdir=/lib \
-	--libexecdir=/lib \
-	--with-dbus-user=dbus \
-	--with-system-pid-file=/run/dbus/pid \
+	--libexecdir=/lib/dbus-1.0 \
+	--runstatedir=/run \
+	--with-dbus-user=81 \
 	--with-system-socket=/run/dbus/system_bus_socket \
 	--with-console-auth-dir=/run/console/ \
 	--disable-verbose-mode \
-	--enable-user-session \
 	--enable-inotify \
-	--disable-dnotify \
+	--enable-user-session \
+	--without-x \
 	--disable-tests \
 	--disable-asserts 
-	make  || die
-	make -j1 DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/doc
-	rm -r "$pkgdir"/var/run
-	rm -r "$pkgdir"/lib/systemd
-	chown dbus:dbus "$pkgdir"/lib/dbus-daemon-launch-helper
-	chmod 4750 "$pkgdir"/lib/dbus-daemon-launch-helper
-}
+	make
+	make -j1 DESTDIR="$pkgdir" install
+	install -Dm644 ../dbus.sysusers "$pkgdir"/lib/sysusers.d/dbus.conf
+'''

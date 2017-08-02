@@ -1,0 +1,17 @@
+name=octave
+version=4.2.1
+desc="A high-level language, primarily intended for numerical computations."
+deps="fftw curl graphicsmagick glpk hdf5 qhull fltk arpack glu ghostscript suitesparse gl2ps libsndfile texlive qt5-tools qt5-base gnuplot"
+source="http://mirrors.ustc.edu.cn/gnu/octave/octave-$version.tar.gz"
+
+build() {
+	cd octave-$version
+
+	./configure --prefix= --libexecdir=/lib \
+	--enable-shared --disable-static \
+	--with-quantum-depth=16 \
+	--with-umfpack="-lumfpack -lsuitesparseconfig"
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

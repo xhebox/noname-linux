@@ -1,8 +1,0 @@
-share|755|0|0|directory
-lib|755|0|0|directory
-lib/libmpc.so.3|777|0|0|symbolic link
-lib/libmpc.so.3.0.0|755|0|0|regular file
-lib/libmpc.a|644|0|0|regular file
-lib/libmpc.so|777|0|0|symbolic link
-include|755|0|0|directory
-include/mpc.h|644|0|0|regular file

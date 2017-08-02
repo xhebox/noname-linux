@@ -1,14 +1,14 @@
-name=bc
-version=1.07.1
-deps="flex ed bison readline"
+version="1.07.1"
+makedeps=["ed", "readline"]
+deps=["readline"]
 desc="An arbitrary precision calculator language"
-source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz
-"
+source=[
+	{url="http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"},
+]
 
-build() { 
-	cd $name-$version
+build='''
+	cd bc-$version
 	./configure --prefix=/ --with-readline --disable-static
-	sed -i '/bc.info/d' doc/Makefile
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

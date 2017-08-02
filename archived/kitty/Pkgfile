@@ -1,0 +1,14 @@
+name=kitty
+version=0.8.4
+desc="A modern, hackable, featureful, OpenGL based terminal emulator"
+deps="python3 freetype fontconfig libx11 python-setuptools libxinerama libxcursor libxrandr libxkbcommon glfw mesa zlib libpng harfbuzz imagemagick"
+source="https://github.com/kovidgoyal/kitty/archive/v$version.tar.gz
+musl.patch"
+
+build() {
+	cd kitty-$version
+	patch -p1 < ../musl.patch || die
+        python3 setup.py linux-package || die
+	cd linux-package
+	cp -r bin share lib $pkgdir/
+}

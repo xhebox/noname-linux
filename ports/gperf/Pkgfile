@@ -1,11 +1,12 @@
-name=gperf
-version=3.1
-deps=musl
+version="3.1"
+makedeps=["texinfo"]
+deps=["musl"]
 desc="Perfect hashf unction generator"
-source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
-build() {
-	cd $name-$version
+source=[{url="http://mirrors.ustc.edu.cn/gnu/gperf/gperf-$version.tar.gz"}]
+
+build='''
+	cd gperf-$version
 	./configure --prefix=
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

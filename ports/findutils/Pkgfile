@@ -1,20 +1,14 @@
-name=findutils
-version=4.6.0
-deps="bash"
+version="4.6.0"
+makedeps=["texinfo"]
+deps=["dash", "musl"]
 desc="Basic directory searching utilities"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.gz"
+source=[{url="http://ftp.gnu.org/pub/gnu/findutils/findutils-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-	./configure --prefix= \
-                --libexecdir=/lib \
-                --disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-	rm -r "$pkgdir"/bin/locate
-	rm -r "$pkgdir"/bin/updatedb
-	rm -f "$pkgdir"/share/man/man1/locate*
-	rm -f "$pkgdir"/share/man/man1/updatedb*
-	rm -f "$pkgdir"/share/man/man5/locatedb*
-}
+build='''
+	cd findutils-$version
+	sed -i '/^SUBDIRS/s/locate//' Makefile.in
+	./configure --prefix= --libexecdir=/lib
+	make -C locate dblocation.texi
+	make
+	make DESTDIR="$pkgdir" install
+'''

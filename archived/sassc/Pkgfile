@@ -1,0 +1,16 @@
+name=sassc
+version=3.4.2
+desc="C/C++ wrapper for sass"
+deps=libsass
+source="https://github.com/sass/sassc/archive/${version}.tar.gz"
+
+build() {
+	cd sassc-$version
+	autoreconf -i
+
+	./configure --prefix=/ --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}
+

@@ -1,16 +1,14 @@
-name=diffutils
-version=3.6
-deps="bash musl"
+version="3.6"
+deps=["dash", "musl"]
 desc="The GNU diff utilities"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
+source=[{url="http://ftp.gnu.org/pub/gnu/diffutils/diffutils-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
-	export ac_cv_libsigsegv=no
+build='''
+	cd diffutils-$version
 	./configure --prefix= \
-                --libexecdir=/lib \
-                --disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+		--sysconfdir=/etc \
+		--libexecdir=/lib \
+		--without-libsigsegv
+	make
+	make DESTDIR="$pkgdir" install
+'''

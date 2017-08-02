@@ -1,4 +1,0 @@
-Fri Apr 14 05:06:37 GMT 2017
-potrace
-1.14
-Utility for tracing a bitmap (input: PBM,PGM,PPM,BMP; output: EPS,PS,PDF,SVG,DXF,PGM,Gimppath,XFig)

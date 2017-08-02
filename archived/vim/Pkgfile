@@ -1,0 +1,61 @@
+version="8.1.0570"
+deps=["acl", "ncurses", "gzip", "acl", "perl", "python"]
+conflicts=["gvim"]
+desc="Highly configurable text editor"
+source=[{url="http://github.com/vim/vim/archive/v$version.tar.gz"}]
+
+ext='''
+	cd vim*
+	cd src
+	echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> feature.h
+'''
+
+build='''
+	mkdir -p "$pkgdir"/etc
+	mkdir -p "$pkgdir"/bin
+	ln -s vim "$pkgdir"/bin/vi
+	cat > "$pkgdir"/etc/vimrc << "EOF"
+" Begin /etc/vimrc
+filetype indent on
+set nocompatible
+set smartindent
+set backspace=indent,eol,start
+syntax on
+if (&term == "iterm") || (&term == "putty")
+	set background=dark
+endif
+set ruler
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.png,.jpg
+if has('gui_running')
+	" Make shift-insert work like in Xterm
+	map <S-Insert> <MiddleMouse>
+	map! <S-Insert> <MiddleMouse>
+endif
+" End /etc/vimrc
+EOF
+	cd vim*/src
+	sed -i 's/nplurals=1/nplurals=2/g' po/ko.UTF-8.po
+
+	./configure \
+		--prefix=/ \
+		--with-features=huge \
+		--with-vim-name=vim \
+		--with-x=no \
+		--enable-acl \
+		--disable-gui \
+		--enable-multibyte \
+		--enable-perlinterp=dynamic \
+		--enable-pythoninterp=dynamic \
+		--enable-cscope \
+		--enable-gpm 
+
+	make VIMRTDIR= 
+	make -j1 VIMRTDIR= DESTDIR="$pkgdir" install
+
+	ln -sf vim.1 "$pkgdir"/share/man/man1/ex.1
+	ln -sf vim.1 "$pkgdir"/share/man/man1/vi.1
+	ln -sf vim.1 "$pkgdir"/share/man/man1/rvim.1
+	ln -sf vim.1 "$pkgdir"/share/man/man1/view.1
+	ln -sf vim.1 "$pkgdir"/share/man/man1/rview.1
+	ln -sf vim.1 "$pkgdir"/share/man/man1/gvim.1
+'''

@@ -1,13 +1,11 @@
-name=libev
-version=4.24
+version="4.24"
 desc="A full-featured and high-performance event loop"
-deps="musl"
-source="http://dist.schmorp.de/${name}/${name}-${version}.tar.gz"
+source=[{url="http://dist.schmorp.de/libev/libev-${version}.tar.gz"}]
 
-build() {
+build='''
 	cd libev-$version
 	./configure --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
+	make
+	make DESTDIR="${pkgdir}" install
 	rm ${pkgdir}/include/event.h
-}
+'''

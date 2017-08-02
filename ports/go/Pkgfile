@@ -1,12 +1,22 @@
-name=go
-version=1.8.3
-deps="git binutils gcc"
+version="1.11.3"
+makedeps=["bash"]
+deps=["git"]
 desc="The Go Programming Language"
-source="http://golang.org/dl/go${version}.src.tar.gz"
+source=[
+	{url="https://storage.googleapis.com/golang/go${version}.src.tar.gz"},
+	{url="noname.patch"},
+]
 
-PKG_NO_STRIP=yes
+ext='''
+	cd go
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i ;;
+		esac
+	done
+'''
 
-build() {
+build='''
 	export GOOS=linux
 	export GOARCH=amd64
 	export GOROOT_FINAL=/lib/go
@@ -27,4 +37,4 @@ build() {
 	ln -sf /share/doc/go "$pkgdir/lib/go/doc"
 	rm -rf "$pkgdir/lib/go/pkg/bootstrap"
 	rm -rf "$pkgdir/lib/go/pkg/tool/*/api"
-}
+'''

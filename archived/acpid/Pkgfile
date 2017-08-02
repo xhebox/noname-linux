@@ -1,0 +1,27 @@
+version="2.0.31"
+deps=["musl"]
+desc="The ACPI Daemon (acpid) With Netlink Support"
+source=[
+	{url="http://nchc.dl.sourceforge.net/project/acpid2/acpid-$version.tar.xz"},
+	{url="portability.patch"},
+	{url="disable-logging-to-console.patch"},
+	{url="acpid.conf"},
+	{url="anything"},
+	{url="handler.sh"},
+]
+
+ext='''
+	cd acpid-$version
+	patch -p0 < ../portability.patch
+	patch -p0 < ../disable-logging-to-console.patch
+'''
+
+build='''
+	cd acpid-$version
+	./configure --prefix= --disable-static --sbindir=/bin 
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 ../anything "$pkgdir"/etc/acpi/events/anything
+	install -Dm755 ../handler.sh "$pkgdir"/etc/acpi/handler.sh
+	install -Dm644 ../acpid.conf "$pkgdir"/etc/finit.d/acpid.conf
+'''

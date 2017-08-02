@@ -1,13 +1,13 @@
-name=libxfixes
-version=5.0.3
-deps="xorg-proto libx11"
+version="5.0.3"
+makedeps=["xorgproto", "libx11"]
+deps=["libx11"]
 desc="X Fixes extension client library"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXfixes-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXfixes-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXfixes-$version
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

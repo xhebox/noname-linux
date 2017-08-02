@@ -1,0 +1,22 @@
+name=graphviz
+version=2.40.1
+desc='Graph visualization software'
+deps="libtool gd libxaw ghostscript gts perl python pango"
+source="http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-${version}.tar.gz
+graphviz.sh
+ghostscript918.patch"
+
+ext() {
+	cd graphviz-$version
+	patch -p1 -i ../ghostscript918.patch
+}
+
+build() {
+	cd graphviz-$version
+	export LIBPOSTFIX=/
+	export PYTHON=python
+	./configure --prefix= --without-tcl
+	make
+	make DESTDIR="${pkgdir}" install
+	install -Dm755 ../graphviz.sh "$pkgdir/${HOOKS#$ROOT}"/graphviz.sh
+}

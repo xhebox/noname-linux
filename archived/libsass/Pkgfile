@@ -1,0 +1,16 @@
+name=libsass
+version=3.4.7
+desc="C implementation of Sass CSS preprocessor"
+deps=musl
+source="libsass-$version.tar.gz::https://github.com/sass/libsass/archive/${version}.tar.gz"
+
+build() {
+	cd libsass-$version
+	autoreconf -i
+
+	./configure --prefix=/ --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}
+

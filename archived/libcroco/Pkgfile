@@ -1,0 +1,15 @@
+name=libcroco
+version=0.6.12
+desc="GNOME CSS2 parsing and manipulation toolkit"
+source="http://ftp.gnome.org/pub/gnome/sources/$name/0.6/$name-$version.tar.xz"
+deps="glib libxml2"
+
+build() {
+	cd libcroco-$version
+	./configure \
+		--prefix= \
+		--disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}

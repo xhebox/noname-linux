@@ -1,14 +1,11 @@
-name=fribidi
-version=0.19.7
+version="1.0.5"
 desc="A Free Implementation of the Unicode Bidirectional Algorithm"
-deps="glib"
-source="http://fribidi.org/download/${name}-${version}.tar.bz2"
+makedeps=["glib"]
+deps=["glib"]
+source=[{url="https://github.com/fribidi/fribidi/releases/download/v$version/fribidi-$version.tar.bz2"}]
 
-build() {
-	cd $name-$version
-
-	./configure --prefix=
-
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+build='''
+	noname-meson fribidi-$version build -D docs=false
+	ninja -C build
+	DESTDIR="${pkgdir}" ninja -C build install
+'''

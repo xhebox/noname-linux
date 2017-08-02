@@ -1,0 +1,23 @@
+. ../libgmp/Pkgfile
+name=libgmp-32
+deps="zlib-32 libgmp"
+
+build() {
+  cd gmp-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  export ABI=32
+  ./configure --prefix= \
+    --target=$TARGET32 \
+    --enable-cxx \
+    --enable-fat \
+    --libdir=/lib32 \
+    --includedir=/lib32/gmp \
+    --disable-static
+  sed -i 's/$(exec_prefix)\/include/$\(includedir\)/' Makefile
+  make
+  make DESTDIR="$pkgdir" install
+  rm -rf "$pkgdir"/share
+}
+

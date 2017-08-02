@@ -1,0 +1,17 @@
+name=qhull
+version=2015.2
+desc="A general dimension code for computing convex hulls and related structures"
+deps="cmake"
+source="http://www.qhull.org/download/qhull-2015-src-7.2.0.tgz"
+
+build() {
+	cd qhull-$version
+
+	EXTRAOPTS="-DCMAKE_CXX_FLAGS=-fPIC -DCMAKE_C_FLAGS=-fPIC"
+
+	mkdir srcbuild
+	cd srcbuild
+	cmake -DCMAKE_INSTALL_PREFIX= $EXTRAOPTS ..
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

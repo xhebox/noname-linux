@@ -1,0 +1,9 @@
+pattern=["share/info/*"]
+when=["pre"]
+operation=["remove"]
+script='''
+for i in $@; do
+	echo $i
+	install-info --delete "$i" /share/info/dir
+done
+'''

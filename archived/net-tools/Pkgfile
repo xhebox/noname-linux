@@ -1,0 +1,43 @@
+name=net-tools
+_commit=115f1af2
+version=1.60.20160710git
+desc="Configuration tools for Linux networking"
+deps="musl"
+source="https://raw.githubusercontent.com/gentoo/musl/master/sys-apps/net-tools/files/net-tools-fix-headers.patch"
+
+ext() {
+	git clone git://git.code.sf.net/p/net-tools/code $name
+	cd $name
+	git reset --hard $_commit
+}
+
+build() {
+	cd $name
+	patch -p1 < ../net-tools-fix-headers.patch
+	sed -i "s#/sbin#/bin#" Makefile
+	sed -i "s#/usr##" man/Makefile
+	sed -i lib/inet6_gr.c \
+	-e "s#netinet6/#linux/#"
+	sed -i lib/inet6_sr.c \
+	-e "s#netinet6/#linux/#"
+	sed -i lib/inet_sr.c \
+	-e "/#include <sys\/param.h>/a #include <asm\/param.h>"
+	sed -i netstat.c \
+	-e "/#include <sys\/param.h>/a #include <asm\/param.h>"
+	sed -i slattach.c \
+	-e "/#include <limits.h>/a #include <termios.h>"
+	sed -i mii-tool.c \
+	-e "s/#ifndef __GLIBC__/#if 0/"
+
+	yes "" | make DESTDIR="$pkgdir" update	-j1
+	rm -f "${pkgdir}"/bin/nisdomainname
+	rm -f "${pkgdir}"/bin/ypdomainname
+	rm -f "${pkgdir}"/share/man/man1/ypdomainname.1
+	rm -f "${pkgdir}"/share/man/man1/nisdomainname.1
+	rm -f "${pkgdir}"/bin/ifconfig
+	rm -f "${pkgdir}"/bin/hostname
+	rm -f "${pkgdir}"/bin/dnsdomainname
+	rm -f "${pkgdir}"/bin/domainname
+	rm -rf "${pkgdir}"/share/man/man8/ifconfig.8
+	rm -rf "${pkgdir}"/share/man/man1
+}

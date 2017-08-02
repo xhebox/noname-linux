@@ -1,0 +1,25 @@
+name=speex-32
+version=1.2.0
+desc="A free codec library for speech."
+source="http://downloads.us.xiph.org/releases/speex/speex-$version.tar.gz"
+deps="libogg-32 speexdsp-32 speex"
+
+build() {
+  cd speex-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+
+  sed -i -e "/^SUBDIRS=/s/doc //" Makefile
+  make
+  make prefix=$pkgdir libdir="$pkgdir"/lib32 install
+
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+}
+

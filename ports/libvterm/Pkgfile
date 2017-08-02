@@ -1,0 +1,9 @@
+version="0.1"
+desc='Abstract library implementation of a VT220/xterm/ECMA-48 terminal emulator'
+source=[{url="https://github.com/neovim/libvterm", protocol="git", commit="f600f523545b7d4018ebf320e3273795dbe43c8a"}]
+
+build='''
+	cd libvterm
+	make PREFIX=/
+	make PREFIX=/ DESTDIR="${pkgdir}" install
+'''

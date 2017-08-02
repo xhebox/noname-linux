@@ -1,14 +1,12 @@
-name=libva-intel-driver
-version=1.8.3
+version="2.1.0"
 desc="va driver for intel cpu"
-deps="xorg-proto libva"
-source="https://github.com/01org/intel-vaapi-driver/releases/download/$version/intel-vaapi-driver-$version.tar.bz2"
+deps=["libva", "wayland"]
+makedeps=["xorgproto", "libva", "wayland-protocols"]
+source=[{url="https://github.com/01org/intel-vaapi-driver/releases/download/$version/intel-vaapi-driver-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd intel-vaapi-driver-$version
-
-	./configure --prefix= --disable-static --disable-wayland
-
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	./configure --prefix= --disable-static --enable-wayland
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,0 +1,11 @@
+name=dunst
+version=1.3.1
+desc="Customizable and lightweight notification-daemon"
+deps="libxinerama libxscrnsaver pango libnotify gdk-pixbuf libxdg-basedir libxrandr"
+source="dunst-$version.tar.gz::https://github.com/dunst-project/dunst/archive/v$version.tar.gz"
+
+build(){
+	cd dunst-$version
+	make PREFIX=/ X11INC=/include/X11 X11LIB=/lib/X11 || die
+	make DESTDIR="${pkgdir}" PREFIX=/ install || die
+}

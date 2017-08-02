@@ -1,0 +1,15 @@
+version="239.3"
+desc="The systemd project's logind, extracted to a standalone package"
+makedeps=["pam", "dbus", "gperf", "libcap", "acl", "libpcre", "meson", "ninja"]
+deps=["pam", "dbus", "gperf", "libcap", "acl", "libpcre"]
+source=[
+	{url="https://github.com/elogind/elogind/archive/v$version.tar.gz"},
+	{url="elogind.conf"},
+]
+
+build='''
+	noname-meson elogind-$version build -Drootprefix=/ -Dpoweroff-path=/bin/poweroff -Dglib=false
+	ninja -C build
+	DESTDIR="${pkgdir}" ninja -C build install
+	install -Dm644 ../elogind.conf "$pkgdir"/etc/finit.d/elogind.conf
+'''

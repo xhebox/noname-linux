@@ -1,14 +1,12 @@
-name=libtool
-version=2.4.6
+version="2.4.6"
 desc="A generic library support script"
-source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
-deps=m4
+makedeps=["help2man"]
+deps=["musl", "dash", "tar"]
+source=[{url="http://mirrors.ustc.edu.cn/gnu/libtool/libtool-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-	./bootstrap --force
-	./configure --prefix= --disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+build='''
+	cd libtool-$version
+	./configure --prefix= lt_cv_sys_lib_dlsearch_path_spec="/lib /lib32"
+	make
+	make DESTDIR="$pkgdir" install
+'''

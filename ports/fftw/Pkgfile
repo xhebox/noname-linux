@@ -1,34 +1,35 @@
-name=fftw
-version=3.3.6-pl2
-deps=musl
+version="3.3.7"
+deps=["musl"]
 desc="C subroutine library for computing discrete Fourier transform."
-source="http://www.fftw.org/$name-$version.tar.gz"
+source=[{url="http://www.fftw.org/fftw-$version.tar.gz"}]
 
-build() {
-	cp -a ${name}-${version} ${name}-${version}-double
-	cp -a ${name}-${version} ${name}-${version}-long-double
-	mv ${name}-${version} ${name}-${version}-single
+build='''
+	cp -a fftw-${version} fftw-${version}-double
+	cp -a fftw-${version} fftw-${version}-long-double
+	mv fftw-${version} fftw-${version}-single
 
 
 	CFLAGS="$CFLAGS -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
 
-	CONFIGURE="./configure --prefix=  \
+	CONFIGURE="./configure --prefix=	\
 		--enable-shared --enable-threads \
 		--enable-openmp"
 
-	cd ${srcdir}/${name}-${version}-double
+	cd fftw-${version}-double
 	$CONFIGURE --enable-sse2 --enable-avx
-	make || die
-	make DESTDIR=$pkgdir install || die
+	make
+	make DESTDIR=$pkgdir install
+	cd -
 
-	cd ${srcdir}/${name}-${version}-long-double
+	cd fftw-${version}-long-double
 	$CONFIGURE --enable-long-double
-	make || die
-	make DESTDIR=$pkgdir install || die
+	make
+	make DESTDIR=$pkgdir install
+	cd -
 
-	cd ${srcdir}/${name}-${version}-single
+	cd fftw-${version}-single
 	$CONFIGURE --enable-float --enable-sse --enable-avx
-	make || die
-	make DESTDIR=$pkgdir install || die
-	rm -r $pkgdir/share/info
-}
+	make
+	make DESTDIR=$pkgdir install
+	cd -
+'''

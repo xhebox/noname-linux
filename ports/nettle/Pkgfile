@@ -1,14 +1,12 @@
-name=nettle
-version=3.3
-deps=musl
+version="3.4"
+deps=["musl"]
 desc="Low-level cryptographic library"
-source="ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+source=[{url="http://mirrors.ustc.edu.cn/gnu/nettle/nettle-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd nettle-$version
 	./configure --prefix=/ --disable-static \
 	--disable-documentation
-
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

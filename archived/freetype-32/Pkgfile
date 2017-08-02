@@ -1,0 +1,20 @@
+. ../freetype/Pkgfile
+name=freetype-32
+deps="zlib-32 libpng-32 bzip2-32 freetype"
+
+build() {
+  cd freetype-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= \
+    --without-harfbuzz \
+    --libdir=/lib32 \
+    --disable-static \
+    --with-zlib 
+  make
+  make DESTDIR="$pkgdir" install
+  rm -rf "$pkgdir"/include
+  rm -rf "$pkgdir"/share
+  rm -rf "$pkgdir"/bin
+}

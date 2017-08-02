@@ -1,21 +1,17 @@
-name=file
-version=5.31
-_version=`echo $version | sed 's/\./_/g'`
-deps=zlib
+version="5.35"
+deps=["zlib", "musl"]
 desc="File type identification utility"
-source="https://github.com/file/file/archive/FILE$_version.tar.gz"
+source=[{url="http://ftp.icm.edu.pl/packages/file/file-$version.tar.gz"}]
 
-build() {
-	cd $name-FILE$_version
-	autoreconf -fi
+build='''
+	cd file-$version
 	./configure \
 		--prefix= \
-		--disable-static \
 		--datadir=/share/file \
-		--enable-fsect-man5 \
-		--enable-shared 
+		--disable-libseccomp \
+		--enable-fsect-man5
 	
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
-
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make
+	make DESTDIR="$pkgdir" install
+'''

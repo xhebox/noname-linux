@@ -1,13 +1,11 @@
-name=m4
-version=1.4.18
+version="1.4.18"
 desc="Gnu m4"
-source="http://mirrors.ustc.edu.cn/gnu/$name/$name-$version.tar.gz"
-deps=musl
+source=[{url="http://mirrors.ustc.edu.cn/gnu/m4/m4-$version.tar.gz"}]
+deps=["dash", "musl"]
 
-build() {
-	cd $name-$version
+build='''
+	cd m4-$version
 	./configure --prefix= 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

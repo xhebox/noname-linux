@@ -1,93 +1,95 @@
-name=gcc
-version=7.1.0
+version="8.2.0"
 desc="The GNU Compiler Collection"
-_islversion=0.18
-source="
-http://mirrors.ustc.edu.cn/gnu/gcc/gcc-${version}/gcc-${version}.tar.bz2
-http://isl.gforge.inria.fr/isl-$_islversion.tar.bz2
-003_all_default-fortify-source.patch
-Revert-eeb6872bf.patch
-050_all_libiberty-asprintf.patch
-locale.patch
-cpu_indicator.patch
-gcc-4.9-musl-fortify.patch
-gcc-6.1-musl-libssp.patch
-libgcc-always-build-gcceh.a.patch
-posix_memalign.patch
-"
-deps="libmpc binutils"
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/gcc/gcc-$version/gcc-${version}.tar.xz"},
+	{url="http://isl.gforge.inria.fr/isl-0.19.tar.bz2"},
+	{url="http://gmplib.org/download/gmp/gmp-6.1.2.tar.xz"},
+	{url="http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz"},
+	{url="https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz"},
+	{url="posix_memalign.patch"},
+	{url="0016-invalid_tls_model.diff"},
+	{url="fix-musl-execinfo.patch"},
+	{url="gcc-6.1-musl-libssp.patch"},
+	{url="libgcc-always-build-gcceh.a.patch"},
+	{url="003_all_default-fortify-source.patch"},
+	{url="050_all_libiberty-asprintf.patch"},
+	{url="gcc-4.9-musl-fortify.patch"},
+	{url="locale.patch"},
+]
+makedeps=["zlib"]
+deps=["zlib", "binutils"]
 
-ext() {
-	cd "$srcdir"/gcc-$version
+ext='''
+	cd gcc-$version
 	for i in $source; do
 		case "$i" in
-		*.patch) msg $i;patch -p1 -i ../"$i" || die;;
+			o.patch|l.patch) ;;
+			*execinfo*.patch) patch -p0 -i ../"$i";;
+			*.patch) patch -p1 -i ../"$i";;
 		esac
 	done
 
-	export gcc_cv_prog_makeinfo_modern=no
-	export libat_cv_have_ifunc=no
 	sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 	sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
-	ln -s ../isl-${_islversion} isl
+	ln -s ../isl-0.19 isl
+	ln -s ../gmp-6.1.2 gmp
+	ln -s ../mpfr-4.0.1 mpfr
+	ln -s ../mpc-1.1.0 mpc
 	echo ${version} > gcc/BASE-VER
-	export LDFLAGS="$LDFLAGS -Wl,--no-keep-memory"
-}
+'''
 
-build() {
-	cd "$srcdir"/gcc-$version
-
+build='''
+	export libat_cv_have_ifunc=no
 	mkdir -p build
 	cd build
-	../configure \
+	../gcc-$version/configure \
 		--host=$TARGET \
 		--build=$TARGET \
 		--target=$TARGET \
-		--prefix=  \
+		--prefix=	\
 		--libexecdir=/lib \
+		--enable-languages=c,c++,lto \
 		--with-pkgversion=noname \
 		--with-isl \
-		--with-linker-hash-style=gnu \
-		--with-system-zlib \
-		--enable-cloog-backend \
-		--enable-checking=release \
-		--enable-__cxa_atexit \
-		--enable-languages=c,c++,lto,fortran \
-		--enable-multilib \
 		--enable-shared \
-		--enable-threads \
-		--enable-clocale=generic \
-		--disable-libmpx \
+		--enable-threads=posix \
+		--enable-checking=release \
+		--enable-cloog-backend \
+		--enable-libstdcxx-time \
+		--with-system-zlib \
+		--enable-__cxa_atexit \
+		--with-linker-hash-style=gnu \
+		--enable-linker-build-id \
+		--enable-cet=auto \
+		--enable-default-pie \
+		--enable-default-ssp \
+		--enable-gnu-indirect-function \
+		--enable-lto --enable-plugin \
+		--enable-vtable-verify \
+		--disable-target-libiberty \
 		--disable-fixed-point \
 		--disable-libstdcxx-pch \
 		--disable-libunwind-exceptions \
-		--disable-libssp \
 		--disable-libsanitizer \
 		--disable-libmudflap \
+		--disable-libmpx \
+		--disable-libssp \
 		--disable-werror \
 		--disable-symvers \
-		--enable-linker-build-id \
-		--enable-lto --enable-plugin \
+		--enable-clocale=generic \
 		--enable-nls \
-		--disable-bootstrap 
-		#--disable-gnu-indirect-function \
-		#--disable-gnu-unique-object \
-		#--with-build-config=bootstrap-lto \
-		#--enable-esp \
-		# do not enable it....we have no pax or grsecurity
-		#--enable-default-pie \
-		# still lack mpx
+		--enable-multilib \
+		--disable-bootstrap
 
 	gcc_cv_libc_provides_ssp=yes \
-	make || die
-	make -j1 DESTDIR="${pkgdir}" install || die
-	make -C gcc DESTDIR="${pkgdir}" install-po || die
+	make
+	make -j1 DESTDIR="${pkgdir}" install
+	make -C gcc DESTDIR="${pkgdir}" install-po
 
 	install -d $pkgdir/share/gdb/auto-load/lib
-	mv $pkgdir/lib/*-gdb.py \
-	$pkgdir/share/gdb/auto-load/lib/
+	mv $pkgdir/lib/*-gdb.py $pkgdir/share/gdb/auto-load/lib/
 
-	ln -s gcc "$pkgdir"/bin/cc
+	ln -srf "$pkgdir"/bin/gcc "$pkgdir"/bin/cc
 
 	find "$pkgdir" -name libgcj.a -o -name libgtkpeer.a \
 		-o -name libgjsmalsa.a -o -name libgcj-tools.a \
@@ -95,10 +97,9 @@ build() {
 		-o -name libjavamath.a \
 		| xargs rm -f
 
-	[ -e "$pkgdir"/lib/gcc/$TARGET/$version/liblto_plugin.so ] && {
-	        mkdir -p "$pkgdir"/lib/bfd-plugins
-	        ln -sf ../../lib/gcc/$TARGET/$version/liblto_plugin.so \
-        	"$pkgdir"/lib/bfd-plugins/liblto_plugin.so
-	}
-	rm -r "$pkgdir"/share/info
-}
+	if [ -e "$pkgdir"/lib/gcc/$TARGET/$version/liblto_plugin.so ]; then
+		mkdir -p "$pkgdir"/lib/bfd-plugins
+		ln -sf ../../lib/gcc/$TARGET/$version/liblto_plugin.so \
+		"$pkgdir"/lib/bfd-plugins/liblto_plugin.so
+	fi
+'''

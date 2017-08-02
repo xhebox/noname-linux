@@ -1,0 +1,6 @@
+pattern=["lib/udev/rules.d/*"]
+script='''
+if [ -d /run/udev ]; then
+	/bin/udevadm control --reload
+fi
+'''

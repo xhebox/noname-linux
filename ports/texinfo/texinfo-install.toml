@@ -1,0 +1,7 @@
+pattern=["share/info/*"]
+script='''
+for i in $@; do
+	echo $i
+	install-info "$i" /share/info/dir
+done
+'''

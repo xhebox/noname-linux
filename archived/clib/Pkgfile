@@ -1,0 +1,11 @@
+name=clib
+version='1.8.1'
+desc="C package manager-ish"
+deps="curl"
+source="https://github.com/clibs/clib/archive/$version.tar.gz"
+
+build() {
+	cd clib-$version
+	make
+	make PREFIX="$pkgdir/" install
+}

@@ -1,6 +1,0 @@
-bin/clewTest|755|0|0|regular file
-bin|755|0|0|directory
-include/clew.h|444|0|0|regular file
-include|755|0|0|directory
-lib/libclew.a|644|0|0|regular file
-lib|755|0|0|directory

@@ -1,0 +1,1 @@
+makedeps=["ncurses", "file"]

@@ -1,0 +1,16 @@
+name=gnome-themes-standard
+version=3.22.3
+desc="Themesfor GTK+"
+deps="intltool librsvg"
+source="https://github.com/GNOME/gnome-themes-standard/archive/$version.tar.gz"
+
+build() {
+	cd $name-$version
+	NOCONFIGURE=1 ./autogen.sh
+	./configure \
+		--prefix=/ \
+		--enable-animation
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	make || die
+	make DESTDIR=${pkgdir} install || die
+}

@@ -1,0 +1,16 @@
+version="9.0.1"
+makedeps=["python3-setuptools"]
+eps=["python3"]
+source=[{url="https://pypi.io/packages/source/p/pip/pip-${version}.tar.gz"}]
+desc="The PyPA recommended tool for installing Python packages"
+
+build='''
+	cd pip-$version
+	/bin/python3 setup.py build
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build
+	rm "$pkgdir"/bin/pip
+'''

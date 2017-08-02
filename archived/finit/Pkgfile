@@ -1,0 +1,31 @@
+version="3.1-rc1"
+makedeps=["eudev", "dbus", "libuev", "libite"]
+deps=["eudev", "dbus", "libuev", "libite", "run-parts", "opentmpfiles", "opensysusers"]
+desc="nice init"
+source=[
+	{url="https://github.com/troglobit/finit/releases/download/$version/finit-$version.tar.xz"},
+	{url="securetty"},
+	{url="rc.local"},
+	{url="finit.conf"},
+]
+
+ext='''
+	cd finit-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+'''
+
+build='''
+	cd finit-$version
+	./configure --prefix=/ --sbindir=/bin --enable-rw-rootfs --enable-dbus-plugin --enable-alsa-utils-plugin --enable-x11-common-plugin --enable-resolvconf-plugin --enable-fallback-shell --enable-progress --disable-inetd
+	make
+	make DESTDIR="$pkgdir" install
+	mkdir -p "$pkgdir"/etc
+	cp ../finit.conf "$pkgdir"/etc/finit.conf
+	install -Dm755 ../rc.local "$pkgdir"/etc/rc.local
+	mkdir -p "$pkgdir"/etc/init.d
+	install -m644 ../securetty "$pkgdir"/etc/securetty
+'''

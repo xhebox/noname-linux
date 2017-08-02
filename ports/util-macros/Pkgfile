@@ -1,14 +1,12 @@
-name=util-macros
-version=1.19.1
-deps="m4"
+version="1.19.2"
 desc="xorg m4 macros"
-source="http://xorg.freedesktop.org/releases/individual/util/util-macros-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/util/util-macros-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd util-macros-$version
 
 	./configure --prefix= 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

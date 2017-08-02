@@ -1,0 +1,79 @@
+version="240"
+desc="system and service manager"
+nostrip=true
+makedeps=["acl", "cryptsetup", "docbook-xsl", "gperf", "lz4", "xz", "pam", "elfutils", "intltool", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+deps=["acl", "cryptsetup", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+source=[
+	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
+	{url="musl.patch"},
+	{url="0017-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
+	{url="musl_test.patch"},
+	{
+		name="0001-Use-Arch-Linux-device-access-groups.patch",
+		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
+	},
+
+	{url="initcpio-hook-udev"},
+	{url="initcpio-install-systemd"},
+	{url="initcpio-install-udev"},
+	{url="noname.conf"},
+	{url="loader.conf"},
+	{url="systemd-user.pam"},
+	{url="systemd-binfmt.toml"},
+	{url="systemd-catalog.toml"},
+	{url="systemd-daemon-reload.toml"},
+	{url="systemd-hwdb.toml"},
+	{url="systemd-sysctl.toml"},
+	{url="systemd-sysusers.toml"},
+	{url="systemd-tmpfiles.toml"},
+	{url="systemd-udev-reload.toml"},
+]
+
+ext='''
+	cd systemd-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 -i ../$i;;
+		esac
+	done
+'''
+
+build='''
+	noname-meson systemd-$version build \
+	-Dsplit-usr=true \
+	-Dutmp=false \
+	-Dldconfig=false \
+	-Dgnu-efi=true \
+	-Dima=false \
+	-Dlibidn2=false \
+	-Dgshadow=false \
+	-Dnss-resolve=false \
+	-Dnss-myhostname=false \
+	-Dnss-mymachines=false \
+	-Dnss-systemd=false \
+	-Dlz4=true \
+	-Ddbuspolicydir=/share/dbus-1/system.d \
+	-Ddefault-hierarchy=hybrid \
+	-Ddefault-locale=C \
+	-Ddefault-kill-user-processes=false \
+	-Dfallback-hostname='PC' \
+	-Dntp-servers="pool.ntp.org" \
+	-Ddns-servers="1.1.1.1 114.114.114.114" \
+	-Drpmmacrosdir=no \
+	-Dsysvinit-path= \
+	-Dsysvrcnd-path=
+
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+
+	install -D -m0644 -t "$pkgdir"/${HOOKS#$ROOT} ../*.toml
+
+	install -D -m0644 noname.conf "$pkgdir"/share/systemd/bootctl/noname.conf
+	install -D -m0644 loader.conf "$pkgdir"/share/systemd/bootctl/loader.conf
+
+	install -D -m0644 systemd-user.pam "$pkgdir"/etc/pam.d/systemd-user
+
+	install -D -m0644 initcpio-install-systemd "$pkgdir"/lib/initcpio/install/systemd
+	install -D -m0644 initcpio-install-udev "$pkgdir"/lib/initcpio/install/udev
+	install -D -m0644 initcpio-hook-udev "$pkgdir"/lib/initcpio/hooks/udev
+'''

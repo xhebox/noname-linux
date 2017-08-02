@@ -1,13 +1,11 @@
-name=libmnl
-version=1.0.4
-deps=musl
+version="1.0.4"
+deps=["musl"]
 desc="Minimalistic user-space library oriented to Netlink developers"
-source="http://www.netfilter.org/projects/${name}/files/${name}-${version}.tar.bz2"
+source=[{url="http://www.netfilter.org/projects/libmnl/files/libmnl-${version}.tar.bz2"}]
 
-build() {
-	cd $name-$version
-	./configure --prefix= \
-		--disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+build='''
+	cd libmnl-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

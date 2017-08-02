@@ -1,0 +1,22 @@
+name=rsyslog
+version=8.34.0
+desc="An enhanced multi-threaded syslogd with a focus on security and reliability"
+deps="gnutls libestr libfastjson liblogging"
+source="http://www.rsyslog.com/files/download/rsyslog/rsyslog-$version.tar.gz
+rsyslog.logrotate
+rsyslog.conf
+rsyslog.service.conf"
+
+build() {
+	cd rsyslog-$version
+	./configure --prefix= \
+		--sbindir=/bin \
+		--enable-gnutls
+
+	make
+	make install DESTDIR="$pkgdir"
+	install -D -m644 "$srcdir"/rsyslog.conf "$pkgdir"/etc/rsyslog.conf
+	install -D -m644 "$srcdir"/rsyslog.logrotate "$pkgdir"/etc/logrotate.d/rsyslog
+	install -D -m644 "$srcdir"/rsyslog.service.conf "$pkgdir"/etc/finit.d/rsyslogd.conf
+	mkdir -p "$pkgdir"/var/spool/rsyslog
+}

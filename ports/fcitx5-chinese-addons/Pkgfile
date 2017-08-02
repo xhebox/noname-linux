@@ -1,0 +1,15 @@
+version="r117.cf54d3a"
+desc="Addons related to Chinese, including IME previous buindled inside fcitx4"
+deps=["boost", "curl", "fcitx5", "opencc", "libime"]
+makedeps=["boost", "curl", "fcitx5", "opencc", "libime", "extra-cmake-modules"]
+
+source=[
+	{url="https://gitlab.com/fcitx/fcitx5-chinese-addons", protocol="git", commit="cf54d3ab3d2369af7759b39baf202a7105fc67d5"},
+]
+
+build='''
+	cd fcitx5-chinese-addons
+	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=/lib -DENABLE_GUI=OFF .
+	make
+	make DESTDIR="$pkgdir" install
+'''

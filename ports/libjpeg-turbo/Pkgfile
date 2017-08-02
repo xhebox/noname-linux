@@ -1,13 +1,12 @@
-name=libjpeg-turbo
-version=1.5.2
-deps=nasm
+version="1.5.3"
+makedeps=["nasm"]
 desc="Library of JPEG support functions."
-source="http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$version.tar.gz"
+source=[{url="https://github.com/libjpeg-turbo/libjpeg-turbo/archive/$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libjpeg-turbo-$version
+	autoreconf -fi
 	./configure --prefix= --disable-static --mandir=/share/man
-	make || die
-	make DESTDIR="$pkgdir" install || die
-	rm -r "$pkgdir"/share/doc
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

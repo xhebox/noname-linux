@@ -1,15 +1,15 @@
-name=libvdpau
-version=1.1.1
+version="1.1.1"
 desc="vdpau"
-deps="xorg-proto libxext"
-source="http://people.freedesktop.org/~aplattner/vdpau/${name}-${version}.tar.bz2"
+deps=["libxext"]
+makedeps=["libxext"]
+source=[{url="http://people.freedesktop.org/~aplattner/vdpau/libvdpau-${version}.tar.bz2"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd libvdpau-$version
 	
 	LIBS="-lX11" \
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

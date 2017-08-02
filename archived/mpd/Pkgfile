@@ -1,0 +1,25 @@
+name=mpd
+version=0.20.20
+desc='Flexible, powerful, server-side application for playing music'
+deps="libao ffmpeg libmodplug audiofile libmad curl faad2 sqlite libmms libid3tag yajl libmpdclient icu libsamplerate libsoxr libgme boost pulseaudio"
+source="https://www.musicpd.org/download/mpd/${version%.*}/mpd-${version}.tar.xz
+stacksize.patch"
+
+ext() {
+	cd mpd-$version
+	patch -p0 < ../stacksize.patch
+}
+
+build() {
+	cd mpd-$version
+	./configure \
+		--prefix= \
+		--sysconfdir=/etc \
+		--enable-libmpdclient \
+		--enable-pipe-output \
+		--enable-pulse \
+		--enable-soundcloud \
+		--disable-sidplay
+	make
+	make DESTDIR="${pkgdir}" install
+}

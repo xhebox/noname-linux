@@ -4,6 +4,7 @@
 
 /bin/sh
 /bin/dash
+/bin/bash
 /bin/zsh
 
 # End of file

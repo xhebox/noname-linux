@@ -1,0 +1,10 @@
+name=re2
+version=2018-04-01
+desc="Fast, safe, thread-friendly regular expression engine"
+source="re2-$version.tar.gz::https://github.com/google/re2/archive/$version.tar.gz"
+
+build() {
+	cd re2-$version
+	make
+	make prefix=/ DESTDIR="$pkgdir" install
+}

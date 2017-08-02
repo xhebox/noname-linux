@@ -1,17 +1,17 @@
-name=proxychains
-version=4.12
-deps=musl
+version="4.12"
+deps=["musl"]
 desc="A hook preloader that allows to redirect TCP traffic of existing dynamically linked programs through one or more SOCKS or HTTP proxies"
-source="proxychains.conf
-https://github.com/rofl0r/proxychains-ng/releases/download/v$version/proxychains-ng-$version.tar.xz"
+baks=["etc/proxychains.conf"]
+source=[
+	{url="https://github.com/rofl0r/proxychains-ng/releases/download/v$version/proxychains-ng-$version.tar.xz"},
+	{url="proxychains.conf"}
+]
 
-build() {
-	cd $name-ng-$version
-
-	./configure --prefix=/ --disable-static 
-
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
+build='''
+	cd proxychains-ng-$version
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
 	ln -s proxychains4 "$pkgdir/bin/proxychains"
 	install -Dm644 ../proxychains.conf "$pkgdir"/etc/proxychains.conf
-}
+'''

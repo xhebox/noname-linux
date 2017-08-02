@@ -1,0 +1,14 @@
+name=vdpauinfo
+version=1.0
+desc="vdpauinfo"
+deps="libvdpau libvdpau-va-gl"
+source="http://people.freedesktop.org/~aplattner/vdpau/${name}-${version}.tar.gz"
+
+build() {
+	cd $name-$version
+
+	./configure --prefix= --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+}

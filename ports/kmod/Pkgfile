@@ -1,31 +1,27 @@
-name=kmod
-version=24
+version="25"
 desc="Kernel module utilities and library"
-deps="zlib xz"
-source="http://www.kernel.org/pub/linux/utils/kernel/$name/$name-$version.tar.xz"
+deps=["musl", "zlib", "xz"]
+source=[{url="http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd kmod-$version
 	./configure --prefix= \
-		--host=$TARGET \
-		--build=$TARGET \
 		--with-xz \
 		--with-zlib \
 		--enable-tools \
 		--bindir=/bin \
-		--disable-static \
 		--sysconfdir=/etc 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
+	make
+	make DESTDIR="$pkgdir" install
+
 	install -d "$pkgdir"/etc/modprobe.d
 	install -d "$pkgdir"/etc/depmod.d
 	install -d "$pkgdir"/bin
-	rm -r "$pkgdir"/share/bash-completion
 	ln -s kmod "$pkgdir"/bin/modinfo
 	ln -s kmod "$pkgdir"/bin/depmod
 	ln -s kmod "$pkgdir"/bin/insmod
 	ln -s kmod "$pkgdir"/bin/rmmod
 	ln -s kmod "$pkgdir"/bin/modprobe
 	ln -s kmod "$pkgdir"/bin/lsmod
-}
+'''

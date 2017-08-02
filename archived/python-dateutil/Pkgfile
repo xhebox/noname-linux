@@ -1,0 +1,25 @@
+name=python-dateutil
+version=2.7.3
+deps="python-setuptools python-six"
+source="python-dateutil-$version.tar.gz::https://files.pythonhosted.org/packages/a0/b0/a4e3241d2dee665fea11baec21389aec6886655cd4db7647ddf96c3fad15/python-dateutil-2.7.3.tar.gz"
+desc="Provides powerful extensions to the standard datetime module"
+
+build() {
+	cp -r python-dateutil-$version date3
+	cd python-dateutil-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../date3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}
+

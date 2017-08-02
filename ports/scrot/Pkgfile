@@ -1,20 +1,21 @@
-name=scrot
-version=0.8.17
+version="0.8.17"
 desc="A simple command-line screenshot utility for X"
-deps="giblib"
-source="http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}.orig.tar.gz
-http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}-${version##*.}.debian.tar.xz"
+makedeps=["giblib"]
+deps=["giblib"]
+source=[
+	{url="http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}.orig.tar.gz"},
+	{url="http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}-${version##*.}.debian.tar.xz"},
+]
 
-ext() {
+ext='''
 	for patch in $(<$srcdir/debian/patches/series); do
-		patch -Np1 -d $srcdir/$name-${version%.*} -i $srcdir/debian/patches/$patch || die
+		patch -Np1 -d $srcdir/$name-${version%.*} -i $srcdir/debian/patches/$patch
 	done
-}
+'''
 
-build() {
+build='''
 	cd scrot-${version%.*}
 	./configure --prefix= --mandir=/share/man
-	make || die
-	make DESTDIR=$pkgdir docsdir=/share/doc/scrot install || die
-}
-
+	make
+	make DESTDIR=$pkgdir docsdir=/share/doc/scrot install
+'''

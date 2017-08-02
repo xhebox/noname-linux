@@ -1,0 +1,19 @@
+--- a/src/go/internal/gcimporter/exportdata.go
++++ b/src/go/internal/gcimporter/exportdata.go
+@@ -10,6 +10,7 @@
+ 	"bufio"
+ 	"fmt"
+ 	"io"
++	"path/filepath"
+ 	"strconv"
+ 	"strings"
+ )
+@@ -57,7 +58,7 @@
+ 		}
+ 
+ 		// First entry should be __.PKGDEF.
+-		if name != "__.PKGDEF" {
++		if filepath.Clean(name) != "__.PKGDEF" {
+ 			err = fmt.Errorf("go archive is missing __.PKGDEF")
+ 			return
+ 		}

@@ -1,0 +1,17 @@
+. ../musl-obstack/Pkgfile
+name=musl-obstack-32
+deps="automake libtool musl"
+
+build() {
+  export CFLAGS="-fPIC"
+  cd musl-obstack-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./bootstrap.sh
+  ./configure --prefix= --disable-shared --libdir=/lib32
+  make
+  make DESTDIR="$pkgdir" install
+  install -Dm644 musl-obstack.pc "$pkgdir"/lib32/pkgconfig/musl-obstack.pc
+  rm -r "$pkgdir"/include
+}

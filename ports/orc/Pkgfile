@@ -1,16 +1,11 @@
-name=orc
-version=0.4.27
+version="0.4.28"
 desc="The Oild Runtime Compiler"
-source="http://gstreamer.freedesktop.org/src/orc/orc-${version}.tar.xz
-"
-deps=musl
+source=[{url="http://gstreamer.freedesktop.org/src/orc/orc-${version}.tar.xz"}]
+deps=["musl"]
 
-build() {
-	cd $name-$version
-	./configure \
-		--prefix= \
-		--disable-static
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+build='''
+	sed -i '/doc/d' orc-$version/meson.build
+	noname-meson orc-$version build -Denable_docs=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

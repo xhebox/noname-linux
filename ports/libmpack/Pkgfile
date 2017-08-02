@@ -1,0 +1,9 @@
+version="1.0.5"
+desc="Simple implementation of msgpack in C"
+source=[{url="https://github.com/libmpack/libmpack/archive/${version}.tar.gz"}]
+
+build='''
+	cd libmpack-$version
+	make
+	make DESTDIR="$pkgdir/" PREFIX= install
+'''

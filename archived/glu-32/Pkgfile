@@ -1,0 +1,16 @@
+name=glu-32
+version=9.0.0
+deps="mesa-32 glu "
+desc="Mesa OpenGL Utility library"
+source="ftp://ftp.freedesktop.org/pub/mesa/$name/glu-$version.tar.bz2"
+
+build() {
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  cd glu-$version
+  ./configure --prefix= --disable-static --libdir=/lib32
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/include
+}

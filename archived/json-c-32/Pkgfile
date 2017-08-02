@@ -1,0 +1,18 @@
+. ../json-c/Pkgfile
+name=json-c-32
+deps=json-c
+
+build() {
+  cd json-c-$version
+  PKG_NO_REMOVELA=yes
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  CFLAGS="$CFLAGS -Wno-error"
+
+  ./configure --prefix=/ --disable-static --libdir=/lib32
+  make
+  make DESTDIR="$pkgdir" install
+
+  rm -r "$pkgdir"/include
+}

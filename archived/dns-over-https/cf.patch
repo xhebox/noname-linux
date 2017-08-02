@@ -1,0 +1,33 @@
+--- dns-over-https-1.3.5/doh-client/doh-client.conf	2018-04-27 00:39:48.000000000 +0800
++++ dns-over-https-1.3.5/doh-client/doh-client.conf	2018-04-27 00:39:48.000000000 +0800
+@@ -1,7 +1,7 @@
+ # DNS listen port
+ listen = [
+-    "127.0.0.1:53",
+-    "[::1]:53",
++    "127.0.0.1:5353",
++    "[::1]:5353",
+ ]
+ 
+ # HTTP path for upstream resolver
+@@ -7,15 +7,13 @@
+ # HTTP path for upstream resolver
+ # If multiple servers are specified, a random one will be chosen each time.
+ upstream_google = [
+-
+-    # Google's productive resolver, good ECS, bad DNSSEC
+-    "https://dns.google.com/resolve",
+-
+     # CloudFlare's resolver, bad ECS, good DNSSEC
+-    #"https://cloudflare-dns.com/dns-query",
+-    #"https://1.1.1.1/dns-query",
+-    #"https://1.0.0.1/dns-query",
++    "https://cloudflare-dns.com/dns-query",
++    "https://1.1.1.1/dns-query",
++    "https://1.0.0.1/dns-query",
+ 
++    # Google's productive resolver, good ECS, bad DNSSEC
++    #"https://dns.google.com/resolve",
+ ]
+ upstream_ietf = [
+ 

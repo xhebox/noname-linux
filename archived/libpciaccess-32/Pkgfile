@@ -1,0 +1,17 @@
+. ../libpciaccess/Pkgfile
+name=libpciaccess-32
+deps=libpciaccess
+
+build() {
+  cd "libpciaccess-$version"
+  export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/include
+}

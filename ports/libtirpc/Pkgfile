@@ -1,0 +1,21 @@
+version="1.0.3"
+desc="Transport Independent RPC library (SunRPC replacement)"
+deps=["musl"]
+source=[
+	{url="http://nchc.dl.sourceforge.net/sourceforge/libtirpc/libtirpc-${version}.tar.bz2"},
+	{url="musl.patch"},
+	{url="restore_using_reserve_ports_for_client_connections.diff"},
+]
+
+ext='''
+	cd libtirpc-$version
+	patch -Np1 -i ../restore_using_reserve_ports_for_client_connections.diff
+	patch -p0 -i ../musl.patch
+'''
+
+build='''
+	cd libtirpc-$version
+	./configure --prefix= --sysconf=/etc --disable-gssapi
+	make
+	make DESTDIR="${pkgdir}" install
+'''

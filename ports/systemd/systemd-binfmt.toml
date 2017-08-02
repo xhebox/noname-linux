@@ -1,0 +1,6 @@
+pattern=["lib/binfmt.d/*.conf"]
+script='''
+if [ -d /run/systemd/system ]; then
+	/lib/systemd/systemd-binfmt 
+fi
+'''

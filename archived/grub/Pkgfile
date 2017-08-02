@@ -1,0 +1,71 @@
+version="2.02"
+_UNIFONT_VER='11.0.02'
+desc="Boot loader for the Linux operating system"
+nostrip=true
+makedeps=["freetype", "libusb", "ncurses", "xz", "intel-ucode", "libisoburn", "mtools", "lvm2", "fuse2", "ttf-dejavu"]
+deps=["freetype", "libusb", "ncurses", "xz", "intel-ucode", "libisoburn", "mtools", "lvm2", "dosfstools", "fuse2", "efibootmgr", "os-prober", "ttf-dejavu"]
+source=[
+	{url="http://ftp.gnu.org/gnu/grub/grub-${version}.tar.gz"},
+	{url="https://ftp.gnu.org/gnu/unifont/unifont-${_UNIFONT_VER}/unifont-${_UNIFONT_VER}.bdf.gz"},
+	{url="git://git.sv.gnu.org/grub-extras"},
+	{url="argp.patch"},
+	{url="0003-10_linux-detect-archlinux-initramfs.patch"},
+	{url="0004-add-GRUB_COLOR_variables.patch"},
+	{url="0008-Fix-packed-not-aligned-error-on-GCC-8.patch"},
+	{url="0010-relocation.patch"},
+	{url="grub.default"},
+]
+
+ext='''
+	cd grub-$version
+	for i in $source; do
+		case "$i" in
+		*.xz) continue;;
+		*.patch) patch -p1 -i "$srcdir"/`basename $i` ;;
+		esac
+	done
+	sed 's|/usr/share/fonts/dejavu|/share/fonts/dejavu /share/fonts/TTF|g' -i configure.ac
+	sed -e 's#en@cyrillic en@greek##g' -i po/LINGUAS
+	sed 's| ro | rw |g' -i util/grub.d/10_linux.in
+	sed 's|GNU/Linux|Linux|' -i util/grub.d/10_linux.in
+	mkdir grub-extras
+	cp -r ../grub-extras/915resolution grub-extras/915resolution
+	install -Dm644 ../unifont-${_UNIFONT_VER}.bdf unifont.bdf
+	NOCONFIGURE=1 ./autogen.sh
+'''
+
+build='''
+	cd grub-$version
+	export GRUB_CONTRIB="${srcdir}/grub-${version}/grub-extras/"
+	unset CC AS LD RANLIB CPP
+	unset CFLAGS
+	unset CPPFLAGS
+	unset CXXFLAGS
+	unset LDFLAGS
+	unset MAKEFLAGS
+
+	./configure --prefix= \
+		--enable-liblzma \
+		--enable-mm-debug \
+		--enable-cache-stats \
+		--enable-boot-time \
+		--enable-grub-mkfont \
+		--enable-grub-mount \
+		--enable-grub-theme \
+		--enable-device-mapper \
+		--disable-werror \
+		--libdir=/lib \
+		--sbindir=/bin \
+		--bindir=/bin \
+		--mandir=/share/man \
+		--infodir=/share/info \
+		--datarootdir=/share \
+		--sysconfdir=/etc \
+		--program-prefix="" \
+		--with-bootdir=/boot \
+		--with-grubdir=grub \
+		--with-platform=efi --target=x86_64 --disable-efiemu
+	make
+	make DESTDIR="${pkgdir}" bashcompletiondir="/share/bash-completion/completions" install
+	install -D -m0644 "${srcdir}/grub.default" "${pkgdir}/etc/default/grub"
+'''

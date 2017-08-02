@@ -1,0 +1,21 @@
+--- a/grub-core/gnulib/argp-help.c
++++ b/grub-core/gnulib/argp-help.c
+@@ -1021,7 +1021,7 @@
+ print_header (const char *str, const struct argp *argp,
+               struct pentry_state *pest)
+ {
+-  const char *tstr = dgettext (argp->argp_domain, str);
++  const char *tstr = str ? dgettext (argp->argp_domain, str) : NULL;
+   const char *fstr = filter_doc (tstr, ARGP_KEY_HELP_HEADER, argp, pest->state);
+ 
+   if (fstr)
+@@ -1412,7 +1412,8 @@
+   char *our_level = *levels;
+   int multiple = 0;
+   const struct argp_child *child = argp->children;
+-  const char *tdoc = dgettext (argp->argp_domain, argp->args_doc), *nl = 0;
++  const char *tdoc = argp->args_doc ? dgettext (argp->argp_domain, argp->args_doc) : NULL;
++  const char *nl = NULL;
+   const char *fdoc = filter_doc (tdoc, ARGP_KEY_HELP_ARGS_DOC, argp, state);
+ 
+   if (fdoc)

@@ -1,24 +1,15 @@
-name=python-pip
-version=9.0.1
-deps="python python3"
-source="https://pypi.io/packages/source/p/pip/pip-${version}.tar.gz"
+version="9.0.1"
+makedeps=["python-setuptools"]
+eps=["python"]
+source=[{url="https://pypi.io/packages/source/p/pip/pip-${version}.tar.gz"}]
 desc="The PyPA recommended tool for installing Python packages"
 
-build() {
-	cp -a pip-$version pip3
-	cd pip3
-	/bin/python3 setup.py build || die
-	/bin/python3 setup.py install \
-		--prefix= \
-		--root=$pkgdir \
-		--optimize=1 \
-		--skip-build || die
-	cd ../pip-$version
-	/bin/python setup.py build || die
+build='''
+	cd pip-$version
+	/bin/python setup.py build
 	/bin/python setup.py install \
 		--prefix= \
 		--root=$pkgdir \
 		--optimize=1 \
-		--skip-build || die
-}
-
+		--skip-build
+'''

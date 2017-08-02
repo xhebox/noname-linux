@@ -1,14 +1,11 @@
-name=pango
-version=1.40.7
+version="1.42.4"
 desc="library for layout and rendering of text"
-deps="expat fontconfig glib cairo libxft libxext gobject-introspection"
-source="http://download.gnome.org/sources/$name/1.40/$name-$version.tar.xz"
+makedeps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "libxft", "libxext", "cairo", "gobject-introspection"]
+deps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "libxft", "libxext", "cairo"]
+source=[{url="https://download.gnome.org/sources/pango/${version%.*}/pango-$version.tar.xz"}]
 
-build() {
-        cd $name-$version
-	./configure --prefix= --disable-static --with-included-modules=basic-fc --with-xft --disable-gtk-doc
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-        make
-        make DESTDIR="$pkgdir" install
-        rm -r "$pkgdir"/share/gtk-doc
-}
+build='''
+	noname-meson pango-$version build -Denable_docs=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

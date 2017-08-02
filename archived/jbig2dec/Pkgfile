@@ -1,0 +1,12 @@
+name=jbig2dec
+version=0.14
+desc='Decoder implementation of the JBIG2 image compression format'
+deps="libpng"
+source="http://downloads.ghostscript.com/public/jbig2dec/jbig2dec-$version.tar.gz"
+
+build() {
+	cd jbig2dec-$version
+	./autogen.sh --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

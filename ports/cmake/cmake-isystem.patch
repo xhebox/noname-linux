@@ -1,34 +1,11 @@
-On systems that support -isystem, CMAKE turns all include paths returned from
-pkg-config from -I foo to -isystem foo, for the sake of suppressing warnings.
-unfortunately this breaks C++ headers #include_next include order.
-
-/include/c++/6.3.0/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
- #include_next <stdlib.h>
-                         ^
-this happens when -I /include ends up in the pkg-config output. the cmake
-devs argue that pkg-config should never return the default include dir.
-I argue that they shouldn't mess around with the system include dir order.
-
---- cmake-2.8.12.2.org/Modules/Compiler/GNU.cmake	2017-01-16 18:59:17.872468517 +0000
-+++ cmake-2.8.12.2/Modules/Compiler/GNU.cmake	2017-01-16 19:09:17.956966428 +0000
-@@ -42,7 +42,6 @@
-   string(APPEND CMAKE_${lang}_FLAGS_RELWITHDEBINFO_INIT " -O2 -g -DNDEBUG")
+--- cmake-3.9.1/Modules/Compiler/GNU.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/Compiler/GNU.cmake	2017-08-10 13:36:32.000000000 +0000
+@@ -45,7 +45,7 @@
    set(CMAKE_${lang}_CREATE_PREPROCESSED_SOURCE "<CMAKE_${lang}_COMPILER> <DEFINES> <INCLUDES> <FLAGS> -E <SOURCE> > <PREPROCESSED_SOURCE>")
    set(CMAKE_${lang}_CREATE_ASSEMBLY_SOURCE "<CMAKE_${lang}_COMPILER> <DEFINES> <INCLUDES> <FLAGS> -S <SOURCE> -o <ASSEMBLY_SOURCE>")
--  if(NOT APPLE OR NOT CMAKE_${lang}_COMPILER_VERSION VERSION_LESS 4) # work around #4462
--    set(CMAKE_INCLUDE_SYSTEM_FLAG_${lang} "-isystem ")
--  endif()
-+  set(CMAKE_INCLUDE_SYSTEM_FLAG_${lang})
-+
- endmacro()
---- cmake-2.8.12.2.org/Modules/Compiler/Clang.cmake	2017-01-16 18:59:17.872468517 +0000
-+++ cmake-2.8.12.2/Modules/Compiler/Clang.cmake	2017-01-16 19:09:45.420623085 +0000
-@@ -18,7 +18,7 @@
-   macro(__compiler_clang lang)
-     __compiler_gnu(${lang})
-     set(CMAKE_${lang}_COMPILE_OPTIONS_PIE "-fPIE")
+   if(NOT APPLE OR NOT CMAKE_${lang}_COMPILER_VERSION VERSION_LESS 4) # work around #4462
 -    set(CMAKE_INCLUDE_SYSTEM_FLAG_${lang} "-isystem ")
 +    set(CMAKE_INCLUDE_SYSTEM_FLAG_${lang})
-     set(CMAKE_${lang}_COMPILE_OPTIONS_VISIBILITY "-fvisibility=")
-     if(CMAKE_${lang}_COMPILER_VERSION VERSION_LESS 3.4.0)
-       set(CMAKE_${lang}_COMPILE_OPTIONS_TARGET "-target ")
+   endif()
+ 
+   set(_CMAKE_${lang}_IPO_SUPPORTED_BY_CMAKE YES)

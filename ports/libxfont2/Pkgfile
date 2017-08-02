@@ -1,15 +1,14 @@
-name=libxfont2
-version=2.0.1
+version="2.0.3"
 desc="xorg lib libXfont"
-deps="harfbuzz xorg-proto xtrans libfontenc"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXfont2-$version.tar.bz2"
+deps=["libfontenc"]
+makedeps=["xorgproto", "xtrans", "libfontenc", "util-macros"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXfont2-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXfont2-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

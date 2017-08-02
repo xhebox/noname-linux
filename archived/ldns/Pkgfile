@@ -1,0 +1,22 @@
+name=ldns
+version=1.7.0
+desc='Fast DNS library supporting recent RFCs'
+deps="libpcap"
+source="https://www.nlnetlabs.nl/downloads/ldns/ldns-${version}.tar.gz
+pc.patch"
+
+build() {
+	cd ldns-$version
+	patch -p1 -i ../pc.patch || die
+	./configure \
+		--prefix=/ \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-rpath \
+		--with-drill \
+		--disable-dane-verify \
+		--with-examples
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

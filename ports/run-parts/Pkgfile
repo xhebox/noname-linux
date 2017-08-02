@@ -1,15 +1,14 @@
-name=run-parts
-version=4.8.1
+version="4.8.4"
 desc="Run scripts or programs in a directory"
-source="
-http://mirrors.ustc.edu.cn/debian/pool/main/d/debianutils/debianutils_${version}.tar.xz
-"
-deps=dash
+source=[
+	{url="http://mirrors.ustc.edu.cn/debian/pool/main/d/debianutils/debianutils_${version}.tar.xz"}
+]
+deps=["musl", "dash"]
 
-build() {
-	cd debianutils-$version
+build='''
+	cd debianutils
 	./configure --prefix=
-	make || die
+	make
 	install -Dm755 run-parts "$pkgdir"/bin/run-parts
 	install -Dm644 run-parts.8 "$pkgdir"/share/man/man8/run-parts.8
-}
+'''

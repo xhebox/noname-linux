@@ -1,0 +1,15 @@
+--- xinit-1.4.0/startx.cpp	2018-03-10 01:46:03.000000000 +0000
++++ xinit-1.4.0/startx.cpp	2018-03-10 01:46:03.000000000 +0000
+@@ -253,11 +253,7 @@
+     XCOMM set up default Xauth info for this machine
+     case `uname` in
+     Linux*)
+-        if [ -z "`hostname --version 2>&1 | grep GNU`" ]; then
+-            hostname=`hostname -f`
+-        else
+-            hostname=`hostname`
+-        fi
++    	hostname=`hostname`
+         ;;
+     *)
+         hostname=`hostname`

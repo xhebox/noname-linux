@@ -1,0 +1,17 @@
+--- OpenShadingLanguage-Release-1.9.8/src/shaders/MaterialX/CMakeLists.txt	2018-04-01 05:45:35.000000000 +0800
++++ OpenShadingLanguage-Release-1.9.8/src/shaders/MaterialX/CMakeLists.txt	2018-04-01 05:45:35.000000000 +0800
+@@ -172,5 +172,5 @@
+                    SOURCES ${shader_source} ${mx_shader_headers})
+ 
+ install (FILES ${mx_shader_headers} ${mx_shader_objs} ${mx_shader_osls}
+-         DESTINATION shaders/MaterialX)
++	DESTINATION /share/shaders/MaterialX)
+ 
+--- OpenShadingLanguage-Release-1.9.8/src/shaders/CMakeLists.txt	2018-04-01 05:45:35.000000000 +0800
++++ OpenShadingLanguage-Release-1.9.8/src/shaders/CMakeLists.txt	2018-04-01 05:45:35.000000000 +0800
+@@ -63,4 +63,4 @@
+                    SOURCES ${shader_source} ${shader_headers})
+ 
+ install (FILES ${shader_headers} ${shader_source} ${shader_objs}
+-        DESTINATION shaders)
++        DESTINATION share/shaders)

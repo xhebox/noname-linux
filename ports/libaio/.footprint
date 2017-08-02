@@ -1,7 +1,0 @@
-lib/libaio.so|777|0|0|symbolic link
-lib/libaio.so.1|777|0|0|symbolic link
-include/libaio.h|644|0|0|regular file
-lib/libaio.a|644|0|0|regular file
-lib/libaio.so.1.0.1|755|0|0|regular file
-lib|755|0|0|directory
-include|755|0|0|directory

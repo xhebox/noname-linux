@@ -1,15 +1,14 @@
-name=libxkbfile
-version=1.0.9
-deps=libx11
+version="1.0.9"
 desc="xorg lib libxkbfile"
-source="http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-$version.tar.bz2"
+makedeps=["libx11", "libxkbcommon"]
+deps=["libx11", "libxkbcommon"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libxkbfile-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

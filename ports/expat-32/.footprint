@@ -1,6 +1,0 @@
-lib32/libexpat.so.1.6.4|755|0|0|regular file
-lib32/libexpat.so.1|777|0|0|symbolic link
-lib32/libexpat.so|777|0|0|symbolic link
-lib32/pkgconfig/expat.pc|644|0|0|regular file
-lib32/pkgconfig|755|0|0|directory
-lib32|755|0|0|directory

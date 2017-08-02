@@ -1,39 +1,71 @@
-name=shadow
-version=4.4
-deps="acl"
+version="4.6"
+makedeps=["docbook-xsl", "libxslt"]
+deps=["acl", "bash", "pam"]
 desc="Shadow password file utilities"
-source="https://github.com/shadow-maint/shadow/releases/download/$version/shadow-$version.tar.gz
-login.defs
-https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/xstrdup.patch
-https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/shadow-strncpy-usage.patch
-useradd.defaults
-"
+source=[
+	{url="https://github.com/shadow-maint/shadow/releases/download/$version/shadow-$version.tar.gz"},
+	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/xstrdup.patch"},
+	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/shadow-strncpy-usage.patch"},
+	{url="useradd.defaults"},
+	{url="defaults.pam"},
+	{url="chgpasswd"},
+	{url="chpasswd"},
+	{url="login.defs"},
+	{url="newusers"},
+	{url="passwd"},
+]
 
-ext() {
-	cd $name-$version
+ext='''
+	cd shadow-$version
 	for i in $source;do
 		case $i in
-		*.patch) patch -p0 < ../`basename $i` || die;;
+		*.patch) patch -p0 -i ../$i;;
 		esac
 	done
-}
+	sed -i '/^SUBDIRS/s/pam\.d//' etc/Makefile.in
+'''
 
-build() {
-	cd $name-$version
+build='''
+	cd shadow-$version
 	./configure --prefix=/ \
+		LIBS="-lcrypt" \
 		--libexecdir=/lib \
 		--bindir=/bin --sbindir=/bin \
-		--libdir=/lib --enable-shared --disable-static \
+		--libdir=/lib --enable-shared \
+		--with-man \
+		--with-libpam \
 		--without-selinux --with-acl --with-attr --with-group-name-max-length=32
-	make || die
-	make DESTDIR="$pkgdir" install  || die
+	make
+	make DESTDIR="$pkgdir" install
 
 	install -Dm644 "$srcdir/useradd.defaults" "$pkgdir/etc/default/useradd"
 	install -Dm644 "$srcdir/login.defs" "$pkgdir/etc/login.defs"
 
-	rm -r "$pkgdir"/share/man/??
-	rm -r "$pkgdir"/share/man/??_??
+	install -dm755 "$pkgdir/etc/pam.d"
+	install -t "$pkgdir/etc/pam.d" -m644 ../passwd ../chgpasswd ../chpasswd ../newusers etc/pam.d/groupmems
+
+	for file in chage groupadd groupdel groupmod shadow useradd usermod userdel; do
+		install -Dm644 ../defaults.pam "$pkgdir/etc/pam.d/$file"
+	done
 
 	mv "$pkgdir"/sbin/* "$pkgdir"/bin
 	rmdir "$pkgdir"/sbin
-}
+
+	for i in login su chsh chfn sg nologin vipw vigr; do
+		rm "$pkgdir"/bin/$i
+	done
+
+	mv "$pkgdir"/bin/newgrp "$pkgdir"/bin/sg
+
+	find "$pkgdir"/share/man \
+	'(' -name 'chsh.1'		-o \
+	-name 'chfn.1'		-o \
+	-name 'su.1'			-o \
+	-name 'logoutd.8' -o \
+	-name 'login.1'	 -o \
+	-name 'nologin.8' -o \
+	-name 'vipw.8'		-o \
+	-name 'vigr.8'		-o \
+	-name 'newgrp.1' ')' \
+	-delete
+'''

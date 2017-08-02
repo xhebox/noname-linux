@@ -1,0 +1,30 @@
+name=audiofile
+version=0.3.6
+desc="Silicon Graphics Audio File Library"
+deps="alsa-lib flac"
+source="https://audiofile.68k.org/audiofile-$version.tar.gz
+01_gcc6.patch
+03_CVE-2015-7747.patch
+04_clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+05_Always-check-the-number-of-coefficients.patch
+06_Check-for-multiplication-overflow-in-MSADPCM-decodeSam.patch
+07_Check-for-multiplication-overflow-in-sfconvert.patch
+08_Fix-signature-of-multiplyCheckOverflow.-It-returns-a-b.patch
+09_Actually-fail-when-error-occurs-in-parseFormat.patch
+10_Check-for-division-by-zero-in-BlockCodec-runPull.patch"
+
+ext() {
+	cd audiofile-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd audiofile-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+}

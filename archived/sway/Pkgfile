@@ -1,0 +1,23 @@
+name=sway
+version=1.0-alpha.1
+desc='i3 compatible window manager for Wayland'
+deps="json-c libpcre wlroots wayland wayland-protocols libxkbcommon cairo pango gdk-pixbuf pixman libcap libinput meson ninja git"
+source="https://github.com/swaywm/sway/archive/$version.tar.gz
+drop.patch
+no-swaylock.patch"
+
+ext() {
+	cd sway-$version
+	patch -Np1 -i ../no-swaylock.patch || die
+	patch -Np1 -i ../drop.patch || die
+}
+
+build() {
+	cd sway-$version
+	PKG_NO_SRTIP=yes
+	CFLAGS="$CFLAGS -g2"
+	noname-meson build
+	ninja -C build || die
+	DESTDIR="$pkgdir" ninja -C build install || die
+	chmod a+s "$pkgdir"/bin/sway
+}

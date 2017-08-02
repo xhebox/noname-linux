@@ -1,11 +1,10 @@
-name=libcap
-version=2.25
+version="2.26"
 desc="POSIX.1e capabilities library"
-source="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz
-libcap-gperf-3.1.patch"
-deps="attr musl"
+makedeps=["kernel-libc-headers"]
+deps=["attr"]
+source=[{url="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz"}]
 
-ext() {
+ext='''
 	cd libcap-$version
 	sed -i 's/CFLAGS :=/CFLAGS +=/g' Make.Rules
 	sed -i 's/LDFLAGS :=/LDFLAGS +=/g' Make.Rules
@@ -14,10 +13,10 @@ ext() {
 		*.patch) patch -p1 -i "$srcdir"/"$i" ;;
 		esac
 	done
-}
+'''
 
-build() {
+build='''
 	cd libcap-$version
-	make KERNEL_HEADERS=/include lib=/lib || die
-	make RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib SBINDIR=/bin install  || die
-}
+	make KERNEL_HEADERS="$ROOT"/include lib=/lib
+	make RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib SBINDIR=/bin install
+'''

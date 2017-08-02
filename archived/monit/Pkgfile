@@ -1,0 +1,23 @@
+version="5.25.2"
+release=2
+desc="Utility for managing and monitoring, processes, files, directories and devices on a *NIX system"
+deps=["libressl"]
+baks=["etc/monitrc"]
+source=[
+	{url="http://mmonit.com/monit/dist/monit-$version.tar.gz"},
+	{url="monit.sh"},
+	{url="monitrc"},
+]
+
+build='''
+	cd monit-$version
+	./configure --prefix=/ --sysconfdir=/etc --with-ssl-incl-dir=/include
+	make
+	make DESTDIR="${pkgdir}" install
+	install -Dm600 ../monitrc "${pkgdir}"/etc/monitrc
+	install -d "$pkgdir"/etc/monit.d
+	install -d "$pkgdir"/etc/monit.d/bootup
+	install -d "$pkgdir"/etc/monit.d/system
+	install -d "$pkgdir"/etc/monit.d/template
+	install -Dm755 ../monit.sh "$pkgdir"/etc/init.d/monit.sh
+'''

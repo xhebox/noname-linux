@@ -1,0 +1,13 @@
+name=autoconf2.13
+version=2.13
+deps="m4 perl"
+desc="A package of M4 macros to produce scripts to auto matically configure source code"
+source="ftp://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz"
+
+build(){
+	cd autoconf-$version
+	./configure --prefix=  --program-suffix=-2.13
+	make || die
+	make prefix="$pkgdir" install || die
+	rm -r "$pkgdir"/info
+}

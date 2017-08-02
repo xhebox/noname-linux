@@ -1,13 +1,12 @@
-name=libressl
-version=2.5.4
+version="2.8.3"
 desc="LibreSSL is av ersion of the TLS/crypto stack forked from OpenSSL."
-source="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"
-deps=musl
+source=[{url="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"}]
+deps=["musl"]
 
-build() {
-	cd $name-$version
+build='''
+	cd libressl-$version
 	./configure --prefix= --enable-shared --disable-static 
-	make || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -f ${pkgdir}/etc/ssl/cert.pem
-}
+	make
+	make DESTDIR="$pkgdir" install
+	rm "$pkgdir"/etc/ssl/cert.pem
+'''

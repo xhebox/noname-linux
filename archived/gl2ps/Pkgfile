@@ -1,0 +1,16 @@
+name=gl2ps
+version=1.3.9
+desc="an OpenGL to PostScript printing library"
+deps="mesa libpng cmake texlive"
+source="http://geuz.org/gl2ps/src/gl2ps-${version}.tgz"
+
+build() {
+	mkdir build
+	cd build
+	cmake ../gl2ps-$version-source \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_EXE_LINKER_FLAGS=-lm
+	make || die
+	make DESTDIR="$pkgdir/" install || die
+}

@@ -1,17 +1,10 @@
-name=acl
-version=2.2.52
+version="2.2.53"
 desc="Access Control Lists library"
-source="http://download-mirror.savannah.gnu.org/releases/$name/$name-$version.src.tar.gz
-e98ce8acf84d12ea67a3ac76bf63c6d87d9af86d.patch"
-deps="attr"
+source=[{url="http://download-mirror.savannah.gnu.org/releases/acl/acl-$version.tar.gz"}]
+deps=["attr"]
 
-build() {
-	cd $name-$version
-	patch -p1 -i "$srcdir"/e98ce8acf84d12ea67a3ac76bf63c6d87d9af86d.patch 
-	sed -i \
-		-e "/^PKG_DOC_DIR/s:@pkg_name@:$name:" \
-		-e '/HAVE_ZIPPED_MANPAGES/s:=.*:=false:' \
-		include/builddefs.in 
+build='''
+	cd acl-$version
 	unset PLATFORM
 	export DEBUG=-DNDEBUG
 	export OPTIMIZER="$CFLAGS"
@@ -19,9 +12,7 @@ build() {
 		--prefix= \
 		--libexecdir=/lib \
 		--disable-static \
-		--disable-gettext \
 		--enable-shared 
-	make  || die
-	make -j1 DIST_ROOT="$pkgdir" install install-lib install-dev  || die
-	rm -r "$pkgdir"/share/doc 
-}
+	make
+	make -j1 DESTDIR="$pkgdir" install
+'''

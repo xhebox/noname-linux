@@ -1,0 +1,16 @@
+name=fcitx-configtool
+version=0.4.10
+desc="GTK based config tool for Fcitx"
+deps="fcitx iso-codes"
+source="http://download.fcitx-im.org/$name/$name-$version.tar.xz"
+
+build(){
+  cd $name-$version
+
+  cmake . \
+  -DCMAKE_INSTALL_PREFIX= \
+  -DENABLE_GIR=OFF
+
+  make
+  make DESTDIR="$pkgdir" install
+}

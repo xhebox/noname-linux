@@ -1,0 +1,15 @@
+name=lxappearance
+version=0.6.3
+deps="gtk gtk3 intltool"
+desc="LXDE Theme Switcher"
+source="http://nchc.dl.sourceforge.net/lxde/$name-$version.tar.xz"
+
+build() {
+	cd $name-$version
+
+	./configure --sysconfdir=/etc --prefix= --disable-dbus --enable-gtk3 --enable-gtk
+
+	make
+	make DESTDIR="$pkgdir" install
+}
+

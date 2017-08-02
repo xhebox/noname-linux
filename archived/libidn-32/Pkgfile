@@ -1,0 +1,12 @@
+. ../libidn/Pkgfile
+name=libidn-32
+
+build() {
+  cd libidn-$version
+  ./configure --prefix= --libdir=/lib32 CC='gcc -m32'
+  make
+  make DESTDIR=${pkgdir} install
+  rm -rf ${pkgdir}/bin
+  rm -rf ${pkgdir}/include
+  rm -rf ${pkgdir}/share
+}

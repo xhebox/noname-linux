@@ -1,15 +1,14 @@
-name=libxft
-version=2.3.2
+version="2.3.2"
 desc="X font rendering client library"
-deps="libxrender fontconfig harfbuzz"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXft-$version.tar.bz2"
+makedeps=["libxrender", "fontconfig"]
+deps=["libxrender", "fontconfig"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXft-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXft-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

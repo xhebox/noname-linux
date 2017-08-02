@@ -1,0 +1,17 @@
+name=kdoctools
+version=5.38.0
+desc='Documentation generation from docbook'
+deps="karchive docbook-xsl extra-cmake-modules ki18n python3 perl-uri"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kdoctools-${version}.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../kdoctools-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

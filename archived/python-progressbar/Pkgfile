@@ -1,0 +1,32 @@
+name=python-progressbar
+version=3.37.1
+deps="python-setuptools"
+source="https://pypi.org/packages/source/p/progressbar2/progressbar2-${version}.tar.gz
+no-test.patch"
+desc="Text progressbar library for python"
+
+ext() {
+	cd progressbar2-$version
+	patch -p1 < ../no-test.patch || die
+	cd ..
+	cp -r progressbar2-$version p3
+}
+
+build() {
+	cd progressbar2-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../p3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}
+

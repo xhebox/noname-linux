@@ -1,27 +1,21 @@
-name=gdb
-version=8.0
-deps="ncurses readline"
+version="8.2"
+makedeps=["texinfo", "python3", "ncurses", "expat", "xz"]
+deps=["ncurses", "readline", "python3"]
 desc="GNU Debugger"
-source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+source=[{url="http://mirrors.ustc.edu.cn/gnu/gdb/gdb-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd gdb-$version
 	./configure \
-		--host=$TARGET \
-		--build=$TARGET \
-		--target=$TARGET \
 		--prefix=/ \
 		--disable-werror \
+		--enable-nls \
+		--with-python=/bin/python3 \
 		--with-system-readline \
 		--with-system-zlib \
-		--disable-static 
-	cd opcodes && ./configure --prefix=/ && cd ..
-	make  || die
-	sed -i 's/^exit $st/exit 0/g' missing
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/lib
-	rm -rf "$pkgdir"/include
-	rm -rf "$pkgdir"/share/info
-	rm -rf "$pkgdir"/share/locale
-}
-
+		--with-system-gdbinit=/etc/gdb/gdbinit
+	make
+	make -C gdb DESTDIR="$pkgdir" install
+	install -dm755 "$pkgdir"/etc/gdb
+	touch "$pkgdir"/etc/gdb/gdbinit
+'''

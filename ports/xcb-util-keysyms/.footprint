@@ -1,9 +1,0 @@
-lib/libxcb-keysyms.so.1|777|0|0|symbolic link
-lib/libxcb-keysyms.so|777|0|0|symbolic link
-include/xcb/xcb_keysyms.h|644|0|0|regular file
-lib/libxcb-keysyms.so.1.0.0|755|0|0|regular file
-lib/pkgconfig/xcb-keysyms.pc|644|0|0|regular file
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory
-include/xcb|755|0|0|directory
-include|755|0|0|directory

@@ -1,6 +1,0 @@
-lib32/libXfixes.so.3|777|0|0|symbolic link
-lib32/libXfixes.so|777|0|0|symbolic link
-lib32/libXfixes.so.3.1.0|755|0|0|regular file
-lib32/pkgconfig/xfixes.pc|644|0|0|regular file
-lib32/pkgconfig|755|0|0|directory
-lib32|755|0|0|directory

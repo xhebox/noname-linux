@@ -1,15 +1,15 @@
-name=flac
-version=1.3.2
-deps="libogg nasm"
+version="1.3.2"
+makedeps=["libogg", "nasm"]
+deps=["libogg"]
 desc="Free Lossless Audio Codec"
-source="http://downloads.xiph.org/releases/flac/flac-${version}.tar.xz"
+source=[{url="http://downloads.xiph.org/releases/flac/flac-${version}.tar.xz"}]
 
-ext() {
+ext='''
 	cd flac-$version
 	find src -name "*.c" -exec sed -i 's/__sigemptyset/sigemptyset/g' {} \;
-}
+'''
 
-build() {
+build='''
 	cd flac-$version
 	./configure --prefix= --disable-static \
 	--enable-shared \
@@ -17,6 +17,6 @@ build() {
 	--enable-sse \
 	--with-pic
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

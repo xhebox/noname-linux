@@ -1,13 +1,15 @@
-name=xterm
-version=330
+version="343"
 desc="X Terminal Emulator"
-deps="xorg-app libxkbfile libxaw libxft ncurses"
-source="ftp://invisible-island.net/$name/$name-$version.tgz
-posix-ptys.patch"
+makedeps=["xbitmaps", "libxkbfile", "libxaw", "libxft", "ncurses"]
+deps=["xbitmaps", "libxkbfile", "libxaw", "libxft", "ncurses"]
+source=[
+	{url="https://invisible-mirror.net/archives/xterm/xterm-$version.tgz"},
+	{url="posix-ptys.patch"},
+]
 
-build() {
-	cd $name-$version
-	patch -p1 < ../posix-ptys.patch || die
+build='''
+	cd xterm-$version
+	patch -p1 < ../posix-ptys.patch
 	./configure --prefix= \
 	--libdir=/etc \
 	--mandir=/share/man \
@@ -35,9 +37,8 @@ build() {
 	--enable-exec-xterm \
 	--enable-sixel-graphics \
 	--enable-regis-graphics \
-	--with-tty-group=tty \
-	--with-utempter
+	--with-tty-group=tty
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

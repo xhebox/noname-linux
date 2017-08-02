@@ -1,0 +1,15 @@
+version="2.9.6"
+desc="Password Checking Library"
+deps=["musl", "zlib"]
+source=[{url="https://github.com/cracklib/cracklib/releases/download/cracklib-$version/cracklib-$version.tar.gz"}]
+
+build='''
+	cd cracklib-$version
+	./configure --prefix= --sbindir=/bin --without-python
+	make
+	make DESTDIR="$pkgdir" install
+
+	mkdir -p "$pkgdir/share/dict"
+	ln -sf ../cracklib/cracklib-small "$pkgdir/share/dict/cracklib-small"
+	sh ./util/cracklib-format dicts/cracklib-small | sh ./util/cracklib-packer "$pkgdir/share/cracklib/pw_dict"
+'''

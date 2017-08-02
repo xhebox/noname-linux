@@ -1,20 +1,26 @@
-name=squashfs-tools
-version=4.3
-deps="zlib xz lzo lz4"
+version="4.3"
+makedeps=["zlib", "xz", "lzo", "lz4"]
+deps=["zlib", "xz", "lzo", "lz4"]
 desc="Tools for squashfs, a highly compressed read-only filesystem for Linux."
-source="http://downloads.sourceforge.net/sourceforge/squashfs/squashfs${version}.tar.gz
-CVE-2015-4645.patch
-fix-compat.patch
-vla-overlow.patch"
+source=[
+	{url="http://nchc.dl.sourceforge.net/sourceforge/squashfs/squashfs${version}.tar.gz"},
+	{url="CVE-2015-4645.patch"},
+	{url="fix-compat.patch"},
+	{url="vla-overlow.patch"},
+]
 
-build() {
-	cd squashfs${version}/${name}
+ext='''
+	cd squashfs${version}/squashfs-tools
 	for i in $source; do
 		case $i in
-		*patch) patch -p1 < ../../$i || die ;;
+		*patch) patch -p1 -i ../../$i ;;
 		esac
 	done
-	make XZ_SUPPORT=1 LZO_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZ4_SUPPORT=1 || die
+'''
+
+build='''
+	cd squashfs${version}/squashfs-tools
+	make XZ_SUPPORT=1 LZO_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZ4_SUPPORT=1
 	install -Dm755 mksquashfs "$pkgdir"/bin/mksquashfs
 	install -m755 unsquashfs "$pkgdir"/bin/unsquashfs
-}
+'''

@@ -1,0 +1,13 @@
+version="1.0.7"
+desc="libmpack lua binding"
+makedeps=["libmpack"]
+deps=["libmpack"]
+source=[{name="libmpack-lua-${version}.tar.gz", url="https://github.com/libmpack/libmpack-lua/archive/${version}.tar.gz"}]
+
+build='''
+	cd libmpack-lua-${version}
+
+	gcc -O2 -fPIC -DMPACK_USE_SYSTEM -c lmpack.c -o lmpack.o -I/include/lua5.1
+	gcc -shared -lmpack -o mpack.so.5.1 lmpack.o
+	install -Dm755 mpack.so.5.1 "${pkgdir}/lib/lua/5.1/mpack.so"
+'''

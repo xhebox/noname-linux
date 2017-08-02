@@ -1,15 +1,13 @@
-name=pciutils
-version=3.5.4
+version="3.6.2"
 desc="Library and utilities to access the PCI bus configuration registers"
-deps="eudev kmod"
-source="http://kernel.org/pub/software/utils/pciutils/$name-$version.tar.gz"
+makedeps=["hwids", "kmod"]
+deps=["hwids", "kmod"]
+source=[{url="http://kernel.org/pub/software/utils/pciutils/pciutils-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-
-	local CONF="ZLIB=yes DESTDIR=$pkgdir SBINDIR=/bin PREFIX="
-
-	make -j1 $CONF OPT="$CFLAGS" SHARED=yes install install-lib  || die
-	make clean  || die
-	make -j1 $CONF OPT="$CFLAGS" SHARED=no  install install-lib  || die
-}
+build='''
+	cd pciutils-$version
+	CONF="ZLIB=yes DESTDIR=$pkgdir SBINDIR=/bin PREFIX="
+	make -j1 $CONF OPT="$CFLAGS" SHARED=yes install install-lib
+	make clean
+	make -j1 $CONF OPT="$CFLAGS" SHARED=no	install install-lib
+'''

@@ -1,0 +1,5 @@
+pattern=["lib/udev/hwdb.d/*"]
+operation=["install", "remove"]
+script='''
+/bin/systemd-hwdb --usr update
+'''

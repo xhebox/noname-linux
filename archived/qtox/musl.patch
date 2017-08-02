@@ -1,0 +1,10 @@
+--- qTox-1.15.0/src/persistence/profile.cpp	2018-04-20 04:50:47.000000000 +0800
++++ qTox-1.15.0/src/persistence/profile.cpp	2018-04-20 04:50:47.000000000 +0800
+@@ -62,6 +62,7 @@
+ 
+     coreThread = new QThread();
+     coreThread->setObjectName("qTox Core");
++    coreThread->setStackSize(524288);
+     core = new Core(coreThread, *this, &Settings::getInstance());
+     QObject::connect(core, &Core::idSet, this,
+                      [this, password](const ToxId& id) { loadDatabase(id, password); },

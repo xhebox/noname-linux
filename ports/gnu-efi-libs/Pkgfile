@@ -1,0 +1,17 @@
+version="3.0.9"
+desc="Library for building UEFI Applications using GNU toolchain"
+makdeps="pciutils"
+nostrip=true
+source=[{url="http://nchc.dl.sourceforge.net/gnu-efi/gnu-efi-${version}.tar.bz2"}]
+
+build='''
+	cd gnu-efi-$version
+	unset LDFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
+	make lib gnuefi inc apps -j1
+	make INSTALLROOT="${pkgdir}" PREFIX="/" LIBDIR="/lib" install
+
+	install -d "${pkgdir}/share/gnu-efi/apps/x86_64/"
+	install -D -m0644 x86_64/apps/*.efi "${pkgdir}/share/gnu-efi/apps/x86_64"
+'''

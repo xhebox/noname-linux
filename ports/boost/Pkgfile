@@ -1,34 +1,34 @@
-name=boost
-version=1.64.0
-ver=`echo $version | sed 's/\./_/g'`
-deps="icu python bzip2"
+version="1.68.0"
+ver="`echo $version | tr . _`"
+deps=["icu", "python-numpy", "zlib", "bzip2"]
+makedeps=["icu", "python-numpy", "zlib", "bzip2"]
 desc="Free peer-reviewed portable C++ source libraries."
-source="http://downloads.sourceforge.net/project/$name/$name/$version/${name}_$ver.tar.bz2
-poll.patch"
+source=[
+	{url="https://dl.bintray.com/boostorg/release/$version/source/boost_$ver.tar.gz"},
+	{url="musl.patch"},
+]
 
-build() {
-	cd ${name}_$ver
-	patch -p0 < ../poll.patch || die
+ext='''
+	cd boost_$ver
+	patch -p0 < ../musl.patch
+'''
 
-	local JOBS=`echo $MAKEFLAGS | awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}'`
+build='''
+	cd boost_$ver
+
+	JOBS=`echo $MAKEFLAGS | awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}'`
 	test -n "$JOBS" && export JOBS="-j $JOBS"
 
-	# This command fixes a header to overcome a problem with Qt's moc command.
-	# It is necessary for building some KDE packages
-	sed \
-		-e '1 i#ifndef Q_MOC_RUN' \
-		-e '$ a#endif' \
-		-i boost/type_traits/detail/has_binary_operator.hpp
-
-	./bootstrap.sh --prefix=$pkgdir --with-toolset=gcc --with-icu --with-python=/bin/python
-	./b2 stage threading=multi link=shared debug-symbols=off  variant=release \
+	./bootstrap.sh --with-toolset=gcc --with-icu --with-python=/bin/python
+	./b2 stage threading=multi link=shared debug-symbols=off variant=release \
 	runtime-link=shared \
 	toolset=gcc \
 	python=2.7 \
 	cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
 	cxxflags="${CPPFLAGS} ${CXXFLAGS} -std=c++14 -fPIC -O3" \
 	linkflags="${LDFLAGS}" \
+	--prefix=$pkgdir \
 	--layout=system \
 	$JOBS \
 	install
-}
+'''

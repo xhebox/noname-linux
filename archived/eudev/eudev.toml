@@ -1,0 +1,9 @@
+pattern=[
+	"lib/udev/hwdb.d",
+	"etc/udev/hwdb.d",
+]
+noarg=true
+script='''
+udevadm hwdb --update
+echo 'Succeeded to update udev hardware database'
+'''

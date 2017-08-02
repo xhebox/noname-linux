@@ -1,0 +1,22 @@
+. ../libgpg-error/Pkgfile
+name=libgpg-error-32
+deps=libgpg-error
+source="
+https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${version}.tar.bz2
+"
+
+build() {
+  cd libgpg-error-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure \
+    --prefix= \
+    --libdir=/lib32 \
+    --disable-static
+  make
+  make DESTDIR="$pkgdir" install
+  rm -r "$pkgdir"/share
+  rm -r "$pkgdir"/include
+  rm -r "$pkgdir"/bin
+}

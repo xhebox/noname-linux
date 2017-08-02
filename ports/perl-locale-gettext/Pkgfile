@@ -1,0 +1,10 @@
+version="1.07"
+deps=["gettext-tiny", "perl"]
+source=[{url="http://search.cpan.org/CPAN/authors/id/P/PV/PVANDRY/Locale-gettext-${version}.tar.gz"}]
+
+build='''
+	cd Locale-gettext-$version
+	PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
+	make
+	make install DESTDIR="${pkgdir}"
+'''

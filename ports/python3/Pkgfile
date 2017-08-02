@@ -1,23 +1,26 @@
-name=python3
-version=3.6.2
+version="3.7.1"
 desc="A high-level scripting language(3.x)"
-deps="expat libressl zlib ncurses bzip2 sqlite libffi gdbm expat"
-source="http://www.python.org/ftp/python/$version/Python-$version.tar.xz
-readonly.patch"
+deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
+source=[
+	{url="http://www.python.org/ftp/python/$version/Python-$version.tar.xz"},
+	{url="readonly.patch"},
+]
 
-build() {
+build='''
 	cd "$srcdir/Python-$version"
-	rm -rf Modules/expat
-	rm -rf Modules/_ctypes/darwin*
-	rm -rf Modules/_ctypes/libffi*
-	rm -rf Modules/zlib
-	rm -rf Modules/_decimal/libmpdec
-	patch -p1 < ../readonly.patch || die
+	rm -rf Modules/expat \
+	Modules/_ctypes/darwin* \
+	Modules/_ctypes/libffi* \
+	Modules/zlib
+	patch -p1 < ../readonly.patch
 	./configure --prefix=/ \
 		--libdir=/lib \
 		--exec-prefix=/ \
 		--enable-shared \
 		--with-threads \
+		--with-computed-gotos \
+		--enable-optimizations \
+		--with-lto \
 		--with-sqlite \
 		--enable-ipv6 \
 		--with-system-expat \
@@ -26,8 +29,8 @@ build() {
 		--without-ensurepip \
 		--enable-loadable-sqlite-extensions
 
-	make EXTRA_CFLAGS="$CFLAGS" || die
-	make DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall || die
+	make EXTRA_CFLAGS="$CFLAGS"
+	make DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall
 
 	find $pkgdir -name "README*" -delete
 	find $pkgdir -name "ChangeLog*" -delete
@@ -40,5 +43,4 @@ build() {
 	install -m755 Tools/i18n/msgfmt.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
 	install -m755 Tools/i18n/pygettext.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
 	install -m755 Tools/scripts/*py "${pkgdir}"/lib/python${version%.*}/Tools/scripts/
-
-}
+'''

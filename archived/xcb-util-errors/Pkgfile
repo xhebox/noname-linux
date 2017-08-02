@@ -1,0 +1,12 @@
+name=xcb-util-errors
+version=1.0
+desc='XCB errors library'
+deps="libxcb"
+source="https://xcb.freedesktop.org/dist/xcb-util-errors-$version.tar.bz2"
+
+build() {
+	cd xcb-util-errors-$version
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

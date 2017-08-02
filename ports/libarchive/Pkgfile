@@ -1,27 +1,30 @@
-name=libarchive
-version=3.3.2
+version="3.3.3"
 desc="Library to read/write several different streaming archive formats"
-source="http://www.libarchive.org/downloads/libarchive-${version}.tar.gz
-filter-xz-enable-threads.patch"
-deps="zlib bzip2 acl lz4 libressl expat lzo xz"
+source=[
+	{url="http://www.libarchive.org/downloads/libarchive-${version}.tar.gz"},
+	{url="filter-xz-enable-threads.patch"}
+]
+makedeps=["zlib", "bzip2", "acl", "lz4", "libressl", "expat", "xz"]
+deps=["zlib", "bzip2", "acl", "lz4", "libressl", "expat", "xz"]
 
-ext() {
-	cd $name-$version
+ext='''
+	cd libarchive-$version
 	for i in $source;do
 		case $i in
-		*xz*.patch) patch -p0 -i "$srcdir"/"$i" || die;;
-		*.patch) patch -p1 -i "$srcdir"/"$i" || die;;
+		*hmac*|*xz*) patch -p0 -i "$srcdir"/"$i";;
+		*.patch) patch -p1 -i "$srcdir"/"$i";;
 		esac
 	done
-}
+'''
 
-build() {
-	cd $name-$version
+build='''
+	cd libarchive-$version
 	./configure --prefix= \
 	--enable-acl --enable-xattr \
 	--enable-expat --enable-lz4 \
+	--enable-bsdtar=static \
 	--enable-openssl --without-xml2 --without-nettle \
-	--disable-rpath ac_cv_func_lchmod=no
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
+	--disable-rpath
+	make
+	make DESTDIR="$pkgdir" install
+'''

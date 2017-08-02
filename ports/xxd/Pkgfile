@@ -1,0 +1,14 @@
+version="8.0.0055"
+desc='Hexdump utility from vim'
+deps=["musl"]
+source=[
+	{url="https://raw.githubusercontent.com/vim/vim/v${version}/src/xxd/xxd.c"},
+	{url="https://raw.githubusercontent.com/vim/vim/v${version}/runtime/doc/xxd.1"},
+]
+
+build='''
+	## https://github.com/vim/vim/blob/master/src/xxd/Makefile
+	cc -DUNIX -o xxd xxd.c
+	install -Dm755 xxd "${pkgdir}/bin/xxd"
+	install -Dm644 xxd.1 "${pkgdir}/share/man/man1/xxd.1"
+'''

@@ -1,0 +1,18 @@
+. ../nettle/Pkgfile
+name=nettle-32
+deps="libgmp-32"
+
+build() {
+  cd nettle-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix=/ --disable-static \
+  --disable-documentation --libdir=/lib32 \
+  --with-include-path=/lib32/gmp
+  make
+  make DESTDIR="$pkgdir" install
+  rm -rf "$pkgdir"/include
+  rm -rf "$pkgdir"/share
+  rm -rf "$pkgdir"/bin
+}

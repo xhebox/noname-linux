@@ -1,45 +1,60 @@
-name=util-linux
-version=2.30.1
-if [ "${version%*.*.*}" = "$version" ]; then
-	_ver="$version"
-else
-	_ver="${version%.*}"
-fi
-desc="uuid lib from util-linux"
-source="https://www.kernel.org/pub/linux/utils/util-linux/v$_ver/util-linux-$version.tar.xz
-fix-musl.patch
-ttydefaults.h"
-deps="ncurses zlib shadow coreutils"
+version="2.33"
+desc="Miscellaneous system utilities for Linux"
+makedeps=["python3", "libcap-ng"] 
+deps=["coreutils", "libcap-ng", "pam", "shadow"]
+source=[
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/utils/util-linux/v$version/util-linux-$version.tar.xz"},
+	{url="0001-agetty-fix-output-of-escaped-characters.patch"},
+	{url="60-rfkill.rules"},
+	{url="util-linux.sysusers"},
+	{url="fix-musl.patch"},
+	{url="pam-common"},
+	{url="pam-login"},
+	{url="pam-su"},
+	{url="ttydefaults.h"},
+]
 
-ext() {
+ext='''
 	cd util-linux-$version
-	patch -p0 < ../fix-musl.patch || die
+	for i in $source; do
+		case $i in
+		*musl*) patch -p0 < ../$i;;
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
 	cp ../ttydefaults.h include
+'''
+
+build='''
 	CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
-}
-
-build() {
 	cd util-linux-$version
-	./configure --prefix= \
+	./configure --prefix=/ \
+		--libdir=/lib \
+		--bindir=/bin \
+		--sbindir=/bin \
+		--localstatedir=/var \
+		--enable-fs-paths-extra=/usr/bin \
 		--enable-raw \
-		--disable-vipw \
-		--disable-newgrp \
-		--disable-chfn-chsh \
-		--disable-nologin \
-		--disable-vipw \
-		--without-selinux \
-		--without-audit \
+		--enable-vipw \
+		--enable-newgrp \
 		--enable-write \
-		--enable-libuuid --enable-makeinstall-chown \
-		--enable-libblkid --enable-fsck --disable-rpath \
-		--without-udev \
-		--without-python 
+		--enable-chfn-chsh \
+		--enable-mesg \
+		--with-python=3
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	chgrp tty "$pkgdir"/bin/wall
-	chgrp tty "$pkgdir"/bin/write
-	mv "$pkgdir"/sbin/* "$pkgdir"/bin
-	rmdir "$pkgdir"/sbin
-	rm -r "$pkgdir"/share/doc
-}
+	make
+	make DESTDIR="$pkgdir" install
+
+	chmod 4755 "$pkgdir"/bin/newgrp
+	chmod 4755 "$pkgdir"/bin/chsh
+	chmod 4755 "$pkgdir"/bin/chfn
+	
+	install -Dm644 ../pam-common "$pkgdir/etc/pam.d/chfn"
+	install -m644 ../pam-common "$pkgdir/etc/pam.d/chsh"
+	install -m644 ../pam-login "$pkgdir/etc/pam.d/login"
+	install -m644 ../pam-su "$pkgdir/etc/pam.d/su"
+	install -m644 ../pam-su "$pkgdir/etc/pam.d/su-l"
+
+	install -Dm644 ../60-rfkill.rules "$pkgdir/lib/udev/rules.d/60-rfkill.rules"
+	install -Dm644 ../util-linux.sysusers "$pkgdir"/lib/sysusers.d/util-linux.conf
+'''

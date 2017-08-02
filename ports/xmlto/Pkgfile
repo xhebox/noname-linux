@@ -1,13 +1,12 @@
-name=xmlto
-version=0.0.28
+version="0.0.28"
 desc="Convert xml to many other formats"
-source="https://releases.pagure.org/xmlto/${name}-${version}.tar.bz2"
-deps="docbook-xsl libxslt"
+source=[{url="https://releases.pagure.org/xmlto/xmlto-${version}.tar.bz2"}]
+makedeps=["docbook-xsl"]
+deps=["libxslt"]
 
-build() {
-	cd "$srcdir/${name}-${version}"
-
+build='''
+	cd xmlto-${version}
 	./configure BASH=/bin/bash --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

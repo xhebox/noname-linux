@@ -1,0 +1,10 @@
+pattern=["share/icons"]
+script='''
+for i in /share/icons/*; do
+	if [ -d "$i" ]; then
+		if [ -e "$i/index.theme" ]; then
+			gtk-update-icon-cache -f "$i"
+		fi
+	fi
+done
+'''

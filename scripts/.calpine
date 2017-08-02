@@ -1,22 +1,19 @@
-#!/bin/bash
-. $1/$2/Pkgfile
+#!/bin/sh
+cd $1/$2
+. ./Pkgfile
+cd ../../scripts
 ___version=$version
 t=0
 while true; do
-	curl -s -L "https://raw.githubusercontent.com/alpinelinux/aports/master/main/$3/APKBUILD" -o "./$2"
-	grep -q '404: Not Found' "./$2" || break
-	curl -s -L "https://raw.githubusercontent.com/alpinelinux/aports/master/testing/$3/APKBUILD" -o "./$2"
-	grep -q '404: Not Found' "./$2" || break
-	t=$((t+1))
-	[ "$t" -eq 5 ] && {
-		t=0
-		echo "$2: can not get" >> ./result
-		exit
-	}
+	pkgver=`curl  --compressed --connect-timeout 10 --retry 3 -s -L "https://github.com/alpinelinux/aports/raw/master/main/$3/APKBUILD" | grep -P '^pkgver=' | cut -d '=' -f 2`
+	[ "$pkver" ] || break
+	pkgver=`curl  --compressed --connect-timeout 10 --retry 3 -s -L "https://github.com/alpinelinux/aports/raw/master/testing/$3/APKBUILD" | grep -P '^pkgver=' | cut -d '=' -f 2`
+	[ "$pkver" ] || break
+
+	echo "$2: can not get" >> ./result
+	exit
 done
-source "./$2" &>/dev/null || true
-version=`echo $version | tr -d '\n'`
+version=`echo $pkgver | tr -d '\n'`
 if [ "$version" != "$___version" ]; then
 	echo "$2: update from $___version to $version" >> ./result
 fi
-rm -rf "./$2"

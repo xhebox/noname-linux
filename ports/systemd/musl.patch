@@ -1,0 +1,1442 @@
+--- systemd-240/meson.build	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/meson.build	2019-02-06 17:20:35.520679182 +0800
+@@ -549,6 +549,7 @@
+                                  #include <unistd.h>'''],
+         ['pivot_root',        '''#include <stdlib.h>
+                                  #include <unistd.h>'''],     # no known header declares pivot_root
++        ['qsort_r',           '''#include <stdlib.h>'''],
+         ['name_to_handle_at', '''#include <sys/types.h>
+                                  #include <sys/stat.h>
+                                  #include <fcntl.h>'''],
+@@ -584,6 +585,18 @@
+ 
+ #####################################################################
+ 
++have_pisn = cc.links('''
++  #define _GNU_SOURCE 1
++  #include <errno.h>
++  int main(void) {
++          if (program_invocation_name && program_invocation_short_name)
++                  return 0;
++          return 1;
++  }
++''', name : 'program_invocation[_short]_name test')
++conf.set10('HAVE_PROGRAM_INVOCATION_NAME', have_pisn,
++           description : 'program_invocation[_short]_name is provided by libc')
++
+ sed = find_program('sed')
+ awk = find_program('awk')
+ m4 = find_program('m4')
+--- systemd-240/src/basic/format-util.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/format-util.h	2019-02-06 17:04:41.925038344 +0800
+@@ -43,7 +43,7 @@
+ #endif
+ 
+ #if SIZEOF_RLIM_T == 8
+-#  define RLIM_FMT "%" PRIu64
++#  define RLIM_FMT "%llu"
+ #elif SIZEOF_RLIM_T == 4
+ #  define RLIM_FMT "%" PRIu32
+ #else
+--- systemd-240/src/basic/memfd-util.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/memfd-util.c	2019-02-06 17:08:48.220545282 +0800
+@@ -14,8 +14,8 @@
+ #include "alloc-util.h"
+ #include "fd-util.h"
+ #include "macro.h"
+-#include "memfd-util.h"
+ #include "missing.h"
++#include "memfd-util.h"
+ #include "string-util.h"
+ #include "utf8.h"
+ 
+--- systemd-240/src/basic/meson.build	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/meson.build	2019-02-06 16:39:11.616262433 +0800
+@@ -130,6 +130,8 @@
+         nss-util.h
+         ordered-set.c
+         ordered-set.h
++        parse-printf-format.c
++        parse-printf-format.h
+         parse-util.c
+         parse-util.h
+         path-util.c
+--- systemd-240/src/basic/missing_prctl.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/missing_prctl.h	2019-02-06 17:10:21.500123305 +0800
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ #pragma once
+ 
+-#include <linux/prctl.h>
++#include <sys/prctl.h>
+ 
+ /* 58319057b7847667f0c9585b9de0e8932b0fdb08 (4.3) */
+ #ifndef PR_CAP_AMBIENT
+--- systemd-240/src/basic/missing_stdlib.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/missing_stdlib.h	2019-02-06 16:42:31.708617630 +0800
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ #pragma once
+ 
++#include "musl_missing.h"
+ #include <stdlib.h>
+ 
+ /* stdlib.h */
+--- systemd-240/src/basic/missing_syscall.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/missing_syscall.h	2019-02-06 17:31:18.807755183 +0800
+@@ -149,12 +149,6 @@
+ #    endif
+ #  endif
+ 
+-struct file_handle {
+-        unsigned int handle_bytes;
+-        int handle_type;
+-        unsigned char f_handle[0];
+-};
+-
+ static inline int missing_name_to_handle_at(int fd, const char *name, struct file_handle *handle, int *mnt_id, int flags) {
+ #  ifdef __NR_name_to_handle_at
+         return syscall(__NR_name_to_handle_at, fd, name, handle, mnt_id, flags);
+--- systemd-240/src/basic/parse-printf-format.c	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/basic/parse-printf-format.c	2019-02-06 16:38:40.856412804 +0800
+@@ -0,0 +1,275 @@
++/***
++  This file is part of systemd.
++
++  Copyright 2014 Emil Renner Berthing <systemd@esmil.dk>
++
++  With parts from the musl C library
++  Copyright 2005-2014 Rich Felker, et al.
++
++  systemd is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Lesser General Public License as published by
++  the Free Software Foundation; either version 2.1 of the License, or
++  (at your option) any later version.
++
++  systemd is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public License
++  along with systemd; If not, see <http://www.gnu.org/licenses/>.
++***/
++
++#include <stddef.h>
++#include <string.h>
++
++#include "parse-printf-format.h"
++
++#ifndef HAVE_PRINTF_H
++
++static const char *consume_nonarg(const char *fmt)
++{
++        do {
++                if (*fmt == '\0')
++                        return fmt;
++        } while (*fmt++ != '%');
++        return fmt;
++}
++
++static const char *consume_num(const char *fmt)
++{
++        for (;*fmt >= '0' && *fmt <= '9'; fmt++)
++                /* do nothing */;
++        return fmt;
++}
++
++static const char *consume_argn(const char *fmt, size_t *arg)
++{
++        const char *p = fmt;
++        size_t val = 0;
++
++        if (*p < '1' || *p > '9')
++                return fmt;
++        do {
++                val = 10*val + (*p++ - '0');
++        } while (*p >= '0' && *p <= '9');
++
++        if (*p != '$')
++                return fmt;
++        *arg = val;
++        return p+1;
++}
++
++static const char *consume_flags(const char *fmt)
++{
++        while (1) {
++                switch (*fmt) {
++                case '#':
++                case '0':
++                case '-':
++                case ' ':
++                case '+':
++                case '\'':
++                case 'I':
++                        fmt++;
++                        continue;
++                }
++                return fmt;
++        }
++}
++
++enum state {
++        BARE,
++        LPRE,
++        LLPRE,
++        HPRE,
++        HHPRE,
++        BIGLPRE,
++        ZTPRE,
++        JPRE,
++        STOP
++};
++
++enum type {
++        NONE,
++        PTR,
++        INT,
++        UINT,
++        ULLONG,
++        LONG,
++        ULONG,
++        SHORT,
++        USHORT,
++        CHAR,
++        UCHAR,
++        LLONG,
++        SIZET,
++        IMAX,
++        UMAX,
++        PDIFF,
++        UIPTR,
++        DBL,
++        LDBL,
++        MAXTYPE
++};
++
++static const short pa_types[MAXTYPE] = {
++        [NONE]   = PA_INT,
++        [PTR]    = PA_POINTER,
++        [INT]    = PA_INT,
++        [UINT]   = PA_INT,
++        [ULLONG] = PA_INT | PA_FLAG_LONG_LONG,
++        [LONG]   = PA_INT | PA_FLAG_LONG,
++        [ULONG]  = PA_INT | PA_FLAG_LONG,
++        [SHORT]  = PA_INT | PA_FLAG_SHORT,
++        [USHORT] = PA_INT | PA_FLAG_SHORT,
++        [CHAR]   = PA_CHAR,
++        [UCHAR]  = PA_CHAR,
++        [LLONG]  = PA_INT | PA_FLAG_LONG_LONG,
++        [SIZET]  = PA_INT | PA_FLAG_LONG,
++        [IMAX]   = PA_INT | PA_FLAG_LONG_LONG,
++        [UMAX]   = PA_INT | PA_FLAG_LONG_LONG,
++        [PDIFF]  = PA_INT | PA_FLAG_LONG_LONG,
++        [UIPTR]  = PA_INT | PA_FLAG_LONG,
++        [DBL]    = PA_DOUBLE,
++        [LDBL]   = PA_DOUBLE | PA_FLAG_LONG_DOUBLE
++};
++
++#define S(x) [(x)-'A']
++#define E(x) (STOP + (x))
++
++static const unsigned char states[]['z'-'A'+1] = {
++        { /* 0: bare types */
++                S('d') = E(INT), S('i') = E(INT),
++                S('o') = E(UINT),S('u') = E(UINT),S('x') = E(UINT), S('X') = E(UINT),
++                S('e') = E(DBL), S('f') = E(DBL), S('g') = E(DBL),  S('a') = E(DBL),
++                S('E') = E(DBL), S('F') = E(DBL), S('G') = E(DBL),  S('A') = E(DBL),
++                S('c') = E(CHAR),S('C') = E(INT),
++                S('s') = E(PTR), S('S') = E(PTR), S('p') = E(UIPTR),S('n') = E(PTR),
++                S('m') = E(NONE),
++                S('l') = LPRE,   S('h') = HPRE, S('L') = BIGLPRE,
++                S('z') = ZTPRE,  S('j') = JPRE, S('t') = ZTPRE
++        }, { /* 1: l-prefixed */
++                S('d') = E(LONG), S('i') = E(LONG),
++                S('o') = E(ULONG),S('u') = E(ULONG),S('x') = E(ULONG),S('X') = E(ULONG),
++                S('e') = E(DBL),  S('f') = E(DBL),  S('g') = E(DBL),  S('a') = E(DBL),
++                S('E') = E(DBL),  S('F') = E(DBL),  S('G') = E(DBL),  S('A') = E(DBL),
++                S('c') = E(INT),  S('s') = E(PTR),  S('n') = E(PTR),
++                S('l') = LLPRE
++        }, { /* 2: ll-prefixed */
++                S('d') = E(LLONG), S('i') = E(LLONG),
++                S('o') = E(ULLONG),S('u') = E(ULLONG),
++                S('x') = E(ULLONG),S('X') = E(ULLONG),
++                S('n') = E(PTR)
++        }, { /* 3: h-prefixed */
++                S('d') = E(SHORT), S('i') = E(SHORT),
++                S('o') = E(USHORT),S('u') = E(USHORT),
++                S('x') = E(USHORT),S('X') = E(USHORT),
++                S('n') = E(PTR),
++                S('h') = HHPRE
++        }, { /* 4: hh-prefixed */
++                S('d') = E(CHAR), S('i') = E(CHAR),
++                S('o') = E(UCHAR),S('u') = E(UCHAR),
++                S('x') = E(UCHAR),S('X') = E(UCHAR),
++                S('n') = E(PTR)
++        }, { /* 5: L-prefixed */
++                S('e') = E(LDBL),S('f') = E(LDBL),S('g') = E(LDBL), S('a') = E(LDBL),
++                S('E') = E(LDBL),S('F') = E(LDBL),S('G') = E(LDBL), S('A') = E(LDBL),
++                S('n') = E(PTR)
++        }, { /* 6: z- or t-prefixed (assumed to be same size) */
++                S('d') = E(PDIFF),S('i') = E(PDIFF),
++                S('o') = E(SIZET),S('u') = E(SIZET),
++                S('x') = E(SIZET),S('X') = E(SIZET),
++                S('n') = E(PTR)
++        }, { /* 7: j-prefixed */
++                S('d') = E(IMAX), S('i') = E(IMAX),
++                S('o') = E(UMAX), S('u') = E(UMAX),
++                S('x') = E(UMAX), S('X') = E(UMAX),
++                S('n') = E(PTR)
++        }
++};
++
++size_t parse_printf_format(const char *fmt, size_t n, int *types)
++{
++        size_t i = 0;
++        size_t last = 0;
++
++        memset(types, 0, n);
++
++        while (1) {
++                size_t arg;
++                unsigned int state;
++
++                fmt = consume_nonarg(fmt);
++                if (*fmt == '\0')
++                        break;
++                if (*fmt == '%') {
++                        fmt++;
++                        continue;
++                }
++                arg = 0;
++                fmt = consume_argn(fmt, &arg);
++                /* flags */
++                fmt = consume_flags(fmt);
++                /* width */
++                if (*fmt == '*') {
++                        size_t warg = 0;
++                        fmt = consume_argn(fmt+1, &warg);
++                        if (warg == 0)
++                                warg = ++i;
++                        if (warg > last)
++                                last = warg;
++                        if (warg <= n && types[warg-1] == NONE)
++                                types[warg-1] = INT;
++                } else
++                        fmt = consume_num(fmt);
++                /* precision */
++                if (*fmt == '.') {
++                        fmt++;
++                        if (*fmt == '*') {
++                                size_t parg = 0;
++                                fmt = consume_argn(fmt+1, &parg);
++                                if (parg == 0)
++                                        parg = ++i;
++                                if (parg > last)
++                                        last = parg;
++                                if (parg <= n && types[parg-1] == NONE)
++                                        types[parg-1] = INT;
++                        } else {
++                                if (*fmt == '-')
++                                        fmt++;
++                                fmt = consume_num(fmt);
++                        }
++                }
++                /* length modifier and conversion specifier */
++                state = BARE;
++                do {
++                        unsigned char c = *fmt++;
++
++                        if (c < 'A' || c > 'z')
++                                continue;
++                        state = states[state]S(c);
++                        if (state == 0)
++                                continue;
++                } while (state < STOP);
++
++                if (state == E(NONE))
++                        continue;
++
++                if (arg == 0)
++                        arg = ++i;
++                if (arg > last)
++                        last = arg;
++                if (arg <= n)
++                        types[arg-1] = state - STOP;
++        }
++
++        if (last > n)
++                last = n;
++        for (i = 0; i < last; i++)
++                types[i] = pa_types[types[i]];
++
++        return last;
++}
++
++#endif // HAVE_PRINTF_H
+--- systemd-240/src/basic/parse-printf-format.h	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/basic/parse-printf-format.h	2019-02-06 16:38:45.393057289 +0800
+@@ -0,0 +1,56 @@
++/***
++  This file is part of systemd.
++
++  Copyright 2014 Emil Renner Berthing <systemd@esmil.dk>
++
++  With parts from the GNU C Library
++  Copyright 1991-2014 Free Software Foundation, Inc.
++
++  systemd is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Lesser General Public License as published by
++  the Free Software Foundation; either version 2.1 of the License, or
++  (at your option) any later version.
++
++  systemd is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public License
++  along with systemd; If not, see <http://www.gnu.org/licenses/>.
++***/
++
++#pragma once
++
++#include "config.h"
++
++#ifdef HAVE_PRINTF_H
++#include <printf.h>
++#else
++
++#include <stddef.h>
++
++enum {        /* C type: */
++  PA_INT,     /* int */
++  PA_CHAR,    /* int, cast to char */
++  PA_WCHAR,   /* wide char */
++  PA_STRING,  /* const char *, a '\0'-terminated string */
++  PA_WSTRING, /* const wchar_t *, wide character string */
++  PA_POINTER, /* void * */
++  PA_FLOAT,   /* float */
++  PA_DOUBLE,  /* double */
++  PA_LAST
++};
++
++/* Flag bits that can be set in a type returned by `parse_printf_format'.  */
++#define PA_FLAG_MASK        0xff00
++#define PA_FLAG_LONG_LONG   (1 << 8)
++#define PA_FLAG_LONG_DOUBLE PA_FLAG_LONG_LONG
++#define PA_FLAG_LONG        (1 << 9)
++#define PA_FLAG_SHORT       (1 << 10)
++#define PA_FLAG_PTR         (1 << 11)
++
++size_t parse_printf_format(const char *fmt, size_t n, int *types);
++
++#endif /* HAVE_PRINTF_H */
++
+--- systemd-240/src/basic/process-util.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/process-util.c	2019-02-06 18:41:49.952682812 +0800
+@@ -1176,7 +1176,6 @@
+ /* We use glibc __register_atfork() + __dso_handle directly here, as they are not included in the glibc
+  * headers. __register_atfork() is mostly equivalent to pthread_atfork(), but doesn't require us to link against
+  * libpthread, as it is part of glibc anyway. */
+-extern int __register_atfork(void (*prepare) (void), void (*parent) (void), void (*child) (void), void *dso_handle);
+ extern void* __dso_handle _weak_;
+ 
+ pid_t getpid_cached(void) {
+--- systemd-240/src/basic/socket-util.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/socket-util.h	2019-02-06 18:22:34.690960089 +0800
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ #pragma once
+ 
++#include <string.h>
+ #include <inttypes.h>
+ #include <linux/netlink.h>
+ #include <linux/if_infiniband.h>
+--- systemd-240/src/basic/stdio-util.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/stdio-util.h	2019-02-06 16:39:38.722796583 +0800
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ #pragma once
+ 
+-#include <printf.h>
++#include "parse-printf-format.h"
+ #include <stdarg.h>
+ #include <stdio.h>
+ #include <sys/types.h>
+--- systemd-240/src/basic/util.h	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/basic/util.h	2019-02-06 17:12:28.919546920 +0800
+@@ -25,6 +25,7 @@
+ 
+ #include "format-util.h"
+ #include "macro.h"
++#include "missing.h"
+ #include "time-util.h"
+ 
+ size_t page_size(void) _pure_;
+--- systemd-240/src/core/shutdown.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/core/shutdown.c	2019-02-06 18:27:34.336311691 +0800
+@@ -3,6 +3,7 @@
+   Copyright © 2010 ProFUSION embedded systems
+ ***/
+ 
++#include <limits.h>
+ #include <errno.h>
+ #include <getopt.h>
+ #include <linux/reboot.h>
+@@ -213,7 +214,7 @@
+ }
+ 
+ static void sync_with_progress(void) {
+-        unsigned long long dirty = ULONG_LONG_MAX;
++        unsigned long long dirty = ULLONG_MAX;
+         unsigned checks;
+         pid_t pid;
+         int r;
+--- systemd-240/src/journal/journal-send.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/journal/journal-send.c	2019-02-06 17:18:53.324474781 +0800
+@@ -2,7 +2,7 @@
+ 
+ #include <errno.h>
+ #include <fcntl.h>
+-#include <printf.h>
++#include "parse-printf-format.h"
+ #include <stddef.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+--- systemd-240/src/libsystemd/sd-netlink/netlink-types.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/libsystemd/sd-netlink/netlink-types.c	2019-02-06 17:18:09.791338358 +0800
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ 
+ #include <netinet/in.h>
++#include <netinet/ether.h>
+ #include <stdint.h>
+ #include <sys/socket.h>
+ #include <linux/netlink.h>
+--- systemd-240/src/locale/localed.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/locale/localed.c	2019-02-06 17:30:28.331318272 +0800
+@@ -485,7 +485,7 @@
+ 
+ #define LOAD_SYMBOL(symbol, dl, name)                                   \
+         ({                                                              \
+-                (symbol) = (typeof(symbol)) dlvsym((dl), (name), "V_0.5.0"); \
++                (symbol) = (typeof(symbol)) dlsym((dl), (name)); \
+                 (symbol) ? 0 : -EOPNOTSUPP;                             \
+         })
+ 
+--- systemd-240/src/network/netdev/tunnel.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/network/netdev/tunnel.c	2019-02-06 18:05:56.968686392 +0800
+@@ -1,7 +1,6 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ 
+ #include <arpa/inet.h>
+-#include <net/if.h>
+ #include <linux/ip.h>
+ #include <linux/if_tunnel.h>
+ #include <linux/ip6_tunnel.h>
+--- systemd-240/src/network/netdev/tuntap.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/network/netdev/tuntap.c	2019-02-06 18:18:23.498729288 +0800
+@@ -2,9 +2,9 @@
+ 
+ #include <errno.h>
+ #include <fcntl.h>
++#include <netinet/if_ether.h>
+ #include <linux/if_tun.h>
+ #include <net/if.h>
+-#include <netinet/if_ether.h>
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
+ #include <sys/types.h>
+--- systemd-240/src/network/networkd-brvlan.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/network/networkd-brvlan.c	2019-02-06 18:19:07.345203519 +0800
+@@ -4,6 +4,7 @@
+ ***/
+ 
+ #include <netinet/in.h>
++#include <netinet/if_ether.h>
+ #include <linux/if_bridge.h>
+ #include <stdbool.h>
+ 
+--- systemd-240/src/portable/portabled-operation.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/portable/portabled-operation.c	2019-02-06 18:06:51.148447204 +0800
+@@ -4,6 +4,7 @@
+ #include "fd-util.h"
+ #include "portabled-operation.h"
+ #include "process-util.h"
++#include <sys/wait.h>
+ 
+ static int operation_done(sd_event_source *s, const siginfo_t *si, void *userdata) {
+         _cleanup_(sd_bus_error_free) sd_bus_error error = SD_BUS_ERROR_NULL;
+--- systemd-240/src/shared/meson.build	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/shared/meson.build	2019-02-06 16:36:11.377143556 +0800
+@@ -105,6 +105,8 @@
+         module-util.h
+         mount-util.c
+         mount-util.h
++	musl_missing.h
++	musl_missing.c
+         nscd-flush.c
+         nscd-flush.h
+         nsflags.c
+@@ -121,6 +123,8 @@
+         pretty-print.h
+         ptyfwd.c
+         ptyfwd.h
++	qsort_r_missing.h
++	qsort_r_missing.c
+         reboot-util.c
+         reboot-util.h
+         resolve-util.c
+--- systemd-240/src/shared/musl_missing.c	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/shared/musl_missing.c	2019-02-06 16:21:41.834474222 +0800
+@@ -0,0 +1,65 @@
++/* SPDX-License-Identifier: LGPL-2.1+ */
++/***
++  This file is part of elogind.
++
++  Copyright 2017-2018 Sven Eden
++
++  elogind is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Lesser General Public License as published by
++  the Free Software Foundation; either version 2.1 of the License, or
++  (at your option) any later version.
++
++  elogind is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public License
++  along with elogind; If not, see <http://www.gnu.org/licenses/>.
++***/
++
++#include <errno.h>
++#include <string.h>
++
++#include "alloc-util.h"
++
++#if HAVE_PROGRAM_INVOCATION_NAME == 0
++char *program_invocation_name       = NULL;
++char *program_invocation_short_name = NULL;
++
++const char *program_arg_name = NULL; /* Helper */
++#endif // libc does not provide program_invocation_[short_]name
++
++#include "musl_missing.h"
++
++#if HAVE_PROGRAM_INVOCATION_NAME == 0
++static void elogind_free_program_name(void) {
++        if (program_invocation_name)
++                program_invocation_name       = mfree(program_invocation_name);
++        if (program_invocation_short_name)
++                program_invocation_short_name = mfree(program_invocation_short_name);
++}
++
++void elogind_set_program_name(const char* pcall) {
++        assert(pcall && pcall[0]);
++
++        program_arg_name = pcall;
++
++        if ( ( program_invocation_name
++            && strcmp(program_invocation_name, program_arg_name))
++          || ( program_invocation_short_name
++            && strcmp(program_invocation_short_name, basename(program_arg_name)) ) )
++                elogind_free_program_name();
++
++        if (NULL == program_invocation_name)
++                program_invocation_name       = strdup(program_arg_name);
++        if (NULL == program_invocation_short_name)
++                program_invocation_short_name = strdup(basename(program_arg_name));
++        atexit(elogind_free_program_name);
++}
++#else
++void elogind_set_program_name(const char* pcall) {
++        assert(pcall && pcall[0]);
++}
++#endif // libc does not provide program_invocation_[short_]name
++
+--- systemd-240/src/shared/musl_missing.h	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/shared/musl_missing.h	2019-02-06 18:42:41.552467693 +0800
+@@ -0,0 +1,133 @@
++#pragma once
++#ifndef ELOGIND_BASIC_MUSL_MISSING_H_INCLUDED
++#define ELOGIND_BASIC_MUSL_MISSING_H_INCLUDED
++
++
++/****************************************************************
++ * musl_missing.h - work around glibc extensions for musl libc.
++ *
++ * Implements glibc functions missing in musl libc as macros.
++ * Is to be included where these functions are used.
++ * Also defines some glibc only constants as either 0 or
++ * as found in the corresponding glibc header file.
++ *
++ * Juergen Buchmueller <pullmoll@t-online.de> for Void Linux
++ * Public Domain; no warranties whatsoever. Thank you Mr. P.
++ *
++ ****************************************************************/
++
++
++void elogind_set_program_name(const char* pcall);
++
++#include "qsort_r_missing.h"
++
++#if !defined(__GLIBC__)
++#include <string.h>
++#include <unistd.h>
++#include <pthread.h> /* for pthread_atfork */
++
++#define strerror_r(e, m, k) (strerror_r(e, m, k) < 0 ? strdupa("strerror_r() failed") : m);
++
++/*
++ * Possibly TODO according to http://man7.org/linux/man-pages/man3/getenv.3.html
++ * + test if the process's effective user ID does not match its real user ID or
++ *   the process's effective group ID does not match its real group ID;
++ *   typically this is the result of executing a set-user-ID or set-
++ *   group-ID program. Is calling issetugid() sufficient here?
++ * + test if the effective capability bit was set on the executable file
++ * + test if the process has a nonempty permitted capability set
++ */
++#if ! HAVE_SECURE_GETENV && ! HAVE___SECURE_GETENV
++#  define secure_getenv(name) \
++        (issetugid() ? NULL : getenv(name))
++#  undef HAVE_SECURE_GETENV
++#  define HAVE_SECURE_GETENV 1
++#endif // HAVE_[__]SECURE_GETENV
++
++/* Poor man's basename */
++//#define basename(path) (strrchr(path, '/') ? strrchr(path, '/')+1 : path)
++
++/* strndupa may already be defined in another compatibility header */
++#if !defined(strndupa)
++#define strndupa(x_src, x_n) \
++        (__extension__ ( {   \
++                const char* x_in  = (x_src);                  \
++                size_t      x_len = strnlen(x_in, (x_n)) + 1; \
++                char*       x_out = (char *) alloca(x_len);   \
++                x_out[x_len-1] = '\0';                        \
++                (char *) memcpy(x_out, x_in, x_len-1);        \
++        } ) )
++#endif
++
++/* See http://man7.org/linux/man-pages/man3/canonicalize_file_name.3.html */
++#define canonicalize_file_name(path) \
++        realpath(path, NULL)
++
++/* GLOB_BRACE is another glibc extension - ignore it for musl libc */
++#define GLOB_BRACE 0
++
++/* getnameinfo(3) glibc extensions are undefined in musl libc */
++#define NI_IDN 0
++#define NI_IDN_USE_STD3_ASCII_RULES 0
++
++/* Taken from glibc's net/if_arp.h */
++#if !defined(ARPHRD_IEEE802154_PHY)
++#define ARPHRD_IEEE802154_PHY 805        /* IEEE 802.15.4 PHY header.  */
++#endif
++
++/* Shorthand for type of comparison functions. */
++#ifndef __COMPAR_FN_T
++# define __COMPAR_FN_T
++typedef int (*__compar_fn_t) (const void *, const void *);
++typedef __compar_fn_t comparison_fn_t;
++#endif
++
++/* Make musl utmp/wtmp stubs visible if needed. */
++#if ENABLE_UTMP
++# include <paths.h>
++# include <utmp.h>
++# include <utmpx.h>
++# if defined(_PATH_UTMP) && !defined(_PATH_UTMPX)
++#   define _PATH_UTMPX _PATH_UTMP
++# endif
++# if defined(_PATH_WTMP) && !defined(_PATH_WTMPX)
++#   define _PATH_WTMPX _PATH_WTMP
++# endif
++#endif // ENABLE_UTMP
++
++/*
++ * Systemd makes use of undeclared glibc-specific __register_atfork to avoid
++ * a depednency on libpthread, __register_atfork is roughly equivalent to
++ * pthread_atfork so define __register_atfork to pthread_atfork.
++ */
++#define __register_atfork(prepare,parent,child,dso) pthread_atfork(prepare,parent,child)
++
++/* 
++ * Missing FTW macros in musl, define them if not defined
++ * taken from
++ * https://git.yoctoproject.org/cgit.cgi/poky/plain/meta/recipes-core/systemd/systemd/0028-add-missing-FTW_-macros-for-musl.patch
++ */
++#ifndef FTW_ACTIONRETVAL
++#define FTW_ACTIONRETVAL 16
++#endif
++
++#ifndef FTW_CONTINUE
++#define FTW_CONTINUE 0
++#endif
++
++#ifndef FTW_STOP
++#define FTW_STOP 1
++#endif
++
++#ifndef FTW_SKIP_SUBTREE
++#define FTW_SKIP_SUBTREE 2
++#endif
++
++#ifndef FTW_SKIP_SIBLINGS
++#define FTW_SKIP_SIBLINGS 3
++#endif
++
++#endif // !defined(__GLIBC__)
++
++#endif // ELOGIND_BASIC_MUSL_MISSING_H_INCLUDED
++
+--- systemd-240/src/shared/qsort_r_missing.c	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/shared/qsort_r_missing.c	2019-02-06 16:21:57.091073163 +0800
+@@ -0,0 +1,497 @@
++/***
++  This file is part of elogind.
++
++  Copyright 2017-2018 Sven Eden
++
++  elogind is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Lesser General Public License as published by
++  the Free Software Foundation; either version 2.1 of the License, or
++  (at your option) any later version.
++
++  elogind is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public License
++  along with elogind; If not, see <http://www.gnu.org/licenses/>.
++***/
++
++#include "qsort_r_missing.h"
++
++#if HAVE_QSORT_R == 0
++
++#include <alloca.h>
++#include <errno.h>
++#include <limits.h>
++#include <stdint.h>
++#include <string.h>
++#include <unistd.h>
++
++/***
++  Original disclaimer of glibc-2.28 msort.c concerning qsort_r() follows:
++***/
++
++/* An alternative to qsort, with an identical interface.
++   This file is part of the GNU C Library.
++   Copyright (C) 1992-2018 Free Software Foundation, Inc.
++   Written by Mike Haertel, September 1988.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++
++/* qsort_r() calls internal _quicksort() function from qsort.c. Disclaimer is as above. */
++static void quicksort ( void* const pbase, size_t total_elems, size_t size, compare_fn_t cmp, void* arg );
++
++struct msort_param {
++        size_t s;
++        size_t var;
++        compare_fn_t cmp;
++        void* arg;
++        char* t;
++};
++
++static void msort_with_tmp ( const struct msort_param* p, void* b, size_t n ) {
++        char* b1, *b2;
++        size_t n1, n2;
++
++        if ( n <= 1 )
++                return;
++
++        n1 = n / 2;
++        n2 = n - n1;
++        b1 = b;
++        b2 = ( char* ) b + ( n1 * p->s );
++
++        msort_with_tmp ( p, b1, n1 );
++        msort_with_tmp ( p, b2, n2 );
++
++        char* tmp = p->t;
++        const size_t s = p->s;
++        compare_fn_t cmp = p->cmp;
++        void* arg = p->arg;
++        switch ( p->var ) {
++                case 0:
++                        while ( n1 > 0 && n2 > 0 ) {
++                                if ( ( *cmp ) ( b1, b2, arg ) <= 0 ) {
++                                        *( uint32_t* ) tmp = *( uint32_t* ) b1;
++                                        b1 += sizeof ( uint32_t );
++                                        --n1;
++                                } else {
++                                        *( uint32_t* ) tmp = *( uint32_t* ) b2;
++                                        b2 += sizeof ( uint32_t );
++                                        --n2;
++                                }
++                                tmp += sizeof ( uint32_t );
++                        }
++                        break;
++                case 1:
++                        while ( n1 > 0 && n2 > 0 ) {
++                                if ( ( *cmp ) ( b1, b2, arg ) <= 0 ) {
++                                        *( uint64_t* ) tmp = *( uint64_t* ) b1;
++                                        b1 += sizeof ( uint64_t );
++                                        --n1;
++                                } else {
++                                        *( uint64_t* ) tmp = *( uint64_t* ) b2;
++                                        b2 += sizeof ( uint64_t );
++                                        --n2;
++                                }
++                                tmp += sizeof ( uint64_t );
++                        }
++                        break;
++                case 2:
++                        while ( n1 > 0 && n2 > 0 ) {
++                                unsigned long* tmpl = ( unsigned long* ) tmp;
++                                unsigned long* bl;
++
++                                tmp += s;
++                                if ( ( *cmp ) ( b1, b2, arg ) <= 0 ) {
++                                        bl = ( unsigned long* ) b1;
++                                        b1 += s;
++                                        --n1;
++                                } else {
++                                        bl = ( unsigned long* ) b2;
++                                        b2 += s;
++                                        --n2;
++                                }
++                                while ( tmpl < ( unsigned long* ) tmp )
++                                        *tmpl++ = *bl++;
++                        }
++                        break;
++                case 3:
++                        while ( n1 > 0 && n2 > 0 ) {
++                                if ( ( *cmp ) ( *( const void** ) b1, *( const void** ) b2, arg ) <= 0 ) {
++                                        *( void** ) tmp = *( void** ) b1;
++                                        b1 += sizeof ( void* );
++                                        --n1;
++                                } else {
++                                        *( void** ) tmp = *( void** ) b2;
++                                        b2 += sizeof ( void* );
++                                        --n2;
++                                }
++                                tmp += sizeof ( void* );
++                        }
++                        break;
++                default:
++                        while ( n1 > 0 && n2 > 0 ) {
++                                if ( ( *cmp ) ( b1, b2, arg ) <= 0 ) {
++                                        tmp = ( char* ) memcpy ( tmp, b1, s );
++                                        b1 += s;
++                                        --n1;
++                                } else {
++                                        tmp = ( char* ) memcpy ( tmp, b2, s );
++                                        b2 += s;
++                                        --n2;
++                                }
++                        }
++                        break;
++        }
++
++        if ( n1 > 0 )
++                memcpy ( tmp, b1, n1 * s );
++        memcpy ( b, p->t, ( n - n2 ) * s );
++}
++
++void qsort_r ( void* b, size_t n, size_t s, compare_fn_t cmp, void* arg ) {
++        size_t size = n * s;
++        char* tmp = NULL;
++        struct msort_param p;
++
++        /* For large object sizes use indirect sorting.  */
++        if ( s > 32 )
++                size = 2 * n * sizeof ( void* ) + s;
++
++        if ( size < 1024 )
++                /* The temporary array is small, so put it on the stack.  */
++                p.t = alloca ( size );
++        else {
++                /* We should avoid allocating too much memory since this might
++                have to be backed up by swap space.  */
++                static long int phys_pages;
++                static int pagesize;
++
++                if ( pagesize == 0 ) {
++                        phys_pages = sysconf ( _SC_PHYS_PAGES );
++
++                        if ( phys_pages == -1 )
++                                /* Error while determining the memory size.  So let's
++                                   assume there is enough memory.  Otherwise the
++                                   implementer should provide a complete implementation of
++                                   the `sysconf' function.  */
++                                phys_pages = ( long int ) ( ~0ul >> 1 );
++
++                        /* The following determines that we will never use more than
++                           a quarter of the physical memory.  */
++                        phys_pages /= 4;
++
++                        /* Make sure phys_pages is written to memory.  */
++                        __asm ( "" ::: "memory" ); /*atomic_write_barrier () */
++
++                        pagesize = sysconf ( _SC_PAGESIZE );
++                }
++
++                /* Just a comment here.  We cannot compute
++                 phys_pages * pagesize
++                 and compare the needed amount of memory against this value.
++                 The problem is that some systems might have more physical
++                 memory then can be represented with a `size_t' value (when
++                 measured in bytes.  */
++
++                /* If the memory requirements are too high don't allocate memory.  */
++                if ( size / pagesize > ( size_t ) phys_pages ) {
++                        quicksort ( b, n, s, cmp, arg );
++                        return;
++                }
++
++                /* It's somewhat large, so malloc it.  */
++                int save = errno;
++                tmp = malloc ( size );
++                errno = ( save );
++                if ( tmp == NULL ) {
++                        /* Couldn't get space, so use the slower algorithm
++                           that doesn't need a temporary array.  */
++                        quicksort ( b, n, s, cmp, arg );
++                        return;
++                }
++                p.t = tmp;
++        }
++
++        p.s = s;
++        p.var = 4;
++        p.cmp = cmp;
++        p.arg = arg;
++
++        if ( s > 32 ) {
++                /* Indirect sorting.  */
++                char* ip = ( char* ) b;
++                void** tp = ( void** ) ( p.t + n * sizeof ( void* ) );
++                void** t = tp;
++                void* tmp_storage = ( void* ) ( tp + n );
++
++                while ( ( void* ) t < tmp_storage ) {
++                        *t++ = ip;
++                        ip += s;
++                }
++                p.s = sizeof ( void* );
++                p.var = 3;
++                msort_with_tmp ( &p, p.t + n * sizeof ( void* ), n );
++
++                /* tp[0] .. tp[n - 1] is now sorted, copy around entries of
++                the original array.  Knuth vol. 3 (2nd ed.) exercise 5.2-10.  */
++                char* kp;
++                size_t i;
++                for ( i = 0, ip = ( char* ) b; i < n; i++, ip += s )
++                        if ( ( kp = tp[i] ) != ip ) {
++                                size_t j = i;
++                                char* jp = ip;
++                                memcpy ( tmp_storage, ip, s );
++
++                                do {
++                                        size_t k = ( kp - ( char* ) b ) / s;
++                                        tp[j] = jp;
++                                        memcpy ( jp, kp, s );
++                                        j = k;
++                                        jp = kp;
++                                        kp = tp[k];
++                                } while ( kp != ip );
++
++                                tp[j] = jp;
++                                memcpy ( jp, tmp_storage, s );
++                        }
++        } else {
++                if ( ( s & ( sizeof ( uint32_t ) - 1 ) ) == 0
++                                && ( ( char* ) b - ( char* ) 0 ) % __alignof__ ( uint32_t ) == 0 ) {
++                        if ( s == sizeof ( uint32_t ) )
++                                p.var = 0;
++                        else if ( s == sizeof ( uint64_t )
++                                        && ( ( char* ) b - ( char* ) 0 ) % __alignof__ ( uint64_t ) == 0 )
++                                p.var = 1;
++                        else if ( ( s & ( sizeof ( unsigned long ) - 1 ) ) == 0
++                                        && ( ( char* ) b - ( char* ) 0 )
++                                        % __alignof__ ( unsigned long ) == 0 )
++                                p.var = 2;
++                }
++                msort_with_tmp ( &p, b, n );
++        }
++        free ( tmp );
++}
++
++/**** quicksort from qsort.c follows ****/
++
++/* Byte-wise swap two items of size SIZE. */
++#define SWAP(a, b, size)           \
++  do                               \
++    {                              \
++      size_t size_ = (size);       \
++      char *a_ = (a), *b_ = (b);   \
++      do                           \
++    {                              \
++      char tmp_ = *a_;             \
++      *a_++ = *b_;                 \
++      *b_++ = tmp_;                \
++    } while (--size_ > 0);         \
++    } while (0)
++
++/* Discontinue quicksort algorithm when partition gets below this size.
++   This particular magic number was chosen to work best on a Sun 4/260. */
++#define MAX_THRESH 4
++
++/* Stack node declarations used to store unfulfilled partition obligations. */
++typedef struct {
++        char* lo;
++        char* hi;
++} stack_node;
++
++/* The next 4 #defines implement a very fast in-line stack abstraction. */
++/* The stack needs log (total_elements) entries (we could even subtract
++   log(MAX_THRESH)).  Since total_elements has type size_t, we get as
++   upper bound for log (total_elements):
++   bits per byte (CHAR_BIT) * sizeof(size_t).  */
++#define STACK_SIZE      (CHAR_BIT * sizeof(size_t))
++#define PUSH(low, high) ((void) ((top->lo = (low)), (top->hi = (high)), ++top))
++#define POP(low, high)  ((void) (--top, (low = top->lo), (high = top->hi)))
++#define STACK_NOT_EMPTY (stack < top)
++
++/* Order size using quicksort.  This implementation incorporates
++   four optimizations discussed in Sedgewick:
++
++   1. Non-recursive, using an explicit stack of pointer that store the
++      next array partition to sort.  To save time, this maximum amount
++      of space required to store an array of SIZE_MAX is allocated on the
++      stack.  Assuming a 32-bit (64 bit) integer for size_t, this needs
++      only 32 * sizeof(stack_node) == 256 bytes (for 64 bit: 1024 bytes).
++      Pretty cheap, actually.
++
++   2. Chose the pivot element using a median-of-three decision tree.
++      This reduces the probability of selecting a bad pivot value and
++      eliminates certain extraneous comparisons.
++
++   3. Only quicksorts TOTAL_ELEMS / MAX_THRESH partitions, leaving
++      insertion sort to order the MAX_THRESH items within each partition.
++      This is a big win, since insertion sort is faster for small, mostly
++      sorted array segments.
++
++   4. The larger of the two sub-partitions is always pushed onto the
++      stack first, with the algorithm then concentrating on the
++      smaller partition.  This *guarantees* no more than log (total_elems)
++      stack size is needed (actually O(1) in this case)!  */
++
++static void quicksort ( void* const pbase, size_t total_elems, size_t size, compare_fn_t cmp, void* arg ) {
++        char* base_ptr = ( char* ) pbase;
++
++        const size_t max_thresh = MAX_THRESH * size;
++
++        if ( total_elems == 0 )
++                /* Avoid lossage with unsigned arithmetic below.  */
++                return;
++
++        if ( total_elems > MAX_THRESH ) {
++                char* lo = base_ptr;
++                char* hi = &lo[size * ( total_elems - 1 )];
++                stack_node stack[STACK_SIZE];
++                stack_node* top = stack;
++
++                PUSH ( NULL, NULL );
++
++                while ( STACK_NOT_EMPTY ) {
++                        char* left_ptr;
++                        char* right_ptr;
++
++                        /* Select median value from among LO, MID, and HI. Rearrange
++                           LO and HI so the three values are sorted. This lowers the
++                           probability of picking a pathological pivot value and
++                           skips a comparison for both the LEFT_PTR and RIGHT_PTR in
++                           the while loops. */
++
++                        char* mid = lo + size * ( ( hi - lo ) / size >> 1 );
++
++                        if ( ( *cmp ) ( ( void* ) mid, ( void* ) lo, arg ) < 0 )
++                                SWAP ( mid, lo, size );
++                        if ( ( *cmp ) ( ( void* ) hi, ( void* ) mid, arg ) < 0 )
++                                SWAP ( mid, hi, size );
++                        else
++                                goto jump_over;
++                        if ( ( *cmp ) ( ( void* ) mid, ( void* ) lo, arg ) < 0 )
++                                SWAP ( mid, lo, size );
++                        jump_over:
++                        ;
++
++                        left_ptr  = lo + size;
++                        right_ptr = hi - size;
++
++                        /* Here's the famous ``collapse the walls'' section of quicksort.
++                           Gotta like those tight inner loops!  They are the main reason
++                           that this algorithm runs much faster than others. */
++                        do {
++                                while ( ( *cmp ) ( ( void* ) left_ptr, ( void* ) mid, arg ) < 0 )
++                                        left_ptr += size;
++
++                                while ( ( *cmp ) ( ( void* ) mid, ( void* ) right_ptr, arg ) < 0 )
++                                        right_ptr -= size;
++
++                                if ( left_ptr < right_ptr ) {
++                                        SWAP ( left_ptr, right_ptr, size );
++                                        if ( mid == left_ptr )
++                                                mid = right_ptr;
++                                        else if ( mid == right_ptr )
++                                                mid = left_ptr;
++                                        left_ptr += size;
++                                        right_ptr -= size;
++                                } else if ( left_ptr == right_ptr ) {
++                                        left_ptr += size;
++                                        right_ptr -= size;
++                                        break;
++                                }
++                        } while ( left_ptr <= right_ptr );
++
++                        /* Set up pointers for next iteration.  First determine whether
++                           left and right partitions are below the threshold size.  If so,
++                           ignore one or both.  Otherwise, push the larger partition's
++                           bounds on the stack and continue sorting the smaller one. */
++
++                        if ( ( size_t ) ( right_ptr - lo ) <= max_thresh ) {
++                                if ( ( size_t ) ( hi - left_ptr ) <= max_thresh )
++                                        /* Ignore both small partitions. */
++                                        POP ( lo, hi );
++                                else
++                                        /* Ignore small left partition. */
++                                        lo = left_ptr;
++                        } else if ( ( size_t ) ( hi - left_ptr ) <= max_thresh )
++                                /* Ignore small right partition. */
++                                hi = right_ptr;
++                        else if ( ( right_ptr - lo ) > ( hi - left_ptr ) ) {
++                                /* Push larger left partition indices. */
++                                PUSH ( lo, right_ptr );
++                                lo = left_ptr;
++                        } else {
++                                /* Push larger right partition indices. */
++                                PUSH ( left_ptr, hi );
++                                hi = right_ptr;
++                        }
++                }
++        }
++
++        /* Once the BASE_PTR array is partially sorted by quicksort the rest
++           is completely sorted using insertion sort, since this is efficient
++           for partitions below MAX_THRESH size. BASE_PTR points to the beginning
++           of the array to sort, and END_PTR points at the very last element in
++           the array (*not* one beyond it!). */
++
++#define min(x, y) ((x) < (y) ? (x) : (y))
++
++        {
++                char* const end_ptr = &base_ptr[size * ( total_elems - 1 )];
++                char* tmp_ptr = base_ptr;
++                char* thresh = min( end_ptr, base_ptr + max_thresh );
++                char* run_ptr;
++
++                /* Find smallest element in first threshold and place it at the
++                   array's beginning.  This is the smallest array element,
++                   and the operation speeds up insertion sort's inner loop. */
++
++                for ( run_ptr = tmp_ptr + size; run_ptr <= thresh; run_ptr += size )
++                        if ( ( *cmp ) ( ( void* ) run_ptr, ( void* ) tmp_ptr, arg ) < 0 )
++                                tmp_ptr = run_ptr;
++
++                if ( tmp_ptr != base_ptr )
++                        SWAP ( tmp_ptr, base_ptr, size );
++
++                /* Insertion sort, running from left-hand-side up to right-hand-side.  */
++
++                run_ptr = base_ptr + size;
++                while ( ( run_ptr += size ) <= end_ptr ) {
++                        tmp_ptr = run_ptr - size;
++                        while ( ( *cmp ) ( ( void* ) run_ptr, ( void* ) tmp_ptr, arg ) < 0 )
++                                tmp_ptr -= size;
++
++                        tmp_ptr += size;
++                        if ( tmp_ptr != run_ptr ) {
++                                char* trav;
++
++                                trav = run_ptr + size;
++                                while ( --trav >= run_ptr ) {
++                                        char c = *trav;
++                                        char* hi, *lo;
++
++                                        for ( hi = lo = trav; ( lo -= size ) >= tmp_ptr; hi = lo )
++                                                * hi = *lo;
++                                        *hi = c;
++                                }
++                        }
++                }
++        }
++}
++
++#endif // HAVE_QSORT_R
+--- systemd-240/src/shared/qsort_r_missing.h	1970-01-01 08:00:00.000000000 +0800
++++ modify-240/src/shared/qsort_r_missing.h	2019-02-06 16:50:56.939414549 +0800
+@@ -0,0 +1,35 @@
++#pragma once
++#ifndef ELOGIND_SRC_SHARED_QSORT_R_MISSING_H_INCLUDED
++#define ELOGIND_SRC_SHARED_QSORT_R_MISSING_H_INCLUDED
++
++/***
++  This file is part of elogind.
++
++  Copyright 2017-2018 Sven Eden
++
++  elogind is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Lesser General Public License as published by
++  the Free Software Foundation; either version 2.1 of the License, or
++  (at your option) any later version.
++
++  elogind is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public License
++  along with elogind; If not, see <http://www.gnu.org/licenses/>.
++***/
++
++#include <stdlib.h>
++
++#if HAVE_QSORT_R == 0
++
++typedef int (*compare_fn_t) (const void *, const void *, void *);
++typedef compare_fn_t __compar_d_fn_t;
++
++void qsort_r (void *base_, size_t nmemb_, size_t size_, compare_fn_t comp_, void *arg_);
++
++#endif // qsort_r() missing
++
++#endif // ELOGIND_SRC_SHARED_QSORT_R_MISSING_H_INCLUDED
+--- systemd-240/src/udev/net/ethtool-util.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/udev/net/ethtool-util.c	2019-02-06 18:19:56.748320018 +0800
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ 
+ #include <net/if.h>
++#include <netinet/if_ether.h>
+ #include <sys/ioctl.h>
+ #include <linux/ethtool.h>
+ #include <linux/sockios.h>
+--- systemd-240/src/udev/net/link-config-gperf.gperf	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/udev/net/link-config-gperf.gperf	2019-02-06 18:14:00.006553962 +0800
+@@ -3,6 +3,7 @@
+ _Pragma("GCC diagnostic ignored \"-Wimplicit-fallthrough\"")
+ #endif
+ #include <stddef.h>
++#include <netinet/if_ether.h>
+ #include "conf-parser.h"
+ #include "ethtool-util.h"
+ #include "link-config.h"
+--- systemd-240/src/udev/udev-builtin-net_setup_link.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/udev/udev-builtin-net_setup_link.c	2019-02-06 18:19:36.785074304 +0800
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: LGPL-2.1+ */
+ 
++#include <netinet/if_ether.h>
+ #include "device-util.h"
+ #include "alloc-util.h"
+ #include "link-config.h"
+--- systemd-240/src/udev/udev-event.c	2018-12-22 02:53:33.000000000 +0800
++++ modify-240/src/udev/udev-event.c	2019-02-06 18:12:38.753579288 +0800
+@@ -8,6 +8,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <unistd.h>
++#include <sys/wait.h>
+ 
+ #include "sd-event.h"
+ 
+--- a/src/basic/user-util.c	2018-12-22 02:53:33.000000000 +0800
++++ b/src/basic/user-util.c	2018-12-22 02:53:33.000000000 +0800
+@@ -807,8 +807,6 @@
+ 
+         errno = 0;
+         p = fgetpwent(stream);
+-        if (!p && errno != ENOENT)
+-                return errno > 0 ? -errno : -EIO;
+ 
+         *pw = p;
+         return !!p;
+@@ -822,8 +820,6 @@
+ 
+         errno = 0;
+         s = fgetspent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno > 0 ? -errno : -EIO;
+ 
+         *sp = s;
+         return !!s;
+@@ -837,8 +833,6 @@
+ 
+         errno = 0;
+         g = fgetgrent(stream);
+-        if (!g && errno != ENOENT)
+-                return errno > 0 ? -errno : -EIO;
+ 
+         *gr = g;
+         return !!g;
+@@ -853,8 +847,6 @@
+ 
+         errno = 0;
+         s = fgetsgent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno > 0 ? -errno : -EIO;
+ 
+         *sg = s;
+         return !!s;
+--- systemd-240/src/basic/glob-util.c	2018-12-21 18:53:33.000000000 +0000
++++ systemd-240/src/basic/glob-util.c	2018-12-21 18:53:33.000000000 +0000
+@@ -24,13 +24,13 @@
+         if (!pglob->gl_closedir)
+                 pglob->gl_closedir = closedir_wrapper;
+         if (!pglob->gl_readdir)
+-                pglob->gl_readdir = (struct dirent *(*)(void *)) readdir_no_dot;
++                pglob->gl_readdir = (void* (*)(void *)) readdir_no_dot;
+         if (!pglob->gl_opendir)
+-                pglob->gl_opendir = (void *(*)(const char *)) opendir;
++                pglob->gl_opendir = (void* (*)(const char *))opendir;
+         if (!pglob->gl_lstat)
+-                pglob->gl_lstat = lstat;
++                pglob->gl_lstat = (int (*)(const char * restrict, void * restrict))lstat;
+         if (!pglob->gl_stat)
+-                pglob->gl_stat = stat;
++                pglob->gl_stat = (int (*)(const char * restrict, void * restrict))stat;
+ 
+         errno = 0;
+         k = glob(path, flags | GLOB_ALTDIRFUNC, NULL, pglob);
+--- systemd-240/src/basic/fileio.c	2019-02-16 01:59:28.631302609 +0800
++++ systemd-240/src/basic/fileio.c	2019-02-16 01:59:28.631302609 +0800
+@@ -166,9 +166,6 @@
+ 
+         (void) __fsetlocking(f, FSETLOCKING_BYCALLER);
+ 
+-        if (flags & WRITE_STRING_FILE_DISABLE_BUFFER)
+-                setvbuf(f, NULL, _IONBF, 0);
+-
+         r = write_string_stream_ts(f, line, flags, ts);
+         if (r < 0)
+                 goto fail;

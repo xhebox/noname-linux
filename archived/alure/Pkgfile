@@ -1,0 +1,19 @@
+name=alure
+version=1.2
+desc='Utility library to help manage common tasks with OpenAL applications.'
+deps="openal cmake libsndfile libvorbis flac mpg123 "
+source="http://kcat.strangesoft.net/alure-releases/alure-${version}.tar.bz2
+build.patch
+"
+
+ext() {
+	cd alure-$version
+	patch -p1 -i ../build.patch || die
+}
+
+build() {
+	cd alure-$version
+	cmake . -DCMAKE_INSTALL_PREFIX=
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

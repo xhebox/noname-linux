@@ -1,12 +1,11 @@
-name=opencore-amr
-version=0.1.5
+version="0.1.5"
 desc="Open source implementation of the Adaptive Multi Rate (AMR) speech codec"
-deps=musl
-source="http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.gz"
+deps=["musl"]
+source=[{url="http://nchc.dl.sourceforge.net/sourceforge/opencore-amr/opencore-amr-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd opencore-amr-$version
 	./configure --prefix= --disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

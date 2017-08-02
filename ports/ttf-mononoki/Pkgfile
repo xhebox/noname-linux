@@ -1,10 +1,8 @@
-name=ttf-mononoki
-version=1.2
+version="1.2"
 desc="nice code font"
-deps="fontconfig"
-source="https://github.com/madmalik/mononoki/releases/download/$version/mononoki.zip"
+source=[{url="https://github.com/madmalik/mononoki/releases/download/$version/mononoki.zip"}]
 
-build() {
+build='''
 	install -m755 -d "${pkgdir}/share/fonts/ttf-mononoki"
 	install -m644 -t "${pkgdir}/share/fonts/ttf-mononoki" *.ttf
-}
+'''

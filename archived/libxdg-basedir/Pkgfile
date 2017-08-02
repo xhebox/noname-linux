@@ -1,0 +1,17 @@
+name=libxdg-basedir
+version=1.2.0
+desc="An implementation of the XDG Base Directory specifications."
+source="https://github.com/devnev/libxdg-basedir/archive/libxdg-basedir-$version.tar.gz
+        xdgGetRelativeHome-overflow.patch"
+
+ext() {
+	cd libxdg-basedir-libxdg-basedir-$version
+	patch -Np0 -i ../xdgGetRelativeHome-overflow.patch || die
+}
+
+build() {
+	cd libxdg-basedir-libxdg-basedir-$version
+	./autogen.sh --prefix=
+	make || die
+	make DESTDIR=${pkgdir} install || die
+}

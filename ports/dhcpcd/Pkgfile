@@ -1,12 +1,15 @@
-name=dhcpcd
-version=6.11.5
+version="7.0.8"
 desc="RFC2131 compliant DHCP client daemon"
-deps="eudev bash musl"
-source="http://roy.marples.name/downloads/$name/$name-$version.tar.xz"
+makedeps=["systemd"]
+deps=["systemd", "dash", "musl"]
+source=[
+	{url="http://roy.marples.name/downloads/dhcpcd/dhcpcd-$version.tar.xz"},
+	{url="https://git.archlinux.org/svntogit/packages.git/tree/trunk/dhcpcd.service?h=packages/dhcpcd", name="dhcpcd.service"},
+	{url="https://git.archlinux.org/svntogit/packages.git/tree/trunk/dhcpcd_.service?h=packages/dhcpcd", name="dhcpcd_.service"},
+]
 
-build() {
-	cd ${name}-${version}
-
+build='''
+	cd dhcpcd-${version}
 	./configure \
 		--prefix=/ \
 		--sysconfdir=/etc \
@@ -15,6 +18,11 @@ build() {
 		--dbdir=/var/lib/dhcpcd \
 		--rundir=/run 
 
-	make  || die
-	make DESTDIR="${pkgdir}" install  || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+
+	echo noipv4ll >> "${pkgdir}/etc/dhcpcd.conf" # Disable ip4vall
+
+	install -Dm644 ../dhcpcd_.service "${pkgdir}/lib/systemd/system/dhcpcd@.service"
+	install -Dm644 ../dhcpcd.service "${pkgdir}/lib/systemd/system/dhcpcd.service" # FS#31543
+'''

@@ -1,15 +1,14 @@
-name=libxdamage
-version=1.1.4
+version="1.1.4"
+makedeps=["xorgproto", "util-macros", "libxfixes", "libx11"]
+deps=["libxfixes", "libx11"]
 desc="X Damage extension client library"
-deps="xorg-proto libxfixes"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXdamage-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXdamage-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXdamage-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

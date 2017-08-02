@@ -1,0 +1,17 @@
+name=egl-wayland
+version=1.1.0
+desc="EGLStream-based Wayland external platform"
+deps="wayland eglexternalplatform meson"
+
+ext() {
+	git clone https://github.com/NVIDIA/egl-wayland
+	cd egl-wayland
+	git tag -f 1.1.0 1676d1d2bfe646fb3ecbba29a85db529dd399493	# Fixup missing tag
+}
+
+build() {
+	noname-meson egl-wayland build
+	ninja -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dt "$pkgdir/share/licenses/egl-wayland" -m644 egl-wayland/COPYING
+}

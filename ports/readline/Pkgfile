@@ -1,40 +1,26 @@
-name=readline
-_version=7.0
-_patch_ver=003
-version=${_version}.$_patch_ver
+version="7.0"
 desc="The GNU readline lib"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$_version.tar.gz
-inputrc
-"
-deps=ncurses
+makedeps=["ncurses"]
+deps=["ncurses"]
+source=[
+	{url="http://ftp.gnu.org/pub/gnu/readline/readline-$version.tar.gz"},
+	{url="inputrc"},
+]
 
-ext() {
-	local url="http://ftp.gnu.org/gnu/$name/$name-$_version-patches"
-	cd $name-$_version
-	if [ "${_patch_ver}" -gt 000 ]; then
-		for p in $(seq -w 001 ${_patch_ver}); do
-			if [ -f readline63-${p} ]; then
-				continue
-			fi
-			curl -O -L ${url}/readline63-$p
-		done
-	fi
-	for p in $(seq -w 001 ${_patch_ver}); do
-		patch -p0 -i readline63-${p} 
+ext='''
+	cd readline-$version
+	url="http://ftp.gnu.org/gnu/readline/readline-$version-patches"
+	for p in $(seq -w 001 005); do
+		curl "$url/readline`echo $version | tr -d '.'`-${p}" | patch -p0 -i -
 	done
 	sed -i 's|-Wl,-rpath,$(libdir) ||g' support/shobj-conf
-}
+'''
 
-build() {
-	cd $name-$_version
-	./configure --prefix= \
-                --libexecdir=/lib \
-		--with-curses --enable-multibyte \
-                --disable-static 
+build='''
+	cd readline-$version
+	./configure --prefix= --libexecdir=/lib
 	CFLAGS="$CFLAGS -fPIC"
-	make SHLIB_LIBS=-lncurses  || die
-	make DESTDIR="$pkgdir" install   || die
-	rm -r "$pkgdir"/share/info
-	rm -r "$pkgdir"/share/doc
-	install -Dm644 "$srcdir"/inputrc "$pkgdir"/etc/inputrc
-}
+	make SHLIB_LIBS=-lncurses
+	make DESTDIR="$pkgdir" install 
+	install -Dm644 ../inputrc "$pkgdir"/etc/inputrc
+'''

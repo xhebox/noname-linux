@@ -1,0 +1,4 @@
+pattern=["share/mime"]
+script='''
+update-mime-database /share/mime
+'''

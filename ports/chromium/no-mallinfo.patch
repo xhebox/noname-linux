@@ -1,83 +1,44 @@
 --- base/trace_event/malloc_dump_provider.cc.orig
 +++ base/trace_event/malloc_dump_provider.cc
-@@ -187,7 +187,7 @@
-   resident_size = main_heap_info.committed_size;
-   allocated_objects_size = main_heap_info.allocated_size;
+@@ -243,7 +243,7 @@
    allocated_objects_count = main_heap_info.block_count;
+ #elif defined(OS_FUCHSIA)
+ // TODO(fuchsia): Port, see https://crbug.com/706592.
 -#else
-+#elif defined(OS_LINUX) && defined(__GLIBC__)
++#elif defined(__GLIBC__)
    struct mallinfo info = mallinfo();
    DCHECK_GE(info.arena + info.hblkhd, info.uordblks);
-
---- content/child/content_child_helpers.cc.orig
-+++ content/child/content_child_helpers.cc
-@@ -24,7 +24,7 @@ namespace content {
- // though, this provides only a partial and misleading value.
- // Unfortunately some telemetry benchmark rely on it and these need to
- // be refactored before getting rid of this. See crbug.com/581365 .
--#if defined(OS_LINUX) || defined(OS_ANDROID)
-+#if defined(OS_LINUX) && defined(__GLIBC__) || defined(OS_ANDROID)
- size_t GetMemoryUsageKB() {
-   struct mallinfo minfo = mallinfo();
-   uint64_t mem_usage =
---- content/renderer/render_thread_impl.cc.orig
-+++ content/renderer/render_thread_impl.cc
-@@ -1699,6 +1699,49 @@
- }
  
- }  // namespace
-+#elif defined(OS_LINUX) && !defined(__GLIBC__)
-+namespace {
-+
-+static size_t GetMallocUsage() {
-+  char *line=NULL;
-+  size_t n,usage=0;
-+  FILE *f = fopen("/proc/self/maps", "r");
-+  char *path, *perm;
-+  if (f == NULL) {
-+    perror("/proc/self/maps");
-+    return 0;
-+  }
-+  path = (char *)malloc(PATH_MAX+16);
-+  if (path == NULL)
-+    goto out;
-+  perm = path + PATH_MAX;
-+
-+  while (getline(&line, &n, f) >=0) {
-+    size_t start,end,offset,inode;
-+    int devmaj, devmin, items;
-+
-+    items = sscanf(line, "%zx-%zx %s %zx %x:%x %zu %s",
-+                   &start, &end, perm, &offset,
-+                   &devmaj, &devmin, &inode, path);
-+
-+    if (items < 7)
-+      continue;
-+
-+    if (items < 8)
-+      path[0] = '\0';
-+
-+    if ((strcmp(perm, "rw-p") == 0 && devmaj+devmin == 0)
-+        && (path[0] == '\0' || strcmp(path, "[heap]") == 0))
-+      usage += end-start;
-+  }
-+  free(line);
-+  free(path);
-+out:
-+  fclose(f);
-+  return usage;
-+}
-+
-+}  // namespace
- #endif
- 
- bool RenderThreadImpl::GetRendererMemoryMetrics(
-@@ -1719,7 +1762,7 @@
-       blink_stats.partition_alloc_total_allocated_bytes / 1024;
-   memory_metrics->blink_gc_kb =
-       blink_stats.blink_gc_total_allocated_bytes / 1024;
--#if defined(OS_LINUX) || defined(OS_ANDROID)
-+#if defined(OS_LINUX) && defined(__GLIBC__) || defined(OS_ANDROID)
+diff --git a/base/process/process_metrics_posix.cc b/base/process/process_metrics_posix.cc
+index 0eb5c1f..8af7799 100644
+--- base/process/process_metrics_posix.cc
++++ base/process/process_metrics_posix.cc
+@@ -94,14 +94,14 @@ size_t ProcessMetrics::GetMallocUsage() {
+   malloc_statistics_t stats = {0};
+   malloc_zone_statistics(nullptr, &stats);
+   return stats.size_in_use;
+-#elif defined(OS_LINUX) || defined(OS_ANDROID)
++#elif defined(__GLIBC__) || defined(OS_ANDROID)
    struct mallinfo minfo = mallinfo();
  #if defined(USE_TCMALLOC)
-   size_t malloc_usage = minfo.uordblks;
+   return minfo.uordblks;
+ #else
+   return minfo.hblkhd + minfo.arena;
+ #endif
+-#elif defined(OS_FUCHSIA)
++#else
+   // TODO(fuchsia): Not currently exposed. https://crbug.com/735087.
+   return 0;
+ #endif
+--- third_party/swiftshader/third_party/llvm-subzero/lib/Support/Unix/Process.inc
++++ third_party/swiftshader/third_party/llvm-subzero/lib/Support/Unix/Process.inc.orig
+@@ -84,7 +84,7 @@
+ }
+ 
+ size_t Process::GetMallocUsage() {
+-#if defined(HAVE_MALLINFO)
++#if defined(HAVE_MALLINFO) && defined(__GLIBC__)
+   struct mallinfo mi;
+   mi = ::mallinfo();
+   return mi.uordblks;
+

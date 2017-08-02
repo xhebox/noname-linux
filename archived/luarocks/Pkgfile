@@ -1,0 +1,15 @@
+name=luarocks
+version=2.4.4
+deps="unzip zip curl cmake luajit lua"
+source="http://luarocks.org/releases/luarocks-$version.tar.gz"
+
+build() {
+	cd luarocks-$version
+	LUA_VERSION= ./configure --prefix=/ \
+		--sysconfdir=/etc/luarocks \
+		--with-lua-include=/include \
+		--with-downloader=curl \
+		--versioned-rocks-dir
+	make
+	make install DESTDIR="$pkgdir"
+}

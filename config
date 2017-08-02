@@ -5,6 +5,7 @@ TARGET=x86_64-pc-linux-musl
 TARGET32=i386-pc-linux-musl
 ROOT=/mnt
 DB=$ROOT/var/db/pkg
+HOOKS=$ROOT/etc/hooks
 COLORS_F=1
 SUM="sha512sum"
 PKG_BINARY=1
@@ -22,3 +23,7 @@ export CXX="g++"
 export QMAKE_CFLAGS_ISYSTEM=
 # comment it if u don't want ccache
 export PATH="/lib/ccache:$PATH"
+
+##url_fetch() {
+## .....
+##}

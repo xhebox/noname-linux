@@ -1,20 +1,22 @@
-name=libomxil-bellagio
-version=0.9.3
+version="0.9.3"
 desc="An opensource implementation of the OpenMAX Integration Layer API"
-deps=musl
-source="http://downloads.sourceforge.net/project/omxil/omxil/Bellagio%20${version}/${name}-${version}.tar.gz
-fedora-fixes.patch"
+deps=["musl"]
+source=[
+	{url="https://nchc.dl.sourceforge.net/project/omxil/omxil/Bellagio%%20${version}/${name}-${version}.tar.gz"},
+	{url="fedora-fixes.patch"},
+]
 
-ext() {
+ext='''
 	cd libomxil-bellagio-$version
-	patch -Np1 -i ../fedora-fixes.patch || die
+	patch -Np1 -i ../fedora-fixes.patch
+	sed -e 's/-Werror//' -i configure.ac
 	autoreconf -fiv
-}
+'''
 
-build() {
+build='''
 	cd libomxil-bellagio-$version
 
 	./configure --prefix= --disable-static --docdir=/share/doc/${name}
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

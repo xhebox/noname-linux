@@ -1,0 +1,38 @@
+###############################################################################
+## Global section
+###############################################################################
+set init 
+set daemon 30
+
+set log syslog
+set pidfile /run/monit.pid
+set idfile /run/.monit.id
+set statefile /run/.monit.state
+
+set limits {
+    programOutput:     1 MB,      # check program's output truncate limit
+    sendExpectBuffer:  256 B,      # limit for send/expect protocol test
+    fileContentBuffer: 512 B,      # limit for file content test
+    httpContentBuffer: 1 MB,       # limit for HTTP content test
+    networkTimeout:    5 seconds   # timeout for network I/O
+    programTimeout:    300 seconds # timeout for check program
+    stopTimeout:       30 seconds  # timeout for service stop
+    startTimeout:      30 seconds  # timeout for service start
+    restartTimeout:    30 seconds  # timeout for service restart
+}
+
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost (drop if you use M/Monit)
+    allow localhost
+
+###############################################################################
+## Services
+###############################################################################
+check system $HOST
+
+###############################################################################
+## Includes
+###############################################################################
+include /etc/monit.d/bootup/*
+include /etc/monit.d/system/*
+include /etc/monit.d/*

@@ -1,14 +1,16 @@
-name=libnih
-version=1.0.3
-deps="expat dbus"
+version="1.0.3"
+makedeps=["expat", "dbus"]
+deps=["expat", "dbus"]
 desc="Small library for C application development."
-source="https://launchpad.net/libnih/${version%.*}/${version}/+download/libnih-$version.tar.gz
-musl.patch"
+source=[
+	{url="https://launchpad.net/libnih/${version%.*}/${version}/+download/libnih-$version.tar.gz"},
+	{url="musl.patch"},
+]
 
-build() {
+build='''
 	cd libnih-$version
-	patch -p0 < ../musl.patch || die
+	patch -p0 -i ../musl.patch
 	./configure --prefix=
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

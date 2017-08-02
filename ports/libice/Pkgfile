@@ -1,15 +1,12 @@
-name=libice
-version=1.0.9
+version="1.0.9"
 desc="xorg lib libICE"
-deps="xorg-proto xtrans"
-source="http://xorg.freedesktop.org/releases/individual/lib/libICE-$version.tar.bz2"
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libICE-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libICE-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

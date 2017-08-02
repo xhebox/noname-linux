@@ -1,12 +1,11 @@
-name=adobe-source-han-sans-fonts-zh
-version=1.004
+version="1.004"
 desc="nice chinese font"
-deps="fontconfig unzip"
-source="
-https://github.com/adobe-fonts/source-han-sans/raw/release/OTF/SourceHanSansSC.zip
-44-source-han-sans-cn.conf"
+source=[
+	{url="https://github.com/adobe-fonts/source-han-sans/raw/release/OTF/SourceHanSansSC.zip"},
+	{url="44-source-han-sans-cn.conf"},
+]
 
-build() {
+build='''
 	mkdir -p "$pkgdir"/share/fonts/adobe-source-han-sans
 	mkdir -p "$pkgdir"/etc/fonts/conf.avail
 	mkdir -p "$pkgdir"/etc/fonts/conf.d
@@ -14,4 +13,4 @@ build() {
 	mv 44*.conf "$pkgdir"/etc/fonts/conf.avail/
 	cd "$pkgdir"/etc/fonts/conf.d
 	ln -s ../conf.avail/44-source-han-sans-cn.conf 44-source-han-sans-cn.conf
-}
+'''

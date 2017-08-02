@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch\trunk - svntogit/packages.git - Git clone of the 'packages' repository
+</title>
+<meta name='generator' content='cgit v1.2.1-1-g437b'/>
+<meta name='robots' content='index, nofollow'/>
+<link rel='stylesheet' type='text/css' href='/cgit.css'/>
+<link rel='shortcut icon' href='/favicon.ico'/>
+<link rel='alternate' title='Atom feed' href='https://git.archlinux.org/svntogit/packages.git/atom/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils' type='application/atom+xml'/>
+<link rel='vcs-git' href='https://git.archlinux.org/svntogit/packages.git' title='svntogit/packages.git Git repository'/>
+<link rel='vcs-git' href='git://git.archlinux.org/svntogit/packages.git' title='svntogit/packages.git Git repository'/>
+<link rel='vcs-git' href='ssh://git.archlinux.org/srv/git/svntogit/packages.git' title='svntogit/packages.git Git repository'/>
+</head>
+<body>
+	<div id="archnavbar"><!-- Arch Linux global navigation bar -->
+		<div id="archnavbarlogo">
+			<p><a href="http://www.archlinux.org/" title="Arch news, packages, projects and more"></a></p>
+		</div>
+		<div id="archnavbarmenu">
+			<ul id="archnavbarlist">
+				<li id="anb-home"><a href="http://www.archlinux.org/" title="Arch news, packages, projects and more">Home</a></li>
+				<li id="anb-packages"><a href="http://www.archlinux.org/packages/" title="Arch Package Database">Packages</a></li>
+				<li id="anb-forums"><a href="https://bbs.archlinux.org/" title="Community forums">Forums</a></li>
+				<li id="anb-wiki"><a href="https://wiki.archlinux.org/" title="Community documentation">Wiki</a></li>
+				<li id="anb-bugs"><a href="https://bugs.archlinux.org/" title="Report and follow bugs">Bugs</a></li>
+				<li id="anb-sec"><a href="https://security.archlinux.org/" title="Security Tracker">Security</a></li>
+				<li id="anb-aur"><a href="https://aur.archlinux.org/" title="Arch Linux User Repository">AUR</a></li>
+				<li id="anb-download"><a href="http://www.archlinux.org/download/" title="Get Arch Linux">Download</a></li>
+			</ul>
+		</div>
+	</div><!-- #archnavbar -->
+<div id='cgit'><table id='header'>
+<tr>
+<td class='main'><a href='/'>index</a> : <a title='svntogit/packages.git' href='/svntogit/packages.git/'>svntogit/packages.git</a></td></tr>
+<tr><td class='sub'>Git clone of the 'packages' repository
+</td><td class='sub right'></td></tr></table>
+<table class='tabs'><tr><td>
+<a href='/svntogit/packages.git/?h=packages/binutils'>summary</a><a href='/svntogit/packages.git/refs/?h=packages/binutils'>refs</a><a href='/svntogit/packages.git/log/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>log</a><a class='active' href='/svntogit/packages.git/tree/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>tree</a><a href='/svntogit/packages.git/commit/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>commit</a><a href='/svntogit/packages.git/diff/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>diff</a><a href='/svntogit/packages.git/stats/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>stats</a></td><td class='form'><form class='right' method='get' action='/svntogit/packages.git/log/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch'>
+<input type='hidden' name='h' value='packages/binutils'/><select name='qt'>
+<option value='grep'>log msg</option>
+<option value='author'>author</option>
+<option value='committer'>committer</option>
+<option value='range'>range</option>
+</select>
+<input class='txt' type='search' size='10' name='q' value=''/>
+<input type='submit' value='search'/>
+</form>
+</td></tr></table>
+<div class='path'>path: <a href='/svntogit/packages.git/tree/?h=packages/binutils'>root</a>/<a href='/svntogit/packages.git/tree/trunk?h=packages/binutils'>trunk</a>/<a href='/svntogit/packages.git/tree/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch</a></div><div class='content'>blob: d971471e2b04101c68f8a3c1a0483fdadeb189f8 (<a href='/svntogit/packages.git/plain/trunk/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch?h=packages/binutils'>plain</a>)
+<table summary='blob content' class='blob'>
+<tr><td class='linenumbers'><pre><a id='n1' href='#n1'>1</a>
+<a id='n2' href='#n2'>2</a>
+<a id='n3' href='#n3'>3</a>
+<a id='n4' href='#n4'>4</a>
+<a id='n5' href='#n5'>5</a>
+<a id='n6' href='#n6'>6</a>
+<a id='n7' href='#n7'>7</a>
+<a id='n8' href='#n8'>8</a>
+<a id='n9' href='#n9'>9</a>
+<a id='n10' href='#n10'>10</a>
+<a id='n11' href='#n11'>11</a>
+<a id='n12' href='#n12'>12</a>
+<a id='n13' href='#n13'>13</a>
+<a id='n14' href='#n14'>14</a>
+<a id='n15' href='#n15'>15</a>
+<a id='n16' href='#n16'>16</a>
+<a id='n17' href='#n17'>17</a>
+<a id='n18' href='#n18'>18</a>
+<a id='n19' href='#n19'>19</a>
+<a id='n20' href='#n20'>20</a>
+<a id='n21' href='#n21'>21</a>
+<a id='n22' href='#n22'>22</a>
+<a id='n23' href='#n23'>23</a>
+<a id='n24' href='#n24'>24</a>
+<a id='n25' href='#n25'>25</a>
+<a id='n26' href='#n26'>26</a>
+<a id='n27' href='#n27'>27</a>
+<a id='n28' href='#n28'>28</a>
+<a id='n29' href='#n29'>29</a>
+<a id='n30' href='#n30'>30</a>
+<a id='n31' href='#n31'>31</a>
+<a id='n32' href='#n32'>32</a>
+<a id='n33' href='#n33'>33</a>
+<a id='n34' href='#n34'>34</a>
+<a id='n35' href='#n35'>35</a>
+<a id='n36' href='#n36'>36</a>
+<a id='n37' href='#n37'>37</a>
+<a id='n38' href='#n38'>38</a>
+<a id='n39' href='#n39'>39</a>
+<a id='n40' href='#n40'>40</a>
+<a id='n41' href='#n41'>41</a>
+<a id='n42' href='#n42'>42</a>
+<a id='n43' href='#n43'>43</a>
+<a id='n44' href='#n44'>44</a>
+<a id='n45' href='#n45'>45</a>
+<a id='n46' href='#n46'>46</a>
+<a id='n47' href='#n47'>47</a>
+<a id='n48' href='#n48'>48</a>
+<a id='n49' href='#n49'>49</a>
+<a id='n50' href='#n50'>50</a>
+<a id='n51' href='#n51'>51</a>
+<a id='n52' href='#n52'>52</a>
+<a id='n53' href='#n53'>53</a>
+<a id='n54' href='#n54'>54</a>
+<a id='n55' href='#n55'>55</a>
+<a id='n56' href='#n56'>56</a>
+<a id='n57' href='#n57'>57</a>
+<a id='n58' href='#n58'>58</a>
+<a id='n59' href='#n59'>59</a>
+<a id='n60' href='#n60'>60</a>
+<a id='n61' href='#n61'>61</a>
+<a id='n62' href='#n62'>62</a>
+<a id='n63' href='#n63'>63</a>
+<a id='n64' href='#n64'>64</a>
+<a id='n65' href='#n65'>65</a>
+<a id='n66' href='#n66'>66</a>
+<a id='n67' href='#n67'>67</a>
+<a id='n68' href='#n68'>68</a>
+<a id='n69' href='#n69'>69</a>
+<a id='n70' href='#n70'>70</a>
+<a id='n71' href='#n71'>71</a>
+<a id='n72' href='#n72'>72</a>
+<a id='n73' href='#n73'>73</a>
+<a id='n74' href='#n74'>74</a>
+<a id='n75' href='#n75'>75</a>
+<a id='n76' href='#n76'>76</a>
+<a id='n77' href='#n77'>77</a>
+<a id='n78' href='#n78'>78</a>
+<a id='n79' href='#n79'>79</a>
+<a id='n80' href='#n80'>80</a>
+<a id='n81' href='#n81'>81</a>
+<a id='n82' href='#n82'>82</a>
+<a id='n83' href='#n83'>83</a>
+<a id='n84' href='#n84'>84</a>
+<a id='n85' href='#n85'>85</a>
+<a id='n86' href='#n86'>86</a>
+<a id='n87' href='#n87'>87</a>
+<a id='n88' href='#n88'>88</a>
+<a id='n89' href='#n89'>89</a>
+<a id='n90' href='#n90'>90</a>
+<a id='n91' href='#n91'>91</a>
+<a id='n92' href='#n92'>92</a>
+<a id='n93' href='#n93'>93</a>
+<a id='n94' href='#n94'>94</a>
+<a id='n95' href='#n95'>95</a>
+<a id='n96' href='#n96'>96</a>
+<a id='n97' href='#n97'>97</a>
+<a id='n98' href='#n98'>98</a>
+<a id='n99' href='#n99'>99</a>
+<a id='n100' href='#n100'>100</a>
+<a id='n101' href='#n101'>101</a>
+<a id='n102' href='#n102'>102</a>
+<a id='n103' href='#n103'>103</a>
+<a id='n104' href='#n104'>104</a>
+<a id='n105' href='#n105'>105</a>
+<a id='n106' href='#n106'>106</a>
+<a id='n107' href='#n107'>107</a>
+<a id='n108' href='#n108'>108</a>
+<a id='n109' href='#n109'>109</a>
+<a id='n110' href='#n110'>110</a>
+<a id='n111' href='#n111'>111</a>
+<a id='n112' href='#n112'>112</a>
+<a id='n113' href='#n113'>113</a>
+<a id='n114' href='#n114'>114</a>
+<a id='n115' href='#n115'>115</a>
+<a id='n116' href='#n116'>116</a>
+<a id='n117' href='#n117'>117</a>
+<a id='n118' href='#n118'>118</a>
+<a id='n119' href='#n119'>119</a>
+<a id='n120' href='#n120'>120</a>
+<a id='n121' href='#n121'>121</a>
+<a id='n122' href='#n122'>122</a>
+<a id='n123' href='#n123'>123</a>
+<a id='n124' href='#n124'>124</a>
+<a id='n125' href='#n125'>125</a>
+<a id='n126' href='#n126'>126</a>
+<a id='n127' href='#n127'>127</a>
+<a id='n128' href='#n128'>128</a>
+<a id='n129' href='#n129'>129</a>
+<a id='n130' href='#n130'>130</a>
+<a id='n131' href='#n131'>131</a>
+<a id='n132' href='#n132'>132</a>
+<a id='n133' href='#n133'>133</a>
+<a id='n134' href='#n134'>134</a>
+<a id='n135' href='#n135'>135</a>
+</pre></td>
+<td class='lines'><pre><code>From 03883490b51c3fe7762e73b9e6c3f3e5d71552fd Mon Sep 17 00:00:00 2001
+From: &quot;H.J. Lu&quot; &lt;hjl.tools&#64;gmail.com&gt;
+Date: Sat, 11 Aug 2018 06:41:33 -0700
+Subject: [PATCH] x86: Properly add X86_ISA_1_NEEDED property
+
+Existing properties may be removed during property merging.  We avoid
+adding X86_ISA_1_NEEDED property only if existing properties won&apos;t be
+removed.
+
+bfd/
+
+	PR ld/23428
+	* elfxx-x86.c (_bfd_x86_elf_link_setup_gnu_properties): Don&apos;t
+	add X86_ISA_1_NEEDED property only if existing properties won&apos;t
+	be removed.
+
+ld/
+
+	PR ld/23428
+	* testsuite/ld-elf/dummy.s: New file.
+	* testsuite/ld-elf/linux-x86.S: Add X86_FEATURE_1_AND property.
+	* testsuite/ld-elf/linux-x86.exp: Add dummy.s to pr23428.
+<span class="hl kwb">---</span>
+ bfd/elfxx-x86.c                   | 28 ++++++++++++++++++++++------
+ ld/testsuite/ld-elf/dummy.s       |  1 +
+ ld/testsuite/ld-elf/linux-x86.S   | 28 ++++++++++++++++++++++++++++
+ ld/testsuite/ld-elf/linux-x86.exp |  2 +-
+ 4 files changed, 52 insertions(+), 7 deletions(-)
+ create mode 100644 ld/testsuite/ld-elf/dummy.s
+
+diff --git a/bfd/elfxx-x86.c b/bfd/elfxx-x86.c
+index 7ccfd25815..2d8f7b640b 100644
+<span class="hl kwb">--- a/bfd/elfxx-x86.c</span>
+<span class="hl kwa">+++ b/bfd/elfxx-x86.c</span>
+&#64;&#64; -2588,7 +2588,6 &#64;&#64; _bfd_x86_elf_link_setup_gnu_properties
+ 	  prop-&gt;pr_kind = property_number;
+ 	}
+       else if (has_text
+<span class="hl kwb">-	       &amp;&amp; elf_properties (ebfd) == NULL</span>
+ 	       &amp;&amp; elf_tdata (info-&gt;output_bfd)-&gt;o-&gt;build_id.sec == NULL
+ 	       &amp;&amp; !htab-&gt;elf.dynamic_sections_created
+ 	       &amp;&amp; !info-&gt;traditional_format
+&#64;&#64; -2598,11 +2597,28 &#64;&#64; _bfd_x86_elf_link_setup_gnu_properties
+ 	  /* If the separate code program header is needed, make sure
+ 	     that the first read-only PT_LOAD segment has no code by
+ 	     adding a GNU_PROPERTY_X86_ISA_1_NEEDED note.  */
+<span class="hl kwb">-	  prop = _bfd_elf_get_property (ebfd,</span>
+<span class="hl kwb">-					GNU_PROPERTY_X86_ISA_1_NEEDED,</span>
+<span class="hl kwb">-					4);</span>
+<span class="hl kwb">-	  prop-&gt;u.number = GNU_PROPERTY_X86_ISA_1_486;</span>
+<span class="hl kwb">-	  prop-&gt;pr_kind = property_number;</span>
+<span class="hl kwa">+	  elf_property_list *list;</span>
+<span class="hl kwa">+	  bfd_boolean need_property = TRUE;</span>
+<span class="hl kwa">+</span>
+<span class="hl kwa">+	  for (list = elf_properties (ebfd); list; list = list-&gt;next)</span>
+<span class="hl kwa">+	    switch (list-&gt;property.pr_type)</span>
+<span class="hl kwa">+	      {</span>
+<span class="hl kwa">+	      case GNU_PROPERTY_STACK_SIZE:</span>
+<span class="hl kwa">+	      case GNU_PROPERTY_NO_COPY_ON_PROTECTED:</span>
+<span class="hl kwa">+	      case GNU_PROPERTY_X86_ISA_1_NEEDED:</span>
+<span class="hl kwa">+		/* These properties won&apos;t be removed during merging.  */</span>
+<span class="hl kwa">+		need_property = FALSE;</span>
+<span class="hl kwa">+		break;</span>
+<span class="hl kwa">+	      }</span>
+<span class="hl kwa">+</span>
+<span class="hl kwa">+	  if (need_property)</span>
+<span class="hl kwa">+	    {</span>
+<span class="hl kwa">+	      prop = _bfd_elf_get_property (ebfd,</span>
+<span class="hl kwa">+					    GNU_PROPERTY_X86_ISA_1_NEEDED,</span>
+<span class="hl kwa">+					    4);</span>
+<span class="hl kwa">+	      prop-&gt;u.number = GNU_PROPERTY_X86_ISA_1_486;</span>
+<span class="hl kwa">+	      prop-&gt;pr_kind = property_number;</span>
+<span class="hl kwa">+	    }</span>
+ 	}
+ 
+       /* Create the GNU property note section if needed.  */
+diff --git a/ld/testsuite/ld-elf/dummy.s b/ld/testsuite/ld-elf/dummy.s
+new file mode 100644
+index 0000000000..403f98000d
+<span class="hl kwb">--- /dev/null</span>
+<span class="hl kwa">+++ b/ld/testsuite/ld-elf/dummy.s</span>
+<span class="hl kwd">&#64;&#64; -0,0 +1 &#64;&#64;</span>
+<span class="hl kwa">+# Dummy</span>
+diff --git a/ld/testsuite/ld-elf/linux-x86.S b/ld/testsuite/ld-elf/linux-x86.S
+index bdf40c6e01..d94abc1106 100644
+<span class="hl kwb">--- a/ld/testsuite/ld-elf/linux-x86.S</span>
+<span class="hl kwa">+++ b/ld/testsuite/ld-elf/linux-x86.S</span>
+&#64;&#64; -61,3 +61,31 &#64;&#64; syscall:
+ 	ret			/* Return to caller.  */
+ 	.size syscall, .-syscall
+ 	.section .note.GNU-stack,&quot;&quot;,&#64;progbits
+<span class="hl kwa">+</span>
+<span class="hl kwa">+	.section &quot;.note.gnu.property&quot;, &quot;a&quot;</span>
+<span class="hl kwa">+#ifdef __LP64__</span>
+<span class="hl kwa">+	.p2align 3</span>
+<span class="hl kwa">+#else</span>
+<span class="hl kwa">+	.p2align 2</span>
+<span class="hl kwa">+#endif</span>
+<span class="hl kwa">+	.long 1f - 0f		/* name length */</span>
+<span class="hl kwa">+	.long 5f - 2f		/* data length */</span>
+<span class="hl kwa">+	.long 5			/* note type */</span>
+<span class="hl kwa">+0:	.asciz &quot;GNU&quot;		/* vendor name */</span>
+<span class="hl kwa">+1:</span>
+<span class="hl kwa">+#ifdef __LP64__</span>
+<span class="hl kwa">+	.p2align 3</span>
+<span class="hl kwa">+#else</span>
+<span class="hl kwa">+	.p2align 2</span>
+<span class="hl kwa">+#endif</span>
+<span class="hl kwa">+2:	.long 0xc0000002	/* pr_type.  */</span>
+<span class="hl kwa">+	.long 4f - 3f		/* pr_datasz.  */</span>
+<span class="hl kwa">+3:</span>
+<span class="hl kwa">+	.long 0x2</span>
+<span class="hl kwa">+4:</span>
+<span class="hl kwa">+#ifdef __LP64__</span>
+<span class="hl kwa">+	.p2align 3</span>
+<span class="hl kwa">+#else</span>
+<span class="hl kwa">+	.p2align 2</span>
+<span class="hl kwa">+#endif</span>
+<span class="hl kwa">+5:</span>
+diff --git a/ld/testsuite/ld-elf/linux-x86.exp b/ld/testsuite/ld-elf/linux-x86.exp
+index 36217c6fb4..f6f5a80853 100644
+<span class="hl kwb">--- a/ld/testsuite/ld-elf/linux-x86.exp</span>
+<span class="hl kwa">+++ b/ld/testsuite/ld-elf/linux-x86.exp</span>
+&#64;&#64; -37,7 +37,7 &#64;&#64; run_ld_link_exec_tests [list \
+ 	&quot;Run PR ld/23428 test&quot; \
+ 	&quot;--no-dynamic-linker -z separate-code&quot; \
+ 	&quot;&quot; \
+<span class="hl kwb">-	{ linux-x86.S pr23428.c } \</span>
+<span class="hl kwa">+	{ linux-x86.S pr23428.c dummy.s } \</span>
+ 	&quot;pr23428&quot; \
+ 	&quot;pass.out&quot; \
+ 	&quot;$NOPIE_CFLAGS -fno-asynchronous-unwind-tables&quot; \
+<span class="hl kwb">-- </span>
+2.18.0
+
+</code></pre></td></tr></table>
+</div> <!-- class=content -->
+<div class="foot" style="padding-left:1em;padding-right:1em;">
+<p>Copyright &copy; 2002-2018 <a href="mailto:jvinet@zeroflux.org"
+title="contact Judd Vinet">Judd Vinet</a> and <a href="mailto:aaron@archlinux.org"
+title="contact Aaron Griffin">Aaron Griffin</a>. The Arch Linux name and logo
+are recognized trademarks. Some rights reserved. The registered trademark
+Linux&reg; is used pursuant to a sublicense from LMI, the exclusive licensee
+of Linus Torvalds, owner of the mark on a world-wide basis.</p>
+</div>
+</div> <!-- id=cgit -->
+</body>
+</html>

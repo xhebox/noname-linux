@@ -1,16 +1,13 @@
-name=libxau
-version=1.0.8
+version="1.0.8"
 desc="X Authorization routines"
-deps=xorg-proto
-source="http://xorg.freedesktop.org/releases/individual/lib/libXau-$version.tar.bz2"
+makedeps=["xorgproto"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXau-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXau-$version
 
-	./configure --prefix= --sysconfdir=/etc \
-		--localstatedir=/var --disable-static 
+	./configure --prefix= --sysconfdir=/etc --localstatedir=/var --disable-static 
 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

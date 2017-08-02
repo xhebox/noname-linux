@@ -1,0 +1,19 @@
+name=st
+version=0.8.1
+desc="simple terminal emulator"
+deps="libxext libxft ncurses"
+source="https://dl.suckless.org/st/st-$version.tar.gz
+config.def.h
+st-xresources.diff"
+
+ext() {
+	cd st-$version
+	cp ../config.def.h .
+	patch -p1 < ../st-xresources.diff || die
+}
+
+build() {
+	cd st-$version
+	make || die
+	make DESTDIR="$pkgdir" PREFIX= install || die
+}

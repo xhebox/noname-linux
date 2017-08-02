@@ -1,11 +1,10 @@
-name=x265
-version=2.4
+version="2.9"
 desc="Open Source H265/HEVC video encoder"
-deps="cmake yasm"
-source="https://bitbucket.org/multicoreware/x265/downloads/x265_${version}.tar.gz"
+makedeps=["yasm"]
+source=[{url="https://bitbucket.org/multicoreware/x265/downloads/x265_${version}.tar.gz"}]
 
-build() {
-	cd ${name}_$version
+build='''
+	cd x265_$version
 	for d in 8 10 12; do
 		if [ -d build-$d ]; then
 			rm -rf build-$d
@@ -22,7 +21,7 @@ build() {
 	-DEXPORT_C_API='FALSE' \
 	-DENABLE_CLI='FALSE' \
 	-DENABLE_SHARED='FALSE'
-	make || die
+	make
 
 	cd ../build-10
 
@@ -32,7 +31,7 @@ build() {
 	-DEXPORT_C_API='FALSE' \
 	-DENABLE_CLI='FALSE' \
 	-DENABLE_SHARED='FALSE'
-	make || die
+	make
 
 	cd ../build-8
 
@@ -46,6 +45,6 @@ build() {
 	-DEXTRA_LINK_FLAGS='-L.' \
 	-DLINKED_10BIT='TRUE' \
 	-DLINKED_12BIT='TRUE'
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

@@ -1,21 +1,24 @@
-name=libxml2
-version=2.9.4+96+gfb56f80e
-deps="zlib xz readline python"
+version="2.9.8"
 desc="XML library version 2"
+makedeps=["python", "python3", "icu", "ncurses", "readline", "xz", "zlib"]
+deps=["icu", "ncurses", "readline", "xz", "zlib"]
+source=[{url="http://xmlsoft.org/sources/libxml2-$version.tar.gz"}]
 
-ext() {
-	git clone https://git.gnome.org/browse/libxml2
-	cd libxml2
-	git reset --hard ${version#*+g}
-}
+build='''
+	cp -a libxml2-$version py3
+	mv libxml2-$version py2
 
-build() {
-	cd libxml2
-	NOCONFIGURE=1 ./autogen.sh
-	./configure --prefix= --disable-static --with-threads --with-history
+	cd py2
+	./configure --prefix= --with-python=/bin/python --with-threads --with-history
 	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
-	make || die
-	make DESTDIR="$pkgdir" install || die
-	rm -r "$pkgdir"/share/doc
-	rm -r "$pkgdir"/share/gtk-doc
-}
+	PYTHONHASHSEED=0 make
+	find doc -type f -exec chmod 0644 {} +
+	make DESTDIR="$pkgdir" install
+
+	cd ../py3
+	./configure --prefix= --with-python=/bin/python3 --with-threads --with-history
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
+	PYTHONHASHSEED=0 make
+	find doc -type f -exec chmod 0644 {} +
+	make -C python DESTDIR="$pkgdir" install
+'''

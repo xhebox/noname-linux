@@ -1,15 +1,11 @@
-name=libpipeline
-version=1.4.1
-deps=musl
+version="1.5.0"
+deps=["musl"]
 desc="A pipeline manipulation library"
-source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz"
+source=[{url="https://savannah.nongnu.org/download/libpipeline/libpipeline-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-	./configure \
-		--prefix= \
-		--disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/share/info
-}
+build='''
+	cd libpipeline-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

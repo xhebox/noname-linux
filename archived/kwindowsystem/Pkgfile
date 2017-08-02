@@ -1,0 +1,18 @@
+name=kwindowsystem
+version=5.38.0
+desc='Access to the windowing system'
+deps="qt5-x11extras libxfixes qt5-tools extra-cmake-modules"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kwindowsystem-${version}.tar.xz"
+
+build() {
+	mkdir build
+	cd build
+	cmake ../kwindowsystem-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DKDE_INSTALL_LIBEXECDIR=lib \
+		-DBUILD_TESTING=OFF
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

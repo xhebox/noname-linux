@@ -1,9 +1,0 @@
-lib/libyaml.so|777|0|0|symbolic link
-lib/libyaml-0.so.2|777|0|0|symbolic link
-include/yaml.h|644|0|0|regular file
-lib/libyaml.a|644|0|0|regular file
-lib/libyaml-0.so.2.0.5|755|0|0|regular file
-lib/pkgconfig/yaml-0.1.pc|644|0|0|regular file
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory
-include|755|0|0|directory

@@ -1,16 +1,14 @@
-name=libgmp
-version=6.1.2
+version="6.1.2"
 desc="Free library for arbitrary precision arithmetic"
-source="http://gmplib.org/download/gmp/gmp-$version.tar.xz"
-deps=zlib
+source=[{url="http://gmplib.org/download/gmp/gmp-$version.tar.xz"}]
+deps=["musl"]
 
-build() {
+build='''
 	cd gmp-$version
 	./configure --prefix= \
+		--host=$TARGET \
 		--enable-cxx \
 		--disable-static
 	make
 	make DESTDIR="$pkgdir" install
-	rm -r "$pkgdir"/share/info
-}
-
+'''

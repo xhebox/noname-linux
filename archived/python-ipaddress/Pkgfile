@@ -1,0 +1,23 @@
+name=python-ipaddress
+version=1.0.19
+desc="IPv4/IPv6 manipulation library"
+deps="python-setuptools"
+source="https://pypi.io/packages/source/i/ipaddress/ipaddress-$version.tar.gz"
+
+build() {
+	cp -r ipaddress-$version set3
+	cd ipaddress-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

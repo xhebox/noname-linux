@@ -1,0 +1,18 @@
+version="4.19.2"
+desc="Linux API headers for userspace"
+source=[
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v4.x/linux-${version}.tar.xz"},
+	{url="libc-4.16-portability.patch"},
+]
+
+build='''
+	cd linux-${version}
+	patch -p1 < ../libc-4.16-portability.patch
+
+	make mrproper
+	make headers_check
+	make INSTALL_HDR_PATH="$pkgdir/" headers_install
+	find "$pkgdir" -name ".install" -exec rm -rf {} \;
+	find "$pkgdir" -name "..install.cmd" -exec rm -rf {} \;
+	rm -rf "$pkgdir/include/drm"
+'''

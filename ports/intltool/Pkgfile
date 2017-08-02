@@ -1,26 +1,26 @@
-name=intltool
-version=0.51.0
+version="0.51.0"
 desc="Internationalization tool collection."
-deps="p5-xml-parser"
-source="http://edge.launchpad.net/$name/trunk/$version/+download/$name-$version.tar.gz
-intltool-0.51.0-perl-5.26.patch
-intltool-merge-Create-cache-file-atomically.patch
-intltool_distcheck-fix.patch"
+makedeps=["perl-xml-parser"]
+deps=["perl-xml-parser"]
+source=[
+	{url="http://edge.launchpad.net/intltool/trunk/$version/+download/intltool-$version.tar.gz"},
+	{url="intltool-0.51.0-perl-5.26.patch"},
+	{url="intltool-merge-Create-cache-file-atomically.patch"},
+	{url="intltool_distcheck-fix.patch"},
+]
 
-ext() {
+ext='''
 	cd intltool-$version
 	for i in $source; do
 		case $i in
-		*patch) patch -p1 < ../$i || die;;
+		*patch) patch -p1 < ../$i;;
 		esac
 	done
-}
+'''
 
-build() {
+build='''
 	cd intltool-$version
-
 	./configure --prefix=
-
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

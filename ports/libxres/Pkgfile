@@ -1,15 +1,14 @@
-name=libxres
+version="1.2.0"
 desc="X Resource extension client library"
-deps="libxext xorg-proto"
-version=1.0.7
-source="http://xorg.freedesktop.org/releases/individual/lib/libXres-$version.tar.bz2"
+deps=["libxext"]
+makedeps=["libxext", "xorgproto"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXres-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXres-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

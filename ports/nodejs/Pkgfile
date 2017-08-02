@@ -1,20 +1,20 @@
-name=nodejs
-version=8.2.1
-deps="zlib python icu libuv http-parser"
+version="11.9.0"
+makedeps=["zlib", "python", "icu", "libuv", "libnghttp2"]
+deps=["zlib", "icu", "libuv", "libnghttp2"]
 desc="Nodejs interpreter"
-source="http://nodejs.org//dist/v${version}/node-v${version}.tar.gz"
+source=[{url="http://nodejs.org//dist/v${version}/node-v${version}.tar.gz"}]
 
-build() {
+build='''
 	cd node-v$version
 	GYP_DEFINES="linux_use_gold_flags=0 \
 		linux_use_bundled_binutils=0 \
 		linux_use_bundled_gold=0" \
 	./configure --prefix=/ \
 		--shared-zlib \
-		--shared-http-parser \
+		--experimental-http-parser \
+		--shared-nghttp2 \
 		--shared-libuv \
-		--with-intl=system-icu \
-
-	make || die
-	make DESTDIR=$pkgdir install || die
-}
+		--with-intl=system-icu
+	make
+	make DESTDIR=$pkgdir install
+'''

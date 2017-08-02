@@ -1,30 +1,47 @@
-name=filesystem
+version="3.0"
 desc="Base files"
-source="
-fstab
-group
-hosts
-shells
-gshadow
-shadow
-issue
-passwd
-profile
-resolv.conf
-securetty
-compressdoc
-"
-version=1.0
+source=[
+	{url="sysctl"},
+	{url="sysusers"},
+	{url="env-generator"},
+	{url="fstab"},
+	{url="crypttab"},
+	{url="locale.sh"},
+	{url="group"},
+	{url="hosts"},
+	{url="shells"},
+	{url="gshadow"},
+	{url="shadow"},
+	{url="securetty"},
+	{url="issue"},
+	{url="passwd"},
+	{url="profile"},
+	{url="resolv.conf"},
+]
+baks=[
+	"etc/passwd",
+	"etc/shadow",
+	"etc/group",
+	"etc/gshadow",
+	"etc/issue",
+	"etc/hostname",
+	"etc/profile",
+	"etc/resolv.conf",
+	"etc/hosts",
+	"etc/shells",
+	"etc/fstab",
+	"etc/crypttab"
+]
 
-ext() {
+ext='''
 	curl -O -L http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
 	curl -O -L http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
-}
+'''
 
-build() {
+build='''
 	cd "$pkgdir/"
 	ln -s . usr
-	for d in boot dev etc/modprobe.d home mnt var run/lock include share/misc lib lib32 bin; do
+	for d in boot dev etc/modprobe.d home mnt var/lock run include share/misc lib lib32 bin; do
 		mkdir -p "$d" && chmod 755 "$d"
 	done
 	for d in $(seq 8); do
@@ -32,34 +49,33 @@ build() {
 	done
 	mkdir etc/skel && chmod 755 etc/skel
 	mkdir etc/profile.d && chmod 755 etc/skel
+	mkdir etc/pkg && mkdir etc/pkg/hooks
 	mkdir proc && chmod 555 proc
 	mkdir sys && chmod 555 sys
 	mkdir root && chmod 0750 root
 	mkdir tmp && chmod 1777 tmp
 	mkdir var/tmp && chmod 1777 var/tmp
 
-	ln -s ../proc/self/mounts etc/mtab
-
-	for f in fstab group hosts passwd resolv.conf securetty shells profile issue; do
-		install -m644 "$srcdir"/$f etc/
+	for f in fstab group hosts passwd resolv.conf shells profile issue securetty; do
+		install -m644 ../$f etc/
 	done
-	install -m600 "$srcdir"/shadow etc/shadow
-	install -m600 "$srcdir"/gshadow etc/gshadow
+	install -m600 ../shadow etc/shadow
+	install -m600 ../gshadow etc/gshadow
+	install -m600 ../crypttab etc/crypttab
 
 	for d in cache local opt log/old lib/misc empty; do
 		mkdir -p var/$d && chmod 755 var/$d
 	done
 
-	ln -s ../run var/run
-	ln -s ../run/lock var/lock
-	echo "PC" > "$pkgdir"/etc/hostname
+	install -m755 ../locale.sh etc/profile.d/locale.sh
 
-	install -m755 "$srcdir"/compressdoc "$pkgdir"/bin/compressdoc
+	ln -s ../run var/run
+	echo "PC" > etc/hostname
 
 	ln -s bin sbin
 
-	install -Dm644 "$srcdir"/protocol-numbers.xml "${pkgdir}/share/iana-etc/protocol-numbers.iana"
-	install -Dm644 "$srcdir"/service-names-port-numbers.xml "${pkgdir}/share/iana-etc/port-numbers.iana"
+	install -Dm644 "$srcdir"/protocol-numbers.xml share/iana-etc/protocol-numbers.iana
+	install -Dm644 "$srcdir"/service-names-port-numbers.xml share/iana-etc/port-numbers.iana
 
 	gawk '
 BEGIN {
@@ -73,7 +89,7 @@ BEGIN {
 	if (/<name/ && !($3~/ /)) n=$3
 	if (/<\/record/ && (v || n=="HOPOPT") && n) printf "%-12s %3i %s\n", tolower(n),v,n
 }
-' "$srcdir"/protocol-numbers.xml > "${pkgdir}/etc/protocols"
+' "$srcdir"/protocol-numbers.xml > etc/protocols
 
 	gawk '
 BEGIN {
@@ -88,11 +104,19 @@ BEGIN {
 	if (/<protocol/) p=$3
 	if (/Unassigned/ || /Reserved/ || /historic/) c=1
 	if (/<\/record/ && n && u && p && !c) printf "%-15s %5i/%s\n", n,u,p
-}' "$srcdir"/service-names-port-numbers.xml > "${pkgdir}/etc/services"
+}' "$srcdir"/service-names-port-numbers.xml > etc/services
 
-	cat >> "$pkgdir"/etc/noname-release << "EOF"
-noname-linux
-filesystems version: %V%
+	cat >> etc/os-release << "EOF"
+NAME=noname-linux
+PRETTY_NAME="Noname Linux"
 EOF
-	sed -i "s/%V%/$version/g" "$pkgdir"/etc/noname-release
-}
+
+	# setup systemd-sysctl
+	install -D -m644 "$srcdir"/sysctl lib/sysctl.d/10-noname.conf
+
+	# setup systemd-sysusers
+	install -D -m644 "$srcdir"/sysusers lib/sysusers.d/noname.conf
+
+	# setup systemd.environment-generator
+	install -D -m755 "$srcdir"/env-generator lib/systemd/system-environment-generators/10-noname
+'''

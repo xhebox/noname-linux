@@ -1,16 +1,14 @@
-name=libsndfile
-version=1.0.28
-deps="alsa-lib libvorbis flac"
-source="http://www.mega-nerd.com/libsndfile/files/libsndfile-$version.tar.gz"
+version="1.0.28"
+makedeps=["alsa-lib", "libvorbis", "flac"]
+deps=["alsa-lib", "libvorbis", "flac"]
 desc="Library for manipulating sound files."
+source=[{url="http://www.mega-nerd.com/libsndfile/files/libsndfile-$version.tar.gz"}]
 
-build() {
+build='''
 	cd libsndfile-$version
 
 	./configure --prefix=
 
-	make || die
-	make DESTDIR=$pkgdir install || die
-	rm -r $pkgdir/share/doc
-}
-
+	make
+	make DESTDIR=$pkgdir install
+'''

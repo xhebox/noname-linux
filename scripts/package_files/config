@@ -1,10 +1,16 @@
-#!/bin/sh
-ARCH=x86_64
-ARCH32=i386
-TARGET=x86_64-pc-linux-musl
-TARGET32=i386-pc-linux-musl
-ROOT=$SYSROOT/noname
-DB=$ROOT/var/db/pkg
-COLORS_F=1
-SUM="sha512sum"
-PORTS="/home/xhe/noname-linux/ports"
+arch64 = "x86_64"
+arch32 = "i386"
+target64 = "x86_64-pc-linux-musl"
+target32 = "i386-pc-linux-musl"
+color = true
+ccache = true
+root = "/"
+database = "/var/db/npkg"
+hooks = "/etc/pkg/hooks"
+ports = [
+	"/noname-linux/ports"
+]
+
+CFLAGS = "-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -fdata-sections -ffunction-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack"
+CXXFLAGS = "-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -fdata-sections -ffunction-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack"
+LDFLAGS = "-Wl,--gc-sections -Wl,-O1,--sort-common,--as-needed,-z,relro"

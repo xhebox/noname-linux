@@ -1,13 +1,13 @@
-name=giblib
-version=1.2.4
+version="1.2.4"
 desc="A library that feh uses as a wrapper to imlib2"
-deps="imlib2 libxext harfbuzz"
-source="http://sourceforge.net/projects/slackbuildsdirectlinks/files/giblib/giblib-$version.tar.gz"
+makedeps=["imlib2", "libxext", "harfbuzz"]
+deps=["imlib2", "libxext", "harfbuzz"]
+source=[{url="http://sourceforge.net/projects/slackbuildsdirectlinks/files/giblib/giblib-$version.tar.gz"}]
 
-build() {
+build='''
 	cd giblib-$version
 
 	./configure --prefix= -disable-static --with-imlib2-prefix=
-	make || die
-	make DESTDIR="${pkgdir}" docsdir=/share/doc/giblib install || die
-}
+	make
+	make DESTDIR="${pkgdir}" docsdir=/share/doc/giblib install
+'''

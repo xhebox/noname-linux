@@ -1,10 +1,10 @@
-name=libxaw
-version=1.0.13
+version="1.0.13"
 desc="libxaw"
-deps="libxmu libxpm"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXaw-$version.tar.bz2"
+makedeps=["libxmu", "libxpm"]
+deps=["libxmu", "libxpm"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXaw-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXaw-$version
 	./configure \
 		--prefix=/ \
@@ -15,6 +15,6 @@ build() {
 		--disable-xaw8 \
 		--disable-static \
 		--disable-xaw6
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

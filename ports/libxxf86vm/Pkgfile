@@ -1,15 +1,14 @@
-name=libxxf86vm
-version=1.1.4
+version="1.1.4"
 desc="X11 XFree86 video mode extension library"
-deps="libxext xorg-proto"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-$version.tar.bz2"
+makedeps=["xorgproto", "libxext"]
+deps=["libxext"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXxf86vm-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

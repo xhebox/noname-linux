@@ -1,16 +1,17 @@
-name=strace
-version=4.18
+version="4.21"
 desc="A useful diagnositic, instructional, and debugging tool"
-deps="perl libunwind"
-source="http://downloads.sourceforge.net/${name}/${name}-$version.tar.xz
-musl.patch"
+makedeps=["perl"]
+deps=["perl"]
+source=[
+	{url="https://github.com/strace/strace/releases/download/v$version/strace-$version.tar.xz"},
+	{url="musl.patch"},
+]
 
-build() {
-	cd $name-$version
-	patch -p0 < ../musl.patch || die
-	./configure --prefix=/ \
-		--with-libunwind
+build='''
+	cd strace-$version
+	patch -p0 -i ../musl.patch
+	./configure --prefix=/ --enable-mpers=m32 \
 
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

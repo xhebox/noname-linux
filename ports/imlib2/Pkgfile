@@ -1,14 +1,16 @@
-name=imlib2
-version=1.4.10
+version="1.5.1"
 desc="Library that does image file loading and saving as well as rendering, manipulation, arbitrary polygon support"
-deps="bzip2 harfbuzz libjpeg-turbo libpng libtiff libxext giflib"
-source="http://downloads.sourceforge.net/enlightenment/$name-$version.tar.bz2"
+makedeps=["bzip2", "harfbuzz", "libjpeg-turbo", "libpng", "libtiff", "libxext", "giflib"]
+deps=["bzip2", "harfbuzz", "libjpeg-turbo", "libpng", "libtiff", "libxext", "giflib"]
+source=[{url="http://nchc.dl.sourceforge.net/enlightenment/imlib2-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd imlib2-$version
+	PKG_NO_REMOVELA=yes
 	sed -i 's/@my_libs@//' imlib2-config.in
-	./configure --prefix= --enable-amd64 \
+	./configure --prefix= \
 	--sysconfdir=/etc/imlib2 \
+	--enable-amd64 \
 	--with-jpeg \
 	--with-png \
 	--with-tiff \
@@ -16,6 +18,6 @@ build() {
 	--with-zlib \
 	--with-bzip2 \
 	--x-libraries=/lib
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make
+	make DESTDIR="${pkgdir}" install
+'''

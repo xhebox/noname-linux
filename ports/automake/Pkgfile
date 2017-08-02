@@ -1,14 +1,13 @@
-name=automake
-version=1.15.1
-deps="autoconf perl"
+version="1.16.1"
+makedeps=["autoconf"]
+deps=["bash", "autoconf", "perl"]
 desc="A tool for automatically generating Makefiles"
-source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz"
+source=[{url="http://mirrors.ustc.edu.cn/gnu/automake/automake-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd automake-$version
+	./bootstrap
 	./configure --prefix=
-	make || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/doc 
-	rm -r "$pkgdir"/share/info 
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

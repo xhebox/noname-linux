@@ -1,18 +1,14 @@
-
-name=sysfsutils
-version=2.1.0
-deps=musl
+version="2.1.0"
+deps=["musl"]
 desc="System Utilities Based on Sysfs"
-source="http://downloads.sourceforge.net/sourceforge/linux-diag/${name}-${version}.tar.gz"
+source=[{url="http://nchc.dl.sourceforge.net/sourceforge/linux-diag/sysfsutils-${version}.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd sysfsutils-$version
 	./configure \
 		--prefix= \
-		--mandir=/share/man \
-		--disable-static 
+		--mandir=/share/man
 	
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

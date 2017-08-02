@@ -1,9 +1,0 @@
-lib/libspnav.so.0|777|0|0|symbolic link
-lib/libspnav.so|777|0|0|symbolic link
-include/spnav.h|644|1000|1000|regular file
-include/spnav_magellan.h|644|1000|1000|regular file
-include/spnav_config.h|644|1000|1000|regular file
-lib/libspnav.a|644|0|0|regular file
-lib/libspnav.so.0.1|755|0|0|regular file
-lib|755|0|0|directory
-include|755|0|0|directory

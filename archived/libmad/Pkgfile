@@ -1,0 +1,27 @@
+name=libmad
+version=0.15.1b
+desc="A high-quality MPEG audio decoder"
+deps="musl"
+source="http://nchc.dl.sourceforge.net/sourceforge/mad/libmad-${version}.tar.gz
+libmad.patch
+amd64-64bit.diff
+frame_length.diff
+optimize.diff"
+
+ext() {
+	cd libmad-$version
+	patch -p1 -i "${srcdir}/libmad.patch"
+	patch -p1 -i "${srcdir}/amd64-64bit.diff"
+	patch -p1 -i "${srcdir}/frame_length.diff"
+	patch -p1 -i "${srcdir}/optimize.diff"
+	sed -e 's,AM_CONFIG_HEADER,AC_CONFIG_HEADERS,g' -i configure.ac
+	autoconf
+}
+
+build() {
+	cd libmad-$version
+	CFLAGS="$CFLAGS -ftree-vectorize -ftree-vectorizer-verbose=1"
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+}

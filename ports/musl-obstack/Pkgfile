@@ -1,15 +1,14 @@
-name=musl-obstack
-version=1.1
-deps="automake libtool musl"
+version="1.1"
+deps=["musl"]
 desc="Implementation of obstack for musl libc"
-source="https://github.com/pullmoll/${name}/archive/v${version}.tar.gz"
+source=[{url="https://github.com/pullmoll/musl-obstack/archive/v${version}.tar.gz"}]
 
-build() {
+build='''
 	export CFLAGS="-fPIC"
-	cd $name-$version
+	cd musl-obstack-$version
 	./bootstrap.sh
-	./configure --prefix= --disable-shared 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	install -Dm644 ${name}.pc "$pkgdir"/lib/pkgconfig/$name.pc
-}
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 musl-obstack.pc "$pkgdir"/lib/pkgconfig/musl-obstack.pc
+'''

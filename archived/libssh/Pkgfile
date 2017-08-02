@@ -1,0 +1,23 @@
+name=libssh
+version=0.7.5
+desc="Library for accessing ssh client services through C libraries"
+deps="libgcrypt zlib libressl cmake cmocka"
+source="https://red.libssh.org/attachments/download/218/$name-$version.tar.xz"
+
+ext() {
+	sed 's/unit_test(torture_path_expand_tilde_unix),//' -i libssh-${version}/tests/unittests/torture_misc.c
+	mkdir -p build
+	CFLAGS="$CFLAGS -largp"
+}
+
+build() {
+	cd build
+	cmake ../$name-$version \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DWITH_GSSAPI=OFF \
+		-DWITH_GCRYPT=ON \
+		-DWITH_TESTING=ON
+	make
+	make DESTDIR="$pkgdir" install
+}

@@ -1,0 +1,23 @@
+name=tlp
+version=1.1
+deps="hdparm iw pciutils usbutils util-linux ethtool linux-tools bash smartmontools"
+source="tlp-${version}.tar.gz::https://github.com/linrunner/TLP/archive/${version}.tar.gz
+tlp.conf
+finit.patch"
+
+ext() {
+	cd TLP-${version}
+	patch -p1 < ../finit.patch
+}
+
+build() {
+	cd TLP-${version}
+	export TLP_SBIN='/bin'
+	export TLP_ULIB='/lib/udev'
+	export TLP_NO_INIT='1'
+	export TLP_NO_PMUTILS='1'
+	sed -i 's/\/usr//g' Makefile
+	find . -type f -exec sed -i 's|!#/bin/sh|!#/bin/bash|g' {} \;
+	make PREFIX=/ DESTDIR="${pkgdir}" install-tlp install-man
+	install -Dm644 ../tlp.conf "$pkgdir"/etc/finit.d/tlp.conf
+}

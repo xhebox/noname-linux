@@ -1,0 +1,18 @@
+--- a/threading_pthread.c
++++ b/threading_pthread.c
+@@ -44,6 +44,7 @@
+         return 0;
+     }
+ 
++    pthread_attr_setstacksize(&attr, 524288);
+     s = pthread_create (&tid, &attr, (void *(*)(void *))fn, (void*)ctx);
+     if (s != 0) {
+         fprintf (stderr, "pthread_create failed: %s\n", strerror (s));
+@@ -77,6 +78,7 @@
+     int minprio = sched_get_priority_min (policy);
+ #endif
+ 
++    pthread_attr_setstacksize(&attr, 524288);
+     s = pthread_create (&tid, &attr, (void *(*)(void *))fn, (void*)ctx);
+     if (s != 0) {
+         fprintf (stderr, "pthread_create failed: %s\n", strerror (s));

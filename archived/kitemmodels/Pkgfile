@@ -1,0 +1,19 @@
+name=kitemmodels
+version=5.38.0
+desc='Models for Qt Model/View system'
+deps="qt5-base extra-cmake-modules llvm"
+source="https://download.kde.org/stable/frameworks/${version%.*}/kitemmodels-${version}.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../kitemmodels-${version} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DKDE_INSTALL_LIBDIR=lib \
+		-DKDE_INSTALL_LIBEXECDIR=lib \
+		-DBUILD_TESTING=OFF
+
+	make || die
+	make DESTDIR="${pkgdir}" install || die
+}

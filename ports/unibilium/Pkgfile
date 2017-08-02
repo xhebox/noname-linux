@@ -1,0 +1,9 @@
+version="2.0.0"
+desc='A terminfo parsing library'
+source=[{name="unibilium-$version.tar.gz", url="https://github.com/mauke/unibilium/archive/v$version.tar.gz"}]
+
+build='''
+	cd unibilium-$version
+	make PREFIX=/
+	DESTDIR="$pkgdir" make install PREFIX=/
+'''

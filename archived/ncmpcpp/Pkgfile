@@ -1,0 +1,23 @@
+name=ncmpcpp
+version=0.8.2
+desc='Almost exact clone of ncmpc with some new features'
+deps="curl libmpdclient taglib ncurses fftw boost"
+source="https://rybczak.net/ncmpcpp/stable/ncmpcpp-$version.tar.bz2"
+
+build() {
+	cd ncmpcpp-$version
+	CPPFLAGS="$CPPFLAGS -DU_USING_ICU_NAMESPACE=1"
+	BOOST_LIB_SUFFIX='' ./configure \
+		--prefix= \
+		--enable-clock \
+		--enable-outputs \
+		--enable-unicode \
+		--enable-visualizer \
+		--with-curl \
+		--with-fftw \
+		--with-taglib
+	make
+	make -C extras
+	make DESTDIR="${pkgdir}" install
+	install -Dm 755 extras/artist_to_albumartist -t "${pkgdir}/bin"
+}

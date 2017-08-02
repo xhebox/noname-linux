@@ -1,0 +1,26 @@
+version="r139.d612e07"
+desc="A library to support generic input method implementation"
+deps=["boost", "fcitx5"]
+makedeps=["boost", "fcitx5", "extra-cmake-modules", "python3"]
+
+source=[
+	{url="https://gitlab.com/fcitx/libime", protocol="git", commit="d612e0722a3fed5ede2138195c8b54d61dca4798"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd libime
+	git submodule update --init
+	for i in $source;do
+		case $i in
+		*patch) patch -p1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build='''
+	cd libime
+	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=/lib .
+	make
+	make DESTDIR="$pkgdir" install
+'''

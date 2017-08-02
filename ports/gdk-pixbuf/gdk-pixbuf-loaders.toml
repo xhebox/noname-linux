@@ -1,0 +1,4 @@
+pattern=["lib/gdk-pixbuf"]
+script='''
+gdk-pixbuf-query-loaders --update-cache
+'''

@@ -1,0 +1,15 @@
+name=aircrack-ng
+version=1.3
+deps="zlib libressl libnl sqlite ethtool net-tools iw"
+desc="A key cracker for the 802.11 WEP and WPA-PSK protocols"
+source="https://github.com/aircrack-ng/aircrack-ng/archive/$version.tar.gz"
+
+build() {
+	cd aircrack-ng-$version
+	./autogen.sh
+	./configure --prefix= --libexecdir=/lib
+	make
+	make DESTDIR="$pkgdir" sqlite=true experimental=true \
+		bindir=/bin sbindir=/bin mandir=/share/man/man1/ \
+		smandir=/share/man/man8/ install
+}

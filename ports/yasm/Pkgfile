@@ -1,14 +1,12 @@
-name=yasm
-version=1.3.0
-deps=musl
+version="1.3.0"
+deps=["musl"]
 desc="A complete rewrite of the NASM assembler under the new BSD License"
-source="http://www.tortall.net/projects/yasm/releases/$name-$version.tar.gz"
+source=[{url="http://www.tortall.net/projects/yasm/releases/yasm-$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-
+build='''
+	cd yasm-$version
 	./configure --prefix=/ --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

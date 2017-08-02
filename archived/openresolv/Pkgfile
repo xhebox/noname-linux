@@ -1,0 +1,13 @@
+version="3.9.0"
+desc="resolv.conf management framework (resolvconf)"
+makedeps=["systemd"]
+deps=["systemd"]
+source=[{url="https://roy.marples.name/downloads/openresolv/openresolv-${version}.tar.xz"}]
+
+build='''
+	cd openresolv-$version
+	sed -n '2,25{s:^# \?::;p}' resolvconf.in > LICENSE
+	./configure --prefix=/ --sysconfdir=/etc --libexecdir=/lib/resolvconf --sbindir=/bin
+	make
+	make DESTDIR="$pkgdir" install
+'''

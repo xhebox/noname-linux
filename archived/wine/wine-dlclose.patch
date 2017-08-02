@@ -1,0 +1,51 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -1123,6 +1123,12 @@ then
+ 
+     dnl *** End of X11/Xlib.h check
+ 
++    dnl Check for the unload_after_dlclose libc
++    AC_RUN_IFELSE(
++	      [AC_LANG_PROGRAM([[#include <dlfcn.h>]], [[dlclose(dlopen("./conftest", 0)); return 0;]])],
++	      ac_save_CPPFLAGS="$ac_save_CPPFLAGS -DNO_UNLOAD_AFTER_DLCLOSE",
++	      [])
++
+     dnl Check for the presence of OpenGL
+     opengl_msg=""
+     if test "x$with_opengl" != "xno"
+--- a/dlls/ntdll/loader.c
++++ b/dlls/ntdll/loader.c
+@@ -3199,6 +3199,9 @@
+  *		LdrShutdownProcess (NTDLL.@)
+  *
+  */
++#ifdef NO_UNLOAD_AFTER_DLCLOSE
++static void MODULE_FlushModrefs(void);
++#endif
+ void WINAPI LdrShutdownProcess(void)
+ {
+     TRACE("()\n");
+@@ -3194,6 +3203,11 @@
+     TRACE("()\n");
++#ifdef NO_UNLOAD_AFTER_DLCLOSE
++    RtlEnterCriticalSection( &loader_section );
++    MODULE_FlushModrefs();
++    RtlLeaveCriticalSection( &loader_section );
++#endif
+     process_detaching = TRUE;
+     process_detach();
+ }
+ 
+ 
+@@ -3384,7 +3398,11 @@
+         if ( free_lib_count <= 1 )
+         {
++#ifdef NO_UNLOAD_AFTER_DLCLOSE
++            TRACE("apply no-op dlclose hacks on this platform\n");
++#else
+             process_detach();
+             MODULE_FlushModrefs();
++#endif
+         }
+ 
+         TRACE("END\n");

@@ -1,0 +1,26 @@
+name=lynx
+desc="Text-based web browser."
+version=2.8.8
+ver=`echo $version | sed 's/\./-/g'`
+deps="ncurses libressl zlib libidn"
+source="http://invisible-mirror.net/archives/lynx/tarballs/lynx${version}rel.2.tar.bz2
+patch-WWW_Library_Implementation_HTTP.c"
+
+build() {
+	cd lynx$ver
+	patch -p0 < ../patch-WWW_Library_Implementation_HTTP.c
+
+	./configure \
+		--prefix= \
+		--enable-color-style \
+		--enable-ipv6 \
+		--with-ssl=/lib \
+		--with-libidn \
+		--with-zlib
+
+	make
+	make -j1 DESTDIR=$pkgdir install
+	sed -i -e "s|^HELPFILE.*$|HELPFILE:file:///share/doc/lynx/lynx_help/lynx_help_main.html|" ${pkgdir}/etc/lynx.cfg
+	install -d ${pkgdir}/share/doc/lynx
+	cp -rf lynx_help ${pkgdir}/share/doc/lynx
+}

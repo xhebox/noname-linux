@@ -1,0 +1,14 @@
+version="0.1.3"
+desc="a standalone utility for handling systemd-style tmpfiles.d settings"
+source=[
+	{url="https://github.com/OpenRC/opentmpfiles/archive/$version.tar.gz"},
+	{url="tmpfiles-init.sh"},
+	{url="tmpfiles.toml"},
+]
+
+build='''
+	cd opentmpfiles-$version
+	make DESTDIR="$pkgdir" install
+	install -Dm755 ../tmpfiles.toml "$pkgdir/${HOOKS#$ROOT}"/tmpfiles.toml
+	install -Dm755 ../tmpfiles-init.sh "$pkgdir"/etc/init.d/tmpfiles-init.sh
+'''

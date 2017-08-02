@@ -1,0 +1,42 @@
+name=ruby
+version=2.5.1
+deps="gdbm libgmp libressl readline zlib libffi libyaml graphviz"
+desc="Ruby interpreter"
+source="http://cache.ruby-lang.org/pub/ruby/${version%.*}/ruby-$version.tar.xz
+patch-ext_openssl_extconf_rb.patch
+patch-ext_openssl_openssl_missing_h.patch
+"
+
+ext() {
+	cd ruby-$version
+	for i in $source; do
+		msg $i
+		case $i in
+		*openssl*patch) patch -p0 < ../$i;;
+		*patch) patch -p1 < ../$i;;
+		esac
+	done
+}
+
+build() {
+	cd ruby-$version
+	./configure --prefix= \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--sharedstatedir=/var/lib \
+		--libexecdir=/lib/ruby \
+		--enable-shared \
+		--disable-rpath \
+		--with-ruby-version=minor
+
+	make
+	make DESTDIR=$pkgdir install
+	mkdir -p "$pkgdir"/etc
+	cat >> "$pkgdir"/etc/gemrc << "EOF"
+# Read about the gemrc format at http://guides.rubygems.org/command-reference/#gem-environment
+
+# --user-install is used to install to $HOME/.gem/ by default since we want to separate
+#								pacman installed gems and gem installed gems
+gem: --user-install
+EOF
+}

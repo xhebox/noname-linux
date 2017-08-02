@@ -1,0 +1,10 @@
+--- a/src/libunwind/lib.rs
++++ b/src/libunwind/lib.rs
+@@ -36,6 +36,6 @@
+ }
+ 
+ #[cfg(target_env = "musl")]
+-#[link(name = "unwind", kind = "static", cfg(target_feature = "crt-static"))]
++#[link(name = "gcc_eh", cfg(target_feature = "crt-static"))]
+ #[link(name = "gcc_s", cfg(not(target_feature = "crt-static")))]
+ extern {}

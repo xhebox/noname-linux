@@ -1,0 +1,29 @@
+. $PORTS/attr/Pkgfile
+name=attr-32
+deps="$deps attr"
+
+build() {
+  cd attr-$version
+  export CC="gcc -m32"
+        export CXX="g++ -m32"
+        export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  unset PLATFORM #184564
+  export DEBUG=-DNDEBUG
+  export OPTIMIZER="$CFLAGS"
+  export INSTALL_USER=root
+  export INSTALL_GROUP=root
+  ./configure \
+    --prefix= \
+    --enable-shared \
+    --disable-static \
+    --enable-gettext \
+    --enable-nls \
+    --libdir=/lib32 \
+    --libexecdir=/lib32
+  make
+  make -j1 DESTDIR="$pkgdir" install
+  rm -rf "$pkgdir"/include
+  rm -rf "$pkgdir"/share
+  rm -rf "$pkgdir"/bin
+  rm -rf "$pkgdir"/etc
+}

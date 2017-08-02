@@ -1,0 +1,4 @@
+pattern=["lib/initcpio"]
+script='''
+mkinitcpio -P
+'''

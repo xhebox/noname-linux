@@ -1,16 +1,14 @@
-name=numlockx
-version=1.2
-deps="libxtst"
+version="1.2"
+makedeps=["libxtst"]
+deps=["libxtst"]
 desc="Turns on the numlock key in X11."
-source="http://pkgs.fedoraproject.org/repo/pkgs/${name}/${name}-${version}.tar.gz/be9109370447eae23f6f3f8527bb1a67/${name}-${version}.tar.gz"
+source=[{url="http://pkgs.fedoraproject.org/repo/pkgs/numlockx/numlockx-${version}.tar.gz/be9109370447eae23f6f3f8527bb1a67/numlockx-${version}.tar.gz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd numlockx-$version
 
-	./configure --prefix= --disable-static \
-	x_includes=/include/X11 x_libraries=/lib
+	./configure --prefix= --disable-static x_includes=/include/X11 x_libraries=/lib
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
-
+	make
+	make DESTDIR="$pkgdir" install
+'''

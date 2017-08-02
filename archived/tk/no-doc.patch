@@ -1,0 +1,11 @@
+--- tk-core-8-6-8/unix/Makefile	2018-03-03 16:15:26.591173446 +0000
++++ tk-core-8-6-8/unix/Makefile	2018-03-03 16:15:26.591173446 +0000
+@@ -578,7 +578,7 @@
+ $(TOP_DIR)/doc/man.macros:
+ 	$(INSTALL_DATA) /home/xhe/noname-linux/ports/tcl/.src/tcl-core-8-6-8/doc/man.macros $(TOP_DIR)/doc/man.macros
+ 
+-doc: $(TOP_DIR)/doc/man.macros
++doc:
+ 
+ # The following target is configured by autoconf to generate either
+ # a shared library or non-shared library for Tk.

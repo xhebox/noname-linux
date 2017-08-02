@@ -1,0 +1,12 @@
+version="2018.4"
+desc="combined X.Org X11 Protocol headers"
+makedeps=["util-macros", "meson"]
+source=[{url="https://xorg.freedesktop.org/archive/individual/proto/xorgproto-$version.tar.bz2"}]
+
+build='''
+	mkdir build
+	noname-meson xorgproto-$version build -Dlegacy=true
+
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

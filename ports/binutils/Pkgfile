@@ -1,44 +1,54 @@
-name=binutils
-version=2.28
+version="2.31.1"
 desc="The GNU Binutils are a collection of binary tools"
-source="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.bz2
-https://git.busybox.net/buildroot/plain/package/binutils/arc-2016.09-eng005/0800-Docs-Prevent-build-failures-when-makeinfo-is-missing.patch"
-deps="zlib bison"
+makedeps=["zlib"]
+deps=["zlib"]
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.bz2"},
+	{url="0001-PR23428-x86-Add-a-GNU_PROPERTY_X86_ISA_1_USED-note-if-needed.patch"},
+	{url="0002-PR23460-Close-resource-leaks-in-the-BFD-library-s-plugin-han.patch"},
+	{url="0003-PR23460-Add-a-testcase-for-PR-binutils-23460.patch"},
+	{url="0004-PR23486-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED-x86_64.patch"},
+	{url="0005-PR23486-x86-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED.patch"},
+	{url="0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch"},
+]
 
-build(){
-	cd $name-$version
-
+ext='''
+	cd binutils-$version
 	for i in $source; do
 		case $i in
-		*.patch) patch -p1 -i "$srcdir"/"`basename $i`" ;;
+		*.patch) patch -p1 -i "$srcdir/$i" ;;
 		esac
 	done
+'''
+
+build='''
+	cd binutils-$version
 	sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
 	sed -e 's,source,\.,g' -i ld/scripttempl/elf32msp430.sc
 	./configure \
-		ac_cv_prog_MAKEINFO=missing \
+		--target=$TARGET \
 		--host=$TARGET \
 		--build=$TARGET \
-		--target=$TARGET \
 		--prefix= \
+		--with-lib-path=/lib:/local/lib:/usr/lib:/usr/local/lib \
 		--enable-plugins \
 		--enable-threads \
 		--enable-ld=default \
 		--with-pic \
+		--enable-relro \
 		--enable-gold \
 		--enable-shared \
 		--enable-deterministic-archives \
-		--enable-nls \
-		--disable-werror 
+		--with-system-zlib \
+		--disable-gdb \
+		--disable-werror \
+		--enable-targets=x86_64-pep \
+		--enable-nls
 
-	make  || die
-	make DESTDIR="$pkgdir" tooldir=/ install  || die
-	rm ${pkgdir}/share/man/man1/dlltool*
-	rm ${pkgdir}/share/man/man1/nlmconv*
-	rm ${pkgdir}/share/man/man1/windres*
-	rm ${pkgdir}/share/man/man1/windmc*
-	rm -r "$pkgdir"/share/info
+	make configure-host
+	make tooldir=/usr
+	make DESTDIR="$pkgdir" tooldir=/ install
 	rm "$pkgdir"/bin/ld
 	ln -sf ld.bfd "$pkgdir"/bin/ld
-	sed -i "s|-L$srcdir[^ ]* ||g" "$pkgdir"/lib/libbfd.la  "$pkgdir"/lib/libopcodes.la
-}
+	sed -i "s|-L$srcdir[^ ]* ||g" "$pkgdir"/lib/libbfd.la	"$pkgdir"/lib/libopcodes.la
+'''

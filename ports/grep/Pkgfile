@@ -1,15 +1,12 @@
-name=grep
-version=3.1
+version="3.1"
 desc="The GNU grep utility"
-source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
-deps="bash libpcre"
+makdeps=["texinfo"]
+deps=["musl", "libpcre"]
+source=[{url="http://ftp.gnu.org/pub/gnu/grep/grep-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
-	./configure --prefix= \
-                --libexecdir=/lib \
-                --disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install   || die
-	rm -r "$pkgdir"/share/info
-}
+build='''
+	cd grep-$version
+	./configure --prefix= --libexecdir=/lib
+	make
+	make DESTDIR="$pkgdir" install 
+'''

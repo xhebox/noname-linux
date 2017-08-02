@@ -1,0 +1,13 @@
+. ../libva-intel-driver/Pkgfile
+name=libva-intel-driver-32
+deps="xorgproto libva-32 libva-intel-driver"
+
+build() {
+  cd intel-vaapi-driver-$version
+  export CC="gcc -m32"
+  export CXX="g++ -m32"
+  export PKG_CONFIG_PATH="/lib32/pkgconfig"
+  ./configure --prefix= --disable-static --libdir=/lib32
+  make
+  make DESTDIR="$pkgdir" install
+}

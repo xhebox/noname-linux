@@ -1,28 +1,31 @@
-name=glib
-version=2.52.3
+version="2.58.3"
 desc="Low-level data structure handling, portability wrappers, and interfaces for runtime functionality"
-deps="libpcre libffi python elfutils libxslt dbus"
-source="http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz
-0001-gquark-make-sure-quark-is-initialized-before-create-.patch"
+makedeps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
+deps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
+source=[
+	{url="http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz"},
+	{url="gio.toml"},
+	{url="glib-schemas.toml"},
+	{url="gobject_init_on_demand.patch"},
+	{url="quark_init_on_demand.patch"},
+	{url="noisy-glib-compile-schemas.diff"},
+]
 
-ext() {
+ext='''
 	cd glib-$version
 	for i in $source; do
 		case $i in
-		*patch) msg $i && patch -p1 < ../$i || die;;
+		*patch) echo $i && patch -p0 < ../$i;;
 		esac
 	done
-}
+'''
 
-build() {
-	cd glib-$version
-	./configure --prefix=/ \
-	--enable-static \
-	--enable-libelf \
-	--with-python=/bin/python \
-	--disable-fam \
-	--with-pcre=system
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make || die
-	make -j1 DESTDIR="$pkgdir" install || die
-}
+build='''
+	noname-meson glib-$version build -D selinux=false -D man=true
+	ninja -C build
+	DESTDIR="$pkgdir" meson install -C build
+	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
+	python -O -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
+	install -Dm755 ../gio.toml "$pkgdir/${HOOKS#$ROOT}"/gio.toml
+	install -Dm755 ../glib-schemas.toml "$pkgdir/${HOOKS#$ROOT}"/glib-schemas.toml
+'''

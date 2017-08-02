@@ -1,35 +1,34 @@
-name=cairo
-version=1.14.10
-desc="A 2D graphics library with support for multiple output devices"
-deps="libpng pixman libx11 libxcb libxrender libjpeg-turbo libxext glib lzo"
-source="https://cairographics.org/releases/$name-$version.tar.xz
-"
+version="1.16.0"
+mesc="A 2D graphics library with support for multiple output devices"
+makedeps=["libpng", "pixman", "libx11", "libxcb", "libxrender", "libjpeg-turbo", "libxext", "glib", "lzo", "xorgproto"]
+deps=["libpng", "pixman", "libx11", "libxcb", "libxrender", "libjpeg-turbo", "libxext", "glib", "lzo"]
+source=[{url="https://cairographics.org/releases/cairo-$version.tar.xz"}]
 
-ext() {
-        cd $name-$version
+ext='''
+	cd cairo-$version
 	for i in $source; do
 		case $i in
-		*musl*.patch) patch -p0 -i "$srcdir/$i" || die;;
-		*.patch) patch -p1 -i "$srcdir/$i" || die;;
+		*musl*.patch) patch -p0 -i "$srcdir/$i";;
+		*.patch) patch -p1 -i "$srcdir/$i";;
 		esac
 	done
-}
+'''
 
-build() {
-        cd $name-$version
-        ./configure \
+build='''
+	cd cairo-$version
+	unset LDFLAGS
+	./configure \
 		--prefix= \
 		--libdir=/lib \
 		--libexecdir=/lib \
-		--disable-static \
 		--enable-tee \
-		--enable-gl \
-		--enable-egl \
+		--disable-gl \
+		--disable-static \
 		--enable-svg \
 		--enable-ps \
 		--enable-pdf \
 		--enable-gobject \
-                --disable-gtk-doc
-        make || die
-        make DESTDIR="$pkgdir" install || die
-}
+		--disable-gtk-doc
+	make
+	make DESTDIR="$pkgdir" install
+'''

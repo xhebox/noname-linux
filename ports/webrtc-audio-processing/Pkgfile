@@ -1,17 +1,16 @@
-name=webrtc-audio-processing
-version=0.3
+version="0.3"
 desc="AudioProcessing library based on Google's implementation of WebRTC"
-source="
-execinfo.patch
-http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/$name-$version.tar.xz
-"
+source=[
+	{url="execinfo.patch"},
+	{url="http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/$name-$version.tar.xz"},
+]
 
-build() {
-	cd $name-$version
-	patch -p1 < ../execinfo.patch
+build='''
+	cd webrtc-audio-processing-$version
+	patch -p1 -i ../execinfo.patch
 	./configure \
 		--prefix= \
 		--disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

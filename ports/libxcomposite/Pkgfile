@@ -1,14 +1,14 @@
-name=libxcomposite
-version=0.4.4
+version="0.4.4"
 desc="X Composite extension client library"
-deps="libxext libxfixes"
-source="http://xorg.freedesktop.org/releases/individual/lib/libXcomposite-$version.tar.bz2"
+makedeps=["libxext", "libxfixes"]
+deps=["libxext", "libxfixes"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXcomposite-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd libXcomposite-$version
 
 	./configure --prefix= --disable-static
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

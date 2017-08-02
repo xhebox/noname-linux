@@ -1,0 +1,14 @@
+version="1.0.10"
+desc="Xvmc library"
+makedeps=["xorgproto", "libxv", "libxext"]
+deps=["libxv", "libxext"]
+source=[{url="http://xorg.freedesktop.org/releases/individual/lib/libXvMC-$version.tar.bz2"}]
+
+build='''
+	cd libXvMC-$version
+
+	./configure --prefix= --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

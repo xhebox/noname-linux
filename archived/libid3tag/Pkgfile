@@ -1,0 +1,26 @@
+name=libid3tag
+version=0.15.1b
+desc="library for id3 tagging"
+deps="zlib gperf"
+source="ftp://ftp.mars.org/pub/mpeg/libid3tag-$version.tar.gz
+gperf.patch
+id3tag.pc
+10_utf16.diff
+11_unknown_encoding.diff
+CVE-2008-2109.patch"
+
+ext() {
+	cd libid3tag-$version
+	patch -p1 -i ../gperf.patch
+	patch -p1 -i ../10_utf16.diff
+	patch -p1 -i ../11_unknown_encoding.diff
+	patch -Np0 -i ../CVE-2008-2109.patch
+}
+
+build() {
+	cd libid3tag-$version
+	./configure --prefix=
+	make
+	make DESTDIR="${pkgdir}" install ||die
+	install -D -m644 ../id3tag.pc "${pkgdir}/lib/pkgconfig/id3tag.pc"
+}

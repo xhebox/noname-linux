@@ -1,45 +1,45 @@
-name=ca-certificates
-version=20161130+nmu1
+version="20180409"
 desc="Common CA certificate"
-source="
-http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_$version.tar.xz
-https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/certdata2pem.c
-https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/remove-expired-certs.sh
-"
-deps="run-parts coreutils findutils sed dash"
+source=[
+	{url="http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_$version.tar.xz"},
+	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/certdata2pem.c"},
+	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/remove-expired-certs.sh"},
+	{url="ca-certs.toml"},
+]
+deps=["run-parts", "coreutils", "libressl", "dash"]
 
-build() {
-	cd ca-certificates-${version%+*}
-	find . -type f -exec sed -i -e 's/\/usr\/share/\/share/g' -e 's/\/usr\/bin/\/bin/g' -e 's/\/usr\/sbin/\/sbin/g' {} \;
+ext='''
+	cd ca-certificates
+
+	find . -type f -exec sed -i -e 's/\/usr\/share/\/share/g' -e 's/\/usr\/bin/\/bin/g' -e 's/\/usr\/sbin/\/bin/g' {} \;
+
 	gcc ../certdata2pem.c -o mozilla/certdata2pem
+
 	install -Dm755 ../remove-expired-certs.sh mozilla
-	sed -i mozilla/Makefile \
-		-e 's,python certdata2pem.py,./certdata2pem,g'
-	sed -i mozilla/Makefile \
-		-e "s;\(.*\)\(certdata2pem.*\);\1\2\n\1./remove-expired-certs.sh;"
-	make || die
 
+	sed -i mozilla/Makefile -e 's,python certdata2pem.py,./certdata2pem,g'
+	sed -i mozilla/Makefile -e "s;\(.*\)\(certdata2pem.*\);\1\2\n\1./remove-expired-certs.sh;"
+	sed -i 's/openssl rehash/openssl certhash/g' sbin/update-ca-certificates
+'''
+
+build='''
+	cd ca-certificates
+	make
+
+	mkdir -p "$pkgdir"/bin
 	mkdir -p "$pkgdir"/share/ca-certificates
-	mkdir "$pkgdir"/sbin
-	mkdir "$pkgdir"/bin
+	mkdir -p "$pkgdir"/etc/ca-certificates/update.d
 	mkdir -p "$pkgdir"/etc/ssl/certs
-	make install DESTDIR=${pkgdir} || die
-	install -Dm644 sbin/update-ca-certificates.8 \
-		${pkgdir}/share/man/man8/update-ca-certificates.8
-	cd ${pkgdir}/share/ca-certificates
-	find . -name '*.crt' | sort | cut -b3- > ${pkgdir}/etc/ca-certificates.conf
-	sed -i 's,c_rehash,openssl certhash,g' ${pkgdir}/sbin/update-ca-certificates
-	mv ${pkgdir}/sbin/* ${pkgdir}/bin
-	rmdir "$pkgdir"/sbin
-	ln -s /etc/ssl/certs/ca-certificates.crt ${pkgdir}/etc/ssl/certs.pem
+	make install DESTDIR=${pkgdir}
 
-	[ ! -d "$pkgdir"/etc/ca-certificates/update.d ] && \
-		install -d "$pkgdir"/etc/ca-certificates/update.d || true
-	[ ! -d "$pkgdir"/etc/ssl/certs ] && install -d "$pkgdir"/etc/ssl/certs || true
-}
+	install -Dm644 sbin/update-ca-certificates.8 "${pkgdir}"/share/man/man8/update-ca-certificates.8
 
-post() {
-	if [ "$UPD" -eq 1 ]; then
-		pchroot "$ROOT" /bin/update-ca-certificates --fresh
-	fi
-}
+	sed -i 's,c_rehash,openssl certhash,g' "${pkgdir}"/bin/update-ca-certificates
+
+	ln -sr "$pkgdir"/etc/ssl/certs/ca-certificates.crt "$pkgdir"/etc/ssl/certs.pem
+
+	install -Dm755 ../ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
+
+	cd "${pkgdir}"/share/ca-certificates
+	find . -name '*.crt' | sort | cut -b3- > "${pkgdir}"/etc/ca-certificates.conf
+'''

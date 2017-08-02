@@ -1,14 +1,13 @@
-name=giflib
-version=5.1.4
-deps=xmlto
+version="5.1.4"
+makedeps=["xmlto", "docbook-xml", "docbook-xsl"]
 desc="A library for reading and writing gif images"
-source="
-http://downloads.sourceforge.net/sourceforge/giflib/giflib-${version}.tar.bz2
-"
+source=[
+	{url="http://nchc.dl.sourceforge.net/sourceforge/giflib/giflib-${version}.tar.bz2"},
+]
 
-build() {
+build='''
 	cd giflib-$version
-	./configure --prefix= --disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	./configure --prefix= --disable-static --disable-docs
+	make
+	make DESTDIR="$pkgdir" install
+'''

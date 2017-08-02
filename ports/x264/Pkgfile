@@ -1,19 +1,13 @@
-name=x264
-version=148.20170521
-deps="perl yasm l-smash"
+version="155"
+makedeps=["perl", "nasm", "l-smash"]
+deps=["l-smash"]
 desc="Free library for encoding H264/AVC video streams"
-_commit='97eaef2ab82a46d13ea5e00270712d6475fbe42b'
+source=[{url="git://git.videolan.org/x264", protocol="git", commit="0a84d986e7020f8344f00752e3600b9769cc1e85"}]
 
-ext() {
-	git clone git://git.videolan.org/x264.git
-	cd x264
-	git reset --hard $_commit
-}
-
-build() {
+build='''
 	cd x264
 	./configure --prefix=/ \
 		--enable-pic --enable-shared
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

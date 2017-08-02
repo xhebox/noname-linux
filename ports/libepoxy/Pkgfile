@@ -1,15 +1,15 @@
-name=libepoxy
-version=1.4.3
+version="1.5.2"
 desc="Direct Rendering Manager runtime library"
-deps="mesa graphviz"
-source="https://github.com/anholt/libepoxy/archive/$version.tar.gz"
+makedeps=["mesa", "meson"]
+deps=["mesa"]
+source=[{url="https://github.com/anholt/libepoxy/archive/$version.tar.gz"}]
 
-build() {
-	cd $name-$version
-	NOCONFIGURE=1 ./autogen.sh
-	./configure --prefix= --disable-static \
-		--enable-shared
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+ext='''
+	sed -i /\'test\'/d libepoxy-$version/meson.build
+'''
 
+build='''
+	noname-meson libepoxy-$version build -Denable_docs=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

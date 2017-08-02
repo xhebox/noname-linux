@@ -1,0 +1,5 @@
+pattern=["share/ca-certificates/*"]
+noarg=true
+script='''
+update-ca-certificates --fresh
+'''

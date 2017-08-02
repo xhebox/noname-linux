@@ -1,16 +1,20 @@
-name=tar
-version=1.29
+version="1.30"
 desc="GNU tar"
-deps="pigz pbzip2 xz lz4"
-source="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+makedeps=["acl", "attr"]
+deps=["musl", "acl", "attr"]
+source=[
+	{url="http://ftp.gnu.org/gnu/tar/tar-$version.tar.xz"},
+	{url="argp.patch"},
+]
 
-build() {
-	cd $name-$version
-	./configure \
-		--prefix= \
-		--libexecdir=/lib \
-		FORCE_UNSAFE_CONFIGURE=1 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -r "$pkgdir"/share/info
-}
+ext='''
+	cd tar-$version
+	patch -p1 -i ../argp.patch
+'''
+
+build='''
+	cd tar-$version
+	./configure --prefix= --libexecdir=/lib FORCE_UNSAFE_CONFIGURE=1 
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,12 +1,12 @@
-name=lcms2
-version=2.8
-deps=libtiff
+version="2.9"
+makedeps=["libtiff"]
+deps=["libtiff"]
 desc="Little CMS intends to be an small-footprint color management engine"
-source="http://downloads.sourceforge.net/project/lcms/lcms/$version/${name}-$version.tar.gz"
+source=[{url="https://github.com/mm2/Little-CMS/archive/lcms$version.tar.gz"}]
 
-build() {
-	cd ${name}-$version
+build='''
+	cd Little-CMS-lcms$version
 	./configure --prefix= --disable-static
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

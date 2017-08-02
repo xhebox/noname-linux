@@ -1,0 +1,33 @@
+--- kitty-0.8.4/kitty/parser.c	2018-03-31 06:46:35.000000000 +0000
++++ kitty-0.8.4/kitty/parser.c	2018-03-31 06:46:35.000000000 +0000
+@@ -13,7 +13,7 @@
+ extern PyTypeObject Screen_Type;
+ 
+ // utils {{{
+-static uint64_t pow10[] = {
++static uint64_t pow_10[] = {
+     1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000
+ };
+ 
+@@ -26,9 +26,9 @@
+         if (*p == '0') { p++; sz--; }
+         else break;
+     }
+-    if (sz < sizeof(pow10)/sizeof(pow10[0])) {
++    if (sz < sizeof(pow_10)/sizeof(pow_10[0])) {
+         for (int i = sz-1, j=0; i >= 0; i--, j++) {
+-            ans += (p[i] - '0') * pow10[j];
++            ans += (p[i] - '0') * pow_10[j];
+         }
+     }
+     return ans;
+--- kitty-0.8.4/kitty/shaders.c	2018-03-31 06:46:35.000000000 +0000
++++ kitty-0.8.4/kitty/shaders.c	2018-03-31 06:46:35.000000000 +0000
+@@ -7,7 +7,6 @@
+ 
+ #include "gl.h"
+ #include "fonts.h"
+-#include <sys/sysctl.h>
+ 
+ enum { CELL_PROGRAM, CELL_BG_PROGRAM, CELL_SPECIAL_PROGRAM, CELL_FG_PROGRAM, CURSOR_PROGRAM, BORDERS_PROGRAM, GRAPHICS_PROGRAM, GRAPHICS_PREMULT_PROGRAM, BLIT_PROGRAM, NUM_PROGRAMS };
+ enum { SPRITE_MAP_UNIT, GRAPHICS_UNIT, BLIT_UNIT };

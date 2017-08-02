@@ -1,28 +1,35 @@
-name=man-db
-version=2.7.6.1
-deps="pbzip2 pigz groff xz libpipeline gdbm coreutils"
+version="2.8.4"
+makedeps=["gdbm", "groff", "zlib", "libpipeline", "libseccomp"]
+deps=["bash",	"groff", "gdbm", "less", "gzip", "zlib", "libpipeline", "libseccomp"]
 desc="The on-line manual database"
-source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz"
+source=[
+	{url="https://savannah.nongnu.org/download/man-db/man-db-$version.tar.xz"},
+	{url="mandb.toml"},
+	{url="argp.patch"},
+]
 
-build() {
-	cd $name-$version
+ext='''
+	cd man-db-$version
+	patch -p1 -i ../argp.patch
+	find . -name "*.c" -exec sed -i 's#//IGNORE##g' {} \;
+'''
+
+build='''
+	cd man-db-$version
 	./configure \
-		--prefix= \
+		--prefix=/ \
 		--sbindir=/bin \
 		--libdir=/lib \
 		--libexecdir=/lib \
-		--with-pager=less \
-		--with-gzip=/bin/pigz \
-		--with-bzip2=/bin/pbzip2 \
+		--with-systemdtmpfilesdir=/lib/tmpfiles.d \
 		--enable-threads=posix \
-		--with-lzma=/bin/lzma \
-		--with-xz=/bin/xz \
 		--disable-setuid \
-		--without-included-regex  
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/share/info
-	rm -rf "$pkgdir"/share/doc
-	rm -r "$pkgdir"/share/man/??
-	rm -rf "$pkgdir"/usr
-}
+		--without-included-regex \
+		--enable-cache-owner=root \
+		--enable-mandirs=GNU \
+		--with-db=gdbm \
+		--with-sections="1 n l 8 3 0 2 5 4 9 6 7"
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 ../mandb.toml "$pkgdir/${HOOKS#$ROOT}"/mandb.toml
+'''

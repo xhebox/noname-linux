@@ -1,0 +1,8 @@
+name=bdf-unifont
+version=11.0.02
+desc="GNU Unifont Glyphs"
+source="http://unifoundry.com/pub/unifont/unifont-${version}/font-builds/unifont-${version}.bdf.gz"
+
+build() {
+	install -Dm644 "${srcdir}/unifont-${version}.bdf" "${pkgdir}/share/fonts/misc/unifont.bdf"
+}

@@ -1,12 +1,22 @@
-name=dmenu
-version=4.7
-desc="dmenu2 from bitbucket"
-deps="xorg-server"
-source="https://bitbucket.org/melek/dmenu2/downloads/dmenu2-0.2.tar.gz
-config.mk"
+version="4.8"
+desc="Dynamic X menu"
+makedeps=["libxt"]
+deps=["libxt"]
+source=[{url="https://dl.suckless.org/tools/dmenu-$version.tar.gz"}]
 
-build(){
-	cd ${name}2-*
-	cp -r ../config.mk .
-	make PREFIX=/ DESTDIR="$pkgdir" install || die
-}
+ext='''
+	cd dmenu-$version
+	sed -i 's/\/usr\/X11R6//g' config.mk
+	sed -i 's/\-lXinerama//g' config.mk
+	sed -i 's/\-DXINERAMA//g' config.mk
+	for i in $source; do
+		case $i in
+		*patch|*diff) patch -p1 -i ../$i;;
+		esac
+	done
+'''
+
+build='''
+	cd dmenu-$version
+	make PREFIX=/ DESTDIR="$pkgdir" install
+'''

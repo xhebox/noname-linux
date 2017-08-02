@@ -1,0 +1,17 @@
+name=compton
+version=git
+desc='X compositor that may fix tearing issues'
+deps="mesa dbus libxcomposite libxdamage libxrandr libpcre libconfig libxinerama hicolor-icon-theme desktop-file-utils cmake xorg-app"
+source="compton.conf"
+
+ext() {
+	git clone https://github.com/yshui/compton
+}
+
+build() {
+	cd compton
+	COMPTON_VERSION=v$version make PREFIX= MANPAGES= compton
+	make PREFIX="$pkgdir" MANPAGES= install
+	install -Dm644 compton.sample.conf "$pkgdir/etc/xdg/compton.conf.example"
+	install -Dm644 "$srcdir"/compton.conf "$pkgdir/etc/xdg/compton.conf"
+}

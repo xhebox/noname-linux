@@ -1,12 +1,11 @@
-name=libcap-ng
-version=0.7.8
+version="0.7.9"
 desc="A library making programming with POSIX capabilities easier than traditional libcap"
-deps="musl"
-source="http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-$version.tar.gz"
+deps=["musl"]
+source=[{url="http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-$version.tar.gz"}]
 
-build() {
+build='''
 	cd libcap-ng-$version
 	./configure --prefix= --enable-static=no --with-python=no
-	make || die
-	make DESTDIR=$pkgdir install || die
-}
+	make
+	make DESTDIR=$pkgdir install
+'''

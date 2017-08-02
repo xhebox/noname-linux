@@ -1,11 +1,11 @@
-name=extra-cmake-modules
-version=5.36.0
+version="5.54.0"
 desc="Extra modules and scripts for CMake."
-deps=cmake
-source="http://download.kde.org/stable/frameworks/${version%.*}/$name-$version.tar.xz"
+deps=["cmake"]
+makedeps=["cmake"]
+source=[{url="http://download.kde.org/stable/frameworks/${version%.*}/extra-cmake-modules-$version.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd extra-cmake-modules-$version
 
 	mkdir build; cd build
 	
@@ -17,7 +17,6 @@ build() {
 		-DBUILD_QTHELP_DOCS=OFF \
 		-DBUILD_TESTING=OFF
 
-	make || die
-	make DESTDIR="$pkgdir" install || die
-
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

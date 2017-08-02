@@ -1,0 +1,11 @@
+version="1.17"
+desc='Specifications of extended Wayland protocols'
+makedeps=["wayland"]
+source=[{url="https://wayland.freedesktop.org/releases/wayland-protocols-$version.tar.xz"}]
+
+build='''
+	cd wayland-protocols-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

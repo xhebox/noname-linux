@@ -1,0 +1,14 @@
+name=siji
+version=git
+desc="icon font"
+deps="fontconfig"
+
+ext() {
+	git clone --depth=1 https://github.com/stark/siji
+}
+
+build() {
+	cd siji
+	mkdir -p "$pkgdir"/share/fonts/misc
+	install -D -m644 pcf/siji.pcf "${pkgdir}/share/fonts/misc/siji.pcf"
+}

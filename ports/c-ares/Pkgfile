@@ -1,12 +1,10 @@
-name=c-ares
-version=1.13.0
+version="1.14.0"
 desc='C library that performs DNS requests and name resolves asynchronously'
-deps=musl
-source="https://c-ares.haxx.se/download/c-ares-$version.tar.gz"
+source=[{url="https://c-ares.haxx.se/download/c-ares-$version.tar.gz"}]
 
-build() {
+build='''
 	cd c-ares-$version
 	./configure --prefix= --enable-shared
-	make || die
-	make DESTDIR="$pkgdir" install || die
-}
+	make
+	make DESTDIR="$pkgdir" install
+'''

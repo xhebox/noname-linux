@@ -1,26 +1,19 @@
-name=gdbm
-version=1.13
+version="1.18.1"
 desc="GNU dbm is a set of database routines that use extensible hashing"
-source="ftp://ftp.nluug.nl/pub/gnu/gdbm/gdbm-$version.tar.gz"
-deps="bash"
+source=[{url="http://mirrors.ustc.edu.cn/gnu/gdbm/gdbm-$version.tar.gz"}]
+deps=["dash", "musl"]
 
-ext() {
-	cd $name-$version
-	for i in $source; do
-		case $i in
-			*.patch) patch -p1 -i "$srcdir"/$i ;;
-		esac
-	done
-}
-
-build() {
-	cd $name-$version
+build='''
+	cd gdbm-$version
 	./configure \
 		--prefix= \
-		--enable-libgdbm-compat \
-		--disable-rpath \
-		--disable-static 
-	make  || die
-	make DESTDIR="$pkgdir" install  || die
-	rm -rf "$pkgdir"/share/info
-}
+		--enable-libgdbm-compat
+	make
+	make DESTDIR="$pkgdir" install
+
+	# create symlinks for compatibility
+	install -dm755 "$pkgdir/include/gdbm"
+	ln -sf ../gdbm.h "$pkgdir/include/gdbm/gdbm.h"
+	ln -sf ../ndbm.h "$pkgdir/include/gdbm/ndbm.h"
+	ln -sf ../dbm.h	"$pkgdir/include/gdbm/dbm.h"
+'''

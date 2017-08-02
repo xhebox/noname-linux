@@ -1,0 +1,11 @@
+version="1.1.1"
+desc='A tool for generating C-based recognizers from regular expressions'
+source=[{url="https://github.com/skvadrik/re2c/archive/$version.tar.gz"}]
+
+build='''
+	cd re2c-$version/re2c
+	./autogen.sh
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

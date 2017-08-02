@@ -1,0 +1,21 @@
+--- boost/asio/detail/socket_types.hpp	2015-03-23 21:24:12.000000000 +0100
++++ boost/asio/detail/socket_types.hpp	2015-07-30 13:10:47.719440415 +0200
+@@ -62,7 +62,7 @@
+    || defined(__OpenBSD__) || defined(__linux__)
+ #  include <poll.h>
+ # elif !defined(__SYMBIAN32__)
+-#  include <sys/poll.h>
++#  include <poll.h>
+ # endif
+ # include <sys/types.h>
+ # include <sys/stat.h>
+--- libs/fiber/src/numa/linux/pin_thread.cpp 2017-09-02 09:56:11.000000000 +0000
++++ libs/fiber/src/numa/linux/pin_thread.cpp 2017-09-02 09:56:11.000000000 +0000
+@@ -9,6 +9,7 @@
+ extern "C" {
+ #include <pthread.h>
+ #include <sched.h>
++#include <string.h>
+ }
+ 
+ #include <system_error>
