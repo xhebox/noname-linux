@@ -1,4 +1,4 @@
-. $PORTS/libressl/Pkgfile
+. ../libressl/Pkgfile
 name=libressl-32
 deps="libressl"
 

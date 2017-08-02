@@ -1,4 +1,4 @@
-. $PORTS/libgcrypt/Pkgfile
+. ../libgcrypt/Pkgfile
 name=libgcrypt-32
 deps="libgpg-error-32 libgcrypt"
 

@@ -1,4 +1,4 @@
-. $PORTS/alsa-plugins/Pkgfile
+. ../alsa-plugins/Pkgfile
 name=alsa-plugins-32
 deps="alsa-lib-32 speex-32 libsamplerate-32 pulseaudio-32 alsa-plugins"
 source=${source%alsaconf*}

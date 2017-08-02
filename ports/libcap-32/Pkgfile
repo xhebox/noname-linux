@@ -1,4 +1,4 @@
-. $PORTS/libcap/Pkgfile
+. ../libcap/Pkgfile
 name=libcap-32
 deps="attr-32 musl libcap"
 

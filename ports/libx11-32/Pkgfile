@@ -1,4 +1,4 @@
-. $PORTS/libx11/Pkgfile
+. ../libx11/Pkgfile
 name=libx11-32
 deps="xorg-proto xtrans libx11 libxcb-32 perl"
 

@@ -1,4 +1,4 @@
-. $PORTS/llvm/Pkgfile
+. ../llvm/Pkgfile
 name=llvm-32
 deps="python cmake flex bison libffi-32 zlib-32 libxml2-32 llvm"
 source="http://llvm.org/releases/$version/llvm-$version.src.tar.xz

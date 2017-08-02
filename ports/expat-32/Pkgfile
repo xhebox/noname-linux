@@ -1,4 +1,4 @@
-. $PORTS/expat/Pkgfile
+. ../expat/Pkgfile
 name=expat-32
 deps=expat
 

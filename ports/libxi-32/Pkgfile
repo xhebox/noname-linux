@@ -1,4 +1,4 @@
-. $PORTS/libxi/Pkgfile
+. ../libxi/Pkgfile
 name=libxi-32
 deps="libxext-32 libxfixes-32 libxi"
 

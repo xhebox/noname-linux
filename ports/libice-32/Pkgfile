@@ -1,4 +1,4 @@
-. $PORTS/libice/Pkgfile
+. ../libice/Pkgfile
 name=libice-32
 deps="xorg-proto xtrans libice"
 

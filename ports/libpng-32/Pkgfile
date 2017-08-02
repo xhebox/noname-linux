@@ -1,4 +1,4 @@
-. $PORTS/libpng/Pkgfile
+. ../libpng/Pkgfile
 name=libpng-32
 deps="zlib-32 libpng"
 

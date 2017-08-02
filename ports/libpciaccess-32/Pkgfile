@@ -1,4 +1,4 @@
-. $PORTS/libpciaccess/Pkgfile
+. ../libpciaccess/Pkgfile
 name=libpciaccess-32
 deps=libpciaccess
 

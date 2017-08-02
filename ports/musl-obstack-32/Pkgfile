@@ -1,4 +1,4 @@
-. $PORTS/musl-obstack/Pkgfile
+. ../musl-obstack/Pkgfile
 name=musl-obstack-32
 deps="automake libtool musl"
 

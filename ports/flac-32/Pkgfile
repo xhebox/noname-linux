@@ -1,4 +1,4 @@
-. $PORTS/flac/Pkgfile
+. ../flac/Pkgfile
 name=flac-32
 deps="libogg-32 flac nasm"
 

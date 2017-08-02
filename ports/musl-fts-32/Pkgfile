@@ -1,4 +1,4 @@
-. $PORTS/musl-fts/Pkgfile
+. ../musl-fts/Pkgfile
 name=musl-fts-32
 deps="automake libtool musl"
 

@@ -1,4 +1,4 @@
-. $PORTS/glib/Pkgfile
+. ../glib/Pkgfile
 name=glib-32
 deps="libpcre-32 libffi-32 python elfutils-32 libxslt-32 glib util-linux-32 dbus-32"
 

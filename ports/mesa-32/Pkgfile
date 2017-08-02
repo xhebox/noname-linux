@@ -1,4 +1,4 @@
-. $PORTS/mesa/Pkgfile
+. ../mesa/Pkgfile
 name=mesa-32
 deps="expat-32 libdrm-32 xorg-proto libxshmfence-32 libxcb-32 libx11-32 libxfixes-32 libxext-32 libxdamage-32 libxxf86vm-32 libxvmc-32 python mesa libtxc_dxtn-32 libgcrypt-32 elfutils-32 llvm-32 lm_sensors-32 libclc"
 

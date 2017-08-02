@@ -1,4 +1,4 @@
-. $PORTS/libnl/Pkgfile
+. ../libnl/Pkgfile
 name=libnl-32
 deps="flex bison"
 

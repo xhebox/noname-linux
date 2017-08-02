@@ -1,4 +1,4 @@
-. $PORTS/libgpg-error/Pkgfile
+. ../libgpg-error/Pkgfile
 name=libgpg-error-32
 deps=libgpg-error
 source="

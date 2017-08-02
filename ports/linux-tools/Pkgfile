@@ -1,4 +1,4 @@
-. $PORTS/linux/Pkgfile
+. ../linux/Pkgfile
 name=linux-tools
 desc="Linux kernel tools"
 conflicts=

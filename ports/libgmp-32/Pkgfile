@@ -1,4 +1,4 @@
-. $PORTS/libgmp/Pkgfile
+. ../libgmp/Pkgfile
 name=libgmp-32
 deps="zlib-32 libgmp"
 

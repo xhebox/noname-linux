@@ -1,4 +1,4 @@
-. $PORTS/ocl-icd/Pkgfile
+. ../ocl-icd/Pkgfile
 name=ocl-icd-32
 deps="ruby mesa-32 opencl-headers"
 

@@ -1,4 +1,4 @@
-. $PORTS/libpcre/Pkgfile
+. ../libpcre/Pkgfile
 name=libpcre-32
 deps=libpcre
 

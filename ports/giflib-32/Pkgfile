@@ -1,4 +1,4 @@
-. $PORTS/giflib/Pkgfile
+. ../giflib/Pkgfile
 name=giflib-32
 deps="giflib"
 

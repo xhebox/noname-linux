@@ -1,4 +1,4 @@
-. $PORTS/libtiff/Pkgfile
+. ../libtiff/Pkgfile
 name=libtiff-32
 deps="libjpeg-turbo-32 zlib-32 xz-32 libtiff"
 

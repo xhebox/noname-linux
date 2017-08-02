@@ -1,4 +1,4 @@
-. $PORTS/libva-intel-driver/Pkgfile
+. ../libva-intel-driver/Pkgfile
 name=libva-intel-driver-32
 deps="xorg-proto libva-32 libva-intel-driver"
 

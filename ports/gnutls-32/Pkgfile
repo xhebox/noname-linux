@@ -1,4 +1,4 @@
-. $PORTS/gnutls/Pkgfile
+. ../gnutls/Pkgfile
 name=gnutls-32
 deps="nettle-32 libgmp-32 gnutls zlib-32 p11-kit-32 libtasn1-32 libidn-32"
 

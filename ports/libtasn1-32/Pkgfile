@@ -1,4 +1,4 @@
-. $PORTS/libtasn1/Pkgfile
+. ../libtasn1/Pkgfile
 name=libtasn1-32
 deps=libtasn1
 

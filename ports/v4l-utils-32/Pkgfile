@@ -1,4 +1,4 @@
-. $PORTS/v4l-utils/Pkgfile
+. ../v4l-utils/Pkgfile
 name=v4l-utils-32
 deps="v4l-utils libjpeg-turbo-32"
 

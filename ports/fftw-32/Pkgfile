@@ -1,4 +1,4 @@
-. $PORTS/fftw/Pkgfile
+. ../fftw/Pkgfile
 name=fftw-32
 deps=fftw
 

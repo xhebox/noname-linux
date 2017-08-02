@@ -1,4 +1,4 @@
-. $PORTS/p11-kit/Pkgfile
+. ../p11-kit/Pkgfile
 name=p11-kit-32
 deps="musl libtasn1-32 libffi-32 p11-kit"
 

@@ -1,4 +1,4 @@
-. $PORTS/libva/Pkgfile
+. ../libva/Pkgfile
 name=libva-32
 deps="xorg-proto libxfixes-32 libx11-32 libdrm-32 libva"
 

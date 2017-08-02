@@ -1,4 +1,4 @@
-. $PORTS/alsa-lib/Pkgfile
+. ../alsa-lib/Pkgfile
 name=alsa-lib-32
 deps=alsa-lib
 

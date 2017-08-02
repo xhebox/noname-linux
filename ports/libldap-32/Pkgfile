@@ -1,4 +1,4 @@
-. $PORTS/libldap/Pkgfile
+. ../libldap/Pkgfile
 name=libldap-32
 deps="libldap libressl-32"
 

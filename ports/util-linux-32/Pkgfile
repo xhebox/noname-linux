@@ -1,4 +1,4 @@
-. $PORTS/util-linux/Pkgfile
+. ../util-linux/Pkgfile
 name=util-linux-32
 deps="zlib-32 util-linux"
 

@@ -1,4 +1,4 @@
-. $PORTS/zlib/Pkgfile
+. ../zlib/Pkgfile
 name=zlib-32
 deps=zlib
 desc="zlib"

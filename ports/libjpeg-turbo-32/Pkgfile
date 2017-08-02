@@ -1,4 +1,4 @@
-. $PORTS/libjpeg-turbo/Pkgfile
+. ../libjpeg-turbo/Pkgfile
 name=libjpeg-turbo-32
 source="http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$version.tar.gz"
 

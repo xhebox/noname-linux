@@ -1,4 +1,4 @@
-. $PORTS/libxslt/Pkgfile
+. ../libxslt/Pkgfile
 name=libxslt-32
 deps="libxml2-32 zlib-32 libgcrypt-32 libxslt"
 

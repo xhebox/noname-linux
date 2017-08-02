@@ -1,4 +1,4 @@
-. $PORTS/gsm/Pkgfile
+. ../gsm/Pkgfile
 name=gsm-32
 deps=gsm
 

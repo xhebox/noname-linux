@@ -1,4 +1,4 @@
-. $PORTS/xz/Pkgfile
+. ../xz/Pkgfile
 name=xz-32
 deps="libressl-32"
 

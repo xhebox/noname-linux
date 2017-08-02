@@ -1,4 +1,4 @@
-. $PORTS/dbus/Pkgfile
+. ../dbus/Pkgfile
 name=dbus-32
 deps="expat-32 python util-linux-32 autoconf automake libtool libsm-32 xmlto"
 

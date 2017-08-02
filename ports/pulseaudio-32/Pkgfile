@@ -1,4 +1,4 @@
-. $PORTS/pulseaudio/Pkgfile
+. ../pulseaudio/Pkgfile
 name=pulseaudio-32
 deps="libcap-32 libressl-32 eudev-32 dbus-32 libsndfile-32 json-c-32 intltool libtool-32 glib-32 speexdsp-32 libxtst-32 libasyncns-32 libsm-32 libsamplerate-32"
 

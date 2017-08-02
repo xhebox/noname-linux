@@ -238,7 +238,9 @@ opt_readpkg() {
 	if [ ! -f "${cur_pkgpath}/Pkgfile" ]; then
 		die "Package $1 does not exist."
 	fi
+	pushd "${cur_pkgpath}"
 	. "$cur_pkgpath"/Pkgfile
+	popd
 	[ "$1" != "$name" ] && die "$1: name and reponame is different"
 	return 0
 }

@@ -1,4 +1,4 @@
-. $PORTS/freetype/Pkgfile
+. ../freetype/Pkgfile
 name=freetype-32
 deps="zlib-32 libpng-32 bzip2-32 freetype"
 

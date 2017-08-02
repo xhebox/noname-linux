@@ -1,4 +1,4 @@
-. $PORTS/libffi/Pkgfile
+. ../libffi/Pkgfile
 name=libffi-32
 deps="musl libffi"
 

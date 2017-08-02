@@ -1,4 +1,4 @@
-. $PORTS/eudev/Pkgfile
+. ../eudev/Pkgfile
 name=eudev-32
 deps="gperf coreutils hwids eudev"
 

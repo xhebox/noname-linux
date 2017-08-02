@@ -1,4 +1,4 @@
-. $PORTS/lm_sensors/Pkgfile
+. ../lm_sensors/Pkgfile
 name=lm_sensors-32
 deps="lm_sensors"
 

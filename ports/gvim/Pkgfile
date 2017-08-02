@@ -1,4 +1,4 @@
-. $PORTS/vim/Pkgfile
+. ../vim/Pkgfile
 conflicts=vim
 name=gvim
 deps="acl ncurses gzip acl perl python gtk libxt ruby"

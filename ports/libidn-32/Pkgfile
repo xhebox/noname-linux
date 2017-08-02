@@ -1,4 +1,4 @@
-. $PORTS/libidn/Pkgfile
+. ../libidn/Pkgfile
 name=libidn-32
 
 build() {

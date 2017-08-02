@@ -1,4 +1,4 @@
-. $PORTS/libsndfile/Pkgfile
+. ../libsndfile/Pkgfile
 name=libsndfile-32
 deps="alsa-lib-32 libvorbis-32 flac-32 libsndfile"
 

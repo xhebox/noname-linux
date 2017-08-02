@@ -1,4 +1,4 @@
-. $PORTS/libdrm/Pkgfile
+. ../libdrm/Pkgfile
 name=libdrm-32
 deps="libpciaccess-32 pthread-stubs libdrm"
 

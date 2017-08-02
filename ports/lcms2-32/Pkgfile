@@ -1,4 +1,4 @@
-. $PORTS/lcms2/Pkgfile
+. ../lcms2/Pkgfile
 name=lcms2-32
 deps="libtiff-32 lcms2 musl"
 

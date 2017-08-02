@@ -1,4 +1,4 @@
-. $PORTS/fontconfig/Pkgfile
+. ../fontconfig/Pkgfile
 name=fontconfig-32
 deps="freetype-32 expat-32 autoconf automake libtool fontconfig"
 

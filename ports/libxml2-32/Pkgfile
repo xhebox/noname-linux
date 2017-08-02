@@ -1,4 +1,4 @@
-. $PORTS/libxml2/Pkgfile
+. ../libxml2/Pkgfile
 name=libxml2-32
 deps="zlib-32 libxml2"
 
