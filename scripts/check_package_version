@@ -12,8 +12,7 @@ for i in `ls ../ports`;do
 			ti="$i";;
 	esac
 	case $ti in
-		freetype-hf) continue;;
-		gettext-tiny|filesystem|zzz|slstatus|twmn|clew|curmix|pclcmd|libcorkipset|qtstyleplugins|pixiewps|reaver)
+		ovmf|gettext-tiny|filesystem|zzz|slstatus|twmn|clew|curmix|pclcmd|libcorkipset|qtstyleplugins|pixiewps|reaver)
 			wait
 			pkg -M $i || exit
 			pkg -S $i || exit
@@ -38,10 +37,18 @@ for i in `ls ../ports`;do
 			./.carch ../ports $i ${ti}2 &;;
 		minizip)
 			./.carch ../ports $i zlib &;;
-		perl-glib-object-introspection)
-			./.caur ../ports $i https://aur.archlinux.org/packages/perl-glib-object-introspection/ &;;
 		pixiewps)
 			./.caur ../ports $i https://aur.archlinux.org/packages/pixiewps/ &;;
+		anbox)
+			./.caur ../ports $i https://aur.archlinux.org/packages/anbox-git/ &;;
+		anbox-image)
+			./.caur ../ports $i https://aur.archlinux.org/packages/anbox-image/ &;;
+		dbus-cpp)
+			./.caur ../ports $i https://aur.archlinux.org/packages/dbus-cpp/ &;;
+		process-cpp)
+			./.caur ../ports $i https://aur.archlinux.org/packages/process-cpp/ &;;
+		properties-cpp)
+			./.caur ../ports $i https://aur.archlinux.org/packages/properties-cpp/ &;;
 		tbb)
 			./.carch ../ports $i intel-tbb &;;
 		qt5)
@@ -68,6 +75,8 @@ for i in `ls ../ports`;do
 			./.carch ../ports $i $ti-unicode &;;
 		linux|linux-x86_64|linux-headers)
 			./.carch ../ports $i linux-zen &;;
+		python-ipaddr)
+			./.carch ../ports $i python2-ipaddr &;;
 		python-pygmentize)
 			./.carch ../ports $i pygmentize &;;
 		gtk)
@@ -77,7 +86,9 @@ for i in `ls ../ports`;do
 		linux-tools)
 			./.carch ../ports $i linux-tools-meta &;;
 		man-pages-zh)
-			./.carch ../ports $i man-pages-zh_CN &;;
+			./.carch ../ports $i man-pages-zh_cn &;;
+		wxgtk)
+			./.carch ../ports $i wxgtk2 &;;
 		graphite2)
 			./.carch ../ports $i graphite &;;
 		adobe-source-han-sans-fonts-zh)
@@ -98,12 +109,14 @@ for i in `ls ../ports`;do
 			./.cvoid ../ports "$i" "noto-fonts-emoji" &;;
 		libmpfr)
 			./.carch ../ports "$i" "mpfr" &;;
-		finit|libuev|libite)
+		finit|libuev|libite|cgroupfs-mount)
 			echo "$i: check manually!" >> result;;
 		arc-theme)
 			./.carch ../ports $i arc-gtk-theme &;;
 		arc-icon)
 			./.carch ../ports $i arc-icon-theme &;;
+		ovmf)
+			./.caur ../ports $i https://aur.archlinux.org/packages/ovmf-git/ &;;
 		*)
 			./.carch ../ports "$i" "$ti" &;;
 	esac

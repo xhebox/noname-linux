@@ -3,6 +3,7 @@ bin/sudoreplay|755|0|0|regular file
 bin/sudo|4111|0|0|regular file
 bin/visudo|755|0|0|regular file
 bin|755|0|0|directory
+etc/sudoers.dist|440|0|0|regular file
 etc/sudoers.d|750|0|0|directory
 etc/sudoers|440|0|0|regular file
 etc|755|0|0|directory

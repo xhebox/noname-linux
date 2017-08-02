@@ -3,10 +3,12 @@ desc="Text-based web browser."
 version=2.8.8
 ver=`echo $version | sed 's/\./-/g'`
 deps="ncurses libressl zlib libidn"
-source="http://invisible-mirror.net/archives/lynx/tarballs/lynx${version}rel.2.tar.bz2"
+source="http://invisible-mirror.net/archives/lynx/tarballs/lynx${version}rel.2.tar.bz2
+patch-WWW_Library_Implementation_HTTP.c"
 
 build() {
 	cd lynx$ver
+	patch -p0 < ../patch-WWW_Library_Implementation_HTTP.c || die
 
 	./configure \
 		--prefix= \

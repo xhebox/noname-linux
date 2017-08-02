@@ -7,7 +7,11 @@ ROOT=/mnt
 DB=$ROOT/var/db/pkg
 COLORS_F=1
 SUM="sha512sum"
+PKG_BINARY=1
+#PKG_BINARY=0
 PORTS="/ports"
+#PORTS="/ports
+#/ports2"
 
 export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong"
 export CXXFLAGS="${CFLAGS}"

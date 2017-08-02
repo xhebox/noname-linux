@@ -1,0 +1,16 @@
+name=qtermwidget
+version=0.7.1
+desc="A terminal widget for Qt, used by QTerminal"
+deps="qt5-base"
+source="https://github.com/lxde/qtermwidget/releases/download/$version/qtermwidget-$version.tar.xz"
+
+build() {
+	mkdir -p build
+	cd build
+	cmake \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		../qtermwidget-$version
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

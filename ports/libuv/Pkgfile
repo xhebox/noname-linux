@@ -1,6 +1,6 @@
 name=libuv
-version=1.11.0
-deps="libtool"
+version=1.13.1
+deps="libtool pthread-stubs"
 desc="Multi-platform support library with a focus on asynchronous I/O"
 source="http://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"
 

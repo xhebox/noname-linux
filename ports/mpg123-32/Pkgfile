@@ -1,6 +1,5 @@
+. $PORTS/mpg123/Pkgfile
 name=mpg123-32
-version=1.23.8
-desc="Commandline MP3 player"
 deps="libtool alsa-lib-32 mpg123 pulseaudio-32"
 source="http://www.mpg123.de/download/mpg123-$version.tar.bz2"
 

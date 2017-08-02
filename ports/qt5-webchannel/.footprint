@@ -1,22 +1,22 @@
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private/qmetaobjectpublisher_p.h|644|0|0|regular file
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private/qqmlwebchannelattached_p.h|644|0|0|regular file
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private/qwebchannel_p.h|644|0|0|regular file
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private/signalhandler_p.h|644|0|0|regular file
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private/variantargument_p.h|644|0|0|regular file
-include/qt/QtWebChannel/5.8.0/QtWebChannel/private|755|0|0|directory
-include/qt/QtWebChannel/5.8.0/QtWebChannel|755|0|0|directory
-include/qt/QtWebChannel/5.8.0|755|0|0|directory
-include/qt/QtWebChannel/QQmlWebChannel|644|0|0|regular file
-include/qt/QtWebChannel/QWebChannelAbstractTransport|644|0|0|regular file
-include/qt/QtWebChannel/QWebChannel|644|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private/qmetaobjectpublisher_p.h|664|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private/qqmlwebchannelattached_p.h|664|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private/qwebchannel_p.h|664|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private/signalhandler_p.h|664|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private/variantargument_p.h|664|0|0|regular file
+include/qt/QtWebChannel/5.9.1/QtWebChannel/private|755|0|0|directory
+include/qt/QtWebChannel/5.9.1/QtWebChannel|755|0|0|directory
+include/qt/QtWebChannel/5.9.1|755|0|0|directory
+include/qt/QtWebChannel/QQmlWebChannel|664|0|0|regular file
+include/qt/QtWebChannel/QWebChannelAbstractTransport|664|0|0|regular file
+include/qt/QtWebChannel/QWebChannel|664|0|0|regular file
 include/qt/QtWebChannel/QtWebChannelDepends|644|0|0|regular file
-include/qt/QtWebChannel/QtWebChannelVersion|644|0|0|regular file
-include/qt/QtWebChannel/QtWebChannel|644|0|0|regular file
-include/qt/QtWebChannel/qqmlwebchannel.h|644|0|0|regular file
-include/qt/QtWebChannel/qtwebchannelversion.h|644|0|0|regular file
-include/qt/QtWebChannel/qwebchannel.h|644|0|0|regular file
-include/qt/QtWebChannel/qwebchannelabstracttransport.h|644|0|0|regular file
-include/qt/QtWebChannel/qwebchannelglobal.h|644|0|0|regular file
+include/qt/QtWebChannel/QtWebChannelVersion|664|0|0|regular file
+include/qt/QtWebChannel/QtWebChannel|664|0|0|regular file
+include/qt/QtWebChannel/qqmlwebchannel.h|664|0|0|regular file
+include/qt/QtWebChannel/qtwebchannelversion.h|664|0|0|regular file
+include/qt/QtWebChannel/qwebchannel.h|664|0|0|regular file
+include/qt/QtWebChannel/qwebchannelabstracttransport.h|664|0|0|regular file
+include/qt/QtWebChannel/qwebchannelglobal.h|664|0|0|regular file
 include/qt/QtWebChannel|755|0|0|directory
 include/qt|755|0|0|directory
 include|755|0|0|directory
@@ -25,8 +25,8 @@ lib/cmake/Qt5WebChannel/Qt5WebChannelConfigVersion.cmake|644|0|0|regular file
 lib/cmake/Qt5WebChannel|755|0|0|directory
 lib/cmake|755|0|0|directory
 lib/libQt5WebChannel.prl|644|0|0|regular file
-lib/libQt5WebChannel.so.5.8.0|755|0|0|regular file
-lib/libQt5WebChannel.so.5.8|777|0|0|symbolic link
+lib/libQt5WebChannel.so.5.9.1|755|0|0|regular file
+lib/libQt5WebChannel.so.5.9|777|0|0|symbolic link
 lib/libQt5WebChannel.so.5|777|0|0|symbolic link
 lib/libQt5WebChannel.so|777|0|0|symbolic link
 lib/pkgconfig/Qt5WebChannel.pc|644|0|0|regular file
@@ -36,8 +36,8 @@ lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri|644|0|0|regular file
 lib/qt/mkspecs/modules|755|0|0|directory
 lib/qt/mkspecs|755|0|0|directory
 lib/qt/qml/QtWebChannel/libdeclarative_webchannel.so|755|0|0|regular file
-lib/qt/qml/QtWebChannel/plugins.qmltypes|644|0|0|regular file
-lib/qt/qml/QtWebChannel/qmldir|644|0|0|regular file
+lib/qt/qml/QtWebChannel/plugins.qmltypes|664|0|0|regular file
+lib/qt/qml/QtWebChannel/qmldir|664|0|0|regular file
 lib/qt/qml/QtWebChannel|755|0|0|directory
 lib/qt/qml|755|0|0|directory
 lib/qt|755|0|0|directory

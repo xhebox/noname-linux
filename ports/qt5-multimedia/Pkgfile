@@ -1,6 +1,6 @@
 name=qt5-multimedia
-version=5.8.0
-desc='Classes for audio, video, radio and camera functionality'
+version=5.9.1
+mesc='Classes for audio, video, radio and camera functionality'
 deps="qt5-base pulseaudio openal qt5-declarative"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtmultimedia-opensource-src-$version.tar.xz"
 

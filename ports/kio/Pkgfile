@@ -1,5 +1,5 @@
 name=kio
-version=5.33.0
+version=5.36.0
 desc='Resource and network access abstraction'
 deps="karchive kconfig kcoreaddons kdbusaddons ki18n kservice kdoctools solid libxslt python3 extra-cmake-modules"
 source="https://download.kde.org/stable/frameworks/${version%.*}/${name}-${version}.tar.xz"
@@ -9,7 +9,7 @@ build() {
 	cd build
 	cmake ../${name}-${version} \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_INSTALL_PREFIX=/ \
 	-DKIOCORE_ONLY=ON \
 	-DKDE_INSTALL_LIBDIR=lib \
 	-DKDE_INSTALL_LIBEXECDIR=lib \

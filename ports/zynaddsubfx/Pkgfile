@@ -1,5 +1,5 @@
 name=zynaddsubfx
-version=3.0.1
+version=3.0.2
 desc="Opensource software synthesizer capable of making a countless number of instruments."
 source="https://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2"
 deps="cmake fltk liblo mxml alsa-lib zlib fftw"

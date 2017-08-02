@@ -8,6 +8,7 @@ bin/grub-kbdcomp|755|0|0|regular file
 bin/grub-macbless|755|0|0|regular file
 bin/grub-menulst2cfg|755|0|0|regular file
 bin/grub-mkconfig|755|0|0|regular file
+bin/grub-mkfont|755|0|0|regular file
 bin/grub-mkimage|755|0|0|regular file
 bin/grub-mklayout|755|0|0|regular file
 bin/grub-mknetdir|755|0|0|regular file
@@ -916,4 +917,113 @@ share/grub|755|0|0|directory
 share/info/grub-dev.info|644|0|0|regular file
 share/info/grub.info|644|0|0|regular file
 share/info|755|0|0|directory
+share/locale/ast/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/ast/LC_MESSAGES|755|0|0|directory
+share/locale/ast|755|0|0|directory
+share/locale/ca/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/ca/LC_MESSAGES|755|0|0|directory
+share/locale/ca|755|0|0|directory
+share/locale/da/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/da/LC_MESSAGES|755|0|0|directory
+share/locale/da|755|0|0|directory
+share/locale/de/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/de/LC_MESSAGES|755|0|0|directory
+share/locale/de@hebrew/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/de@hebrew/LC_MESSAGES|755|0|0|directory
+share/locale/de@hebrew|755|0|0|directory
+share/locale/de_CH/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/de_CH/LC_MESSAGES|755|0|0|directory
+share/locale/de_CH|755|0|0|directory
+share/locale/de|755|0|0|directory
+share/locale/en@arabic/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/en@arabic/LC_MESSAGES|755|0|0|directory
+share/locale/en@arabic|755|0|0|directory
+share/locale/en@hebrew/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/en@hebrew/LC_MESSAGES|755|0|0|directory
+share/locale/en@hebrew|755|0|0|directory
+share/locale/en@piglatin/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/en@piglatin/LC_MESSAGES|755|0|0|directory
+share/locale/en@piglatin|755|0|0|directory
+share/locale/en@quot/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/en@quot/LC_MESSAGES|755|0|0|directory
+share/locale/en@quot|755|0|0|directory
+share/locale/eo/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/eo/LC_MESSAGES|755|0|0|directory
+share/locale/eo|755|0|0|directory
+share/locale/es/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/es/LC_MESSAGES|755|0|0|directory
+share/locale/es|755|0|0|directory
+share/locale/fi/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/fi/LC_MESSAGES|755|0|0|directory
+share/locale/fi|755|0|0|directory
+share/locale/fr/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/fr/LC_MESSAGES|755|0|0|directory
+share/locale/fr|755|0|0|directory
+share/locale/gl/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/gl/LC_MESSAGES|755|0|0|directory
+share/locale/gl|755|0|0|directory
+share/locale/hr/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/hr/LC_MESSAGES|755|0|0|directory
+share/locale/hr|755|0|0|directory
+share/locale/hu/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/hu/LC_MESSAGES|755|0|0|directory
+share/locale/hu|755|0|0|directory
+share/locale/id/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/id/LC_MESSAGES|755|0|0|directory
+share/locale/id|755|0|0|directory
+share/locale/it/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/it/LC_MESSAGES|755|0|0|directory
+share/locale/it|755|0|0|directory
+share/locale/ja/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/ja/LC_MESSAGES|755|0|0|directory
+share/locale/ja|755|0|0|directory
+share/locale/ko/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/ko/LC_MESSAGES|755|0|0|directory
+share/locale/ko|755|0|0|directory
+share/locale/lt/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/lt/LC_MESSAGES|755|0|0|directory
+share/locale/lt|755|0|0|directory
+share/locale/nb/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/nb/LC_MESSAGES|755|0|0|directory
+share/locale/nb|755|0|0|directory
+share/locale/nl/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/nl/LC_MESSAGES|755|0|0|directory
+share/locale/nl|755|0|0|directory
+share/locale/pa/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/pa/LC_MESSAGES|755|0|0|directory
+share/locale/pa|755|0|0|directory
+share/locale/pl/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/pl/LC_MESSAGES|755|0|0|directory
+share/locale/pl|755|0|0|directory
+share/locale/pt_BR/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/pt_BR/LC_MESSAGES|755|0|0|directory
+share/locale/pt_BR|755|0|0|directory
+share/locale/ru/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/ru/LC_MESSAGES|755|0|0|directory
+share/locale/ru|755|0|0|directory
+share/locale/sl/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/sl/LC_MESSAGES|755|0|0|directory
+share/locale/sl|755|0|0|directory
+share/locale/sr/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/sr/LC_MESSAGES|755|0|0|directory
+share/locale/sr|755|0|0|directory
+share/locale/sv/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/sv/LC_MESSAGES|755|0|0|directory
+share/locale/sv|755|0|0|directory
+share/locale/tr/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/tr/LC_MESSAGES|755|0|0|directory
+share/locale/tr|755|0|0|directory
+share/locale/uk/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/uk/LC_MESSAGES|755|0|0|directory
+share/locale/uk|755|0|0|directory
+share/locale/vi/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/vi/LC_MESSAGES|755|0|0|directory
+share/locale/vi|755|0|0|directory
+share/locale/zh_CN/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
+share/locale/zh_CN|755|0|0|directory
+share/locale/zh_TW/LC_MESSAGES/grub.mo|644|0|0|regular file
+share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
+share/locale/zh_TW|755|0|0|directory
+share/locale|755|0|0|directory
 share|755|0|0|directory

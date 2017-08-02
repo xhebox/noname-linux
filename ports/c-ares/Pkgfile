@@ -1,5 +1,5 @@
 name=c-ares
-version=1.12.0
+version=1.13.0
 desc='C library that performs DNS requests and name resolves asynchronously'
 deps=musl
 source="https://c-ares.haxx.se/download/c-ares-$version.tar.gz"

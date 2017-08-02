@@ -1,5 +1,5 @@
 name=vim
-version=8.0.0586
+version=8.0.0722
 deps="acl ncurses gzip acl perl python"
 conflicts=gvim
 desc="Highly configurable text editor"

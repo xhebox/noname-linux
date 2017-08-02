@@ -1,0 +1,29 @@
+name=glm
+version=0.9.8.4
+desc="C++ mathematics library for 3D software based on the OpenGL Shading Language (GLSL) specification"
+deps="cmake"
+source="https://github.com/g-truc/glm/releases/download/${version}/glm-${version}.zip"
+
+build() {
+	cd glm
+
+	mkdir build
+	cd build
+
+	cmake .. \
+	-DCMAKE_INSTALL_PREFIX=/ \
+	-DCMAKE_INSTALL_LIBDIR=lib
+	make DESTDIR="${pkgdir}/" install || die
+
+	cd ..
+
+	mkdir -p $pkgdir/share/doc
+	cp -r doc $pkgdir/share/doc/glm
+
+	find $pkgdir -type f -exec chmod 644 {} \;
+	find $pkgdir -type d -exec chmod 755 {} \;
+
+	sed -i \
+		"s/PACKAGE_VERSION_UNSUITABLE TRUE/PACKAGE_VERSION_UNSUITABLE FALSE/g" \
+	$pkgdir/lib/cmake/glm/glmConfigVersion.cmake
+}

@@ -1,12 +1,12 @@
-lib/libmodplug.so|777|0|0|symbolic link
-lib/libmodplug.so.1|777|0|0|symbolic link
 include/libmodplug/it_defs.h|644|0|0|regular file
 include/libmodplug/modplug.h|644|0|0|regular file
-include/libmodplug/stdafx.h|644|0|0|regular file
 include/libmodplug/sndfile.h|644|0|0|regular file
-lib/pkgconfig/libmodplug.pc|644|0|0|regular file
-lib/libmodplug.so.1.0.0|755|0|0|regular file
-lib/pkgconfig|755|0|0|directory
-lib|755|0|0|directory
+include/libmodplug/stdafx.h|644|0|0|regular file
 include/libmodplug|755|0|0|directory
 include|755|0|0|directory
+lib/libmodplug.so.1.0.0|755|0|0|regular file
+lib/libmodplug.so.1|777|0|0|symbolic link
+lib/libmodplug.so|777|0|0|symbolic link
+lib/pkgconfig/libmodplug.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

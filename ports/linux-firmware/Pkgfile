@@ -1,7 +1,7 @@
 name=linux-firmware
 conflicts=
-version=20170309.695f2d6
-desc="git"
+version=20170622.7d2c913
+desc="Firmware files for Linux"
 
 ext() {
 	git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git

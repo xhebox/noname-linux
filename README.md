@@ -79,13 +79,13 @@ run: grub-install --target=i386-pc /dev/sdx
 To UEFI systems, efivarfs is not mounted by default(livecd mounted it, so that you can install UEFI bootloaders), here's the detailed [description from archlinux](https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#Mount_efivarfs)
 
 ### reboot and get the package manager
-Congratulations, enjoy it! But dont forget to copy ./pkg to /bin/pkg, ./ignore to /etc/pkg.ignore, ./config to /etc/pkg.conf, now you have a working package manager.
+Congratulations, enjoy it! But dont forget to configurate /etc/pkg.conf, ports default to /ports, now you have a working package manager.
+Binaries are [here](http://thunix.org/~xhe/tarballs/), it should be downloaded by pkg automatically, you could disable downloading through the config file if you want.
 
 ### about kernel
 1. there's two packages for kernel, one is linux-x86_64, another one is linux.
 linux-x86_64 is compiled with `march=x86-64` while linux is compiled with `march=native`. linux-x86_64 is installed by default, but you may prefer the latter as it's a lot faster.
 2. ```tpm_crb MSFT0101:00: can't request region for resource```, if you see it in demsg, be calm, tpm2.0 is not fully working.
-
 
 # Important Information!
 1. Run /bin/pkg as root !!!

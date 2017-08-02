@@ -1,54 +1,57 @@
-lib/libevent_extra.so|777|0|0|symbolic link
-lib/libevent-2.0.so.5|777|0|0|symbolic link
-lib/libevent_core-2.0.so.5|777|0|0|symbolic link
-lib/libevent_openssl-2.0.so.5|777|0|0|symbolic link
-lib/libevent_core.so|777|0|0|symbolic link
-lib/libevent_pthreads-2.0.so.5|777|0|0|symbolic link
-lib/libevent_openssl.so|777|0|0|symbolic link
-lib/libevent_extra-2.0.so.5|777|0|0|symbolic link
-lib/libevent.so|777|0|0|symbolic link
-lib/libevent_pthreads.so|777|0|0|symbolic link
 bin/event_rpcgen.py|755|0|0|regular file
+bin|755|0|0|directory
+include/evdns.h|644|0|0|regular file
 include/event.h|644|0|0|regular file
-include/event2/rpc.h|644|0|0|regular file
-include/event2/tag.h|644|0|0|regular file
-include/event2/http_compat.h|644|0|0|regular file
-include/event2/rpc_struct.h|644|0|0|regular file
+include/event2/buffer.h|644|0|0|regular file
+include/event2/buffer_compat.h|644|0|0|regular file
+include/event2/bufferevent.h|644|0|0|regular file
+include/event2/bufferevent_compat.h|644|0|0|regular file
 include/event2/bufferevent_ssl.h|644|0|0|regular file
-include/event2/event_compat.h|644|0|0|regular file
-include/event2/event-config.h|644|0|0|regular file
-include/event2/dns_struct.h|644|0|0|regular file
 include/event2/bufferevent_struct.h|644|0|0|regular file
 include/event2/dns.h|644|0|0|regular file
 include/event2/dns_compat.h|644|0|0|regular file
+include/event2/dns_struct.h|644|0|0|regular file
+include/event2/event-config.h|644|0|0|regular file
 include/event2/event.h|644|0|0|regular file
-include/event2/rpc_compat.h|644|0|0|regular file
-include/event2/bufferevent.h|644|0|0|regular file
-include/event2/http_struct.h|644|0|0|regular file
-include/event2/thread.h|644|0|0|regular file
-include/event2/buffer_compat.h|644|0|0|regular file
-include/event2/listener.h|644|0|0|regular file
-include/event2/util.h|644|0|0|regular file
+include/event2/event_compat.h|644|0|0|regular file
 include/event2/event_struct.h|644|0|0|regular file
-include/event2/buffer.h|644|0|0|regular file
-include/event2/tag_compat.h|644|0|0|regular file
-include/event2/keyvalq_struct.h|644|0|0|regular file
 include/event2/http.h|644|0|0|regular file
-include/event2/bufferevent_compat.h|644|0|0|regular file
-include/evdns.h|644|0|0|regular file
+include/event2/http_compat.h|644|0|0|regular file
+include/event2/http_struct.h|644|0|0|regular file
+include/event2/keyvalq_struct.h|644|0|0|regular file
+include/event2/listener.h|644|0|0|regular file
+include/event2/rpc.h|644|0|0|regular file
+include/event2/rpc_compat.h|644|0|0|regular file
+include/event2/rpc_struct.h|644|0|0|regular file
+include/event2/tag.h|644|0|0|regular file
+include/event2/tag_compat.h|644|0|0|regular file
+include/event2/thread.h|644|0|0|regular file
+include/event2/util.h|644|0|0|regular file
+include/event2/visibility.h|644|0|0|regular file
+include/event2|755|0|0|directory
+include/evhttp.h|644|0|0|regular file
 include/evrpc.h|644|0|0|regular file
 include/evutil.h|644|0|0|regular file
-include/evhttp.h|644|0|0|regular file
-lib/libevent_openssl-2.0.so.5.1.9|755|0|0|regular file
-lib/libevent-2.0.so.5.1.9|755|0|0|regular file
-lib/libevent_pthreads-2.0.so.5.1.9|755|0|0|regular file
-lib/libevent_extra-2.0.so.5.1.9|755|0|0|regular file
-lib/pkgconfig/libevent_pthreads.pc|644|0|0|regular file
+include|755|0|0|directory
+lib/libevent-2.1.so.6.0.2|755|0|0|regular file
+lib/libevent-2.1.so.6|777|0|0|symbolic link
+lib/libevent.so|777|0|0|symbolic link
+lib/libevent_core-2.1.so.6.0.2|755|0|0|regular file
+lib/libevent_core-2.1.so.6|777|0|0|symbolic link
+lib/libevent_core.so|777|0|0|symbolic link
+lib/libevent_extra-2.1.so.6.0.2|755|0|0|regular file
+lib/libevent_extra-2.1.so.6|777|0|0|symbolic link
+lib/libevent_extra.so|777|0|0|symbolic link
+lib/libevent_openssl-2.1.so.6.0.2|755|0|0|regular file
+lib/libevent_openssl-2.1.so.6|777|0|0|symbolic link
+lib/libevent_openssl.so|777|0|0|symbolic link
+lib/libevent_pthreads-2.1.so.6.0.2|755|0|0|regular file
+lib/libevent_pthreads-2.1.so.6|777|0|0|symbolic link
+lib/libevent_pthreads.so|777|0|0|symbolic link
 lib/pkgconfig/libevent.pc|644|0|0|regular file
+lib/pkgconfig/libevent_core.pc|644|0|0|regular file
+lib/pkgconfig/libevent_extra.pc|644|0|0|regular file
 lib/pkgconfig/libevent_openssl.pc|644|0|0|regular file
-lib/libevent_core-2.0.so.5.1.9|755|0|0|regular file
+lib/pkgconfig/libevent_pthreads.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory
-include/event2|755|0|0|directory
-include|755|0|0|directory
-bin|755|0|0|directory

@@ -19,6 +19,7 @@ include/exiv2/futils.hpp|644|0|0|regular file
 include/exiv2/gifimage.hpp|644|0|0|regular file
 include/exiv2/http.hpp|644|0|0|regular file
 include/exiv2/image.hpp|644|0|0|regular file
+include/exiv2/ini.hpp|644|0|0|regular file
 include/exiv2/iptc.hpp|644|0|0|regular file
 include/exiv2/jp2image.hpp|644|0|0|regular file
 include/exiv2/jpgimage.hpp|644|0|0|regular file
@@ -35,6 +36,7 @@ include/exiv2/quicktimevideo.hpp|644|0|0|regular file
 include/exiv2/rafimage.hpp|644|0|0|regular file
 include/exiv2/riffvideo.hpp|644|0|0|regular file
 include/exiv2/rw2image.hpp|644|0|0|regular file
+include/exiv2/rwlock.hpp|644|0|0|regular file
 include/exiv2/svn_version.h|644|0|0|regular file
 include/exiv2/tags.hpp|644|0|0|regular file
 include/exiv2/tgaimage.hpp|644|0|0|regular file
@@ -43,13 +45,14 @@ include/exiv2/types.hpp|644|0|0|regular file
 include/exiv2/utilsvideo.hpp|644|0|0|regular file
 include/exiv2/value.hpp|644|0|0|regular file
 include/exiv2/version.hpp|644|0|0|regular file
+include/exiv2/webpimage.hpp|644|0|0|regular file
 include/exiv2/xmp.hpp|644|0|0|regular file
 include/exiv2/xmpsidecar.hpp|644|0|0|regular file
 include/exiv2|755|0|0|directory
 include|755|0|0|directory
 lib/libexiv2.a|644|0|0|regular file
-lib/libexiv2.so.14.0.0|644|0|0|regular file
-lib/libexiv2.so.14|777|0|0|symbolic link
+lib/libexiv2.so.26.0.0|644|0|0|regular file
+lib/libexiv2.so.26|777|0|0|symbolic link
 lib/libexiv2.so|777|0|0|symbolic link
 lib/pkgconfig/exiv2.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
@@ -101,6 +104,7 @@ share/locale/vi/LC_MESSAGES|755|0|0|directory
 share/locale/vi|755|0|0|directory
 share/locale|755|0|0|directory
 share/man/man1/exiv2.1.gz|644|0|0|regular file
+share/man/man1/exiv2samples.1.gz|644|0|0|regular file
 share/man/man1|755|0|0|directory
 share/man|755|0|0|directory
 share|755|0|0|directory

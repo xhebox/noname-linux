@@ -1,5 +1,5 @@
 name=qt5-declarative
-version=5.8.0
+version=5.9.1
 desc='Classes for QML and JavaScript languages'
 deps="qt5-base qt5-xmlpatterns"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtdeclarative-opensource-src-$version.tar.xz

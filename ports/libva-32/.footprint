@@ -1,5 +1,3 @@
-lib32/dri/dummy_drv_video.so|755|0|0|regular file
-lib32/dri|755|0|0|directory
 lib32/libva-drm.so.1.4000.0|755|0|0|regular file
 lib32/libva-drm.so.1|777|0|0|symbolic link
 lib32/libva-drm.so|777|0|0|symbolic link

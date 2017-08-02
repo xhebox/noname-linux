@@ -9,7 +9,7 @@ while true;do
 	[ "$t" -eq 5 ] && {
 		t=0
 		echo "$2: can not get" >> ./result
-		break
+		exit
 	}
 done
 version=`echo $version | tr -d '\n'`

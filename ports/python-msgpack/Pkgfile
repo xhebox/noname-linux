@@ -1,0 +1,24 @@
+name=python-msgpack
+version=0.4.8
+desc="MessagePack serializer implementation for Python"
+deps="python-setuptools python-cython"
+source="https://pypi.io/packages/source/m/msgpack-python/msgpack-python-$version.tar.gz"
+
+build() {
+	cp -r msgpack-python-$version py3
+	cd msgpack-python-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../py3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

@@ -7,13 +7,13 @@ tfff=0
 for i in ${list%EOF*}; do
 	echo "$source" | grep -q -F "$i" || {
 		sed -i -r "/${i%-*}.+tar.+/d" ../ports/xorg-fonts/Pkgfile
-		sed -i "s/source=\"/&\n$i/g" ../ports/xorg-fonts/Pkgfile
+		sed -i "s/source=\"/&\n	http\:\/\/xorg\.freedesktop\.org\/releases\/individual\/font\/$i/g" ../ports/xorg-fonts/Pkgfile
 		rm ../ports/xorg-fonts/*${i%-*}*tar*
 		tfff=1
 	}
 done
 [ "$tfff" -eq 1 ] && {
-	pkg -Muf xorg-fonts
+	pkg -Ue xorg-fonts
 	pkg -M xorg-fonts
 	pkg -S xorg-fonts
 }

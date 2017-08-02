@@ -1,16 +1,16 @@
-lib/perl5/vendor_perl/Error/Simple.pm|444|0|0|regular file
-lib/perl5/vendor_perl/auto/Error/.packlist|644|0|0|regular file
+lib/perl5/core_perl|755|0|0|directory
 lib/perl5/vendor_perl/Error.pm|444|0|0|regular file
-share/man/man3/perl/Error::Simple.3pm.gz|644|0|0|regular file
+lib/perl5/vendor_perl/Error/Simple.pm|444|0|0|regular file
+lib/perl5/vendor_perl/Error|755|0|0|directory
+lib/perl5/vendor_perl/auto/Error/.packlist|644|0|0|regular file
+lib/perl5/vendor_perl/auto/Error|755|0|0|directory
+lib/perl5/vendor_perl/auto|755|0|0|directory
+lib/perl5/vendor_perl|755|0|0|directory
+lib/perl5|755|0|0|directory
+lib|755|0|0|directory
 share/man/man3/perl/Error.3pm.gz|644|0|0|regular file
+share/man/man3/perl/Error::Simple.3pm.gz|644|0|0|regular file
 share/man/man3/perl|755|0|0|directory
 share/man/man3|755|0|0|directory
 share/man|755|0|0|directory
 share|755|0|0|directory
-lib/perl5/vendor_perl/auto/Error|755|0|0|directory
-lib/perl5/vendor_perl/auto|755|0|0|directory
-lib/perl5/vendor_perl/Error|755|0|0|directory
-lib/perl5/vendor_perl|755|0|0|directory
-lib/perl5/core_perl|755|0|0|directory
-lib/perl5|755|0|0|directory
-lib|755|0|0|directory

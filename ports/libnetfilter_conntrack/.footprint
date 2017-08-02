@@ -1,0 +1,17 @@
+include/libnetfilter_conntrack/libnetfilter_conntrack.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_dccp.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_icmp.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_ipv4.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_ipv6.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_sctp.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_tcp.h|644|0|0|regular file
+include/libnetfilter_conntrack/libnetfilter_conntrack_udp.h|644|0|0|regular file
+include/libnetfilter_conntrack/linux_nfnetlink_conntrack.h|644|0|0|regular file
+include/libnetfilter_conntrack|755|0|0|directory
+include|755|0|0|directory
+lib/libnetfilter_conntrack.so.3.6.0|755|0|0|regular file
+lib/libnetfilter_conntrack.so.3|777|0|0|symbolic link
+lib/libnetfilter_conntrack.so|777|0|0|symbolic link
+lib/pkgconfig/libnetfilter_conntrack.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

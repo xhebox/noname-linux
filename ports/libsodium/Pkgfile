@@ -1,5 +1,5 @@
 name=libsodium
-version=1.0.12
+version=1.0.13
 desc="P(ortable|ackageable) NaCl-based crypto library"
 deps="musl"
 source="http://download.libsodium.org/$name/releases/$name-${version}.tar.gz"

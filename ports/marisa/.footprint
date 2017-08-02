@@ -1,0 +1,35 @@
+bin/marisa-benchmark|755|0|0|regular file
+bin/marisa-build|755|0|0|regular file
+bin/marisa-common-prefix-search|755|0|0|regular file
+bin/marisa-dump|755|0|0|regular file
+bin/marisa-lookup|755|0|0|regular file
+bin/marisa-predictive-search|755|0|0|regular file
+bin/marisa-reverse-lookup|755|0|0|regular file
+bin|755|0|0|directory
+include/marisa.h|644|0|0|regular file
+include/marisa/agent.h|644|0|0|regular file
+include/marisa/base.h|644|0|0|regular file
+include/marisa/exception.h|644|0|0|regular file
+include/marisa/iostream.h|644|0|0|regular file
+include/marisa/key.h|644|0|0|regular file
+include/marisa/keyset.h|644|0|0|regular file
+include/marisa/query.h|644|0|0|regular file
+include/marisa/scoped-array.h|644|0|0|regular file
+include/marisa/scoped-ptr.h|644|0|0|regular file
+include/marisa/stdio.h|644|0|0|regular file
+include/marisa/trie.h|644|0|0|regular file
+include/marisa|755|0|0|directory
+include|755|0|0|directory
+lib/libmarisa.so.0.0.0|755|0|0|regular file
+lib/libmarisa.so.0|777|0|0|symbolic link
+lib/libmarisa.so|777|0|0|symbolic link
+lib/pkgconfig/marisa.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/doc/marisa-0.2.4/README|644|0|0|regular file
+share/doc/marisa-0.2.4/readme.en.html|644|0|0|regular file
+share/doc/marisa-0.2.4/readme.ja.html|644|0|0|regular file
+share/doc/marisa-0.2.4/style.css|644|0|0|regular file
+share/doc/marisa-0.2.4|755|0|0|directory
+share/doc|755|0|0|directory
+share|755|0|0|directory

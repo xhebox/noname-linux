@@ -1,13 +1,14 @@
 name=fcitx
 version=4.2.9.1
 desc="A Flexible Input Method Framework"
-deps="gtk3 gtk cairo pango libxrender libxfixes icu python libxkbcommon extra-cmake-modules gettext dbus iso-codes shared-mime-info opencc gobject-introspection"
-source="https://download.fcitx-im.org/fcitx/fcitx-$version.tar.xz"
+deps="gtk3 gtk cairo pango libxrender libxfixes icu python libxkbcommon extra-cmake-modules dbus iso-codes shared-mime-info opencc gobject-introspection"
+source="https://download.fcitx-im.org/fcitx/fcitx-$version.tar.xz
+musl.patch"
 
 build(){
 	cd $name-$version
+	patch -p1 < ../musl.patch || die
 	sed -i '/Libexecinfo/d' CMakeLists.txt
-	find src/im/pinyin src/lib/fcitx -type f -exec sed -i 's/uint /unsigned int /g' {} \;
 	mkdir build
 	cd build
 	cmake .. \

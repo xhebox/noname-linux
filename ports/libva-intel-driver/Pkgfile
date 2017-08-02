@@ -1,5 +1,5 @@
 name=libva-intel-driver
-version=1.8.1
+version=1.8.3
 desc="va driver for intel cpu"
 deps="xorg-proto libva"
 source="https://github.com/01org/intel-vaapi-driver/releases/download/$version/intel-vaapi-driver-$version.tar.bz2"

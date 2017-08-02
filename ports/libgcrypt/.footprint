@@ -1,19 +1,19 @@
-lib/libgcrypt.so|777|0|0|symbolic link
-lib/libgcrypt.so.20|777|0|0|symbolic link
-bin/hmac256|755|0|0|regular file
 bin/dumpsexp|755|0|0|regular file
+bin/hmac256|755|0|0|regular file
 bin/libgcrypt-config|755|0|0|regular file
 bin/mpicalc|755|0|0|regular file
+bin|755|0|0|directory
 include/gcrypt.h|644|0|0|regular file
-lib/libgcrypt.so.20.1.6|755|0|0|regular file
+include|755|0|0|directory
+lib/libgcrypt.so.20.1.8|755|0|0|regular file
+lib/libgcrypt.so.20|777|0|0|symbolic link
+lib/libgcrypt.so|777|0|0|symbolic link
+lib|755|0|0|directory
 share/aclocal/libgcrypt.m4|644|0|0|regular file
+share/aclocal|755|0|0|directory
 share/info/gcrypt.info|644|0|0|regular file
+share/info|755|0|0|directory
 share/man/man1/hmac256.1.gz|644|0|0|regular file
 share/man/man1|755|0|0|directory
 share/man|755|0|0|directory
-share/info|755|0|0|directory
-share/aclocal|755|0|0|directory
 share|755|0|0|directory
-lib|755|0|0|directory
-include|755|0|0|directory
-bin|755|0|0|directory

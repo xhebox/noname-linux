@@ -1,7 +1,7 @@
 name=fontconfig
-version=2.12.1
+version=2.12.4
 desc="A library for configuring and customizing font access"
-deps="harfbuzz expat autoconf automake libtool"
+deps="freetype expat autoconf automake libtool"
 source="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.bz2
 "
 
@@ -12,18 +12,15 @@ ext() {
 		*.patch) patch -p1 -i ../"$i" || die;;
 		esac
 	done
-	aclocal
-	libtoolize -f
-	automake -afi
+	rm -f src/fcobjshash.h
 }
 
 build() {
 	cd fontconfig-$version
 	./configure \
-		--prefix=/ \
+		--prefix= \
 		--sysconfdir=/etc \
 		--with-templatedir=/etc/fonts/conf.avail \
-		--with-templateinfdir=/etc/fonts/conf.avail.infinality \
 		--with-xmldir=/etc/fonts \
 		--localstatedir=/var \
 		--disable-static \

@@ -1,5 +1,5 @@
 name=mpg123
-version=1.23.8
+version=1.25.4
 desc="Commandline MP3 player"
 deps="libtool alsa-lib pulseaudio"
 source="http://www.mpg123.de/download/$name-$version.tar.bz2"

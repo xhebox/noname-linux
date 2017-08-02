@@ -4,15 +4,23 @@ t=0
 while true;do
 	pkgver=`curl -s -L "https://www.archlinux.org/packages/core/x86_64/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
 	[ "$pkgver" ] && break
+	pkgver=`curl -s -L "https://www.archlinux.org/packages/core/any/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
+	[ "$pkgver" ] && break
+
 	pkgver=`curl -s -L "https://www.archlinux.org/packages/extra/x86_64/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
 	[ "$pkgver" ] && break
+	pkgver=`curl -s -L "https://www.archlinux.org/packages/extra/any/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
+	[ "$pkgver" ] && break
+
 	pkgver=`curl -s -L "https://www.archlinux.org/packages/community/x86_64/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
+	[ "$pkgver" ] && break
+	pkgver=`curl -s -L "https://www.archlinux.org/packages/community/any/$3/" | grep -A 1 pkgdetails | grep "$3" | cut -d ' ' -f 6 | cut -d '-' -f 1 | cut -d ':' -f 2`
 	[ "$pkgver" ] && break
 	t=$((t+1))
 	[ "$t" -eq 5 ] && {
 		t=0
 		echo "$2: can not get" >> ./result
-		break
+		exit
 	}
 done
 pkgver=`echo $pkgver | tr -d '\n'`

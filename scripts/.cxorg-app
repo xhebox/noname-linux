@@ -7,14 +7,13 @@ tfff=0
 for i in ${list%EOF*}; do
 	echo "$source" | grep -q -F "$i" || {
 		sed -i -r "/${i%-*}.+tar.+/d" ../ports/xorg-app/Pkgfile
-		sed -i "s/source=\"/&\n$i/g" ../ports/xorg-app/Pkgfile
+		sed -i "s/source=\"/&\nhttp\:\/\/xorg\.freedesktop\.org\/releases\/individual\/app\/$i/g" ../ports/xorg-app/Pkgfile
 		rm ../ports/xorg-app/*${i%-*}*tar*
 		tfff=1
-		exit
 	}
 done
 [ "$tfff" -eq 1 ] && {
-	pkg -Muf xorg-app
+	pkg -Ue xorg-app
 	pkg -M xorg-app
 	pkg -S xorg-app
 }

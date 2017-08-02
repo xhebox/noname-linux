@@ -1,17 +1,15 @@
+. $PORTS/libxml2/Pkgfile
 name=libxml2-32
-version=2.9.4
 deps="zlib-32 libxml2"
-desc="XML library version 2"
-source="ftp://xmlsoft.org/libxml2/libxml2-$version.tar.gz"
 
 build() {
-	cd libxml2-$version
+	cd libxml2
 	export CC="gcc -m32"
         export CXX="g++ -m32"
         export PKG_CONFIG_PATH="/lib32/pkgconfig"
-	autoreconf -fi
+	NOCONFIGURE=1 ./autogen.sh
 	./configure --target=$TARGET32 --prefix= --disable-static --with-threads --libdir=/lib32 --without-lzma --without-python
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' -e 's/    if test "$export_dynamic" = yes && test -n "$export_dynamic_flag_spec"; then/      func_append compile_command " -Wl,-O1,--as-needed"\n      func_append finalize_command " -Wl,-O1,--as-needed"\n\0/' libtool
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
 	make || die
 	make DESTDIR="$pkgdir" install || die
 	rm -r "$pkgdir"/share

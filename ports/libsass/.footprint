@@ -1,15 +1,15 @@
-lib/libsass.so|777|0|0|symbolic link
-lib/libsass.so.0|777|0|0|symbolic link
-include/sass2scss.h|644|0|0|regular file
-include/sass/functions.h|644|0|0|regular file
-include/sass/version.h|644|0|0|regular file
-include/sass/values.h|644|0|0|regular file
+include/sass.h|644|0|0|regular file
 include/sass/base.h|644|0|0|regular file
 include/sass/context.h|644|0|0|regular file
-include/sass.h|644|0|0|regular file
+include/sass/functions.h|644|0|0|regular file
+include/sass/values.h|644|0|0|regular file
+include/sass/version.h|644|0|0|regular file
+include/sass2scss.h|644|0|0|regular file
+include/sass|755|0|0|directory
+include|755|0|0|directory
 lib/libsass.so.0.0.9|755|0|0|regular file
+lib/libsass.so.0|777|0|0|symbolic link
+lib/libsass.so|777|0|0|symbolic link
 lib/pkgconfig/libsass.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory
-include/sass|755|0|0|directory
-include|755|0|0|directory

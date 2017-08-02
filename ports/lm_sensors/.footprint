@@ -1,38 +1,37 @@
+bin/fancontrol|755|0|0|regular file
+bin/isadump|755|0|0|regular file
+bin/isaset|755|0|0|regular file
+bin/pwmconfig|755|0|0|regular file
+bin/sensord|755|0|0|regular file
+bin/sensors-conf-convert|755|0|0|regular file
+bin/sensors-detect|755|0|0|regular file
+bin/sensors|755|0|0|regular file
+bin|755|0|0|directory
+etc/sensors.d|755|0|0|directory
+etc/sensors3.conf|644|0|0|regular file
+etc|755|0|0|directory
+include/sensors/error.h|644|0|0|regular file
+include/sensors/sensors.h|644|0|0|regular file
+include/sensors|755|0|0|directory
+include|755|0|0|directory
+lib/libsensors.so.4.4.0|755|0|0|regular file
 lib/libsensors.so.4|777|0|0|symbolic link
 lib/libsensors.so|777|0|0|symbolic link
-share/man/man5/sensors3.conf.5.gz|777|0|0|symbolic link
-bin/isaset|755|0|0|regular file
-bin/isadump|755|0|0|regular file
-bin/sensors-conf-convert|755|0|0|regular file
-bin/fancontrol|755|0|0|regular file
-bin/sensord|755|0|0|regular file
-bin/sensors-detect|755|0|0|regular file
-bin/pwmconfig|755|0|0|regular file
-bin/sensors|755|0|0|regular file
-etc/sensord|644|0|0|regular file
-etc/sensors3.conf|644|0|0|regular file
-include/sensors/sensors.h|644|0|0|regular file
-include/sensors/error.h|644|0|0|regular file
-lib/libsensors.so.4.4.0|755|0|0|regular file
-share/man/man8/sensors-conf-convert.8.gz|644|0|0|regular file
-share/man/man8/isaset.8.gz|644|0|0|regular file
-share/man/man8/sensord.8.gz|644|0|0|regular file
-share/man/man8/fancontrol.8.gz|644|0|0|regular file
-share/man/man8/isadump.8.gz|644|0|0|regular file
-share/man/man8/sensors-detect.8.gz|644|0|0|regular file
-share/man/man8/pwmconfig.8.gz|644|0|0|regular file
-share/man/man3/libsensors.3.gz|644|0|0|regular file
-share/man/man5/sensors.conf.5.gz|644|0|0|regular file
+lib|755|0|0|directory
 share/man/man1/sensors.1.gz|644|0|0|regular file
 share/man/man1|755|0|0|directory
-share/man/man5|755|0|0|directory
+share/man/man3/libsensors.3.gz|644|0|0|regular file
 share/man/man3|755|0|0|directory
+share/man/man5/sensors.conf.5.gz|644|0|0|regular file
+share/man/man5/sensors3.conf.5.gz|777|0|0|symbolic link
+share/man/man5|755|0|0|directory
+share/man/man8/fancontrol.8.gz|644|0|0|regular file
+share/man/man8/isadump.8.gz|644|0|0|regular file
+share/man/man8/isaset.8.gz|644|0|0|regular file
+share/man/man8/pwmconfig.8.gz|644|0|0|regular file
+share/man/man8/sensord.8.gz|644|0|0|regular file
+share/man/man8/sensors-conf-convert.8.gz|644|0|0|regular file
+share/man/man8/sensors-detect.8.gz|644|0|0|regular file
 share/man/man8|755|0|0|directory
 share/man|755|0|0|directory
 share|755|0|0|directory
-lib|755|0|0|directory
-include/sensors|755|0|0|directory
-include|755|0|0|directory
-etc/sensors.d|755|0|0|directory
-etc|755|0|0|directory
-bin|755|0|0|directory

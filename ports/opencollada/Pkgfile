@@ -1,5 +1,5 @@
 name=opencollada
-version=1.6.45
+version=1.6.58
 desc="Stream based reader and writer library for COLLADA files"
 deps="libxml2 libpcre cmake git"
 source="https://github.com/KhronosGroup/OpenCOLLADA/archive/v$version.tar.gz

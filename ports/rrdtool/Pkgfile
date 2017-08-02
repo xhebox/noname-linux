@@ -1,5 +1,5 @@
 name=rrdtool
-version=1.6.0
+version=1.7.0
 deps="perl python pango libxml2"
 desc="Data logging and graphing application"
 source="http://oss.oetiker.ch/rrdtool/pub/rrdtool-${version}.tar.gz"

@@ -1,10 +1,8 @@
 name=grub
-version=2.02~rc2
-_UNIFONT_VER="9.0.06"
+version=2.02
 desc="Boot loader for the Linux operating system"
-deps="flex libusb ncurses xz intel-ucode libisoburn mtools fuse2 lvm2 dosfstools efibootmgr"
-source="http://alpha.gnu.org/gnu/grub/grub-${version}.tar.gz
-https://ftp.gnu.org/gnu/unifont/unifont-${_UNIFONT_VER}/unifont-${_UNIFONT_VER}.bdf.gz
+deps="bdf-unifont freetype flex libusb ncurses xz intel-ucode libisoburn mtools fuse2 lvm2 dosfstools efibootmgr os-prober"
+source="http://ftp.gnu.org/gnu/grub/grub-${version}.tar.gz
 0002-intel-ucode.patch
 0003-10_linux-detect-archlinux-initramfs.patch
 0004-add-GRUB_COLOR_variables.patch
@@ -26,7 +24,6 @@ ext() {
 	mkdir grub-extras
 	cp -r ../grub-extras/915resolution grub-extras/915resolution
 	export GRUB_CONTRIB="${srcdir}/grub-${version}/grub-extras/"
-	cp ../unifont-${_UNIFONT_VER}.bdf unifont.bdf
 	./autogen.sh
 }
 
@@ -37,7 +34,7 @@ build() {
 		--enable-mm-debug \
 		--enable-cache-stats \
 		--enable-boot-time \
-		--disable-grub-mkfont \
+		--enable-grub-mkfont \
 		--enable-grub-themes \
 		--enable-grub-mount \
 		--enable-device-mapper \

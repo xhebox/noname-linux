@@ -1,0 +1,23 @@
+name=python-pysocks
+version=1.6.7
+desc="SOCKS4, SOCKS5 or HTTP proxy (Anorov fork PySocks replaces socksipy)"
+deps="python-setuptools"
+source="https://github.com/Anorov/PySocks/archive/$version.tar.gz"
+
+build() {
+	cp -a PySocks-$version set3
+	cd PySocks-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

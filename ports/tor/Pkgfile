@@ -1,5 +1,5 @@
 name=tor
-version=0.3.0.6
+version=0.3.0.9
 deps="libressl libevent zlib bash libseccomp ca-certificates"
 desc="Onion router for anonymization of internet traffic"
 source="https://dist.torproject.org/$name-$version.tar.gz"

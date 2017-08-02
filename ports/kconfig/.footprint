@@ -48,10 +48,10 @@ lib/cmake|755|0|0|directory
 lib/kf5/kconf_update|755|0|0|regular file
 lib/kf5/kconfig_compiler_kf5|755|0|0|regular file
 lib/kf5|755|0|0|directory
-lib/libKF5ConfigCore.so.5.33.0|755|0|0|regular file
+lib/libKF5ConfigCore.so.5.36.0|755|0|0|regular file
 lib/libKF5ConfigCore.so.5|777|0|0|symbolic link
 lib/libKF5ConfigCore.so|777|0|0|symbolic link
-lib/libKF5ConfigGui.so.5.33.0|755|0|0|regular file
+lib/libKF5ConfigGui.so.5.36.0|755|0|0|regular file
 lib/libKF5ConfigGui.so.5|777|0|0|symbolic link
 lib/libKF5ConfigGui.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KConfigCore.pri|644|0|0|regular file

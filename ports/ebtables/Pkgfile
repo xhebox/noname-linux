@@ -1,0 +1,28 @@
+name=ebtables
+version=2.0.10_4
+ver=`echo $version | sed 's/_/-/g'`
+desc='Ethernet bridge filtering utilities'
+deps="perl bash iptables"
+source="http://downloads.sourceforge.net/ebtables/ebtables-v${ver}.tar.gz
+musl-fixes.patch"
+
+build() {
+	cd ebtables-v$ver
+	patch -p0 < ../musl-fixes.patch || die
+	sed -i 's,<linux/if_ether.h>,<netinet/if_ether.h>,g; /<linux\/if_pppox.h>/d' include/linux/netfilter_bridge.h include/linux/netfilter_bridge/ebtables.h extensions/ebt_*.c
+	rm -f include/linux/if_ether.h
+	LDFLAGS="-Wl,--no-as-needed"
+	make || die
+	make install \
+	DESTDIR="$pkgdir" \
+	LIBDIR=/lib \
+	MANDIR=/share/man \
+	BINDIR=/bin \
+	INITDIR=/etc/rc.d \
+	SYSCONFIGDIR=/etc || die
+
+	rm "$pkgdir/etc/ebtables-config"
+	rm -r "$pkgdir/etc/rc.d"
+	install -Dm 644 /dev/null "$pkgdir/etc/ebtables.conf"
+	rm "$pkgdir/etc/ethertypes"
+}

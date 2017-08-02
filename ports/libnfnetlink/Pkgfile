@@ -1,0 +1,15 @@
+name=libnfnetlink
+version=1.0.1
+desc='Low-level library for netfilter related kernel/userspace communication'
+deps="musl"
+source="http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-$version.tar.bz2"
+
+build() {
+	cd libnfnetlink-$version
+	sed -e "/#include <linux\/netlink.h>/i #include <stdint.h>" \
+		-i include/libnfnetlink/libnfnetlink.h
+	find . -type f -exec sed -e "s;u_int;uint;g" -i "{}" \;
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

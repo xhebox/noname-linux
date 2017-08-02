@@ -1,6 +1,6 @@
 . $PORTS/elfutils/Pkgfile
 name=elfutils-32
-deps="xz-32 zlib-32 bzip2-32 m4 argp-standalone-32 gettext-32 musl-obstack-32 musl-fts-32"
+deps="xz-32 zlib-32 bzip2-32 m4 argp-standalone-32 musl-obstack-32 musl-fts-32"
 
 build() {
 	cd elfutils-$version

@@ -1,0 +1,12 @@
+name=librime
+version=1.2.9
+desc="Rime input method engine"
+deps="boost opencc yaml-cpp leveldb google-glog marisa cmake"
+source="https://github.com/rime/librime/archive/rime-$version.tar.gz"
+
+build() {
+	cd librime-rime-$version
+	cmake -DCMAKE_INSTALL_PREFIX= .
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

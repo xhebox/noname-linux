@@ -1,0 +1,17 @@
+. $PORTS/lm_sensors/Pkgfile
+name=lm_sensors-32
+deps="lm_sensors"
+
+build() {
+	cd lm-sensors-$_ver
+	sed -i 's/CC := gcc/CC := gcc -m32/' Makefile
+	sed -i 's,asm/io.h,sys/io.h,g' prog/dump/*.c
+	patch -p0 -i "${srcdir}/lm_sensors-fancontrol.patch" || die
+	make PREFIX=/ || die
+	make DESTDIR=${pkgdir} \
+		PREFIX=/ LIBDIR=/lib32 SBINDIR=/bin MANDIR=/share/man install || die
+	rm -r ${pkgdir}/etc/
+	rm -r ${pkgdir}/bin
+	rm -r ${pkgdir}/include
+	rm -r ${pkgdir}/share/man
+}

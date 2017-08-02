@@ -3,7 +3,7 @@ include/ass/ass_types.h|644|0|0|regular file
 include/ass|755|0|0|directory
 include|755|0|0|directory
 lib/libass.a|644|0|0|regular file
-lib/libass.so.9.0.0|755|0|0|regular file
+lib/libass.so.9.0.1|755|0|0|regular file
 lib/libass.so.9|777|0|0|symbolic link
 lib/libass.so|777|0|0|symbolic link
 lib/pkgconfig/libass.pc|644|0|0|regular file

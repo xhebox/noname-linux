@@ -3,7 +3,7 @@ version=1.0
 desc="all needed proto"
 deps="util-macros xmlto"
 source="
-presentproto-1.1.tar.bz2
+http://ftp.x.org/pub/individual/proto/presentproto-1.1.tar.bz2
 http://ftp.x.org/pub/individual/proto/bigreqsproto-1.1.2.tar.bz2
 http://ftp.x.org/pub/individual/proto/compositeproto-0.4.2.tar.bz2
 http://ftp.x.org/pub/individual/proto/damageproto-1.2.1.tar.bz2

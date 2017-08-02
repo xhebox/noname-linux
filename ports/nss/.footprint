@@ -78,6 +78,7 @@ include/nss/pkcs11n.h|644|0|0|regular file
 include/nss/pkcs11p.h|644|0|0|regular file
 include/nss/pkcs11t.h|644|0|0|regular file
 include/nss/pkcs11u.h|644|0|0|regular file
+include/nss/pkcs11uri.h|644|0|0|regular file
 include/nss/pkcs12.h|644|0|0|regular file
 include/nss/pkcs12t.h|644|0|0|regular file
 include/nss/pkcs1sig.h|644|0|0|regular file
@@ -130,7 +131,7 @@ lib/libsmime3.so|755|0|0|regular file
 lib/libsoftokn3.chk|644|0|0|regular file
 lib/libsoftokn3.so|755|0|0|regular file
 lib/libssl3.so|755|0|0|regular file
-lib/pkgconfig/mozilla-nss.pc|644|0|0|regular file
+lib/pkgconfig/mozilla-nss.pc|777|0|0|symbolic link
 lib/pkgconfig/nss.pc|644|0|0|regular file
 lib/pkgconfig|755|0|0|directory
 lib|755|0|0|directory

@@ -29,13 +29,13 @@ lib/cairo/libcairo-trace.so.0.0.0|755|0|0|regular file
 lib/cairo/libcairo-trace.so.0|777|0|0|symbolic link
 lib/cairo/libcairo-trace.so|777|0|0|symbolic link
 lib/cairo|755|0|0|directory
-lib/libcairo-gobject.so.2.11400.8|755|0|0|regular file
+lib/libcairo-gobject.so.2.11400.10|755|0|0|regular file
 lib/libcairo-gobject.so.2|777|0|0|symbolic link
 lib/libcairo-gobject.so|777|0|0|symbolic link
-lib/libcairo-script-interpreter.so.2.11400.8|755|0|0|regular file
+lib/libcairo-script-interpreter.so.2.11400.10|755|0|0|regular file
 lib/libcairo-script-interpreter.so.2|777|0|0|symbolic link
 lib/libcairo-script-interpreter.so|777|0|0|symbolic link
-lib/libcairo.so.2.11400.8|755|0|0|regular file
+lib/libcairo.so.2.11400.10|755|0|0|regular file
 lib/libcairo.so.2|777|0|0|symbolic link
 lib/libcairo.so|777|0|0|symbolic link
 lib/pkgconfig/cairo-egl.pc|644|0|0|regular file
@@ -113,7 +113,6 @@ share/gtk-doc/html/cairo/index-1.6.html|644|0|0|regular file
 share/gtk-doc/html/cairo/index-1.8.html|644|0|0|regular file
 share/gtk-doc/html/cairo/index-all.html|644|0|0|regular file
 share/gtk-doc/html/cairo/index.html|644|0|0|regular file
-share/gtk-doc/html/cairo/index.sgml|644|0|0|regular file
 share/gtk-doc/html/cairo/language-bindings.html|644|0|0|regular file
 share/gtk-doc/html/cairo/left-insensitive.png|644|0|0|regular file
 share/gtk-doc/html/cairo/left.png|644|0|0|regular file

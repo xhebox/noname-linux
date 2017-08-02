@@ -3,10 +3,10 @@ version=0.1
 desc="part of all apps"
 deps="libpng xbitmaps mesa libsm pixman libx11 libxkbfile libxxf86vm xorg-proto libxres libxmu libxshmfence libxtst libxv xcb-util libva libva-intel-driver harfbuzz xcb-util-wm xcb-util-image xcb-util-cursor xcb-util-renderutil xcb-util-keysyms libxaw libxcursor libxrandr libvdpau-va-gl"
 source="
-xkbcomp-1.4.0.tar.bz2
-sessreg-1.1.1.tar.bz2
-xauth-1.0.10.tar.bz2
+http://xorg.freedesktop.org/releases/individual/app/xauth-1.0.10.tar.bz2
 sessreg-1.1.0-missing_path_wtmpx.patch
+http://xorg.freedesktop.org/releases/individual/app/xkbcomp-1.4.0.tar.bz2
+http://xorg.freedesktop.org/releases/individual/app/sessreg-1.1.1.tar.bz2
 http://xorg.freedesktop.org/releases/individual/app/iceauth-1.0.7.tar.bz2
 http://xorg.freedesktop.org/releases/individual/app/luit-1.1.1.tar.bz2
 http://xorg.freedesktop.org/releases/individual/app/mkfontdir-1.0.7.tar.bz2

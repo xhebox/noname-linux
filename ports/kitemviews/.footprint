@@ -27,7 +27,7 @@ lib/cmake/KF5ItemViews/KF5ItemViewsTargets-release.cmake|644|0|0|regular file
 lib/cmake/KF5ItemViews/KF5ItemViewsTargets.cmake|644|0|0|regular file
 lib/cmake/KF5ItemViews|755|0|0|directory
 lib/cmake|755|0|0|directory
-lib/libKF5ItemViews.so.5.33.0|755|0|0|regular file
+lib/libKF5ItemViews.so.5.36.0|755|0|0|regular file
 lib/libKF5ItemViews.so.5|777|0|0|symbolic link
 lib/libKF5ItemViews.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KItemViews.pri|644|0|0|regular file

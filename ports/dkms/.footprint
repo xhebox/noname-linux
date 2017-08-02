@@ -1,0 +1,20 @@
+bin/dkms|755|0|0|regular file
+bin|755|0|0|directory
+etc/dkms/framework.conf|644|0|0|regular file
+etc/dkms|755|0|0|directory
+etc|755|0|0|directory
+lib/dkms/common.postinst|755|0|0|regular file
+lib/dkms/dkms_autoinstaller|755|0|0|regular file
+lib/dkms|755|0|0|directory
+lib|755|0|0|directory
+share/bash-completion/completions/dkms|644|0|0|regular file
+share/bash-completion/completions|755|0|0|directory
+share/bash-completion|755|0|0|directory
+share/man/man8/dkms.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory
+var/lib/dkms/dkms_dbversion|644|0|0|regular file
+var/lib/dkms|755|0|0|directory
+var/lib|755|0|0|directory
+var|755|0|0|directory

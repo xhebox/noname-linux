@@ -1,5 +1,5 @@
 name=feh
-version=2.18.3
+version=2.19.1
 desc="Fast and light imlib2-based image viewer"
 deps="imlib2 curl libxinerama libexif libxt imagemagick"
 source="https://feh.finalrewind.org/${name}-${version}.tar.bz2"

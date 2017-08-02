@@ -186,7 +186,9 @@ lib/firmware/ath10k/QCA6174/hw2.1|755|0|0|directory
 lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin|644|0|0|regular file
 lib/firmware/ath10k/QCA6174/hw3.0/board.bin|644|0|0|regular file
 lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin|644|0|0|regular file
+lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin|644|0|0|regular file
 lib/firmware/ath10k/QCA6174/hw3.0/notice_ath10k_firmware-4.txt|644|0|0|regular file
+lib/firmware/ath10k/QCA6174/hw3.0/notice_ath10k_firmware-6.txt|644|0|0|regular file
 lib/firmware/ath10k/QCA6174/hw3.0|755|0|0|directory
 lib/firmware/ath10k/QCA6174|755|0|0|directory
 lib/firmware/ath10k/QCA9377/hw1.0/board-2.bin|644|0|0|regular file
@@ -277,6 +279,7 @@ lib/firmware/ath9k_htc|755|0|0|directory
 lib/firmware/atmel/wilc1000_ap_fw.bin|644|0|0|regular file
 lib/firmware/atmel/wilc1000_fw.bin|644|0|0|regular file
 lib/firmware/atmel/wilc1000_p2p_fw.bin|644|0|0|regular file
+lib/firmware/atmel/wilc1000_wifi_firmware.bin|644|0|0|regular file
 lib/firmware/atmel|755|0|0|directory
 lib/firmware/atmsar11.fw|644|0|0|regular file
 lib/firmware/atusb/ChangeLog|644|0|0|regular file
@@ -588,13 +591,13 @@ lib/firmware/cxgb4/aq1202_fw.cld|644|0|0|regular file
 lib/firmware/cxgb4/bcm8483.bin|644|0|0|regular file
 lib/firmware/cxgb4/t4fw-1.14.4.0.bin|644|0|0|regular file
 lib/firmware/cxgb4/t4fw-1.15.37.0.bin|644|0|0|regular file
-lib/firmware/cxgb4/t4fw-1.16.33.0.bin|644|0|0|regular file
+lib/firmware/cxgb4/t4fw-1.16.45.0.bin|644|0|0|regular file
 lib/firmware/cxgb4/t4fw.bin|777|0|0|symbolic link
 lib/firmware/cxgb4/t5fw-1.14.4.0.bin|644|0|0|regular file
 lib/firmware/cxgb4/t5fw-1.15.37.0.bin|644|0|0|regular file
-lib/firmware/cxgb4/t5fw-1.16.33.0.bin|644|0|0|regular file
+lib/firmware/cxgb4/t5fw-1.16.45.0.bin|644|0|0|regular file
 lib/firmware/cxgb4/t5fw.bin|777|0|0|symbolic link
-lib/firmware/cxgb4/t6fw-1.16.33.0.bin|644|0|0|regular file
+lib/firmware/cxgb4/t6fw-1.16.45.0.bin|644|0|0|regular file
 lib/firmware/cxgb4/t6fw.bin|777|0|0|symbolic link
 lib/firmware/cxgb4|755|0|0|directory
 lib/firmware/dabusb/bitstream.bin|644|0|0|regular file
@@ -656,7 +659,6 @@ lib/firmware/go7007|755|0|0|directory
 lib/firmware/hfi1_dc8051.fw|644|0|0|regular file
 lib/firmware/hfi1_fabric.fw|644|0|0|regular file
 lib/firmware/hfi1_pcie.fw|644|0|0|regular file
-lib/firmware/hfi1_platform.dat|644|0|0|regular file
 lib/firmware/hfi1_sbus.fw|644|0|0|regular file
 lib/firmware/htc_7010.fw|644|0|0|regular file
 lib/firmware/htc_9271.fw|644|0|0|regular file
@@ -680,16 +682,22 @@ lib/firmware/i915/skl_guc_ver6.bin|777|0|0|symbolic link
 lib/firmware/i915/skl_guc_ver6_1.bin|644|0|0|regular file
 lib/firmware/i915/skl_huc_ver01_07_1398.bin|644|0|0|regular file
 lib/firmware/i915|755|0|0|directory
+lib/firmware/imx/sdma/sdma-imx6q.bin|644|0|0|regular file
+lib/firmware/imx/sdma/sdma-imx7d.bin|644|0|0|regular file
+lib/firmware/imx/sdma|755|0|0|directory
+lib/firmware/imx|755|0|0|directory
 lib/firmware/intel/IntcSST2.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_bxtn.bin|777|0|0|symbolic link
 lib/firmware/intel/dsp_fw_bxtn_v1118.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_bxtn_v2010.bin|644|0|0|regular file
+lib/firmware/intel/dsp_fw_bxtn_v2219.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_bxtn_v430.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_bxtn_v702.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_glk.bin|777|0|0|symbolic link
 lib/firmware/intel/dsp_fw_glk_v1814.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_kbl.bin|777|0|0|symbolic link
 lib/firmware/intel/dsp_fw_kbl_v1037.bin|644|0|0|regular file
+lib/firmware/intel/dsp_fw_kbl_v2042.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_kbl_v701.bin|644|0|0|regular file
 lib/firmware/intel/dsp_fw_release.bin|777|0|0|symbolic link
 lib/firmware/intel/dsp_fw_release_v827.bin|644|0|0|regular file
@@ -853,6 +861,8 @@ lib/firmware/liquidio|755|0|0|directory
 lib/firmware/matrox/g200_warp.fw|644|0|0|regular file
 lib/firmware/matrox/g400_warp.fw|644|0|0|regular file
 lib/firmware/matrox|755|0|0|directory
+lib/firmware/mellanox/mlxsw_spectrum-13.1420.122.mfa2|644|0|0|regular file
+lib/firmware/mellanox|755|0|0|directory
 lib/firmware/moxa/moxa-1110.fw|644|0|0|regular file
 lib/firmware/moxa/moxa-1130.fw|644|0|0|regular file
 lib/firmware/moxa/moxa-1131.fw|644|0|0|regular file
@@ -869,6 +879,7 @@ lib/firmware/moxa/moxa-1653.fw|644|0|0|regular file
 lib/firmware/moxa/moxa-1658.fw|644|0|0|regular file
 lib/firmware/moxa|755|0|0|directory
 lib/firmware/mrvl/pcie8897_uapsta.bin|644|0|0|regular file
+lib/firmware/mrvl/pcie8997_wlan_v4.bin|644|0|0|regular file
 lib/firmware/mrvl/pcieuart8997_combo_v4.bin|644|0|0|regular file
 lib/firmware/mrvl/pcieusb8997_combo_v4.bin|644|0|0|regular file
 lib/firmware/mrvl/sd8688.bin|644|0|0|regular file
@@ -882,6 +893,7 @@ lib/firmware/mrvl/usb8766_uapsta.bin|644|0|0|regular file
 lib/firmware/mrvl/usb8797_uapsta.bin|644|0|0|regular file
 lib/firmware/mrvl/usb8801_uapsta.bin|644|0|0|regular file
 lib/firmware/mrvl/usb8897_uapsta.bin|644|0|0|regular file
+lib/firmware/mrvl/usbusb8997_combo_v4.bin|644|0|0|regular file
 lib/firmware/mrvl|755|0|0|directory
 lib/firmware/mt7601u.bin|644|0|0|regular file
 lib/firmware/mt7650.bin|644|0|0|regular file
@@ -914,6 +926,15 @@ lib/firmware/myri10ge_rss_ethp_big_z8e.dat|644|0|0|regular file
 lib/firmware/myri10ge_rss_ethp_z8e.dat|644|0|0|regular file
 lib/firmware/myricom/lanai.bin|644|0|0|regular file
 lib/firmware/myricom|755|0|0|directory
+lib/firmware/netronome/nic_AMDA0081-0001_1x40.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0081-0001_4x10.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0096-0001_2x10.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0097-0001_2x40.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0097-0001_4x10_1x40.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0097-0001_8x10.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0099-0001_2x10.nffw|644|0|0|regular file
+lib/firmware/netronome/nic_AMDA0099-0001_2x25.nffw|644|0|0|regular file
+lib/firmware/netronome|755|0|0|directory
 lib/firmware/nvidia/gk20a/fecs_data.bin|644|0|0|regular file
 lib/firmware/nvidia/gk20a/fecs_inst.bin|644|0|0|regular file
 lib/firmware/nvidia/gk20a/gpccs_data.bin|644|0|0|regular file
@@ -1094,11 +1115,11 @@ lib/firmware/nvidia/gp107/acr/ucode_load.bin|777|0|0|symbolic link
 lib/firmware/nvidia/gp107/acr/ucode_unload.bin|777|0|0|symbolic link
 lib/firmware/nvidia/gp107/acr/unload_bl.bin|777|0|0|symbolic link
 lib/firmware/nvidia/gp107/acr|755|0|0|directory
-lib/firmware/nvidia/gp107/gr/fecs_bl.bin|777|0|0|symbolic link
+lib/firmware/nvidia/gp107/gr/fecs_bl.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/fecs_data.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/fecs_inst.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/fecs_sig.bin|644|0|0|regular file
-lib/firmware/nvidia/gp107/gr/gpccs_bl.bin|777|0|0|symbolic link
+lib/firmware/nvidia/gp107/gr/gpccs_bl.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/gpccs_data.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/gpccs_inst.bin|644|0|0|regular file
 lib/firmware/nvidia/gp107/gr/gpccs_sig.bin|644|0|0|regular file
@@ -1114,8 +1135,33 @@ lib/firmware/nvidia/gp107/sec2/image.bin|777|0|0|symbolic link
 lib/firmware/nvidia/gp107/sec2/sig.bin|777|0|0|symbolic link
 lib/firmware/nvidia/gp107/sec2|755|0|0|directory
 lib/firmware/nvidia/gp107|755|0|0|directory
+lib/firmware/nvidia/gp10b/acr/bl.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/acr/ucode_load.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/acr|755|0|0|directory
+lib/firmware/nvidia/gp10b/gr/fecs_bl.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/fecs_data.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/fecs_inst.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/fecs_sig.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/gpccs_bl.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/gpccs_data.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/gpccs_inst.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/gpccs_sig.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/sw_bundle_init.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/sw_ctx.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/sw_method_init.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr/sw_nonctx.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/gr|755|0|0|directory
+lib/firmware/nvidia/gp10b/pmu/desc.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/pmu/image.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/pmu/sig.bin|644|0|0|regular file
+lib/firmware/nvidia/gp10b/pmu|755|0|0|directory
+lib/firmware/nvidia/gp10b|755|0|0|directory
+lib/firmware/nvidia/tegra124/vic03_ucode.bin|644|0|0|regular file
 lib/firmware/nvidia/tegra124/xusb.bin|644|0|0|regular file
 lib/firmware/nvidia/tegra124|755|0|0|directory
+lib/firmware/nvidia/tegra186/vic04_ucode.bin|644|0|0|regular file
+lib/firmware/nvidia/tegra186|755|0|0|directory
+lib/firmware/nvidia/tegra210/vic04_ucode.bin|644|0|0|regular file
 lib/firmware/nvidia/tegra210/xusb.bin|644|0|0|regular file
 lib/firmware/nvidia/tegra210|755|0|0|directory
 lib/firmware/nvidia|755|0|0|directory
@@ -1143,9 +1189,19 @@ lib/firmware/qca/rampatch_usb_00000201.bin|644|0|0|regular file
 lib/firmware/qca/rampatch_usb_00000300.bin|644|0|0|regular file
 lib/firmware/qca/rampatch_usb_00000302.bin|644|0|0|regular file
 lib/firmware/qca|755|0|0|directory
+lib/firmware/qcom/NOTICE.txt|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.b00|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.b01|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.b02|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.b03|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.b04|644|0|0|regular file
+lib/firmware/qcom/venus-1.8/venus.mdt|644|0|0|regular file
+lib/firmware/qcom/venus-1.8|755|0|0|directory
+lib/firmware/qcom|755|0|0|directory
 lib/firmware/qed/qed_init_values_zipped-8.10.10.0.bin|644|0|0|regular file
 lib/firmware/qed/qed_init_values_zipped-8.10.5.0.bin|644|0|0|regular file
 lib/firmware/qed/qed_init_values_zipped-8.15.3.0.bin|644|0|0|regular file
+lib/firmware/qed/qed_init_values_zipped-8.20.0.0.bin|644|0|0|regular file
 lib/firmware/qed/qed_init_values_zipped-8.4.2.0.bin|644|0|0|regular file
 lib/firmware/qed/qed_init_values_zipped-8.7.3.0.bin|644|0|0|regular file
 lib/firmware/qed|755|0|0|directory
@@ -1417,7 +1473,9 @@ lib/firmware/radeon|755|0|0|directory
 lib/firmware/rockchip/dptx.bin|644|0|0|regular file
 lib/firmware/rockchip|755|0|0|directory
 lib/firmware/rp2.fw|644|0|0|regular file
+lib/firmware/rsi/rs9113_wlan_qspi.rps|644|0|0|regular file
 lib/firmware/rsi_91x.fw|644|0|0|regular file
+lib/firmware/rsi|755|0|0|directory
 lib/firmware/rt2561.bin|644|0|0|regular file
 lib/firmware/rt2561s.bin|644|0|0|regular file
 lib/firmware/rt2661.bin|644|0|0|regular file
@@ -1616,6 +1674,8 @@ lib/firmware/vxge/X3fw.ncf|644|0|0|regular file
 lib/firmware/vxge|755|0|0|directory
 lib/firmware/whiteheat.fw|644|0|0|regular file
 lib/firmware/whiteheat_loader.fw|644|0|0|regular file
+lib/firmware/wil6210.brd|644|0|0|regular file
+lib/firmware/wil6210.fw|644|0|0|regular file
 lib/firmware/wsm_22.bin|644|0|0|regular file
 lib/firmware/yam/1200.bin|644|0|0|regular file
 lib/firmware/yam/9600.bin|644|0|0|regular file

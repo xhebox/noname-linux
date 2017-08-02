@@ -1,0 +1,4 @@
+Tue May 30 04:46:08 GMT 2017
+python-ndg-httpsclient
+0.4.2
+Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL

@@ -1,0 +1,12 @@
+name=google-glog
+version=0.3.5
+desc="Logging library for C++"
+source="https://github.com/google/glog/archive/v$version.tar.gz"
+
+build() {
+	cd glog-$version
+
+	./configure --prefix=/
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

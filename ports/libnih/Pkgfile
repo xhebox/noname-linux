@@ -1,0 +1,14 @@
+name=libnih
+version=1.0.3
+deps="expat dbus"
+desc="Small library for C application development."
+source="https://launchpad.net/libnih/${version%.*}/${version}/+download/libnih-$version.tar.gz
+musl.patch"
+
+build() {
+	cd libnih-$version
+	patch -p0 < ../musl.patch || die
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

@@ -1,0 +1,11 @@
+name=brise
+version=0.35
+desc="Rime schema repository"
+deps="librime"
+source="https://github.com/rime/brise/archive/brise-$version.tar.gz"
+
+build() {
+	cd brise-brise-$version
+	make || die
+	make PREFIX=/ DESTDIR="$pkgdir" install || die
+}

@@ -1,5 +1,5 @@
 name=irssi
-version=1.0.2
+version=1.0.4
 desc="Modular text mode IRC client with Perl scripting"
 deps="glib libressl ncurses"
 source="https://github.com/irssi/irssi/releases/download/$version/$name-$version.tar.xz

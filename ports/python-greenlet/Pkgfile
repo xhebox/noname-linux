@@ -1,0 +1,24 @@
+name=python-greenlet
+version=0.4.12
+desc="Lightweight in-process concurrent programming"
+deps="python-setuptools"
+source="https://files.pythonhosted.org/packages/source/g/greenlet/greenlet-${version}.tar.gz"
+
+build() {
+	cp -r greenlet-$version py3
+	cd greenlet-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+
+	cd ../py3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

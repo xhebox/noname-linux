@@ -1,0 +1,23 @@
+name=python-chardet
+version=3.0.4
+desc="Python module for character encoding auto-detection"
+deps="python-setuptools"
+source="https://pypi.io/packages/source/c/chardet/chardet-${version}.tar.gz"
+
+build() {
+	cp -a chardet-$version set3
+	cd chardet-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+	cd ../set3
+	/bin/python3 setup.py build || die
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}

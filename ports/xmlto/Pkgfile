@@ -1,7 +1,7 @@
 name=xmlto
 version=0.0.28
 desc="Convert xml to many other formats"
-source="https://fedorahosted.org/releases/x/m/${name}/${name}-${version}.tar.bz2"
+source="https://releases.pagure.org/xmlto/${name}-${version}.tar.bz2"
 deps="docbook-xsl libxslt"
 
 build() {

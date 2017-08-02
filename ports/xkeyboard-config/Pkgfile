@@ -1,5 +1,5 @@
 name=xkeyboard-config
-version=2.20
+version=2.21
 deps="xorg-app intltool"
 desc="X keyboard configuration database"
 source="http://xorg.freedesktop.org/releases/individual/data/$name/$name-$version.tar.bz2"

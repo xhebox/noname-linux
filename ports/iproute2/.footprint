@@ -33,6 +33,8 @@ include/iproute2/bpf_elf.h|644|0|0|regular file
 include/iproute2|755|0|0|directory
 include|755|0|0|directory
 lib/tc/experimental.dist|644|0|0|regular file
+lib/tc/m_ipt.so|777|0|0|symbolic link
+lib/tc/m_xt.so|755|0|0|regular file
 lib/tc/normal.dist|644|0|0|regular file
 lib/tc/pareto.dist|644|0|0|regular file
 lib/tc/paretonormal.dist|644|0|0|regular file
@@ -86,6 +88,8 @@ share/man/man8/devlink-monitor.8.gz|644|0|0|regular file
 share/man/man8/devlink-port.8.gz|644|0|0|regular file
 share/man/man8/devlink-sb.8.gz|644|0|0|regular file
 share/man/man8/devlink.8.gz|644|0|0|regular file
+share/man/man8/genl.8.gz|644|0|0|regular file
+share/man/man8/ifcfg.8.gz|644|0|0|regular file
 share/man/man8/ifstat.8.gz|644|0|0|regular file
 share/man/man8/ip-address.8.gz|644|0|0|regular file
 share/man/man8/ip-addrlabel.8.gz|644|0|0|regular file
@@ -103,9 +107,11 @@ share/man/man8/ip-netns.8.gz|644|0|0|regular file
 share/man/man8/ip-ntable.8.gz|644|0|0|regular file
 share/man/man8/ip-route.8.gz|644|0|0|regular file
 share/man/man8/ip-rule.8.gz|644|0|0|regular file
+share/man/man8/ip-sr.8.gz|644|0|0|regular file
 share/man/man8/ip-tcp_metrics.8.gz|644|0|0|regular file
 share/man/man8/ip-token.8.gz|644|0|0|regular file
 share/man/man8/ip-tunnel.8.gz|644|0|0|regular file
+share/man/man8/ip-vrf.8.gz|644|0|0|regular file
 share/man/man8/ip-xfrm.8.gz|644|0|0|regular file
 share/man/man8/ip.8.gz|644|0|0|regular file
 share/man/man8/lnstat.8.gz|644|0|0|regular file
@@ -117,6 +123,7 @@ share/man/man8/rtmon.8.gz|644|0|0|regular file
 share/man/man8/rtpr.8.gz|644|0|0|regular file
 share/man/man8/rtstat.8.gz|644|0|0|regular file
 share/man/man8/ss.8.gz|644|0|0|regular file
+share/man/man8/tc-actions.8.gz|644|0|0|regular file
 share/man/man8/tc-basic.8.gz|644|0|0|regular file
 share/man/man8/tc-bfifo.8.gz|644|0|0|regular file
 share/man/man8/tc-bpf.8.gz|644|0|0|regular file
@@ -169,6 +176,7 @@ share/man/man8/tipc-link.8.gz|644|0|0|regular file
 share/man/man8/tipc-media.8.gz|644|0|0|regular file
 share/man/man8/tipc-nametable.8.gz|644|0|0|regular file
 share/man/man8/tipc-node.8.gz|644|0|0|regular file
+share/man/man8/tipc-peer.8.gz|644|0|0|regular file
 share/man/man8/tipc-socket.8.gz|644|0|0|regular file
 share/man/man8/tipc.8.gz|644|0|0|regular file
 share/man/man8|755|0|0|directory

@@ -146,10 +146,10 @@ lib/kf5/kio_http_cache_cleaner|755|0|0|regular file
 lib/kf5/kiod5|755|0|0|regular file
 lib/kf5/kioslave|755|0|0|regular file
 lib/kf5|755|0|0|directory
-lib/libKF5KIOCore.so.5.33.0|755|0|0|regular file
+lib/libKF5KIOCore.so.5.36.0|755|0|0|regular file
 lib/libKF5KIOCore.so.5|777|0|0|symbolic link
 lib/libKF5KIOCore.so|777|0|0|symbolic link
-lib/libKF5KIONTLM.so.5.33.0|755|0|0|regular file
+lib/libKF5KIONTLM.so.5.36.0|755|0|0|regular file
 lib/libKF5KIONTLM.so.5|777|0|0|symbolic link
 lib/libKF5KIONTLM.so|777|0|0|symbolic link
 lib/qt/mkspecs/modules/qt_KIOCore.pri|644|0|0|regular file
@@ -537,6 +537,59 @@ share/doc/HTML/nl/kioslave5/webdav/index.docbook|644|0|0|regular file
 share/doc/HTML/nl/kioslave5/webdav|755|0|0|directory
 share/doc/HTML/nl/kioslave5|755|0|0|directory
 share/doc/HTML/nl|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/cache/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/cache/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/cache|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/cookies/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/cookies/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/cookies|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/netpref/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/netpref/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/netpref|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/proxy/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/proxy/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/proxy|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/smb/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/smb/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/smb|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/trash/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/trash/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/trash|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/useragent/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/useragent/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/useragent|755|0|0|directory
+share/doc/HTML/pt/kcontrol5/webshortcuts/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/webshortcuts/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kcontrol5/webshortcuts|755|0|0|directory
+share/doc/HTML/pt/kcontrol5|755|0|0|directory
+share/doc/HTML/pt/kioslave5/data/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/data/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/data|755|0|0|directory
+share/doc/HTML/pt/kioslave5/file/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/file/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/file|755|0|0|directory
+share/doc/HTML/pt/kioslave5/ftp/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/ftp/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/ftp|755|0|0|directory
+share/doc/HTML/pt/kioslave5/help/documentationnotfound/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/help/documentationnotfound/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/help/documentationnotfound|755|0|0|directory
+share/doc/HTML/pt/kioslave5/help/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/help/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/help|755|0|0|directory
+share/doc/HTML/pt/kioslave5/http/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/http/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/http|755|0|0|directory
+share/doc/HTML/pt/kioslave5/mailto/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/mailto/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/mailto|755|0|0|directory
+share/doc/HTML/pt/kioslave5/telnet/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/telnet/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/telnet|755|0|0|directory
+share/doc/HTML/pt/kioslave5/webdav/index.cache.bz2|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/webdav/index.docbook|644|0|0|regular file
+share/doc/HTML/pt/kioslave5/webdav|755|0|0|directory
+share/doc/HTML/pt/kioslave5|755|0|0|directory
 share/doc/HTML/pt_BR/kcontrol5/cache/index.cache.bz2|644|0|0|regular file
 share/doc/HTML/pt_BR/kcontrol5/cache/index.docbook|644|0|0|regular file
 share/doc/HTML/pt_BR/kcontrol5/cache|755|0|0|directory
@@ -591,6 +644,7 @@ share/doc/HTML/pt_BR/kioslave5/webdav/index.docbook|644|0|0|regular file
 share/doc/HTML/pt_BR/kioslave5/webdav|755|0|0|directory
 share/doc/HTML/pt_BR/kioslave5|755|0|0|directory
 share/doc/HTML/pt_BR|755|0|0|directory
+share/doc/HTML/pt|755|0|0|directory
 share/doc/HTML/ru/kioslave5/data/index.cache.bz2|644|0|0|regular file
 share/doc/HTML/ru/kioslave5/data/index.docbook|644|0|0|regular file
 share/doc/HTML/ru/kioslave5/data|755|0|0|directory
@@ -1101,9 +1155,12 @@ share/man/man8|755|0|0|directory
 share/man/nl/man8/kcookiejar5.8.gz|644|0|0|regular file
 share/man/nl/man8|755|0|0|directory
 share/man/nl|755|0|0|directory
+share/man/pt/man8/kcookiejar5.8.gz|644|0|0|regular file
+share/man/pt/man8|755|0|0|directory
 share/man/pt_BR/man8/kcookiejar5.8.gz|644|0|0|regular file
 share/man/pt_BR/man8|755|0|0|directory
 share/man/pt_BR|755|0|0|directory
+share/man/pt|755|0|0|directory
 share/man/sv/man8/kcookiejar5.8.gz|644|0|0|regular file
 share/man/sv/man8|755|0|0|directory
 share/man/sv|755|0|0|directory

@@ -1,0 +1,162 @@
+bin/protoc|755|0|0|regular file
+bin|755|0|0|directory
+include/google/protobuf/any.h|644|0|0|regular file
+include/google/protobuf/any.pb.h|644|0|0|regular file
+include/google/protobuf/any.proto|644|0|0|regular file
+include/google/protobuf/api.pb.h|644|0|0|regular file
+include/google/protobuf/api.proto|644|0|0|regular file
+include/google/protobuf/arena.h|644|0|0|regular file
+include/google/protobuf/arenastring.h|644|0|0|regular file
+include/google/protobuf/compiler/code_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/command_line_interface.h|644|0|0|regular file
+include/google/protobuf/compiler/cpp/cpp_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/cpp|755|0|0|directory
+include/google/protobuf/compiler/csharp/csharp_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/csharp/csharp_names.h|644|0|0|regular file
+include/google/protobuf/compiler/csharp|755|0|0|directory
+include/google/protobuf/compiler/importer.h|644|0|0|regular file
+include/google/protobuf/compiler/java/java_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/java/java_names.h|644|0|0|regular file
+include/google/protobuf/compiler/javanano/javanano_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/javanano|755|0|0|directory
+include/google/protobuf/compiler/java|755|0|0|directory
+include/google/protobuf/compiler/js/js_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/js/well_known_types_embed.h|644|0|0|regular file
+include/google/protobuf/compiler/js|755|0|0|directory
+include/google/protobuf/compiler/objectivec/objectivec_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/objectivec/objectivec_helpers.h|644|0|0|regular file
+include/google/protobuf/compiler/objectivec|755|0|0|directory
+include/google/protobuf/compiler/parser.h|644|0|0|regular file
+include/google/protobuf/compiler/php/php_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/php|755|0|0|directory
+include/google/protobuf/compiler/plugin.h|644|0|0|regular file
+include/google/protobuf/compiler/plugin.pb.h|644|0|0|regular file
+include/google/protobuf/compiler/plugin.proto|644|0|0|regular file
+include/google/protobuf/compiler/profile.pb.h|644|0|0|regular file
+include/google/protobuf/compiler/profile.proto|644|0|0|regular file
+include/google/protobuf/compiler/python/python_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/python|755|0|0|directory
+include/google/protobuf/compiler/ruby/ruby_generator.h|644|0|0|regular file
+include/google/protobuf/compiler/ruby|755|0|0|directory
+include/google/protobuf/compiler|755|0|0|directory
+include/google/protobuf/descriptor.h|644|0|0|regular file
+include/google/protobuf/descriptor.pb.h|644|0|0|regular file
+include/google/protobuf/descriptor.proto|644|0|0|regular file
+include/google/protobuf/descriptor_database.h|644|0|0|regular file
+include/google/protobuf/duration.pb.h|644|0|0|regular file
+include/google/protobuf/duration.proto|644|0|0|regular file
+include/google/protobuf/dynamic_message.h|644|0|0|regular file
+include/google/protobuf/empty.pb.h|644|0|0|regular file
+include/google/protobuf/empty.proto|644|0|0|regular file
+include/google/protobuf/extension_set.h|644|0|0|regular file
+include/google/protobuf/field_mask.pb.h|644|0|0|regular file
+include/google/protobuf/field_mask.proto|644|0|0|regular file
+include/google/protobuf/generated_enum_reflection.h|644|0|0|regular file
+include/google/protobuf/generated_enum_util.h|644|0|0|regular file
+include/google/protobuf/generated_message_reflection.h|644|0|0|regular file
+include/google/protobuf/generated_message_table_driven.h|644|0|0|regular file
+include/google/protobuf/generated_message_util.h|644|0|0|regular file
+include/google/protobuf/has_bits.h|644|0|0|regular file
+include/google/protobuf/io/coded_stream.h|644|0|0|regular file
+include/google/protobuf/io/gzip_stream.h|644|0|0|regular file
+include/google/protobuf/io/printer.h|644|0|0|regular file
+include/google/protobuf/io/strtod.h|644|0|0|regular file
+include/google/protobuf/io/tokenizer.h|644|0|0|regular file
+include/google/protobuf/io/zero_copy_stream.h|644|0|0|regular file
+include/google/protobuf/io/zero_copy_stream_impl.h|644|0|0|regular file
+include/google/protobuf/io/zero_copy_stream_impl_lite.h|644|0|0|regular file
+include/google/protobuf/io|755|0|0|directory
+include/google/protobuf/map.h|644|0|0|regular file
+include/google/protobuf/map_entry.h|644|0|0|regular file
+include/google/protobuf/map_entry_lite.h|644|0|0|regular file
+include/google/protobuf/map_field.h|644|0|0|regular file
+include/google/protobuf/map_field_inl.h|644|0|0|regular file
+include/google/protobuf/map_field_lite.h|644|0|0|regular file
+include/google/protobuf/map_type_handler.h|644|0|0|regular file
+include/google/protobuf/message.h|644|0|0|regular file
+include/google/protobuf/message_lite.h|644|0|0|regular file
+include/google/protobuf/metadata.h|644|0|0|regular file
+include/google/protobuf/metadata_lite.h|644|0|0|regular file
+include/google/protobuf/reflection.h|644|0|0|regular file
+include/google/protobuf/reflection_ops.h|644|0|0|regular file
+include/google/protobuf/repeated_field.h|644|0|0|regular file
+include/google/protobuf/service.h|644|0|0|regular file
+include/google/protobuf/source_context.pb.h|644|0|0|regular file
+include/google/protobuf/source_context.proto|644|0|0|regular file
+include/google/protobuf/struct.pb.h|644|0|0|regular file
+include/google/protobuf/struct.proto|644|0|0|regular file
+include/google/protobuf/stubs/atomic_sequence_num.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_arm64_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_arm_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_arm_qnx.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_atomicword_compat.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_generic_c11_atomic.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_generic_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_mips_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_power.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_ppc_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_solaris.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_tsan.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_x86_gcc.h|644|0|0|regular file
+include/google/protobuf/stubs/atomicops_internals_x86_msvc.h|644|0|0|regular file
+include/google/protobuf/stubs/bytestream.h|644|0|0|regular file
+include/google/protobuf/stubs/callback.h|644|0|0|regular file
+include/google/protobuf/stubs/casts.h|644|0|0|regular file
+include/google/protobuf/stubs/common.h|644|0|0|regular file
+include/google/protobuf/stubs/fastmem.h|644|0|0|regular file
+include/google/protobuf/stubs/hash.h|644|0|0|regular file
+include/google/protobuf/stubs/logging.h|644|0|0|regular file
+include/google/protobuf/stubs/macros.h|644|0|0|regular file
+include/google/protobuf/stubs/mutex.h|644|0|0|regular file
+include/google/protobuf/stubs/once.h|644|0|0|regular file
+include/google/protobuf/stubs/platform_macros.h|644|0|0|regular file
+include/google/protobuf/stubs/port.h|644|0|0|regular file
+include/google/protobuf/stubs/scoped_ptr.h|644|0|0|regular file
+include/google/protobuf/stubs/shared_ptr.h|644|0|0|regular file
+include/google/protobuf/stubs/singleton.h|644|0|0|regular file
+include/google/protobuf/stubs/status.h|644|0|0|regular file
+include/google/protobuf/stubs/stl_util.h|644|0|0|regular file
+include/google/protobuf/stubs/stringpiece.h|644|0|0|regular file
+include/google/protobuf/stubs/template_util.h|644|0|0|regular file
+include/google/protobuf/stubs/type_traits.h|644|0|0|regular file
+include/google/protobuf/stubs|755|0|0|directory
+include/google/protobuf/text_format.h|644|0|0|regular file
+include/google/protobuf/timestamp.pb.h|644|0|0|regular file
+include/google/protobuf/timestamp.proto|644|0|0|regular file
+include/google/protobuf/type.pb.h|644|0|0|regular file
+include/google/protobuf/type.proto|644|0|0|regular file
+include/google/protobuf/unknown_field_set.h|644|0|0|regular file
+include/google/protobuf/util/delimited_message_util.h|644|0|0|regular file
+include/google/protobuf/util/field_comparator.h|644|0|0|regular file
+include/google/protobuf/util/field_mask_util.h|644|0|0|regular file
+include/google/protobuf/util/json_util.h|644|0|0|regular file
+include/google/protobuf/util/message_differencer.h|644|0|0|regular file
+include/google/protobuf/util/time_util.h|644|0|0|regular file
+include/google/protobuf/util/type_resolver.h|644|0|0|regular file
+include/google/protobuf/util/type_resolver_util.h|644|0|0|regular file
+include/google/protobuf/util|755|0|0|directory
+include/google/protobuf/wire_format.h|644|0|0|regular file
+include/google/protobuf/wire_format_lite.h|644|0|0|regular file
+include/google/protobuf/wire_format_lite_inl.h|644|0|0|regular file
+include/google/protobuf/wrappers.pb.h|644|0|0|regular file
+include/google/protobuf/wrappers.proto|644|0|0|regular file
+include/google/protobuf|755|0|0|directory
+include/google|755|0|0|directory
+include|755|0|0|directory
+lib/libprotobuf-lite.a|644|0|0|regular file
+lib/libprotobuf-lite.so.13.0.2|755|0|0|regular file
+lib/libprotobuf-lite.so.13|777|0|0|symbolic link
+lib/libprotobuf-lite.so|777|0|0|symbolic link
+lib/libprotobuf.a|644|0|0|regular file
+lib/libprotobuf.so.13.0.2|755|0|0|regular file
+lib/libprotobuf.so.13|777|0|0|symbolic link
+lib/libprotobuf.so|777|0|0|symbolic link
+lib/libprotoc.a|644|0|0|regular file
+lib/libprotoc.so.13.0.2|755|0|0|regular file
+lib/libprotoc.so.13|777|0|0|symbolic link
+lib/libprotoc.so|777|0|0|symbolic link
+lib/pkgconfig/protobuf-lite.pc|644|0|0|regular file
+lib/pkgconfig/protobuf.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory

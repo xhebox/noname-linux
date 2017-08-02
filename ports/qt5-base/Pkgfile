@@ -1,11 +1,8 @@
 name=qt5-base
-version=5.8.0
+version=5.9.1
 deps="dbus mesa libxi libxrender xcb-util-image xcb-util-keysyms xcb-util-wm libressl harfbuzz sqlite python libpng libjpeg-turbo zlib gtk hicolor-icon-theme icu alsa-lib fontconfig libinput pulseaudio"
 source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtbase-opensource-src-$version.tar.xz
 libressl-compat.patch
-plasma-crash-1.patch
-plasma-crash-2.patch
-plasma-crash-3.patch
 qt-musl-iconv-no-bom.patch
 "
 desc="Qt Free Edition, version 5.x"
@@ -59,8 +56,4 @@ build() {
 	find "${pkgdir}/lib" -type f -name '*.prl' -exec sed -i '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 	sed -i "$pkgdir"/lib/qt/mkspecs/common/gcc-base.conf \
 		-e '/^QMAKE_CFLAGS_ISYSTEM/s;-isystem;-I;'
-}
-
-post() {
-	[ ! -f "$DB/gnome-themes-standard.metadata" ] && error "install qtstyleplugins to enable qtgtkstyle" || true
 }

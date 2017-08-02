@@ -1,5 +1,5 @@
 name=sqlite
-version=3.18.0
+version=3.19.3
 _verr=$(echo ${version} | sed 's/\./ /g')
 _ver=$(printf "%d%02d%02d00\n" ${_verr})
 deps="readline ncurses"

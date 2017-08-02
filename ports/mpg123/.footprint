@@ -7,10 +7,10 @@ include/fmt123.h|644|0|0|regular file
 include/mpg123.h|644|0|0|regular file
 include/out123.h|644|0|0|regular file
 include|755|0|0|directory
-lib/libmpg123.so.0.42.3|755|0|0|regular file
+lib/libmpg123.so.0.44.3|755|0|0|regular file
 lib/libmpg123.so.0|777|0|0|symbolic link
 lib/libmpg123.so|777|0|0|symbolic link
-lib/libout123.so.0.1.4|755|0|0|regular file
+lib/libout123.so.0.2.1|755|0|0|regular file
 lib/libout123.so.0|777|0|0|symbolic link
 lib/libout123.so|777|0|0|symbolic link
 lib/mpg123/output_alsa.so|755|0|0|regular file

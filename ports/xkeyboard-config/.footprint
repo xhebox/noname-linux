@@ -43,6 +43,7 @@ share/X11/xkb/geometry/sgi_vndr/indigo|644|0|0|regular file
 share/X11/xkb/geometry/sgi_vndr/indy|644|0|0|regular file
 share/X11/xkb/geometry/sgi_vndr|755|0|0|directory
 share/X11/xkb/geometry/sony|644|0|0|regular file
+share/X11/xkb/geometry/steelseries|644|0|0|regular file
 share/X11/xkb/geometry/sun|644|0|0|regular file
 share/X11/xkb/geometry/teck|644|0|0|regular file
 share/X11/xkb/geometry/thinkpad|644|0|0|regular file
@@ -99,7 +100,6 @@ share/X11/xkb/symbols/ba|644|0|0|regular file
 share/X11/xkb/symbols/bd|644|0|0|regular file
 share/X11/xkb/symbols/be|644|0|0|regular file
 share/X11/xkb/symbols/bg|644|0|0|regular file
-share/X11/xkb/symbols/bn|644|0|0|regular file
 share/X11/xkb/symbols/brai|644|0|0|regular file
 share/X11/xkb/symbols/br|644|0|0|regular file
 share/X11/xkb/symbols/bt|644|0|0|regular file

@@ -35,7 +35,6 @@ share/ca-certificates/mozilla/COMODO_ECC_Certification_Authority.crt|644|0|0|reg
 share/ca-certificates/mozilla/COMODO_RSA_Certification_Authority.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Camerfirma_Chambers_of_Commerce_Root.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Camerfirma_Global_Chambersign_Root.crt|644|0|0|regular file
-share/ca-certificates/mozilla/Certification_Authority_of_WoSign_G2.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Certigna.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Certinomis_-_Autorité_Racine.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Certinomis_-_Root_CA.crt|644|0|0|regular file
@@ -99,7 +98,6 @@ share/ca-certificates/mozilla/ISRG_Root_X1.crt|644|0|0|regular file
 share/ca-certificates/mozilla/IdenTrust_Commercial_Root_CA_1.crt|644|0|0|regular file
 share/ca-certificates/mozilla/IdenTrust_Public_Sector_Root_CA_1.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Izenpe.com.crt|644|0|0|regular file
-share/ca-certificates/mozilla/Microsec_e-Szigno_Root_CA.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Microsec_e-Szigno_Root_CA_2009.crt|644|0|0|regular file
 share/ca-certificates/mozilla/NetLock_Arany_=Class_Gold=_Főtanúsítvány.crt|644|0|0|regular file
 share/ca-certificates/mozilla/Network_Solutions_Certificate_Authority.crt|644|0|0|regular file
@@ -169,7 +167,6 @@ share/ca-certificates/mozilla/Verisign_Class_3_Public_Primary_Certification_Auth
 share/ca-certificates/mozilla/Visa_eCommerce_Root.crt|644|0|0|regular file
 share/ca-certificates/mozilla/WellsSecure_Public_Root_Certificate_Authority.crt|644|0|0|regular file
 share/ca-certificates/mozilla/WoSign.crt|644|0|0|regular file
-share/ca-certificates/mozilla/WoSign_China.crt|644|0|0|regular file
 share/ca-certificates/mozilla/XRamp_Global_CA_Root.crt|644|0|0|regular file
 share/ca-certificates/mozilla/certSIGN_ROOT_CA.crt|644|0|0|regular file
 share/ca-certificates/mozilla/ePKI_Root_Certification_Authority.crt|644|0|0|regular file

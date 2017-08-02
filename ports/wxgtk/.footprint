@@ -850,13 +850,11 @@ share/locale/tr|755|0|0|directory
 share/locale/uk/LC_MESSAGES/wxstd.mo|644|0|0|regular file
 share/locale/uk/LC_MESSAGES|755|0|0|directory
 share/locale/uk|755|0|0|directory
-share/locale/zh/LC_MESSAGES|755|0|0|directory
 share/locale/zh_CN/LC_MESSAGES/wxstd.mo|644|0|0|regular file
 share/locale/zh_CN/LC_MESSAGES|755|0|0|directory
 share/locale/zh_CN|755|0|0|directory
 share/locale/zh_TW/LC_MESSAGES/wxstd.mo|644|0|0|regular file
 share/locale/zh_TW/LC_MESSAGES|755|0|0|directory
 share/locale/zh_TW|755|0|0|directory
-share/locale/zh|755|0|0|directory
 share/locale|755|0|0|directory
 share|755|0|0|directory

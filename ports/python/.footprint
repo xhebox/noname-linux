@@ -1953,6 +1953,7 @@ lib/python2.7/lib-dynload/_sqlite3.so|755|0|0|regular file
 lib/python2.7/lib-dynload/_ssl.so|755|0|0|regular file
 lib/python2.7/lib-dynload/_struct.so|755|0|0|regular file
 lib/python2.7/lib-dynload/_testcapi.so|755|0|0|regular file
+lib/python2.7/lib-dynload/_tkinter.so|755|0|0|regular file
 lib/python2.7/lib-dynload/array.so|755|0|0|regular file
 lib/python2.7/lib-dynload/audioop.so|755|0|0|regular file
 lib/python2.7/lib-dynload/binascii.so|755|0|0|regular file

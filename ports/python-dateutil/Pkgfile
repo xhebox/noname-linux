@@ -1,5 +1,5 @@
 name=python-dateutil
-version=2.6.0
+version=2.6.1
 deps="python-setuptools python-six"
 source="https://github.com/dateutil/dateutil/archive/$version.tar.gz"
 desc="Provides powerful extensions to the standard datetime module"

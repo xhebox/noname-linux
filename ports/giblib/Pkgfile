@@ -1,7 +1,7 @@
 name=giblib
 version=1.2.4
 desc="A library that feh uses as a wrapper to imlib2"
-deps="imlib2 libxext freetype"
+deps="imlib2 libxext harfbuzz"
 source="http://sourceforge.net/projects/slackbuildsdirectlinks/files/giblib/giblib-$version.tar.gz"
 
 build() {

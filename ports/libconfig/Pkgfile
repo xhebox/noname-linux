@@ -1,12 +1,13 @@
 name=libconfig
-version=1.5
+version=1.6
 desc="C/C++ Configuration File Library"
 deps=gcc
-source="http://www.hyperrealm.com/libconfig/$name-$version.tar.gz"
+source="https://github.com/hyperrealm/libconfig/archive/v$version.tar.gz"
 
 build() {
 	cd $name-$version
-	./configure --prefix=
+	rm lib/scanner.c
+	./configure --prefix= MAKEINFO=true
 	make || die
 	make DESTDIR="$pkgdir" install || die
 }

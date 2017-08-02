@@ -290,23 +290,23 @@ lib/glib-2.0/include/glibconfig.h|644|0|0|regular file
 lib/glib-2.0/include|755|0|0|directory
 lib/glib-2.0|755|0|0|directory
 lib/libgio-2.0.a|644|0|0|regular file
-lib/libgio-2.0.so.0.5200.1|755|0|0|regular file
+lib/libgio-2.0.so.0.5200.3|755|0|0|regular file
 lib/libgio-2.0.so.0|777|0|0|symbolic link
 lib/libgio-2.0.so|777|0|0|symbolic link
 lib/libglib-2.0.a|644|0|0|regular file
-lib/libglib-2.0.so.0.5200.1|755|0|0|regular file
+lib/libglib-2.0.so.0.5200.3|755|0|0|regular file
 lib/libglib-2.0.so.0|777|0|0|symbolic link
 lib/libglib-2.0.so|777|0|0|symbolic link
 lib/libgmodule-2.0.a|644|0|0|regular file
-lib/libgmodule-2.0.so.0.5200.1|755|0|0|regular file
+lib/libgmodule-2.0.so.0.5200.3|755|0|0|regular file
 lib/libgmodule-2.0.so.0|777|0|0|symbolic link
 lib/libgmodule-2.0.so|777|0|0|symbolic link
 lib/libgobject-2.0.a|644|0|0|regular file
-lib/libgobject-2.0.so.0.5200.1|755|0|0|regular file
+lib/libgobject-2.0.so.0.5200.3|755|0|0|regular file
 lib/libgobject-2.0.so.0|777|0|0|symbolic link
 lib/libgobject-2.0.so|777|0|0|symbolic link
 lib/libgthread-2.0.a|644|0|0|regular file
-lib/libgthread-2.0.so.0.5200.1|755|0|0|regular file
+lib/libgthread-2.0.so.0.5200.3|755|0|0|regular file
 lib/libgthread-2.0.so.0|777|0|0|symbolic link
 lib/libgthread-2.0.so|777|0|0|symbolic link
 lib/locale/af/LC_MESSAGES/glib20.mo|644|0|0|regular file
@@ -624,8 +624,8 @@ share/bash-completion/completions/gresource|644|0|0|regular file
 share/bash-completion/completions/gsettings|644|0|0|regular file
 share/bash-completion/completions|755|0|0|directory
 share/bash-completion|755|0|0|directory
-share/gdb/auto-load/lib/libglib-2.0.so.0.5200.1-gdb.py|755|0|0|regular file
-share/gdb/auto-load/lib/libgobject-2.0.so.0.5200.1-gdb.py|755|0|0|regular file
+share/gdb/auto-load/lib/libglib-2.0.so.0.5200.3-gdb.py|755|0|0|regular file
+share/gdb/auto-load/lib/libgobject-2.0.so.0.5200.3-gdb.py|755|0|0|regular file
 share/gdb/auto-load/lib|755|0|0|directory
 share/gdb/auto-load|755|0|0|directory
 share/gdb|755|0|0|directory

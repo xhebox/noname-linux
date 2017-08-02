@@ -1,20 +1,18 @@
 name=gcc
-version=6.3.0
+version=7.1.0
 desc="The GNU Compiler Collection"
-_islversion=0.17.1
+_islversion=0.18
 source="
 http://mirrors.ustc.edu.cn/gnu/gcc/gcc-${version}/gcc-${version}.tar.bz2
 http://isl.gforge.inria.fr/isl-$_islversion.tar.bz2
 003_all_default-fortify-source.patch
+Revert-eeb6872bf.patch
 050_all_libiberty-asprintf.patch
-boehm-gc-musl.patch
-cilkrts.patch
 locale.patch
 cpu_indicator.patch
 gcc-4.9-musl-fortify.patch
 gcc-6.1-musl-libssp.patch
 libgcc-always-build-gcceh.a.patch
-linux_libc_has_function.patch
 posix_memalign.patch
 "
 deps="libmpc binutils"
@@ -23,7 +21,6 @@ ext() {
 	cd "$srcdir"/gcc-$version
 	for i in $source; do
 		case "$i" in
-		*posix*.patch) msg $i;patch -p0 -i ../"$i" || die;;
 		*.patch) msg $i;patch -p1 -i ../"$i" || die;;
 		esac
 	done
@@ -60,12 +57,12 @@ build() {
 		--enable-shared \
 		--enable-threads \
 		--enable-clocale=generic \
-		--disable-libsanitizer \
 		--disable-libmpx \
 		--disable-fixed-point \
 		--disable-libstdcxx-pch \
 		--disable-libunwind-exceptions \
 		--disable-libssp \
+		--disable-libsanitizer \
 		--disable-libmudflap \
 		--disable-werror \
 		--disable-symvers \

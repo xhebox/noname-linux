@@ -1,5 +1,5 @@
 name=kcompletion
-version=5.33.0
+version=5.36.0
 desc='Text completion helpers and widgets'
 deps="qt5-base shared-mime-info extra-cmake-modules qt5-tools llvm kwidgetsaddons kconfig"
 source="https://download.kde.org/stable/frameworks/${version%.*}/kcompletion-${version}.tar.xz"
@@ -9,8 +9,9 @@ build() {
 	cd build
 	cmake ../kcompletion-${version} \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_PREFIX=/ \
 		-DKDE_INSTALL_LIBDIR=lib \
+		-DKDE_INSTALL_LIBEXECDIR=lib \
 		-D_KDE4_DEFAULT_HOME_POSTFIX=4 \
 		-DBUILD_TESTING=OFF
 	make || die

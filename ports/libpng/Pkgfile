@@ -1,5 +1,5 @@
 name=libpng
-version=1.6.29
+version=1.6.30
 deps=zlib
 desc="Library of PNG support functions with APNG support."
 source="http://download.sourceforge.net/$name/$name-$version.tar.xz

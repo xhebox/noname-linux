@@ -1,6 +1,6 @@
-lib32/libfreetype.so|777|0|0|symbolic link
+lib32/libfreetype.so.6.14.0|755|0|0|regular file
 lib32/libfreetype.so.6|777|0|0|symbolic link
+lib32/libfreetype.so|777|0|0|symbolic link
 lib32/pkgconfig/freetype2.pc|644|0|0|regular file
-lib32/libfreetype.so.6.13.0|755|0|0|regular file
 lib32/pkgconfig|755|0|0|directory
 lib32|755|0|0|directory

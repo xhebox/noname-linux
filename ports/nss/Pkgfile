@@ -1,5 +1,5 @@
 name=nss
-version=3.30.2
+version=3.31
 desc="Mozilla Network Security Services (NSS)"
 deps="nspr sqlite xmlto python"
 _version=`echo $version | sed 's/\./_/g'`

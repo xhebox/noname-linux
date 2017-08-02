@@ -1,5 +1,5 @@
 name=libass
-version=0.13.6
+version=0.13.7
 desc='A portable library for SSA/ASS subtitles rendering'
 deps="fribidi fontconfig yasm"
 source="https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz"

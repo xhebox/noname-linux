@@ -1,5 +1,5 @@
 name=hwids
-version=20161103
+version=20170328
 desc="hardware identification databases"
 source="https://github.com/gentoo/hwids/archive/hwids-$version.tar.gz"
 

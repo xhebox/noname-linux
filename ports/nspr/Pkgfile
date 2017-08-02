@@ -1,5 +1,5 @@
 name=nspr
-version=4.14
+version=4.15
 deps=musl
 desc="Netscape Portable Runtime library"
 source="http://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v$version/src/$name-$version.tar.gz

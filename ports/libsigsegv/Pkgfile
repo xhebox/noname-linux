@@ -1,5 +1,5 @@
 name=libsigsegv
-version=2.10
+version=2.11
 desc="Page fault detection library"
 deps=musl
 source="http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-${version}.tar.gz"

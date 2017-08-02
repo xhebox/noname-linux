@@ -1,12 +1,12 @@
 name=elfutils
-version=0.168
+version=0.169
 desc="Libraries/utilities to handle ELF objects (drop in replacement for libelf)"
 source="https://fedorahosted.org/releases/e/l/${name}/${version}/${name}-${version}.tar.bz2
-elfutils-0.168-musl-libs.patch
+elfutils-0.169-musl-libs.patch
 elfutils-0.168-musl-obstack-fts.patch
 elfutils-0.168-musl-utils.patch
 "
-deps="zlib xz bzip2 m4 argp-standalone gettext musl-obstack musl-fts gettext"
+deps="zlib xz bzip2 m4 argp-standalone musl-obstack musl-fts"
 
 ext () {
 	cd elfutils-$version

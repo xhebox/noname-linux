@@ -1,6 +1,6 @@
 name=curl
-version=7.54.0
-deps="libressl zlib libpsl libssh2 krb5 groff"
+version=7.54.1
+deps="libressl zlib libssh2 krb5 groff"
 desc="A tool for transfering files with URL syntax"
 source="http://curl.haxx.se/download/curl-$version.tar.bz2"
 

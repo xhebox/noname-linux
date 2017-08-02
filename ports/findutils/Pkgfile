@@ -12,4 +12,9 @@ build() {
 	make  || die
 	make DESTDIR="$pkgdir" install  || die
 	rm -r "$pkgdir"/share/info
+	rm -r "$pkgdir"/bin/locate
+	rm -r "$pkgdir"/bin/updatedb
+	rm -f "$pkgdir"/share/man/man1/locate*
+	rm -f "$pkgdir"/share/man/man1/updatedb*
+	rm -f "$pkgdir"/share/man/man5/locatedb*
 }

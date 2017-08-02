@@ -1,6 +1,6 @@
 name=fcitx-libpinyin
 version=0.5.1
-deps="libpinyin fcitx cmake qt5-webengine"
+deps="libpinyin fcitx cmake"
 desc="Fcitx Wrapper for libpinyin, Library to deal with pinyin"
 source="
 http://download.fcitx-im.org/$name/$name-${version}.tar.xz
@@ -10,7 +10,7 @@ build() {
 	cd $name-$version
 	mkdir -p build
 	cd build
-	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DENABLE_QT=ON ..
+	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DENABLE_QT=OFF ..
 	make || die
 	make DESTDIR="$pkgdir" install || die
 }

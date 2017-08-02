@@ -1,6 +1,6 @@
 name=schroot
 desc="Allows users to execute commands in different chroots"
-deps="elfutils e2fsprogs boost gtest gettext lvm2"
+deps="elfutils e2fsprogs boost gtest lvm2"
 version=1.7.2
 source="http://ftp.debian.org/debian/pool/main/s/$name/${name}_${version}.orig.tar.xz
 arch

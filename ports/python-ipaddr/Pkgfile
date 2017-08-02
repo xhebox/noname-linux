@@ -1,0 +1,16 @@
+name=python-ipaddr
+version=2.1.11
+deps="python-setuptools"
+desc="An IPv4/IPv6 manipulation library in Python"
+source="https://pypi.python.org/packages/source/i/ipaddr/ipaddr-${version}.tar.gz"
+
+build() {
+	cd ipaddr-$version
+	/bin/python setup.py build || die
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1 \
+		--skip-build || die
+}
+

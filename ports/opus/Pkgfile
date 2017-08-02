@@ -1,11 +1,11 @@
 name=opus
-version=1.1.4
+version=1.2.1
 desc="codec designed for interactive speech and audio transmission over the internet"
-source="http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz"
+source="https://archive.mozilla.org/pub/opus/opus-$version.tar.gz"
 deps="musl"
 
 build() {
-	cd $name-$version
+	cd opus-$version
 	./configure --prefix= \
 	    --sbindir=/bin \
 	    --enable-custom-modes \

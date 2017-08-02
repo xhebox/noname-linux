@@ -1,5 +1,5 @@
 name=zziplib
-version=0.13.66
+version=0.13.67
 desc="A lightweight library that offers the ability to easily extract data from files archived in a single zip file"
 deps="zlib python"
 source="https://github.com/gdraheim/zziplib/archive/v$version.tar.gz

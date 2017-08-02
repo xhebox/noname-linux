@@ -1,10 +1,10 @@
 name=expat
-version=2.2.0
+version=2.2.2
 deps=musl
 desc="A fast, non-validating, stream-oriented XML parsing library"
-source="http://download.sourceforge.net/$name/$name-$version.tar.bz2"
+source="http://download.sourceforge.net/expat/expat-$version.tar.bz2"
 build() { 
-	 cd $name-$version
+	 cd expat-$version
 	 ./configure --prefix= 
 	 make 
 	 make DESTDIR="$pkgdir" install 

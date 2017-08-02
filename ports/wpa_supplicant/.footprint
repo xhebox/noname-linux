@@ -1,24 +1,24 @@
-bin/wpa_supplicant|755|0|0|regular file
 bin/wpa_cli|755|0|0|regular file
 bin/wpa_passphrase|755|0|0|regular file
+bin/wpa_supplicant|755|0|0|regular file
+bin|755|0|0|directory
 etc/dbus-1/system.d/wpa_supplicant.conf|644|0|0|regular file
-share/man/man8/wpa_priv.8.gz|644|0|0|regular file
-share/man/man8/wpa_background.8.gz|644|0|0|regular file
-share/man/man8/eapol_test.8.gz|644|0|0|regular file
-share/man/man8/wpa_cli.8.gz|644|0|0|regular file
-share/man/man8/wpa_passphrase.8.gz|644|0|0|regular file
-share/man/man8/wpa_gui.8.gz|644|0|0|regular file
-share/man/man8/wpa_supplicant.8.gz|644|0|0|regular file
-share/man/man5/wpa_supplicant.conf.5.gz|644|0|0|regular file
-share/dbus-1/system-services/fi.w1.wpa_supplicant1.service|644|0|0|regular file
-share/dbus-1/system-services/fi.epitest.hostap.WPASupplicant.service|644|0|0|regular file
-share/dbus-1/system-services|755|0|0|directory
-share/dbus-1|755|0|0|directory
-share/man/man5|755|0|0|directory
-share/man/man8|755|0|0|directory
-share/man|755|0|0|directory
-share|755|0|0|directory
 etc/dbus-1/system.d|755|0|0|directory
 etc/dbus-1|755|0|0|directory
 etc|755|0|0|directory
-bin|755|0|0|directory
+share/dbus-1/system-services/fi.epitest.hostap.WPASupplicant.service|644|0|0|regular file
+share/dbus-1/system-services/fi.w1.wpa_supplicant1.service|644|0|0|regular file
+share/dbus-1/system-services|755|0|0|directory
+share/dbus-1|755|0|0|directory
+share/man/man5/wpa_supplicant.conf.5.gz|644|0|0|regular file
+share/man/man5|755|0|0|directory
+share/man/man8/eapol_test.8.gz|644|0|0|regular file
+share/man/man8/wpa_background.8.gz|644|0|0|regular file
+share/man/man8/wpa_cli.8.gz|644|0|0|regular file
+share/man/man8/wpa_gui.8.gz|644|0|0|regular file
+share/man/man8/wpa_passphrase.8.gz|644|0|0|regular file
+share/man/man8/wpa_priv.8.gz|644|0|0|regular file
+share/man/man8/wpa_supplicant.8.gz|644|0|0|regular file
+share/man/man8|755|0|0|directory
+share/man|755|0|0|directory
+share|755|0|0|directory

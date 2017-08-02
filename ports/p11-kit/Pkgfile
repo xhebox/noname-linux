@@ -1,5 +1,5 @@
 name=p11-kit
-version=0.23.5
+version=0.23.7
 desc="Provides a way to load and enumerate PKCS#11 modules"
 deps="musl libtasn1 libffi"
 source="https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$version.tar.gz

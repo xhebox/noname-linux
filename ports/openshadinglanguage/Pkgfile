@@ -1,5 +1,5 @@
 name=openshadinglanguage
-version=1.8.7
+version=1.8.8
 desc="Advanced shading language for production GI renderers"
 deps="boost openimageio openexr tbb harfbuzz libpng libtiff zlib ncurses cmake llvm"
 source="https://github.com/imageworks/OpenShadingLanguage/archive/Release-${version}.tar.gz"

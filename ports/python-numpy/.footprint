@@ -6,11 +6,11 @@ include/python2.7|755|0|0|directory
 include/python3.6m/numpy|777|0|0|symbolic link
 include/python3.6m|755|0|0|directory
 include|755|0|0|directory
-lib/python2.7/site-packages/numpy-1.12.1-py2.7.egg-info/PKG-INFO|644|0|0|regular file
-lib/python2.7/site-packages/numpy-1.12.1-py2.7.egg-info/SOURCES.txt|644|0|0|regular file
-lib/python2.7/site-packages/numpy-1.12.1-py2.7.egg-info/dependency_links.txt|644|0|0|regular file
-lib/python2.7/site-packages/numpy-1.12.1-py2.7.egg-info/top_level.txt|644|0|0|regular file
-lib/python2.7/site-packages/numpy-1.12.1-py2.7.egg-info|755|0|0|directory
+lib/python2.7/site-packages/numpy-1.13.1-py2.7.egg-info/PKG-INFO|644|0|0|regular file
+lib/python2.7/site-packages/numpy-1.13.1-py2.7.egg-info/SOURCES.txt|644|0|0|regular file
+lib/python2.7/site-packages/numpy-1.13.1-py2.7.egg-info/dependency_links.txt|644|0|0|regular file
+lib/python2.7/site-packages/numpy-1.13.1-py2.7.egg-info/top_level.txt|644|0|0|regular file
+lib/python2.7/site-packages/numpy-1.13.1-py2.7.egg-info|755|0|0|directory
 lib/python2.7/site-packages/numpy/__config__.pyc|644|0|0|regular file
 lib/python2.7/site-packages/numpy/__config__.pyo|644|0|0|regular file
 lib/python2.7/site-packages/numpy/__config__.py|644|0|0|regular file
@@ -486,6 +486,8 @@ lib/python2.7/site-packages/numpy/f2py/tests/src/assumed_shape/foo_mod.f90|664|0
 lib/python2.7/site-packages/numpy/f2py/tests/src/assumed_shape/foo_use.f90|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/src/assumed_shape/precision.f90|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/src/assumed_shape|755|0|0|directory
+lib/python2.7/site-packages/numpy/f2py/tests/src/common/block.f|664|0|0|regular file
+lib/python2.7/site-packages/numpy/f2py/tests/src/common|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/tests/src/kind/foo.f90|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/src/kind|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/tests/src/mixed/foo.f|664|0|0|regular file
@@ -502,10 +504,13 @@ lib/python2.7/site-packages/numpy/f2py/tests/src/regression/inout.f90|664|0|0|re
 lib/python2.7/site-packages/numpy/f2py/tests/src/regression|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/tests/src/size/foo.f90|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/src/size|755|0|0|directory
+lib/python2.7/site-packages/numpy/f2py/tests/src/string/char.f90|664|0|0|regular file
+lib/python2.7/site-packages/numpy/f2py/tests/src/string|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/tests/src|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/tests/test_array_from_pyobj.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_assumed_shape.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_callback.py|664|0|0|regular file
+lib/python2.7/site-packages/numpy/f2py/tests/test_common.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_kind.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_mixed.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_parameter.py|664|0|0|regular file
@@ -516,6 +521,7 @@ lib/python2.7/site-packages/numpy/f2py/tests/test_return_integer.py|664|0|0|regu
 lib/python2.7/site-packages/numpy/f2py/tests/test_return_logical.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_return_real.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/test_size.py|664|0|0|regular file
+lib/python2.7/site-packages/numpy/f2py/tests/test_string.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests/util.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/f2py/tests|755|0|0|directory
 lib/python2.7/site-packages/numpy/f2py/use_rules.pyc|644|0|0|regular file
@@ -578,6 +584,9 @@ lib/python2.7/site-packages/numpy/lib/index_tricks.py|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/info.pyc|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/info.pyo|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/info.py|644|0|0|regular file
+lib/python2.7/site-packages/numpy/lib/mixins.pyc|644|0|0|regular file
+lib/python2.7/site-packages/numpy/lib/mixins.pyo|644|0|0|regular file
+lib/python2.7/site-packages/numpy/lib/mixins.py|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/nanfunctions.pyc|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/nanfunctions.pyo|644|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/nanfunctions.py|644|0|0|regular file
@@ -620,6 +629,7 @@ lib/python2.7/site-packages/numpy/lib/tests/test_format.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_function_base.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_index_tricks.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_io.py|664|0|0|regular file
+lib/python2.7/site-packages/numpy/lib/tests/test_mixins.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_nanfunctions.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_packbits.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/lib/tests/test_polynomial.py|664|0|0|regular file
@@ -687,6 +697,7 @@ lib/python2.7/site-packages/numpy/ma/setup.pyc|644|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/setup.pyo|644|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/setup.py|644|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/tests/test_core.py|664|0|0|regular file
+lib/python2.7/site-packages/numpy/ma/tests/test_deprecations.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/tests/test_extras.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/tests/test_mrecords.py|664|0|0|regular file
 lib/python2.7/site-packages/numpy/ma/tests/test_old_ma.py|664|0|0|regular file
@@ -819,11 +830,11 @@ lib/python2.7/site-packages/numpy/version.py|644|0|0|regular file
 lib/python2.7/site-packages/numpy|755|0|0|directory
 lib/python2.7/site-packages|755|0|0|directory
 lib/python2.7|755|0|0|directory
-lib/python3.6/site-packages/numpy-1.12.1-py3.6.egg-info/PKG-INFO|644|0|0|regular file
-lib/python3.6/site-packages/numpy-1.12.1-py3.6.egg-info/SOURCES.txt|644|0|0|regular file
-lib/python3.6/site-packages/numpy-1.12.1-py3.6.egg-info/dependency_links.txt|644|0|0|regular file
-lib/python3.6/site-packages/numpy-1.12.1-py3.6.egg-info/top_level.txt|644|0|0|regular file
-lib/python3.6/site-packages/numpy-1.12.1-py3.6.egg-info|755|0|0|directory
+lib/python3.6/site-packages/numpy-1.13.1-py3.6.egg-info/PKG-INFO|644|0|0|regular file
+lib/python3.6/site-packages/numpy-1.13.1-py3.6.egg-info/SOURCES.txt|644|0|0|regular file
+lib/python3.6/site-packages/numpy-1.13.1-py3.6.egg-info/dependency_links.txt|644|0|0|regular file
+lib/python3.6/site-packages/numpy-1.13.1-py3.6.egg-info/top_level.txt|644|0|0|regular file
+lib/python3.6/site-packages/numpy-1.13.1-py3.6.egg-info|755|0|0|directory
 lib/python3.6/site-packages/numpy/__config__.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/__init__.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/__pycache__/__config__.cpython-36.opt-1.pyc|644|0|0|regular file
@@ -1315,6 +1326,8 @@ lib/python3.6/site-packages/numpy/f2py/tests/src/assumed_shape/foo_mod.f90|644|0
 lib/python3.6/site-packages/numpy/f2py/tests/src/assumed_shape/foo_use.f90|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/src/assumed_shape/precision.f90|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/src/assumed_shape|755|0|0|directory
+lib/python3.6/site-packages/numpy/f2py/tests/src/common/block.f|644|0|0|regular file
+lib/python3.6/site-packages/numpy/f2py/tests/src/common|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/tests/src/kind/foo.f90|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/src/kind|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/tests/src/mixed/foo.f|644|0|0|regular file
@@ -1331,10 +1344,13 @@ lib/python3.6/site-packages/numpy/f2py/tests/src/regression/inout.f90|644|0|0|re
 lib/python3.6/site-packages/numpy/f2py/tests/src/regression|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/tests/src/size/foo.f90|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/src/size|755|0|0|directory
+lib/python3.6/site-packages/numpy/f2py/tests/src/string/char.f90|644|0|0|regular file
+lib/python3.6/site-packages/numpy/f2py/tests/src/string|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/tests/src|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/tests/test_array_from_pyobj.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_assumed_shape.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_callback.py|644|0|0|regular file
+lib/python3.6/site-packages/numpy/f2py/tests/test_common.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_kind.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_mixed.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_parameter.py|644|0|0|regular file
@@ -1345,6 +1361,7 @@ lib/python3.6/site-packages/numpy/f2py/tests/test_return_integer.py|644|0|0|regu
 lib/python3.6/site-packages/numpy/f2py/tests/test_return_logical.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_return_real.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/test_size.py|644|0|0|regular file
+lib/python3.6/site-packages/numpy/f2py/tests/test_string.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests/util.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/f2py/tests|755|0|0|directory
 lib/python3.6/site-packages/numpy/f2py/use_rules.py|644|0|0|regular file
@@ -1395,6 +1412,8 @@ lib/python3.6/site-packages/numpy/lib/__pycache__/index_tricks.cpython-36.opt-1.
 lib/python3.6/site-packages/numpy/lib/__pycache__/index_tricks.cpython-36.pyc|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/__pycache__/info.cpython-36.opt-1.pyc|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/__pycache__/info.cpython-36.pyc|644|0|0|regular file
+lib/python3.6/site-packages/numpy/lib/__pycache__/mixins.cpython-36.opt-1.pyc|644|0|0|regular file
+lib/python3.6/site-packages/numpy/lib/__pycache__/mixins.cpython-36.pyc|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/__pycache__/nanfunctions.cpython-36.opt-1.pyc|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/__pycache__/nanfunctions.cpython-36.pyc|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/__pycache__/npyio.cpython-36.opt-1.pyc|644|0|0|regular file
@@ -1433,6 +1452,7 @@ lib/python3.6/site-packages/numpy/lib/format.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/function_base.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/index_tricks.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/info.py|644|0|0|regular file
+lib/python3.6/site-packages/numpy/lib/mixins.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/nanfunctions.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/npyio.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/polynomial.py|644|0|0|regular file
@@ -1459,6 +1479,7 @@ lib/python3.6/site-packages/numpy/lib/tests/test_format.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_function_base.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_index_tricks.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_io.py|644|0|0|regular file
+lib/python3.6/site-packages/numpy/lib/tests/test_mixins.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_nanfunctions.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_packbits.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/lib/tests/test_polynomial.py|644|0|0|regular file
@@ -1524,6 +1545,7 @@ lib/python3.6/site-packages/numpy/ma/extras.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/mrecords.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/setup.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/tests/test_core.py|644|0|0|regular file
+lib/python3.6/site-packages/numpy/ma/tests/test_deprecations.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/tests/test_extras.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/tests/test_mrecords.py|644|0|0|regular file
 lib/python3.6/site-packages/numpy/ma/tests/test_old_ma.py|644|0|0|regular file

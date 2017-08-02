@@ -1,5 +1,5 @@
 name=lmms
-version=1.2.0-rc2
+version=1.2.0-rc3
 desc="The Linux MultiMedia Studio (Qt5 Version)."
 source="https://github.com/LMMS/lmms/archive/v$version.tar.gz
 musl.patch"

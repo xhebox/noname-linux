@@ -1,5 +1,5 @@
 name=grep
-version=3.0
+version=3.1
 desc="The GNU grep utility"
 source="http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.xz"
 deps="bash libpcre"

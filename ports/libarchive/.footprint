@@ -6,7 +6,7 @@ include/archive.h|644|0|0|regular file
 include/archive_entry.h|644|0|0|regular file
 include|755|0|0|directory
 lib/libarchive.a|644|0|0|regular file
-lib/libarchive.so.13.3.1|755|0|0|regular file
+lib/libarchive.so.13.3.2|755|0|0|regular file
 lib/libarchive.so.13|777|0|0|symbolic link
 lib/libarchive.so|777|0|0|symbolic link
 lib/pkgconfig/libarchive.pc|644|0|0|regular file

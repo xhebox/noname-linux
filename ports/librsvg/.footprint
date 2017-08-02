@@ -14,7 +14,7 @@ lib/gdk-pixbuf-2.0/2.10.0|755|0|0|directory
 lib/gdk-pixbuf-2.0|755|0|0|directory
 lib/girepository-1.0/Rsvg-2.0.typelib|644|0|0|regular file
 lib/girepository-1.0|755|0|0|directory
-lib/librsvg-2.so.2.40.17|755|0|0|regular file
+lib/librsvg-2.so.2.40.18|755|0|0|regular file
 lib/librsvg-2.so.2|777|0|0|symbolic link
 lib/librsvg-2.so|777|0|0|symbolic link
 lib/pkgconfig/librsvg-2.0.pc|644|0|0|regular file

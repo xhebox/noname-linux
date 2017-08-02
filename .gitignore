@@ -3,14 +3,17 @@ ports/*/*.tgz*
 ports/*/*.rar*
 ports/*/*.zip*
 ports/*/*.rpm*
+ports/*/*.img*
 ports/*/*.t3g*
 ports/*/*.bin*
 ports/*/*.run*
 ports/*/*msi*
 ports/*/*iso*
+ports/*/*xz
 scripts/*iso
 scripts/*tar.xz
 scripts/result
 scripts/travis
+tarballs
 index
 pindex

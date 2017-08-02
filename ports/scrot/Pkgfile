@@ -1,14 +1,14 @@
 name=scrot
-version=0.8.13
+version=0.8.17
 desc="A simple command-line screenshot utility for X"
 deps="giblib"
-source="http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/${name}_${version%.*}.orig.tar.gz
-http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/${name}_${version%.*}-${version##*.}.debian.tar.gz"
+source="http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}.orig.tar.gz
+http://scrot.sourcearchive.com/downloads/${version%.*}-${version##*.}/scrot_${version%.*}-${version##*.}.debian.tar.xz"
 
-ext(){
-    for patch in $(<$srcdir/debian/patches/series); do
-        patch -Np1 -d $srcdir/$name-${version%.*} -i $srcdir/debian/patches/$patch
-    done
+ext() {
+	for patch in $(<$srcdir/debian/patches/series); do
+		patch -Np1 -d $srcdir/$name-${version%.*} -i $srcdir/debian/patches/$patch || die
+	done
 }
 
 build() {

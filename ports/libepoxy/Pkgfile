@@ -1,5 +1,5 @@
 name=libepoxy
-version=1.4.2
+version=1.4.3
 desc="Direct Rendering Manager runtime library"
 deps="mesa graphviz"
 source="https://github.com/anholt/libepoxy/archive/$version.tar.gz"

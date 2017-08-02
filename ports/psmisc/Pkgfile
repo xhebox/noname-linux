@@ -1,8 +1,8 @@
 name=psmisc
-version=22.21
+version=23.1
 deps="ncurses"
 desc="Small set of utilities that use the linux proc filesystem"
-source="http://downloads.sourceforge.net/psmisc/${name}-${version}.tar.gz
+source="http://downloads.sourceforge.net/psmisc/${name}-${version}.tar.xz
 fuser.patch
 musl.patch"
 

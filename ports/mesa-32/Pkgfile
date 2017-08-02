@@ -1,6 +1,6 @@
 . $PORTS/mesa/Pkgfile
 name=mesa-32
-deps="expat-32 libdrm-32 xorg-proto libxshmfence-32 libxcb-32 libx11-32 libxfixes-32 libxext-32 libxdamage-32 libxxf86vm-32 libxvmc-32 python mesa libtxc_dxtn-32 libgcrypt-32 elfutils-32 llvm-32 libclc"
+deps="expat-32 libdrm-32 xorg-proto libxshmfence-32 libxcb-32 libx11-32 libxfixes-32 libxext-32 libxdamage-32 libxxf86vm-32 libxvmc-32 python mesa libtxc_dxtn-32 libgcrypt-32 elfutils-32 llvm-32 lm_sensors-32 libclc"
 
 build() {
 	cd mesa-$version
@@ -15,20 +15,21 @@ build() {
 		--prefix= \
 		--libdir=/lib32 \
 		--libexecdir=/lib32 \
-		--with-gallium-drivers=radeonsi,nouveau,swrast,virgl \
+		--with-gallium-drivers=radeonsi,nouveau,swrast,virgl,swr,svga \
 		--with-dri-drivers=i915,i965,radeon,nouveau,swrast \
 		--with-vulkan-drivers=intel,radeon \
-		--with-egl-platforms=drm,x11 \
+		--with-platforms=drm,x11 \
+		--enable-lmsensors \
+		--disable-libunwind \
+		--disable-xvmc \
 		--enable-egl \
+		--enable-gles1 \
 		--enable-gles2 \
 		--enable-gbm \
 		--enable-shared-glapi \
-		--enable-xvmc \
 		--enable-nine \
-		--enable-xorg \
 		--enable-glx \
 		--enable-va \
-		--enable-gallium-osmesa \
 		--enable-xa \
 		--enable-vdpau \
 		--disable-glx-tls \
@@ -36,10 +37,12 @@ build() {
 		--enable-dri3 \
 		--enable-opencl \
 		--enable-opencl-icd \
+		--enable-lmsensors \
 		--enable-texture-float \
-		--enable-gallium-llvm \
+		--enable-gallium-osmesa \
+		--enable-gallium-extra-hud \
 		--enable-llvm-shared-libs \
-		--with-dri-driverdir=/lib32/xorg/modules/dri \
+		--with-dri-driverdir=/lib32/xorg/modules/dri
 
 	make || die
 	make DESTDIR="$pkgdir" install || die

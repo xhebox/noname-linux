@@ -1,0 +1,51 @@
+include/qtermwidget5/Filter.h|644|0|0|regular file
+include/qtermwidget5/qtermwidget.h|644|0|0|regular file
+include/qtermwidget5|755|0|0|directory
+include|755|0|0|directory
+lib/libqtermwidget5.so.0.7.1|755|0|0|regular file
+lib/libqtermwidget5.so.0|777|0|0|symbolic link
+lib/libqtermwidget5.so|777|0|0|symbolic link
+lib/pkgconfig/qtermwidget5.pc|644|0|0|regular file
+lib/pkgconfig|755|0|0|directory
+lib|755|0|0|directory
+share/cmake/qtermwidget5/qtermwidget5-config.cmake|644|0|0|regular file
+share/cmake/qtermwidget5/qtermwidget5_use.cmake|644|0|0|regular file
+share/cmake/qtermwidget5|755|0|0|directory
+share/cmake|755|0|0|directory
+share/qtermwidget5/color-schemes/BlackOnLightYellow.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/BlackOnRandomLight.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/BlackOnWhite.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/BreezeModified.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/DarkPastels.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/GreenOnBlack.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/Linux.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/Solarized.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/SolarizedLight.colorscheme|644|0|0|regular file
+share/qtermwidget5/color-schemes/WhiteOnBlack.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/BlackOnLightColor.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/DarkPicture.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/GreenOnBlack.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/GreenTint.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/GreenTint_MC.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/LightPicture.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/Linux.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/Transparent.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/Transparent_MC.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/Transparent_darkbg.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/Transparent_lightbg.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/XTerm.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/syscolor.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic/vim.schema|644|0|0|regular file
+share/qtermwidget5/color-schemes/historic|755|0|0|directory
+share/qtermwidget5/color-schemes|755|0|0|directory
+share/qtermwidget5/kb-layouts/default.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/historic/vt100.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/historic/x11r5.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/historic|755|0|0|directory
+share/qtermwidget5/kb-layouts/linux.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/macbook.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/solaris.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts/vt420pc.keytab|644|0|0|regular file
+share/qtermwidget5/kb-layouts|755|0|0|directory
+share/qtermwidget5|755|0|0|directory
+share|755|0|0|directory

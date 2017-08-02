@@ -2792,6 +2792,7 @@ lib/python3.6/lib-dynload/_testbuffer.cpython-36m-x86_64-linux-gnu.so|755|0|0|re
 lib/python3.6/lib-dynload/_testcapi.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload/_testimportmultiple.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload/_testmultiphase.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
+lib/python3.6/lib-dynload/_tkinter.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload/array.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload/audioop.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload/binascii.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
@@ -2814,9 +2815,9 @@ lib/python3.6/lib-dynload/xxlimited.cpython-36m-x86_64-linux-gnu.so|755|0|0|regu
 lib/python3.6/lib-dynload/zlib.cpython-36m-x86_64-linux-gnu.so|755|0|0|regular file
 lib/python3.6/lib-dynload|755|0|0|directory
 lib/python3.6/lib2to3/Grammar.txt|644|0|0|regular file
-lib/python3.6/lib2to3/Grammar3.6.1.final.0.pickle|644|0|0|regular file
+lib/python3.6/lib2to3/Grammar3.6.2.final.0.pickle|644|0|0|regular file
 lib/python3.6/lib2to3/PatternGrammar.txt|644|0|0|regular file
-lib/python3.6/lib2to3/PatternGrammar3.6.1.final.0.pickle|644|0|0|regular file
+lib/python3.6/lib2to3/PatternGrammar3.6.2.final.0.pickle|644|0|0|regular file
 lib/python3.6/lib2to3/__init__.py|644|0|0|regular file
 lib/python3.6/lib2to3/__main__.py|644|0|0|regular file
 lib/python3.6/lib2to3/__pycache__/__init__.cpython-36.opt-1.pyc|644|0|0|regular file
@@ -3423,7 +3424,6 @@ lib/python3.6/tabnanny.py|755|0|0|regular file
 lib/python3.6/tarfile.py|755|0|0|regular file
 lib/python3.6/telnetlib.py|644|0|0|regular file
 lib/python3.6/tempfile.py|644|0|0|regular file
-lib/python3.6/test/185test.db|644|0|0|regular file
 lib/python3.6/test/Sine-1000Hz-300ms.aif|644|0|0|regular file
 lib/python3.6/test/__init__.py|644|0|0|regular file
 lib/python3.6/test/__main__.py|644|0|0|regular file

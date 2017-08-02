@@ -1,5 +1,5 @@
 name=sudo
-version=1.8.19.p2
+version=1.8.20.p2
 _version="`echo $version | sed 's/.p/p/g'`"
 deps="zlib groff libldap"
 source="http://www.courtesan.com/sudo/dist/$name-$_version.tar.gz

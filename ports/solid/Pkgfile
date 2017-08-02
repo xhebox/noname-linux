@@ -1,5 +1,5 @@
 name=solid
-version=5.33.0
+version=5.36.0
 desc='Hardware integration and detection'
 deps="qt5-declarative qt5-tools extra-cmake-modules"
 source="https://download.kde.org/stable/frameworks/${version%.*}/solid-${version}.tar.xz"
@@ -46,8 +46,9 @@ build() {
 
 	cmake ../solid-${version} \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_PREFIX=/ \
 		-DKDE_INSTALL_LIBDIR=lib \
+		-DKDE_INSTALL_LIBEXECDIR=lib \
 		-DBUILD_TESTING=OFF
 	make || die
 	make DESTDIR="${pkgdir}" install || die

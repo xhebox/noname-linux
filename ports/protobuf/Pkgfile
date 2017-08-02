@@ -1,0 +1,14 @@
+name=protobuf
+version=3.3.2
+desc="Protocol Buffers - Google's data interchange format"
+deps="zlib unzip llvm"
+source="https://github.com/google/protobuf/archive/v${version}.tar.gz"
+
+build() {
+	export CC=clang CXX=clang++
+	cd protobuf-$version
+	NOCONFIGURE=1 ./autogen.sh
+	./configure --prefix=
+	make || die
+	make DESTDIR="$pkgdir" install || die
+}

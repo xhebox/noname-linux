@@ -24,9 +24,15 @@ echo ":: building rootfs"
 cat lists_of_base | while read i; do
 	../pkg -S $i || exit
 done
+cp ../pkg noname/bin/pkg
+cp ../config noname/etc/pkg.conf
+cd noname/
+git clone --depth=1 https://github.com/xhebox/noname ports
+cd -
 rm -f noname/boot/initram*
 echo ":: build rootfs done"
 cp -a -l noname rootfs
+rm -r noname/ports
 rm rootfs/etc/mkinitcpio.conf
 rm rootfs/etc/hostname
 rm rootfs/etc/fstab
@@ -109,9 +115,9 @@ iso_mount_handler() {
 		    name=`ls -l /dev/block/$i | cut -d '/' -f 5`
 		    echo ":: look for root.sq in /dev/$name"
 		    if mount "/dev/block/$i" /realroot/low &>/dev/null; then
-		   	 [ -f "/realroot/low/root.sq" ] && {
+		   	 [ -f "/realroot/low/noname/root.sq" ] && {
 		    		echo ":: found root.sq in /dev/$name"
-    	    		 	mount -t squashfs "/realroot/low/root.sq" /realroot/low
+    	    		 	mount -t squashfs "/realroot/low/noname/root.sq" /realroot/low
 				mount -t overlay overlay -o lowerdir=/realroot/low,upperdir=/realroot/up,workdir=/realroot/work $1
 				return 0
 			 }
@@ -142,47 +148,14 @@ echo ":: building squashfs "
 mksquashfs noname root.sq
 
 echo ":: building real iso "
-mv root.sq iso
-cp -a /lib/syslinux/bios iso/isolinux
-mv iso/boot/* iso/isolinux
-rmdir iso/boot
-cp package_files/isolinux.cfg iso/isolinux
+mkdir iso/noname
+mv root.sq iso/noname
+mkdir -p  iso/boot/grub
+cp package_files/grub.cfg iso/boot/grub
 
-dd if=/dev/zero of=efiboot.img bs=1M count=32
-mkdosfs -F 12 efiboot.img
-MOUNTPOINT=$(mktemp -d)
-modprobe loop
-mount -o loop efiboot.img $MOUNTPOINT
-mkdir -p $MOUNTPOINT/EFI/BOOT
-cp -a /lib/syslinux/efi64/* $MOUNTPOINT/EFI/BOOT/
-mv $MOUNTPOINT/EFI/BOOT/syslinux.efi $MOUNTPOINT/EFI/BOOT/bootx64.efi
-cp -a iso/isolinux/initramfs-linux-zen.img $MOUNTPOINT/EFI/BOOT
-cp -a iso/isolinux/intel-ucode.img $MOUNTPOINT/EFI/BOOT
-cp -a iso/isolinux/vmlinuz-linux-zen $MOUNTPOINT/EFI/BOOT
-cp -a package_files/isolinux.cfg $MOUNTPOINT/EFI/BOOT/syslinux.cfg
-umount $MOUNTPOINT
-rmdir $MOUNTPOINT
-mv efiboot.img iso/isolinux
- 
-xorriso -as mkisofs \
-        -iso-level 3 \
-        -full-iso9660-filenames \
-	-volid "Noname_$(date +%Y%m)" \
-	-appid "Noname_Livecd" \
-        -publisher "Xhebox/noname" \
-        -preparer "prepared by mkarchiso" \
-        -eltorito-boot isolinux/isolinux.bin \
-        -eltorito-catalog isolinux/boot.cat \
-        -no-emul-boot -boot-load-size 4 -boot-info-table \
-        -isohybrid-mbr iso/isolinux/isohdpfx.bin \
-	-eltorito-alt-boot \
-	-e isolinux/efiboot.img \
-	-no-emul-boot \
-	-isohybrid-gpt-basdat \
-	-output noname_`date +%Y%m`.iso \
-        iso
+rm -rf ./noname
+rm -rf ./rootfs
+grub-mkrescue -o noname_`date +%Y%m`.iso  iso
 
 # clear
-rm -rf ./noname
 rm -rf ./iso
-rm -rf ./rootfs

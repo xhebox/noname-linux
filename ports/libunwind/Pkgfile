@@ -1,5 +1,5 @@
 name=libunwind
-version=1.2
+version=1.2.1
 desc="Portable and efficient C programming interface (API) to determine the call-chain of a program"
 deps="musl xz"
 source="http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz"
