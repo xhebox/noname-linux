@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	libpkg "./pkg"
+	"./libpkg"
 	"github.com/gobwas/glob"
 	toml "github.com/pelletier/go-toml"
 	"github.com/pkg/errors"

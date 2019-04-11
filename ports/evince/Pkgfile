@@ -1,8 +1,8 @@
 version="3.28.2"
 desc="GTK3 document viewer, complete features, no gnome dependencies"
 source=[{url="https://download.gnome.org/sources/evince/${version%.*}/evince-${version}.tar.xz"}]
-makedeps=["gtk3", "libsm", "itstool", "intltool", "python", "poppler", "dbus", "libtiff", "libarchive"]
-deps=["gtk3", "libsm", "python", "poppler", "dbus", "libtiff", "libarchive"]
+makedeps=["gtk3", "libsm", "itstool", "intltool", "python", "poppler", "dbus", "libtiff", "libarchive", "djvulibre", "xorgproto", "wayland-protocols", "gobject-introspection"]
+deps=["gtk3", "libsm", "python", "poppler", "dbus", "libtiff", "libarchive", "djvulibre"]
 
 build='''
 	cd evince-$version

@@ -1,9 +1,9 @@
-version="18.3.2"
+version="19.0.1"
 makedeps=["expat", "libdrm", "xorgproto", "libxshmfence", "libxcb", "libx11", "libxfixes", "libxext", "libxdamage", "libxxf86vm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libvdpau", "libva", "libclc", "python", "libxrandr", "wayland-protocols"]
 deps=["expat", "libdrm", "libxshmfence", "libxcb", "libx11", "libxfixes", "libxext", "libxdamage", "libxxf86vm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libvdpau", "libva", "libclc", "libxrandr", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
-	{url="https://www.mesa3d.org/archive/mesa-$version.tar.xz"},
+	{url="https://mesa.freedesktop.org/archive/mesa-$version.tar.xz"},
 	{url="musl.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
@@ -23,7 +23,7 @@ ext='''
 
 build='''
 	noname-meson mesa-$version build \
-		-D b_lundef=false \
+		-D b_lto=false \
 		-D b_ndebug=true \
 		-D platforms=x11,wayland,drm,surfaceless \
 		-D dri-drivers=i915,i965,r100,r200,nouveau \

@@ -1,0 +1,6 @@
+--- fcitx5/src/ui/CMakeLists.txt	2019-02-24 14:33:33.601450985 +0800
++++ fcitx5/src/ui/CMakeLists.txt	2019-02-24 14:33:33.601450985 +0800
+@@ -1,3 +1,2 @@
+ add_subdirectory(classic)
+-add_subdirectory(kimpanel)
+ add_subdirectory(simpleui)

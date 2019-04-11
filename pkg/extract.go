@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	libpkg "./pkg"
+	"./libpkg"
 	dircopy "github.com/otiai10/copy"
 	"github.com/pkg/errors"
 	"gopkg.in/src-d/go-git.v4"

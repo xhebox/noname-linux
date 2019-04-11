@@ -5,7 +5,7 @@ source=[{url="https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/iso-co
 
 build='''
 	cd iso-codes-iso-codes-$version
-	./configure --prefix= --disable-static
+	./configure --prefix=/ --disable-static
 	make
 	make DESTDIR="$pkgdir" install
 '''

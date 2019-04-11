@@ -1,10 +1,10 @@
-name=sassc
-version=3.4.2
+version="3.4.2"
 desc="C/C++ wrapper for sass"
-deps=libsass
-source="https://github.com/sass/sassc/archive/${version}.tar.gz"
+deps=["libsass"]
+makedeps=["libsass"]
+source=[{url="https://github.com/sass/sassc/archive/${version}.tar.gz"}]
 
-build() {
+build='''
 	cd sassc-$version
 	autoreconf -i
 
@@ -12,5 +12,4 @@ build() {
 
 	make
 	make DESTDIR="$pkgdir" install
-}
-
+'''

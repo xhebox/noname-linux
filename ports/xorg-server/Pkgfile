@@ -1,11 +1,10 @@
 version="1.20.1"
 desc="X Window System server"
 nostrip=true
-makedeps=["mesa", "libressl", "libsm", "libepoxy", "pixman", "libx11", "libxkbfile", "libxfont2", "libxxf86vm", "libxres", "libxmu", "libxshmfence", "libxtst", "xcb-util", "libva", "xcb-util-wm", "xcb-util-image", "xcb-util-cursor", "xcb-util-renderutil", "xcb-util-keysyms", "xkeyboard-config", "libxaw", "xorg-app", "xorg-fonts", "meson", "libtirpc", "nettle", "libxcomposite", "libxscrnsaver", "libxft", "xorgproto", "xtrans", "systemd"]
-deps=["mesa", "libressl", "libsm", "libepoxy", "pixman", "libx11", "libxkbfile", "libxfont2", "libxxf86vm", "libxres", "libxmu", "libxshmfence", "libxtst", "xcb-util", "libva", "xcb-util-wm", "xcb-util-image", "xcb-util-cursor", "xcb-util-renderutil", "xcb-util-keysyms", "xkeyboard-config", "libxaw", "xorg-app", "xorg-fonts", "libtirpc", "nettle", "libxcomposite", "libxscrnsaver", "libxft", "systemd"]
+makedeps=["mesa", "libressl", "libsm", "libepoxy", "pixman", "libx11", "libxkbfile", "libxfont2", "libxxf86vm", "libxres", "libxmu", "libxshmfence", "libxtst", "xcb-util", "libva", "xcb-util-wm", "xcb-util-image", "xcb-util-cursor", "xcb-util-renderutil", "xcb-util-keysyms", "xkeyboard-config", "libxaw", "xorg-app", "xorg-fonts", "meson", "libtirpc", "nettle", "libxcomposite", "libxscrnsaver", "libxft", "xorgproto", "xtrans", "systemd", "wayland-protocols"]
+deps=["mesa", "libressl", "libsm", "libepoxy", "pixman", "libx11", "libxkbfile", "libxfont2", "libxxf86vm", "libxres", "libxmu", "libxshmfence", "libxtst", "xcb-util", "libva", "xcb-util-wm", "xcb-util-image", "xcb-util-cursor", "xcb-util-renderutil", "xcb-util-keysyms", "xkeyboard-config", "libxaw", "xorg-app", "xorg-fonts", "libtirpc", "nettle", "libxcomposite", "libxscrnsaver", "libxft", "systemd", "wayland"]
 source=[
 	{url="http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-$version.tar.bz2"},
-	{url="0001-v2-FS-58644.patch"},
 	{url="https://cgit.freedesktop.org/xorg/xserver/plain/include/xwayland-config.h.meson.in?id=xorg-server-1.20.0", name="xwayland-config.h.meson.in"},
 	{url="musl-io.patch"},
 ]
@@ -28,13 +27,12 @@ build='''
 		-D os_verdor="Noname" \
 		-D ipv6=true \
 		-D dmx=false \
-		-D xvfb=true \
-		-D xnest=true \
-		-D xorg=true \
-		-D xcsecurity=true \
-		-D xephyr=true \
-		-D suid_wrapper=true \
-		-D xwayland=false \
+		-D xvfb=false \
+		-D xnest=false \
+		-D xorg=false \
+		-D xcsecurity=false \
+		-D xephyr=false \
+		-D xwayland=true \
 		-D xwayland_eglstream=false \
 		-D glamor=true \
 		-D udev=true \

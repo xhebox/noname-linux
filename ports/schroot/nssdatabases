@@ -3,8 +3,4 @@
 # <database name>
 passwd
 shadow
-group
-gshadow
-services
-protocols
 hosts

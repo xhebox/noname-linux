@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	libpkg "./pkg"
+	"./libpkg"
 	"github.com/pkg/errors"
 	"v.io/x/lib/toposort"
 )
@@ -146,7 +146,7 @@ func pkg_cpfiles(pkg *libpkg.Pkgfile) error {
 		}
 
 		dst := filepath.Join(cfg.ROOT, hdr.Name)
-		mode := os.FileMode(hdr.Mode)
+		mode := hdr.FileInfo().Mode()
 
 		switch hdr.Typeflag {
 		case tar.TypeDir:

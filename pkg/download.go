@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	libpkg "./pkg"
+	"./libpkg"
 	"github.com/pkg/errors"
 	"gopkg.in/src-d/go-git.v4"
 )

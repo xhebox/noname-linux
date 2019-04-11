@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	libpkg "./pkg"
+	"./libpkg"
 	"github.com/pkg/errors"
 )
 
@@ -195,7 +195,6 @@ func opt_build(pkg string, opts map[harg]bool) error {
 	if e := locksys(); e != nil {
 		return errors.WithStack(e)
 	}
-	defer unlocksys()
 
 	var makedeps []string
 
@@ -214,6 +213,8 @@ func opt_build(pkg string, opts map[harg]bool) error {
 	if e := pkg_build(pkg, opts); e != nil {
 		return errors.Wrapf(e, "can not build %v", pkg)
 	}
+
+	unlocksys()
 
 	if e := opt_rmnoneed("*"); e != nil {
 		return errors.Wrapf(e, "can not remove unneeded")

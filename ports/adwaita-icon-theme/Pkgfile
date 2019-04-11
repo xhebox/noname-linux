@@ -1,12 +1,8 @@
-version="3.30.0"
-makedeps=["intltool", "hicolor-icon-theme"]
-deps=["intltool", "hicolor-icon-theme"]
+version="3.30.1"
+deps=["hicolor-icon-theme"]
 desc="default fallback used by the icon theme specification"
-source=[{url="http://mirrors.ustc.edu.cn/gnome/sources/adwaita-icon-theme/${version%.*}/adwaita-icon-theme-$version.tar.xz"}]
+source=[{url="http://mirrors.ustc.edu.cn/archlinux/extra/os/x86_64/adwaita-icon-theme-$version-1-any.pkg.tar.xz"}]
 
 build='''
-	cd adwaita-icon-theme-$version
-	./configure --prefix=/ --disable-icon-mapping
-	make
-	make DESTDIR="$pkgdir" install
+	mv usr/share "$pkgdir"
 '''

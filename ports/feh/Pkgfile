@@ -1,7 +1,7 @@
 version="2.26.3"
 desc="Fast and light imlib2-based image viewer"
-makedeps=["imlib2", "curl", "libxt", "xorgproto"]
-deps=["imlib2", "curl", "libxt"]
+makedeps=["imlib2", "curl", "libxt", "xorgproto", "libexif"]
+deps=["imlib2", "curl", "libxt", "libexif"]
 source=[{url="https://feh.finalrewind.org/${name}-${version}.tar.bz2"}]
 
 build='''

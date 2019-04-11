@@ -1,5 +1,4 @@
 pattern=["bin/ping"]
 script='''
-	setcap cap_net_raw=ep /bin/ping 2>/dev/null || chmod +s /bin/ping
-	echo 'Succeeded to set cap for /bin/ping'
+	setcap cap_net_raw=ep /bin/ping 2>/dev/null
 '''

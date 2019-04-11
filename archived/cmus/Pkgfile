@@ -1,0 +1,10 @@
+version="2.8.0"
+desc="Feature-rich ncurses-based music player"
+source=[{url="https://github.com/horst3180/arc-icon-theme/archive/$version.tar.gz"}]
+
+build='''
+	cd cmus-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

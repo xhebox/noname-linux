@@ -1,0 +1,25 @@
+version="8.6.8"
+ver="`echo $version | sed 's/\\./\\-/g'`"
+desc="The Tcl scripting language"
+deps=["zlib", "sqlite"]
+makedeps=["zlib", "sqlite"]
+source=[{url="https://github.com/tcltk/tcl/archive/core-$ver.tar.gz"}]
+
+ext='''
+	cd tcl-core-${ver}
+	rm -rf pkgs/sqlite3*
+'''
+
+build='''
+	cd tcl-core-${ver}/unix
+	./configure --prefix= --mandir=/share/man --enable-threads --enable-64bit
+	make
+	make INSTALL_ROOT="${pkgdir}" install install-private-headers
+	ln -sf tclsh${version%.*} "${pkgdir}/bin/tclsh"
+	ln -sf libtcl${version%.*}.so "${pkgdir}/lib/libtcl.so"
+
+# remove buildroot traces
+	sed -e "s#${srcdir}/tcl${version}/unix#/lib#" \
+	-e "s#${srcdir}/tcl${version}#/include#" \
+	-i "${pkgdir}/lib/tclConfig.sh"
+'''

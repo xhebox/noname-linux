@@ -1,0 +1,18 @@
+_name="c-toxcore"
+version="0.2.9"
+desc="Secure, configuration-free, P2P Skype replacement backend"
+deps=["libconfig", "systemd", "libsodium", "libvpx", "opus"]
+makedeps=["libconfig", "systemd", "libsodium", "libvpx", "opus"]
+source=[{url="https://github.com/TokTok/${_name}/archive/v${version}.tar.gz"}]
+
+build='''
+	cd $_name-$version
+	sed -i "/Rpath/d;/RPATH/d" CMakeLists.txt
+	cmake -DCMAKE_INSTALL_PREFIX= \
+	-DCMAKE_INSTALL_LIBDIR=/lib \
+	-DDHT_BOOTSTRAP=on \
+	-DBOOTSTRAP_DAEMON=on \
+	-DBUILD_NTOX=off
+	make
+	make DESTDIR="$pkgdir" install
+'''

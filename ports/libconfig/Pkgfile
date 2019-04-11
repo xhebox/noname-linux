@@ -1,0 +1,12 @@
+version="1.7.2"
+desc="C/C++ Configuration File Library"
+makedeps=["texinfo"]
+source=[{url="https://github.com/hyperrealm/libconfig/archive/v$version.tar.gz"}]
+
+build='''
+	cd libconfig-$version
+	autoreconf -vi
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

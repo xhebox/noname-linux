@@ -1,0 +1,13 @@
+version="1.19.1"
+desc="Cross-platform 3D audio library, software implementation"
+deps=["alsa-lib", "pulseaudio", "sdl2", "ffmpeg"]
+makedeps=["alsa-lib", "pulseaudio", "sdl2", "ffmpeg"]
+source=[{url="https://github.com/kcat/openal-soft/archive/openal-soft-$version.tar.gz"}]
+
+build='''
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DALSOFT_EXAMPLES=OFF ../openal-soft-openal-soft-$version -G Ninja
+	ninja
+	DESTDIR="$pkgdir/" ninja install
+'''

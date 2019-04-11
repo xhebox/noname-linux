@@ -1,0 +1,7 @@
+pattern=["bin/ss-local"]
+script='''
+	setcap cap_net_bind_service+ep bin/ss-local  2>/dev/null
+	setcap cap_net_bind_service+ep bin/ss-server 2>/dev/null
+	setcap cap_net_bind_service+ep bin/ss-tunnel 2>/dev/null
+	setcap cap_net_bind_service,cap_net_admin+ep bin/ss-redir 2>/dev/null
+'''

@@ -1,0 +1,14 @@
+version="0.10.9"
+desc="SVG-based theme engine for Qt5 (including config tool and extra themes)"
+makedeps=["qt5-base", "qt5-svg", "qt5-x11extras", "libx11", "libxext", "qt5-tools", "xorgproto", "kwindowsystem"]
+deps=["qt5-base", "qt5-svg", "qt5-x11extras", "libx11", "libxext", "qt5-tools", "kwindowsystem"]
+source=[{url="https://github.com/tsujan/Kvantum/archive/V${version}.tar.gz"}]
+
+build='''
+	mkdir -p build
+	cd build
+	cmake ../Kvantum-$version/Kvantum \
+		-DCMAKE_INSTALL_PREFIX=
+	make
+	make DESTDIR="${pkgdir}" install
+'''

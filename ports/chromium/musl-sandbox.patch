@@ -52,11 +52,12 @@ diff --git a/sandbox/linux/seccomp-bpf-helpers/syscall_sets.cc b/sandbox/linux/s
 index 80f02c0..21fbe21 100644
 --- sandbox/linux/seccomp-bpf-helpers/syscall_sets.cc
 +++ sandbox/linux/seccomp-bpf-helpers/syscall_sets.cc
-@@ -373,6 +373,7 @@ bool SyscallSets::IsAllowedProcessStartOrDeath(int sysno) {
+@@ -373,6 +373,8 @@ bool SyscallSets::IsAllowedProcessStartOrDeath(int sysno) {
  #if defined(__i386__)
      case __NR_waitpid:
  #endif
 +    case __NR_set_tid_address:
++    case 324:
        return true;
      case __NR_clone:  // Should be parameter-restricted.
      case __NR_setns:  // Privileged.

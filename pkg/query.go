@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	libpkg "./pkg"
+	"./libpkg"
 	"github.com/gobwas/glob"
 	"github.com/pkg/errors"
 )

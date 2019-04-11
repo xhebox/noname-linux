@@ -1,0 +1,14 @@
+version="1.0"
+desc='Tiling Wayland compositor and replacement for the i3 window manager'
+deps=["cairo", "json-c", "pango", "libpcre", "wlroots"]
+makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols", "xorgproto"]
+source=[
+	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
+]
+
+build='''
+  mkdir -p build
+  noname-meson build sway-$version -D werror=false -D b_ndebug=true
+  ninja -C build
+  DESTDIR="$pkgdir" ninja -C build install
+'''

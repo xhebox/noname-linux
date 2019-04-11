@@ -45,15 +45,15 @@
  
  void PrintToStderr(const char* output) {
    // NOTE: This code MUST be async-signal safe (it's used by in-process
-@@ -721,7 +721,7 @@
- // NOTE: This code MUST be async-signal safe (it's used by in-process
- // stack dumping signal handler). NO malloc or stdio is allowed here.
+@@ -812,7 +812,7 @@
+   // NOTE: This code MUST be async-signal safe (it's used by in-process
+   // stack dumping signal handler). NO malloc or stdio is allowed here.
  
 -#if !defined(__UCLIBC__) && !defined(_AIX)
 +#if defined(__GLIBC__) && !defined(_AIX)
-   count = std::min(arraysize(trace_), count);
- 
    // Though the backtrace API man page does not list any possible negative
+   // return values, we take no chance.
+   return base::saturated_cast<size_t>(backtrace(trace, count));
 @@ -827,13 +827,13 @@
  // NOTE: This code MUST be async-signal safe (it's used by in-process
  // stack dumping signal handler). NO malloc or stdio is allowed here.

@@ -1,20 +1,16 @@
-version="72.0.3626.109"
+version="73.0.3683.86"
 nostrip=true
 makedeps=["alsa-lib", "bzip2", "gtk3", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "nodejs", "opus", "gn", "icu", "minizip", "llvm", "nss", "xorgproto", "wayland-protocols"]
-deps=["alsa-lib", "bzip2", "gtk3", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "opus", "icu", "minizip", "nss"]
+deps=["alsa-lib", "bzip2", "gtk3", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "opus", "icu", "minizip", "nss", "wayland"]
 desc="The open-source project behind Google Chrome"
 source=[
 	{url="chromium-skia-harmony.patch"},
-	{url="chromium-swiftshader-default-visibility.patch"},
 	{url="musl-v8-fix-deadlock.patch"},
 	{url="musl-v8-monotonic-pthread-cont_timedwait.patch"},
 	{url="chromium-system-icu.patch"},
-	{url="chromium-vaapi.patch"},
-	{url="chromium-vaapi-relax-the-version-check-for-VA-API.patch"},
-	{url="chromium-enable-mojo-video-decoders-by-default.patch"},
-	{url="chromium-vaapi-fix-the-VA_CHECK_VERSION.patch"},
-	{url="chromium-webrtc-r0.patch"},
-	{url="chromium-widevine.patch"},
+	{url="chromium-avoid-log-flooding-in-GLSurfacePresentationHelper.patch"},
+	{url="chromium-color_utils-use-std-sqrt.patch"},
+	{url="chromium-media-fix-uild-with-libstdcpp.patch"},
 	{url="default-pthread-stacksize.patch"},
 	{url="dont-assume-secure-getenv.patch"},
 	{url="musl-crashpad.patch"},
@@ -25,6 +21,7 @@ source=[
 	{url="no-getcontext.patch"},
 	{url="no-mallinfo.patch"},
 	{url="resolver.patch"},
+	{url="chromium-vaapi.patch"},
 	{url="chromium.sh"},
 	{url="chromium.desktop"},
 	{url="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$version.tar.xz"},
@@ -34,6 +31,7 @@ ext='''
 	cd chromium-$version
 
 	for i in $source; do
+		echo "$i"
 		case $i in
 		*swift*|*skia*) patch -p0 -i ../$i;;
 		fix*|00??-*|chromium-*patch|icu*|*getrlimit*|*vaapi*) patch -p1 -i ../$i;;
@@ -82,9 +80,9 @@ build='''
 	export CXX=clang++
 	export AR=ar
 	export NM=nm
-
-	gn gen out/Release --args='is_desktop_linux=true use_lld=false use_gold=false remove_webcore_debug_symbols=true symbol_level=0 linux_use_bundled_binutils=false closure_compile=false binutils_path="/bin" use_jumbo_build=true is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=true use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=true enable_swiftshader=true enable_hangout_services_extension=true custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default"'
-	ninja -j3 -C out/Release chrome chrome_sandbox chromedriver
+	
+	gn gen out/Release --args='is_desktop_linux=true use_lld=false use_gold=false remove_webcore_debug_symbols=true symbol_level=0 linux_use_bundled_binutils=false closure_compile=false binutils_path="/bin" use_jumbo_build=true is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=true use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=false enable_swiftshader=false enable_hangout_services_extension=true custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default"'
+	ninja -C out/Release chrome chrome_sandbox chromedriver
 	
 	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
 
@@ -92,7 +90,10 @@ build='''
 
 	install -D out/Release/chromedriver "$pkgdir/lib/chromium/chromedriver"
 
-	cp -a out/Release/*.pak out/Release/*.bin out/Release/*.so out/Release/locales "$pkgdir/lib/chromium/"
+	cp -a out/Release/*.pak out/Release/*.bin out/Release/locales "$pkgdir/lib/chromium/"
+	for i in out/Release/*.so; do
+		[ "$i" != "out/Release/*.so" ] && cp -a "$i" "$pkgdir/lib/chromium/"
+	done
 	[ -e "out/Release/icudtl.dat" ] && cp -a out/Release/icudtl.dat "$pkgdir/lib/chromium/"
 	[ -e "out/Release/resources" ] && cp -a out/Release/resources "$pkgdir/lib/chromium/"
 	[ -e "out/Release/swiftshader" ] && cp -a out/Release/swiftshader "$pkgdir/lib/chromium/"

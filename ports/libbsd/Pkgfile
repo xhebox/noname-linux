@@ -1,0 +1,19 @@
+version="0.8.7"
+desc='Provides useful functions commonly found on BSD systems like strlcpy()'
+source=[
+	{url="https://libbsd.freedesktop.org/releases/libbsd-$version.tar.xz"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd libbsd-$version
+	patch -p0 -i ../musl.patch
+'''
+
+build='''
+	cd libbsd-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+	rm "${pkgdir}"/lib/libbsd.a
+'''

@@ -1,0 +1,14 @@
+version="0.6.21"
+desc="A library to parse an EXIF file and read the data from those tags"
+source=[
+	{url="https://nchc.dl.sourceforge.net/project/libexif/libexif/$version/libexif-$version.tar.bz2"},
+]
+
+build='''
+	cd libexif-$version
+	./configure \
+		--prefix= \
+		--disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

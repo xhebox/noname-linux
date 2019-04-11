@@ -1,7 +1,7 @@
 version="3.24.1"
 desc="A multi-platform toolkit for creating graphical user interfaces"
-makedeps=["at-spi2-atk", "atk", "libxcursor", "gdk-pixbuf", "pixman", "libxrandr", "libxdamage", "libxcomposite", "pango", "hicolor-icon-theme", "libxi", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols", "xorgproto", "gobject-introspection"]
-deps=["at-spi2-atk", "atk", "libxcursor", "gdk-pixbuf", "pixman", "libxrandr", "libxdamage", "libxcomposite", "pango", "hicolor-icon-theme", "libxi", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
+makedeps=["at-spi2-atk", "cairo", "atk", "libxcursor", "libxfixes", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols", "xorgproto", "gobject-introspection"]
+deps=["at-spi2-atk", "atk", "cairo", "libxcursor", "libxfixes", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
 source=[
 	{url="http://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
 	{url="gtk3-immodules.toml"},
@@ -27,11 +27,11 @@ build='''
 	--disable-xinerama \
 	--enable-wayland-backend \
 	--enable-x11-backend \
-	--enable-xkb \
-	--enable-xrandr \
-	--enable-xfixes \
-	--enable-xcomposite \
-	--enable-xdamage \
+	--disable-xkb \
+	--disable-xrandr \
+	--disable-xfixes \
+	--disable-xcomposite \
+	--disable-xdamage \
 	--disable-cups \
 	--enable-introspection \
 	--disable-static

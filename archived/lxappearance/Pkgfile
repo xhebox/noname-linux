@@ -1,15 +1,14 @@
-name=lxappearance
-version=0.6.3
-deps="gtk gtk3 intltool"
+version="0.6.3"
+makedeps=["gtk3", "intltool", "xorgproto", "wayland-protocols"]
+deps=["gtk3", "wayland"]
 desc="LXDE Theme Switcher"
-source="http://nchc.dl.sourceforge.net/lxde/$name-$version.tar.xz"
+source=[{url="http://nchc.dl.sourceforge.net/lxde/lxappearance-${version}.tar.xz"}]
 
-build() {
-	cd $name-$version
+build='''
+	cd lxappearance-$version
 
-	./configure --sysconfdir=/etc --prefix= --disable-dbus --enable-gtk3 --enable-gtk
+	./configure --sysconfdir=/etc --prefix= --disable-dbus --enable-gtk3 --disable-gtk
 
 	make
 	make DESTDIR="$pkgdir" install
-}
-
+'''

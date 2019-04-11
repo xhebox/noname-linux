@@ -1,20 +1,15 @@
 version="git"
 desc="dwm status"
-deps=["alsa-lib", "xorg-server"]
 source=[
 	{url="https://github.com/drkhsh/slstatus", protocol="git"},
 	{url="config.h"},
-	{url="icon.patch"},
-	{url="alsa.patch"},
+	{url="no-x11.patch"},
 ]
 
 build='''
 	cd slstatus
+	sed -i '/\-lX11/d' config.mk
 	cp -r ../config.h .
-	sed -i 's/\-lX11/& \-lasound/g' config.mk
-	echo 1
-	patch -p1 -i ../icon.patch
-	echo 2
-	patch -p1 -i ../alsa.patch
+	patch -p1 -i ../no-x11.patch
 	make PREFIX=/ DESTDIR="$pkgdir" install
 '''

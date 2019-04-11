@@ -11,16 +11,14 @@ static const char unknown_str[] = "n/a";
 
 static const struct arg args[] = {
 	/* function	format        argument */
-	{ wifi_icon,     "\x03%s\x01 ",            "wlp3s0" },
 	{ wifi_essid,    "%s ",                    "wlp3s0" },
-	{ netspeed_rx,   "%s ",                    "wlp3s0" },
-	{ netspeed_tx,   "%s ",                    "wlp3s0" },
-	{ cpu_perc,      "\x03\u00b3\x01 %s ",     NULL },
-	{ cpu_freq,      "%s ",                    NULL },
-	{ ram_perc,      "\x03\u00c6\x01 %s ",     NULL },
-	{ vol_icon,   	 "\x03%s\x01 ",            NULL },
-	{ vol_alsa,   	 "%s ",                    NULL },
-	{ bat_icon,      "\x03%s\x01 ",            "BAT0" },
-	{ battery_perc,  "%s ",                    "BAT0" },
-	{ datetime,      "\x03\u00c9\x01 %s ",     "%y-%m-%d %a %H:%M:%S" },
+	{ netspeed_rx,   "| %s ",                  "wlp3s0" },
+	{ netspeed_tx,   " %s ",                    "wlp3s0" },
+	{ cpu_perc,      "| %s ",									  NULL },
+	{ cpu_freq,      " %s ",                   NULL },
+	{ ram_perc,      "| %s ",										NULL },
+	{ run_command, 	 "| %s ",										"amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }'" },
+	{ run_command, 	 " %s ",										  "amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'" },
+	{ battery_perc,  "| %s ",                   "BAT0" },
+	{ datetime,      "| %s ",                   "%y-%m-%d %a %H:%M:%S" },
 };

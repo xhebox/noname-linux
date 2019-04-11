@@ -2,10 +2,11 @@ version="r408.984f3f2"
 _SPELL_EN_DICT_VER='20121020'
 desc="Next generation of fcitx"
 deps=["cairo", "enchant", "iso-codes", "mesa", "libxkbcommon", "pango", "xcb-util-wm", "libxkbfile", "xcb-imdkit", "fmt", "gdk-pixbuf", "wayland"]
-makedeps=["cairo", "enchant", "iso-codes", "mesa", "libxkbcommon", "pango", "xcb-util-wm", "libxkbfile", "xcb-imdkit", "fmt", "gdk-pixbuf", "extra-cmake-modules", "wayland-protocols"]
+makedeps=["cairo", "enchant", "iso-codes", "mesa", "libxkbcommon", "pango", "xcb-util-wm", "libxkbfile", "xcb-imdkit", "fmt", "gdk-pixbuf", "extra-cmake-modules", "wayland-protocols", "xorgproto"]
 
 source=[
 	{url="https://gitlab.com/fcitx/fcitx5", protocol="git", commit="984f3f2c1fdcecb7de4dfb39b876c2821e366a59"},
+	{url="no-kimpanel.patch"},
  	{name="en_dict-${_SPELL_EN_DICT_VER}.tar.gz", url="http://download.fcitx-im.org/data/en_dict-${_SPELL_EN_DICT_VER}.tar.gz"},
 ]
 
@@ -13,6 +14,7 @@ ext='''
 	_SPELL_EN_DICT_VER='20121020'
 
 	cd fcitx5
+	patch -p1 -i ../no-kimpanel.patch
 	sed -i 's/ushort/unsigned short/g' src/lib/fcitx-utils/color.cpp
 	sed -i 's/uint /unsigned int /g' src/lib/fcitx/icontheme.h src/lib/fcitx/icontheme.cpp
 

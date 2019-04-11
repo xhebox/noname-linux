@@ -1,4 +1,4 @@
-version="3.7.1"
+version="3.7.3"
 desc="A high-level scripting language(3.x)"
 deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
 source=[

@@ -1,4 +1,4 @@
-version="9.0.1"
+version="19.0.3"
 makedeps=["python3-setuptools"]
 eps=["python3"]
 source=[{url="https://pypi.io/packages/source/p/pip/pip-${version}.tar.gz"}]

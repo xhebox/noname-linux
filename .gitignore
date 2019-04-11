@@ -1,3 +1,4 @@
+pkg/pkg
 ports/*/*.tar*
 ports/*/*.tgz*
 ports/test
@@ -42,7 +43,6 @@ ports/gettext-tiny/gettext-tiny
 ports/iputils/iputils
 ports/xcb-imdkit/xcb-imdkit
 ports/fcitx5/fcitx5
-ports/linux-firmware/linux-firmware.git
 ports/slstatus/slstatus
 ports/libclc/libclc
 ports/xf86-video-intel/xf86-video-intel

@@ -119,16 +119,6 @@ diff --git a/chrome/browser/metrics/chrome_browser_main_extra_parts_metrics.cc b
    base::Version version(gnu_get_libc_version());
  
    UMALinuxGlibcVersion glibc_version_result = UMA_LINUX_GLIBC_NOT_PARSEABLE;
---- ./device/serial/serial_io_handler_posix.cc.orig
-+++ ./device/serial/serial_io_handler_posix.cc
-@@ -6,6 +6,7 @@
- 
- #include <sys/ioctl.h>
- #include <termios.h>
-+#include <asm-generic/ioctls.h>
- 
- #include "base/posix/eintr_wrapper.h"
- 
 diff --git a/third_party/ots/include/opentype-sanitiser.h b/third_party/ots/include/opentype-sanitiser.h
 --- third_party/ots/include/opentype-sanitiser.h
 +++ third_party/ots/include/opentype-sanitiser.h

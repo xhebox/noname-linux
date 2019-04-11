@@ -1,7 +1,7 @@
 version="1.16.0"
 mesc="A 2D graphics library with support for multiple output devices"
-makedeps=["libpng", "pixman", "libx11", "libxcb", "libxrender", "libjpeg-turbo", "libxext", "glib", "lzo", "xorgproto"]
-deps=["libpng", "pixman", "libx11", "libxcb", "libxrender", "libjpeg-turbo", "libxext", "glib", "lzo"]
+makedeps=["libpng", "pixman", "libx11", "libxcb", "libjpeg-turbo", "libxext", "glib", "lzo", "xorgproto"]
+deps=["libpng", "pixman", "libx11", "libxcb", "libjpeg-turbo", "libxext", "glib", "lzo"]
 source=[{url="https://cairographics.org/releases/cairo-$version.tar.xz"}]
 
 ext='''

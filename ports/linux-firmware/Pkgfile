@@ -1,9 +1,9 @@
-version="20180825"
+version="20190212"
 desc="Firmware files for Linux"
 source=[
 	{
-		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git",
-		commit="fea76a04f25fd0a217c0d566ff5ff8f23ad3e648",
+		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware",
+		commit="28f5f7dc1f077ea37d663f70de4490844db0449d",
 		protocol="git"
 	}
 ]
@@ -21,4 +21,7 @@ build='''
 	echo kernel/x86/microcode/AuthenticAMD.bin | bsdcpio -o -H newc -R 0:0 > amd-ucode.img
 	install -d "${pkgdir}/lib/tmpfiles.d"
 	install -D -m0644 amd-ucode.img "${pkgdir}"/boot/amd-ucode.img	
+
+	install -d "${pkgdir}/lib/tmpfiles.d"
+	echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' > "${pkgdir}/lib/tmpfiles.d/linux-firmware.conf"
 '''

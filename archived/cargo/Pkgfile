@@ -1,6 +1,5 @@
-name=cargo
-version=0.30.0
-STAGE0_VERSION=0.30.0
+version="0.33.0"
+STAGE0_VERSION="0.33.0"
 desc="The Rust package manager"
 deps="cmake curl libgit2 libssh2 libressl python zlib rust"
 source="https://github.com/rust-lang/cargo/archive/$version.tar.gz

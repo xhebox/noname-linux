@@ -1,0 +1,18 @@
+version="5.55.0"
+makedeps=["qt5-tools", "qt5-x11extras", "extra-cmake-modules"]
+deps=["qt5-x11extras"]
+desc="Qt Free Edition, version 5.x"
+source=[{url="https://download.kde.org/stable/frameworks/${version%.*}/kwindowsystem-$version.tar.xz"}]
+
+build='''
+	mkdir -p build
+	cd build
+
+	cmake ../kwindowsystem-$version \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_TESTING=OFF
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

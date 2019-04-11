@@ -1,4 +1,4 @@
-version="4.1"
+version="4.1.2"
 makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
 deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
 desc="Complete solution to record, convert and stream audio and video."

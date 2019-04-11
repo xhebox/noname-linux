@@ -1,0 +1,29 @@
+version="5.12.1"
+deps=["qt5-base"]
+makedeps=["qt5-base"]
+desc="Qt Free Edition, version 5.x"
+source=[{url="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtx11extras-everywhere-src-$version.tar.xz"}]
+
+ext='''
+	cd qtx11extras-everywhere-src-$version
+
+	for i in $source;do
+		case $i in
+		*qtbug*.patch) msg $i && patch -p1 -i $srcdir/$i;;
+		*.patch) msg $i && patch -p1 -i $srcdir/$i ;;
+		esac
+	done
+'''
+
+build='''
+	cd qtx11extras-everywhere-src-$version
+	mkdir build
+	cd build
+	qmake ..
+
+	make
+	make INSTALL_ROOT=$pkgdir install
+		
+	# Drop QMAKE_PRL_BUILD_DIR because reference the build dir
+	find "${pkgdir}/lib" -type f -name '*.prl' -exec sed -i '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+'''

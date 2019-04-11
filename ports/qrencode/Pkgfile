@@ -1,0 +1,14 @@
+version="4.0.2"
+desc="C library for encoding data in a QR Code symbol."
+deps=["libpng"]
+makedeps=["libpng"]
+source=[{url="http://megaui.net/fukuchi/works/qrencode/qrencode-${version}.tar.bz2"}]
+
+build='''
+	cd qrencode-$version
+
+	./configure --prefix=
+
+	make
+	make prefix="$pkgdir" install
+'''

@@ -1,0 +1,11 @@
+version="20180614"
+makedeps=["qt5-kvantum"]
+deps=["qt5-kvantum"]
+desc="arc theme for qt5"
+source=[{url="https://github.com/PapirusDevelopmentTeam/arc-kde/archive/$version.tar.gz"}]
+
+build='''
+	cd arc-kde-$version
+	mkdir -p "$pkgdir"/share/Kvantum
+	cp -a Kvantum/* "$pkgdir"/share/Kvantum
+'''

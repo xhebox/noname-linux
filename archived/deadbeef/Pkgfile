@@ -1,14 +1,16 @@
-name=deadbeef
-version=0.7.2
+version="0.7.2"
 desc='A GTK+ audio player for GNU/Linux.'
-deps="alsa-lib hicolor-icon-theme desktop-file-utils jansson libvorbis libmad flac curl imlib2 libsndfile libx11 intltool zlib pkgconf pulseaudio zip libsamplerate yasm ffmpeg gtk gtk3 dbus faad2"
-source="http://downloads.sourceforge.net/project/deadbeef/deadbeef-${version}.tar.bz2
-musl-stacksize.patch"
+makedeps=["alsa-lib", "desktop-file-utils", "jansson", "libvorbis", "libmad", "flac", "curl", "imlib2", "libsndfile", "libx11", "intltool", "zlib", "pulseaudio", "libsamplerate", "yasm", "ffmpeg", "gtk3", "dbus", "faad2"]
+deps=["alsa-lib", "desktop-file-utils", "jansson", "libvorbis", "libmad", "flac", "curl", "imlib2", "libsndfile", "libx11", "zlib", "pulseaudio", "libsamplerate", "yasm", "ffmpeg", "gtk3", "dbus", "faad2"]
+source=[
+	{url="http://downloads.sourceforge.net/project/deadbeef/deadbeef-${version}.tar.bz2"},
+	{url="musl-stacksize.patch"}
+]
 
-build() {
+build='''
 	cd deadbeef-$version
-	patch -p1 < ../musl-stacksize.patch || die
+	patch -p1 -i ../musl-stacksize.patch
 	./configure --prefix=
-	make || die
-	make prefix="${pkgdir}" install || die
-}
+	make
+	make prefix="${pkgdir}" install
+'''

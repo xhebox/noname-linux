@@ -1,0 +1,14 @@
+version="4.0.1"
+desc="SQLite extension that provides transparent 256-bit AES encryption of database files"
+deps=["libressl", "sqlite", "readline"]
+makedeps=["tcl", "libressl", "sqlite", "readline"]
+source=[
+	{url="https://github.com/sqlcipher/sqlcipher/archive/v$version.zip"},
+]
+
+build='''
+	cd sqlcipher-$version
+	bash ./configure --prefix= --enable-tempstore=yes --disable-tcl CFLAGS="$CFLAGS -DSQLITE_HAS_CODEC"
+	make
+	make DESTDIR="${pkgdir}" install
+'''
