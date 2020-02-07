@@ -1,8 +1,8 @@
 # Intro
 
-**300++ packages, 400+ inactive packages.**
+**300++ packages, 500+ inactive packages.**
 
-This **experimental(in the meaning of adding new packages constantly, daily using has been OK)** distro is a personal project of mine and is designed to be lightweight and fast.
+This **experimental(in the meaning of adding/removeing packages constantly)** distro is a personal project of mine and is designed to be lightweight and fast.
 
 You can join #nonamelinux in freenode to ask for help, if someone is there. Or leave me a mail: xw897002528@gmail.com.
 
@@ -10,8 +10,6 @@ You can join #nonamelinux in freenode to ask for help, if someone is there. Or l
 
 1. using native intl instead of the one in gettext
 2. emoji wcwidth patch for musl
-3. working fcitx
-4. with some patches stolen from everywhere to let apps need EWMH(like obs) working with dwm
 
 # Rootfs
 
