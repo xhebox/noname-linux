@@ -1,11 +1,12 @@
-version="4.1.2"
-makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
-deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "libvdpau", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
+version="4.2.1"
+makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
+deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
 desc="Complete solution to record, convert and stream audio and video."
 source=[{url="http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
 build='''
 	cd ffmpeg-$version
+	sed -i configure -e "s;_cflags_speed='-O3';_cflags_speed='-O2';"
 	./configure \
 		--prefix=/ \
 		--bindir=/bin \
@@ -38,6 +39,8 @@ build='''
 		--enable-libsoxr \
 		--enable-libspeex \
 		--disable-libssh \
+		--disable-rpath \
+		--disable-ffplay \
 		--enable-libtheora \
 		--enable-libv4l2 \
 		--enable-libvidstab \
@@ -51,7 +54,7 @@ build='''
 		--enable-version3 \
 		--disable-static \
 		--enable-nonfree \
-		--enable-vdpau \
+		--disable-vdpau \
 		--enable-vaapi
 
 	make

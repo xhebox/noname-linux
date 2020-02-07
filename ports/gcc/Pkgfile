@@ -1,19 +1,20 @@
-version="8.2.0"
+version="9.2.0"
+nostrip=true
 desc="The GNU Compiler Collection"
 source=[
 	{url="http://mirrors.ustc.edu.cn/gnu/gcc/gcc-$version/gcc-${version}.tar.xz"},
-	{url="http://isl.gforge.inria.fr/isl-0.19.tar.bz2"},
+	{url="http://isl.gforge.inria.fr/isl-0.21.tar.bz2"},
 	{url="http://gmplib.org/download/gmp/gmp-6.1.2.tar.xz"},
 	{url="http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz"},
 	{url="https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz"},
-	{url="posix_memalign.patch"},
-	{url="0016-invalid_tls_model.diff"},
+	{url="0002-posix_memalign.patch"},
+	{url="003_all_default-fortify-source.patch"},
+	{url="013_all_default-ssp-fix.patch"},
+	{url="203-libgcc_s.patch"},
 	{url="fix-musl-execinfo.patch"},
 	{url="gcc-6.1-musl-libssp.patch"},
 	{url="libgcc-always-build-gcceh.a.patch"},
-	{url="003_all_default-fortify-source.patch"},
-	{url="050_all_libiberty-asprintf.patch"},
-	{url="gcc-4.9-musl-fortify.patch"},
+	{url="0016-invalid_tls_model.patch"},
 	{url="locale.patch"},
 ]
 makedeps=["zlib"]
@@ -23,15 +24,14 @@ ext='''
 	cd gcc-$version
 	for i in $source; do
 		case "$i" in
-			o.patch|l.patch) ;;
 			*execinfo*.patch) patch -p0 -i ../"$i";;
-			*.patch) patch -p1 -i ../"$i";;
+			*.patch) patch -Np1 -i ../"$i";;
 		esac
 	done
 
 	sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 	sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
-	ln -s ../isl-0.19 isl
+	ln -s ../isl-0.21 isl
 	ln -s ../gmp-6.1.2 gmp
 	ln -s ../mpfr-4.0.1 mpfr
 	ln -s ../mpc-1.1.0 mpc
@@ -65,7 +65,7 @@ build='''
 		--enable-default-ssp \
 		--enable-gnu-indirect-function \
 		--enable-lto --enable-plugin \
-		--enable-vtable-verify \
+		--disable-vtable-verify \
 		--disable-target-libiberty \
 		--disable-fixed-point \
 		--disable-libstdcxx-pch \
@@ -85,9 +85,6 @@ build='''
 	make
 	make -j1 DESTDIR="${pkgdir}" install
 	make -C gcc DESTDIR="${pkgdir}" install-po
-
-	install -d $pkgdir/share/gdb/auto-load/lib
-	mv $pkgdir/lib/*-gdb.py $pkgdir/share/gdb/auto-load/lib/
 
 	ln -srf "$pkgdir"/bin/gcc "$pkgdir"/bin/cc
 

@@ -6,11 +6,9 @@ desc="The PyPA recommended tool for installing Python packages"
 
 build='''
 	cd pip-$version
-	/bin/python3 setup.py build
 	/bin/python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
-		--optimize=1 \
-		--skip-build
+		--optimize=1
 	rm "$pkgdir"/bin/pip
 '''

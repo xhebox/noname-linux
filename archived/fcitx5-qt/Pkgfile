@@ -1,0 +1,12 @@
+version="git"
+desc="Fcitx Qt Library"
+deps=["fcitx5", "qt5-base", "qt5-x11extras", "qt5-quickcontrols"]
+makedeps=["fcitx5", "qt5-base", "extra-cmake-modules", "qt5-x11extras", "qt5-quickcontrols", "xorgproto"]
+source=[{protocol="git", url="https://gitlab.com/fcitx/fcitx5-qt"}]
+
+build='''
+cd fcitx5-qt
+cmake -DCMAKE_INSTALL_PREFIX=/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=/lib -DENABLE_QT4=OFF .
+make
+make DESTDIR="$pkgdir" install
+'''

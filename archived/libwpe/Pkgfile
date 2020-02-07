@@ -1,0 +1,17 @@
+name="libwpe"
+version="1.4.0.1"
+desc="General-purpose library for WPE WebKit"
+deps=["libxkbcommon"]
+makedeps=["cmake", "mesa", "libxkbcommon"]
+source=[
+	{url="https://wpewebkit.org/releases/$name-$version.tar.xz"},
+]
+
+build='''
+	cmake -H$name-$version -Bbuild \
+				-DCMAKE_BUILD_TYPE=None \
+				-DCMAKE_INSTALL_PREFIX=/ \
+				-DCMAKE_INSTALL_LIBDIR=/lib
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

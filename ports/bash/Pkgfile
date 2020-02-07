@@ -1,4 +1,4 @@
-version="4.4"
+version="5.0"
 desc="An sh-compatible command language interpreter"
 makedeps=["ncurses", "readline"]
 deps=["ncurses", "readline", "musl"]
@@ -14,7 +14,7 @@ source=[
 ext='''
 	cd bash-$version
 	url="http://ftp.gnu.org/gnu/bash/bash-$version-patches"
-	for p in $(seq -w 001 023); do
+	for p in $(seq -w 001 007); do
 		curl "$url/bash`echo $version | tr -d '.'`-${p}" | patch -p0 -i -
 	done
 
@@ -28,7 +28,7 @@ ext='''
 
 build='''
 	cd bash-$version
-	export CFLAGS="$CFLAGS -DSYS_BASHRC='\"/etc/bashrc\"' -DDEFAULT_PATH_VALUE=\'\"/sbin:/bin\"\' -DSTANDARD_UTILS_PATH=\'\"/bin\"\'"
+	export CFLAGS="$CFLAGS -DSYS_BASHRC='\"/etc/bashrc\"' -DDEFAULT_PATH_VALUE='\"/sbin:/bin\"' -DSTANDARD_UTILS_PATH='\"/bin\"'"
 	./configure --prefix=/ --without-bash-malloc --with-installed-readline --with-curses --enable-readline
 	make
 	make DESTDIR="$pkgdir" install

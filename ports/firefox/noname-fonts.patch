@@ -1,0 +1,12 @@
+--- security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-01-18 05:34:45.000000000 +0800
++++ security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-01-18 05:34:45.000000000 +0800
+@@ -287,8 +287,9 @@
+   policy->AddDir(rdonly, "/etc");
+   policy->AddDir(rdonly, "/usr/share");
+   policy->AddDir(rdonly, "/usr/local/share");
++  policy->AddDir(rdonly, "/share");
+   // Various places where fonts reside
+   policy->AddDir(rdonly, "/usr/X11R6/lib/X11/fonts");
+   policy->AddDir(rdonly, "/nix/store");
+   policy->AddDir(rdonly, "/run/host/fonts");
+   policy->AddDir(rdonly, "/run/host/user-fonts");

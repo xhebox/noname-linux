@@ -7,12 +7,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"./libpkg"
 	"github.com/pkg/errors"
 	"v.io/x/lib/toposort"
 )
 
-func pkg_deps(name []string, makedep, fdb, installed, needed, user bool) ([]string, error) {
+func pkg_deps(name []string, makedep, fdb, installed, needed, user, excl bool) ([]string, error) {
 	// to avoid duplication quickly
 	m := map[string]bool{}
 	sorter := toposort.Sorter{}
@@ -31,14 +30,14 @@ func pkg_deps(name []string, makedep, fdb, installed, needed, user bool) ([]stri
 			sorter.AddNode(cur)
 
 			if user {
-				pkg, e := libpkg.NewPkgdb(cur, db)
+				pkg, e := NewPkgdb(cur, db)
 				if e == nil && pkg.User {
 					continue
 				}
 			}
 
 			var deps []string
-			pkg, e := libpkg.NewPkgfile(cur, cfg.Ports)
+			pkg, e := NewPkgfile(cur, cfg.Ports)
 			if e != nil {
 				return nil, errors.WithStack(e)
 			}
@@ -57,7 +56,7 @@ func pkg_deps(name []string, makedep, fdb, installed, needed, user bool) ([]stri
 				t := map[string]bool{}
 
 				for v := range db.Keys(nil) {
-					pkgdep, e := libpkg.NewPkgdb(v, db)
+					pkgdep, e := NewPkgdb(v, db)
 					if e != nil {
 						return nil, errors.WithStack(e)
 					}
@@ -103,17 +102,25 @@ func pkg_deps(name []string, makedep, fdb, installed, needed, user bool) ([]stri
 	}
 
 	r := []string{}
+	n := map[string]bool{}
+
+	for _, v := range name {
+		n[v] = true
+	}
 
 	v, _ := sorter.Sort()
 	for _, val := range v {
-		r = append(r, val.(string))
+		str := val.(string)
+		if !excl || !n[str] {
+			r = append(r, str)
+		}
 	}
 
 	log.Debugf("pkg_deps: queried deps%v", r)
 	return r, nil
 }
 
-func pkg_cpfiles(pkg *libpkg.Pkgfile) error {
+func pkg_cpfiles(pkg *Pkgfile) error {
 	fd, e := os.Open(pkg.Tarball)
 	if e != nil {
 		return errors.Wrapf(e, "can not open tarball to extract [%v]", pkg.Tarball)
@@ -186,23 +193,19 @@ func pkg_cpfiles(pkg *libpkg.Pkgfile) error {
 	return nil
 }
 
-func pkg_install(pkgs []string, main []string, nomain, user bool) error {
-	var pkgfiles []*libpkg.Pkgfile
-	var pkgdbs []*libpkg.Pkgdb
-	var footprints [][]libpkg.Fileinfo
-	var rfiles []libpkg.Fileinfo
+func pkg_install(pkgs []string, main []string, user bool) error {
+	var pkgfiles []*Pkgfile
+	var pkgdbs []*Pkgdb
+	var footprints [][]Fileinfo
+	var rfiles []Fileinfo
 	m := map[string]bool{}
 
-	for _, v := range main {
-		m[v] = true
+	for k := range main {
+		m[main[k]] = true
 	}
 
 	for _, pkg := range pkgs {
-		if nomain && m[pkg] {
-			continue
-		}
-
-		pkgfile, e := libpkg.NewPkgfile(pkg, cfg.Ports)
+		pkgfile, e := NewPkgfile(pkg, cfg.Ports)
 		if e != nil {
 			return errors.WithStack(e)
 		}
@@ -235,7 +238,7 @@ func pkg_install(pkgs []string, main []string, nomain, user bool) error {
 		}
 
 		if db.Has(pkgfile.Name) {
-			pkgdb, e := libpkg.NewPkgdb(pkgfile.Name, db)
+			pkgdb, e := NewPkgdb(pkgfile.Name, db)
 			if e != nil {
 				return errors.WithStack(e)
 			}
@@ -257,7 +260,7 @@ func pkg_install(pkgs []string, main []string, nomain, user bool) error {
 			}
 		}
 
-		pkgdbs = append(pkgdbs, &libpkg.Pkgdb{
+		pkgdbs = append(pkgdbs, &Pkgdb{
 			Footprint: footprints[k],
 			Name:      pkgfile.Name,
 			Version:   pkgfile.Version,
@@ -292,21 +295,19 @@ func opt_install(pkgs []string, opts map[harg]bool) error {
 	}
 	defer unlocksys()
 
-	var all []string
-
 	if !opts['d'] {
 		var e error
-		all, e = pkg_deps(pkgs, false, false, !opts['r'], false, false)
+		pkgs, e = pkg_deps(pkgs, false, false, !opts['r'], false, false, false)
 		if e != nil {
 			return errors.Wrapf(e, "can not query deps [%v]", pkgs)
 		}
 	}
 
-	if len(all) > 1 {
-		if !ask("do you really want to install %v\n", all) {
+	if len(pkgs) > 1 {
+		if !ask("do you really want to install %v\n", pkgs) {
 			return nil
 		}
 	}
 
-	return pkg_install(all, pkgs, false, true)
+	return pkg_install(pkgs, pkgs, !opts['z'])
 }

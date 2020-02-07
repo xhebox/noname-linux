@@ -1,0 +1,12 @@
+pattern=["share/pulseaudio"]
+when=["post"]
+operation=["remove", "install"]
+script='''
+if [ -e /bin/systemctl ]; then
+	if systemctl --global is-enabled pulseaudio.socket; then
+		systemctl --global disable pulseaudio.socket
+	else
+		systemctl --global enable pulseaudio.socket
+	fi
+fi
+'''

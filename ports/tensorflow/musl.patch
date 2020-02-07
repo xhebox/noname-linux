@@ -1,0 +1,20 @@
+--- a/third_party/hwloc/workspace.bzl	2019-06-14 01:41:13.000000000 +0800
++++ a/third_party/hwloc/workspace.bzl	2019-06-14 01:41:13.000000000 +0800
+@@ -12,5 +12,6 @@
+         sha256 = "64def246aaa5b3a6e411ce10932a22e2146c3031b735c8f94739534f06ad071c",
+         strip_prefix = "hwloc-2.0.3",
+         build_file = "//third_party/hwloc:BUILD.bazel",
++        patch_file = str(Label("//third_party/hwloc:hwloc.patch")),
+         system_build_file = "//third_party/hwloc:BUILD.system",
+     )
+--- a/tensorflow/core/platform/posix/env.cc	2019-06-14 01:41:13.000000000 +0800
++++ a/tensorflow/core/platform/posix/env.cc	2019-06-14 01:41:13.000000000 +0800
+@@ -129,7 +129,7 @@
+         return true;
+       }
+     }
+-#if defined(__ANDROID__) || defined(__EMSCRIPTEN__)
++#if defined(__ANDROID__) || defined(__EMSCRIPTEN__) || !defined(__GLIBC__)
+     return false;
+ #else
+     char buf[100];

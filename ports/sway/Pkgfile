@@ -1,14 +1,28 @@
-version="1.0"
+version="1.3-rc1"
+nostrip=true
 desc='Tiling Wayland compositor and replacement for the i3 window manager'
-deps=["cairo", "json-c", "pango", "libpcre", "wlroots"]
+deps=["swaybg", "cairo", "json-c", "pango", "libpcre", "wlroots"]
 makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols", "xorgproto"]
 source=[
 	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
+	{url="ime.patch"},
+	{url="size_hints.patch"},
+	{url="text-input.c"},
+	{url="text-input.h"},
 ]
+
+ext='''
+	#cp -a text-input.c sway-$version/sway/input
+	#cp -a text-input.h sway-$version/include/sway/input
+	#patch -p1 -i ../ime.patch
+	cd sway-$version
+	patch -p1 -i ../size_hints.patch
+'''
 
 build='''
   mkdir -p build
-  noname-meson build sway-$version -D werror=false -D b_ndebug=true
+	export CFLAGS="$CFLAGS -g3"
+  noname-meson build sway-$version -Dwerror=false
   ninja -C build
   DESTDIR="$pkgdir" ninja -C build install
 '''

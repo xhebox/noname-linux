@@ -1,11 +1,24 @@
-version="2.8.3"
+version="2.9.2"
 desc="LibreSSL is av ersion of the TLS/crypto stack forked from OpenSSL."
-source=[{url="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"}]
+source=[
+	{url="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"},
+	{url="fail-instead-of-trying-fallback.patch"},
+	{url="getprogname-musl.patch"},
+]
 deps=["musl"]
+
+ext='''
+	cd libressl-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 -i "$srcdir"/$i;;
+		esac
+	done
+'''
 
 build='''
 	cd libressl-$version
-	./configure --prefix= --enable-shared --disable-static 
+	./configure --prefix= --enable-shared
 	make
 	make DESTDIR="$pkgdir" install
 	rm "$pkgdir"/etc/ssl/cert.pem

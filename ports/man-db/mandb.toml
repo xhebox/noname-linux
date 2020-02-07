@@ -2,5 +2,7 @@ pattern=["share/man"]
 noarg=true
 script='''
 mkdir -p /var/cache/man
-mandb -q
+for i in $@; do
+        mandb -q "$i" || true
+done
 '''

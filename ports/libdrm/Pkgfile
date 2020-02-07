@@ -1,4 +1,4 @@
-version="2.4.97"
+version="2.4.100"
 desc="Userspace interface to kernel DRM services"
 makedeps=["libpciaccess"]
 deps=["libpciaccess"]

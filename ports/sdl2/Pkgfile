@@ -1,9 +1,16 @@
-version="2.0.9"
+version="2.0.10"
 desc="A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard (Version 2)"
-makedeps=["libxext", "libxcursor", "libxrender", "libx11", "mesa", "dbus", "pulseaudio", "wayland-protocols"]
-deps=["libxext", "libxcursor", "libxrender", "libx11", "mesa", "dbus", "pulseaudio", "wayland"]
-source=[{name="sdl2-$version.tar.gz", url="http://www.libsdl.org/release/SDL2-${version}.tar.gz"}]
+makedeps=["mesa", "dbus", "pulseaudio", "wayland-protocols"]
+deps=["mesa", "dbus", "pulseaudio", "wayland"]
+source=[
+	{name="sdl2-$version.tar.gz", url="http://www.libsdl.org/release/SDL2-${version}.tar.gz"},
+	{url="pure-wayland.patch"},
+]
 
+ext='''
+	cd SDL2-$version
+	patch -Np1 -i ../pure-wayland.patch
+'''
 
 build='''
 	cd SDL2-$version
@@ -18,10 +25,11 @@ build='''
 		-DNAS=OFF \
 		-DALSA=ON \
 		-DPULSEAUDIO_SHARED=ON \
+		-DVIDEO_X11=OFF \
 		-DVIDEO_WAYLAND=ON \
 		-DRPATH=OFF \
 		-DCLOCK_GETTIME=ON \
 		-DJACK_SHARED=OFF
-	make
+	make -j1 V=1
 	make DESTDIR="$pkgdir" install
 '''

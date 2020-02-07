@@ -1,0 +1,18 @@
+version="7.13.3496"
+desc='OpenGL and OpenGL ES shader front end and validator'
+makedeps=["spirv-tools", "cmake", "ninja"]
+deps=["spirv-tools"]
+source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"}]
+
+build='''
+	cmake glslang-$version -Bbuild \
+      -DCMAKE_INSTALL_PREFIX= \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	cd "${pkgdir}"/lib
+	for lib in *.so; do
+		ln -sf "${lib}" "${lib}.0"
+	done
+'''

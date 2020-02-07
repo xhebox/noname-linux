@@ -15,7 +15,7 @@ index e0a1ee3..465b65a 100644
 --- a/include/llvm/Analysis/TargetLibraryInfo.h
 +++ b/include/llvm/Analysis/TargetLibraryInfo.h
 @@ -18,6 +18,15 @@
- #include "llvm/IR/Module.h"
+ #include "llvm/IR/PassManager.h"
  #include "llvm/Pass.h"
  
 +#undef fopen64
@@ -28,26 +28,26 @@ index e0a1ee3..465b65a 100644
 +#undef tmpfile64
 +
  namespace llvm {
- /// VecDesc - Describes a possible vectorization of a function.
- /// Function 'VectorFnName' is equivalent to 'ScalarFnName' vectorized
+ template <typename T> class ArrayRef;
+ 
 diff --git a/utils/unittest/googletest/src/gtest.cc b/utils/unittest/googletest/src/gtest.cc
 index 5780764..1d548c1 100644
 --- a/utils/unittest/googletest/src/gtest.cc
 +++ b/utils/unittest/googletest/src/gtest.cc
-@@ -120,6 +120,7 @@
+@@ -128,6 +128,7 @@
  
  #if GTEST_CAN_STREAM_RESULTS_
  # include <arpa/inet.h>  // NOLINT
 +# include <sys/socket.h>  // NOLINT
  # include <netdb.h>  // NOLINT
- #endif
- 
+ # include <sys/socket.h>  // NOLINT
+ # include <sys/types.h>  // NOLINT
 -- 
 2.5.1
 
---- llvm-5.0.0.src/lib/Support/Unix/DynamicLibrary.inc.orig
-+++ llvm-5.0.0.src/lib/Support/Unix/DynamicLibrary.inc
-@@ -103,7 +103,7 @@
+--- a/lib/Support/Unix/DynamicLibrary.inc
++++ b/lib/Support/Unix/DynamicLibrary.inc
+@@ -102,7 +102,7 @@ static void *DoSearch(const char* SymbolName) {
  
  // This macro returns the address of a well-known, explicit symbol
  #define EXPLICIT_SYMBOL(SYM) \

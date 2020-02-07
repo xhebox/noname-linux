@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"./libpkg"
 	"github.com/gobwas/glob"
 	"github.com/pkg/errors"
 )
@@ -33,7 +32,7 @@ func opt_query(pkg string, opts map[harg]bool) error {
 		}
 	} else if opts['o'] {
 		for x := range db.Keys(nil) {
-			pkgdb, e := libpkg.NewPkgdb(x, db)
+			pkgdb, e := NewPkgdb(x, db)
 			if e != nil {
 				return errors.Errorf("%v is not installed properly", x)
 			}
@@ -46,7 +45,7 @@ func opt_query(pkg string, opts map[harg]bool) error {
 			}
 		}
 	} else {
-		pkgdb, e := libpkg.NewPkgdb(pkg, db)
+		pkgdb, e := NewPkgdb(pkg, db)
 		if e != nil {
 			return errors.Errorf("%v is not installed properly", pkg)
 		}

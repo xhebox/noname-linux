@@ -1,5 +1,6 @@
 version="5.35"
 deps=["zlib", "musl"]
+makedeps=["zlib", "musl"]
 desc="File type identification utility"
 source=[{url="http://ftp.icm.edu.pl/packages/file/file-$version.tar.gz"}]
 

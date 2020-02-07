@@ -1,0 +1,108 @@
+diff --git a/include/sway/input/seat.h b/include/sway/input/seat.h
+index c963de9b..5d0efa2a 100644
+--- a/include/sway/input/seat.h
++++ b/include/sway/input/seat.h
+@@ -5,6 +5,7 @@
+ #include <wlr/types/wlr_seat.h>
+ #include <wlr/util/edges.h>
+ #include "sway/input/input-manager.h"
++#include "sway/input/text-input.h"
+ 
+ struct sway_seat;
+ 
+@@ -65,6 +66,8 @@ struct sway_seat {
+ 	// If the focused layer is set, views cannot receive keyboard focus
+ 	struct wlr_layer_surface_v1 *focused_layer;
+ 
++	struct roots_input_method_relay im_relay;
++
+ 	// If exclusive_client is set, no other clients will receive input events
+ 	struct wl_client *exclusive_client;
+ 
+diff --git a/sway/input/seat.c b/sway/input/seat.c
+index 12309c1d..99ef9f8c 100644
+--- a/sway/input/seat.c
++++ b/sway/input/seat.c
+@@ -17,6 +17,7 @@
+ #include "sway/input/keyboard.h"
+ #include "sway/input/seat.h"
+ #include "sway/input/switch.h"
++#include "sway/input/text-input.h"
+ #include "sway/ipc-server.h"
+ #include "sway/layers.h"
+ #include "sway/output.h"
+@@ -117,6 +118,7 @@ static void seat_send_focus(struct sway_node *node, struct sway_seat *seat) {
+ 			wlr_pointer_constraints_v1_constraint_for_surface(
+ 				server.pointer_constraints, view->surface, seat->wlr_seat);
+ 		sway_cursor_constrain(seat->cursor, constraint);
++		roots_input_method_relay_set_focus(&seat->im_relay, view->surface);
+ 	}
+ }
+ 
+@@ -481,6 +483,8 @@ struct sway_seat *seat_create(const char *seat_name) {
+ 
+ 	wl_list_init(&seat->devices);
+ 
++	roots_input_method_relay_init(seat, &seat->im_relay);
++
+ 	wl_list_insert(&server.input->seats, &seat->link);
+ 
+ 	seatop_begin_default(seat);
+@@ -587,6 +591,7 @@ static void seat_configure_keyboard(struct sway_seat *seat,
+ 	if (focus && node_is_view(focus)) {
+ 		// force notify reenter to pick up the new configuration
+ 		wlr_seat_keyboard_clear_focus(seat->wlr_seat);
++		roots_input_method_relay_set_focus(&seat->im_relay, NULL);
+ 		wlr_seat_keyboard_notify_enter(seat->wlr_seat,
+ 				focus->sway_container->view->surface, wlr_keyboard->keycodes,
+ 				wlr_keyboard->num_keycodes, &wlr_keyboard->modifiers);
+@@ -832,6 +837,7 @@ static void send_unfocus(struct sway_container *con, void *data) {
+ static void seat_send_unfocus(struct sway_node *node, struct sway_seat *seat) {
+ 	sway_cursor_constrain(seat->cursor, NULL);
+ 	wlr_seat_keyboard_clear_focus(seat->wlr_seat);
++	roots_input_method_relay_set_focus(&seat->im_relay, NULL);
+ 	if (node->type == N_WORKSPACE) {
+ 		workspace_for_each_container(node->sway_workspace, send_unfocus, seat);
+ 	} else {
+diff --git a/sway/meson.build b/sway/meson.build
+index 99dab7e7..7d7230f4 100644
+--- a/sway/meson.build
++++ b/sway/meson.build
+@@ -31,6 +31,7 @@ sway_sources = files(
+ 	'input/cursor.c',
+ 	'input/keyboard.c',
+ 	'input/switch.c',
++	'input/text-input.c',
+ 
+ 	'config/bar.c',
+ 	'config/output.c',
+diff --git a/include/sway/input/input-manager.h b/include/sway/input/input-manager.h
+index 8d4a5b00..2044499d 100644
+--- a/include/sway/input/input-manager.h
++++ b/include/sway/input/input-manager.h
+@@ -20,6 +20,8 @@ struct sway_input_manager {
+ 
+ 	struct wlr_input_inhibit_manager *inhibit;
+ 	struct wlr_virtual_keyboard_manager_v1 *virtual_keyboard;
++	struct wlr_input_method_manager_v2 *input_method;
++	struct wlr_text_input_manager_v3 *text_input;
+ 
+ 	struct wl_listener new_input;
+ 	struct wl_listener inhibit_activate;
+diff --git a/sway/input/input-manager.c b/sway/input/input-manager.c
+index a2a1e274..6e1d94e4 100644
+--- a/sway/input/input-manager.c
++++ b/sway/input/input-manager.c
+@@ -701,6 +701,12 @@ struct sway_input_manager *input_manager_create(struct sway_server *server) {
+ 	wl_signal_add(&input->inhibit->events.deactivate,
+ 			&input->inhibit_deactivate);
+ 
++	input->input_method =
++		wlr_input_method_manager_v2_create(server->wl_display);
++
++	input->text_input = wlr_text_input_manager_v3_create(server->wl_display);
++
++
+ 	return input;
+ }
+ 

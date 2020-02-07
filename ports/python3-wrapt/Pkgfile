@@ -1,0 +1,13 @@
+version="1.11.2"
+deps=["python3"]
+makedeps=["python3-setuptools"]
+desc="A Python module for decorators, wrappers and monkey patching"
+source=[{url="https://github.com/GrahamDumpleton/wrapt/archive/$version.tar.gz"}]
+
+build='''
+	cd wrapt-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

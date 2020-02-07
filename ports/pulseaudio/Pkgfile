@@ -1,33 +1,31 @@
-version="12.2"
+version="13.0"
 desc="A featureful, general-purpose sound server"
 source=[
 	{url="http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$version.tar.xz"},
+	{url="pulseaudio.toml"},
 ]
-makedeps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libxi", "libxtst", "libasyncns", "libxcb", "libsm", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc", "intltool"]
-deps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libxi", "libxtst", "libasyncns", "libxcb", "libsm", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc"]
+makedeps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc"]
+deps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc"]
 
 build='''
-	cd pulseaudio-$version
-	./configure \
-	--prefix=	\
-	--sysconfdir=/etc \
-	--libexecdir=/lib \
-	--localstatedir=/var \
-	--with-udev-rules-dir=/lib/udev/rules.d \
-	--with-database=tdb \
-	--disable-bluez5-ofono-headset \
-	--disable-tcpwrap \
-	--disable-samplerate \
-	--disable-bluez4 \
-	--disable-gtk3 \
-	--disable-default-build-tests \
-	DATADIRNAME=share \
-	--enable-systemd --enable-systemd-journal \
-	--with-bash-completion-dir=/share/bash-completion/completions
+	noname-meson pulseaudio-$version build \
+	-Dman=false \
+	-Dtests=false \
+	-Dgcov=false \
+	-Dudevruelsdir=/lib/udev/rules.d \
+	-Ddatabase=tdb \
+	-Dbluez5-ofono-headset=false \
+	-Dgtk=disabled \
+	-Dgsettings=disabled \
+	-Dsamplerate=disabled \
+	-Dx11=disabled
 
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make
-	make DESTDIR="$pkgdir" install
+
+	meson configure build
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
 	sed -e '/ifexists module-console-kit/,+2d' -i "$pkgdir"/etc/pulse/default.pa
 	sed -s 's/; flat-volumes=yes/flat-volumes=no/g' -i "$pkgdir"/etc/pulse/daemon.conf
+	sed -e '/autospawn/iautospawn = no' -i "$pkgdir"/etc/pulse/client.conf
+	install -Dm644 ../pulseaudio.toml "$pkgdir/${HOOKS#$ROOT}"/pulseaudio.toml
 '''

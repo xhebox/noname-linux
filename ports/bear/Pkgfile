@@ -1,0 +1,18 @@
+version="2.3.13"
+desc="tool to generate compilation database for clang tooling"
+deps=["python3"]
+source=[{url="https://github.com/rizsotto/Bear/archive/$version.tar.gz", name="bear-$version.tar.gz"}]
+
+build='''
+	mkdir -p build
+	cd build
+	cmake \
+		-GNinja \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+		-DCMAKE_BUILD_TYPE=plain \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		../Bear-$version
+	cmake --build .
+	DESTDIR="$pkgdir" cmake --build . -- install
+'''

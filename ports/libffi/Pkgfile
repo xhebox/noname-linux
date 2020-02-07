@@ -1,5 +1,6 @@
 version="3.2.1"
 deps=["musl"]
+makedeps=["musl"]
 desc="Portable Foreign Function Interface Library"
 source=[
 	{url="http://sourceware.org/pub/libffi/libffi-$version.tar.gz"},
@@ -8,7 +9,7 @@ source=[
 
 build='''
 	cd libffi-$version
-	patch -p1 < ../gnu-linux-define.patch
+	patch -p1 -i ../gnu-linux-define.patch
 	./configure --prefix= --disable-static --enable-pax_emutramp
 	make
 	make DESTDIR="$pkgdir" install

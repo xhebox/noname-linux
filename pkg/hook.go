@@ -10,7 +10,6 @@ import (
 	"sort"
 	"strings"
 
-	"./libpkg"
 	"github.com/gobwas/glob"
 	toml "github.com/pelletier/go-toml"
 	"github.com/pkg/errors"
@@ -39,7 +38,7 @@ func (s byString) Less(i, j int) bool {
 	return s[i].Name() < s[j].Name()
 }
 
-func pkg_hook(files []libpkg.Fileinfo, when, opt string) error {
+func pkg_hook(files []Fileinfo, when, opt string) error {
 	log.Debugf("pkg_hook: %s, %s", when, opt)
 
 	if len(files) == 0 {
@@ -95,7 +94,7 @@ func pkg_hook(files []libpkg.Fileinfo, when, opt string) error {
 
 		for _, v := range h.Operation {
 			if v == opt {
-				t1 = true
+				t2 = true
 				break
 			}
 		}

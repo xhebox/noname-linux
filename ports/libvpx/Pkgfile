@@ -1,5 +1,5 @@
-version="1.7.0"
-makedeps=["perl", "yasm"]
+version="1.8.1"
+makedeps=["yasm"]
 deps=["bash"]
 desc="Library for the vp8 codec"
 source=[
@@ -23,14 +23,14 @@ build='''
 		--enable-vp8 \
 		--enable-vp9 \
 		--enable-vp9-highbitdepth \
+		--enable-vp9-temporal-denoising \
 		--enable-runtime-cpu-detect \
 		--enable-shared \
 		--enable-postproc \
 		--enable-pic \
-		--enable-experimental --enable-spatial-svc \
+		--enable-experimental \
 		--disable-install-docs \
-		--disable-install-srcs \
-		--disable-static
+		--disable-install-srcs
 	make
 	make DIST_DIR="$pkgdir" install
 '''

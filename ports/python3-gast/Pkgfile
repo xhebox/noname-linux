@@ -1,0 +1,13 @@
+version="0.2.2"
+deps=["python3"]
+makedeps=["python3-setuptools"]
+desc="AST that abstracts the underlying Python version "
+source=[{url="https://pypi.io/packages/source/g/gast/gast-${version}.tar.gz"}]
+
+build='''
+	cd gast-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

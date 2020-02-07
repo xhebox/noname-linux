@@ -1,11 +1,19 @@
-version="0.8.0"
+version="0.10.0"
 desc="xkbcommon is a library to handle keyboard descriptions, including loading them from disk, parsing them and handling their state"
-makedeps=["libxcb", "meson"]
-deps=["libxcb"]
-source=[{url="http://xkbcommon.org/download/libxkbcommon-$version.tar.xz"}]
+makedeps=["wayland-protocols", "xkeyboard-config"]
+deps=["wayland", "xkeyboard-config"]
+source=[
+	{url="http://xkbcommon.org/download/libxkbcommon-$version.tar.xz"},
+]
+
+ext='''
+	cd libxkbcommon-$version
+'''
 
 build='''
-	noname-meson libxkbcommon-$version build -Denable-wayland=false -Denable-docs=false
+	noname-meson libxkbcommon-$version build -Denable-x11=false -Denable-wayland=true -Denable-docs=false
 	ninja -C build
 	DESTDIR="$pkgdir" ninja -C build install
+	mkdir -p "$pkgdir"/share/xkb
+	mkdir -p "$pkgdir"/share/xkb/locale
 '''

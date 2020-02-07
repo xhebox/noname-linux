@@ -1,0 +1,132 @@
+name="firefox"
+version="72.0.2"
+nostrip=true
+desc="Firefox web browser"
+deps=["alsa-lib", "bzip2", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip"]
+makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip", "wayland-protocols"]
+source=[
+	{url="https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
+	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},
+	{url="stab.h"},
+	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/8e71fa07fe00.patch"},
+	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
+	{url="noname-fonts.patch"},
+	{url="no-x11.patch"},
+	{url="fix-audio.patch"},
+	{url="fix-fortify-inline.patch"},
+	{url="fix-seccomp-bpf.patch"},
+	{url="fix-toolkit.patch"},
+	{url="fix-tools.patch"},
+	{url="mallinfo.patch"},
+	{url="rust_audio-thread-priority.patch"},
+]
+
+ext='''
+	mkdir .cargo
+	cat > .cargo/config << "EOF"
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+EOF
+
+	cd firefox-$version
+	for i in ../*.patch; do
+		patch -p0 -i $i
+	done
+
+	find dom/plugins -type f | xargs sed -i \
+		-e 's/ifdef MOZ_WIDGET_GTK/if 0/g' \
+		-e 's/if MOZ_WIDGET_GTK/if 0/g' \
+		-e 's/if (MOZ_WIDGET_GTK)/if 0/g' \
+		-e 's/!defined(MOZ_WIDGET_GTK)/1/g' \
+		-e 's/defined(MOZ_WIDGET_GTK)/0/g'
+
+	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/audio_thread_priority/.cargo-checksum.json
+
+	cp "$srcdir"/stab.h toolkit/crashreporter/google-breakpad/src/
+
+	rm -rf third_party/rust/x11
+	cat > .mozconfig << END
+ac_add_options --enable-application=browser
+
+ac_add_options --prefix=
+ac_add_options --enable-release
+ac_add_options --enable-optimize="$CFLAGS"
+ac_add_options --enable-rust-simd
+ac_add_options --with-ccache=/bin/ccache
+
+# Branding
+ac_add_options --enable-official-branding
+ac_add_options --enable-update-channel=release
+ac_add_options --with-distribution-id=noname-linux
+
+# System libraries
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
+ac_add_options --with-system-bz2
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-zlib
+ac_add_options --with-system-libevent
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-icu
+ac_add_options --with-system-png
+ac_add_options --enable-system-pixman
+ac_add_options --enable-system-sqlite
+ac_add_options --enable-system-ffi
+
+# Features
+ac_add_options --enable-alsa
+ac_add_options --disable-valgrind
+ac_add_options --disable-jack
+ac_add_options --disable-webrtc
+ac_add_options --disable-gold
+ac_add_options --disable-startup-notification
+ac_add_options --disable-crashreporter
+ac_add_options --disable-tests
+ac_add_options --disable-gconf
+ac_add_options --disable-install-strip
+ac_add_options --disable-strip
+ac_add_options --disable-elf-hack
+ac_add_options --disable-profiling
+ac_add_options --disable-jemalloc
+ac_add_options --disable-updater
+ac_add_options --host=$TARGET
+ac_add_options --target=$TARGET
+ac_add_options --enable-default-toolkit="cairo-gtk3-wayland"
+END
+'''
+
+build='''
+	cd autoconf-2.13
+	./configure --prefix=$srcdir/.a213 --program-suffix=-2.13
+	make
+	make install
+	cd ..
+
+	export CARGO_HOME="$srcdir/.cargo"
+	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
+	cargo install cbindgen
+
+	cd firefox-$version
+	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
+
+	./mach build
+	DESTDIR="$pkgdir" ./mach install
+	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
+	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END
+pref("intl.locale.matchOS", true);
+pref("browser.shell.checkDefaultBrowser", false);
+pref("browser.tabs.remote.autostart", true);
+END
+
+	for i in 16 22 24 32 48 64 128 256; do
+		install -Dm644 browser/branding/official/default$i.png "$pkgdir/share/icons/hicolor/${i}x${i}/apps/$name.png"
+	done
+	install -Dm644 browser/branding/official/content/about-logo.png "$pkgdir/share/icons/hicolor/192x192/apps/firefox.png"
+	install -Dm644 browser/branding/official/content/about-logo@2x.png "$pkgdir/share/icons/hicolor/384x384/apps/firefox.png"
+	ln -srf "$pkgdir"/lib/firefox/firefox "$pkgdir/bin/firefox"
+	rm -rf "$pkgdir"/lib/firefox/firefox-bin
+	ln -srf "$pkgdir/lib/libnssckbi.so" "$pkgdir/lib/firefox/libnssckbi.so"
+'''

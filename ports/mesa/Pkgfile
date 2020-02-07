@@ -1,9 +1,11 @@
-version="19.0.1"
-makedeps=["expat", "libdrm", "xorgproto", "libxshmfence", "libxcb", "libx11", "libxfixes", "libxext", "libxdamage", "libxxf86vm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libvdpau", "libva", "libclc", "python", "libxrandr", "wayland-protocols"]
-deps=["expat", "libdrm", "libxshmfence", "libxcb", "libx11", "libxfixes", "libxext", "libxdamage", "libxxf86vm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libvdpau", "libva", "libclc", "libxrandr", "wayland"]
+version="19.3.3"
+nostrip=true
+makedeps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libva", "libclc", "python", "wayland-protocols"]
+deps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libva", "libclc", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://mesa.freedesktop.org/archive/mesa-$version.tar.xz"},
+	{url="add-use-elf-tls.patch"},
 	{url="musl.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
@@ -13,19 +15,17 @@ ext='''
 	cd mesa-$version
 	for i in $source; do
 		case $i in
-		musl*patch) patch -p0 -i "$srcdir"/$i ;;
-		revert*patch) patch -Np1 -i "$srcdir"/$i ;;
+		add-*patch|musl*patch) patch -p0 -i "$srcdir"/$i ;;
 		*patch)	patch -Np1 -i "$srcdir"/$i ;;
 		esac
 	done
-	sed -i '/GLX_USE_TLS/d' meson.build
 '''
 
 build='''
 	noname-meson mesa-$version build \
 		-D b_lto=false \
 		-D b_ndebug=true \
-		-D platforms=x11,wayland,drm,surfaceless \
+		-D platforms=wayland,drm,surfaceless \
 		-D dri-drivers=i915,i965,r100,r200,nouveau \
 		-D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast \
 		-D vulkan-drivers=amd,intel \
@@ -34,16 +34,18 @@ build='''
 		-D egl=true \
 		-D gallium-extra-hud=true \
 		-D gallium-nine=true \
-		-D gallium-omx=bellagio \
+		-D gallium-omx=disabled \
 		-D gallium-opencl=icd \
 		-D gallium-va=true \
-		-D gallium-vdpau=true \
+		-D gallium-vdpau=false \
 		-D gallium-xa=true \
 		-D gallium-xvmc=false \
 		-D gbm=true \
+		-D use-elf-tls=false \
 		-D gles1=true \
 		-D gles2=true \
-		-D glx=dri \
+		-D glx=disabled \
+		-D xlib-lease=false \
 		-D llvm=true \
 		-D lmsensors=true \
 		-D osmesa=gallium \

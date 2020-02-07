@@ -1,0 +1,19 @@
+--- sway-1.3-rc1/sway/desktop/xwayland.c	2019-12-31 23:33:11.000000000 +0800
++++ sway-1.3-rc1/sway/desktop/xwayland.c	2019-12-31 23:33:11.000000000 +0800
+@@ -298,10 +298,12 @@
+ 		double *max_width, double *min_height, double *max_height) {
+ 	struct wlr_xwayland_surface *surface = view->wlr_xwayland_surface;
+ 	struct wlr_xwayland_surface_size_hints *size_hints = surface->size_hints;
+-	*min_width = size_hints->min_width > 0 ? size_hints->min_width : DBL_MIN;
+-	*max_width = size_hints->max_width > 0 ? size_hints->max_width : DBL_MAX;
+-	*min_height = size_hints->min_height > 0 ? size_hints->min_height : DBL_MIN;
+-	*max_height = size_hints->max_height > 0 ? size_hints->max_height : DBL_MAX;
++	if (size_hints != NULL) {
++		*min_width = size_hints->min_width > 0 ? size_hints->min_width : DBL_MIN;
++		*max_width = size_hints->max_width > 0 ? size_hints->max_width : DBL_MAX;
++		*min_height = size_hints->min_height > 0 ? size_hints->min_height : DBL_MIN;
++		*max_height = size_hints->max_height > 0 ? size_hints->max_height : DBL_MAX;
++	}
+ }
+ 
+ static const struct sway_view_impl view_impl = {

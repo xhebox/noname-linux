@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"./libpkg"
 	"github.com/pkg/errors"
 )
 
@@ -20,7 +19,7 @@ func pkg_build(name string, opts map[harg]bool) error {
 		}
 	}
 
-	pkg, e := libpkg.NewPkgfile(name, cfg.Ports)
+	pkg, e := NewPkgfile(name, cfg.Ports)
 	if e != nil {
 		return errors.WithStack(e)
 	}
@@ -200,13 +199,13 @@ func opt_build(pkg string, opts map[harg]bool) error {
 
 	if !opts['d'] {
 		var e error
-		makedeps, e = pkg_deps([]string{pkg}, true, false, true, false, false)
+		makedeps, e = pkg_deps([]string{pkg}, true, false, true, false, false, true)
 		if e != nil {
 			return errors.Wrapf(e, "can not query deps of %v", pkg)
 		}
 	}
 
-	if e := pkg_install(makedeps, []string{pkg}, true, true); e != nil {
+	if e := pkg_install(makedeps, []string{}, false); e != nil {
 		return errors.Wrapf(e, "can not install %v", pkg)
 	}
 

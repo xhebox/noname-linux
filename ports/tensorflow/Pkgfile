@@ -1,0 +1,79 @@
+version="2.0.0-beta1"
+deps=["python3-numpy", "python3-termcolor", "python3-absl", "python3-astor", "python3-gast", "python3-wrapt", "python3-six", "protobuf", "python3-keras-preprocessing", "python3-keras-applications", "c-ares", "curl", "icu"]
+makedeps=["bazel", "python3-setuptools", "python3-wheel", "python3-numpy", "python3-keras-preprocessing", "c-ares", "curl", "icu"]
+source=[
+	{url="https://github.com/tensorflow/tensorflow/archive/v$version.tar.gz"},
+	{url="musl.patch"},
+	{url="hwloc.patch"},
+]
+
+build='''
+	pyver=$(python3 -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))')
+	export PYTHON_BIN_PATH="$(which python3)"
+	export PYTHON_LIB_PATH="$(python3 -c 'from distutils.sysconfig import *; print(get_python_lib())')"
+	export USE_DEFAULT_PYTHON_LIB_PATH=1
+	export TF_NEED_JEMALLOC=0
+	export TF_NEED_AWS=0
+	export TF_ENABLE_XLA=0
+	export TF_NEED_OPENCL_SYCL=0
+	export TF_NEED_OPENCL=0
+	export TF_NEED_COMPUTECPP=0
+	export TF_NEED_ROCM=0
+	export TF_NEED_MPI=0
+	export TF_SET_ANDROID_WORKSPACE=0
+	export TF_NEED_CUDA=0
+	export TF_DOWNLOAD_CLANG=0
+	export TF_CUDA_CLANG=0
+	export TF_NEED_TENSORRT=0
+	export TF_SYSTEM_LIBS="curl icu"
+	export CC_OPT_FLAGS="-march=x86-64"
+	export TF_IGNORE_MAX_BAZEL_VERSION=1
+
+	cd tensorflow-$version
+
+	patch -p1 -i ../musl.patch
+	cp ../hwloc.patch third_party/hwloc
+
+	sed -i -e '/define TF_GENERATE_BACKTRACE/d' tensorflow/core/platform/default/stacktrace.h
+	sed -i -e '/define TF_GENERATE_STACKTRACE/d' tensorflow/core/platform/stacktrace_handler.cc
+	./configure
+
+	bazel build --config=opt \
+		--incompatible_no_support_tools_in_action_inputs=false \
+		//tensorflow:libtensorflow.so \
+		//tensorflow:libtensorflow_cc.so \
+		//tensorflow:install_headers \
+		//tensorflow/tools/pip_package:build_pip_package
+
+	bazel shutdown
+
+	bazel-bin/tensorflow/tools/pip_package/build_pip_package "${srcdir}"/tmpopt
+
+	install -d "${pkgdir}"/include/tensorflow
+	cp -r bazel-genfiles/tensorflow/include/* "${pkgdir}"/include/tensorflow/
+
+	# install python-version to get all extra headers
+	WHEEL_PACKAGE=$(find "${srcdir}"/$1 -name "tensor*.whl")
+	pip3 install --ignore-installed --upgrade --prefix="${pkgdir}" $WHEEL_PACKAGE --no-dependencies
+
+	# move extra headers to correct location
+	find "${pkgdir}/lib/python$pyver"/site-packages/tensorflow/include/ -maxdepth 1 -mindepth 1 -type d | while read _folder; do
+		cp -nr "${_folder}" "${pkgdir}"/include/tensorflow/
+	done
+
+	# create symlinks to headers
+	find "${pkgdir}/lib/python$pyver"/site-packages/tensorflow/include/ -maxdepth 1 -mindepth 1 -type d | while read _folder; do
+		rm -rf "${_folder}"
+		_smlink="$(basename "${_folder}")"
+		ln -s /include/tensorflow/"${_smlink}" "${pkgdir}/lib/python${pyver}"/site-packages/tensorflow/include/
+	done
+
+	# install the rest of tensorflow
+	tensorflow/c/generate-pc.sh --prefix=/ --version=${version}
+	sed -e 's/\/include/\/include\/tensorflow/' -i tensorflow.pc
+	install -Dm644 tensorflow.pc "${pkgdir}"/lib/pkgconfig/tensorflow.pc
+	install -Dm755 bazel-bin/tensorflow/libtensorflow.so "${pkgdir}"/lib/libtensorflow.so
+	install -Dm755 bazel-bin/tensorflow/libtensorflow_cc.so "${pkgdir}"/lib/libtensorflow_cc.so
+	install -Dm755 bazel-bin/tensorflow/libtensorflow_framework.so "${pkgdir}"/lib/libtensorflow_framework.so
+	install -Dm644 tensorflow/c/c_api.h "${pkgdir}"/include/tensorflow/tensorflow/c/c_api.h
+'''

@@ -1,0 +1,28 @@
+version="1.1.119"
+desc="Vulkan header files"
+makedeps=["cmake", "spirv-headers", "vulkan-headers"]
+deps=["spirv-tools"]
+source=[{url="https://github.com/KhronosGroup/Vulkan-ValidationLayers/archive/v${version}.tar.gz"}]
+
+build='''
+	cd Vulkan-ValidationLayers-$version
+	rm -rf build ; mkdir build ; cd build
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+		-DCMAKE_INSTALL_DATADIR=/share \
+		-DCMAKE_INSTALL_INCLUDEDIR="/include/vulkan/" \
+		-DBUILD_LAYER_SUPPORT_FILES=ON \
+		-DGLSLANG_INSTALL_DIR=/ \
+		-DCMAKE_SKIP_RPATH=True \
+		-DBUILD_TESTS=Off \
+		-DBUILD_WSI_XCB_SUPPORT=Off \
+		-DBUILD_WSI_XLIB_SUPPORT=Off \
+		-DBUILD_WSI_WAYLAND_SUPPORT=Off \
+		-DCMAKE_BUILD_TYPE=Release \
+		..
+
+	cmake --build .
+	DESTDIR="$pkgdir" cmake --build . --target install
+'''

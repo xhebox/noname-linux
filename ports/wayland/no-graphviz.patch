@@ -1,0 +1,26 @@
+--- a/configure.ac	2018-08-25 02:04:36.000000000 +0800
++++ a/configure.ac	2018-08-25 02:04:36.000000000 +0800
+@@ -159,17 +159,10 @@
+ 		AC_MSG_ERROR([Documentation build requested but xmlto not found. Install xmlto or disable the documentation using --disable-documentation])
+ 	fi
+ 
+-	AC_PATH_PROG(DOT, dot)
++	AC_PATH_PROG(DOT, true)
+ 	if test "x$DOT" = "x"; then
+ 		AC_MSG_ERROR([Documentation build requested but graphviz's dot not found. Install graphviz or disable the documentation using --disable-documentation])
+ 	fi
+-	AC_MSG_CHECKING([for compatible dot version])
+-	dot_version=`$DOT -V 2>&1|$GREP -o ['[0-9]*\.[0-9]*\.[0-9]*']`
+-	AS_VERSION_COMPARE([$dot_version], [2.26.0],
+-	                   [AC_MSG_RESULT([no])
+-	                    AC_MSG_ERROR([Graphviz dot $dot_version too old. Graphviz 2.26+ required for documentation build. Install required graphviz version or disable the documentation using --disable-documentation])],
+-	                   [AC_MSG_RESULT([yes])],
+-	                   [AC_MSG_RESULT([yes])])
+ 
+ 	AC_CONFIG_FILES([
+ 	doc/doxygen/wayland.doxygen
+--- a/doc/Makefile.am	2018-08-25 02:04:36.000000000 +0800
++++ b/doc/Makefile.am	2018-08-25 02:04:36.000000000 +0800
+@@ -1 +1 @@
+-SUBDIRS = doxygen publican man
++SUBDIRS = doxygen man

@@ -38,7 +38,7 @@ build='''
 
 	ln -sr "$pkgdir"/etc/ssl/certs/ca-certificates.crt "$pkgdir"/etc/ssl/certs.pem
 
-	install -Dm755 ../ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
+	install -Dm644 ../ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
 
 	cd "${pkgdir}"/share/ca-certificates
 	find . -name '*.crt' | sort | cut -b3- > "${pkgdir}"/etc/ca-certificates.conf

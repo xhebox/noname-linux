@@ -1,0 +1,17 @@
+version="1.0.8"
+makedeps=["python-setuptools", "python3-numpy"]
+deps=["python3-numpy"]
+source=[
+	{url="https://files.pythonhosted.org/packages/source/K/Keras_Applications/Keras_Applications-${version}.tar.gz"},
+]
+desc="Applications module of the Keras deep learning librare"
+
+build='''
+	cd Keras_Applications-$version
+
+	/bin/python3 setup.py \
+		install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

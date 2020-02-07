@@ -1,0 +1,10 @@
+--- a/cmake/sdlchecks.cmake	2019-07-25 12:32:36.000000000 +0800
++++ b/cmake/sdlchecks.cmake	2019-07-25 12:32:36.000000000 +0800
+@@ -655,6 +655,7 @@
+       endif()
+ 
+       set(SDL_VIDEO_DRIVER_WAYLAND 1)
++      set(SDL_VIDEO_OPENGL_EGL 1)
+     endif()
+   endif()
+ endmacro()

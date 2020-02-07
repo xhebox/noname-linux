@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"./libpkg"
 	"github.com/gobwas/glob"
 	"github.com/pkg/errors"
 	"v.io/x/lib/toposort"
@@ -30,7 +29,7 @@ func pkg_required(name []string) ([]string, error) {
 	}
 
 	for v := range db.Keys(nil) {
-		pkgdb, e := libpkg.NewPkgdb(v, db)
+		pkgdb, e := NewPkgdb(v, db)
 		if e != nil {
 			return nil, errors.WithStack(e)
 		}
@@ -89,7 +88,7 @@ func pkg_required(name []string) ([]string, error) {
 	return r, nil
 }
 
-func pkg_rmfiles(files []libpkg.Fileinfo, baks []string) error {
+func pkg_rmfiles(files []Fileinfo, baks []string) error {
 	for _, x := range files {
 		if x.Type != tar.TypeDir {
 			os.Remove(filepath.Join(cfg.ROOT, x.Path))
@@ -117,11 +116,11 @@ func pkg_remove(pkgs []string) error {
 		return nil
 	}
 
-	var rfiles []libpkg.Fileinfo
+	var rfiles []Fileinfo
 	var rbaks []string
 
 	for _, pkg := range pkgs {
-		pkgdb, e := libpkg.NewPkgdb(pkg, db)
+		pkgdb, e := NewPkgdb(pkg, db)
 		if e != nil {
 			return errors.WithStack(e)
 		}
@@ -145,7 +144,7 @@ func pkg_remove(pkgs []string) error {
 	log.Noticef("remove%v: removed files", pkgs)
 
 	for _, pkg := range pkgs {
-		if e := libpkg.Erase(pkg, db); e != nil {
+		if e := Erase(pkg, db); e != nil {
 			return errors.WithStack(e)
 		}
 	}
@@ -182,12 +181,12 @@ func opt_rmnoneed(pattern string) error {
 	}
 	defer unlocksys()
 
-	var pkgdbs []*libpkg.Pkgdb
+	var pkgdbs []*Pkgdb
 
 	m := map[string][]string{}
 
 	for v := range db.Keys(nil) {
-		pkgdb, e := libpkg.NewPkgdb(v, db)
+		pkgdb, e := NewPkgdb(v, db)
 		if e != nil {
 			return errors.WithStack(e)
 		}

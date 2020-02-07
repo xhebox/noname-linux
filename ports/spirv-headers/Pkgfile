@@ -1,0 +1,14 @@
+version="1.5.1.corrected"
+desc="SPIR-V headers"
+source=[
+	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/${version}.tar.gz"},
+]
+
+build='''
+	cd SPIRV-Headers-$version
+	install -dm755 "$pkgdir"/include/spirv/unified1
+	ln -srf "$pkgdir"/include/spirv/unified1 "$pkgdir"/include/SPIRV
+	install -m644 include/spirv/unified1/*.h "$pkgdir"/include/spirv/unified1/
+	install -m644 include/spirv/unified1/*.hpp "$pkgdir"/include/spirv/unified1/
+	install -m644 include/spirv/unified1/*.hpp11 "$pkgdir"/include/spirv/unified1/
+'''

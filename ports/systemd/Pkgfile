@@ -1,13 +1,14 @@
 version="240"
 desc="system and service manager"
 nostrip=true
-makedeps=["acl", "cryptsetup", "docbook-xsl", "gperf", "lz4", "xz", "pam", "elfutils", "intltool", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
-deps=["acl", "cryptsetup", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+makedeps=["acl", "docbook-xsl", "gperf", "lz4", "xz", "pam", "elfutils", "intltool", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
 	{url="musl.patch"},
 	{url="0017-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
 	{url="musl_test.patch"},
+	{url="poweroff.patch"},
 	{
 		name="0001-Use-Arch-Linux-device-access-groups.patch",
 		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
@@ -51,7 +52,9 @@ build='''
 	-Dnss-myhostname=false \
 	-Dnss-mymachines=false \
 	-Dnss-systemd=false \
+	-Dresolve=false \
 	-Dlz4=true \
+	-Dpolkit=false \
 	-Ddbuspolicydir=/share/dbus-1/system.d \
 	-Ddefault-hierarchy=hybrid \
 	-Ddefault-locale=C \

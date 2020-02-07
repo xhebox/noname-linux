@@ -1,0 +1,13 @@
+version="1.1.0"
+deps=["musl"]
+makedeps=["cmake"]
+desc="A fast JSON parser/generator for C++ with both SAX/DOM style API"
+source=[{url="https://github.com/miloyip/rapidjson/archive/v$version.tar.gz"}]
+
+build='''
+	cd rapidjson-$version
+	find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i
+	cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

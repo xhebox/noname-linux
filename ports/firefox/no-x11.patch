@@ -1,0 +1,2236 @@
+--- widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
+@@ -4,4 +4,4 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-DIRS += ['stub', 'gtk2', 'gtk3']
++DIRS += ['stub', 'gtk3']
+
+--- toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
++++ toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
+@@ -265,9 +265,6 @@
+ def toolkit_gtk(toolkit):
+     return toolkit == 'gtk'
+ 
+-set_config('MOZ_X11', True, when=toolkit_gtk)
+-set_define('MOZ_X11', True, when=toolkit_gtk)
+-add_old_configure_assignment('MOZ_X11', True, when=toolkit_gtk)
+ 
+ # Wayland support
+ # ==============================================================
+--- old-configure.in	2020-01-18 05:34:42.000000000 +0800
++++ old-configure.in	2020-01-18 05:34:42.000000000 +0800
+@@ -1773,16 +1773,7 @@
+     AC_DEFINE_UNQUOTED(GDK_VERSION_MAX_ALLOWED,$GDK_VERSION_MAX_ALLOWED)
+     GLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_32
+   fi
+-  if test "$MOZ_ENABLE_GTK"; then
+-    if test "$MOZ_X11"; then
+-      GDK_PACKAGES=gdk-x11-2.0
+-    fi
+-    AC_DEFINE_UNQUOTED(GLIB_VERSION_MIN_REQUIRED,$GLIB_VERSION_MIN_REQUIRED)
+-    AC_DEFINE_UNQUOTED(GLIB_VERSION_MAX_ALLOWED,$GLIB_VERSION_MAX_ALLOWED)
+-
+-    PKG_CHECK_MODULES(MOZ_GTK2, gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 $GDK_PACKAGES)
+-    MOZ_GTK2_CFLAGS="-I${_topsrcdir}/widget/gtk/compat $MOZ_GTK2_CFLAGS"
+-  fi
+ fi # COMPILE_ENVIRONMENT
++PS_SURFACE_FEATURE="#define CAIRO_HAS_PS_SURFACE 1"
+ 
+ AC_SUBST(MOZ_FS_LAYOUT)
+--- dom/moz.build	2020-01-18 05:34:16.000000000 +0800
++++ dom/moz.build	2020-01-18 05:34:16.000000000 +0800
+@@ -118,7 +118,7 @@
+     'imptests',
+ ]
+ 
+-if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('gtk', 'cocoa', 'windows'):
++if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('cocoa', 'windows'):
+     TEST_DIRS += ['plugins/test']
+ 
+ SPHINX_TREES['/dom'] = 'docs'
+--- media/ffvpx/config_unix64.h	2020-01-18 05:34:42.000000000 +0800
++++ media/ffvpx/config_unix64.h	2020-01-18 05:34:42.000000000 +0800
+@@ -213,7 +213,9 @@
+ #define HAVE_ES2_GL_H 0
+ #define HAVE_GSM_H 0
+ #define HAVE_IO_H 0
++#ifndef HAVE_LINUX_PERF_EVENT_H
+ #define HAVE_LINUX_PERF_EVENT_H 0
++#endif
+ #define HAVE_MACHINE_IOCTL_BT848_H 0
+ #define HAVE_MACHINE_IOCTL_METEOR_H 0
+ #define HAVE_OPENCV2_CORE_CORE_C_H 0
+--- dom/plugins/ipc/PluginMessageUtils.h	2020-01-30 23:08:26.832756794 +0800
++++ dom/plugins/ipc/PluginMessageUtils.h	2020-01-30 23:08:26.832756794 +0800
+@@ -118,7 +118,7 @@
+ #elif defined(XP_DARWIN) || defined(ANDROID)
+ typedef intptr_t NativeWindowHandle;  // never actually used, will always be 0
+ #else
+-#  error Need NativeWindowHandle for this platform
++typedef intptr_t NativeWindowHandle;
+ #endif
+ 
+ #ifdef XP_WIN
+--- gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
++++ gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
+@@ -15,6 +15,8 @@
+ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
+     if CONFIG['MOZ_EGL_XRENDER_COMPOSITE']:
+         gl_provider = 'EGL'
++    elif CONFIG['MOZ_WAYLAND']:
++        gl_provider = 'EGL'
+     else:
+         gl_provider = 'EGL'
+ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'android':
+ 
+--- gfx/gl/GLContextProviderWayland.cpp	2020-01-18 05:34:21.000000000 +0800
++++ gfx/gl/GLContextProviderWayland.cpp	2020-01-18 05:34:21.000000000 +0800
+@@ -5,8 +5,10 @@
+ 
+ #ifdef MOZ_WIDGET_GTK
+ #  include <gdk/gdk.h>
++#ifdef MOZ_X11
+ #  include <gdk/gdkx.h>
+ #endif
++#endif
+ 
+ #include "GLContextProvider.h"
+ 
+@@ -16,69 +16,89 @@
+ using namespace mozilla::gfx;
+ using namespace mozilla::widget;
+ 
++#ifdef MOZ_X11
+ static class GLContextProviderGLX sGLContextProviderGLX;
++#endif
+ static class GLContextProviderEGL sGLContextProviderEGL;
+ 
+ already_AddRefed<GLContext> GLContextProviderWayland::CreateWrappingExisting(
+     void* aContext, void* aSurface) {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     return sGLContextProviderGLX.CreateWrappingExisting(aContext, aSurface);
+-  } else {
++  }
++#endif
++  {
+     return sGLContextProviderEGL.CreateWrappingExisting(aContext, aSurface);
+   }
+ }
+ 
+ already_AddRefed<GLContext> GLContextProviderWayland::CreateForCompositorWidget(
+     CompositorWidget* aCompositorWidget, bool aWebRender,
+     bool aForceAccelerated) {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     return sGLContextProviderGLX.CreateForCompositorWidget(
+         aCompositorWidget, aWebRender, aForceAccelerated);
+-  } else {
++  }
++#endif
++  {
+     return sGLContextProviderEGL.CreateForCompositorWidget(
+         aCompositorWidget, aWebRender, aForceAccelerated);
+   }
+ }
+ 
+ /*static*/
+ already_AddRefed<GLContext> GLContextProviderWayland::CreateHeadless(
+     CreateContextFlags flags, nsACString* const out_failureId) {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     return sGLContextProviderGLX.CreateHeadless(flags, out_failureId);
+-  } else {
++  }
++#endif
++  {
+     return sGLContextProviderEGL.CreateHeadless(flags, out_failureId);
+   }
+ }
+ 
+ /*static*/
+ already_AddRefed<GLContext> GLContextProviderWayland::CreateOffscreen(
+     const IntSize& size, const SurfaceCaps& minCaps, CreateContextFlags flags,
+     nsACString* const out_failureId) {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     return sGLContextProviderGLX.CreateOffscreen(size, minCaps, flags,
+                                                  out_failureId);
+-  } else {
++  }
++#endif
++  {
+     return sGLContextProviderEGL.CreateOffscreen(size, minCaps, flags,
+                                                  out_failureId);
+   }
+ }
+ 
+ /*static*/
+ GLContext* GLContextProviderWayland::GetGlobalContext() {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     return sGLContextProviderGLX.GetGlobalContext();
+-  } else {
++  }
++#endif
++  {
+     return sGLContextProviderEGL.GetGlobalContext();
+   }
+ }
+ 
+ /*static*/
+ void GLContextProviderWayland::Shutdown() {
++#ifdef MOZ_X11
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     sGLContextProviderGLX.Shutdown();
+-  } else {
++  }
++#endif
++  {
+     sGLContextProviderEGL.Shutdown();
+   }
+ }
+ 
+ } /* namespace gl */
+--- widget/gtk/moz.build	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/moz.build	2020-01-18 05:35:31.000000000 +0800
+@@ -57,20 +57,20 @@
+     'WaylandVsyncSource.cpp', # conflicts with X11 headers
+ ]
+ 
++UNIFIED_SOURCES += [
++    'CompositorWidgetChild.cpp',
++    'CompositorWidgetParent.cpp',
++    'GtkCompositorWidget.cpp',
++    'InProcessGtkCompositorWidget.cpp',
++    'nsIdleServiceGTK.cpp',
++]
++EXPORTS.mozilla.widget += [
++    'CompositorWidgetChild.h',
++    'CompositorWidgetParent.h',
++    'GtkCompositorWidget.h',
++    'InProcessGtkCompositorWidget.h',
++]
++
+-if CONFIG['MOZ_X11']:
+-    UNIFIED_SOURCES += [
+-        'CompositorWidgetChild.cpp',
+-        'CompositorWidgetParent.cpp',
+-        'GtkCompositorWidget.cpp',
+-        'InProcessGtkCompositorWidget.cpp',
+-        'nsIdleServiceGTK.cpp',
+-    ]
+-    EXPORTS.mozilla.widget += [
+-        'CompositorWidgetChild.h',
+-        'CompositorWidgetParent.h',
+-        'GtkCompositorWidget.h',
+-        'InProcessGtkCompositorWidget.h',
+-    ]
+ 
+ if CONFIG['NS_PRINTING']:
+     UNIFIED_SOURCES += [
+@@ -82,19 +85,22 @@
+         'nsPSPrinters.cpp',
+     ]
+ 
++UNIFIED_SOURCES += [
++    'nsClipboard.cpp',
++    'nsDragService.cpp',
++    'WindowSurfaceProvider.cpp',
++]
++EXPORTS.mozilla.widget += [
++    'WindowSurfaceProvider.h',
++]
++
+ if CONFIG['MOZ_X11']:
+     UNIFIED_SOURCES += [
+-        'nsClipboard.cpp',
+         'nsClipboardX11.cpp',
+-        'nsDragService.cpp',
+-        'WindowSurfaceProvider.cpp',
+         'WindowSurfaceX11.cpp',
+         'WindowSurfaceX11Image.cpp',
+         'WindowSurfaceXRender.cpp',
+     ]
+-    EXPORTS.mozilla.widget += [
+-        'WindowSurfaceProvider.h',
+-    ]
+ 
+ if CONFIG['MOZ_WAYLAND']:
+     UNIFIED_SOURCES += [
+@@ -138,7 +138,7 @@
+     '/widget/headless',
+ ]
+ 
+-if CONFIG['MOZ_X11']:
++if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
+     LOCAL_INCLUDES += [
+         '/widget/x11',
+     ]
+--- gfx/thebes/gfxPlatformGtk.cpp	2020-01-18 05:34:25.000000000 +0800
++++ gfx/thebes/gfxPlatformGtk.cpp	2020-01-18 05:34:25.000000000 +0800
+@@ -52,13 +52,15 @@
+ #    undef Status
+ #  endif
+ 
++
++#endif /* MOZ_X11 */
++
+ #  ifdef MOZ_WAYLAND
++#  include <gdk/gdk.h>
+ #    include <gdk/gdkwayland.h>
+ #    include "mozilla/widget/nsWaylandDisplay.h"
+ #  endif
+ 
+-#endif /* MOZ_X11 */
+-
+ #include <fontconfig/fontconfig.h>
+ 
+ #include "nsMathUtils.h"
+@@ -120,9 +120,11 @@
+ }
+ 
+ void gfxPlatformGtk::FlushContentDrawing() {
++#ifdef MOZ_X11
+   if (gfxVars::UseXRender()) {
+     XFlush(DefaultXDisplay());
+   }
++#endif
+ }
+ 
+ void gfxPlatformGtk::InitPlatformGPUProcessPrefs() {
+--- gfx/layers/AnimationHelper.h	2020-01-18 05:34:22.000000000 +0800
++++ gfx/layers/AnimationHelper.h	2020-01-18 05:34:22.000000000 +0800
+@@ -7,6 +7,7 @@
+ #ifndef mozilla_layers_AnimationHelper_h
+ #define mozilla_layers_AnimationHelper_h
+ 
++#include "X11UndefineNone.h"
+ #include "mozilla/dom/Nullable.h"
+ #include "mozilla/ComputedTimingFunction.h"    // for ComputedTimingFunction
+ #include "mozilla/layers/LayersMessages.h"     // for TransformData, etc
+@@ -14,7 +15,6 @@
+ #include "mozilla/TimeStamp.h"                 // for TimeStamp
+ #include "mozilla/TimingParams.h"
+ #include "mozilla/Variant.h"
+-#include "X11UndefineNone.h"
+ 
+ namespace mozilla {
+ struct AnimationValue;
+--- gfx/layers/ipc/CompositorBridgeParent.cpp	2020-01-18 05:34:21.000000000 +0800
++++ gfx/layers/ipc/CompositorBridgeParent.cpp	2020-01-18 05:34:21.000000000 +0800
+@@ -71,9 +71,9 @@
+ #include "mozilla/PerfStats.h"
+ #include "mozilla/PodOperations.h"
+ #include "mozilla/Telemetry.h"
+-#ifdef MOZ_WIDGET_GTK
++#if defined(MOZ_WIDGET_GTK) && defined(MOZ_X11)
+ #  include "basic/X11BasicCompositor.h"  // for X11BasicCompositor
+ #endif
+ #include "nsCOMPtr.h"         // for already_AddRefed
+ #include "nsDebug.h"          // for NS_ASSERTION, etc
+ #include "nsISupportsImpl.h"  // for MOZ_COUNT_CTOR, etc
+@@ -1513,11 +1510,11 @@
+           new CompositorOGL(this, mWidget, mEGLSurfaceSize.width,
+                             mEGLSurfaceSize.height, mUseExternalSurfaceSize);
+     } else if (aBackendHints[i] == LayersBackend::LAYERS_BASIC) {
+-#ifdef MOZ_WIDGET_GTK
++#if defined(MOZ_WIDGET_GTK) && defined(MOZ_X11)
+       if (gfxVars::UseXRender()) {
+         compositor = new X11BasicCompositor(this, mWidget);
+       } else
+ #endif
+       {
+         compositor = new BasicCompositor(this, mWidget);
+       }
+--- gfx/thebes/gfxPlatformGtk.cpp	2020-02-03 16:53:43.266943077 +0800
++++ gfx/thebes/gfxPlatformGtk.cpp	2020-02-03 16:53:43.266943077 +0800
+@@ -83,9 +83,7 @@
+   }
+ 
+   mMaxGenericSubstitutions = UNINITIALIZED_VALUE;
+-  mIsX11Display = gfxPlatform::IsHeadless()
+-                      ? false
+-                      : GDK_IS_X11_DISPLAY(gdk_display_get_default());
++  mIsX11Display = false;
+ #ifdef MOZ_X11
+   if (mIsX11Display && XRE_IsParentProcess() &&
+       mozilla::Preferences::GetBool("gfx.xrender.enabled")) {
+--- gfx/webrender_bindings/RenderThread.cpp	2020-01-18 05:34:22.000000000 +0800
++++ gfx/webrender_bindings/RenderThread.cpp	2020-01-18 05:34:22.000000000 +0800
+@@ -978,9 +978,7 @@
+ #if defined(MOZ_WIDGET_ANDROID)
+   return CreateGLContextEGL();
+ #elif defined(MOZ_WAYLAND)
+-  if (!GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+-    return CreateGLContextEGL();
+-  }
++  return CreateGLContextEGL();
+ #endif
+ 
+ #ifdef XP_MACOSX
+--- dom/plugins/ipc/PluginInstanceChild.cpp	2020-02-03 18:08:50.357034557 +0800
++++ dom/plugins/ipc/PluginInstanceChild.cpp	2020-02-03 18:08:50.357034557 +0800
+@@ -1251,8 +1251,6 @@
+   // TODO: Need Android impl
+ #elif defined(MOZ_WIDGET_UIKIT)
+   // Don't care
+-#else
+-#  error Implement me for your OS
+ #endif
+ 
+   return IPC_OK();
+--- dom/plugins/ipc/PluginInstanceParent.cpp	2020-02-03 18:54:33.407636895 +0800
++++ dom/plugins/ipc/PluginInstanceParent.cpp	2020-02-03 18:54:33.407636895 +0800
+@@ -232,7 +232,7 @@
+   // TODO: Need Android impl
+   int id;
+ #else
+-#  warning Implement me
++  int id;
+ #endif
+ 
+   *result = mNPNIface->getvalue(mNPP, NPNVnetscapeWindow, &id);
+--- widget/gtk/nsWindow.h	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsWindow.h	2020-01-18 05:35:31.000000000 +0800
+@@ -84,7 +84,9 @@
+ 
+ namespace mozilla {
+ class TimeStamp;
++#ifdef MOZ_X11
+ class CurrentX11TimeGetter;
++#endif
+ 
+ }  // namespace mozilla
+ 
+@@ -297,7 +297,9 @@
+ 
+   WidgetEventTime GetWidgetEventTime(guint32 aEventTime);
+   mozilla::TimeStamp GetEventTimeStamp(guint32 aEventTime);
++#ifdef MOZ_X11
+   mozilla::CurrentX11TimeGetter* GetCurrentTimeGetter();
++#endif
+ 
+   virtual void SetInputContext(const InputContext& aContext,
+                                const InputContextAction& aAction) override;
+@@ -528,9 +528,9 @@
+   Window mXWindow;
+   Visual* mXVisual;
+   int mXDepth;
+-  mozilla::widget::WindowSurfaceProvider mSurfaceProvider;
+ #endif
+ #ifdef MOZ_WAYLAND
++  mozilla::widget::WindowSurfaceProvider mSurfaceProvider;
+   RefPtr<mozilla::gfx::VsyncSource> mWaylandVsyncSource;
+ #endif
+ 
+@@ -673,7 +673,9 @@
+    */
+   RefPtr<mozilla::widget::IMContextWrapper> mIMContext;
+ 
++#ifdef MOZ_X11
+   mozilla::UniquePtr<mozilla::CurrentX11TimeGetter> mCurrentTimeGetter;
++#endif
+   static CSDSupportLevel sCSDSupportLevel;
+ };
+ 
+--- widget/gtk/ScreenHelperGTK.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/ScreenHelperGTK.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -142,9 +142,9 @@
+   DesktopToLayoutDeviceScale contentsScale(1.0);
+ #ifdef MOZ_WAYLAND
+   GdkDisplay* gdkDisplay = gdk_display_get_default();
+-  if (!GDK_IS_X11_DISPLAY(gdkDisplay)) {
++  if (GDK_IS_WAYLAND_DISPLAY(gdkDisplay)) {
+     contentsScale.scale = gdkScaleFactor;
+   }
+ #endif
+ 
+   CSSToLayoutDeviceScale defaultCssScale(gdkScaleFactor *
+--- widget/gtk/nsWaylandDisplay.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsWaylandDisplay.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -6,6 +6,7 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #include "nsWaylandDisplay.h"
++#include <dlfcn.h>
+ 
+ namespace mozilla {
+ namespace widget {
+--- widget/gtk/GtkCompositorWidget.h	2020-02-03 23:06:48.270604278 +0800
++++ widget/gtk/GtkCompositorWidget.h	2020-02-03 23:06:48.270604278 +0800
+@@ -57,8 +57,10 @@
+   GtkCompositorWidget* AsX11() override { return this; }
+   CompositorWidgetDelegate* AsDelegate() override { return this; }
+ 
++#ifdef MOZ_X11
+   Display* XDisplay() const { return mXDisplay; }
+   Window XWindow() const { return mXWindow; }
++#endif
+ 
+   EGLNativeWindowType GetEGLNativeWindow();
+ #ifdef MOZ_WAYLAND
+@@ -75,8 +77,10 @@
+  private:
+   LayoutDeviceIntSize mClientSize;
+ 
++#ifdef MOZ_X11
+   Display* mXDisplay;
+   Window mXWindow;
++#endif
+   WindowSurfaceProvider mProvider;
+ };
+ 
+--- widget/gtk/GtkCompositorWidget.cpp	2020-02-03 23:06:48.263937566 +0800
++++ widget/gtk/GtkCompositorWidget.cpp	2020-02-03 23:06:48.263937566 +0800
+@@ -18,6 +18,11 @@
+     const GtkCompositorWidgetInitData& aInitData,
+     const layers::CompositorOptions& aOptions, nsWindow* aWindow)
+     : CompositorWidget(aOptions), mWidget(aWindow) {
++#ifdef MOZ_WAYLAND
++  MOZ_RELEASE_ASSERT(
++      aWindow, "We're running on Wayland and but without valid nsWindow.");
++  mProvider.Initialize(aWindow);
++#else
+   // If we have a nsWindow, then grab the already existing display connection
+   // If we don't, then use the init data to connect to the display
+   if (aWindow) {
+@@ -26,13 +31,6 @@
+     mXDisplay = XOpenDisplay(aInitData.XDisplayString().get());
+   }
+ 
+-#ifdef MOZ_WAYLAND
+-  if (!mXDisplay) {
+-    MOZ_RELEASE_ASSERT(
+-        aWindow, "We're running on Wayland and but without valid nsWindow.");
+-    mProvider.Initialize(aWindow);
+-  } else
+-#endif
+   {
+     mXWindow = (Window)aInitData.XWindow();
+ 
+@@ -49,17 +47,20 @@
+     mProvider.Initialize(mXDisplay, mXWindow, visual, depth,
+                          aInitData.Shaped());
+   }
++#endif
+   mClientSize = aInitData.InitialClientSize();
+ }
+ 
+ GtkCompositorWidget::~GtkCompositorWidget() {
+   mProvider.CleanupResources();
+ 
++#ifdef MOZ_X11
+   // If we created our own display connection, we need to destroy it
+   if (!mWidget && mXDisplay) {
+     XCloseDisplay(mXDisplay);
+     mXDisplay = nullptr;
+   }
++#endif
+ }
+ 
+ already_AddRefed<gfx::DrawTarget> GtkCompositorWidget::StartRemoteDrawing() {
+--- widget/gtk/WindowSurfaceProvider.h	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/WindowSurfaceProvider.h	2020-01-18 05:35:31.000000000 +0800
+@@ -16,8 +16,10 @@
+ #ifdef MOZ_WAYLAND
+ #  include <gdk/gdkwayland.h>
+ #endif
++#ifdef MOZ_X11
+ #include <X11/Xlib.h>  // for Window, Display, Visual, etc.
+ #include "X11UndefineNone.h"
++#endif
+ 
+ class nsWindow;
+ 
+@@ -39,8 +41,10 @@
+    * own the Display, Window, etc, and they must continue to exist
+    * while WindowSurfaceProvider is used.
+    */
++#ifdef MOZ_X11
+   void Initialize(Display* aDisplay, Window aWindow, Visual* aVisual,
+                   int aDepth, bool aIsShaped);
++#endif
+ 
+ #ifdef MOZ_WAYLAND
+   void Initialize(nsWindow* aWidget);
+@@ -63,10 +67,12 @@
+ 
+   // Can we access X?
+   bool mIsX11Display;
++#ifdef MOZ_X11
+   Display* mXDisplay;
+   Window mXWindow;
+   Visual* mXVisual;
+   int mXDepth;
++#endif
+   UniquePtr<WindowSurface> mWindowSurface;
+ #ifdef MOZ_WAYLAND
+   nsWindow* mWidget;
+--- widget/gtk/WindowSurfaceProvider.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/WindowSurfaceProvider.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -8,9 +8,11 @@
+ 
+ #include "gfxPlatformGtk.h"
+ #include "mozilla/layers/LayersTypes.h"
++#ifdef MOZ_X11
+ #include "WindowSurfaceX11Image.h"
+ #include "WindowSurfaceX11SHM.h"
+ #include "WindowSurfaceXRender.h"
++#endif
+ #ifdef MOZ_WAYLAND
+ #  include "WindowSurfaceWayland.h"
+ #endif
+@@ -23,10 +25,12 @@
+ 
+ WindowSurfaceProvider::WindowSurfaceProvider()
+     : mIsX11Display(false),
++#ifdef MOZ_X11
+       mXDisplay(nullptr),
+       mXWindow(0),
+       mXVisual(nullptr),
+       mXDepth(0),
++#endif
+       mWindowSurface(nullptr)
+ #ifdef MOZ_WAYLAND
+       ,
+@@ -36,6 +40,7 @@
+       mIsShaped(false) {
+ }
+ 
++#ifdef MOZ_X11
+ void WindowSurfaceProvider::Initialize(Display* aDisplay, Window aWindow,
+                                        Visual* aVisual, int aDepth,
+                                        bool aIsShaped) {
+@@ -52,6 +57,7 @@
+   mIsShaped = aIsShaped;
+   mIsX11Display = true;
+ }
++#endif
+ 
+ #ifdef MOZ_WAYLAND
+ void WindowSurfaceProvider::Initialize(nsWindow* aWidget) {
+@@ -70,15 +76,18 @@
+   }
+ #endif
+ 
++
++#ifdef MOZ_X11
+   // We should be initialized
+   MOZ_ASSERT(mXDisplay);
++#endif
+ 
+   // Blit to the window with the following priority:
+   // 1. XRender (iff XRender is enabled && we are in-process)
+   // 2. MIT-SHM
+   // 3. XPutImage
+ 
+-#ifdef MOZ_WIDGET_GTK
++#if defined(MOZ_WIDGET_GTK) && defined(MOZ_X11)
+   if (!mIsShaped && gfxVars::UseXRender()) {
+     LOGDRAW(("Drawing to Window 0x%lx will use XRender\n", mXWindow));
+     return MakeUnique<WindowSurfaceXRender>(mXDisplay, mXWindow, mXVisual,
+@@ -86,7 +95,7 @@
+   }
+ #endif  // MOZ_WIDGET_GTK
+ 
+-#ifdef MOZ_HAVE_SHMIMAGE
++#if defined(MOZ_HAVE_SHMIMAGE) && defined(MOZ_X11)
+   if (!mIsShaped && nsShmImage::UseShm()) {
+     LOGDRAW(("Drawing to Window 0x%lx will use MIT-SHM\n", mXWindow));
+     return MakeUnique<WindowSurfaceX11SHM>(mXDisplay, mXWindow, mXVisual,
+@@ -94,9 +103,11 @@
+   }
+ #endif  // MOZ_HAVE_SHMIMAGE
+ 
++#ifdef MOZ_X11
+   LOGDRAW(("Drawing to Window 0x%lx will use XPutImage\n", mXWindow));
+   return MakeUnique<WindowSurfaceX11Image>(mXDisplay, mXWindow, mXVisual,
+                                            mXDepth, mIsShaped);
++#endif
+ }
+ 
+ already_AddRefed<gfx::DrawTarget>
+@@ -111,8 +122,9 @@
+ 
+   *aBufferMode = BufferMode::BUFFER_NONE;
+   RefPtr<DrawTarget> dt = nullptr;
+-  if (!(dt = mWindowSurface->Lock(aInvalidRegion)) && mIsX11Display &&
+-      !mWindowSurface->IsFallback()) {
++  if (!(dt = mWindowSurface->Lock(aInvalidRegion))) {
++#ifdef MOZ_X11
++		if (mIsX11Display && !mWindowSurface->IsFallback()) {
+     // We can't use WindowSurfaceX11Image fallback on Wayland but
+     // Lock() call on WindowSurfaceWayland should never fail.
+     gfxWarningOnce()
+@@ -120,6 +132,8 @@
+     mWindowSurface = MakeUnique<WindowSurfaceX11Image>(
+         mXDisplay, mXWindow, mXVisual, mXDepth, mIsShaped);
+     dt = mWindowSurface->Lock(aInvalidRegion);
++		}
++#endif
+   }
+   return dt.forget();
+ }
+--- widget/gtk/WindowSurfaceWayland.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/WindowSurfaceWayland.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -11,6 +11,7 @@
+ #include "mozilla/gfx/2D.h"
+ #include "mozilla/gfx/Tools.h"
+ #include "gfxPlatform.h"
++#include "gfxImageSurface.h"
+ #include "mozcontainer.h"
+ #include "nsTArray.h"
+ #include "base/message_loop.h"  // for MessageLoop
+--- widget/gtk/mozcontainer.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/mozcontainer.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -7,7 +7,9 @@
+ 
+ #include "mozcontainer.h"
+ #include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ #ifdef MOZ_WAYLAND
+ #  include "nsWaylandDisplay.h"
+ #  include "gfxPlatformGtk.h"
+--- widget/gtk/nsClipboard.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsClipboard.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -9,7 +9,9 @@
+ 
+ #include "nsArrayUtils.h"
+ #include "nsClipboard.h"
++#ifdef MOZ_X11
+ #include "nsClipboardX11.h"
++#endif
+ #if defined(MOZ_WAYLAND)
+ #  include "nsClipboardWayland.h"
+ #endif
+@@ -31,7 +33,9 @@
+ #include "imgIContainer.h"
+ 
+ #include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #include <gtk/gtkx.h>
++#endif
+ 
+ #include "mozilla/Encoding.h"
+ 
+@@ -91,13 +95,14 @@
+ NS_IMPL_ISUPPORTS(nsClipboard, nsIClipboard, nsIObserver)
+ 
+ nsresult nsClipboard::Init(void) {
++#ifdef MOZ_X11
+   if (gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     mContext = new nsRetrievalContextX11();
++  }
++#endif
+ #if defined(MOZ_WAYLAND)
+-  } else {
+-    mContext = new nsRetrievalContextWayland();
++  mContext = new nsRetrievalContextWayland();
+ #endif
+-  }
+   NS_ASSERTION(mContext, "Missing nsRetrievalContext for nsClipboard!");
+ 
+   nsCOMPtr<nsIObserverService> os = mozilla::services::GetObserverService();
+--- widget/gtk/nsGtkKeyUtils.h.orig	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsGtkKeyUtils.h	2020-02-04 10:48:13.970757807 +0800
+@@ -12,7 +12,9 @@
+ #include "mozilla/EventForwards.h"
+ 
+ #include <gdk/gdk.h>
++#ifdef MOZ_X11
+ #include <X11/XKBlib.h>
++#endif
+ #ifdef MOZ_WAYLAND
+ #  include <gdk/gdkwayland.h>
+ #  include <xkbcommon/xkbcommon.h>
+@@ -301,6 +303,7 @@
+    */
+   int mXKBBaseEventCode;
+ 
++#ifdef MOZ_X11
+   /**
+    * Only auto_repeats[] stores valid value.  If you need to use other
+    * members, you need to listen notification events for them.
+@@ -308,6 +311,7 @@
+    * InitXKBExtension().
+    */
+   XKeyboardState mKeyboardState;
++#endif
+ 
+   /**
+    * Pointer of the singleton instance.
+@@ -318,7 +322,7 @@
+    * Auto key repeat management.
+    */
+   static guint sLastRepeatableHardwareKeyCode;
+-  static Time sLastRepeatableKeyTime;
++  static GTime sLastRepeatableKeyTime;
+   enum RepeatState { NOT_PRESSED, FIRST_PRESS, REPEATING };
+   static RepeatState sRepeatState;
+ 
+--- widget/gtk/nsPrintDialogGTK.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsPrintDialogGTK.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -27,8 +27,13 @@
+ #include "WidgetUtils.h"
+ #include "nsIObserverService.h"
+ 
++#ifdef MOZ_X11
+ // for gdk_x11_window_get_xid
+ #include <gdk/gdkx.h>
++#endif
++#ifdef MOZ_WAYLAND
++#include <gdk/gdkwayland.h>
++#endif
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+@@ -533,6 +538,7 @@
+ static gboolean window_export_handle(GtkWindow* window,
+                                      GtkWindowHandleExported callback,
+                                      gpointer user_data) {
++#ifdef MOZ_X11
+   if (gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     GdkWindow* gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
+     char* handle_str;
+@@ -543,8 +549,9 @@
+     g_free(handle_str);
+     return true;
+   }
++#endif
+ #ifdef MOZ_WAYLAND
+-  else {
++  if (!gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     GdkWindow* gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
+     WaylandWindowHandleExportedData* data;
+ 
+--- toolkit/xre/nsAppRunner.cpp	2020-01-18 05:35:25.000000000 +0800
++++ toolkit/xre/nsAppRunner.cpp	2020-01-18 05:35:25.000000000 +0800
+@@ -286,6 +286,7 @@
+ #  endif
+ #  ifdef MOZ_X11
+ #    include <gdk/gdkx.h>
++#    undef None
+ #  endif /* MOZ_X11 */
+ #  include "nsGTKToolkit.h"
+ #  include <fontconfig/fontconfig.h>
+@@ -310,9 +311,6 @@
+ #  endif
+ #endif  // FUZZING
+ 
+-// Undo X11/X.h's definition of None
+-#undef None
+-
+ namespace mozilla {
+ int (*RunGTest)(int*, char**) = 0;
+ }  // namespace mozilla
+@@ -3834,11 +3832,13 @@
+       gdk_display_manager_set_default_display(gdk_display_manager_get(),
+                                               mGdkDisplay);
+       if (saveDisplayArg) {
++#  ifdef MOZ_X11
+         if (GDK_IS_X11_DISPLAY(mGdkDisplay)) {
+           SaveWordToEnv("DISPLAY", nsDependentCString(display_name));
+         }
++#endif
+ #  ifdef MOZ_WAYLAND
+-        else if (!GDK_IS_X11_DISPLAY(mGdkDisplay)) {
++        if (GDK_IS_WAYLAND_DISPLAY(mGdkDisplay)) {
+           SaveWordToEnv("WAYLAND_DISPLAY", nsDependentCString(display_name));
+         }
+ #  endif
+--- toolkit/xre/nsGDKErrorHandler.cpp	2020-01-18 05:35:25.000000000 +0800
++++ toolkit/xre/nsGDKErrorHandler.cpp	2020-01-18 05:35:25.000000000 +0800
+@@ -6,14 +6,18 @@
+ #include "nsGDKErrorHandler.h"
+ 
+ #include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+ #include "nsDebug.h"
+ #include "nsString.h"
++#ifdef MOZ_X11
+ #include "nsX11ErrorHandler.h"
++#endif
+ 
+ #include "prenv.h"
+ 
+@@ -26,6 +30,7 @@
+  */
+ static void GdkErrorHandler(const gchar* log_domain, GLogLevelFlags log_level,
+                             const gchar* message, gpointer user_data) {
++#ifdef MOZ_X11
+   if (strstr(message, "X Window System error")) {
+     XErrorEvent event;
+     nsDependentCString buffer(message);
+@@ -92,10 +97,12 @@
+     event.resourceid = 0;
+ 
+     X11Error(event.display, &event);
+-  } else {
+-    g_log_default_handler(log_domain, log_level, message, user_data);
+-    MOZ_CRASH_UNSAFE(message);
+-  }
++		return;
++ }
++#endif
++
++ g_log_default_handler(log_domain, log_level, message, user_data);
++ MOZ_CRASH_UNSAFE(message);
+ }
+ 
+ void InstallGdkErrorHandler() {
+@@ -103,7 +110,9 @@
+                     (GLogLevelFlags)(G_LOG_LEVEL_ERROR | G_LOG_FLAG_FATAL |
+                                      G_LOG_FLAG_RECURSION),
+                     GdkErrorHandler, nullptr);
++#ifdef MOZ_X11
+   if (PR_GetEnv("MOZ_X_SYNC")) {
+     XSynchronize(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), X11True);
+   }
++#endif
+ }
+--- widget/gtk/nsNativeThemeGTK.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsNativeThemeGTK.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -863,7 +863,9 @@
+                                const nsIntSize& aDrawSize,
+                                GdkRectangle& aGDKRect,
+                                nsITheme::Transparency aTransparency) {
++#ifdef MOZ_X11
+   bool isX11Display = gfxPlatformGtk::GetPlatform()->IsX11Display();
++#endif
+   static auto sCairoSurfaceSetDeviceScalePtr =
+       (void (*)(cairo_surface_t*, double, double))dlsym(
+           RTLD_DEFAULT, "cairo_surface_set_device_scale");
+--- toolkit/xre/nsNativeAppSupportUnix.cpp	2020-01-18 05:35:25.000000000 +0800
++++ toolkit/xre/nsNativeAppSupportUnix.cpp	2020-01-18 05:35:25.000000000 +0800
+@@ -404,7 +404,6 @@
+   prop.num_vals = numVals;
+   prop.vals = vals;
+ }
+-#endif /* MOZ_X11 */
+ 
+ static void RemoveArg(char** argv) {
+   do {
+@@ -414,6 +413,7 @@
+ 
+   --gArgc;
+ }
++#endif /* MOZ_X11 */
+ 
+ NS_IMETHODIMP
+ nsNativeAppSupportUnix::Start(bool* aRetVal) {
+--- widget/gtk/nsGtkKeyUtils.cpp.orig	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsGtkKeyUtils.cpp	2020-02-04 17:07:41.968283858 +0800
+@@ -12,15 +12,17 @@
+ #include <gdk/gdkkeysyms.h>
+ #include <algorithm>
+ #include <gdk/gdk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#include <X11/XKBlib.h>
++#endif
+ #include <dlfcn.h>
+ #ifdef MOZ_WIDGET_GTK
+ #  include <gdk/gdkkeysyms-compat.h>
+ #endif
+-#include <X11/XKBlib.h>
+ #include "IMContextWrapper.h"
+ #include "WidgetUtils.h"
+ #include "keysym2ucs.h"
+ #include "nsContentUtils.h"
+ #include "nsGtkUtils.h"
+ #include "nsIBidiKeyboard.h"
+@@ -51,7 +53,7 @@
+ 
+ KeymapWrapper* KeymapWrapper::sInstance = nullptr;
+ guint KeymapWrapper::sLastRepeatableHardwareKeyCode = 0;
+-Time KeymapWrapper::sLastRepeatableKeyTime = 0;
++GTime KeymapWrapper::sLastRepeatableKeyTime = 0;
+ KeymapWrapper::RepeatState KeymapWrapper::sRepeatState =
+     KeymapWrapper::NOT_PRESSED;
+ 
+@@ -347,9 +349,11 @@
+ 
+   g_object_ref(mGdkKeymap);
+ 
++#ifdef MOZ_X11
+   if (gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     InitXKBExtension();
+   }
++#endif
+ 
+   Init();
+ }
+@@ -366,16 +370,18 @@
+   mModifierKeys.Clear();
+   memset(mModifierMasks, 0, sizeof(mModifierMasks));
+ 
++#ifdef MOZ_X11
+   if (gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     InitBySystemSettingsX11();
+   }
++#endif
+ #ifdef MOZ_WAYLAND
+-  else {
+-    InitBySystemSettingsWayland();
+-  }
++  InitBySystemSettingsWayland();
+ #endif
+ 
++#ifdef MOZ_X11
+   gdk_window_add_filter(nullptr, FilterEvents, this);
++#endif
+ 
+   MOZ_LOG(gKeymapWrapperLog, LogLevel::Info,
+           ("%p Init, CapsLock=0x%X, NumLock=0x%X, "
+@@ -388,6 +394,7 @@
+            GetModifierMask(SUPER), GetModifierMask(HYPER)));
+ }
+ 
++#ifdef MOZ_X11
+ void KeymapWrapper::InitXKBExtension() {
+   PodZero(&mKeyboardState);
+ 
+@@ -448,7 +455,9 @@
+   MOZ_LOG(gKeymapWrapperLog, LogLevel::Info,
+           ("%p InitXKBExtension, Succeeded", this));
+ }
++#endif
+ 
++#ifdef MOZ_X11
+ void KeymapWrapper::InitBySystemSettingsX11() {
+   MOZ_LOG(gKeymapWrapperLog, LogLevel::Info,
+           ("%p InitBySystemSettingsX11, mGdkKeymap=%p", this, mGdkKeymap));
+@@ -615,6 +624,7 @@
+   XFreeModifiermap(xmodmap);
+   XFree(xkeymap);
+ }
++#endif
+ 
+ #ifdef MOZ_WAYLAND
+ void KeymapWrapper::SetModifierMask(xkb_keymap* aKeymap,
+@@ -772,7 +782,9 @@
+ #endif
+ 
+ KeymapWrapper::~KeymapWrapper() {
++#ifdef MOZ_X11
+   gdk_window_remove_filter(nullptr, FilterEvents, this);
++#endif
+   if (gfxPlatformGtk::GetPlatform()->IsX11Display()) {
+     g_signal_handlers_disconnect_by_func(mGdkKeymap,
+                                          FuncToGpointer(OnKeysChanged), this);
+@@ -783,6 +795,7 @@
+   MOZ_LOG(gKeymapWrapperLog, LogLevel::Info, ("%p Destructor", this));
+ }
+ 
++#ifdef MOZ_X11
+ /* static */
+ GdkFilterReturn KeymapWrapper::FilterEvents(GdkXEvent* aXEvent,
+                                             GdkEvent* aGdkEvent,
+@@ -896,6 +909,7 @@
+ 
+   return GDK_FILTER_CONTINUE;
+ }
++#endif
+ 
+ static void ResetBidiKeyboard() {
+   // Reset the bidi keyboard settings for the new GdkKeymap
+@@ -1719,6 +1733,7 @@
+   // state.  It means if there're some pending modifier key press or
+   // key release events, the result isn't what we want.
+   guint modifierState = aGdkKeyEvent->state;
++#ifdef MOZ_X11
+   GdkDisplay* gdkDisplay = gdk_display_get_default();
+   if (aGdkKeyEvent->is_modifier && GDK_IS_X11_DISPLAY(gdkDisplay)) {
+     Display* display = gdk_x11_display_get_xdisplay(gdkDisplay);
+@@ -1736,6 +1751,7 @@
+       }
+     }
+   }
++#endif
+   InitInputEvent(aKeyEvent, modifierState);
+ 
+   switch (aGdkKeyEvent->keyval) {
+@@ -1982,6 +2000,7 @@
+   return result;
+ }
+ 
++#ifdef MOZ_X11
+ bool KeymapWrapper::IsAutoRepeatableKey(guint aHardwareKeyCode) {
+   uint8_t indexOfArray = aHardwareKeyCode / 8;
+   MOZ_ASSERT(indexOfArray < ArrayLength(mKeyboardState.auto_repeats),
+@@ -1989,6 +2008,7 @@
+   char bitMask = 1 << (aHardwareKeyCode % 8);
+   return (mKeyboardState.auto_repeats[indexOfArray] & bitMask) != 0;
+ }
++#endif
+ 
+ /* static */
+ bool KeymapWrapper::IsBasicLatinLetterOrNumeral(uint32_t aCharCode) {
+--- toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
++++ toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
+@@ -13,12 +13,15 @@
+ 
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
+     SOURCES += [
+-        'nsGTKRemoteServer.cpp',
+         'nsUnixRemoteServer.cpp',
+-        'nsXRemoteClient.cpp',
+-        'nsXRemoteServer.cpp',
+         'RemoteUtils.cpp',
+     ]
++    if CONFIG['MOZ_X11']:
++        SOURCES += [
++            'nsGTKRemoteServer.cpp',
++            'nsXRemoteClient.cpp',
++            'nsXRemoteServer.cpp',
++        ]
+     if CONFIG['MOZ_ENABLE_DBUS']:
+         SOURCES += [
+             'nsDBusRemoteClient.cpp',
+--- widget/gtk/nsDragService.cpp	2020-02-04 17:28:52.008883979 +0800
++++ widget/gtk/nsDragService.cpp	2020-02-04 17:28:52.008883979 +0800
+@@ -23,14 +23,18 @@
+ #include "prthread.h"
+ #include <dlfcn.h>
+ #include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ #include "nsCRT.h"
+ #include "mozilla/BasicEvents.h"
+ #include "mozilla/Services.h"
+ #include "mozilla/ClearOnShutdown.h"
+ #include "mozilla/PresShell.h"
+ 
++#ifdef MOZ_X11
+ #include "gfxXlibSurface.h"
++#endif
+ #include "gfxContext.h"
+ #include "nsImageToPixbuf.h"
+ #include "nsPresContext.h"
+--- widget/CompositorWidget.h	2020-01-18 05:35:31.000000000 +0800
++++ widget/CompositorWidget.h	2020-01-18 05:35:31.000000000 +0800
+@@ -60,7 +60,7 @@
+ };
+ 
+ // Platforms that support out-of-process widgets.
+-#if defined(XP_WIN) || defined(MOZ_X11)
++#if defined(XP_WIN) || defined(MOZ_X11) || defined(MOZ_WAYLAND)
+ // CompositorWidgetParent should implement CompositorWidget and
+ // PCompositorWidgetParent.
+ class CompositorWidgetParent;
+--- browser/installer/package-manifest.in	2020-01-18 05:34:07.000000000 +0800
++++ browser/installer/package-manifest.in	2020-01-18 05:34:07.000000000 +0800
+@@ -100,7 +100,9 @@
+ #endif
+ #ifdef MOZ_GTK
+ @BINPATH@/@DLL_PREFIX@mozgtk@DLL_SUFFIX@
++#ifdef MOZ_X11
+ @BINPATH@/gtk2/@DLL_PREFIX@mozgtk@DLL_SUFFIX@
++#endif
+ #ifdef MOZ_WAYLAND
+ @BINPATH@/@DLL_PREFIX@mozwayland@DLL_SUFFIX@
+ #endif
+--- widget/gtk/components.conf	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/components.conf	2020-01-18 05:35:31.000000000 +0800
+@@ -84,7 +84,7 @@
+     },
+ ]
+ 
+-if defined('MOZ_X11'):
++if defined('MOZ_X11') or defined('MOZ_WAYLAND'):
+     Classes += [
+         {
+             'cid': '{8b5314ba-db01-11d2-96ce-0060b0fb9956}',
+--- widget/gtk/nsWidgetFactory.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsWidgetFactory.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -20,9 +20,7 @@
+ #include "nsHTMLFormatConverter.h"
+ #include "HeadlessClipboard.h"
+ #include "IMContextWrapper.h"
+-#ifdef MOZ_X11
+-#  include "nsClipboard.h"
+-#endif
++#include "nsClipboard.h"
+ #include "TaskbarProgress.h"
+ #include "nsFilePicker.h"
+ #include "nsSound.h"
+@@ -36,7 +34,6 @@
+ using namespace mozilla;
+ using namespace mozilla::widget;
+ 
+-#ifdef MOZ_X11
+ NS_IMPL_COMPONENT_FACTORY(nsIClipboard) {
+   nsCOMPtr<nsIClipboard> inst;
+   if (gfxPlatform::IsHeadless()) {
+@@ -51,7 +48,6 @@
+ 
+   return inst.forget().downcast<nsISupports>();
+ }
+-#endif
+ 
+ nsresult nsWidgetGtk2ModuleCtor() { return nsAppShellInit(); }
+ 
+--- widget/gtk/nsIdleServiceGTK.h	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsIdleServiceGTK.h	2020-01-18 05:35:31.000000000 +0800
+@@ -9,10 +9,13 @@
+ #define nsIdleServiceGTK_h__
+ 
+ #include "nsIdleService.h"
++#ifdef MOZ_X11
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
+ #include <gdk/gdkx.h>
++#endif
+ 
++#ifdef MOZ_X11
+ typedef struct {
+   Window window;               // Screen saver window
+   int state;                   // ScreenSaver(Off,On,Disabled)
+@@ -21,6 +24,7 @@
+   unsigned long idle;          // milliseconds idle
+   unsigned long event_mask;    // event stuff
+ } XScreenSaverInfo;
++#endif
+ 
+ class nsIdleServiceGTK : public nsIdleService {
+  public:
+@@ -40,7 +44,9 @@
+ 
+  private:
+   ~nsIdleServiceGTK();
++#ifdef MOZ_X11
+   XScreenSaverInfo* mXssInfo;
++#endif
+ 
+  protected:
+   nsIdleServiceGTK();
+--- widget/gtk/nsIdleServiceGTK.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsIdleServiceGTK.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -17,6 +17,7 @@
+ 
+ static mozilla::LazyLogModule sIdleLog("nsIIdleService");
+ 
++#ifdef MOZ_X11
+ typedef bool (*_XScreenSaverQueryExtension_fn)(Display* dpy, int* event_base,
+                                                int* error_base);
+ 
+@@ -25,12 +26,15 @@
+ typedef void (*_XScreenSaverQueryInfo_fn)(Display* dpy, Drawable drw,
+                                           XScreenSaverInfo* info);
+ 
+-static bool sInitialized = false;
+ static _XScreenSaverQueryExtension_fn _XSSQueryExtension = nullptr;
+ static _XScreenSaverAllocInfo_fn _XSSAllocInfo = nullptr;
+ static _XScreenSaverQueryInfo_fn _XSSQueryInfo = nullptr;
++#endif
++
++static bool sInitialized = false;
+ 
+ static void Initialize() {
++#ifdef MOZ_X11
+   if (!GDK_IS_X11_DISPLAY(gdk_display_get_default())) return;
+ 
+   // This will leak - See comments in ~nsIdleServiceGTK().
+@@ -55,14 +59,22 @@
+     MOZ_LOG(sIdleLog, LogLevel::Warning, ("Failed to get XSSAllocInfo!\n"));
+   if (!_XSSQueryInfo)
+     MOZ_LOG(sIdleLog, LogLevel::Warning, ("Failed to get XSSQueryInfo!\n"));
++#endif
+ 
+   sInitialized = true;
+ }
+ 
+-nsIdleServiceGTK::nsIdleServiceGTK() : mXssInfo(nullptr) { Initialize(); }
++
++nsIdleServiceGTK::nsIdleServiceGTK() 
++#ifdef MOZ_X11
++: mXssInfo(nullptr)
++#endif
++{ Initialize(); }
+ 
+ nsIdleServiceGTK::~nsIdleServiceGTK() {
++#ifdef MOZ_X11
+   if (mXssInfo) XFree(mXssInfo);
++#endif
+ 
+ // It is not safe to unload libXScrnSaver until each display is closed because
+ // the library registers callbacks through XESetCloseDisplay (Bug 397607).
+@@ -84,6 +96,7 @@
+   // Ask xscreensaver about idle time:
+   *aIdleTime = 0;
+ 
++#ifdef MOZ_X11
+   // We might not have a display (cf. in xpcshell)
+   Display* dplay = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
+   if (!dplay) {
+@@ -103,6 +116,7 @@
+     *aIdleTime = mXssInfo->idle;
+     return true;
+   }
++#endif
+   // If we get here, we couldn't get to XScreenSaver:
+   MOZ_LOG(sIdleLog, LogLevel::Warning, ("XSSQueryExtension returned false!\n"));
+   return false;
+--- widget/gtk/nsWindow.cpp.orig	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/nsWindow.cpp	2020-02-04 16:57:03.097671586 +0800
+@@ -44,13 +44,13 @@
+ #include "ScreenHelperGTK.h"
+ 
+ #include <gtk/gtk.h>
+-#include <gtk/gtkx.h>
+ 
+ #ifdef MOZ_WAYLAND
+ #  include <gdk/gdkwayland.h>
+ #endif /* MOZ_WAYLAND */
+ 
+ #ifdef MOZ_X11
++#  include <gtk/gtkx.h>
+ #  include <gdk/gdkx.h>
+ #  include <X11/Xatom.h>
+ #  include <X11/extensions/XShm.h>
+@@ -61,6 +61,8 @@
+ #include <gdk/gdkkeysyms.h>
+ 
+ #if defined(MOZ_WAYLAND)
++#  include <gdk/gdk.h>
++#  include <gdk/gdkkeysyms-compat.h>
+ #  include <gdk/gdkwayland.h>
+ #  include "nsView.h"
+ #endif
+@@ -125,17 +127,15 @@
+ #include "mozilla/layers/APZInputBridge.h"
+ #include "mozilla/layers/IAPZCTreeManager.h"
+ 
++#  include "nsIClipboard.h"
++#  include "GtkCompositorWidget.h"
+ #ifdef MOZ_X11
+ #  include "GLContextGLX.h"  // for GLContextGLX::FindVisual()
+-#  include "GtkCompositorWidget.h"
+ #  include "gfxXlibSurface.h"
+ #  include "WindowSurfaceX11Image.h"
+ #  include "WindowSurfaceX11SHM.h"
+ #  include "WindowSurfaceXRender.h"
+ #endif  // MOZ_X11
+-#ifdef MOZ_WAYLAND
+-#  include "nsIClipboard.h"
+-#endif
+ 
+ #include "nsShmImage.h"
+ #include "gtkdrawing.h"
+@@ -149,7 +149,9 @@
+ using namespace mozilla::widget;
+ using namespace mozilla::layers;
+ using mozilla::gl::GLContext;
++#ifdef MOZ_X11
+ using mozilla::gl::GLContextGLX;
++#endif
+ 
+ // Don't put more than this many rects in the dirty region, just fluff
+ // out to the bounding-box if there are more
+@@ -285,6 +285,7 @@
+ 
+ namespace mozilla {
+ 
++#ifdef MOZ_X11
+ class CurrentX11TimeGetter {
+  public:
+   explicit CurrentX11TimeGetter(GdkWindow* aWindow)
+@@ -332,6 +333,7 @@
+   GdkWindow* mWindow;
+   TimeStamp mAsyncUpdateStart;
+ };
++#endif
+ 
+ }  // namespace mozilla
+ 
+@@ -407,7 +409,11 @@
+   mHandleTouchEvent = false;
+ #endif
+   mIsDragPopup = false;
++#ifdef MOZ_X11
+   mIsX11Display = gfxPlatformGtk::GetPlatform()->IsX11Display();
++#else
++  mIsX11Display = false;
++#endif
+ 
+   mContainer = nullptr;
+   mGdkWindow = nullptr;
+@@ -1586,9 +1586,13 @@
+   // button and key releases.  Therefore use the most recent of
+   // gdk_x11_display_get_user_time and the last time that we have seen.
+   GdkDisplay* gdkDisplay = gdk_display_get_default();
++#ifdef MOZ_X11
+   guint32 timestamp = GDK_IS_X11_DISPLAY(gdkDisplay)
+                           ? gdk_x11_display_get_user_time(gdkDisplay)
+                           : gtk_get_current_event_time();
++#else
++  guint32 timestamp = gtk_get_current_event_time();
++#endif
+ 
+   if (sLastUserInputTime != GDK_CURRENT_TIME &&
+       TimestampIsNewerThan(sLastUserInputTime, timestamp)) {
+@@ -1722,6 +1728,7 @@
+     return;
+   }
+ 
++#ifdef MOZ_X11
+   GdkAtom cardinal_atom = gdk_x11_xatom_to_atom(XA_CARDINAL);
+ 
+   GdkAtom type_returned;
+@@ -1749,6 +1756,7 @@
+   g_free(frame_extents);
+ 
+   mClientOffset = nsIntPoint(left, top);
++#endif
+ }
+ 
+ LayoutDeviceIntPoint nsWindow::GetClientOffset() {
+@@ -1771,6 +1771,7 @@
+ 
+ gboolean nsWindow::OnPropertyNotifyEvent(GtkWidget* aWidget,
+                                          GdkEventProperty* aEvent) {
++#ifdef MOZ_X11
+   if (aEvent->atom == gdk_atom_intern("_NET_FRAME_EXTENTS", FALSE)) {
+     UpdateClientOffset();
+ 
+@@ -1784,6 +1785,7 @@
+   if (GetCurrentTimeGetter()->PropertyNotifyHandler(aWidget, aEvent)) {
+     return TRUE;
+   }
++#endif
+ 
+   return FALSE;
+ }
+@@ -1895,9 +1903,11 @@
+       return GetToplevelWidget();
+ 
+     case NS_NATIVE_SHAREABLE_WINDOW:
++#ifdef MOZ_X11
+       if (mIsX11Display) {
+         return (void*)GDK_WINDOW_XID(gdk_window_get_toplevel(mGdkWindow));
+       }
++#endif
+       NS_WARNING(
+           "nsWindow::GetNativeData(): NS_NATIVE_SHAREABLE_WINDOW is not "
+           "handled on Wayland!");
+@@ -1921,9 +1931,11 @@
+       return gfxPlatformGtk::GetPlatform()->GetCompositorDisplay();
+ #endif  // MOZ_X11
+     case NS_NATIVE_EGL_WINDOW: {
++#ifdef MOZ_X11
+       if (mIsX11Display) {
+         return mGdkWindow ? (void*)GDK_WINDOW_XID(mGdkWindow) : nullptr;
+       }
++#endif
+ #ifdef MOZ_WAYLAND
+       if (mContainer) {
+         return moz_container_get_wl_egl_window(mContainer, GdkScaleFactor());
+@@ -2260,8 +2272,13 @@
+   nsIWidgetListener* listener = GetListener();
+   if (!listener) return FALSE;
+ 
++#ifdef MOZ_X11
+   LOGDRAW(("received expose event [%p] %p 0x%lx (rects follow):\n", this,
+            mGdkWindow, mIsX11Display ? gdk_x11_window_get_xid(mGdkWindow) : 0));
++#else
++  LOGDRAW(("received expose event [%p] %p 0x%lx (rects follow):\n", this,
++           mGdkWindow, 0));
++#endif
+   LayoutDeviceIntRegion exposeRegion;
+   if (!ExtractExposeRegion(exposeRegion, cr)) {
+     return FALSE;
+@@ -2605,12 +2622,10 @@
+ 
+   mBounds.SizeTo(size);
+ 
+-#ifdef MOZ_X11
+   // Notify the GtkCompositorWidget of a ClientSizeChange
+   if (mCompositorWidgetDelegate) {
+     mCompositorWidgetDelegate->NotifyClientSizeChanged(GetClientSize());
+   }
+-#endif
+ 
+   // Gecko permits running nested event loops during processing of events,
+   // GtkWindow callers of gtk_widget_size_allocate expect the signal
+@@ -2710,6 +2725,7 @@
+     MOZ_ASSERT(gdk_window, "gdk_window_get_toplevel should not return null");
+ 
+     bool canDrag = true;
++#ifdef MOZ_X11
+     if (mIsX11Display) {
+       // Workaround for https://bugzilla.gnome.org/show_bug.cgi?id=789054
+       // To avoid crashes disable double-click on WM without _NET_WM_MOVERESIZE.
+@@ -2720,6 +2736,7 @@
+         canDrag = false;
+       }
+     }
++#endif
+ 
+     if (canDrag) {
+       gdk_window_begin_move_drag(gdk_window, 1, aEvent->x_root, aEvent->y_root,
+@@ -3158,13 +3175,16 @@
+     int64_t tick =
+         BaseTimeDurationPlatformUtils::TicksFromMilliseconds(timestampTime);
+     eventTimeStamp = TimeStamp::FromSystemTime(tick);
+-  } else {
++  }
++#ifdef MOZ_X11
++  else {
+     CurrentX11TimeGetter* getCurrentTime = GetCurrentTimeGetter();
+     MOZ_ASSERT(getCurrentTime,
+                "Null current time getter despite having a window");
+     eventTimeStamp =
+         TimeConverter().GetTimeStampFromSystemTime(aEventTime, *getCurrentTime);
+   }
++#endif
+   return eventTimeStamp;
+ }
+ 
+@@ -3192,6 +3194,7 @@
+   return eventTimeStamp;
+ }
+ 
++#ifdef MOZ_X11
+ mozilla::CurrentX11TimeGetter* nsWindow::GetCurrentTimeGetter() {
+   MOZ_ASSERT(mGdkWindow, "Expected mGdkWindow to be set");
+   if (MOZ_UNLIKELY(!mCurrentTimeGetter)) {
+@@ -3199,6 +3202,7 @@
+   }
+   return mCurrentTimeGetter.get();
+ }
++#endif
+ 
+ gboolean nsWindow::OnKeyPressEvent(GdkEventKey* aEvent) {
+   LOGFOCUS(("OnKeyPressEvent [%p]\n", (void*)this));
+@@ -3750,11 +3770,15 @@
+       // gfxVars, used below.
+       Unused << gfxPlatform::GetPlatform();
+ 
++#ifdef MOZ_X11
+       bool useWebRender =
+           gfx::gfxVars::UseWebRender() && AllowWebRenderForThisWindow();
++#endif
+ 
+       bool shouldAccelerate = ComputeShouldAccelerate();
++#ifdef MOZ_X11
+       MOZ_ASSERT(shouldAccelerate | !useWebRender);
++#endif
+ 
+       if (mWindowType == eWindowType_toplevel) {
+         // We enable titlebar rendering for toplevel windows only.
+@@ -3798,6 +3822,7 @@
+ 
+       // Use GL/WebRender compatible visual only when it is necessary, since
+       // the visual consumes more memory.
++#ifdef MOZ_X11
+       if (mIsX11Display && shouldAccelerate) {
+         auto display = GDK_DISPLAY_XDISPLAY(gtk_widget_get_display(mShell));
+         auto screen = gtk_widget_get_screen(mShell);
+@@ -3820,6 +3845,7 @@
+           NS_WARNING("We're missing X11 Visual!");
+         }
+       }
++#endif
+ 
+       if (!isSetVisual && needsAlphaVisual) {
+         GdkScreen* screen = gtk_widget_get_screen(mShell);
+@@ -4194,8 +4220,13 @@
+   LOG(("nsWindow [%p] %s\n", (void*)this,
+        mWindowType == eWindowType_toplevel ? "Toplevel" : "Popup"));
+   if (mShell) {
++#ifdef MOZ_X11
+     LOG(("\tmShell %p mContainer %p mGdkWindow %p 0x%lx\n", mShell, mContainer,
+          mGdkWindow, mIsX11Display ? gdk_x11_window_get_xid(mGdkWindow) : 0));
++#else
++    LOG(("\tmShell %p mContainer %p mGdkWindow %p 0x%lx\n", mShell, mContainer,
++         mGdkWindow, 0));
++#endif
+   } else if (mContainer) {
+     LOG(("\tmContainer %p mGdkWindow %p\n", mContainer, mGdkWindow));
+   } else if (mGdkWindow) {
+@@ -4228,12 +4259,12 @@
+       SetCompositorHint(GTK_WIDGET_COMPOSIDED_ENABLED);
+     }
+   }
+-#  ifdef MOZ_WAYLAND
+-  else if (!mIsX11Display) {
++#endif
++#ifdef MOZ_WAYLAND
++  {
+     mSurfaceProvider.Initialize(this);
+     WaylandStartVsync();
+   }
+-#  endif
+ #endif
+ 
+   // Set default application name when it's empty.
+@@ -4343,13 +4374,11 @@
+     gdk_window_resize(mGdkWindow, size.width, size.height);
+   }
+ 
+-#ifdef MOZ_X11
+   // Notify the GtkCompositorWidget of a ClientSizeChange
+   // This is different than OnSizeAllocate to catch initial sizing
+   if (mCompositorWidgetDelegate) {
+     mCompositorWidgetDelegate->NotifyClientSizeChanged(GetClientSize());
+   }
+-#endif
+ 
+   // Does it need to be shown because bounds were previously insane?
+   if (mNeedsShow && mIsShown) {
+@@ -4403,13 +4432,11 @@
+     }
+   }
+ 
+-#ifdef MOZ_X11
+   // Notify the GtkCompositorWidget of a ClientSizeChange
+   // This is different than OnSizeAllocate to catch initial sizing
+   if (mCompositorWidgetDelegate) {
+     mCompositorWidgetDelegate->NotifyClientSizeChanged(GetClientSize());
+   }
+-#endif
+ 
+   // Does it need to be shown because bounds were previously insane?
+   if (mNeedsShow && mIsShown) {
+@@ -5111,6 +5138,7 @@
+     cairo_surface_destroy(surface);
+   }
+ 
++#ifdef MOZ_X11
+   if (!mNeedsShow) {
+     Display* xDisplay = GDK_WINDOW_XDISPLAY(mGdkWindow);
+     Window xDrawable = GDK_WINDOW_XID(mGdkWindow);
+@@ -5133,6 +5161,7 @@
+ 
+     XFreePixmap(xDisplay, maskPixmap);
+   }
++#endif
+ }
+ 
+ void nsWindow::GrabPointer(guint32 aTime) {
+@@ -6625,6 +6654,8 @@
+     return false;
+   }
+ 
++
++#ifdef MOZ_X11
+   if (mIsX11Display) {
+     // Workaround for https://bugzilla.gnome.org/show_bug.cgi?id=789054
+     // To avoid crashes disable double-click on WM without _NET_WM_MOVERESIZE.
+@@ -6640,6 +6671,7 @@
+       }
+     }
+   }
++#endif
+ 
+   // FIXME: It would be nice to have the widget position at the time
+   // of the event, but it's relatively unlikely that the widget has
+@@ -7319,15 +7351,25 @@
+     mozilla::widget::CompositorWidgetInitData* aInitData) {
+   // Make sure the window XID is propagated to X server, we can fail otherwise
+   // in GPU process (Bug 1401634).
++#ifdef MOZ_X11
+   if (mXDisplay && mXWindow != X11None) {
+     XFlush(mXDisplay);
+   }
++#endif
+ 
++#ifdef MOZ_X11
+   *aInitData = mozilla::widget::GtkCompositorWidgetInitData(
+       (mXWindow != X11None) ? mXWindow : (uintptr_t) nullptr,
+       mXDisplay ? nsCString(XDisplayString(mXDisplay)) : nsCString(),
+       mIsTransparent && !mHasAlphaVisual && !mTransparencyBitmapForTitlebar,
+       GetClientSize());
++#else
++  *aInitData = mozilla::widget::GtkCompositorWidgetInitData(
++      (uintptr_t) nullptr,
++      nsCString(),
++      mIsTransparent && !mHasAlphaVisual && !mTransparencyBitmapForTitlebar,
++      GetClientSize());
++#endif
+ }
+ 
+ #ifdef MOZ_WAYLAND
+--- widget/moz.build.orig	2020-02-04 00:53:25.385598257 +0800
++++ widget/moz.build	2020-02-04 23:31:34.572990195 +0800
+@@ -252,13 +252,17 @@
+ EXPORTS.ipc = ['nsGUIEventIPC.h']
+ 
+ if CONFIG['MOZ_X11']:
+-    DIRS += ['x11']
+     SOURCES += [
+-        'GfxInfoX11.cpp',
+         'nsShmImage.cpp',
+         'WindowSurfaceX11SHM.cpp',
+     ]
+ 
++if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
++    DIRS += ['x11'] # for keysym2ucs
++    SOURCES += [
++        'GfxInfoX11.cpp',
++    ]
++
+ if toolkit == 'windows':
+     EXPORTS += [
+         'PluginWidgetProxy.h',
+@@ -311,7 +311,7 @@
+         'windows/PCompositorWidget.ipdl',
+         'windows/PlatformWidgetTypes.ipdlh',
+     ]
+-elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk' and CONFIG['MOZ_X11']:
++elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
+     IPDL_SOURCES = [
+         'gtk/PCompositorWidget.ipdl',
+         'gtk/PlatformWidgetTypes.ipdlh',
+--- toolkit/xre/moz.build	2020-01-18 05:35:25.000000000 +0800
++++ toolkit/xre/moz.build	2020-01-18 05:35:25.000000000 +0800
+@@ -146,7 +146,7 @@
+     'ProfileReset.cpp',
+ ]
+ 
+-if CONFIG['MOZ_X11']:
++if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
+     UNIFIED_SOURCES += [
+         'glxtest.cpp',
+     ]
+@@ -176,7 +176,7 @@
+ 
+ FINAL_LIBRARY = 'xul'
+ 
+-if CONFIG['MOZ_X11']:
++if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
+     DEFINES['USE_GLX_TEST'] = True
+ 
+ for var in ('MOZ_APP_NAME', 'MOZ_APP_BASENAME', 'MOZ_APP_DISPLAYNAME',
+--- widget/gtk/mozgtk/mozgtk.c	2020-01-18 05:35:31.000000000 +0800
++++ widget/gtk/mozgtk/mozgtk.c	2020-01-18 05:35:31.000000000 +0800
+@@ -654,7 +654,7 @@
+ STUB(gtk_object_get_type)
+ #endif
+ 
+-#ifndef GTK3_SYMBOLS
++#if !defined(GTK3_SYMBOLS) && defined(MOZ_X11)
+ // Only define the following workaround when using GTK3, which we detect
+ // by checking if GTK3 stubs are not provided.
+ #  include <X11/Xlib.h>
+--- toolkit/xre/glxtest.cpp.orig	2020-02-05 11:03:32.858653505 +0800
++++ toolkit/xre/glxtest.cpp	2020-02-05 12:40:11.733025101 +0800
+@@ -31,11 +31,14 @@
+ #  include <stdio.h>
+ #endif
+ 
++#ifdef MOZ_X11
+ #include "X11/Xlib.h"
+ #include "X11/Xutil.h"
++#endif
+ 
+ #include "mozilla/Unused.h"
+ 
++#ifdef MOZ_X11
+ // stuff from glx.h
+ typedef struct __GLXcontextRec* GLXContext;
+ typedef XID GLXPixmap;
+@@ -50,16 +53,22 @@
+ #define GLX_RED_SIZE 8
+ #define GLX_GREEN_SIZE 9
+ #define GLX_BLUE_SIZE 10
++#endif
+ 
+ // stuff from gl.h
+ typedef uint8_t GLubyte;
+ typedef uint32_t GLenum;
+ #define GL_VENDOR 0x1F00
+ #define GL_RENDERER 0x1F01
+ #define GL_VERSION 0x1F02
++#ifdef MOZ_WAYLAND
++#define EGL_VENDOR                        0x3053
++#define EGL_VERSION                       0x3054
++#endif
+ 
+ // GLX_MESA_query_renderer
+ // clang-format off
++#ifdef MOZ_X11
+ #define GLX_RENDERER_VENDOR_ID_MESA                            0x8183
+ #define GLX_RENDERER_DEVICE_ID_MESA                            0x8184
+ #define GLX_RENDERER_VERSION_MESA                              0x8185
+@@ -72,6 +83,7 @@
+ #define GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA            0x818C
+ #define GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA           0x818D
+ #define GLX_RENDERER_ID_MESA                                   0x818E
++#endif
+ // clang-format on
+ 
+ namespace mozilla {
+@@ -100,6 +112,7 @@
+   _exit(EXIT_FAILURE);
+ }
+ 
++#ifdef MOZ_X11
+ static int x_error_handler(Display*, XErrorEvent* ev) {
+   enum { bufsize = 1024 };
+   char buf[bufsize];
+@@ -111,6 +124,7 @@
+   _exit(EXIT_FAILURE);
+   return 0;
+ }
++#endif
+ 
+ // glxtest is declared inside extern "C" so that the name is not mangled.
+ // The name is used in build/valgrind/x86_64-pc-linux-gnu.sup to suppress
+@@ -118,7 +132,7 @@
+ // care about leaking memory
+ extern "C" {
+ 
+-static int get_egl_status(char* buf, int bufsize) {
++static int get_egl_status(char* buf, int bufsize, int gotDriDriver) {
+   void* libegl = dlopen("libEGL.so.1", RTLD_LAZY);
+   if (!libegl) {
+     libegl = dlopen("libEGL.so", RTLD_LAZY);
+@@ -153,13 +167,16 @@
+   PFNEGLTERMINATEPROC eglTerminate =
+       cast<PFNEGLTERMINATEPROC>(eglGetProcAddress("eglTerminate"));
+ 
++  typedef const char* (*PFNEGLQUERYSTRING)(EGLDisplay dpy, EGLint name);
++  PFNEGLQUERYSTRING eglQueryString =
++      cast<PFNEGLQUERYSTRING>(eglGetProcAddress("eglQueryString"));
++
+   typedef const char* (*PFNEGLGETDISPLAYDRIVERNAMEPROC)(EGLDisplay dpy);
+   PFNEGLGETDISPLAYDRIVERNAMEPROC eglGetDisplayDriverName =
+       cast<PFNEGLGETDISPLAYDRIVERNAMEPROC>(
+           eglGetProcAddress("eglGetDisplayDriverName"));
+ 
+-  if (!eglGetDisplay || !eglInitialize || !eglTerminate ||
+-      !eglGetDisplayDriverName) {
++  if (!eglGetDisplay || !eglInitialize || !eglTerminate || !eglQueryString) {
+     dlclose(libegl);
+     return 0;
+   }
+@@ -177,10 +198,24 @@
+   }
+ 
+   int length = 0;
+-  const char* driDriver = eglGetDisplayDriverName(dpy);
+-  if (driDriver) {
+-    length = snprintf(buf, bufsize, "DRI_DRIVER\n%s\n", driDriver);
++#ifdef MOZ_WAYLAND
++  const char* versionString = eglQueryString(dpy, EGL_VERSION);
++  const char* vendorString = eglQueryString(dpy, EGL_VENDOR);
++  const char* rendererString = "Unknown";
++  if (!versionString || !vendorString || !rendererString)
++    fatal_error("eglQueryString returned null");
++
++  length += snprintf(buf + length, bufsize - length, "VENDOR\n%s\nVERSION\n%s\nRENDERER\n%s\n", vendorString, versionString, rendererString);
++#endif
++
++#ifdef MOZ_X11
++  if (!gotDriDriver && eglGetDisplayDriverName != NULL) {
++    const char* driDriver = eglGetDisplayDriverName(dpy);
++    if (driDriver) {
++      length += snprintf(buf + length, bufsize - length, "DRI_DRIVER\n%s\n", driDriver);
++    }
+   }
++#endif
+ 
+   eglTerminate(dpy);
+   dlclose(libegl);
+@@ -200,6 +233,11 @@
+     fatal_error(
+         "The MOZ_AVOID_OPENGL_ALTOGETHER environment variable is defined");
+ 
++  int length = 0;
++  enum { bufsize = 2048 };
++  char buf[bufsize];
++  int gotDriDriver = 0;
++#ifdef MOZ_X11
+     ///// Open libGL and load needed symbols /////
+ #if defined(__OpenBSD__) || defined(__NetBSD__)
+ #  define LIBGL_FILENAME "libGL.so"
+@@ -286,8 +324,6 @@
+   void* glXBindTexImageEXT = glXGetProcAddress("glXBindTexImageEXT");
+ 
+   ///// Get GL vendor/renderer/versions strings /////
+-  enum { bufsize = 2048 };
+-  char buf[bufsize];
+   const GLubyte* versionString = glGetString(GL_VERSION);
+   const GLubyte* vendorString = glGetString(GL_VENDOR);
+   const GLubyte* rendererString = glGetString(GL_RENDERER);
+@@ -295,8 +331,8 @@
+   if (!versionString || !vendorString || !rendererString)
+     fatal_error("glGetString returned null");
+ 
+-  int length =
+-      snprintf(buf, bufsize, "VENDOR\n%s\nRENDERER\n%s\nVERSION\n%s\nTFP\n%s\n",
++  length +=
++      snprintf(buf + length, bufsize - length, "VENDOR\n%s\nRENDERER\n%s\nVERSION\n%s\nTFP\n%s\n",
+                vendorString, rendererString, versionString,
+                glXBindTexImageEXT ? "TRUE" : "FALSE");
+   if (length >= bufsize)
+@@ -337,7 +373,6 @@
+   }
+ 
+   // From Mesa's GL/internal/dri_interface.h, to be used by DRI clients.
+-  int gotDriDriver = 0;
+   typedef const char* (*PFNGLXGETSCREENDRIVERPROC)(Display * dpy, int scrNum);
+   PFNGLXGETSCREENDRIVERPROC glXGetScreenDriverProc =
+       cast<PFNGLXGETSCREENDRIVERPROC>(glXGetProcAddress("glXGetScreenDriver"));
+@@ -397,14 +432,13 @@
+ #endif
+ 
+   dlclose(libgl);
+-
++#endif
++ 
+   // If we failed to get the driver name from X, try via EGL_MESA_query_driver.
+   // We are probably using Wayland.
+-  if (!gotDriDriver) {
+-    length += get_egl_status(buf + length, bufsize - length);
+-    if (length >= bufsize) {
+-      fatal_error("GL strings length too large for buffer size");
+-    }
++  length += get_egl_status(buf + length, bufsize - length, gotDriDriver);
++  if (length >= bufsize) {
++    fatal_error("GL strings length too large for buffer size");
+   }
+ 
+   ///// Finally write data to the pipe
+--- widget/GfxInfoX11.cpp	2020-02-05 13:32:30.855339616 +0800
++++ widget/GfxInfoX11.cpp	2020-02-05 13:32:30.855339616 +0800
+@@ -19,7 +19,9 @@
+ 
+ #include "GfxInfoX11.h"
+ 
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ #ifdef MOZ_WAYLAND
+ #  include "mozilla/widget/nsWaylandDisplay.h"
+ #endif
+@@ -327,7 +329,7 @@
+ 
+   mAdapterDescription.Assign(glRenderer);
+ #ifdef MOZ_WAYLAND
+-  mIsWayland = !GDK_IS_X11_DISPLAY(gdk_display_get_default());
++  mIsWayland = GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default());
+   if (mIsWayland) {
+     mIsWaylandDRM = nsWaylandDisplay::IsDMABufEnabled();
+   }
+@@ -456,7 +458,7 @@
+     return NS_OK;
+   }
+ 
+-  if (mGLMajorVersion == 1) {
++  if (mGLMajorVersion == 1 && !mIsWayland) {
+     // We're on OpenGL 1. In most cases that indicates really old hardware.
+     // We better block them, rather than rely on them to fail gracefully,
+     // because they don't! see bug 696636
+--- gfx/wgpu/wgpu-core/Cargo.toml	2020-01-18 05:34:22.000000000 +0800
++++ gfx/wgpu/wgpu-core/Cargo.toml	2020-01-18 05:34:22.000000000 +0800
+@@ -39,9 +39,9 @@
+ gfx-backend-metal = { version = "0.4" }
+ gfx-backend-vulkan = { version = "0.4", optional = true }
+ 
+-[target.'cfg(all(unix, not(target_os = "ios"), not(target_os = "macos")))'.dependencies]
+-gfx-backend-vulkan = { version = "0.4", features = ["x11"] }
+-
++[target.'cfg(all(unix, not(target_os = "ios"), not(target_os = "macos")))'.dependencies]
++gfx-backend-vulkan = { version = "0.4" }
++
+ [target.'cfg(windows)'.dependencies]
+ gfx-backend-dx12 = { version = "0.4.1" }
+ gfx-backend-dx11 = { version = "0.4" }
+--- security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-02-06 11:31:38.843267559 +0800
++++ security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-02-06 11:31:38.843267559 +0800
+@@ -37,6 +37,8 @@
+ #  include <glib.h>
+ #  ifdef MOZ_WAYLAND
+ #    include <gdk/gdk.h>
++#  endif
++#  ifdef MOZ_X11
+ #    include <gdk/gdkx.h>
+ #  endif
+ #endif
+@@ -463,12 +463,10 @@
+ #if defined(MOZ_WIDGET_GTK)
+   // Allow local X11 connections, for Primus and VirtualGL to contact
+   // the secondary X server. No exception for Wayland.
+-#  if defined(MOZ_WAYLAND)
++#  if defined(MOZ_X11)
+   if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+     policy->AddPrefix(SandboxBroker::MAY_CONNECT, "/tmp/.X11-unix/X");
+   }
+-#  else
+-  policy->AddPrefix(SandboxBroker::MAY_CONNECT, "/tmp/.X11-unix/X");
+ #  endif
+   if (const auto xauth = PR_GetEnv("XAUTHORITY")) {
+     policy->AddPath(rdonly, xauth);
+--- gfx/angle/checkout/include/EGL/eglplatform.h	2020-01-18 05:34:21.000000000 +0800
++++ gfx/angle/checkout/include/EGL/eglplatform.h	2020-01-18 05:34:21.000000000 +0800
+@@ -116,7 +116,9 @@
+ typedef intptr_t EGLNativePixmapType;
+ typedef intptr_t EGLNativeWindowType;
+ 
+-#elif defined(__unix__) || defined(USE_X11)
++#elif defined(__unix__)
++
++#if defined(USE_X11)
+ 
+ /* X11 (tentative)  */
+ #include <X11/Xlib.h>
+@@ -126,6 +128,14 @@
+ typedef Pixmap   EGLNativePixmapType;
+ typedef Window   EGLNativeWindowType;
+ 
++#else
++
++typedef void              *EGLNativeDisplayType;
++typedef khronos_uintptr_t  EGLNativePixmapType;
++typedef khronos_uintptr_t  EGLNativeWindowType;
++
++#endif
++
+ #elif defined(__APPLE__)
+ 
+ typedef int   EGLNativeDisplayType;
+--- gfx/gl/GLContextProviderEGL.cpp	2020-01-18 05:34:21.000000000 +0800
++++ gfx/gl/GLContextProviderEGL.cpp	2020-01-18 05:34:21.000000000 +0800
+@@ -81,11 +81,10 @@
+ #  include "nsDataHashtable.h"
+ 
+ #  include <gtk/gtk.h>
+-#  include <gdk/gdkx.h>
+ #  include <gdk/gdkwayland.h>
+ #  include <wayland-egl.h>
+ #  include <dlfcn.h>
+ #endif
+ 
+ using namespace mozilla::gfx;
+ 
+@@ -113,7 +113,7 @@
+ void DeleteWaylandGLSurface(EGLSurface surface) {
+   // We're running on Wayland which means our EGLSurface may
+   // have attached Wayland backend data which must be released.
+-  if (!GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++  if (GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     auto entry = sWaylandGLSurface.Lookup(surface);
+     if (entry) {
+       delete entry.Data();
+@@ -297,7 +297,7 @@
+ 
+ #if defined(MOZ_WAYLAND)
+   if (surface != EGL_NO_SURFACE &&
+-      !GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++      GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     // Make eglSwapBuffers() non-blocking on wayland
+     egl->fSwapInterval(egl->Display(), 0);
+   }
+@@ -483,7 +483,7 @@
+   const bool ok = MakeCurrent(true);
+   MOZ_ASSERT(ok);
+ #if defined(MOZ_WAYLAND)
+-  if (mSurface && !GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++  if (mSurface && GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     // Make eglSwapBuffers() non-blocking on wayland
+     mEgl->fSwapInterval(mEgl->Display(), 0);
+   }
+@@ -955,7 +955,7 @@
+                                bool es3, nsTArray<EGLint>* out) {
+   out->AppendElement(LOCAL_EGL_SURFACE_TYPE);
+ #if defined(MOZ_WAYLAND)
+-  if (!GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++  if (GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     // Wayland on desktop does not support PBuffer or FBO.
+     // We create a dummy wl_egl_window instead.
+     out->AppendElement(LOCAL_EGL_WINDOW_BIT);
+@@ -1084,7 +1084,7 @@
+   mozilla::gfx::IntSize pbSize(size);
+   EGLSurface surface = nullptr;
+ #if defined(MOZ_WAYLAND)
+-  if (!GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++  if (GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     surface = GLContextEGL::CreateWaylandBufferSurface(egl, config, pbSize);
+   } else
+ #endif
+--- gfx/gl/GLLibraryEGL.cpp	2020-01-18 05:34:22.000000000 +0800
++++ gfx/gl/GLLibraryEGL.cpp	2020-01-18 05:34:22.000000000 +0800
+@@ -783,7 +783,7 @@
+ #ifdef MOZ_WAYLAND
+     // Some drivers doesn't support EGL_DEFAULT_DISPLAY
+     GdkDisplay* gdkDisplay = gdk_display_get_default();
+-    if (!GDK_IS_X11_DISPLAY(gdkDisplay)) {
++    if (GDK_IS_WAYLAND_DISPLAY(gdkDisplay)) {
+       nativeDisplay = WaylandDisplayGetWLDisplay(gdkDisplay);
+       if (!nativeDisplay) {
+         NS_WARNING("Failed to get wl_display.");
+--- gfx/webrender_bindings/RenderCompositorEGL.cpp	2020-01-18 05:34:22.000000000 +0800
++++ gfx/webrender_bindings/RenderCompositorEGL.cpp	2020-01-18 05:34:22.000000000 +0800
+@@ -16,6 +16,5 @@
+ #ifdef MOZ_WAYLAND
+ #  include "mozilla/widget/GtkCompositorWidget.h"
+ #  include <gdk/gdk.h>
+-#  include <gdk/gdkx.h>
+ #endif
+ 
+@@ -30,7 +32,7 @@
+ UniquePtr<RenderCompositor> RenderCompositorEGL::Create(
+     RefPtr<widget::CompositorWidget> aWidget) {
+ #ifdef MOZ_WAYLAND
+-  if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
++  if (GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default())) {
+     return nullptr;
+   }
+ #endif
+--- dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
++++ dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
+@@ -6,8 +6,10 @@
+ 
+ #ifdef MOZ_WIDGET_GTK
+ #  include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #  include <gdk/gdkx.h>
+ #endif
++#endif
+ 
+ #include "ContentChild.h"
+ 
+--- widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800
++++ widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800
+@@ -13,7 +13,6 @@
+ #include "mozilla/StaticPtr.h"
+ #ifdef MOZ_WAYLAND
+ #  include <gdk/gdk.h>
+-#  include <gdk/gdkx.h>
+ #  include <gdk/gdkwayland.h>
+ #endif /* MOZ_WAYLAND */
+ 
+@@ -111,7 +110,7 @@
+                              int32_t aHeight, nsIScreen** aOutScreen) {
+ #ifdef MOZ_WAYLAND
+   static bool inWayland = gdk_display_get_default() &&
+-                          !GDK_IS_X11_DISPLAY(gdk_display_get_default());
++                          GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default());
+ 
+   if (inWayland) {
+     NS_WARNING("Getting screen in wayland, primary display will be returned.");
+--- layout/xul/nsMenuPopupFrame.cpp	2020-01-18 05:34:42.000000000 +0800
++++ layout/xul/nsMenuPopupFrame.cpp	2020-01-18 05:34:42.000000000 +0800
+@@ -59,7 +59,6 @@
+ #include <algorithm>
+ #ifdef MOZ_WAYLAND
+ #  include <gdk/gdk.h>
+-#  include <gdk/gdkx.h>
+ #  include <gdk/gdkwayland.h>
+ #endif /* MOZ_WAYLAND */
+ 
+@@ -1530,7 +1529,7 @@
+       // screen.
+ #ifdef MOZ_WAYLAND
+     static bool inWayland = gdk_display_get_default() &&
+-                            !GDK_IS_X11_DISPLAY(gdk_display_get_default());
++                            GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default());
+ #else
+     static bool inWayland = false;
+ #endif
+@@ -1670,7 +1669,7 @@
+       do_GetService("@mozilla.org/gfx/screenmanager;1"));
+ #ifdef MOZ_WAYLAND
+   static bool inWayland = gdk_display_get_default() &&
+-                          !GDK_IS_X11_DISPLAY(gdk_display_get_default());
++                          GDK_IS_WAYLAND_DISPLAY(gdk_display_get_default());
+ #else
+   static bool inWayland = false;
+ #endif
+--- toolkit/components/remote/nsRemoteService.cpp.orig	2020-01-18 05:35:23.000000000 +0800
++++ toolkit/components/remote/nsRemoteService.cpp	2020-02-06 00:40:00.900959711 +0800
+@@ -11,12 +11,17 @@
+ #endif
+ 
+ #ifdef MOZ_WIDGET_GTK
++#ifdef MOZ_X11
+ #  include "nsGTKRemoteServer.h"
+ #  include "nsXRemoteClient.h"
++#endif
+ #  ifdef MOZ_ENABLE_DBUS
+ #    include "nsDBusRemoteServer.h"
+ #    include "nsDBusRemoteClient.h"
+ #  endif
++#  ifdef MOZ_WAYLAND
++#  include <gdk/gdkwayland.h>
++#  endif
+ #elif defined(XP_WIN)
+ #  include "nsWinRemoteServer.h"
+ #  include "nsWinRemoteClient.h"
+@@ -94,16 +99,22 @@
+   nsAutoPtr<nsRemoteClient> client;
+ 
+ #ifdef MOZ_WIDGET_GTK
+-  bool useX11Remote = GDK_IS_X11_DISPLAY(gdk_display_get_default());
++  bool useX11Remote = false;
++#ifdef MOZ_X11
++  useX11Remote = GDK_IS_X11_DISPLAY(gdk_display_get_default());
++#endif
+ 
+ #  if defined(MOZ_ENABLE_DBUS)
+   if (!useX11Remote) {
+     client = new nsDBusRemoteClient();
+   }
+ #  endif
++
++#ifdef MOZ_X11
+   if (useX11Remote) {
+     client = new nsXRemoteClient();
+   }
++#endif
+ #elif defined(XP_WIN)
+   client = new nsWinRemoteClient();
+ #else
+@@ -141,16 +152,21 @@
+   }
+ 
+ #ifdef MOZ_WIDGET_GTK
++  bool useX11Remote = false;
++#ifdef MOZ_X11
+   bool useX11Remote = GDK_IS_X11_DISPLAY(gdk_display_get_default());
++#endif
+ 
+ #  if defined(MOZ_ENABLE_DBUS)
+   if (!useX11Remote) {
+     mRemoteServer = MakeUnique<nsDBusRemoteServer>();
+   }
+ #  endif
++#ifdef MOZ_X11
+   if (useX11Remote) {
+     mRemoteServer = MakeUnique<nsGTKRemoteServer>();
+   }
++#endif
+ #elif defined(XP_WIN)
+   mRemoteServer = MakeUnique<nsWinRemoteServer>();
+ #else
+--- gfx/thebes/gfxPlatform.cpp	2020-01-18 05:34:22.000000000 +0800
++++ gfx/thebes/gfxPlatform.cpp	2020-01-18 05:34:22.000000000 +0800
+@@ -3189,14 +3189,6 @@
+   }
+ #if defined(MOZ_WIDGET_GTK)
+   else {
+-    if (gfxConfig::IsEnabled(Feature::HW_COMPOSITING)) {
+-      // Hardware compositing should be disabled by default if we aren't using
+-      // WebRender. We had to check if it is enabled at all, because it may
+-      // already have been forced disabled (e.g. safe mode, headless). It may
+-      // still be forced on by the user, and if so, this should have no effect.
+-      gfxConfig::Disable(Feature::HW_COMPOSITING, FeatureStatus::Blocked,
+-                         "Acceleration blocked by platform");
+-    }
+ 
+     if (!gfxConfig::IsEnabled(Feature::HW_COMPOSITING) &&
+         gfxConfig::IsEnabled(Feature::GPU_PROCESS) &&

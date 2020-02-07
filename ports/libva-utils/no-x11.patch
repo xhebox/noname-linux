@@ -1,0 +1,10 @@
+--- a/videoprocess/vppscaling_n_out_usrptr.cpp	2019-10-08 22:34:20.000000000 +0800
++++ b/videoprocess/vppscaling_n_out_usrptr.cpp	2019-10-08 22:34:20.000000000 +0800
+@@ -38,7 +38,6 @@
+ #include <va/va.h>
+ #include <va/va_vpp.h>
+ #include "va_display.h"
+-#include <va/va_x11.h>
+ 
+ #define MAX_LEN   1024
+ 

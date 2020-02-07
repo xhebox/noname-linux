@@ -1,0 +1,20 @@
+version="1.1.115"
+desc="Vulkan Installable Client Driver (ICD) Loader"
+deps=["musl"]
+makedeps=["cmake", "wayland-protocols", "vulkan-headers"]
+source=[{url="https://github.com/KhronosGroup/Vulkan-Loader/archive/v${version}.tar.gz"}]
+
+build='''
+	cmake Vulkan-Loader-$version -Bbuild -DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+		-DCMAKE_INSTALL_DATADIR=/share \
+		-DCMAKE_SKIP_RPATH=True \
+		-DBUILD_TESTS=Off \
+		-DBUILD_WSI_XCB_SUPPORT=OFF \
+		-DBUILD_WSI_XLIB_SUPPORT=OFF \
+		-DBUILD_WSI_WAYLAND_SUPPORT=On \
+		-DCMAKE_BUILD_TYPE=Release
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

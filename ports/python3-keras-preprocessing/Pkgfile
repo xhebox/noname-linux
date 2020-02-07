@@ -1,0 +1,17 @@
+version="1.1.0"
+makedeps=["python-setuptools", "python3-numpy"]
+deps=["python3-numpy"]
+source=[
+	{url="https://files.pythonhosted.org/packages/source/K/Keras_Preprocessing/Keras_Preprocessing-${version}.tar.gz"},
+]
+desc="Preprocessing module of the Keras deep learning librare"
+
+build='''
+	cd Keras_Preprocessing-$version
+
+	/bin/python3 setup.py \
+		install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

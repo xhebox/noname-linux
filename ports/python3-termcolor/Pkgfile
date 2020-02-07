@@ -1,0 +1,13 @@
+version="1.1.0"
+deps=["python3"]
+makedeps=["python3-setuptools"]
+desc="ANSII Color formatting for output in terminal"
+source=[{url="https://pypi.python.org/packages/source/t/termcolor/termcolor-$version.tar.gz"}]
+
+build='''
+	cd termcolor-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

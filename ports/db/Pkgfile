@@ -21,4 +21,5 @@ build='''
 
 	make LIBSO_LIBS=-lpthread
 	make DESTDIR="$pkgdir" install
+	rm -r "$pkgdir"/docs
 '''

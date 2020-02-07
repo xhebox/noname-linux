@@ -1,10 +1,10 @@
-version="63.1"
+version="64.2"
 ver="`echo $version | tr . _`"
 desc="International Components for Unicode library"
 deps=["dash"]
 source=[
 	{
-		url="https://sourceforge.net/projects/icu/files/ICU4C/$version/icu4c-$ver-src.tgz/download",
+		url="https://ssl.icu-project.org/files/icu4c/${version}/icu4c-$ver-src.tgz",
 		name="icu4c-$version.tar.gz"
 	},
 	{url="icu-58.1-remove-bashisms.patch"},

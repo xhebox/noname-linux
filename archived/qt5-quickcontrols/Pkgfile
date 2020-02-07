@@ -1,0 +1,18 @@
+version="5.12.1"
+desc='Reusable Qt Quick based UI controls to create classic desktop-style user interfaces'
+deps=["qt5-declarative"]
+makedeps=["qt5-declarative"]
+source=[{url="https://download.qt.io/official_releases/qt/${version%.*}/${version}/submodules/qtquickcontrols-everywhere-src-$version.tar.xz"}]
+
+build='''
+  mkdir -p build
+  cd build
+
+  qmake ../qtquickcontrols-everywhere-src-$version
+  make
+  make INSTALL_ROOT="$pkgdir" install
+
+  # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
+  find "$pkgdir/lib" -type f -name '*.prl' \
+    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+'''

@@ -1,0 +1,22 @@
+version="2.6.0"
+desc="vaapi utils"
+deps=["libva"]
+makedeps=["libva", "mesa"]
+source=[
+	{url="https://github.com/intel/libva-utils/releases/download/$version/libva-utils-$version.tar.bz2"},
+	{url="no-x11.patch"},
+]
+
+ext='''
+	cd libva-utils-$version
+	patch -Np1 -i ../no-x11.patch
+'''
+
+build='''
+	cd libva-utils-$version
+
+	./configure --prefix= --disable-static --disable-x11
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

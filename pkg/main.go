@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"os"
 	"os/signal"
-	"path"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -25,7 +24,6 @@ func (c harg) String() string {
 	return fmt.Sprintf("%c", c)
 }
 
-// various structs
 type config struct {
 	ARCH64    string   `toml:"arch64"`
 	ARCH32    string   `toml:"arch32"`
@@ -65,7 +63,7 @@ func main() {
 	}()
 
 	// subaction [z] is reversed for internal use
-	pkgs, args, e := getopt.GetOpt(os.Args[1:], "EUMQSRhabcdefiklmoprstuxyv", []string{"config=", "debug", "root="})
+	pkgs, args, e := getopt.GetOpt(os.Args[1:], "EUMQSRhabcdefiklmoprstuxyvz", []string{"config=", "debug", "root="})
 	if e != nil {
 		log.Fatalf(errors.Wrapf(e, "can not parse arguments").Error())
 	}
@@ -74,11 +72,13 @@ func main() {
 	root := ""
 	mact := harg('h')
 	sact := make(map[harg]bool)
-	for _, arg := range args {
+	for k := range args {
+		arg := args[k]
+
 		switch act := arg.Opt(); act {
 		case "-U", "-M", "-Q", "-S", "-R", "-E", "-h":
 			mact = harg(act[1])
-		case "-a", "-b", "-c", "-d", "-f", "-i", "-k", "-l", "-m", "-o", "-p", "-r", "-s", "-t", "-u", "-x", "-y":
+		case "-a", "-b", "-c", "-d", "-f", "-i", "-k", "-l", "-m", "-o", "-p", "-r", "-s", "-t", "-u", "-x", "-y", "-z":
 			sact[harg(act[1])] = true
 		case "--config":
 			cfgfile = arg.Arg()
@@ -99,7 +99,7 @@ func main() {
 	}
 
 	if cfg.Makeflags == 0 {
-		cfg.Makeflags = runtime.NumCPU() + 1
+		cfg.Makeflags = runtime.NumCPU()
 	}
 
 	if e := os.Chdir(os.TempDir()); e != nil {
@@ -129,16 +129,8 @@ func main() {
 
 	db = diskv.New(diskv.Options{
 		BasePath: cfg.Database,
-		AdvancedTransform: func(key string) *diskv.PathKey {
-			path := strings.Split(key, "/")
-			last := len(path) - 1
-			return &diskv.PathKey{
-				Path:     path[:last],
-				FileName: path[last],
-			}
-		},
-		InverseTransform: func(pathkey *diskv.PathKey) string {
-			return path.Join(strings.Join(pathkey.Path, "/"), pathkey.FileName)
+		Transform: func(key string) []string {
+			return []string{}
 		},
 		CacheSizeMax: 1024 * 1024,
 		Compression:  diskv.NewZlibCompression(),
@@ -166,7 +158,7 @@ func main() {
 	fmt.Fprintf(shenv, "export LDFLAGS=\"%s\"\n", cfg.LDFLAGS)
 	fmt.Fprintf(shenv, "export MAKEFLAGS=\"-j%d\"\n", cfg.Makeflags)
 	if cfg.Ccache {
-		fmt.Fprintln(shenv, "export PATH=\"/usr/lib/ccache:/usr/lib/ccache/bin:/lib/ccache:/lib/ccache/bin:$PATH\"")
+		fmt.Fprintln(shenv, "export PATH=\"/lib/ccache:$PATH\"")
 	}
 
 	switch mact {
@@ -234,11 +226,12 @@ func main() {
 		log.Notice("-M fetch, extract and build packages")
 		log.Notice("\t(d) no makedeps")
 		log.Notice("\t(s) no strip")
-		log.Notice("\t(k) keep .src&.pkg")
+		log.Notice("\t(k) keep src & pkg")
 		log.Notice("\t(x) assume extraction has done")
 		log.Notice("-S install packages")
 		log.Notice("\t(d) no deps")
 		log.Notice("\t(r) upgrade installed package")
+		log.Notice("\t(z) not to mark it as a user-installed package")
 		log.Notice("-R remove packages")
 		log.Notice("\t(d) only remove specific packages")
 		log.Notice("-Q query system or packages or files, [i] is the default subaction if no provided one")

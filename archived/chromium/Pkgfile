@@ -1,0 +1,128 @@
+version="80.0.3987.42"
+nostrip=true
+makedeps=["alsa-lib", "bzip2", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "nodejs", "opus", "gn", "icu", "minizip", "llvm", "nss", "xorgproto", "wayland-protocols", "vulkan-headers"]
+deps=["alsa-lib", "bzip2", "perl", "pciutils", "dbus", "gperf", "mesa", "python", "yasm", "ninja", "libcap", "flac", "libva", "libjpeg-turbo", "libpng", "libxslt", "ffmpeg", "expat", "libwebp", "elfutils", "speex", "hwids", "libxscrnsaver", "desktop-file-utils", "glib", "libevent", "libxfont2", "ttf-dejavu", "opus", "icu", "minizip", "nss", "wayland", "vulkan-icd-loader"]
+desc="The open-source project behind Google Chrome"
+source=[
+	{url="0001-ozone-wayland-Complete-submission-of-a-buffer-submit.patch"},
+	{url="chromium-headers.patch"},
+	{url="chromium-ozone.patch"},
+	{url="chromium-remotetree.patch"},
+	{url="chromium-skia-harmony.patch"},
+	{url="chromium-spammyfont.patch"},
+	{url="chromium-swiftshader-default-visibility.patch"},
+	{url="chromium-system-icu.patch"},
+	{url="chromium-system-zlib.patch"},
+	{url="delete_not_yet_released_clang_warnings.patch"},
+	{url="musl_crashpad.patch"},
+	{url="musl_fixes.patch"},
+	{url="musl_fontconfig.patch"},
+	{url="musl_hacks.patch"},
+	{url="musl_libcpp.patch"},
+	{url="musl_no-execinfo.patch"},
+	{url="musl_no-getcontext.patch"},
+	{url="musl_no-mallinfo.patch"},
+	{url="musl_resolver.patch"},
+	{url="musl_sandbox.patch"},
+	{url="musl_stack.patch"},
+	{url="musl_v8_timedwait.patch"},
+	{url="vaapi-fix.patch"},
+
+	{url="chromium.sh"},
+	{url="chromium.desktop"},
+	{url="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$version.tar.xz"},
+]
+
+ext='''
+	cd chromium-$version
+
+	for i in $source; do
+		echo "$i"
+		case $i in
+		*.patch|*.diff) patch -Np1 -i ../$i;;
+		esac
+	done
+
+	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
+	sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' \
+		third_party/blink/renderer/core/xml/*.cc \
+		third_party/blink/renderer/core/xml/parser/xml_document_parser.cc \
+		third_party/libxml/chromium/libxml_utils.cc
+
+	mkdir -p third_party/node/linux/node-linux-x64/bin
+	ln -s /bin/node third_party/node/linux/node-linux-x64/bin/
+
+	# libvpx
+	# libevent
+	# libxml
+	_system_libs="icu zlib freetype flac harfbuzz-ng libjpeg libwebp libxslt opus yasm libdrm fontconfig ffmpeg libpng"
+	for _lib in $_system_libs libjpeg_turbo; do
+		find "third_party/$_lib" -type f \
+		\! -path "third_party/$_lib/chromium/*" \
+		\! -path "third_party/$_lib/google/*" \
+		\! -path 'third_party/yasm/run_yasm.py' \
+		\! -regex '.*\.\(gn\|gni\|isolate\)' \
+		-delete || true
+	done
+	python2 build/linux/unbundle/replace_gn_files.py --system-libraries ${_system_libs}
+	third_party/libaddressinput/chromium/tools/update-strings.py
+'''
+
+build='''
+	cd chromium-$version
+	# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
+	# To be honest, i am too poor to get a complete set of keys..
+	# you can get your own keys, and put them here...
+	# or set env vars like GOOGLE_API_KEY, uppercase, same as the followings...
+	#-Dgoogle_api_key=
+	#-Dgoogle_default_client_id=
+	#-Dgoogle_default_client_secret="
+	export CCACHE_SLOPPINESS=time_macros
+	export CC=clang
+	export CXX=clang++
+	export AR=ar
+	export NM=nm
+	
+	#gn gen out/Release --args='is_desktop_linux=true use_lld=true use_gold=false symbol_level=0 linux_use_bundled_binutils=false closure_compile=false binutils_path="/bin" is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=false use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=false enable_swiftshader=false enable_hangout_services_extension=false custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_ozone=true ozone_platform_wayland=true ozone_platform_x11=false ozone_auto_platforms=false use_system_libwayland=true use_system_minigbm=true use_system_libdrm=true use_gtk=false enable_vulkan=true rtc_use_pipewire=false rtc_link_pipewire=false'
+	gn gen out/Release --args='is_desktop_linux=true use_lld=true use_gold=false symbol_level=0 linux_use_bundled_binutils=false closure_compile=false binutils_path="/bin" is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=false use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=false enable_swiftshader=false enable_hangout_services_extension=false enable_vulkan=true rtc_use_pipewire=false rtc_link_pipewire=false custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default"'
+	ninja -C out/Release chrome chrome_sandbox
+	
+	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
+
+	install -Dm4755 out/Release/chrome_sandbox "$pkgdir/lib/chromium/chrome-sandbox"
+
+	[ -e "out/Release/chromedriver" ] && install -D out/Release/chromedriver "$pkgdir/lib/chromium/chromedriver"
+
+	cp -a out/Release/*.pak out/Release/*.bin out/Release/locales "$pkgdir/lib/chromium/"
+	for i in out/Release/*.so; do
+		[ "$i" != "out/Release/*.so" ] && cp -a "$i" "$pkgdir/lib/chromium/"
+	done
+	[ -e "out/Release/icudtl.dat" ] && cp -a out/Release/icudtl.dat "$pkgdir/lib/chromium/"
+	[ -e "out/Release/resources" ] && cp -a out/Release/resources "$pkgdir/lib/chromium/"
+	[ -e "out/Release/swiftshader" ] && cp -a out/Release/swiftshader "$pkgdir/lib/chromium/"
+
+	install -Dm644 chrome/app/resources/manpage.1.in "$pkgdir/share/man/man1/chromium.1"
+	install -Dm644 "$srcdir/chromium.desktop" "$pkgdir/share/applications/chromium.desktop"
+
+	sed -i \
+	-e "s/@@MENUNAME@@/Chromium/g" \
+	-e "s/@@PACKAGE@@/chromium/g" \
+	-e "s/@@USR_BIN_SYMLINK_NAME@@/chromium/g" \
+	"$pkgdir/share/applications/chromium.desktop" \
+	"$pkgdir/share/man/man1/chromium.1"
+
+	install -Dm755 "$srcdir/chromium.sh" \
+	"$pkgdir/bin/chromium"
+
+	for size in 24 48 64 128 256; do
+		install -Dm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	for size in 16 32; do
+		install -Dm644 "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	ln -s /lib/chromium/chromedriver "$pkgdir/bin/chromedriver"
+'''

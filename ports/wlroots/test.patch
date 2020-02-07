@@ -1,0 +1,75 @@
+--- a/types/xdg_shell/wlr_xdg_surface.c	2019-12-31 23:11:54.000000000 +0800
++++ b/types/xdg_shell/wlr_xdg_surface.c	2019-12-31 23:11:54.000000000 +0800
+@@ -505,6 +505,10 @@
+ 		break;
+ 	}
+ 
++		wlr_log(WLR_DEBUG,
++		"xhebox - xdg_surface reset  %p (res %p) (role %d)",
++			xdg_surface, xdg_surface->resource, xdg_surface->role);
++
+ 	xdg_surface->role = WLR_XDG_SURFACE_ROLE_NONE;
+ }
+ 
+@@ -513,6 +513,9 @@
+ }
+ 
+ void destroy_xdg_surface(struct wlr_xdg_surface *surface) {
++		wlr_log(WLR_DEBUG,
++		"xhebox - destroy(then reset)_xdg_surface %p (res %p)\n",
++			surface, surface->resource);
+ 	reset_xdg_surface(surface);
+ 
+ 	wl_resource_set_user_data(surface->resource, NULL);
+@@ -563,6 +566,9 @@
+ 		wlr_xdg_popup_destroy(popup->base);
+ 	}
+ 
++		wlr_log(WLR_DEBUG,
++		"xhebox - popup_destroy(then reset) %p (res %p)\n",
++			surface, surface->resource);
+ 	xdg_popup_send_popup_done(surface->popup->resource);
+ 	wl_resource_set_user_data(surface->popup->resource, NULL);
+ 	reset_xdg_surface(surface);
+--- a/types/xdg_shell/wlr_xdg_surface.c	2020-01-23 14:27:35.866063748 +0800
++++ b/types/xdg_shell/wlr_xdg_surface.c	2020-01-23 14:27:35.866063748 +0800
+@@ -103,7 +103,8 @@
+ 	if (surface->role == WLR_XDG_SURFACE_ROLE_NONE) {
+ 		wl_resource_post_error(surface->resource,
+ 			XDG_SURFACE_ERROR_NOT_CONSTRUCTED,
+-			"xdg_surface must have a role");
++			"ack xdg_surface must have a role1");
++		wlr_log(WLR_DEBUG, "ack role1");
+ 		return;
+ 	}
+ 
+@@ -270,7 +270,8 @@
+ 	if (surface->role == WLR_XDG_SURFACE_ROLE_NONE) {
+ 		wl_resource_post_error(surface->resource,
+ 			XDG_SURFACE_ERROR_NOT_CONSTRUCTED,
+-			"xdg_surface must have a role");
++			"geometry xdg_surface must have a role2");
++		wlr_log(WLR_DEBUG, "geometry role2");
+ 		return;
+ 	}
+ 
+@@ -335,7 +335,8 @@
+ 	if (surface->role == WLR_XDG_SURFACE_ROLE_NONE) {
+ 		wl_resource_post_error(surface->resource,
+ 			XDG_SURFACE_ERROR_NOT_CONSTRUCTED,
+-			"xdg_surface must have a role");
++			"commit xdg_surface must have a role3");
++		wlr_log(WLR_DEBUG, "commit role3");
+ 		return;
+ 	}
+ }
+--- a/types/xdg_shell/wlr_xdg_surface.c	2020-01-25 11:18:04.816644319 +0800
++++ b/types/xdg_shell/wlr_xdg_surface.c	2020-01-25 11:18:04.816644319 +0800
+@@ -507,6 +507,7 @@
+ 			xdg_surface, xdg_surface->resource, xdg_surface->role);
+ 
+ 	xdg_surface->role = WLR_XDG_SURFACE_ROLE_NONE;
++	//xdg_surface->surface->role = NULL;
+ }
+ 
+ void destroy_xdg_surface(struct wlr_xdg_surface *surface) {

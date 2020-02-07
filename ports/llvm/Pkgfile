@@ -1,41 +1,48 @@
-version="7.0.1"
+version="9.0.1"
 nostrip=true
 desc="LLVM compiler and its backend"
-makedeps=["python", "cmake", "flex", "bison", "libffi", "libxml2"]
-deps=["python", "libffi", "libxml2"]
+makedeps=["python", "cmake", "flex", "bison", "libffi", "libxml2", "libedit"]
+deps=["python", "libffi", "libxml2", "libedit"]
 source=[
-	{url="http://llvm.org/releases/$version/llvm-$version.src.tar.xz"},
-	{url="https://releases.llvm.org/$version/lld-$version.src.tar.xz"},
-	{url="http://www.llvm.org/releases/${version}/cfe-${version}.src.tar.xz"},
-	{url="http://www.llvm.org/releases/${version}/clang-tools-extra-${version}.src.tar.xz"},
-	{url="http://www.llvm.org/releases/${version}/compiler-rt-${version}.src.tar.xz"},
-	{url="cfe-001-fix-stdint.patch"},
-	{url="cfe-003-fix-unwind-chain-inclusion.patch"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lldb-$version.src.tar.xz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lld-$version.src.tar.xz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/clang-$version.src.tar.xz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/clang-tools-extra-$version.src.tar.xz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz"},
+	{url="enable-SSP-and-PIE-by-default.patch"},
 	{url="llvm-001-musl.patch"},
 	{url="llvm-config.h"}
 ]
 
 ext='''
-	cd cfe-$version.src
+	cd clang-$version.src
 	for i in $source;do
-		echo $i
 		case $i in
-		cfe*.patch) patch -p1 -i "$srcdir/$i";;
+		clang*.patch) patch -p1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
 
 	cd compiler-rt-$version.src
 	for i in $source;do
-		echo $i
 		case $i in
 		compiler-rt*.patch) patch -p1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
 
+	cd lldb-$version.src
+	for i in $source;do
+		case $i in
+		lldb*.patch) patch -p1 -i "$srcdir/$i";;
+		esac
+	done
+	cd ..
+
 	wrksrc="`pwd`/llvm-$version.src"
-	mv cfe-${version}.src ${wrksrc}/tools/clang
+	mv clang-${version}.src ${wrksrc}/tools/clang
+	mv lldb-${version}.src ${wrksrc}/tools/lldb
 	mv clang-tools-extra-${version}.src ${wrksrc}/tools/clang/tools/extra
 	mv compiler-rt-${version}.src ${wrksrc}/projects/compiler-rt
 	mv lld-${version}.src ${wrksrc}/projects/lld
@@ -43,7 +50,6 @@ ext='''
 
 	cd llvm-$version.src
 	for i in $source;do
-		echo $i
 		case $i in
 		llvm*.patch) patch -p1 -i "$srcdir/$i";;
 		esac
@@ -71,6 +77,7 @@ build='''
 		-DLLVM_ENABLE_FFI=YES \
 		-DLLVM_ENABLE_RTTI=YES \
 		-DLLVM_ENABLE_ZLIB=YES \
+		-DLLDB_DISABLE_PYTHON=YES \
 		-DLLVM_APPEND_VC_REV=NO \
 		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET" \
 		-DLLVM_TARGETS_TO_BUILD='X86;AMDGPU;BPF' \

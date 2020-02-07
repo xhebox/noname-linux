@@ -1,0 +1,11 @@
+--- crypto/compat/getentropy_linux.c.orig
++++ crypto/compat/getentropy_linux.c
+@@ -162,7 +162,7 @@
+ 	 * sysctl ABI, or consider providing a new failsafe API which
+ 	 * works in a chroot or when file descriptors are exhausted.
+ 	 */
+-#undef FAIL_INSTEAD_OF_TRYING_FALLBACK
++#define FAIL_INSTEAD_OF_TRYING_FALLBACK
+ #ifdef FAIL_INSTEAD_OF_TRYING_FALLBACK
+ 	raise(SIGKILL);
+ #endif

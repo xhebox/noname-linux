@@ -1,0 +1,19 @@
+version="5.12.1"
+desc='Provides access to hardware and virtual serial ports'
+deps=["qt5-base"]
+makedeps=["qt5-base"]
+source=[
+	{url="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtserialport-everywhere-src-$version.tar.xz"},
+]
+
+build='''
+	mkdir -p build
+	cd build
+
+	qmake ../qtserialport-everywhere-src-$version
+	make
+	make INSTALL_ROOT="$pkgdir" install
+
+	find "$pkgdir/lib" -type f -name '*.prl' \
+	-exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+'''

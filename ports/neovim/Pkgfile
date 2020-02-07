@@ -1,7 +1,7 @@
 version="0.3.4"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
-makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "xsel", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
-deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "xsel", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
+makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
+deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
 source=[
 	{url="https://github.com/neovim/neovim/archive/v${version}.tar.gz"},
 ]

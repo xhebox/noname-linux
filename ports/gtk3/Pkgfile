@@ -1,7 +1,7 @@
 version="3.24.1"
 desc="A multi-platform toolkit for creating graphical user interfaces"
-makedeps=["at-spi2-atk", "cairo", "atk", "libxcursor", "libxfixes", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols", "xorgproto", "gobject-introspection"]
-deps=["at-spi2-atk", "atk", "cairo", "libxcursor", "libxfixes", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
+makedeps=["cairo", "atk", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols", "gobject-introspection"]
+deps=["atk", "cairo", "gdk-pixbuf", "pixman", "pango", "hicolor-icon-theme", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
 source=[
 	{url="http://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
 	{url="gtk3-immodules.toml"},
@@ -26,7 +26,7 @@ build='''
 	--disable-gtk-doc-html \
 	--disable-xinerama \
 	--enable-wayland-backend \
-	--enable-x11-backend \
+	--disable-x11-backend \
 	--disable-xkb \
 	--disable-xrandr \
 	--disable-xfixes \
@@ -38,6 +38,7 @@ build='''
 	sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 	make
 	make DESTDIR="$pkgdir" install
-	install -Dm755 ../icon.toml "$pkgdir/${HOOKS#$ROOT}"/icon.toml
-	install -Dm755 ../gtk3-immodules.toml "$pkgdir/${HOOKS#$ROOT}"/gtk3-immodules.toml
+	install -Dm644 ../icon.toml "$pkgdir/${HOOKS#$ROOT}"/icon.toml
+	install -Dm644 ../gtk3-immodules.toml "$pkgdir/${HOOKS#$ROOT}"/gtk3-immodules.toml
+	sed -i 's/x11//g' "$pkgdir/lib/pkgconfig/gtk+-wayland-3.0.pc" "$pkgdir/lib/pkgconfig/gtk+-3.0.pc"
 '''

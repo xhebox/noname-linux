@@ -1,0 +1,14 @@
+version="1.8.15"
+makedeps=["perl", "python", "flex", "cmake"]
+desc="Documentation system for C++, C, Java, IDL and PHP"
+_version="`echo $version | tr . _`"
+source=[{url="https://github.com/doxygen/doxygen/archive/Release_${_version}.tar.gz"}]
+
+build='''
+	cmake doxygen-Release_$_version -Bbuild -DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX:PATH= \
+		-DDOC_INSTALL_DIR:PATH=share/doc/doxygen \
+		-DPYTHON_EXECUTABLE:FILE=/bin/python2
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

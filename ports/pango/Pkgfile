@@ -1,8 +1,16 @@
 version="1.42.4"
 desc="library for layout and rendering of text"
-makedeps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "libxft", "libxext", "cairo", "gobject-introspection"]
-deps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "libxft", "libxext", "cairo"]
-source=[{url="https://download.gnome.org/sources/pango/${version%.*}/pango-$version.tar.xz"}]
+makedeps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "gobject-introspection"]
+deps=["expat", "fontconfig", "harfbuzz", "glib", "cairo"]
+source=[
+	{url="https://download.gnome.org/sources/pango/${version%.*}/pango-$version.tar.xz"},
+	{url="no-x11.patch"},
+]
+
+ext='''
+	cd pango-$version
+	patch -p1 -i ../no-x11.patch
+'''
 
 build='''
 	noname-meson pango-$version build -Denable_docs=false

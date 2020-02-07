@@ -9,9 +9,10 @@ source=[
 
 build='''
 	cd cmake-$version
-	patch -p1 < ../cmake-isystem.patch
+	patch -p1 -i ../cmake-isystem.patch
 	./configure \
 		--prefix= \
+		--docdir=/share/doc/cmake-${version%.*} \
 		--system-libs \
 		--no-system-jsoncpp \
 		--no-system-librhash

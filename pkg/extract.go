@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"./libpkg"
 	dircopy "github.com/otiai10/copy"
 	"github.com/pkg/errors"
 	"gopkg.in/src-d/go-git.v4"
@@ -19,7 +18,7 @@ import (
 )
 
 func opt_extract(name string, opts map[harg]bool) error {
-	pkg, e := libpkg.NewPkgfile(name, cfg.Ports)
+	pkg, e := NewPkgfile(name, cfg.Ports)
 	if e != nil {
 		return errors.WithStack(e)
 	}

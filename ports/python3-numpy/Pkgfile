@@ -1,0 +1,30 @@
+version="1.14.3"
+makedeps=["python-setuptools", "python3-cython"]
+deps=["python3-cython"]
+source=[
+	{url="https://github.com/numpy/numpy/archive/v${version}.tar.gz"},
+	{url="site.cfg"},
+]
+desc="Scientific tools for Python"
+
+build='''
+	pyver=$(python3 -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))')
+
+	sed -i 's/xlocale/locale/g' numpy-$version/numpy/core/src/multiarray/numpyos.c
+	cp site.cfg numpy-$version/numpy-$version 
+
+	export LDFLAGS="$LDFLAGS -shared"
+	export ATLAS=None
+
+	cd numpy-$version
+
+	/bin/python3 setup.py \
+		build \
+		install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+
+	install -m755 -d "${pkgdir}/include/python${pyver}m"
+	ln -s ../../../lib/python$pyver/site-packages/numpy/core/include/numpy "${pkgdir}/include/python${pyver}m/numpy"
+'''

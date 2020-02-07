@@ -1,23 +1,25 @@
-name=qt5-declarative
-version=5.11.0
+version="5.12.1"
 desc='Classes for QML and JavaScript languages'
-deps="qt5-base qt5-xmlpatterns"
-source="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtdeclarative-everywhere-src-$version.tar.xz
-qt-musl-stackbottom.patch"
+deps=["qt5-base"]
+makedeps=["qt5-base", "python3"]
+source=[
+	{url="http://download.qt.io/official_releases/qt/${version%.*}/$version/submodules/qtdeclarative-everywhere-src-$version.tar.xz"},
+	{url="qt-musl-stackbottom.patch"},
+]
 
-ext() {
+ext='''
 	cd qtdeclarative-everywhere-src-$version
-	patch -p1 < ../qt-musl-stackbottom.patch || die
-}
+	patch -p1 -i ../qt-musl-stackbottom.patch
+'''
 
-build() {
+build='''
 	mkdir -p build
 	cd build
 
 	qmake ../qtdeclarative-everywhere-src-$version
-	make || die
-	make INSTALL_ROOT="$pkgdir" install || die
+	make
+	make INSTALL_ROOT="$pkgdir" install
 
 	find "$pkgdir/lib" -type f -name '*.prl' \
 	-exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
-}
+'''

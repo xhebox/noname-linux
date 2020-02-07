@@ -8,7 +8,7 @@ source=[
 
 build='''
 	cd libevent-$version-stable
-	patch -p0 < ../libressl.patch
+	patch -p0 -i ../libressl.patch
 	./configure --prefix=/	--disable-static --disable-libevent-regress
 	make
 	make DESTDIR="$pkgdir" install

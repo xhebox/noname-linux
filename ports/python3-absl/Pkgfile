@@ -1,0 +1,13 @@
+version="0.7.1"
+deps=["python3"]
+makedeps=["python3-setuptools"]
+desc="Python 2 and 3 compatibility utilities"
+source=[{url="https://pypi.io/packages/source/a/absl-py/absl-py-$version.tar.gz"}]
+
+build='''
+	cd absl-py-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

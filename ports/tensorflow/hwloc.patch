@@ -1,0 +1,11 @@
+--- /hwloc/topology.c	2018-12-07 17:09:15.000000000 +0800
++++ /hwloc/topology.c	2018-12-07 17:09:15.000000000 +0800
+@@ -42,7 +42,7 @@
+ #endif
+ 
+ #ifdef HAVE_SYS_SYSCTL_H
+-#include <sys/sysctl.h>
++#include <linux/sysctl.h>
+ #endif
+ 
+ #ifdef HWLOC_WIN_SYS

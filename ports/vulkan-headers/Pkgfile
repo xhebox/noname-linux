@@ -1,0 +1,12 @@
+version="1.1.119"
+desc="Vulkan header files"
+deps=["cmake"]
+source=[{url="https://github.com/KhronosGroup/Vulkan-Headers/archive/v${version}.tar.gz"}]
+
+build='''
+	cmake Vulkan-Headers-$version -Bbuild -DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_SKIP_RPATH=True \
+		-DCMAKE_BUILD_TYPE=Release
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

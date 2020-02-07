@@ -1,0 +1,16 @@
+version="0.28.0"
+nostrip=true
+deps=["libarchive", "openjdk8", "zip", "unzip"]
+makedeps=["libarchive", "openjdk8", "zip", "unzip"]
+source=[
+	{url="https://github.com/bazelbuild/bazel/releases/download/${version}/bazel-${version}-dist.zip"},
+	{url="bfd.patch"},
+]
+
+build='''
+	patch -p1 -i ../bfd.patch
+	env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" ./compile.sh
+  cd output
+  install -Dm755 "${srcdir}/scripts/packages/bazel.sh" "${pkgdir}/bin/bazel"
+  install -Dm755 "${srcdir}/output/bazel" "${pkgdir}/bin/bazel-real"
+'''

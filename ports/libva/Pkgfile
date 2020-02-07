@@ -1,13 +1,13 @@
-version="2.4.0"
+version="2.6.1"
 desc="vaapi"
-deps=["libxfixes", "libx11", "libxext", "libdrm", "wayland"]
-makedeps=["libxfixes", "libx11", "libxext", "libdrm", "wayland-protocols"]
-source=[{url="https://github.com/01org/libva/releases/download/$version/libva-$version.tar.bz2"}]
+deps=["libdrm", "wayland"]
+makedeps=["libdrm", "wayland-protocols"]
+source=[{url="https://github.com/intel/libva/releases/download/$version/libva-$version.tar.bz2"}]
 
 build='''
 	cd libva-$version
 
-	./configure --prefix= --disable-static
+	./configure --prefix= --disable-static --disable-x11
 
 	make
 	make DESTDIR="$pkgdir" install

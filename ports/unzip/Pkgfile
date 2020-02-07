@@ -1,0 +1,41 @@
+version="6.0"
+desc="Decompress utility for zipfiles"
+makedeps=["bzip2"]
+deps=["bzip2"]
+source=[
+	{url="http://downloads.sourceforge.net/infozip/unzip60.tar.gz"},
+	{url="overflow-fsize.patch"},
+	{url="cve20149636.patch"},
+	{url="test_compr_eb.patch"},
+	{url="getZip64Data.patch"},
+	{url="crc32.patch"},
+	{url="empty-input.patch"},
+	{url="csiz-underflow.patch"},
+	{url="nextbyte-overflow.patch"},
+]
+
+ext='''
+	cd unzip60
+	sed -i "/MANDIR =/s#)/#)/share/#" unix/Makefile
+	for i in $source; do
+		case $i in
+			test_compr_eb.patch|getZip64Data.patch|crc32.patch) patch -i "$srcdir"/$i ;;
+			*.patch) patch -p1 -i "$srcdir"/$i ;;
+		esac
+	done
+'''
+
+build='''
+	cd unzip60
+	# DEFINES, make, and install args from Debian
+	DEFINES='-DACORN_FTYPE_NFS -DWILD_STOP_AT_DIR -DLARGE_FILE_SUPPORT \
+  -DUNICODE_SUPPORT -DUNICODE_WCHAR -DUTF8_MAYBE_NATIVE -DNO_LCHMOD \
+  -DDATE_FORMAT=DF_YMD -DUSE_BZIP2 -DNOMEMCPY -DNO_WORKING_ISPRINT'
+
+	make -f unix/Makefile prefix="$pkgdir" \
+		D_USE_BZ2=-DUSE_BZIP2 L_BZ2=-lbz2 \
+		LF2="$LDFLAGS" CF="$CFLAGS $CPPFLAGS -I. $DEFINES" \
+		unzips
+	make -f unix/Makefile prefix="$pkgdir" MANDIR="$pkgdir"/share/man/man1 install
+	ln -sf unzip "$pkgdir"/bin/zipinfo
+'''

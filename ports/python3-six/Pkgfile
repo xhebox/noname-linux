@@ -1,0 +1,13 @@
+version="1.11.0"
+deps=["python3"]
+desc="Python 2 and 3 compatibility utilities"
+makedeps=["python3-setuptools"]
+source=[{url="https://pypi.io/packages/source/s/six/six-$version.tar.gz"}]
+
+build='''
+	cd six-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

@@ -1,0 +1,21 @@
+version="2019.4"
+hver="1.5.1.corrected"
+desc="API and commands for processing SPIR-V modules"
+deps=["musl"]
+makedeps=["cmake", "python3"]
+source=[
+	{url="https://github.com/KhronosGroup/SPIRV-Tools/archive/v${version}.tar.gz"},
+	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/${hver}.tar.gz"},
+]
+
+build='''
+	cmake SPIRV-Tools-$version -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DSPIRV_WERROR=Off \
+		-DBUILD_SHARED_LIBS=ON \
+		-DSPIRV-Headers_SOURCE_DIR=${srcdir}/SPIRV-Headers-${hver}
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

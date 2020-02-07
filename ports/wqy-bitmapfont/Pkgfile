@@ -1,0 +1,14 @@
+version="1.0.0-RC1"
+desc="A bitmapped Song Ti (serif) Chinese font"
+source=[{url="http://distfiles.exherbo.org/distfiles/wqy-bitmapsong-pcf-$version.tar.gz"}]
+
+build='''
+	cd wqy-bitmapsong
+	mkdir -p	"$pkgdir"/share/fonts/wenquanyi
+	cp *.pcf "$pkgdir"/share/fonts/wenquanyi
+
+	mkdir -p "$pkgdir"/etc/fonts/conf.avail
+	mkdir -p "$pkgdir"/etc/fonts/conf.d
+	cp 85-wqy-bitmapsong.conf "$pkgdir"/etc/fonts/conf.avail
+	ln -sr "$pkgdir"/etc/fonts/conf.avail/85-wqy-bitmapsong.conf "$pkgdir"/etc/fonts/conf.d/85-wqy-bitmapsong.conf
+'''

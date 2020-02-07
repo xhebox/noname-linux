@@ -12,13 +12,12 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"./libpkg"
 	"github.com/pkg/errors"
 	"gopkg.in/src-d/go-git.v4"
 )
 
 func opt_download(name string, opts map[harg]bool) error {
-	pkg, e := libpkg.NewPkgfile(name, cfg.Ports)
+	pkg, e := NewPkgfile(name, cfg.Ports)
 	if e != nil {
 		return errors.WithStack(e)
 	}

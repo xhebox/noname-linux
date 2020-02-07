@@ -1,0 +1,12 @@
+version="0.20190314"
+deps=["llvm", "rapidjson"]
+makedeps=["llvm", "rapidjson"]
+desc="C/C++/ObjC language server supporting cross references, hierarchies, completion and semantic highlighting"
+source=[{url="https://github.com/MaskRay/ccls/archive/$version.tar.gz"}]
+
+build='''
+	cd ccls-$version
+	cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''

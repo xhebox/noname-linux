@@ -1,10 +1,10 @@
-version="3.25.3"
+version="3.31.1"
 ver="`echo $version | tr . ' '`"
 _ver="`printf \"%d%02d%02d00\n\" $ver`"
 deps=["readline", "zlib"]
 desc="SQL database engine"
 source=[
-	{url="http://www.sqlite.org/2018/sqlite-autoconf-${_ver}.tar.gz"},
+	{url="http://www.sqlite.org/2020/sqlite-autoconf-${_ver}.tar.gz"},
 	{url="defaults.patch"},
 	{url="walmode.patch"},
 ]

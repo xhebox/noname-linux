@@ -1,6 +1,7 @@
 version="3.7.3"
 desc="A high-level scripting language(3.x)"
 deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
+makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
 source=[
 	{url="http://www.python.org/ftp/python/$version/Python-$version.tar.xz"},
 	{url="readonly.patch"},
@@ -12,15 +13,13 @@ build='''
 	Modules/_ctypes/darwin* \
 	Modules/_ctypes/libffi* \
 	Modules/zlib
-	patch -p1 < ../readonly.patch
+	patch -p1 -i ../readonly.patch
 	./configure --prefix=/ \
 		--libdir=/lib \
 		--exec-prefix=/ \
 		--enable-shared \
 		--with-threads \
 		--with-computed-gotos \
-		--enable-optimizations \
-		--with-lto \
 		--with-sqlite \
 		--enable-ipv6 \
 		--with-system-expat \
@@ -28,6 +27,7 @@ build='''
 		--with-system-libmpdec \
 		--without-ensurepip \
 		--enable-loadable-sqlite-extensions
+#--enable-optimizations \
 
 	make EXTRA_CFLAGS="$CFLAGS"
 	make DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall

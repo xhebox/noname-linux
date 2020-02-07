@@ -1,0 +1,12 @@
+[Unit]
+Description=Shadowsocks-Libev Client Service
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=20
+ExecStart=/bin/ss-local -c %h/.config/shadowsocks/%i.json
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,47 @@
+version="0.41.0"
+_cargo_dist_version="0.40.0"
+desc="The Rust package manager"
+deps=["libssh2", "libressl", "zlib", "rust"]
+makedeps=["libssh2", "libressl", "python", "zlib", "rust"]
+source=[
+	{url="https://github.com/rust-lang/cargo/archive/$version.tar.gz"},
+	{url="https://static.rust-lang.org/dist/cargo-${_cargo_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
+]
+
+ext='''
+	mkdir -p stage0/bin
+	mkdir -p stage0/lib
+
+	rm cargo-*/cargo/manifest.in
+	cp -a cargo-*/cargo/* stage0/
+
+	mkdir .cargo
+	cat > .cargo/config << "EOF"
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+EOF
+
+	cd cargo-$version
+	for i in $source; do
+		case $i in
+		*.patch) patch -p1 -i ../$i;;
+		esac
+	done
+'''
+
+build='''
+	cd cargo-$version
+	export CARGO_HOME="$srcdir/.cargo"
+	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
+	export PATH="$srcdir/stage0/bin:$PATH"
+	export RUST_BACKTRACE=1
+
+	cargo build $MAKEFLAGS --release --verbose
+	install -D -m 755 target/release/cargo "$pkgdir"/bin/cargo
+	mkdir -p "$pkgdir"/share/man/man1
+	install -m 644 -t "$pkgdir"/share/man/man1/ src/etc/man/*.1
+	install -D -m 644 -D src/etc/cargo.bashcomp.sh "$subpkgdir"/share/bash-completion/completions/cargo
+'''

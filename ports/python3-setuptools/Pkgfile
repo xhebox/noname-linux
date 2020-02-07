@@ -1,4 +1,6 @@
-version="40.6.3"
+version="41.0.1"
+deps=["python3", "python3-wheel"]
+makedeps=["python3"]
 source=[{url="http://github.com/pypa/setuptools/archive/v$version.tar.gz"}]
 desc="Easily download, build, install, upgrade, and uninstall Python packages."
 

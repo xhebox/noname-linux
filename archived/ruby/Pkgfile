@@ -1,24 +1,25 @@
-name=ruby
-version=2.5.1
-deps="gdbm libgmp libressl readline zlib libffi libyaml graphviz"
+name="ruby"
+version="2.7.0"
+deps=["gdbm", "libressl", "readline", "zlib", "libffi"]
+makedeps=["gdbm", "libressl", "readline", "zlib", "libffi"]
 desc="Ruby interpreter"
-source="http://cache.ruby-lang.org/pub/ruby/${version%.*}/ruby-$version.tar.xz
-patch-ext_openssl_extconf_rb.patch
-patch-ext_openssl_openssl_missing_h.patch
-"
+source=[
+	{url="http://cache.ruby-lang.org/pub/ruby/${version%.*}/ruby-$version.tar.xz"},
+	{url="patch-ext_openssl_extconf_rb.patch"},
+	{url="patch-ext_openssl_openssl_missing_h.patch"},
+]
 
-ext() {
+ext='''
 	cd ruby-$version
 	for i in $source; do
-		msg $i
 		case $i in
-		*openssl*patch) patch -p0 < ../$i;;
-		*patch) patch -p1 < ../$i;;
+		*openssl*patch) patch -p0 -i ../$i;;
+		*patch) patch -p1 -i ../$i;;
 		esac
 	done
-}
+'''
 
-build() {
+build='''
 	cd ruby-$version
 	./configure --prefix= \
 		--sysconfdir=/etc \
@@ -34,9 +35,7 @@ build() {
 	mkdir -p "$pkgdir"/etc
 	cat >> "$pkgdir"/etc/gemrc << "EOF"
 # Read about the gemrc format at http://guides.rubygems.org/command-reference/#gem-environment
-
 # --user-install is used to install to $HOME/.gem/ by default since we want to separate
-#								pacman installed gems and gem installed gems
 gem: --user-install
 EOF
-}
+'''

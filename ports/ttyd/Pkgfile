@@ -1,0 +1,17 @@
+name="ttyd"
+version="1.5.2"
+desc='Share your terminal over the web'
+deps=["json-c", "libwebsockets", "zlib"]
+makedeps=["json-c", "libwebsockets", "zlib", "cmake", "xxd"]
+source=[
+	{url="https://github.com/tsl0922/ttyd/archive/$version/ttyd-$version.tar.gz"},
+]
+
+build='''
+	cd ttyd-$version
+	mkdir build -p
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/ ..
+	make
+	make DESTDIR="$pkgdir" install
+'''

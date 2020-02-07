@@ -1,0 +1,167 @@
+--- i/build/config/linux/BUILD.gn	2020-01-09 02:49:58.000000000 +0800
++++ w/build/config/linux/BUILD.gn	2020-01-09 02:49:58.000000000 +0800
+@@ -33,6 +33,7 @@
+   }
+ }
+ 
++if (use_x11) {
+ config("x11") {
+   libs = [
+     "X11",
+@@ -69,11 +69,13 @@
+ config("xfixes") {
+   libs = [ "Xfixes" ]
+ }
++}
+ 
+ config("libcap") {
+   libs = [ "cap" ]
+ }
+ 
++if (use_x11) {
+ config("xi") {
+   libs = [ "Xi" ]
+ }
+@@ -80,6 +81,7 @@
+ config("xtst") {
+   libs = [ "Xtst" ]
+ }
++}
+ 
+ config("libresolv") {
+   libs = [ "resolv" ]
+--- a/ui/ozone/platform/wayland/host/wayland_window.cc	2020-01-09 02:50:48.000000000 +0800
++++ b/ui/ozone/platform/wayland/host/wayland_window.cc	2020-01-09 02:50:48.000000000 +0800
+@@ -388,7 +388,7 @@
+ }
+ 
+ void WaylandWindow::Hide() {
+-  if (!is_tooltip_) {
++  if (is_tooltip_) {
+     tooltip_subsurface_.reset();
+   } else {
+     if (child_window_)
+@@ -394,7 +394,7 @@
+     if (child_window_)
+       child_window_->Hide();
+     if (shell_popup_) {
+-      parent_window_->set_child_window(nullptr);
++      //parent_window_->set_child_window(nullptr);
+       shell_popup_.reset();
+     }
+   }
+--- a/ui/ozone/platform/wayland/host/wayland_buffer_manager_host.h	2020-01-09 02:50:28.000000000 +0800
++++ b/ui/ozone/platform/wayland/host/wayland_buffer_manager_host.h	2020-01-09 02:50:28.000000000 +0800
+@@ -152,6 +152,7 @@
+   // Returns the anonymously created WaylandBuffer.
+   std::unique_ptr<WaylandBuffer> PassAnonymousWlBuffer(uint32_t buffer_id);
+ 
++  void BufferId() override;
+  private:
+   // This is an internal representation of a real surface, which holds a pointer
+   // to WaylandWindow. Also, this object holds buffers, frame callbacks and
+--- a/ui/ozone/platform/wayland/host/wayland_buffer_manager_host.cc	2020-01-25 21:12:42.027063869 +0800
++++ b/ui/ozone/platform/wayland/host/wayland_buffer_manager_host.cc	2020-01-25 21:12:42.027063869 +0800
+@@ -767,6 +767,24 @@
+   return buffer;
+ }
+ 
++void WaylandBufferManagerHost::BufferId() {
++ uint32_t i=65535, k;
++	for (k=0;k<65535;k++) {
++		i = rand() % 65535; if (i <= 0) continue;
++		for (auto const& surface : surfaces_) {
++			if (!surface.second->BufferExists(i)) {
++				buffer_manager_gpu_associated_->BufferId(i); return;
++			}
++		}
++
++		for (auto const& buffer : anonymous_buffers_) {
++			if (buffer.second->buffer_id != i) {
++				buffer_manager_gpu_associated_->BufferId(i); return;
++			}
++		}
++	}
++}
++
+ bool WaylandBufferManagerHost::CreateBuffer(const gfx::Size& size,
+                                             uint32_t buffer_id) {
+   // First check if any of the surfaces has already had a buffer with the same
+--- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.h	2020-01-09 02:50:48.000000000 +0800
++++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.h	2020-01-09 02:50:48.000000000 +0800
+@@ -123,6 +123,8 @@
+   const std::vector<uint64_t>& GetModifiersForBufferFormat(
+       gfx::BufferFormat buffer_format) const;
+ 
++  uint32_t GetBufferId();
++  void BufferId(uint32_t buffer_id) override; uint32_t buffer_id__;
+  private:
+   void CreateDmabufBasedBufferInternal(base::ScopedFD dmabuf_fd,
+                                        gfx::Size size,
+--- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc	2020-01-09 02:50:48.000000000 +0800
++++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc	2020-01-09 02:50:48.000000000 +0800
+@@ -243,4 +243,13 @@
+     surface->OnPresentation(buffer_id, feedback);
+ }
+ 
++void WaylandBufferManagerGpu::BufferId(uint32_t buffer_id) {
++	buffer_id__ = buffer_id;
++}
++
++uint32_t WaylandBufferManagerGpu::GetBufferId() {
++	remote_host_->BufferId();
++	return buffer_id__;
++}
++
+ }  // namespace ui
+--- a/ui/ozone/public/mojom/wayland/wayland_buffer_manager.mojom	2020-01-09 02:50:28.000000000 +0800
++++ b/ui/ozone/public/mojom/wayland/wayland_buffer_manager.mojom	2020-01-09 02:50:28.000000000 +0800
+@@ -75,6 +75,8 @@
+   // the ones on the gpu process.
+   CommitBuffer(gfx.mojom.AcceleratedWidget widget, uint32 buffer_id,
+                gfx.mojom.Rect damage_region);
++
++	BufferId();
+ };
+ 
+ 
+@@ -103,4 +103,6 @@
+   OnPresentation(gfx.mojom.AcceleratedWidget widget,
+                  uint32 buffer_id,
+                  gfx.mojom.PresentationFeedback feedback);
++
++	BufferId(uint32 buffer_id);
+ };
+--- a/ui/ozone/platform/wayland/gpu/wayland_canvas_surface.cc	2020-01-09 02:50:28.000000000 +0800
++++ b/ui/ozone/platform/wayland/gpu/wayland_canvas_surface.cc	2020-01-09 02:50:28.000000000 +0800
+@@ -294,8 +294,9 @@
+ WaylandCanvasSurface::CreateSharedMemoryBuffer() {
+   DCHECK(!size_.IsEmpty());
+ 
++	uint32_t buffer_id = buffer_manager_->GetBufferId();
+   auto canvas_buffer = std::make_unique<SharedMemoryBuffer>(
+-      ++buffer_id_, widget_, buffer_manager_);
++      buffer_id, widget_, buffer_manager_);
+   return canvas_buffer->Initialize(size_) ? std::move(canvas_buffer) : nullptr;
+ }
+
+--- a/components/viz/service/display/output_surface.h	2020-01-09 02:50:42.000000000 +0800
++++ b/components/viz/service/display/output_surface.h	2020-01-09 02:50:42.000000000 +0800
+@@ -54,7 +54,7 @@
+     int max_frames_pending = 1;
+     // Whether this output surface renders to the default OpenGL zero
+     // framebuffer or to an offscreen framebuffer.
+-    bool uses_default_gl_framebuffer = true;
++    bool uses_default_gl_framebuffer = false;
+     // Whether this OutputSurface is flipped or not.
+     bool flipped_output_surface = false;
+     // Whether this OutputSurface supports stencil operations or not.
+@@ -82,7 +82,7 @@
+     // Indicates whether this surface will invalidate only the damage rect.
+     // When this is false contents outside the damaged area might need to be
+     // recomposited to the surface.
+-    bool only_invalidates_damage_rect = true;
++    bool only_invalidates_damage_rect = false;
+     // Whether the gpu supports surfaceless surface (equivalent of using buffer
+     // queue).
+     bool supports_surfaceless = false;

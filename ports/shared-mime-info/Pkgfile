@@ -13,5 +13,5 @@ build='''
 	./configure --prefix=
 	make -j1
 	make DESTDIR="${pkgdir}" install
-	install -Dm755 ../mime.toml "$pkgdir/${HOOKS#$ROOT}"/mime.toml
+	install -Dm644 ../mime.toml "$pkgdir/${HOOKS#$ROOT}"/mime.toml
 '''

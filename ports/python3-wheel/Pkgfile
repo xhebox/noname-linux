@@ -1,0 +1,13 @@
+version="0.33.4"
+makedeps=["python3-setuptools"]
+deps=["python3"]
+desc="A built-package format for Python"
+source=[{url="https://pypi.io/packages/source/w/wheel/wheel-$version.tar.gz"}]
+
+build='''
+	cd wheel-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

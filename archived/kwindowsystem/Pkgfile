@@ -1,18 +1,20 @@
-name=kwindowsystem
-version=5.38.0
-desc='Access to the windowing system'
-deps="qt5-x11extras libxfixes qt5-tools extra-cmake-modules"
-source="https://download.kde.org/stable/frameworks/${version%.*}/kwindowsystem-${version}.tar.xz"
+version="5.55.0"
+makedeps=["qt5-tools", "qt5-x11extras", "extra-cmake-modules"]
+deps=["qt5-x11extras"]
+desc="Qt Free Edition, version 5.x"
+source=[{url="https://download.kde.org/stable/frameworks/${version%.*}/kwindowsystem-$version.tar.xz"}]
 
-build() {
-	mkdir build
+build='''
+	mkdir -p build
 	cd build
-	cmake ../kwindowsystem-${version} \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/ \
-		-DKDE_INSTALL_LIBDIR=lib \
-		-DKDE_INSTALL_LIBEXECDIR=lib \
+
+	cmake ../kwindowsystem-$version \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DBUILD_TESTING=OFF
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+
+	make
+	make DESTDIR="$pkgdir" install
+	mkdir -p "$pkgdir"/lib/qt
+	mv "$pkgdir"/mkspecs "$pkgdir"/lib/qt
+'''

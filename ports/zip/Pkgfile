@@ -1,0 +1,21 @@
+version="3.0"
+desc="Compression and file packaging/archive utility"
+makedeps=["bzip2"]
+deps=["bzip2"]
+source=[
+	{url="https://downloads.sourceforge.net/infozip/zip30.tar.gz"},
+	{url="zipnote.patch"},
+]
+
+build='''
+	cd zip30
+	for i in $source; do
+		case $i in
+			*.patch) patch -p1 -i "$srcdir"/$i ;;
+		esac
+	done
+	sed -e "/^CFLAGS_NOOPT =/s/\$/ $CPPFLAGS $CFLAGS/" -i unix/Makefile
+	sed -e "s/^LFLAGS1=''/LFLAGS1=$LDFLAGS/" -i unix/configure
+	make -f unix/Makefile LOCAL_ZIP="$CFLAGS" prefix=/ generic
+	make -f unix/Makefile INSTALL=install prefix=/"$pkgdir" MANDIR="$pkgdir"/share/man/man1 install
+'''

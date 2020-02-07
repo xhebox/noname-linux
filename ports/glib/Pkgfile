@@ -26,6 +26,6 @@ build='''
 	DESTDIR="$pkgdir" meson install -C build
 	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
 	python -O -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
-	install -Dm755 ../gio.toml "$pkgdir/${HOOKS#$ROOT}"/gio.toml
-	install -Dm755 ../glib-schemas.toml "$pkgdir/${HOOKS#$ROOT}"/glib-schemas.toml
+	install -Dm644 ../gio.toml "$pkgdir/${HOOKS#$ROOT}"/gio.toml
+	install -Dm644 ../glib-schemas.toml "$pkgdir/${HOOKS#$ROOT}"/glib-schemas.toml
 '''
