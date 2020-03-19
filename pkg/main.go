@@ -225,7 +225,6 @@ func main() {
 		log.Notice("\t(m) ignore checksum through extraction")
 		log.Notice("-M fetch, extract and build packages")
 		log.Notice("\t(d) no makedeps")
-		log.Notice("\t(s) no strip")
 		log.Notice("\t(k) keep src & pkg")
 		log.Notice("\t(x) assume extraction has done")
 		log.Notice("-S install packages")

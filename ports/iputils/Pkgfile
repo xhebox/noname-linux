@@ -1,15 +1,14 @@
-version="20180629"
-makedeps=["libcap", "libressl", "docbook-xsl", "perl-sgmls", "kernel-libc-headers"]
+version="20190729"
+makedeps=["libcap", "libressl", "kernel-libc-headers"]
 deps=["libcap", "libressl"]
 desc="IP Configuration Utilities (and ping)"
 source=[
 	{
 		url="https://github.com/iputils/iputils",
 		protocol="git",
-		commit="f6aac8dbe3f8c45c53424854a3312bdd8cdd58d3"
+		commit="13e00847176aa23683d68fce1d17ffb523510946"
 	},
-	{url="musl.patch"},
-	{url="iputils-ping.toml"},
+	{url="fix-arping-exitcode.patch"},
 ]
 
 ext='''
@@ -22,21 +21,7 @@ ext='''
 '''
 
 build='''
-	cd iputils
-	make \
-	USE_IDN=no \
-	USE_SYSFS=no \
-	USE_GNUTLS=no \
-	USE_GCRYPT=no \
-	USE_NETTLE=no
-	sed -i -e 's#sgmlspl#sgmlspl.pl#g' doc/Makefile
-	make -C doc man
-
-	install -dm755 "${pkgdir}"/bin
-	install -m755 ping arping clockdiff rarpd rdisc tftpd tracepath "${pkgdir}"/bin/
-	install -dm755 "${pkgdir}"/share/man/man8
-	for f in arping ping clockdiff rarpd rdisc tftpd tracepath; do
-		install -Dm644 doc/${f}.8 "$pkgdir"/share/man/man8/${f}.8
-	done
-	install -Dm644 ../iputils-ping.toml "$pkgdir/${HOOKS#$ROOT}"/iputils-ping.toml
+	noname-meson iputils build -DUSE_IDN=false -DBUILD_MANS=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
 '''

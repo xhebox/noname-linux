@@ -1,4 +1,0 @@
-pattern=["bin/ping"]
-script='''
-	setcap cap_net_raw=ep /bin/ping 2>/dev/null
-'''

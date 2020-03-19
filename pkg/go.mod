@@ -1,5 +1,7 @@
 module github.com/xhebox/noname-linux/pkg
 
+replace github.com/xhebox/noname-linux/pkg => ./
+
 go 1.13
 
 require (
@@ -11,6 +13,7 @@ require (
 	github.com/pelletier/go-toml v1.6.0
 	github.com/peterbourgon/diskv v2.0.1+incompatible
 	github.com/pkg/errors v0.8.1
+	github.com/pkg/xattr v0.4.1
 	github.com/timtadh/getopt v1.0.1
 	golang.org/x/sys v0.0.0-20200107162124-548cf772de50
 	gopkg.in/src-d/go-git.v4 v4.13.1

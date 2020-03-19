@@ -6,8 +6,10 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/pkg/errors"
+	"github.com/pkg/xattr"
 	"v.io/x/lib/toposort"
 )
 
@@ -142,50 +144,73 @@ func pkg_cpfiles(pkg *Pkgfile) error {
 			return errors.Wrapf(e, "can not untar tarball to extract [%v]", pkg.Tarball)
 		}
 
-		// backup files
-		switch hdr.Typeflag {
-		case tar.TypeReg, tar.TypeRegA, tar.TypeChar, tar.TypeBlock, tar.TypeFifo, tar.TypeLink, tar.TypeSymlink:
-			for _, v := range pkg.Baks {
-				if v == hdr.Name && exist(filepath.Join(cfg.ROOT, v)) {
-					hdr.Name += ".bak"
+		f := func(pkg *Pkgfile, hdr *tar.Header) error {
+			// backup files
+			switch hdr.Typeflag {
+			case tar.TypeReg, tar.TypeRegA, tar.TypeChar, tar.TypeBlock, tar.TypeFifo, tar.TypeLink, tar.TypeSymlink:
+				for _, v := range pkg.Baks {
+					if v == hdr.Name && exist(filepath.Join(cfg.ROOT, v)) {
+						hdr.Name += ".bak"
+					}
 				}
 			}
+
+			dst := filepath.Join(cfg.ROOT, hdr.Name)
+			mode := hdr.FileInfo().Mode()
+
+			switch hdr.Typeflag {
+			case tar.TypeDir:
+				if e := os.MkdirAll(dst, mode); e != nil {
+					return errors.Wrapf(e, "can not install dir %v [%v]", dst, pkg.Tarball)
+				}
+			case tar.TypeReg, tar.TypeRegA:
+				dstfd, e := os.OpenFile(dst+".tmp", os.O_RDWR|os.O_CREATE, mode)
+				if e != nil {
+					return errors.Wrapf(e, "can not install tmp file %v [%v]", dst+".tmp", pkg.Tarball)
+				}
+				defer dstfd.Close()
+
+				_, e = io.Copy(dstfd, tarfd)
+				if e != nil {
+					return errors.Wrapf(e, "can not fill tmp file %v [%v]", dst+".tmp", pkg.Tarball)
+				}
+
+				if e := movefile(dst+".tmp", dst); e != nil {
+					return errors.Wrapf(e, "can not overwrite the origin file %v [%v]", dst, pkg.Tarball)
+				}
+			case tar.TypeSymlink:
+				os.Remove(dst)
+				if e := os.Symlink(hdr.Linkname, dst); e != nil {
+					return errors.Wrapf(e, "can not overwrite the soft link %v [%v]", dst, pkg.Tarball)
+				}
+			case tar.TypeLink:
+				if e := os.Link(hdr.Linkname, dst); e != nil {
+					return errors.Wrapf(e, "can not overwrite the hard link %v [%v]", dst, pkg.Tarball)
+				}
+			default:
+				return errors.Errorf("%s: unsupported type flag: %c [%v]", hdr.Name, hdr.Typeflag, pkg.Tarball)
+			}
+
+			dstfd, e := os.Open(dst)
+			if e != nil {
+				return errors.Errorf("%s: can not open file %s [%v]", hdr.Name, dst, pkg.Tarball)
+			}
+			defer dstfd.Close()
+
+			for attr, attrval := range hdr.PAXRecords {
+				if strings.HasPrefix(attr, "SCHILY.xattr.") {
+					attr = strings.TrimLeft(attr, "SCHILY.xattr.")
+
+					if e := xattr.FSet(dstfd, attr, []byte(attrval)); e != nil {
+						return errors.Errorf("%s: can not set capability [%s] for file %s [%v]", hdr.Name, attr, dst, pkg.Tarball)
+					}
+				}
+			}
+
+			return nil
 		}
-
-		dst := filepath.Join(cfg.ROOT, hdr.Name)
-		mode := hdr.FileInfo().Mode()
-
-		switch hdr.Typeflag {
-		case tar.TypeDir:
-			if e := os.MkdirAll(dst, mode); e != nil {
-				return errors.Wrapf(e, "can not install dir %v [%v]", dst, pkg.Tarball)
-			}
-		case tar.TypeReg, tar.TypeRegA:
-			dstfd, e := os.OpenFile(dst+".tmp", os.O_RDWR|os.O_CREATE, mode)
-			if e != nil {
-				return errors.Wrapf(e, "can not install tmp file %v [%v]", dst+".tmp", pkg.Tarball)
-			}
-
-			_, e = io.Copy(dstfd, tarfd)
-			if e != nil {
-				return errors.Wrapf(e, "can not fill tmp file %v [%v]", dst+".tmp", pkg.Tarball)
-			}
-			dstfd.Close()
-
-			if e := movefile(dst+".tmp", dst); e != nil {
-				return errors.Wrapf(e, "can not overwrite the origin file %v [%v]", dst, pkg.Tarball)
-			}
-		case tar.TypeSymlink:
-			os.Remove(dst)
-			if e := os.Symlink(hdr.Linkname, dst); e != nil {
-				return errors.Wrapf(e, "can not overwrite the soft link %v [%v]", dst, pkg.Tarball)
-			}
-		case tar.TypeLink:
-			if e := os.Link(hdr.Linkname, dst); e != nil {
-				return errors.Wrapf(e, "can not overwrite the hard link %v [%v]", dst, pkg.Tarball)
-			}
-		default:
-			return errors.Errorf("%s: unsupported type flag: %c [%v]", hdr.Name, hdr.Typeflag, pkg.Tarball)
+		if e := f(pkg, hdr); e != nil {
+			return e
 		}
 	}
 

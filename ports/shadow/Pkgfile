@@ -1,5 +1,5 @@
-version="4.6"
-makedeps=["docbook-xsl", "libxslt"]
+version="4.8"
+makedeps=["docbook-xsl", "libxslt", "acl", "pam"]
 deps=["acl", "bash", "pam"]
 desc="Shadow password file utilities"
 source=[
@@ -32,6 +32,8 @@ build='''
 		--libexecdir=/lib \
 		--bindir=/bin --sbindir=/bin \
 		--libdir=/lib --enable-shared \
+		--enable-account-tools-setuid=no \
+		--with-fcaps \
 		--with-man \
 		--with-libpam \
 		--without-selinux --with-acl --with-attr --with-group-name-max-length=32
@@ -47,9 +49,6 @@ build='''
 	for file in chage groupadd groupdel groupmod shadow useradd usermod userdel; do
 		install -Dm644 ../defaults.pam "$pkgdir/etc/pam.d/$file"
 	done
-
-	mv "$pkgdir"/sbin/* "$pkgdir"/bin
-	rmdir "$pkgdir"/sbin
 
 	for i in login su chsh chfn sg nologin vipw vigr; do
 		rm "$pkgdir"/bin/$i
