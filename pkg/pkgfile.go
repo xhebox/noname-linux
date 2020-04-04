@@ -315,33 +315,38 @@ func (c *Pkgfile) PackageTarball() error {
 			}
 		}
 
-		fp, e := os.Open(spath)
-		if e != nil {
-			return errors.Wrapf(e, "can not open %v for packaging [%v]", spath, c.Name)
-		}
-		defer fp.Close()
+		isFile := !info.IsDir() && (info.Mode()&os.ModeSymlink == 0)
+		var fp *os.File
 
-		hdr.PAXRecords = make(map[string]string)
-
-		attrs, err := xattr.FList(fp)
-		if e != nil {
-			return errors.Wrapf(e, "can not list attrs [%v]", c.Name)
-		}
-
-		for _, attr := range attrs {
-			attrval, e := xattr.FGet(fp, attr)
+		if isFile {
+			fp, e = os.Open(spath)
 			if e != nil {
-				return errors.Wrapf(e, "can not get attr [%v]", c.Name)
+				return errors.Wrapf(e, "can not open %v for packaging [%v]", spath, c.Name)
+			}
+			defer fp.Close()
+
+			hdr.PAXRecords = make(map[string]string)
+
+			attrs, e := xattr.FList(fp)
+			if e != nil {
+				return errors.Wrapf(e, "can not list attrs [%v]", c.Name)
 			}
 
-			hdr.PAXRecords["SCHILY.xattr."+attr] = string(attrval)
+			for _, attr := range attrs {
+				attrval, e := xattr.FGet(fp, attr)
+				if e != nil {
+					return errors.Wrapf(e, "can not get attr [%v]", c.Name)
+				}
+
+				hdr.PAXRecords["SCHILY.xattr."+attr] = string(attrval)
+			}
 		}
 
 		if e := tarwt.WriteHeader(hdr); e != nil {
 			return errors.Wrapf(e, "can not write header to disk [%v]", c.Name)
 		}
 
-		if !info.IsDir() && (info.Mode()&os.ModeSymlink == 0) {
+		if isFile {
 			if _, e := io.Copy(tarwt, fp); e != nil {
 				return errors.Wrapf(e, "can not write %v to tarball [%v]", spath, c.Name)
 			}

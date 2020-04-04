@@ -191,18 +191,21 @@ func pkg_cpfiles(pkg *Pkgfile) error {
 				return errors.Errorf("%s: unsupported type flag: %c [%v]", hdr.Name, hdr.Typeflag, pkg.Tarball)
 			}
 
-			dstfd, e := os.Open(dst)
-			if e != nil {
-				return errors.Errorf("%s: can not open file %s [%v]", hdr.Name, dst, pkg.Tarball)
-			}
-			defer dstfd.Close()
+			switch hdr.Typeflag {
+			case tar.TypeDir, tar.TypeReg, tar.TypeRegA:
+				dstfd, e := os.Open(dst)
+				if e != nil {
+					return errors.Errorf("%s: can not open file %s [%v]", hdr.Name, dst, pkg.Tarball)
+				}
+				defer dstfd.Close()
 
-			for attr, attrval := range hdr.PAXRecords {
-				if strings.HasPrefix(attr, "SCHILY.xattr.") {
-					attr = strings.TrimLeft(attr, "SCHILY.xattr.")
+				for attr, attrval := range hdr.PAXRecords {
+					if strings.HasPrefix(attr, "SCHILY.xattr.") {
+						attr = strings.TrimLeft(attr, "SCHILY.xattr.")
 
-					if e := xattr.FSet(dstfd, attr, []byte(attrval)); e != nil {
-						return errors.Errorf("%s: can not set capability [%s] for file %s [%v]", hdr.Name, attr, dst, pkg.Tarball)
+						if e := xattr.FSet(dstfd, attr, []byte(attrval)); e != nil {
+							return errors.Errorf("%s: can not set capability [%s] for file %s [%v]", hdr.Name, attr, dst, pkg.Tarball)
+						}
 					}
 				}
 			}
