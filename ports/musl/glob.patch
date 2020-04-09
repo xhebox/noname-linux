@@ -24,7 +24,7 @@
  #define GLOB_ABORTED 2
 --- musl-1.1.21/src/regex/glob.c	2019-01-21 17:30:47.000000000 +0000
 +++ musl-1.1.21/src/regex/glob.c	2019-01-21 17:30:47.000000000 +0000
-@@ -30,8 +30,18 @@
+@@ -32,8 +32,18 @@
  	return 0;
  }
  
@@ -44,7 +44,7 @@
  	/* If GLOB_MARK is unused, we don't care about type. */
  	if (!type && !(flags & GLOB_MARK)) type = DT_REG;
  
-@@ -115,7 +125,7 @@
+@@ -124,7 +134,7 @@
  			saved_sep = '\\';
  		}
  	}
@@ -53,7 +53,7 @@
  	if (!dir) {
  		if (errfunc(buf, errno) || (flags & GLOB_ERR))
  			return GLOB_ABORTED;
-@@ -133,7 +133,7 @@
+@@ -132,7 +142,7 @@
  	}
  	int old_errno = errno;
  	struct dirent *de;
@@ -62,7 +62,7 @@
  		/* Quickly skip non-directories when there's pattern left. */
  		if (p2 && de->d_type && de->d_type!=DT_DIR && de->d_type!=DT_LNK)
  			continue;
-@@ -148,15 +158,15 @@
+@@ -157,15 +167,15 @@
  
  		memcpy(buf+pos, de->d_name, l+1);
  		if (p2) *p2 = saved_sep;
@@ -81,12 +81,12 @@
  	if (readerr && (errfunc(buf, errno) || (flags & GLOB_ERR)))
  		return GLOB_ABORTED;
  	errno = old_errno;
-@@ -202,7 +212,7 @@
- 		char *p = strdup(pat);
- 		if (!p) return GLOB_NOSPACE;
- 		buf[0] = 0;
--		error = do_glob(buf, 0, 0, p, flags, errfunc, &tail);
-+		error = do_glob(buf, 0, 0, p, flags, errfunc, &tail, g);
+@@ -249,7 +259,7 @@
+ 		if ((flags & (GLOB_TILDE | GLOB_TILDE_CHECK)) && *p == '~')
+ 			error = expand_tilde(&s, buf, &pos);
+ 		if (!error)
+-			error = do_glob(buf, pos, 0, s, flags, errfunc, &tail);
++			error = do_glob(buf, pos, 0, s, flags, errfunc, &tail, g);
  		free(p);
  	}
  

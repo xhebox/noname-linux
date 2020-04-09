@@ -1,4 +1,4 @@
-version="4.20"
+version="5.6.3"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -8,15 +8,12 @@ esac
 )'''
 desc="Linux system kernel"
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v4.x/linux-${version}.tar.xz"},
-	{url="https://github.com/dolohow/uksm/raw/master/uksm-${ver}.patch"},
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="linux.preset"},
-	{url="wifi.patch"},
-	{url="nouveau_runpm_workaround.patch"},
+	{url="v5-pci-prevent-putting-nvidia-GPUs-into-lower-device-states-on-certain-intel-bridges.diff"},
 	{url="config"},
 ]
-nostrip=true
-makedeps=["bc", "bash", "xmlto", "inetutils", "elfutils"]
+makedeps=["bc", "bash", "xmlto", "inetutils", "elfutils", "crda"]
 deps=["kmod" , "linux-firmware", "coreutils"]
 
 ext='''
@@ -25,14 +22,11 @@ ext='''
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
-	patch -p1 -i ../nouveau_runpm_workaround.patch
-	patch -p1 -i ../uksm-${ver}.patch
+	patch -p1 -i ../v5-pci-prevent-putting-nvidia-GPUs-into-lower-device-states-on-certain-intel-bridges.diff
 
 	cp ../config .config
 
 	sed -i 's/# CONFIG_EXPERT is not set/CONFIG_EXPERT=y/g' .config
-	sed -i 's/# CONFIG_CFG80211_INTERNAL_REGDB is not set/CONFIG_CFG80211_INTERNAL_REGDB=y/g' .config
-	curl -L https://raw.githubusercontent.com/Distrotech/wireless-regdb/master/db.txt -o net/wireless/db.txt
 
 	sed -i 's;# CONFIG_MODULE_SIG_SHA1 is not set;CONFIG_MODULE_SIG_SHA1=y;g' .config
 	sed -i 's;CONFIG_MODULE_SIG_SHA512=y;# CONFIG_MODULE_SIG_SHA512 is not set;g' .config

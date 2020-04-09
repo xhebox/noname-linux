@@ -1,9 +1,9 @@
-version="20190212"
+version="20200316"
 desc="Firmware files for Linux"
 source=[
 	{
 		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware",
-		commit="28f5f7dc1f077ea37d663f70de4490844db0449d",
+		commit="8eb0b281511d6455ca9151e52f694dc982193251",
 		protocol="git"
 	}
 ]
@@ -11,10 +11,10 @@ source=[
 build='''
 	cd linux-firmware*
 	make DESTDIR="${pkgdir}" FIRMWAREDIR=/lib/firmware install
-	rm "${pkgdir}"/lib/firmware/Makefile
-	rm "${pkgdir}"/lib/firmware/README
-	rm "${pkgdir}"/lib/firmware/configure
-	rm "${pkgdir}"/lib/firmware/GPL-3
+	rm -f "${pkgdir}"/lib/firmware/Makefile
+	rm -f "${pkgdir}"/lib/firmware/README
+	rm -f "${pkgdir}"/lib/firmware/configure
+	rm -f "${pkgdir}"/lib/firmware/GPL-3
 
 	mkdir -p kernel/x86/microcode
 	cat amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin

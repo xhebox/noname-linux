@@ -1,22 +1,17 @@
-version="4.20"
+version="5.6.3"
 desc="Linux kernel tools"
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v4.x/linux-${version}.tar.xz"},
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="linux.preset"},
-	{url="portable.patch"},
-	{url="perf.patch"},
-	{url="usbip_fix.patch"},
+	{url="musl.patch"},
 	{url="config"},
 ]
-nostrip=true
 makedeps=["perl", "python", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
 deps=["perl", "python", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
 
 ext='''
 	cd linux-${version}
-	patch -p1 -i ../perf.patch
-	patch -p1 -i ../portable.patch
-	patch -p1 -i ../usbip_fix.patch
+	patch -p0 -i ../musl.patch
 '''
 
 build='''
