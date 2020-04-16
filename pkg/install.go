@@ -158,6 +158,11 @@ func pkg_cpfiles(pkg *Pkgfile) error {
 			dst := filepath.Join(cfg.ROOT, hdr.Name)
 			mode := hdr.FileInfo().Mode()
 
+			dinfo, err := os.Stat(dst)
+			if err != nil || dinfo.Mode() != mode {
+				os.Remove(dst)
+			}
+
 			switch hdr.Typeflag {
 			case tar.TypeDir:
 				if e := os.MkdirAll(dst, mode); e != nil {
