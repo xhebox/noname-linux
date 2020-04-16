@@ -95,12 +95,19 @@ func pkg_rmfiles(files []Fileinfo, baks []string) error {
 		}
 	}
 
-	for _, x := range files {
-		if x.Type == tar.TypeDir {
-			p, e := ioutil.ReadDir(x.Path)
-			if e == nil && len(p) != 0 {
-				os.Remove(filepath.Join(cfg.ROOT, x.Path))
+	for {
+		uns := false
+		for _, x := range files {
+			if x.Type == tar.TypeDir {
+				p, e := ioutil.ReadDir(x.Path)
+				if e == nil && len(p) != 0 {
+					uns = true
+					os.Remove(filepath.Join(cfg.ROOT, x.Path))
+				}
 			}
+		}
+		if !uns {
+			break
 		}
 	}
 
