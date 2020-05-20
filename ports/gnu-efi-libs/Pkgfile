@@ -1,7 +1,6 @@
 version="3.0.9"
 desc="Library for building UEFI Applications using GNU toolchain"
 makdeps="pciutils"
-nostrip=true
 source=[{url="http://nchc.dl.sourceforge.net/gnu-efi/gnu-efi-${version}.tar.bz2"}]
 
 build='''

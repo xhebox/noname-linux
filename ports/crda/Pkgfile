@@ -1,0 +1,44 @@
+version="3.18"
+_dbversion="2019.06.03"
+makedeps=["libressl", "libnl", "python-m2crypto"]
+deps=["iw", "libressl", "libnl"]
+desc="Central Regulatory Domain Agent for wireless networks"
+source=[
+	{url="https://mirrors.ustc.edu.cn/kernel.org/software/network/crda/crda-${version}.tar.xz"},
+	{url="https://mirrors.ustc.edu.cn/kernel.org/software/network/wireless-regdb/wireless-regdb-${_dbversion}.tar.xz"},
+	{url="crda.patch"},
+	{url="ldconfig.patch"},
+	{url="set-wireless-regdom"},
+]
+
+build='''
+	cd crda-$version
+	export CFLAGS="$CFLAG -Wno-unused-variable"
+	patch -p1 -i ../crda.patch
+	patch -p1 -i ../ldconfig.patch
+	make USE_OPENSSL=1 all_noverify -j1 V=1
+	make DESTDIR="${pkgdir}" UDEV_RULE_DIR=/lib/udev/rules.d/ SBINDIR=/bin/ install
+
+	# Adjust paths in udev rule file
+	sed 's|/sbin/crda|/bin/crda|' -i "${pkgdir}"/lib/udev/rules.d/85-regulatory.rules
+
+	# This rule automatically sets the regulatory domain when cfg80211 is loaded
+	echo 'ACTION=="add", SUBSYSTEM=="module", DEVPATH=="/module/cfg80211", RUN+="/bin/set-wireless-regdom"' >> "${pkgdir}"/lib/udev/rules.d/85-regulatory.rules
+
+	install -D -m755 "${srcdir}"/set-wireless-regdom "${pkgdir}"/bin/set-wireless-regdom
+
+	cd ../wireless-regdb-$_dbversion
+	install -D -m644 regulatory.bin "${pkgdir}"/lib/crda/regulatory.bin
+	install -D -m644 sforshee.key.pub.pem "${pkgdir}"/lib/crda/pubkeys/sforshee.key.pub.pem
+	install -D -m644 regulatory.bin.5 "${pkgdir}"/share/man/man5/regulatory.bin.5
+	install -D -m644 regulatory.db "${pkgdir}"/lib/firmware/regulatory.db
+	install -D -m644 regulatory.db.p7s "${pkgdir}"/lib/firmware/regulatory.db.p7s
+	install -D -m644 regulatory.db.5 "${pkgdir}"/share/man/man5/regulatory.db.5
+
+	mkdir -p "$pkgdir"/etc
+	for dom in $(grep ^country db.txt | cut -d' ' -f2 | sed 's|:||g'); do
+	  echo "#WIRELESS_REGDOM=\"${dom}\"" >> "${pkgdir}"/etc/wireless-regdom.tmp
+	done
+	sort -u "${pkgdir}"/etc/wireless-regdom.tmp >> "${pkgdir}"/etc/wireless-regdom
+	rm "${pkgdir}"/etc/wireless-regdom.tmp
+'''

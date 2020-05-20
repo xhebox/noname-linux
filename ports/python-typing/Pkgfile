@@ -1,0 +1,15 @@
+version="3.7.4.1"
+deps=["python"]
+makedeps=["python-setuptools"]
+desc="Backport of the standard library typing module to Python versions older than 3.6"
+source=[
+	{url="https://pypi.io/packages/source/t/typing/typing-$version.tar.gz"},
+]
+
+build='''
+	cd typing-$version
+	/bin/python setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

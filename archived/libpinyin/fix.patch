@@ -1,0 +1,37 @@
+--- a/src/pinyin.h	2019-03-18 13:31:53.000000000 +0800
++++ b/src/pinyin.h	2019-03-18 13:31:53.000000000 +0800
+@@ -22,6 +22,7 @@
+ #ifndef PINYIN_H
+ #define PINYIN_H
+ 
++#include <stdbool.h>
+ 
+ #include "novel_types.h"
+ #include "pinyin_custom2.h"
+@@ -215,7 +216,7 @@
+  *
+  */
+ bool pinyin_set_full_pinyin_scheme(pinyin_context_t * context,
+-                                   FullPinyinScheme scheme);
++                                   enum FullPinyinScheme scheme);
+ 
+ /**
+  * pinyin_set_double_pinyin_scheme:
+@@ -227,7 +228,7 @@
+  *
+  */
+ bool pinyin_set_double_pinyin_scheme(pinyin_context_t * context,
+-                                     DoublePinyinScheme scheme);
++                                     enum DoublePinyinScheme scheme);
+ 
+ /**
+  * pinyin_set_zhuyin_scheme:
+@@ -239,7 +240,7 @@
+  *
+  */
+ bool pinyin_set_zhuyin_scheme(pinyin_context_t * context,
+-                              ZhuyinScheme scheme);
++                              enum ZhuyinScheme scheme);
+ 
+ /**
+  * pinyin_fini:

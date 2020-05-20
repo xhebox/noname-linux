@@ -1,10 +1,9 @@
-version="1.1.2"
+version="1.2.2"
 desc="Modular text mode IRC client with Perl scripting"
 makedeps=["glib", "libressl", "ncurses"]
 deps=["glib", "libressl", "ncurses"]
 source=[
 	{url="https://github.com/irssi/irssi/releases/download/$version/irssi-$version.tar.xz"},
-	{url="patch-src_core_network-openssl_c.patch"},
 ]
 
 ext='''

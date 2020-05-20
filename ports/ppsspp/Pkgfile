@@ -1,0 +1,53 @@
+version="1.9.4"
+desc="A PSP emulator written in C++"
+makedeps=["mesa", "sdl2", "ffmpeg", "glslang", "wayland-protocols"]
+deps=["mesa", "sdl2", "ffmpeg", "glslang", "wayland"]
+source=[
+	{protocol="git", url="https://github.com/hrydgard/ppsspp"},
+	{protocol="git", url="https://github.com/hrydgard/ppsspp-lang"},
+	{protocol="git", url="https://github.com/hrydgard/minidx9"},
+	{protocol="git", url="https://github.com/KhronosGroup/SPIRV-Cross"},
+	{protocol="git", url="https://github.com/Kingcom/armips"},
+	{protocol="git", url="https://github.com/hrydgard/glslang"},
+	{protocol="git", url="https://github.com/hrydgard/ppsspp-freetype"},
+	{protocol="git", url="https://github.com/Tencent/rapidjson"},
+	{url="no-x11.patch"},
+]
+
+ext='''
+	cd ppsspp
+	patch -p1 -i ../no-x11.patch
+	rm -rf assets/lang
+	mv ../ppsspp-lang assets/lang
+	rm -rf ext/SPIRV-Cross
+	ln -srf ../SPIRV-Cross ext/SPIRV-Cross
+	rm -rf ext/armips
+	ln -srf ../armips ext/armips
+	rm -rf ext/glslang
+	ln -srf ../glslang ext/glslang
+	rm -rf ext/natives/tools/prebuilt
+	ln -srf ../ppsspp-freetype ext/native/tools/prebuilt
+	rm -rf ext/rapidjson
+	ln -srf ../rapidjson ext/rapidjson
+'''
+
+build='''
+	cd ppsspp
+	cmake . -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DHEADLESS=OFF \
+		-DUSE_SYSTEM_FFMPEG=ON \
+		-DUSE_WAYLAND_WSI=ON \
+		-DUSE_DISCORD=OFF \
+		-DUSING_GLES2=ON \
+		-DUSING_EGL=OFF \
+		-DUSING_X11_VULKAN=OFF \
+		-DUSING_QT_UI=OFF
+	cmake --build build
+	#DESTDIR="$pkgdir" cmake --build build --target install
+	install -Dm 755 build/PPSSPPSDL "${pkgdir}"/bin/ppsspp
+	install -dm 755 "${pkgdir}"/share/ppsspp
+	cp -r --no-preserve=ownership build/assets "${pkgdir}"/share/ppsspp/
+'''

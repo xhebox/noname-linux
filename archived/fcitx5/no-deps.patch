@@ -1,0 +1,406 @@
+--- fcitx5/src/ui/CMakeLists.txt	2019-02-24 14:33:33.601450985 +0800
++++ fcitx5/src/ui/CMakeLists.txt	2019-02-24 14:33:33.601450985 +0800
+@@ -1,3 +1,2 @@
+ add_subdirectory(classic)
+-add_subdirectory(kimpanel)
+ add_subdirectory(simpleui)
+--- fcitx5/CMakeLists.txt	2020-02-12 21:02:00.374518351 +0800
++++ fcitx5/CMakeLists.txt	2020-02-12 21:02:00.374518351 +0800
+@@ -64,7 +64,6 @@
+ find_package(Expat REQUIRED)
+ find_package(XKeyboardConfig)
+ pkg_check_modules(JsonC REQUIRED IMPORTED_TARGET "json-c")
+-pkg_check_modules(XkbFile REQUIRED IMPORTED_TARGET "xkbfile")
+ pkg_check_modules(Cairo IMPORTED_TARGET cairo)
+ pkg_check_modules(CairoXCB IMPORTED_TARGET cairo-xcb)
+ pkg_check_modules(CairoEGL IMPORTED_TARGET cairo-egl)
+@@ -70,7 +70,6 @@
+ pkg_check_modules(Pango IMPORTED_TARGET pango pangocairo)
+ pkg_check_modules(GdkPixbuf IMPORTED_TARGET gdk-pixbuf-2.0)
+ pkg_check_modules(GioUnix IMPORTED_TARGET gio-unix-2.0)
+-pkg_check_modules(CldrEmojiAnnotation REQUIRED IMPORTED_TARGET cldr-emoji-annotation)
+ find_package(Wayland COMPONENTS Client Egl)
+ find_package(WaylandScanner)
+ find_package(WaylandProtocols)
+--- fcitx5/src/modules/CMakeLists.txt	2020-02-12 21:30:48.361098757 +0800
++++ fcitx5/src/modules/CMakeLists.txt	2020-02-12 21:30:48.361098757 +0800
+@@ -1,4 +1,3 @@
+-add_subdirectory(xcb)
+ add_subdirectory(dbus)
+ add_subdirectory(wayland)
+ add_subdirectory(spell)
+--- citx5/src/modules/dbus/CMakeLists.txt	2020-02-12 21:31:55.136021711 +0800
++++ citx5/src/modules/dbus/CMakeLists.txt	2020-02-12 21:31:55.136021711 +0800
+@@ -1,5 +1,5 @@
+ add_library(dbus MODULE dbusmodule.cpp)
+-target_link_libraries(dbus Fcitx5::Core Fcitx5::Module::Keyboard Fcitx5::Module::XCB XCB::XCB)
++target_link_libraries(dbus Fcitx5::Core Fcitx5::Module::Keyboard)
+ set_target_properties(dbus PROPERTIES PREFIX "")
+ install(TARGETS dbus DESTINATION "${FCITX_INSTALL_ADDONDIR}")
+ fcitx5_translate_desktop_file(dbus.conf.in dbus.conf)
+--- a/src/modules/spell/CMakeLists.txt	2020-02-12 21:31:55.136021711 +0800
++++ b/src/modules/spell/CMakeLists.txt	2020-02-12 21:31:55.136021711 +0800
+@@ -1,6 +1,6 @@
+ add_subdirectory(dict)
+-add_library(spell MODULE spell.cpp spell-enchant.cpp spell-custom-dict.cpp spell-custom.cpp)
+-target_link_libraries(spell Fcitx5::Core PkgConfig::Enchant)
++add_library(spell MODULE spell.cpp spell-custom-dict.cpp spell-custom.cpp)
++target_link_libraries(spell Fcitx5::Core)
+ set_target_properties(spell PROPERTIES PREFIX "")
+ install(TARGETS spell DESTINATION "${FCITX_INSTALL_ADDONDIR}")
+ fcitx5_translate_desktop_file(spell.conf.in spell.conf)
+--- fcitx5/src/ui/classic/CMakeLists.txt	2020-02-12 21:35:25.917862833 +0800
++++ fcitx5/src/ui/classic/CMakeLists.txt	2020-02-12 21:35:25.917862833 +0800
+@@ -1,9 +1,9 @@
+ add_subdirectory(themes)
+ 
+-add_library(classicui MODULE classicui.cpp xcbui.cpp xcbwindow.cpp window.cpp theme.cpp
++add_library(classicui MODULE classicui.cpp window.cpp theme.cpp
+ waylandui.cpp waylandwindow.cpp waylandeglwindow.cpp waylandshmwindow.cpp
+ waylandpointer.cpp
+-buffer.cpp waylandinputwindow.cpp xcbtraywindow.cpp inputwindow.cpp xcbinputwindow.cpp xcbmenu.cpp)
++buffer.cpp waylandinputwindow.cpp inputwindow.cpp)
+ 
+ if (CAIRO_EGL_FOUND)
+ set(CAIRO_EGL_LIBRARY PkgConfig::CairoEGL Wayland::Egl EGL::EGL)
+@@ -13,10 +13,9 @@
+ 
+ target_link_libraries(classicui
+     Fcitx5::Core
+-    PkgConfig::Cairo PkgConfig::CairoXCB PkgConfig::Pango
++    PkgConfig::Cairo PkgConfig::Pango
+     PkgConfig::GdkPixbuf PkgConfig::GioUnix
+-    Fcitx5::Module::XCB Fcitx5::Module::Wayland Fcitx5::Module::NotificationItem
+-    XCB::AUX XCB::ICCCM XCB::XINERAMA Wayland::Client XCB::RANDR XCB::EWMH
++    Fcitx5::Module::Wayland Fcitx5::Module::NotificationItem
+     ${CAIRO_EGL_LIBRARY}
+     Fcitx5::Wayland::Core Fcitx5::Wayland::InputMethod
+     ${FMT_TARGET})
+--- fcitx5/src/modules/clipboard/CMakeLists.txt	2020-02-12 21:39:42.628264930 +0800
++++ fcitx5/src/modules/clipboard/CMakeLists.txt	2020-02-12 21:39:42.628264930 +0800
+@@ -1,5 +1,5 @@
+ add_library(clipboard MODULE clipboard.cpp)
+-target_link_libraries(clipboard Fcitx5::Core Fcitx5::Module::XCB XCB::XCB)
++target_link_libraries(clipboard Fcitx5::Core)
+ set_target_properties(clipboard PROPERTIES PREFIX "")
+ install(TARGETS clipboard DESTINATION "${FCITX_INSTALL_ADDONDIR}")
+ fcitx5_translate_desktop_file(clipboard.conf.in clipboard.conf)
+--- fcitx5/src/im/keyboard/CMakeLists.txt	2020-02-12 21:39:42.618264338 +0800
++++ fcitx5/src/im/keyboard/CMakeLists.txt	2020-02-12 21:39:42.618264338 +0800
+@@ -1,5 +1,5 @@
+ add_library(keyboard STATIC keyboard.cpp isocodes.cpp xkbrules.cpp xmlparser.cpp)
+-target_link_libraries(keyboard Fcitx5::Core Expat::Expat LibIntl::LibIntl XKBCommon::XKBCommon Fcitx5::Module::XCB Fcitx5::Module::Spell Fcitx5::Module::Notifications Fcitx5::Module::Emoji PkgConfig::JsonC ${FMT_TARGET})
++target_link_libraries(keyboard Fcitx5::Core Expat::Expat LibIntl::LibIntl XKBCommon::XKBCommon Fcitx5::Module::Spell Fcitx5::Module::Notifications PkgConfig::JsonC ${FMT_TARGET})
+ target_include_directories(keyboard PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
+ fcitx5_translate_desktop_file(keyboard.conf.in keyboard.conf)
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/keyboard.conf" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/addon")
+--- fcitx5/src/frontend/CMakeLists.txt	2020-02-12 21:39:42.614930808 +0800
++++ fcitx5/src/frontend/CMakeLists.txt	2020-02-12 21:39:42.614930808 +0800
+@@ -1,4 +1,3 @@
+-add_subdirectory(xim)
+ add_subdirectory(dbusfrontend)
+ add_subdirectory(waylandim)
+ add_subdirectory(ibusfrontend)
+--- fcitx5/src/modules/dbus/dbusmodule.cpp	2020-02-12 21:44:44.856323683 +0800
++++ fcitx5/src/modules/dbus/dbusmodule.cpp	2020-02-12 21:44:44.856323683 +0800
+@@ -28,7 +28,6 @@
+ #include "fcitx/inputmethodentry.h"
+ #include "fcitx/inputmethodmanager.h"
+ #include "keyboard_public.h"
+-#include "xcb_public.h"
+ #include <set>
+ 
+ #define FCITX_DBUS_SERVICE "org.fcitx.Fcitx5"
+@@ -381,16 +380,6 @@
+         instance_->globalConfig().safeSave();
+     }
+ 
+-    void openX11Connection(const std::string &name) {
+-        if (auto xcb = module_->xcb()) {
+-            xcb->call<IXCBModule::openConnection>(name);
+-        } else {
+-            throw dbus::MethodCallError(
+-                "org.freedesktop.DBus.Error.InvalidArgs",
+-                "XCB addon is not available.");
+-        }
+-    }
+-
+ private:
+     DBusModule *module_;
+     Instance *instance_;
+@@ -428,7 +428,6 @@
+ 
+     FCITX_OBJECT_VTABLE_METHOD(getAddons, "GetAddons", "", "a(sssibb)");
+     FCITX_OBJECT_VTABLE_METHOD(setAddonsState, "SetAddonsState", "a(sb)", "");
+-    FCITX_OBJECT_VTABLE_METHOD(openX11Connection, "OpenX11Connection", "s", "");
+ };
+ 
+ DBusModule::DBusModule(Instance *instance)
+--- fcitx5/src/modules/dbus/dbusmodule.h	2020-02-12 21:44:44.856323683 +0800
++++ fcitx5/src/modules/dbus/dbusmodule.h	2020-02-12 21:44:44.856323683 +0800
+@@ -37,7 +37,6 @@
+     dbus::Bus *bus();
+     bool lockGroup(int group);
+     FCITX_ADDON_DEPENDENCY_LOADER(keyboard, instance_->addonManager());
+-    FCITX_ADDON_DEPENDENCY_LOADER(xcb, instance_->addonManager());
+ 
+ private:
+     FCITX_ADDON_EXPORT_FUNCTION(DBusModule, bus);
+--- a/src/modules/spell/spell.cpp	2020-02-12 21:44:44.862991709 +0800
++++ a/src/modules/spell/spell.cpp	2020-02-12 21:44:44.862991709 +0800
+@@ -23,7 +23,9 @@
+ #include "fcitx-utils/standardpath.h"
+ #include "fcitx/addonmanager.h"
+ #include "spell-custom.h"
++#ifdef ENABLE_ENCHANT
+ #include "spell-enchant.h"
++#endif
+ #include <fcntl.h>
+ 
+ namespace fcitx {
+--- fcitx5/src/modules/clipboard/clipboard.h	2020-02-12 21:49:42.137605419 +0800
++++ fcitx5/src/modules/clipboard/clipboard.h	2020-02-12 21:49:42.137605419 +0800
+@@ -28,7 +28,6 @@
+ #include "fcitx/addoninstance.h"
+ #include "fcitx/inputcontextproperty.h"
+ #include "fcitx/instance.h"
+-#include "xcb_public.h"
+ #include <map>
+ 
+ namespace fcitx {
+@@ -72,11 +71,7 @@
+     KeyList selectionKeys_;
+     ClipboardConfig config_;
+     FactoryFor<ClipboardState> factory_;
+-    AddonInstance *xcb_;
+ 
+-    std::unique_ptr<HandlerTableEntry<XCBConnectionCreated>>
+-        xcbCreatedCallback_;
+-    std::unique_ptr<HandlerTableEntry<XCBConnectionClosed>> xcbClosedCallback_;
+     std::unordered_map<std::string,
+                        std::vector<std::unique_ptr<HandlerTableEntryBase>>>
+         selectionCallbacks_;
+--- fcitx5/src/modules/clipboard/clipboard.cpp	2020-02-12 21:49:42.137605419 +0800
++++ fcitx5/src/modules/clipboard/clipboard.cpp	2020-02-12 21:49:42.137605419 +0800
+@@ -111,29 +111,10 @@
+ 
+ Clipboard::Clipboard(Instance *instance)
+     : instance_(instance),
+-      factory_([this](InputContext &) { return new ClipboardState(this); }),
+-      xcb_(instance_->addonManager().addon("xcb")) {
++      factory_([this](InputContext &) { return new ClipboardState(this); }) {
+     instance_->inputContextManager().registerProperty("clipboardState",
+                                                       &factory_);
+ 
+-    xcbCreatedCallback_ = xcb_->call<IXCBModule::addConnectionCreatedCallback>(
+-        [this](const std::string &name, xcb_connection_t *, int, FocusGroup *) {
+-            auto &callbacks = selectionCallbacks_[name];
+-
+-            callbacks.emplace_back(xcb_->call<IXCBModule::addSelection>(
+-                name, "PRIMARY",
+-                [this, name](xcb_atom_t) { primaryChanged(name); }));
+-            callbacks.emplace_back(xcb_->call<IXCBModule::addSelection>(
+-                name, "CLIPBOARD",
+-                [this, name](xcb_atom_t) { clipboardChanged(name); }));
+-            primaryChanged(name);
+-            clipboardChanged(name);
+-        });
+-    xcbClosedCallback_ = xcb_->call<IXCBModule::addConnectionClosedCallback>(
+-        [this](const std::string &name, xcb_connection_t *) {
+-            selectionCallbacks_.erase(name);
+-        });
+-
+     constexpr KeySym syms[] = {
+         FcitxKey_1, FcitxKey_2, FcitxKey_3, FcitxKey_4, FcitxKey_5,
+         FcitxKey_6, FcitxKey_7, FcitxKey_8, FcitxKey_9, FcitxKey_0,
+@@ -305,42 +286,9 @@
+ void Clipboard::reloadConfig() { readAsIni(config_, "conf/clipboard.conf"); }
+ 
+ void Clipboard::primaryChanged(const std::string &name) {
+-    primaryCallback_ = xcb_->call<IXCBModule::convertSelection>(
+-        name, "PRIMARY", "",
+-        [this](xcb_atom_t, const char *data, size_t length) {
+-            if (!data) {
+-                primary_.clear();
+-            } else {
+-                std::string str(data, length);
+-                primary_ = std::move(str);
+-            }
+-            primaryCallback_.reset();
+-        });
+ }
+ 
+ void Clipboard::clipboardChanged(const std::string &name) {
+-    clipboardCallback_ = xcb_->call<IXCBModule::convertSelection>(
+-        name, "CLIPBOARD", "",
+-        [this](xcb_atom_t, const char *data, size_t length) {
+-            if (data) {
+-                std::string str(data, length);
+-                history_.push_front(std::move(str));
+-                auto iter = history_.begin();
+-                ++iter;
+-                // Insert and remove duplicates.
+-                for (; iter != history_.end(); iter++) {
+-                    if (history_.front() == *iter) {
+-                        history_.erase(iter);
+-                        break;
+-                    }
+-                }
+-                while (history_.size() && static_cast<int>(history_.size()) >
+-                                              config_.numOfEntries.value()) {
+-                    history_.pop_back();
+-                }
+-            }
+-            clipboardCallback_.reset();
+-        });
+ }
+ 
+ std::string Clipboard::primary(const InputContext *) {
+--- fcitx5/src/im/keyboard/keyboard.cpp	2020-02-12 21:51:33.043406000 +0800
++++ fcitx5/src/im/keyboard/keyboard.cpp	2020-02-12 21:51:33.043406000 +0800
+@@ -20,7 +20,6 @@
+ #include "keyboard.h"
+ #include "chardata.h"
+ #include "config.h"
+-#include "emoji_public.h"
+ #include "fcitx-config/iniparser.h"
+ #include "fcitx-utils/charutils.h"
+ #include "fcitx-utils/cutf8.h"
+@@ -35,7 +35,6 @@
+ #include "fcitx/instance.h"
+ #include "notifications_public.h"
+ #include "spell_public.h"
+-#include "xcb_public.h"
+ #include <cstring>
+ #include <fcntl.h>
+ #include <fmt/format.h>
+@@ -509,24 +508,6 @@
+     auto results = spell()->call<ISpell::hint>(entry.languageCode(),
+                                                state->buffer_.userInput(),
+                                                config_.pageSize.value());
+-    if (config_.enableEmoji.value() && emoji()) {
+-        auto emojiResults = emoji()->call<IEmoji::query>(
+-            entry.languageCode(), state->buffer_.userInput(), true);
+-        // If we have emoji result and spell result is full, pop one from the
+-        // original result, because emoji matching is always exact. Which means
+-        // the spell is right.
+-        if (!emojiResults.empty() &&
+-            static_cast<int>(results.size()) == config_.pageSize.value()) {
+-            results.pop_back();
+-        }
+-        size_t i = 0;
+-        while (i < emojiResults.size() &&
+-               static_cast<int>(results.size()) < config_.pageSize.value()) {
+-            results.push_back(emojiResults[i]);
+-            i++;
+-        }
+-    }
+-
+     auto candidateList = std::make_unique<CommonCandidateList>();
+     auto spellType = guessSpellType(state->buffer_.userInput());
+     for (const auto &result : results) {
+--- fcitx5/src/ui/classic/classicui.cpp	2020-02-12 21:53:03.393883772 +0800
++++ fcitx5/src/ui/classic/classicui.cpp	2020-02-12 21:53:03.393883772 +0800
+@@ -27,7 +27,6 @@
+ #include "fcitx/userinterfacemanager.h"
+ #include "notificationitem_public.h"
+ #include "waylandui.h"
+-#include "xcbui.h"
+ #include <fcntl.h>
+ 
+ namespace fcitx {
+@@ -37,21 +36,6 @@
+     : UserInterface(), instance_(instance) {
+     reloadConfig();
+ 
+-    if (auto xcbAddon = xcb()) {
+-        xcbCreatedCallback_ =
+-            xcbAddon->call<IXCBModule::addConnectionCreatedCallback>(
+-                [this](const std::string &name, xcb_connection_t *conn,
+-                       int screen, FocusGroup *) {
+-                    uis_["x11:" + name].reset(
+-                        new XCBUI(this, name, conn, screen));
+-                });
+-        xcbClosedCallback_ =
+-            xcbAddon->call<IXCBModule::addConnectionClosedCallback>(
+-                [this](const std::string &name, xcb_connection_t *) {
+-                    uis_.erase("x11:" + name);
+-                });
+-    }
+-
+     if (auto waylandAddon = wayland()) {
+         waylandCreatedCallback_ =
+             waylandAddon->call<IWaylandModule::addConnectionCreatedCallback>(
+@@ -85,11 +69,6 @@
+     theme_.load(*config_.theme, themeConfig);
+ }
+ 
+-AddonInstance *ClassicUI::xcb() {
+-    auto &addonManager = instance_->addonManager();
+-    return addonManager.addon("xcb");
+-}
+-
+ AddonInstance *ClassicUI::wayland() {
+     auto &addonManager = instance_->addonManager();
+     return addonManager.addon("wayland");
+--- fcitx5/src/ui/classic/classicui.h	2020-02-12 21:54:06.448658149 +0800
++++ fcitx5/src/ui/classic/classicui.h	2020-02-12 21:54:06.448658149 +0800
+@@ -33,7 +33,6 @@
+ #include "fcitx/userinterface.h"
+ #include "theme.h"
+ #include "wayland_public.h"
+-#include "xcb_public.h"
+ 
+ namespace fcitx {
+ namespace classicui {
+@@ -71,7 +70,6 @@
+     ClassicUI(Instance *instance);
+     ~ClassicUI();
+ 
+-    AddonInstance *xcb();
+     AddonInstance *wayland();
+     Instance *instance() { return instance_; }
+     const Configuration *getConfig() const override { return &config_; }
+@@ -95,10 +93,6 @@
+     UIInterface *uiForEvent(Event &event);
+     UIInterface *uiForInputContext(InputContext *inputContext);
+ 
+-    std::unique_ptr<HandlerTableEntry<XCBConnectionCreated>>
+-        xcbCreatedCallback_;
+-    std::unique_ptr<HandlerTableEntry<XCBConnectionClosed>> xcbClosedCallback_;
+-
+     std::unique_ptr<HandlerTableEntry<WaylandConnectionCreated>>
+         waylandCreatedCallback_;
+     std::unique_ptr<HandlerTableEntry<WaylandConnectionClosed>>
+--- fcitx5/src/im/keyboard/keyboard.cpp	2020-02-12 21:54:48.211500884 +0800
++++ fcitx5/src/im/keyboard/keyboard.cpp	2020-02-12 21:54:48.211500884 +0800
+@@ -162,19 +162,7 @@
+ KeyboardEngine::KeyboardEngine(Instance *instance) : instance_(instance) {
+     registerDomain("xkeyboard-config", XKEYBOARDCONFIG_DATADIR "/locale");
+     isoCodes_.read(ISOCODES_ISO639_JSON, ISOCODES_ISO3166_JSON);
+-    auto xcb = instance_->addonManager().addon("xcb");
+     std::string rule;
+-    if (xcb) {
+-        auto rules = xcb->call<IXCBModule::xkbRulesNames>("");
+-        if (!rules[0].empty()) {
+-            rule = rules[0];
+-            if (rule[0] != '/') {
+-                rule = XKEYBOARDCONFIG_XKBBASE "/rules/" + rule;
+-            }
+-            rule += ".xml";
+-            ruleName_ = rule;
+-        }
+-    }
+     if (rule.empty() || !xkbRules_.read(rule)) {
+         rule = XKEYBOARDCONFIG_XKBBASE "/rules/" DEFAULT_XKB_RULES ".xml";
+         xkbRules_.read(rule);
+--- fcitx5/src/ui/classic/waylandui.cpp	2020-02-12 21:54:48.188167696 +0800
++++ fcitx5/src/ui/classic/waylandui.cpp	2020-02-12 21:54:48.188167696 +0800
+@@ -28,7 +28,6 @@
+ #include "wl_seat.h"
+ #include "wl_shell.h"
+ #include "wl_shm.h"
+-#include "xcbui.h"
+ #include "zwp_input_panel_v1.h"
+ #include <algorithm>
+ 

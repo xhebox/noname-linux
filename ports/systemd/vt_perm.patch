@@ -1,0 +1,132 @@
+--- systemd-245/src/login/logind-dbus.c	2020-05-18 16:21:46.696670919 +0800
++++ systemd-245/src/login/logind-dbus.c	2020-05-18 16:21:46.696670919 +0800
+@@ -1049,20 +1049,6 @@
+                 return sd_bus_error_setf(error, BUS_ERROR_SESSION_NOT_ON_SEAT,
+                                          "Session %s not on seat %s", session_name, seat_name);
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &m->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = session_activate(session);
+         if (r < 0)
+                 return r;
+--- systemd-245/src/login/logind-seat-dbus.c	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/login/logind-seat-dbus.c	2020-03-06 20:38:52.000000000 +0800
+@@ -178,20 +178,6 @@
+         if (session->seat != s)
+                 return sd_bus_error_setf(error, BUS_ERROR_SESSION_NOT_ON_SEAT, "Session %s not on seat %s", name, s->id);
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &s->manager->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = session_activate(session);
+         if (r < 0)
+                 return r;
+@@ -214,20 +200,6 @@
+         if (to <= 0)
+                 return sd_bus_error_setf(error, SD_BUS_ERROR_INVALID_ARGS, "Invalid virtual terminal");
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &s->manager->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = seat_switch_to(s, to);
+         if (r < 0)
+                 return r;
+@@ -242,20 +214,6 @@
+         assert(message);
+         assert(s);
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &s->manager->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = seat_switch_to_next(s);
+         if (r < 0)
+                 return r;
+@@ -270,20 +228,6 @@
+         assert(message);
+         assert(s);
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &s->manager->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = seat_switch_to_previous(s);
+         if (r < 0)
+                 return r;
+--- systemd-245/src/login/logind-session-dbus.c	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/login/logind-session-dbus.c	2020-03-06 20:38:52.000000000 +0800
+@@ -191,20 +191,6 @@
+         assert(message);
+         assert(s);
+ 
+-        r = bus_verify_polkit_async(
+-                        message,
+-                        CAP_SYS_ADMIN,
+-                        "org.freedesktop.login1.chvt",
+-                        NULL,
+-                        false,
+-                        UID_INVALID,
+-                        &s->manager->polkit_registry,
+-                        error);
+-        if (r < 0)
+-                return r;
+-        if (r == 0)
+-                return 1; /* Will call us back */
+-
+         r = session_activate(s);
+         if (r < 0)
+                 return r;

@@ -1,5 +1,6 @@
 ports/*/*.tar*
 ports/*/*.tgz*
+ports/*/*.git*
 ports/test
 ports/*/*.rar*
 ports/*/*.zip*

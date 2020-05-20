@@ -1,0 +1,13 @@
+name="libvips"
+version="8.9.0"
+desc="A fast image processing library with low memory needs"
+deps=["fftw", "libwebp", "libxml2", "pango"]
+makedeps=["fftw", "libwebp", "libxml2", "pango"]
+source=[{url="https://github.com/libvips/libvips/releases/download/v$version/vips-$version.tar.gz"}]
+
+build='''
+	cd vips-$version
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
+'''

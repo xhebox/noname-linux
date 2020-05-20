@@ -1,0 +1,10 @@
+--- systemd-245/src/basic/path-util.h	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/basic/path-util.h	2020-03-06 20:38:52.000000000 +0800
+@@ -9,6 +9,7 @@
+ #include "string-util.h"
+ #include "strv.h"
+ #include "time-util.h"
++#include "missing_type.h"
+ 
+ #define PATH_SPLIT_SBIN_BIN(x) x "sbin:" x "bin"
+ #define PATH_SPLIT_SBIN_BIN_NULSTR(x) x "sbin\0" x "bin\0"

@@ -1,5 +1,4 @@
 version="9.0.1"
-nostrip=true
 desc="LLVM compiler and its backend"
 makedeps=["python", "cmake", "flex", "bison", "libffi", "libxml2", "libedit"]
 deps=["python", "libffi", "libxml2", "libedit"]

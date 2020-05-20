@@ -1,9 +1,8 @@
-version="2.9.2"
+version="3.0.2"
 desc="LibreSSL is av ersion of the TLS/crypto stack forked from OpenSSL."
 source=[
 	{url="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$name-$version.tar.gz"},
 	{url="fail-instead-of-trying-fallback.patch"},
-	{url="getprogname-musl.patch"},
 ]
 deps=["musl"]
 

@@ -18,4 +18,8 @@ build='''
 		--no-system-librhash
 	make
 	make DESTDIR="$pkgdir" install
+	cat >> "$pkgdir"/bin/noname-cmake << "EOF"
+cmake $@ -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=/lib
+EOF
+	chmod +x "$pkgdir"/bin/noname-cmake
 '''

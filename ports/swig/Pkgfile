@@ -1,0 +1,13 @@
+version="4.0.1"
+desc="Generate scripting interfaces to C/C++ code"
+makedeps=["libpcre"]
+deps=["libpcre"]
+source=[{url="https://github.com/swig/swig/archive/rel-$version.tar.gz"}]
+
+build='''
+	cd swig-rel-$version
+	./autogen.sh
+	./configure --prefix= --sbindir=/bin
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,18 +1,44 @@
-version="240"
+version="245"
 desc="system and service manager"
-nostrip=true
 makedeps=["acl", "docbook-xsl", "gperf", "lz4", "xz", "pam", "elfutils", "intltool", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
 deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
-	{url="musl.patch"},
-	{url="0017-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
-	{url="musl_test.patch"},
-	{url="poweroff.patch"},
 	{
 		name="0001-Use-Arch-Linux-device-access-groups.patch",
 		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
 	},
+	{url="0001-Handle-missing-gshadow.patch"},
+	{url="0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch"},
+	{url="0001-do-not-disable-buffer-in-writing-files.patch"},
+	{url="0002-don-t-use-glibc-specific-qsort_r.patch"},
+	{url="0002-src-login-brightness.c-include-sys-wait.h.patch"},
+	{url="0003-implment-systemd-sysv-install-for-OE.patch"},
+	{url="0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch"},
+	{url="0003-src-basic-copy.c-include-signal.h.patch"},
+	{url="0004-add-fallback-parse_printf_format-implementation.patch"},
+	{url="0004-src-shared-cpu-set-util.h-add-__cpu_mask-definition.patch"},
+	{url="0005-src-basic-missing.h-check-for-missing-strndupa.patch"},
+	{url="0006-Include-netinet-if_ether.h.patch"},
+	{url="0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not.patch"},
+	{url="0008-add-missing-FTW_-macros-for-musl.patch"},
+	{url="0010-fix-missing-of-__register_atfork-for-non-glibc-build.patch"},
+	{url="0011-Use-uintmax_t-for-handling-rlim_t.patch"},
+	{url="0014-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch"},
+	{url="0015-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
+	{url="0016-Define-glibc-compatible-basename-for-non-glibc-syste.patch"},
+	{url="0017-Do-not-disable-buffering-when-writing-to-oom_score_a.patch"},
+	{url="0018-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch"},
+	{url="0019-Hide-__start_BUS_ERROR_MAP-and-__stop_BUS_ERROR_MAP.patch"},
+	{url="0020-missing_type.h-add-__compar_d_fn_t-definition.patch"},
+	{url="0021-avoid-redefinition-of-prctl_mm_map-structure.patch"},
+	{url="0024-test-json.c-define-M_PIl.patch"},
+	{url="musl_missing_fs.patch"},
+	{url="musl_quota.patch"},
+	{url="portable_user_util.patch"},
+	{url="vt_perm.patch"},
+	{url="libressl.patch"},
+	{url="poweroff.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},
@@ -33,13 +59,15 @@ source=[
 ext='''
 	cd systemd-$version
 	for i in $source; do
+		echo $i
 		case $i in
-		*patch) patch -p1 -i ../$i;;
+		*patch) patch -Np1 -i ../$i;;
 		esac
 	done
 '''
 
 build='''
+	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0"
 	noname-meson systemd-$version build \
 	-Dsplit-usr=true \
 	-Dutmp=false \
@@ -47,7 +75,11 @@ build='''
 	-Dgnu-efi=true \
 	-Dima=false \
 	-Dlibidn2=false \
+	-Dlibidn=false \
+	-Didn=false \
 	-Dgshadow=false \
+	-Dlocaled=false \
+	-Duserdb=false \
 	-Dnss-resolve=false \
 	-Dnss-myhostname=false \
 	-Dnss-mymachines=false \

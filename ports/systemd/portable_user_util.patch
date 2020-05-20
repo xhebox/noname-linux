@@ -1,0 +1,38 @@
+--- systemd-245/src/basic/user-util.c	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/basic/user-util.c	2020-03-06 20:38:52.000000000 +0800
+@@ -913,8 +913,6 @@
+ 
+         errno = 0;
+         p = fgetpwent(stream);
+-        if (!p && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *pw = p;
+         return !!p;
+@@ -928,8 +926,6 @@
+ 
+         errno = 0;
+         s = fgetspent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *sp = s;
+         return !!s;
+@@ -943,8 +939,6 @@
+ 
+         errno = 0;
+         g = fgetgrent(stream);
+-        if (!g && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *gr = g;
+         return !!g;
+@@ -959,8 +953,6 @@
+ 
+         errno = 0;
+         s = fgetsgent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *sg = s;
+         return !!s;

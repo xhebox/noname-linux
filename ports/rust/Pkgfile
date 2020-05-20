@@ -1,5 +1,4 @@
 name="rust"
-nostrip=true
 version="1.40.0"
 _rust_dist_version="1.39.0"
 _cargo_dist_version="0.40.0"
@@ -73,7 +72,7 @@ codegen-units=1
 codegen-units-std=1
 jemalloc=false
 llvm-libunwind = false
-channel="stable"
+channel="dev"
 rpath=false
 [dist]
 src-tarball=false

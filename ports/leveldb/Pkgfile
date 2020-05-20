@@ -1,0 +1,15 @@
+name="leveldb"
+version="1.22"
+desc="A fast and lightweight key/value database library"
+deps=["gperf"]
+makedeps=["gperf"]
+source=[{url="https://github.com/google/leveldb/archive/$version.tar.gz"}]
+
+build='''
+	noname-cmake leveldb-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

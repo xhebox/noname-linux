@@ -1,0 +1,12 @@
+name="brise"
+version="0.38.20180515"
+desc="Rime schema repository"
+makedeps=["librime"]
+source=[{url="https://github.com/rime/brise/releases/download/brise-0.38/brise-$version.tar.gz"}]
+
+build='''
+cd brise
+make
+rime_deployer --build output
+make prefix= DESTDIR="$pkgdir" install
+'''

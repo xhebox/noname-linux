@@ -1,14 +1,23 @@
-name=libpinyin
-version=2.1.91
-deps="db glib"
+name="libpinyin"
+version="2.3.0"
+deps=["db", "glib"]
+makedeps=["db", "glib"]
 desc="Library to deal with pinyin"
-source="https://github.com/libpinyin/libpinyin/archive/$version.tar.gz"
+source=[
+	{url="https://github.com/libpinyin/libpinyin/archive/$version.tar.gz"},
+	{url="http://downloads.sourceforge.net/libpinyin/models/model17.text.tar.gz"},
+	{url="fix.patch"},
+]
 
-build() {
-	cd $name-$version
-	sed -i "s/wget/curl -L -O/g" data/Makefile.am
-	aclocal && libtoolize --force && autoheader && automake -a && autoconf
-	./configure --prefix=
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+ext='''
+	cd libpinyin-$version
+	patch -Np1 -i ../fix.patch
+'''
+
+build='''
+	cd libpinyin-$version
+	mv ../*.table ../*.conf ../*.text data
+	./autogen.sh --prefix=/
+	make
+	make DESTDIR="${pkgdir}" install
+'''

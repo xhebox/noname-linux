@@ -1,5 +1,4 @@
 version="0.28.0"
-nostrip=true
 deps=["libarchive", "openjdk8", "zip", "unzip"]
 makedeps=["libarchive", "openjdk8", "zip", "unzip"]
 source=[

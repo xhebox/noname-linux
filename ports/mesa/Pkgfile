@@ -1,5 +1,4 @@
 version="19.3.3"
-nostrip=true
 makedeps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libva", "libclc", "python", "wayland-protocols"]
 deps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libva", "libclc", "wayland"]
 desc="Mesa 3D Graphics Library"
@@ -7,6 +6,7 @@ source=[
 	{url="https://mesa.freedesktop.org/archive/mesa-$version.tar.xz"},
 	{url="add-use-elf-tls.patch"},
 	{url="musl.patch"},
+	{url="no-x11.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
 ]

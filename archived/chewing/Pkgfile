@@ -1,0 +1,13 @@
+name="libchewing"
+version="0.5.1"
+desc='Intelligent Chinese phonetic input method'
+deps=["sqlite"]
+makedeps=["sqlite"]
+source=[{url="https://github.com/chewing/libchewing/releases/download/v${version}/libchewing-${version}.tar.bz2"}]
+
+build='''
+	cd libchewing-$version
+  ./configure --prefix=/
+  make
+  make DESTDIR="${pkgdir}" install
+'''

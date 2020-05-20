@@ -1,12 +1,17 @@
 version="r30.b17b2de"
-_SPELL_EN_DICT_VER='20121020'
 desc="Next generation of fcitx(gtk)"
 deps=["fcitx5", "gtk3"]
-makedeps=["fcitx5", "gtk3", "extra-cmake-modules", "xorgproto", "wayland-protocols", "gobject-introspection"]
+makedeps=["fcitx5", "gtk3", "extra-cmake-modules", "wayland-protocols", "gobject-introspection"]
 
 source=[
 	{url="https://gitlab.com/fcitx/fcitx5-gtk", protocol="git"},
+	{url="no-x11.patch"},
 ]
+
+ext='''
+	cd fcitx5-gtk
+	patch -Np1 -i ../no-x11.patch
+'''
 
 build='''
 	cd fcitx5-gtk

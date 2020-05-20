@@ -6,9 +6,9 @@ source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"
 
 build='''
 	cmake glslang-$version -Bbuild \
-      -DCMAKE_INSTALL_PREFIX= \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DBUILD_SHARED_LIBS=ON
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	cd "${pkgdir}"/lib

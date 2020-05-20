@@ -1,0 +1,19 @@
+version="1.6"
+deps=["musl"]
+makedeps=["python"]
+desc="json cli util"
+source=[{url="https://github.com/stedolan/jq/releases/download/jq-$version/jq-$version.tar.gz"}]
+
+build='''
+	cd jq-$version
+	cd modules/oniguruma
+	autoreconf -fi
+	cd ../..
+	./configure --prefix=/ \
+		--sysconfdir=/etc \
+		--libexecdir=/lib \
+		--with-oniguruma=builtin \
+		--disable-maintainer-mode
+	make
+	make DESTDIR="$pkgdir" install
+'''

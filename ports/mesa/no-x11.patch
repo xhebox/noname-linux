@@ -1,0 +1,14 @@
+--- mesa-19.3.3/include/EGL/eglplatform.h	2020-01-29 03:07:35.000000000 +0800
++++ mesa-19.3.3/include/EGL/eglplatform.h	2020-01-29 03:07:35.000000000 +0800
+@@ -55,11 +55,7 @@
+ #endif
+ #define EGLAPIENTRYP EGLAPIENTRY*
+ 
+-#if defined(MESA_EGL_NO_X11_HEADERS) && !defined(EGL_NO_X11)
+-#warning "`MESA_EGL_NO_X11_HEADERS` is deprecated, and doesn't work with the unmodified Khronos header"
+-#warning "Please use `EGL_NO_X11` instead, as `MESA_EGL_NO_X11_HEADERS` will be removed soon"
+ #define EGL_NO_X11
+-#endif
+ 
+ /* The types NativeDisplayType, NativeWindowType, and NativePixmapType
+  * are aliases of window-system-dependent types, such as X Display * or

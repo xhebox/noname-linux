@@ -1,0 +1,10 @@
+--- systemd-245/src/basic/quota-util.h	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/basic/quota-util.h	2020-03-06 20:38:52.000000000 +0800
+@@ -2,6 +2,7 @@
+ #pragma once
+ 
+ #include <inttypes.h>
++#include <linux/quota.h>
+ #include <sys/quota.h>
+ #include <sys/types.h>
+ 

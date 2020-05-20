@@ -1,0 +1,135 @@
+--- fcitx5-gtk/CMakeLists.txt	2020-02-12 21:58:24.616826862 +0800
++++ fcitx5-gtk/CMakeLists.txt	2020-02-12 21:58:24.616826862 +0800
+@@ -14,7 +14,7 @@
+ include(ECMUninstallTarget)
+ 
+ option(ENABLE_GIR "GObject Introspection" ON)
+-option(ENABLE_GTK2_IM_MODULE "Enable GTK2 IM Module" ON)
++option(ENABLE_GTK2_IM_MODULE "Enable GTK2 IM Module" OFF)
+ option(ENABLE_GTK3_IM_MODULE "Enable GTK3 IM Module" ON)
+ option(ENABLE_SNOOPER "Enable Key Snooper for gtk app" ON)
+ 
+@@ -33,15 +33,7 @@
+ pkg_check_modules(GObject2 REQUIRED IMPORTED_TARGET "gobject-2.0")
+ add_subdirectory(fcitx-gclient)
+ 
+-if (ENABLE_GTK2_IM_MODULE OR ENABLE_GTK3_IM_MODULE)
+-find_package(X11 REQUIRED)
+-add_library(X11Import UNKNOWN IMPORTED)
+-set_target_properties(X11Import PROPERTIES
+-    IMPORTED_LOCATION "${X11_X11_LIB}"
+-    INTERFACE_INCLUDE_DIRECTORIES "${X11_X11_INCLUDE_PATH}")
+-endif()
+-
+ if (ENABLE_GTK2_IM_MODULE)
+ add_subdirectory(gtk2)
+ endif()
+ 
+--- fcitx5-gtk/gtk3/CMakeLists.txt	2020-02-12 22:01:19.299003379 +0800
++++ fcitx5-gtk/gtk3/CMakeLists.txt	2020-02-12 22:01:19.299003379 +0800
+@@ -5,7 +5,7 @@
+ 
+ pkg_check_modules(Gtk3 REQUIRED IMPORTED_TARGET "gtk+-3.0")
+ pkg_check_modules(Gdk3 REQUIRED IMPORTED_TARGET "gdk-3.0")
+-pkg_check_modules(Gdk3X11 REQUIRED IMPORTED_TARGET "gdk-x11-3.0")
++pkg_check_modules(Gdk3X11 REQUIRED IMPORTED_TARGET "gdk-wayland-3.0")
+ pkg_get_variable(GTK3_BINARY_VERSION "gtk+-3.0" "gtk_binary_version")
+ 
+ if (NOT DEFINED GTK3_IM_MODULEDIR)
+@@ -17,5 +17,5 @@
+ add_library(im-fcitx5-gtk3 MODULE ${FCITX_GTK3_IM_MODULE_SOURCES})
+ set_target_properties(im-fcitx5-gtk3 PROPERTIES PREFIX "" OUTPUT_NAME "im-fcitx5"
+   COMPILE_FLAGS "-fvisibility=hidden -fno-exceptions" LINK_FLAGS "-Wl,--no-undefined")
+-target_link_libraries(im-fcitx5-gtk3 Fcitx5::Utils Fcitx5::GClient XKBCommon::XKBCommon PkgConfig::Gtk3 PkgConfig::Gdk3 PkgConfig::Gdk3X11 X11Import)
++target_link_libraries(im-fcitx5-gtk3 Fcitx5::Utils Fcitx5::GClient XKBCommon::XKBCommon PkgConfig::Gtk3 PkgConfig::Gdk3 PkgConfig::Gdk3X11)
+ install(TARGETS im-fcitx5-gtk3 DESTINATION "${GTK3_IM_MODULEDIR}")
+--- fcitx5-gtk/gtk2/fcitximcontext.cpp	2020-02-12 22:02:41.719537090 +0800
++++ fcitx5-gtk/gtk2/fcitximcontext.cpp	2020-02-12 22:02:41.719537090 +0800
+@@ -31,10 +31,8 @@
+ 
+ #include <gdk/gdk.h>
+ #include <gdk/gdkkeysyms.h>
+-#include <gdk/gdkx.h>
+ #include <gtk/gtk.h>
+ #include <string.h>
+-#include <xcb/xcb.h>
+ #include <xkbcommon/xkbcommon-compose.h>
+ 
+ #ifdef GDK_WINDOWING_WAYLAND
+@@ -416,14 +416,6 @@
+     context->client = fcitx_g_client_new_with_watcher(_watcher);
+     if (context->is_wayland) {
+         fcitx_g_client_set_display(context->client, "wayland:");
+-    } else {
+-#if GTK_CHECK_VERSION(3, 0, 0)
+-        if (GDK_IS_X11_DISPLAY(gdk_display_get_default())) {
+-#endif
+-            fcitx_g_client_set_display(context->client, "x11:");
+-#if GTK_CHECK_VERSION(3, 0, 0)
+-        }
+-#endif
+     }
+     g_signal_connect(context->client, "connected",
+                      G_CALLBACK(_fcitx_im_context_connect_cb), context);
+@@ -1404,61 +1396,9 @@
+     }
+ }
+ 
+-void send_uuid_to_x11(Display *xdisplay, const guint8 *uuid) {
+-
+-    Atom atom = XInternAtom(xdisplay, "_FCITX_SERVER", False);
+-    if (!atom) {
+-        return;
+-    }
+-    Window window = XGetSelectionOwner(xdisplay, atom);
+-    if (!window) {
+-        return;
+-    }
+-    XEvent ev;
+-
+-    memset(&ev, 0, sizeof(ev));
+-    ev.xclient.type = ClientMessage;
+-    ev.xclient.window = window;
+-    ev.xclient.message_type = atom;
+-    ev.xclient.format = 8;
+-    memcpy(ev.xclient.data.b, uuid, 16);
+-
+-    XSendEvent(xdisplay, window, False, NoEventMask, &ev);
+-    XSync(xdisplay, False);
+-}
+-
+ void _fcitx_im_context_connect_cb(FcitxGClient *im, void *user_data) {
+     FCITX_UNUSED(im);
+     FcitxIMContext *context = FCITX_IM_CONTEXT(user_data);
+-    Display *display = NULL;
+-    if (context->client_window) {
+-#if GTK_CHECK_VERSION(3, 0, 0)
+-        if (GDK_IS_X11_WINDOW(context->client_window)) {
+-            display = GDK_WINDOW_XDISPLAY(context->client_window);
+-        }
+-#else
+-        if (GDK_IS_WINDOW(context->client_window)) {
+-            auto drawable = gdk_x11_window_get_drawable_impl(context->client_window);
+-            // We use the logic in gtk's get_impl_drawable.
+-            if (GDK_IS_WINDOW (drawable) || GDK_IS_PIXMAP (drawable)) {
+-                display = gdk_x11_drawable_get_xdisplay(drawable);
+-            }
+-        }
+-#endif
+-    } else {
+-        GdkDisplay *gdkDisplay = gdk_display_get_default();
+-#if GTK_CHECK_VERSION(3, 0, 0)
+-        if (GDK_IS_X11_DISPLAY(gdkDisplay)) {
+-#endif
+-            display = GDK_DISPLAY_XDISPLAY(gdkDisplay);
+-#if GTK_CHECK_VERSION(3, 0, 0)
+-        }
+-#endif
+-    }
+-
+-    if (display) {
+-        send_uuid_to_x11(display, fcitx_g_client_get_uuid(im));
+-    }
+ 
+     _fcitx_im_context_set_capability(context, TRUE);
+     if (context->has_focus && _focus_im_context == (GtkIMContext *)context &&

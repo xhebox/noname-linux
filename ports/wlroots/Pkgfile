@@ -1,21 +1,20 @@
 name="wlroots"
-version="0.9.0"
-nostrip=true
+version="0.10.0"
 desc='Modular Wayland compositor library'
 deps=["libinput", "libxkbcommon", "mesa", "pixman", "systemd", "libcap", "wayland", "libdrm"]
 makedeps=["libinput", "libxkbcommon", "mesa", "pixman", "systemd", "libcap", "wayland-protocols", "libdrm"]
 source=[
 	{url="https://github.com/swaywm/wlroots/archive/$version.tar.gz"},
-	{url="test.patch"},
+	{url="ime.patch"},
 ]
 
 ext='''
 	cd wlroots-$version
-	patch -p1 -i ../test.patch
+	patch -Np1 -i ../ime.patch
 '''
 
 build='''
-	export CFLAGS="$CFLAGS -g3"
+export CFLAGS="-g3"
 	noname-meson "wlroots-$version" build \
 				--prefix=/ \
 				--buildtype=plain \

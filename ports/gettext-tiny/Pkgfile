@@ -1,6 +1,5 @@
 version="git"
 desc="lightweight replacements of the gnu gettext"
-nostrip=true
 source=[
 	{
 		url="git://github.com/sabotage-linux/gettext-tiny",

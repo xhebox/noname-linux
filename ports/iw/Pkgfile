@@ -1,0 +1,11 @@
+version="5.4"
+makedeps=["libnl"]
+deps=["libnl"]
+desc="nl80211 based CLI configuration utility for wireless devices"
+source=[{url="https://mirrors.ustc.edu.cn/kernel.org/software/network/iw/iw-$version.tar.xz"}]
+
+build='''
+	cd iw-$version
+	make
+	make PREFIX= SBINDIR=/bin DESTDIR="$pkgdir" install
+'''

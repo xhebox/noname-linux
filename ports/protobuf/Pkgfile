@@ -8,12 +8,12 @@ source=[
 ]
 
 build='''
-  cd protobuf-$version
+	cd protobuf-$version
 	patch -p0 -i ../musl-fix.patch
 	autoreconf -ifv
-  ./configure --prefix=/
-  make
-  make DESTDIR="$pkgdir" install
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
 
 	cd python
 	python3 setup.py install --prefix= --root="$pkgdir" --cpp_implementation

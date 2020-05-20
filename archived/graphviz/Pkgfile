@@ -1,4 +1,4 @@
-name=graphviz
+name="graphviz"
 version=2.40.1
 desc='Graph visualization software'
 deps="libtool gd libxaw ghostscript gts perl python pango"

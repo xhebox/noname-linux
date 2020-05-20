@@ -1,5 +1,5 @@
 name="ttyd"
-version="1.5.2"
+version="1.6.0"
 desc='Share your terminal over the web'
 deps=["json-c", "libwebsockets", "zlib"]
 makedeps=["json-c", "libwebsockets", "zlib", "cmake", "xxd"]

@@ -25,14 +25,14 @@ Change the buffer size.
   %{coverage:-fprofile-arcs -ftest-coverage}\
   %{fprofile-arcs|fprofile-generate*|coverage:\
     %{!fprofile-update=singel:\
---- a/gcc/params.def	2016-03-30 09:47:40.000000000 +0200
-+++ b/gcc/params.def	2016-09-19 12:56:58.443179039 +0200
-@@ -673,7 +673,7 @@ DEFPARAM (PARAM_INTEGER_SHARE_LIMIT,
- DEFPARAM (PARAM_SSP_BUFFER_SIZE,
- 	  "ssp-buffer-size",
- 	  "The lower bound for a buffer to be considered for stack smashing protection.",
--	  8, 1, 0)
-+	  4, 1, 0)
+--- a/gcc/params.opt	2020-05-07 18:49:59.000000000 +0800
++++ b/gcc/params.opt	2020-05-07 18:49:59.000000000 +0800
+@@ -853,7 +853,7 @@
+ The maximum number of SSA_NAME assignments to follow in determining a value.
  
- DEFPARAM (PARAM_MIN_SIZE_FOR_STACK_SHARING,
- 	  "min-size-for-stack-sharing",
+ -param=ssp-buffer-size=
+-Common Joined UInteger Var(param_ssp_buffer_size) Init(8) IntegerRange(1, 65536) Param Optimization
++Common Joined UInteger Var(param_ssp_buffer_size) Init(4) IntegerRange(1, 65536) Param Optimization
+ The lower bound for a buffer to be considered for stack smashing protection.
+ 
+ -param=stack-clash-protection-guard-size=

@@ -1,0 +1,24 @@
+--- crda-3.18/utils/key2pub.py	2014-12-11 07:51:29.000000000 +0800
++++ crda-3.18/utils/key2pub.py	2014-12-11 07:51:29.000000000 +0800
+@@ -60,6 +60,7 @@
+ def print_ssl(output, name, val):
+     import struct
+     output.write('#include <stdint.h>\n')
++    output.write('#include <openssl/bn.h>\n')
+     if len(struct.pack('@L', 0)) == 8:
+         return print_ssl_64(output, name, val)
+     else:
+--- crda-3.18/Makefile	2020-04-09 15:17:37.139124600 +0800
++++ crda-3.18/Makefile	2020-04-09 15:17:37.139124600 +0800
+@@ -45,11 +45,6 @@
+ $(LIBREG): keys-ssl.c
+ 
+ else
+-CFLAGS += -DUSE_GCRYPT
+-LDLIBS += -lgcrypt
+-
+-$(LIBREG): keys-gcrypt.c
+-
+ endif
+ MKDIR ?= mkdir -p
+ INSTALL ?= install

@@ -1,5 +1,5 @@
-version="1.14.3"
-makedeps=["python-setuptools", "python3-cython"]
+version="1.18.4"
+makedeps=["python3-setuptools", "python3-cython"]
 deps=["python3-cython"]
 source=[
 	{url="https://github.com/numpy/numpy/archive/v${version}.tar.gz"},
@@ -10,7 +10,6 @@ desc="Scientific tools for Python"
 build='''
 	pyver=$(python3 -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))')
 
-	sed -i 's/xlocale/locale/g' numpy-$version/numpy/core/src/multiarray/numpyos.c
 	cp site.cfg numpy-$version/numpy-$version 
 
 	export LDFLAGS="$LDFLAGS -shared"
