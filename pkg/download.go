@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/go-git/go-git/v5"
 	"github.com/pkg/errors"
-	"gopkg.in/src-d/go-git.v4"
 )
 
 func opt_download(name string, opts map[harg]bool) error {
@@ -60,22 +60,14 @@ func opt_download(name string, opts map[harg]bool) error {
 					os.RemoveAll(spath) // dirty dir, reclone
 					goto notexisted
 				}
-
-				if e := worktree.Pull(&git.PullOptions{
-					RemoteName: "origin",
-					Progress:   os.Stdout,
-				}); e != nil && e != git.NoErrAlreadyUpToDate {
-					return errors.Wrapf(e, "can not pull [%v]", source["url"])
-				}
 			}
 
 		notexisted:
 			if !exist(spath) {
 				repo, e = git.PlainClone(spath, false, &git.CloneOptions{
-					URL:      source["url"],
-					Progress: os.Stdout,
+					URL:               source["url"],
+					Progress:          os.Stdout,
 				})
-
 				if e != nil {
 					return errors.Wrapf(e, "can not clone [%v]", source["url"])
 				}
