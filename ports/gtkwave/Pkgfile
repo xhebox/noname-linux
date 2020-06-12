@@ -1,0 +1,16 @@
+version="git"
+deps=["gtk3"]
+makedeps=["gtk3"]
+desc="vcd viewer"
+source=[
+	{protocol="git", url="https://github.com/gtkwave/gtkwave"},
+	{url="no-x11.patch"},
+]
+
+build='''
+	cd gtkwave/gtkwave3-gtk3
+	patch -Np1 -i ../../no-x11.patch
+	./configure --prefix= --libexecdir=/lib --disable-tcl --enable-gtk3
+	make
+	make DESTDIR="$pkgdir" install
+'''

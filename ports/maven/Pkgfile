@@ -1,0 +1,30 @@
+version="3.6.3"
+deps=["openjdk8", "procps-ng"]
+makedeps=["openjdk8", "procps-ng"]
+source=[
+	{url="https://www-us.apache.org/dist/maven/maven-3/${version}/source/apache-maven-${version}-src.tar.gz"},
+	{url="https://www-us.apache.org/dist/maven/maven-3/${version}/binaries/apache-maven-${version}-bin.tar.gz"},
+]
+
+build='''
+	. /etc/profile.d/jdk8.sh
+	cd apache-maven-$version
+	./bin/mvn package \
+		-s/home/xhe/.m2/settings.xml \
+		-Dmaven.repo.local=repo \
+		-Drat.skip=true \
+		-Dproject.build.sourceEncoding=UTF-8 -e
+
+	install -d "${pkgdir}/opt/maven"
+
+	./bin/mvn install \
+		-Dmaven.repo.local=repo \
+		-Drat.skip=true \
+		-Dproject.build.sourceEncoding=UTF-8 -e \
+		-DdistributionTargetDir="${pkgdir}/opt/maven" \
+		-DskipTests -Dmaven.test.skip=true
+
+	install -d "${pkgdir}/bin"
+	ln -s /opt/maven/bin/mvn "${pkgdir}/bin/mvn"
+	ln -s /opt/maven/bin/mvnDebug "${pkgdir}/bin/mvnDebug"
+'''

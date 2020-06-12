@@ -1,0 +1,102 @@
+diff --git a/caffe2/contrib/gloo/allgather_ops.cc b/caffe2/contrib/gloo/allgather_ops.cc
+index 39fbecc68e36d..22403fa4a3c6e 100644
+--- a/caffe2/contrib/gloo/allgather_ops.cc
++++ b/caffe2/contrib/gloo/allgather_ops.cc
+@@ -52,6 +52,9 @@ void AllgatherOp<Context>::initializeAlgorithm() {
+   }
+ }
+ 
++// Used outside of the translation unit
++template void AllgatherOp<CPUContext>::initializeAlgorithm();
++
+ namespace {
+ 
+ REGISTER_CPU_OPERATOR_WITH_ENGINE(Allgather, GLOO, AllgatherOp<CPUContext>);
+diff --git a/caffe2/contrib/gloo/allreduce_ops.cc b/caffe2/contrib/gloo/allreduce_ops.cc
+index f1c61c050f3fd..4f2e0335a60b6 100644
+--- a/caffe2/contrib/gloo/allreduce_ops.cc
++++ b/caffe2/contrib/gloo/allreduce_ops.cc
+@@ -81,6 +81,9 @@ void AllreduceOp<Context>::initializeHalvingDoubling() {
+   }
+ }
+ 
++// Used outside of the translation unit
++template void AllreduceOp<CPUContext>::initializeHalvingDoubling();
++
+ template <class Context>
+ void AllreduceOp<Context>::initializeRingFull() {
+   if (init_.template IsType<float>()) {
+diff --git a/caffe2/operators/elementwise_mul_gradient_op.cc b/caffe2/operators/elementwise_mul_gradient_op.cc
+index b08bb377a28bb..285aa7e6370a4 100644
+--- a/caffe2/operators/elementwise_mul_gradient_op.cc
++++ b/caffe2/operators/elementwise_mul_gradient_op.cc
+@@ -220,6 +220,56 @@ bool MulFunctor<CPUContext>::Backward(
+   return true;
+ }
+ 
++// Used in fallback ops
++template
++bool MulFunctor<CPUContext>::Backward<float, float, float> (
++    const std::vector<int>& A_dims,
++    const std::vector<int>& B_dims,
++    const float* dC,
++    const float* A,
++    const float* B,
++    const float* /* C */,
++    float* dA,
++    float* dB,
++    CPUContext* context) const;
++
++template
++bool MulFunctor<CPUContext>::Backward<int32_t, int32_t, int32_t> (
++    const std::vector<int>& A_dims,
++    const std::vector<int>& B_dims,
++    const int* dC,
++    const int* A,
++    const int* B,
++    const int* /* C */,
++    int* dA,
++    int* dB,
++    CPUContext* context) const;
++
++template
++bool MulFunctor<CPUContext>::Backward<double, double, double> (
++    const std::vector<int>& A_dims,
++    const std::vector<int>& B_dims,
++    const double* dC,
++    const double* A,
++    const double* B,
++    const double* /* C */,
++    double* dA,
++    double* dB,
++    CPUContext* context) const;
++
++template
++bool MulFunctor<CPUContext>::Backward<int64_t, int64_t, int64_t> (
++    const std::vector<int>& A_dims,
++    const std::vector<int>& B_dims,
++    const int64_t* dC,
++    const int64_t* A,
++    const int64_t* B,
++    const int64_t* /* C */,
++    int64_t* dA,
++    int64_t* dB,
++    CPUContext* context) const;
++
++
+ REGISTER_CPU_OPERATOR(
+     MulGradient,
+     BinaryElementwiseGradientOp<
+diff --git a/caffe2/quantization/server/fully_connected_dnnlowp_op.cc b/caffe2/quantization/server/fully_connected_dnnlowp_op.cc
+index 2e357ca580c6d..6e91f068dd1e6 100644
+--- a/caffe2/quantization/server/fully_connected_dnnlowp_op.cc
++++ b/caffe2/quantization/server/fully_connected_dnnlowp_op.cc
+@@ -904,6 +904,8 @@ bool FullyConnectedDNNLowPOp<T, ReluFused>::GetQuantizationParameters_() {
+   return true;
+ }
+ 
++template class FullyConnectedDNNLowPOp<uint8_t>;
++
+ REGISTER_CPU_OPERATOR_WITH_ENGINE(
+     FC,
+     DNNLOWP,

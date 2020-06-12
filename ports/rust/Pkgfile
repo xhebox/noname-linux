@@ -1,7 +1,7 @@
 name="rust"
-version="1.40.0"
-_rust_dist_version="1.39.0"
-_cargo_dist_version="0.40.0"
+version="1.44.0"
+_rust_dist_version="1.43.0"
+_cargo_dist_version="0.43.0"
 deps=["libffi", "ncurses", "libxml2", "zlib", "llvm"]
 makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "cmake", "curl", "python"]
 source=[
@@ -11,7 +11,7 @@ source=[
 	{url="https://static.rust-lang.org/dist/cargo-${_cargo_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
 	{url="link-musl-dynamically.patch"},
-	{url="minimize-rpath.patch"},
+	{url="noname-target.patch"},
 	{url="musl-dont-use-crt-static.patch"},
 	{url="musl-fix-linux_musl_base.patch"},
 	{url="musl-fix-static-linking.patch"},
@@ -45,13 +45,16 @@ ext='''
 	cat <<- EOF > config.toml
 [llvm]
 link-shared=true
+[target.$TARGET]
+llvm-config = "/bin/llvm-config"
+crt-static = false
 [target.x86_64-unknown-linux-musl]
-llvm-config="/bin/llvm-config"
-crt-static=false
+llvm-config = "/bin/llvm-config"
+crt-static = false
 [build]
 build="x86_64-unknown-linux-musl"
-host=["x86_64-unknown-linux-musl"]
-target=["x86_64-unknown-linux-musl"]
+host=["$TARGET"]
+target=["$TARGET"]
 docs=false
 extended=false
 sanitizers=false
@@ -72,8 +75,8 @@ codegen-units=1
 codegen-units-std=1
 jemalloc=false
 llvm-libunwind = false
+musl-root="/"
 channel="dev"
-rpath=false
 [dist]
 src-tarball=false
 EOF
@@ -90,9 +93,11 @@ EOF
 
 build='''
 	cd rustc-$version-src
+	export LLVM_LINK_SHARED=1
 	export CARGO_HOME="$srcdir/.cargo"
 	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
 	export PATH="$srcdir/stage0/bin:$PATH"
+	export RUSTFLAGS="-C target-feature=-crt-static" cargo build
 	export RUST_BACKTRACE=1
 	./x.py build $MAKEFLAGS -v
 	DESTDIR="$pkgdir" ./x.py install

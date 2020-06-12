@@ -1,10 +1,10 @@
 name="firefox"
-version="73.0.1"
+version="77.0.1"
 desc="Firefox web browser"
 deps=["alsa-lib", "bzip2", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip"]
-makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip", "wayland-protocols", "yasm"]
+makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
-	{url="https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
+	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},
 	{url="stab.h"},
 	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
@@ -12,10 +12,8 @@ source=[
 	{url="no-x11.patch"},
 	{url="fix-fortify-inline.patch"},
 	{url="fix-seccomp-bpf.patch"},
-	{url="fix-toolkit.patch"},
 	{url="fix-tools.patch"},
 	{url="mallinfo.patch"},
-	{url="rust_audio-thread-priority.patch"},
 ]
 
 ext='''
@@ -72,7 +70,6 @@ ac_add_options --with-system-libvpx
 ac_add_options --with-system-icu
 ac_add_options --with-system-png
 ac_add_options --enable-system-pixman
-ac_add_options --enable-system-sqlite
 ac_add_options --enable-system-ffi
 
 # Features
@@ -106,14 +103,14 @@ build='''
 
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.12.1 --locked cbindgen
+	cargo install --version 0.14.1 --locked cbindgen
 
 	cd firefox-$version
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
 
 	env >> env
 
-	./mach build
+	./mach build -j3
 	DESTDIR="$pkgdir" ./mach install
 	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
 	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END

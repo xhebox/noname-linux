@@ -1,10 +1,11 @@
-version="8.212.04"
 desc="OpenJDK 8 provided by IcedTea"
 makedeps=["unzip", "zip"]
+nostrip=true
 deps=["unzip", "zip"]
 _java_ver="8"
-_jdk_update="222"
-_jdk_build="05"
+_jdk_update="252"
+_jdk_build="09"
+version="$_java_ver.$_jdk_update.$_jdk_build"
 _repo_ver="jdk${_java_ver}u${_jdk_update}-b${_jdk_build}"
 _prefix="jdk8u-${_repo_ver}/image"
 _jvmdir="/lib/jvm/java-8-openjdk"
@@ -30,12 +31,11 @@ source=[
 	{url="icedtea-jdk-execinfo.patch"},
 	{url="icedtea-jdk-fix-ipv6-init.patch"},
 	{url="icedtea-jdk-fix-libjvm-load.patch"},
-	{url="icedtea-jdk-getmntent-buffer.patch"},
 	{url="icedtea-jdk-includes.patch"},
 	{url="icedtea-jdk-musl.patch"},
-	{url="icedtea-jdk-tls-nist-curves.patch"},
 	{url="openjdk8-no-unused-deps.patch"},
 	{url="openjdk8-no-genx11-in-headless.patch"},
+	{url="jdk8_no_unused.patch"},
 ]
 
 ext='''
@@ -45,6 +45,7 @@ ext='''
   done
 
 	for i in $source; do
+		echo $i
 		case $i in
 			*-no-*.patch) patch -p0 -i "$srcdir"/$i ;;
 			*.patch) patch -p1 -i "$srcdir"/$i ;;
@@ -59,11 +60,12 @@ build='''
 
 	unset JAVA_HOME
   export MAKEFLAGS=${MAKEFLAGS##-j*}
-  export CFLAGS="${CFLAGS} -Wno-error=deprecated-declarations -Wno-error=stringop-overflow= -Wno-error=return-type -Wno-error=cpp -fno-lifetime-dse -fno-delete-null-pointer-checks"
+  export CFLAGS="${CFLAGS} -Wno-error=deprecated-declarations -Wno-error=stringop-overflow= -Wno-error=return-type -Wno-error=cpp -fno-lifetime-dse -fno-delete-null-pointer-checks -fcommon"
 
   install -d -m 755 "${srcdir}/${_prefix}/"
 
 	chmod +x configure
+
   ALSA_NOT_NEEDED=yes \
 	X11_NOT_NEEDED=yes \
 	CUPS_NOT_NEEDED=yes \
@@ -80,7 +82,7 @@ build='''
     --without-x \
     --without-cups \
 	  --disable-freetype-bundling \
-	  --disable-headful \
+	  --enable-headful \
 	  --with-boot-jdk="../usr/lib/jvm/java-1.7-openjdk" \
     --with-extra-cflags="${CFLAGS}" \
     --with-extra-cxxflags="${CXXFLAGS}" \
@@ -118,8 +120,7 @@ build='''
   install -d -m 755 "${pkgdir}"/share/man/man1/
   for file in *; do
     if [ -f "${srcdir}/${_imgdir}/man/man1/${file}.1" ]; then
-      install -m 644 "${srcdir}/${_imgdir}/man/man1/${file}.1" \
-        "${pkgdir}/share/man/man1/${file}-${_jdkname}.1"
+      install -m 644 "${srcdir}/${_imgdir}/man/man1/${file}.1" "${pkgdir}/share/man/man1/${file}-${_jdkname}.1"
     fi
   done
 	cd -
@@ -144,7 +145,9 @@ build='''
       ln -s ../jre/bin/${b} "${pkgdir}${_jvmdir}/bin/${b}"
     else
       install -D -m 755 ${b} "${pkgdir}${_jvmdir}/bin/${b}"
-      install -D -m 644 ../man/man1/${b}.1 "${pkgdir}/share/man/man1/${b}-${_jdkname}.1"
+      if [ -f "../man/man1/${b}.1" ]; then
+        install -D -m 644 ../man/man1/${b}.1 "${pkgdir}/share/man/man1/${b}-${_jdkname}.1"
+      fi
     fi
   done
   cd -

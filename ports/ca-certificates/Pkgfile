@@ -1,4 +1,4 @@
-version="20190110"
+version="20200601"
 desc="Common CA certificate"
 source=[
 	{url="http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_$version.tar.xz"},
@@ -9,7 +9,7 @@ source=[
 deps=["run-parts", "coreutils", "libressl", "dash"]
 
 ext='''
-	cd ca-certificates-$version
+	cd work
 
 	find . -type f -exec sed -i -e 's/\/usr\/share/\/share/g' -e 's/\/usr\/bin/\/bin/g' -e 's/\/usr\/sbin/\/bin/g' {} \;
 
@@ -23,7 +23,7 @@ ext='''
 '''
 
 build='''
-	cd ca-certificates-$version
+	cd work
 	make
 
 	mkdir -p "$pkgdir"/bin

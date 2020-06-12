@@ -1,10 +1,10 @@
-version="3.49.2"
+version="3.53"
 _version="`echo $version | tr . _`"
 desc="Mozilla Network Security Services (NSS)"
 makedeps=["nspr", "sqlite", "zlib", "perl", "python"]
 deps=["nspr", "sqlite", "zlib"]
 source=[
-	{url="https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${_version}_RTM/src/nss-${version}.tar.gz"},
+	{url="https://archive.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${_version}_RTM/src/nss-${version}.tar.gz"},
 	{url="nss-config.in"},
 	{url="nss-config.xml"},
 	{url="nss.pc.in"},
@@ -34,9 +34,9 @@ build='''
 	export USE_64=1
 
 	make -j1 -C coreconf
-	make -j1 -C lib/dbm
-	make -j1
+	make -j1 all
 	make clean_docs build_docs
+
 	cd ..
 
 	install -d "$pkgdir"/bin

@@ -40,3 +40,26 @@
 +#endif
  }
  #endif
+--- dom/media/AudioSampleFormat.h	2020-06-03 07:35:42.000000000 +0800
++++ dom/media/AudioSampleFormat.h	2020-06-03 07:35:42.000000000 +0800
+@@ -8,6 +8,7 @@
+ 
+ #include "mozilla/Assertions.h"
+ #include <algorithm>
++#include <cstring>
+ 
+ namespace mozilla {
+ 
+@@ -162,10 +163,10 @@
+ }
+ inline void ConvertAudioSamples(const int16_t* aFrom, int16_t* aTo,
+                                 int aCount) {
+-  memcpy(aTo, aFrom, sizeof(*aTo) * aCount);
++  std::memcpy(aTo, aFrom, sizeof(*aTo) * aCount);
+ }
+ inline void ConvertAudioSamples(const float* aFrom, float* aTo, int aCount) {
+-  memcpy(aTo, aFrom, sizeof(*aTo) * aCount);
++  std::memcpy(aTo, aFrom, sizeof(*aTo) * aCount);
+ }
+ 
+ // Sample buffer conversion with scale

@@ -1,0 +1,38 @@
+version="1.5.0"
+makedeps=["python3-setuptools", "python3-numpy", "python3-yaml", "openmp"]
+deps=["python3", "python3-numpy", "python3-yaml", "openmp", "fbgemm"]
+source=[
+	{protocol="git", url="https://github.com/pytorch/pytorch", commit="4ff3872a2099993bf7e8c588f7182f3df777205b"},
+	{url="381.diff"},
+	{url="35359.patch"},
+	{url="35939.diff"},
+	{url="musl.patch"},
+	{url="gcc10.patch"},
+	{url="fix_include_system.patch"},
+]
+desc="torch for python"
+
+build='''
+	cd pytorch
+	#https_proxy=socks5://127.0.0.1:1080 \
+	git submodule update --init --recursive
+	patch -Np1 -i ../35359.patch
+	patch -Np1 -i ../35939.diff
+	patch -Np1 -i ../musl.patch
+	patch -Np1 -i ../gcc10.patch
+	patch -N torch/utils/cpp_extension.py -i ../fix_include_system.patch
+	cd third_party/fbgemm
+	patch -Np1 -i ../../../381.diff
+	cd -
+	export USE_DISTRIBUTED=OFF
+	export USE_CUDA=OFF
+	export USE_FFMPEG=OFF
+	export BUILD_TEST=OFF
+	export USE_OPENMP=ON
+	export USE_FBGEMM=ON
+	python3 setup.py build
+	python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

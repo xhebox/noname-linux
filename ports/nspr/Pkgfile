@@ -1,7 +1,7 @@
-version="4.24"
+version="4.25"
 desc="Netscape Portable Runtime library"
 source=[
-	{url="http://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v$version/src/$name-$version.tar.gz"},
+	{url="http://archive.mozilla.org/pub/mozilla.org/nspr/releases/v$version/src/$name-$version.tar.gz"},
 ]
 
 build='''

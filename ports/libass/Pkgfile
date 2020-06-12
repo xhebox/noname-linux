@@ -1,14 +1,17 @@
-version="0.14.0"
+version="git"
 desc='A portable library for SSA/ASS subtitles rendering'
 makedeps=["fribidi", "harfbuzz", "fontconfig", "glib", "nasm"]
 deps=["fribidi", "harfbuzz", "fontconfig", "glib"]
-source=[{url="https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz"}]
+source=[{protocol="git", url="https://github.com/libass/libass", commit="fb85c9e863ef27c8fcd6ab2dd5f51ced246baadf"}]
 
 build='''
-	cd libass-${version}
+	cd libass
+
+	./autogen.sh
 
 	./configure \
 		--prefix= \
+		--enable-harfbuzz \
 		--enable-fontconfig
 	make
 	make DESTDIR="${pkgdir}" install

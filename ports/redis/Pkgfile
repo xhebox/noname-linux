@@ -1,0 +1,22 @@
+version="6.0.4"
+desc="a good database"
+source=[
+	{url="https://codeload.github.com/antirez/redis/tar.gz/$version", name="redis-v$version.tar.gz"},
+	{url="malloc_size.patch"},
+]
+deps=["grep", "shadow"]
+
+ext='''
+	cd redis-$version
+	patch -p1 -i ../malloc_size.patch
+'''
+
+build='''
+	cd redis-$version
+	export USE_JEMALLOC=no
+	export USE_TCMALLOC=no
+	export USE_SYSTEMD=no
+	export BUILD_WITH_SYSTEMD=no
+	make
+	make PREFIX="$pkgdir" install
+'''

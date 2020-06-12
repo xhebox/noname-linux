@@ -55,6 +55,9 @@ source=[
 	{url="systemd-tmpfiles.toml"},
 	{url="systemd-udev-reload.toml"},
 ]
+baks=[
+	"etc/systemd/journald.conf",
+]
 
 ext='''
 	cd systemd-$version

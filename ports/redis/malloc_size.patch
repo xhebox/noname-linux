@@ -1,0 +1,15 @@
+--- redis-6.0.4/src/zmalloc.h	2020-05-28 18:18:38.000000000 +0800
++++ redis-6.0.4/src/zmalloc.h	2020-05-28 18:18:38.000000000 +0800
+@@ -63,12 +63,10 @@
+ 
+ #ifndef ZMALLOC_LIB
+ #define ZMALLOC_LIB "libc"
+-#ifdef __GLIBC__
+ #include <malloc.h>
+ #define HAVE_MALLOC_SIZE 1
+ #define zmalloc_size(p) malloc_usable_size(p)
+ #endif
+-#endif
+ 
+ /* We can enable the Redis defrag capabilities only if we are using Jemalloc
+  * and the version used is our special version modified for Redis having

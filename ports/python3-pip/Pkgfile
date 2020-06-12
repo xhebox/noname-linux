@@ -1,6 +1,6 @@
 version="19.0.3"
 makedeps=["python3-setuptools"]
-eps=["python3"]
+deps=["python3"]
 source=[{url="https://pypi.io/packages/source/p/pip/pip-${version}.tar.gz"}]
 desc="The PyPA recommended tool for installing Python packages"
 

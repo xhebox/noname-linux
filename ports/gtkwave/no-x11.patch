@@ -1,0 +1,73 @@
+--- gtkwave3-gtk3/src/twinwave.c	2020-05-21 09:51:29.163390905 +0800
++++ gtkwave3-gtk3/src/twinwave.c	2020-05-21 09:51:29.163390905 +0800
+@@ -15,9 +15,6 @@
+ #include <windows.h>
+ #undef MINGW_USE_XID
+ #else
+-#if GTK_CHECK_VERSION(3,0,0)
+-#include <gtk/gtkx.h>
+-#endif
+ #if GTK_CHECK_VERSION(3,22,26)
+ #if !defined(MAC_INTEGRATION)
+ #include <gdk/gdkwayland.h>
+@@ -143,15 +140,6 @@
+ 	use_embedded = 0;
+ 	}
+ #endif
+-	{
+-	xsocket[0] = gtk_socket_new ();
+-	xsocket[1] = gtk_socket_new ();
+-	gtk_widget_show (xsocket[0]);
+-	gtk_widget_show (xsocket[1]);
+-	}
+-
+-if(!twinwayland)
+-g_signal_connect(XXX_GTK_OBJECT(xsocket[0]), "plug-removed", G_CALLBACK(plug_removed), NULL);
+ 
+ #if GTK_CHECK_VERSION(3,0,0)
+ main_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+@@ -171,12 +159,6 @@
+ gtk_widget_show (vpan);
+ gtk_box_pack_start (GTK_BOX (main_vbox), vpan, TRUE, TRUE, 1);
+ 
+-if(!twinwayland)
+-	{
+-	gtk_paned_pack1 (GTK_PANED (vpan), xsocket[0], TRUE, FALSE);
+-	g_signal_connect(XXX_GTK_OBJECT(xsocket[1]), "plug-removed", G_CALLBACK(plug_removed), NULL);
+-	gtk_paned_pack2 (GTK_PANED (vpan), xsocket[1], TRUE, FALSE);
+-	}
+ #endif
+ 
+ #ifdef __MINGW32__
+@@ -431,8 +413,6 @@
+ 					{
+ #ifdef MAC_INTEGRATION
+ 					sprintf(buf2, "%x", gtk_socket_get_id (GTK_SOCKET(xsocket[0])));
+-#else
+-					sprintf(buf2, "%lx", (long)gtk_socket_get_id (GTK_SOCKET(xsocket[0])));
+ #endif
+ 					}
+ 					else
+@@ -469,8 +449,6 @@
+ 				{
+ #ifdef MAC_INTEGRATION
+ 				sprintf(buf2, "%x", gtk_socket_get_id (GTK_SOCKET(xsocket[1])));
+-#else
+-				sprintf(buf2, "%lx", (long)gtk_socket_get_id (GTK_SOCKET(xsocket[1])));
+ #endif
+ 				}
+ 				else
+--- gtkwave3-gtk3/src/main.c	2020-05-21 09:57:39.483398739 +0800
++++ gtkwave3-gtk3/src/main.c	2020-05-21 09:57:39.483398739 +0800
+@@ -40,11 +40,7 @@
+ #include <sys/types.h>
+ #endif
+ 
+-#if !defined __MINGW32__
+-#define WAVE_USE_XID
+-#else
+ #undef WAVE_USE_XID
+-#endif
+ 
+ #ifdef HAVE_GETOPT_LONG
+ #include <getopt.h>

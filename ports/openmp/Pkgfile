@@ -1,0 +1,16 @@
+version="10.0.0"
+desc="LLVM OpenMP Runtime Library"
+deps=["elfutils", "libffi"]
+makedeps=["elfutils", "libffi"]
+source=[
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/openmp-$version.src.tar.xz"},
+]
+
+build='''
+	cmake openmp-$version.src -Bbuild \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DLIBOMP_INSTALL_ALIASES=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

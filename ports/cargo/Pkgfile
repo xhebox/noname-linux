@@ -1,5 +1,5 @@
-version="0.41.0"
-_cargo_dist_version="0.40.0"
+version="0.44.0"
+_cargo_dist_version="0.43.0"
 desc="The Rust package manager"
 deps=["libssh2", "libressl", "zlib", "rust"]
 makedeps=["libssh2", "libressl", "python", "zlib", "rust"]

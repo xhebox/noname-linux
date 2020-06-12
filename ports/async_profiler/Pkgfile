@@ -1,0 +1,18 @@
+version="1.7.1"
+desc=""
+makedeps=["openjdk8"]
+deps=["openjdk8"]
+source=[{url="https://github.com/jvm-profiling-tools/async-profiler/archive/v$version.tar.gz"}]
+
+build='''
+	cd async-profiler-$version
+	. /etc/profile.d/jdk8.sh
+	make
+
+	sed -i -r 's/\$SCRIPT_DIR\/build\/libasyncProfiler.so/\/lib\/libasyncProfiler.so/g' profiler.sh
+	sed -i -r 's/\$SCRIPT_DIR\/build\/jattach/\/bin\/jattach/g' profiler.sh
+
+	install -D -m755 profiler.sh "$pkgdir/bin/async-profiler"
+	install -D -m755 build/jattach "$pkgdir/bin/jattach"
+	install -D -m755 build/libasyncProfiler.so "$pkgdir/lib/libasyncProfiler.so"
+'''

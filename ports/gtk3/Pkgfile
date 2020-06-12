@@ -6,6 +6,7 @@ source=[
 	{url="http://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
 	{url="gtk3-immodules.toml"},
 	{url="0004-Remove-Gdk-dependency-from-gtk-encode-symbolic-svg.patch"},
+	{url="gdk_firefox.patch"},
 	{url="icon.toml"},
 ]
 

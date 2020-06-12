@@ -1,0 +1,36 @@
+--- a/c10/macros/Macros.h	2020-06-01 19:46:19.212517401 +0800
++++ b/c10/macros/Macros.h	2020-06-01 19:46:19.212517401 +0800
+@@ -237,7 +237,7 @@
+     __assert_fail(
+         const char* assertion,
+         const char* file,
+-        unsigned int line,
+-        const char* function) throw();
++        int line,
++        const char* function);
+ }
+ #endif // NDEBUG
+--- a/c10/util/Backtrace.cpp	2020-06-01 20:51:00.919317244 +0800
++++ b/c10/util/Backtrace.cpp	2020-06-01 20:51:00.919317244 +0800
+@@ -15,9 +15,7 @@
+ // No backtrace on mobile, windows and emscripten platforms.
+ #define SUPPORTS_BACKTRACE 0
+ #else
+-#define SUPPORTS_BACKTRACE 1
+-#include <cxxabi.h>
+-#include <execinfo.h>
++#define SUPPORTS_BACKTRACE 0
+ #endif
+ 
+ namespace c10 {
+--- a/c10/util/Type.cpp	2020-06-01 20:59:47.242668643 +0800
++++ b/c10/util/Type.cpp	2020-06-01 20:59:47.242668643 +0800
+@@ -10,7 +10,7 @@
+     (TARGET_IPHONE_SIMULATOR || TARGET_OS_SIMULATOR || TARGET_OS_IPHONE)
+ #define HAS_DEMANGLE 0
+ #else
+-#define HAS_DEMANGLE 1
++#define HAS_DEMANGLE 0
+ #endif
+ 
+ #if HAS_DEMANGLE
