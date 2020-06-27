@@ -4,14 +4,16 @@ source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="linux.preset"},
 	{url="musl.patch"},
+	{url="usbip.patch"},
 	{url="config"},
 ]
-makedeps=["perl", "python", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
-deps=["perl", "python", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
+makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
+deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz"]
 
 ext='''
 	cd linux-${version}
 	patch -p0 -i ../musl.patch
+	patch -p1 -i ../usbip.patch
 '''
 
 build='''

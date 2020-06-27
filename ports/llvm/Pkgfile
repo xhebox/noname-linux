@@ -1,7 +1,7 @@
 version="10.0.0"
 desc="LLVM compiler and its backend"
-makedeps=["python", "cmake", "flex", "bison", "libffi", "libxml2", "libedit"]
-deps=["python", "libffi", "libxml2", "libedit"]
+makedeps=["cmake", "flex", "bison", "libffi", "libxml2", "libedit"]
+deps=["libffi", "libxml2", "libedit"]
 source=[
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz"},
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lldb-$version.src.tar.xz"},

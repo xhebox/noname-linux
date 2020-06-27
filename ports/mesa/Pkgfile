@@ -1,6 +1,6 @@
-version="19.3.3"
-makedeps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libva", "libclc", "python", "wayland-protocols"]
-deps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libva", "libclc", "wayland"]
+version="20.1.2"
+makedeps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "python3-mako", "meson", "libva", "zstd", "wayland-protocols"]
+deps=["expat", "libdrm", "elfutils", "llvm", "libomxil-bellagio", "lm_sensors", "libva", "wayland", "zstd"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://mesa.freedesktop.org/archive/mesa-$version.tar.xz"},
@@ -23,12 +23,14 @@ ext='''
 
 build='''
 	noname-meson mesa-$version build \
-		-D b_lto=false \
+		-D b_lto=true \
 		-D b_ndebug=true \
 		-D platforms=wayland,drm,surfaceless \
 		-D dri-drivers=i915,i965,r100,r200,nouveau \
-		-D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast \
+		-D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,swr,iris,lima,zink \
 		-D vulkan-drivers=amd,intel \
+		-D vulkan-overlay-layer=true \
+    -D vulkan-device-select-layer=true \
 		-D swr-arches=avx,avx2 \
 		-D dri3=true \
 		-D egl=true \
@@ -38,7 +40,7 @@ build='''
 		-D gallium-opencl=icd \
 		-D gallium-va=true \
 		-D gallium-vdpau=false \
-		-D gallium-xa=true \
+		-D gallium-xa=false \
 		-D gallium-xvmc=false \
 		-D gbm=true \
 		-D use-elf-tls=false \
@@ -54,6 +56,6 @@ build='''
 		-D valgrind=false
 
 	meson configure build
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

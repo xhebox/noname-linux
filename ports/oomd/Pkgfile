@@ -1,0 +1,17 @@
+version="0.4.0"
+deps=["jsoncpp"]
+makedeps=["jsoncpp", "meson"]
+desc="A userspace out-of-memory killer "
+source=[
+	{url="https://github.com/facebookincubator/oomd/archive/v$version.tar.gz"},
+	{url="musl.patch"},
+]
+
+
+build='''
+	cd oomd-$version
+	patch -p1 -i ../musl.patch
+	noname-meson build
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+'''

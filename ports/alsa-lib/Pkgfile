@@ -4,8 +4,6 @@ source=[
 	{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/lib/alsa-lib-$version.tar.bz2"},
 	{url="alsa-lib-stdint.patch"},
 ]
-makedeps=["python"]
-deps=["python"]
 
 ext='''
 	cd alsa-lib-$version

@@ -1,0 +1,12 @@
+version="0.2.0-9aa6f35"
+deps=["llvm", "python3"]
+makedeps=["llvm", "python3"]
+desc="Library requirements of the OpenCL C programming language"
+source=[{url="https://llvm.org/git/libclc.git", protocol="git", commit="9aa6f350a6ce0f2cfc7e489495af8899ca74e079"}]
+
+build='''
+	cd libclc
+	python3 ./configure.py --prefix=/
+	make V=s
+	make DESTDIR=$pkgdir install
+'''

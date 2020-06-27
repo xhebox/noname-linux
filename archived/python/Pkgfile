@@ -33,16 +33,13 @@ build='''
 		--with-threads 
 	make EXTRA_CFLAGS="$CFLAGS"
 	make	DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall
-	ln -sf python2.7.1 $pkgdir/share/man/man1/python.1
 
-	ln -s python2.7 $pkgdir/bin/python
+	find $pkgdir -name "README*" -delete
+	find $pkgdir -name "ChangeLog*" -delete
+	find $pkgdir -name "TODO*" -delete
+	find $pkgdir -name "NEWS*" -delete
+
 	ln -s python2.7 $pkgdir/bin/python2
-	ln -s python2.7-config $pkgdir/bin/python-config
-	ln -s python2.7 $pkgdir/lib/python
-	ln -s python2.7 $pkgdir/lib/python2
-	ln -s /lib/libpython2.7.so $pkgdir/lib/python2.7/config/libpython2.7.so
-	rm $pkgdir/lib/python/ctypes/macholib/README.ctypes
-
-	mv $pkgdir/include/python2.7/pyconfig.h $pkgdir/include/python2.7/pyconfig-64.h
-	install -m 0644 ../pyconfig.h $pkgdir/include/python2.7/
+	ln -s python2.7-config $pkgdir/bin/python2-config
+	ln -sf python2.7.1 $pkgdir/share/man/man1/python2.1
 '''

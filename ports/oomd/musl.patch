@@ -1,0 +1,111 @@
+--- a/src/oomd/StatsClient.cpp	2020-06-05 02:43:42.000000000 +0800
++++ b/src/oomd/StatsClient.cpp	2020-06-05 02:43:42.000000000 +0800
+@@ -20,6 +20,7 @@
+ #include <json/value.h>
+ #include <stdio.h>
+ #include <sys/socket.h>
++#include <sys/time.h>
+ #include <sys/un.h>
+ #include <unistd.h>
+ #include <iostream>
+--- a/src/oomd/util/Fs.cpp	2020-06-05 02:43:42.000000000 +0800
++++ b/src/oomd/util/Fs.cpp	2020-06-05 02:43:42.000000000 +0800
+@@ -157,9 +157,6 @@
+   glob_t globbuf;
+   std::vector<std::string> ret;
+-  int flags = GLOB_NOSORT | GLOB_BRACE;
+-  if (dir_only) {
+-    flags |= GLOB_ONLYDIR;
+-  }
++  int flags = GLOB_NOSORT;
+   if (0 == ::glob(pattern.c_str(), flags, nullptr, &globbuf)) {
+     for (size_t i = 0; i < globbuf.gl_pathc; i++) {
+       std::string path(globbuf.gl_pathv[i]);
+@@ -618,13 +618,15 @@
+   char buf[1024];
+   buf[0] = '\0';
+   if (!fd.isValid()) {
++    ::strerror_r(errno, buf, sizeof(buf));
+     throw bad_control_file(
+-        std::string{"open failed: "} + ::strerror_r(errno, buf, sizeof(buf)));
++        std::string{"open failed: "} + buf);
+   }
+   auto ret = Util::writeFull(fd.fd(), content.c_str(), content.size());
+   if (ret < 0) {
++    ::strerror_r(errno, buf, sizeof(buf));
+     throw bad_control_file(
+-        std::string{"write failed: "} + ::strerror_r(errno, buf, sizeof(buf)));
++        std::string{"write failed: "} + buf);
+   }
+ }
+ 
+--- a/src/oomd/util/Fixture.cpp	2020-06-05 02:43:42.000000000 +0800
++++ b/src/oomd/util/Fixture.cpp	2020-06-05 02:43:42.000000000 +0800
+@@ -79,9 +79,10 @@
+   if (::mkdtemp(temp.data()) == nullptr) {
+     std::array<char, 1024> buf;
+     buf[0] = '\0';
++		::strerror_r(errno, buf.data(), buf.size());
+     throw std::runtime_error(
+         std::string(temp.data()) +
+-        ": mkdtemp failed: " + ::strerror_r(errno, buf.data(), buf.size()));
++        ": mkdtemp failed: " + buf.data());
+   }
+   return temp.data();
+ }
+@@ -107,9 +108,10 @@
+     if (::mkdir(prefix_path.c_str(), 0777) == -1 && errno != EEXIST) {
+       std::array<char, 1024> buf;
+       buf[0] = '\0';
++			::strerror_r(errno, buf.data(), buf.size());
+       throw std::runtime_error(
+           prefix_path +
+-          ": mkdir failed: " + ::strerror_r(errno, buf.data(), buf.size()));
++          ": mkdir failed: " + buf.data());
+     }
+   }
+ }
+@@ -122,15 +124,17 @@
+   buf[0] = '\0';
+   auto fd = ::open(path.c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666);
+   if (fd < 0) {
++		::strerror_r(errno, buf.data(), buf.size());
+     throw std::runtime_error(
+-        path + ": open failed: " + ::strerror_r(errno, buf.data(), buf.size()));
++        path + ": open failed: " + buf.data());
+   }
+   auto ret = Util::writeFull(fd, content.c_str(), content.size());
+   ::close(fd);
+   if (ret < 0) {
++		::strerror_r(errno, buf.data(), buf.size());
+     throw std::runtime_error(
+         path +
+-        ": write failed: " + ::strerror_r(errno, buf.data(), buf.size()));
++        ": write failed: " + buf.data());
+   }
+   if ((size_t)ret != content.size()) {
+     throw std::runtime_error(
+@@ -151,9 +155,10 @@
+       case ENOENT:
+         return;
+       default:
++				::strerror_r(errno, buf.data(), buf.size());
+         throw std::runtime_error(
+             path +
+-            ": remove failed: " + ::strerror_r(errno, buf.data(), buf.size()));
++            ": remove failed: " + buf.data());
+     }
+   }
+ }
+--- a/src/oomd/Main.cpp	2020-06-05 02:43:42.000000000 +0800
++++ b/src/oomd/Main.cpp	2020-06-05 02:43:42.000000000 +0800
+@@ -18,7 +18,8 @@
+ #include <json/value.h>
+ #include <sys/file.h>
+ #include <sys/types.h>
+-#include <sys/unistd.h>
++#include <unistd.h>
++#include <fcntl.h>
+ #include <cstring>
+ #ifdef MESON_BUILD
+ #include <filesystem>

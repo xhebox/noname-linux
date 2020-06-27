@@ -1,0 +1,14 @@
+version="1.4.5"
+desc="zstd"
+source=[{url="https://github.com/facebook/zstd/releases/download/v${version}/zstd-${version}.tar.gz"}]
+makedeps=["zlib", "lz4", "xz"]
+deps=["zlib", "lz4", "xz"]
+
+build='''
+	cd zstd-$version
+	make
+	make -C contrib/pzstd
+	make PREFIX=/ DESTDIR="$pkgdir/" install
+	ln -sf /bin/zstd "$pkgdir/bin/zstdmt"
+	install -Dm755 contrib/pzstd/pzstd "$pkgdir/bin/pzstd"
+'''

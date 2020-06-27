@@ -9,10 +9,12 @@ source=[
 
 build='''
 	cd "$srcdir/Python-$version"
+
 	rm -rf Modules/expat \
 	Modules/_ctypes/darwin* \
 	Modules/_ctypes/libffi* \
 	Modules/zlib
+
 	patch -p1 -i ../readonly.patch
 	./configure --prefix=/ \
 		--libdir=/lib \
@@ -27,7 +29,6 @@ build='''
 		--with-system-libmpdec \
 		--without-ensurepip \
 		--enable-loadable-sqlite-extensions
-#--enable-optimizations \
 
 	make EXTRA_CFLAGS="$CFLAGS"
 	make DESTDIR="$pkgdir" EXTRA_CFLAGS="$CFLAGS" altinstall
@@ -37,10 +38,17 @@ build='''
 	find $pkgdir -name "TODO*" -delete
 	find $pkgdir -name "NEWS*" -delete
 
-	ln -s /bin/python${version%.*} $pkgdir/bin/python3
-	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/scripts
 	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/i18n
 	install -m755 Tools/i18n/msgfmt.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
 	install -m755 Tools/i18n/pygettext.py "${pkgdir}"/lib/python${version%.*}/Tools/i18n/
+
+	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/scripts
 	install -m755 Tools/scripts/*py "${pkgdir}"/lib/python${version%.*}/Tools/scripts/
+
+	ln -s /bin/python${version%.*} $pkgdir/bin/python3
+	ln -s python3               "${pkgdir}"/bin/python
+	ln -s python3-config        "${pkgdir}"/bin/python-config
+	ln -s idle3                 "${pkgdir}"/bin/idle
+	ln -s pydoc3                "${pkgdir}"/bin/pydoc
+	ln -s python${_pybasever}.1 "${pkgdir}"/share/man/man1/python.1
 '''

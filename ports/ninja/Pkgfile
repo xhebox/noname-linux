@@ -1,6 +1,6 @@
-version="1.8.2"
-makedeps=["re2c", "python"]
-deps=["re2c", "python"]
+version="1.10.0"
+makedeps=["re2c", "python3"]
+deps=["re2c", "python3"]
 desc="Small build system with a focus on speed"
 source=[{url="https://github.com/martine/ninja/archive/v${version}.tar.gz"}]
 
