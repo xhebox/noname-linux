@@ -1,0 +1,41 @@
+name="graphviz"
+version="2.44.1"
+desc='Graph visualization software'
+deps=["libtool", "python3", "pango", "cairo", "zlib", "expat", "gd"]
+makedeps=["git", "perl", "libtool", "python3", "pango", "cairo", "zlib", "expat", "gd"]
+source=[
+	{url="https://gitlab.com/graphviz/graphviz/-/archive/$version/graphviz-$version.tar.gz"},
+	{url="0001-clone-nameclash.patch"},
+]
+
+ext='''
+	cd graphviz-$version
+	find . -name Makefile.am -exec sed -i 's/pdf_DATA = .\+/pdf_DATA = /g' {} \;
+	patch -Np1 -i ../0001-clone-nameclash.patch
+'''
+
+build='''
+	cd graphviz-$version
+	export CFLAGS="$CFLAGS -Dcray"
+	export CXXFLAGS="$CXXFLAGS -Dcray -fPIC -fpermissive"
+	export LIBPOSTFIX=/
+	./autogen.sh NOCONFIG
+	./configure --prefix= \
+		--without-gdk-pixbuf \
+		--disable-static \
+		--disable-ltdl \
+		--enable-sharp=no \
+		--enable-go=no \
+		--enable-guile=no \
+		--enable-java=no \
+		--enable-lua=no \
+		--enable-ocaml=no \
+		--enable-perl=no \
+		--enable-php=no \
+		--enable-python=yes \
+		--enable-r=no \
+		--enable-ruby=no \
+		--enable-tcl=no
+	make
+	make -j1 DESTDIR="$pkgdir" pkgconfigdir=/lib/pkgconfig install
+'''

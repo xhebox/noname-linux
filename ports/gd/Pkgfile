@@ -1,0 +1,17 @@
+name="gd"
+version="2.3.0"
+desc="Library for the dynamic creation of images by programmers"
+deps=["fontconfig", "libwebp", "libjpeg-turbo", "zlib", "libtiff", "libpng", "perl"]
+makedeps=["fontconfig", "libwebp", "libjpeg-turbo", "zlib", "libtiff", "libpng", "perl"]
+source=[
+	{url="https://github.com/libgd/libgd/releases/download/gd-${version}/libgd-${version}.tar.xz"}
+]
+
+build='''
+	cd libgd-${version}
+	./configure \
+		--prefix= \
+		--disable-rpath
+	make
+	make DESTDIR="${pkgdir}" install
+'''
