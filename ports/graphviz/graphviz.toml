@@ -1,0 +1,4 @@
+pattern=["bin/dot"]
+script='''
+dot -c
+'''

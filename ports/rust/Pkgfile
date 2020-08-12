@@ -1,35 +1,16 @@
 name="rust"
-version="1.44.0"
-_rust_dist_version="1.43.0"
-_cargo_dist_version="0.43.0"
+nostrip=true
+version="1.45.0"
 deps=["libffi", "ncurses", "libxml2", "zlib", "llvm"]
-makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "cmake", "curl", "python"]
+makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "cmake", "curl", "python3"]
 source=[
 	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
-	{url="https://static.rust-lang.org/dist/rustc-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
-	{url="https://static.rust-lang.org/dist/rust-std-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
-	{url="https://static.rust-lang.org/dist/cargo-${_cargo_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
-	{url="link-musl-dynamically.patch"},
 	{url="noname-target.patch"},
 	{url="musl-dont-use-crt-static.patch"},
-	{url="musl-fix-linux_musl_base.patch"},
-	{url="musl-fix-static-linking.patch"},
 ]
 
 ext='''
-	mkdir -p stage0/bin
-	mkdir -p stage0/lib
-
-	rm rust-std-*/rust-std-*/manifest.in
-	cp -a rust-std-*/rust-std-*/* stage0/
-
-	rm rustc-*/rustc/manifest.in
-	cp -a rustc-*/rustc/* stage0/
-
-	rm cargo-*/cargo/manifest.in
-	cp -a cargo-*/cargo/* stage0/
-
 	cd rustc-$version-src
 	for i in $source; do
 		case $i in
@@ -37,7 +18,6 @@ ext='''
 		esac
 	done
 
-	rm -Rf src/llvm*
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/libc/.cargo-checksum.json
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
@@ -46,37 +26,33 @@ ext='''
 [llvm]
 link-shared=true
 [target.$TARGET]
-llvm-config = "/bin/llvm-config"
-crt-static = false
-[target.x86_64-unknown-linux-musl]
-llvm-config = "/bin/llvm-config"
-crt-static = false
+llvm-config="/bin/llvm-config"
+crt-static=false
 [build]
-build="x86_64-unknown-linux-musl"
+build="x86_64-pc-linux-musl"
+tools=["cargo", "rls", "clippy", "miri", "rustfmt", "analysis", "src"]
 host=["$TARGET"]
 target=["$TARGET"]
 docs=false
-extended=false
+extended=true
 sanitizers=false
-locked-deps=true
+profiler=true
 full-bootstrap=false
-submodules=false
+cargo="/bin/cargo"
+rustc="/bin/rustc"
 vendor=true
-verbose=2
-cargo="$srcdir/stage0/bin/cargo"
-rustc="$srcdir/stage0/bin/rustc"
 [install]
 prefix="/"
 libdir="lib"
 mandir="share/man"
 [rust]
-optimize=true
-codegen-units=1
-codegen-units-std=1
-jemalloc=false
-llvm-libunwind = false
 musl-root="/"
-channel="dev"
+channel="stable"
+codegen-units-std=1
+codegen-tests=false
+jemalloc=false
+llvm-libunwind=false
+rpath=false
 [dist]
 src-tarball=false
 EOF
@@ -84,21 +60,16 @@ EOF
 	mkdir .cargo
 	cat > .cargo/config << "EOF"
 [source.crates-io]
-replace-with = 'ustc'
+replace-with='ustc'
 
 [source.ustc]
-registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+registry="https://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 '''
 
 build='''
 	cd rustc-$version-src
-	export LLVM_LINK_SHARED=1
 	export CARGO_HOME="$srcdir/.cargo"
-	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
-	export PATH="$srcdir/stage0/bin:$PATH"
-	export RUSTFLAGS="-C target-feature=-crt-static" cargo build
-	export RUST_BACKTRACE=1
-	./x.py build $MAKEFLAGS -v
+	./x.py build -j2 -v
 	DESTDIR="$pkgdir" ./x.py install
 '''

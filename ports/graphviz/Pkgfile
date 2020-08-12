@@ -6,6 +6,7 @@ makedeps=["git", "perl", "libtool", "python3", "pango", "cairo", "zlib", "expat"
 source=[
 	{url="https://gitlab.com/graphviz/graphviz/-/archive/$version/graphviz-$version.tar.gz"},
 	{url="0001-clone-nameclash.patch"},
+	{url="graphviz.toml"},
 ]
 
 ext='''
@@ -20,10 +21,10 @@ build='''
 	export CXXFLAGS="$CXXFLAGS -Dcray -fPIC -fpermissive"
 	export LIBPOSTFIX=/
 	./autogen.sh NOCONFIG
-	./configure --prefix= \
+	./configure --prefix=/ \
 		--without-gdk-pixbuf \
 		--disable-static \
-		--disable-ltdl \
+		--enable-ltdl \
 		--enable-sharp=no \
 		--enable-go=no \
 		--enable-guile=no \
@@ -38,4 +39,5 @@ build='''
 		--enable-tcl=no
 	make
 	make -j1 DESTDIR="$pkgdir" pkgconfigdir=/lib/pkgconfig install
+	install -Dm644 ../graphviz.toml "$pkgdir/${HOOKS#$ROOT}"/graphviz.toml
 '''

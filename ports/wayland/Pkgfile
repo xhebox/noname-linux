@@ -1,4 +1,4 @@
-version="1.16.0"
+version="1.18.0"
 desc="A computer display server protocol"
 deps=["expat", "libffi", "libxml2"]
 makedeps=["expat", "libffi", "libxml2", "docbook-xsl", "doxygen"]

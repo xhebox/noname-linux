@@ -1,0 +1,14 @@
+version="2.0.15"
+desc="A library that allows you to use TrueType fonts in your SDL applications (Version 2)"
+deps=["sdl2", "freetype"]
+makedeps=["sdl2", "freetype"]
+source=[
+	{url="https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-${version}.tar.gz"},
+]
+
+build='''
+	cd SDL2_ttf-${version}
+	./configure --disable-static --prefix=
+	make
+	make DESTDIR="${pkgdir}/" install
+'''

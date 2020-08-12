@@ -1,7 +1,7 @@
 desc="Allows users to execute commands in different chroots"
 version="1.6.10"
-deps=["elfutils", "e2fsprogs", "boost", "lvm2", "pam"]
-makedeps=["elfutils", "e2fsprogs", "boost", "lvm2", "pam"]
+deps=["elfutils", "e2fsprogs", "boost", "pam"]
+makedeps=["elfutils", "e2fsprogs", "boost", "pam"]
 source=[
 	{url="http://http.debian.net/debian/pool/main/s/schroot/schroot_${version}.orig.tar.xz"},
 	{url="http://http.debian.net/debian/pool/main/s/schroot/schroot_${version}-3+deb9u1.debian.tar.xz"},
@@ -38,7 +38,7 @@ build='''
 	cd schroot-$version
 	mkdir build
 	cd build
-	cmake \
+	noname-cmake \
 		-DCMAKE_INSTALL_PREFIX= \
 		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
 		-DCMAKE_INSTALL_LIBDIR=/lib \
@@ -46,7 +46,7 @@ build='''
 		-DCMAKE_INSTALL_LOCALSTATEDIR=/var \
 		-Ddchroot=ON \
 		-Dbash_completion_dir=/share/bash-completion/completions \
-		-Dlvm-snapshot=ON \
+		-Dlvm-snapshot=OFF \
 		..
 	make
 	make DESTDIR="$pkgdir" install

@@ -1,4 +1,4 @@
-version="1.2.0"
+version="1.2.1"
 desc="An implementation of the standard C library for Linux-based systems."
 deps=[
 	"filesystem",
@@ -31,9 +31,6 @@ ext='''
 
 build='''
 	cd musl-$version
-	export FLAGS="-march=x86-64 -mtune=generic -Os -g -pipe -fstack-protector-strong"
-	export CFLAGS="$FLAGS"
-	export CXXFLAGS="$CFLAGS"
 	unset LDFLAGS
 
 	# ------------------------------

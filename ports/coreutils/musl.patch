@@ -1,0 +1,12 @@
+--- coreutils-8.30/src/uname.c	2020-07-19 01:11:12.096099974 +0800
++++ coreutils-8.30/src/uname.c	2020-07-19 01:11:12.096099974 +0800
+@@ -363,8 +363,7 @@
+             element = hardware_platform;
+         }
+ #endif
+-      if (! (toprint == UINT_MAX && element == unknown))
+-        print_element (element);
++        print_element ("pc");
+     }
+ 
+   if (toprint & PRINT_OPERATING_SYSTEM)

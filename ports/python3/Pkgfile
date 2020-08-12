@@ -47,7 +47,7 @@ build='''
 
 	ln -s /bin/python${version%.*} $pkgdir/bin/python3
 	ln -s python3               "${pkgdir}"/bin/python
-	ln -s python3-config        "${pkgdir}"/bin/python-config
+	ln -s python3.7m-config     "${pkgdir}"/bin/python3-config
 	ln -s idle3                 "${pkgdir}"/bin/idle
 	ln -s pydoc3                "${pkgdir}"/bin/pydoc
 	ln -s python${_pybasever}.1 "${pkgdir}"/share/man/man1/python.1

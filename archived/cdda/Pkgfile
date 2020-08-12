@@ -1,0 +1,31 @@
+version="10827"
+nostrip=true
+desc="A post-apocalyptic roguelike."
+deps=["ncurses", "lua51", "freetype", "sdl2_ttf", "sdl2_image", "sdl2_mixer", "sdl2"]
+makedeps=["ncurses", "lua51", "freetype", "sdl2_ttf", "sdl2_image", "sdl2_mixer", "sdl2"]
+source=[
+	{url="https://github.com/CleverRaven/Cataclysm-DDA/archive/cdda-jenkins-b${version}.tar.gz"},
+	{url="file.patch"},
+]
+
+ext='''
+	cd Cataclysm-DDA-cdda-jenkins-b$version
+	sed -i 's/-Werror//' Makefile
+	sed -i 's/ncursesw5-config/ncursesw6-config/' Makefile
+	sed -i 's/shell git/shell false/' Makefile
+	patch -Np1 -i ../file.patch
+'''
+
+build='''
+	cd Cataclysm-DDA-cdda-jenkins-b$version
+
+	export FLAGS="PREFIX=/ RELEASE=1 USE_XDG_DIR=1 BACKTRACE=0 ZLEVELS=1 LUA=1 LINTJSON=0 RUNTESTS=0 DYNAMIC_LINKING=1"
+
+	make $FLAGS
+	make DESTDIR="$pkgdir" $FLAGS install
+
+	export FLAGS="$FLAGS TILES=1 SOUND=1"
+
+	make $FLAGS
+	make DESTDIR="$pkgdir" $FLAGS install
+'''

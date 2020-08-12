@@ -40,6 +40,7 @@ type config struct {
 	Makeflags int      `toml:"makeflags"`
 	CC        string   `toml:"CC"`
 	CXX       string   `toml:"CXX"`
+	LD        string   `toml:"LD"`
 	Ccache    bool     `toml:"ccache"`
 }
 
@@ -152,6 +153,9 @@ func main() {
 	}
 	if len(cfg.CXX) != 0 {
 		fmt.Fprintf(shenv, "export CXX=\"%s\"\n", cfg.CXX)
+	}
+	if len(cfg.LD) != 0 {
+		fmt.Fprintf(shenv, "export LD=\"%s\"\n", cfg.LD)
 	}
 	fmt.Fprintf(shenv, "export CFLAGS=\"%s\"\n", cfg.CFLAGS)
 	fmt.Fprintf(shenv, "export CXXFLAGS=\"%s\"\n", cfg.CXXFLAGS)

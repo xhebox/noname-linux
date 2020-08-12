@@ -1,0 +1,25 @@
+version="1.36.0"
+makedeps=["lua51", "libuv"]
+edeps=["lua51", "libuv"]
+source=[
+	{url="https://github.com/luvit/luv/releases/download/${version}-0/luv-${version}-0.tar.gz"},
+	{url="libluv.pc.in"},
+	{url="install.patch"},
+]
+
+ext='''
+	cd luv-$version-0
+	cp ../libluv.pc.in .
+	patch -Np1 -i ../install.patch
+'''
+
+build='''
+	noname-cmake luv-$version-0 -Bbuild \
+		-DWITH_SHARED_LIBUV=ON \
+		-DWITH_LUA_ENGINE=Lua \
+		-DLUA_BUILD_TYPE=System \
+		-DBUILD_MODULE=OFF \
+		-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

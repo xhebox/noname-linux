@@ -1,9 +1,9 @@
-version="20200316"
+version="20200721"
 desc="Firmware files for Linux"
 source=[
 	{
 		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware",
-		commit="8eb0b281511d6455ca9151e52f694dc982193251",
+		commit="2b823fc2568fc354551a63c37f5f5490d70a53d1",
 		protocol="git"
 	}
 ]

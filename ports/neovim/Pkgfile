@@ -1,17 +1,15 @@
-version="0.3.4"
+version="nightly"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
-makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
-deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51"]
+makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv"]
+deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv"]
 source=[
-	{url="https://github.com/neovim/neovim/archive/v${version}.tar.gz"},
+	{url="https://github.com/neovim/neovim/archive/${version}.tar.gz"},
 ]
 
 build='''
-	cmake -Hneovim-${version} -Bbuild -GNinja \
+	noname-cmake -Hneovim-${version} -Bbuild \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DENABLE_JEMALLOC=OFF \
-		-DPREFER_LUA=ON \
-		-DCMAKE_INSTALL_PREFIX=
-	ninja -C build
-	DESTDIR="${pkgdir}" ninja -C build install
+		-DPREFER_LUA=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

@@ -7,16 +7,27 @@ deps=[
 	"libcap",
 	"libressl"
 ]
+makedeps=[
+	"attr",
+	"libgmp",
+	"acl",
+	"libcap",
+	"libressl"
+]
 source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/coreutils/coreutils-$version.tar.xz"}
+	{url="http://mirrors.ustc.edu.cn/gnu/coreutils/coreutils-$version.tar.xz"},
+	{url="musl.patch"},
 ]
 
 build='''
 	cd coreutils-$version
+	patch -Np1 -i ../musl.patch
 	export FORCE_UNSAFE_CONFIGURE=1
 	./configure --prefix= \
+		--host=$TARGET \
+		--build=$TARGET \
+		--target=$TARGET \
 		--libexecdir=/lib \
-		--with-libressl \
 		--enable-no-install-program=groups,hostname,kill,uptime 
 	make
 	make DESTDIR="$pkgdir" install

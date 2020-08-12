@@ -1,10 +1,16 @@
-version="0.175"
+version="0.180"
 desc="Libraries/utilities to handle ELF objects (drop in replacement for libelf)"
 source=[
 	{url="https://fedorahosted.org/releases/e/l/elfutils/${version}/elfutils-${version}.tar.bz2"},
-	{url="elfutils-0.171-musl-libs.patch"},
-	{url="elfutils-0.170-musl-obstack-fts.patch"},
-	{url="elfutils-0.171-musl-utils.patch"},
+	{url="fix-uninitialized.patch"},
+	{url="musl-asm_ptrace_h.patch"},
+	{url="musl-cdefs.patch"},
+	{url="musl-fts-obstack.patch"},
+	{url="musl-macros.patch"},
+	{url="musl-qsort_r.patch"},
+	{url="musl-strerror_r.patch"},
+	{url="musl-strndupa.patch"},
+	{url="error.h"},
 ]
 makedeps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
 deps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
@@ -14,17 +20,20 @@ ext='''
 	for i in $source;do
 		echo $i
 		case $i in
-		*.patch)patch -p1 < ../$i ;;
+		*.patch) patch -Np0 -i ../$i ;;
 		esac
 	done
+	cp ../error.h lib
+	cp ../error.h src
 	sed -i 's:-Werror::' */Makefile.in
 	autoreconf -fi
-	export CFLAGS="$CFLAGS -Wno-null-dereference"
 '''
 
 build='''
+	export CFLAGS="$CFLAGS -Wno-error=null-dereference"
 	cd elfutils-$version
 	./configure --prefix= \
+	--disable-debuginfod \
 	--program-prefix=eu-
 	make
 	make DESTDIR="$pkgdir" install

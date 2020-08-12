@@ -80,6 +80,7 @@ build='''
 	-Dlibidn2=false \
 	-Dlibidn=false \
 	-Didn=false \
+	-Dlibcryptsetup=false \
 	-Dgshadow=false \
 	-Dlocaled=false \
 	-Duserdb=false \

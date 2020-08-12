@@ -1,12 +1,14 @@
-name=sdl2_image
-version=2.0.1
+version="2.0.5"
 desc="A simple library to load images of various formats as SDL surfaces (Version 2)"
-deps="sdl2 libpng libtiff libjpeg-turbo libwebp cmake"
-source="https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${version}.tar.gz"
+deps=["sdl2", "libpng", "libtiff", "libjpeg-turbo", "libwebp"]
+makedeps=["sdl2", "libpng", "libtiff", "libjpeg-turbo", "libwebp"]
+source=[
+	{url="https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${version}.tar.gz"},
+]
 
-build() {
+build='''
 	cd SDL2_image-${version}
 	./configure --disable-static --prefix=
-	make || die
-	make DESTDIR="${pkgdir}/" install || die
-}
+	make
+	make DESTDIR="${pkgdir}/" install
+'''

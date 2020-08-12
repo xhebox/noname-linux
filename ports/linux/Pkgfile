@@ -1,4 +1,4 @@
-version="5.6.3"
+version="5.8"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -10,10 +10,9 @@ desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="linux.preset"},
-	{url="v5-pci-prevent-putting-nvidia-GPUs-into-lower-device-states-on-certain-intel-bridges.diff"},
 	{url="config"},
 ]
-makedeps=["bc", "bash", "xmlto", "inetutils", "elfutils", "crda"]
+makedeps=["bc", "bash", "xmlto", "inetutils", "elfutils", "crda", "pahole"]
 deps=["kmod" , "linux-firmware", "coreutils"]
 
 ext='''
@@ -21,8 +20,6 @@ ext='''
 	scripts/setlocalversion --save-scmversion
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
-
-	patch -p1 -i ../v5-pci-prevent-putting-nvidia-GPUs-into-lower-device-states-on-certain-intel-bridges.diff
 
 	cp ../config .config
 
@@ -40,6 +37,11 @@ ext='''
 '''
 
 build='''
+	unset CC
+	unset CXX
+	unset CFLAGS
+	unset CXXFLAGS
+	unset LDFLAGS
 	cd linux-${version}
 
 	make bzImage modules

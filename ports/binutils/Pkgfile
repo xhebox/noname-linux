@@ -1,15 +1,9 @@
-version="2.31.1"
+version="2.35"
 desc="The GNU Binutils are a collection of binary tools"
 makedeps=["zlib"]
 deps=["zlib"]
 source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.bz2"},
-	{url="0001-PR23428-x86-Add-a-GNU_PROPERTY_X86_ISA_1_USED-note-if-needed.patch"},
-	{url="0002-PR23460-Close-resource-leaks-in-the-BFD-library-s-plugin-han.patch"},
-	{url="0003-PR23460-Add-a-testcase-for-PR-binutils-23460.patch"},
-	{url="0004-PR23486-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED-x86_64.patch"},
-	{url="0005-PR23486-x86-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED.patch"},
-	{url="0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch"},
+	{url="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.xz"},
 ]
 
 ext='''

@@ -1,0 +1,13 @@
+--- Cataclysm-DDA-cdda-jenkins-b10827/src/item_contents.cpp	2020-07-11 15:20:58.000000000 +0800
++++ Cataclysm-DDA-cdda-jenkins-b10827/src/item_contents.cpp	2020-07-11 15:20:58.000000000 +0800
+@@ -279,8 +279,8 @@
+                     const ret_val<item_pocket::contain_code> inserted = current_pocket_iter->insert_item( *it );
+                     if( !inserted.success() ) {
+                         uninserted_items.push_back( *it );
+-                        debugmsg( "error: tried to put an item into a pocket that can't fit into it while loading.  err: %s",
+-                                  inserted.str() );
++                        debugmsg( "error: tried to put an item into a pocket that can't fit into it while loading. %s err: %s",
++                                  it->typeId().c_str(), inserted.str() );
+                     }
+                 }
+             }

@@ -1,0 +1,15 @@
+--- luv-1.36.0-0/CMakeLists.txt	2020-04-19 16:44:19.000000000 +0800
++++ luv-1.36.0-0/CMakeLists.txt	2020-04-19 16:44:19.000000000 +0800
+@@ -224,7 +224,6 @@
+     CACHE PATH "Installation directory for headers")
+ endif (BUILD_SHARED_LIBS)
+ 
+-if (CMAKE_INSTALL_PREFIX)
+   if (BUILD_MODULE)
+     install(TARGETS luv
+       ARCHIVE DESTINATION "${MODULE_INSTALL_LIB_DIR}"
+@@ -259,4 +258,3 @@
+       DESTINATION "${SHAREDLIBS_INSTALL_INC_DIR}"
+     )
+   endif (BUILD_SHARED_LIBS)
+-endif (CMAKE_INSTALL_PREFIX)

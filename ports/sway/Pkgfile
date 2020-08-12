@@ -1,4 +1,4 @@
-version="1.4"
+version="1.5"
 desc='Tiling Wayland compositor and replacement for the i3 window manager'
 deps=["swaybg", "cairo", "json-c", "pango", "libpcre", "wlroots"]
 makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols"]
@@ -14,7 +14,7 @@ ext='''
 
 build='''
   mkdir -p build
-  noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled
+  noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled
   ninja -C build
   DESTDIR="$pkgdir" ninja -C build install
 '''
