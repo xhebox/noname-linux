@@ -4,8 +4,8 @@ source=[
 	{url="http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$version.tar.xz"},
 	{url="pulseaudio.toml"},
 ]
-makedeps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc"]
-deps=["libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "tdb", "bluez", "sbc"]
+makedeps=["gdbm", "libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "bluez", "sbc"]
+deps=["gdbm", "libcap", "libressl", "systemd", "fftw", "libsndfile", "json-c", "glib", "speexdsp", "libasyncns", "orc", "webrtc-audio-processing", "bluez", "sbc"]
 
 build='''
 	noname-meson pulseaudio-$version build \
@@ -13,13 +13,15 @@ build='''
 	-Dtests=false \
 	-Dgcov=false \
 	-Dudevruelsdir=/lib/udev/rules.d \
-	-Ddatabase=tdb \
+	-Ddatabase=gdbm \
 	-Dbluez5-ofono-headset=false \
 	-Dgtk=disabled \
+	-Davahi=disabled \
+	-Djack=disabled \
+	-Dlirc=disabled \
 	-Dgsettings=disabled \
 	-Dsamplerate=disabled \
 	-Dx11=disabled
-
 
 	meson configure build
 	ninja -C build

@@ -12,7 +12,7 @@ source=[
 	{url="linux.preset"},
 	{url="config"},
 ]
-makedeps=["bc", "bash", "xmlto", "inetutils", "elfutils", "crda", "pahole"]
+makedeps=["bc", "bash", "inetutils", "elfutils", "crda", "pahole"]
 deps=["kmod" , "linux-firmware", "coreutils"]
 
 ext='''

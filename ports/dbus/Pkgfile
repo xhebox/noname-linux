@@ -1,6 +1,6 @@
 version="1.12.12"
 deps=["expat", "util-linux", "systemd"]
-makedeps=["expat", "util-linux", "python3", "docbook-xsl", "xmlto", "systemd"]
+makedeps=["expat", "util-linux", "python3", "systemd"]
 desc="Freedesktop.org message bus system"
 source=[
 	{url="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz"},
@@ -27,6 +27,7 @@ build='''
 	--with-dbus-user=81 \
 	--with-system-socket=/run/dbus/system_bus_socket \
 	--with-console-auth-dir=/run/console/ \
+	--disable-xml-docs \
 	--disable-verbose-mode \
 	--enable-inotify \
 	--enable-user-session \

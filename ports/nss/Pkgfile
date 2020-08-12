@@ -1,12 +1,11 @@
 version="3.53"
 _version="`echo $version | tr . _`"
 desc="Mozilla Network Security Services (NSS)"
-makedeps=["nspr", "sqlite", "zlib", "perl", "python"]
+makedeps=["nspr", "sqlite", "zlib", "perl", "python3"]
 deps=["nspr", "sqlite", "zlib"]
 source=[
 	{url="https://archive.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${_version}_RTM/src/nss-${version}.tar.gz"},
 	{url="nss-config.in"},
-	{url="nss-config.xml"},
 	{url="nss.pc.in"},
 ]
 
@@ -19,8 +18,6 @@ ext='''
 '''
 
 build='''
-	xmlto man nss-config.xml
-
 	cd nss-$version/nss
 
 	export BUILD_OPT=1
@@ -35,14 +32,12 @@ build='''
 
 	make -j1 -C coreconf
 	make -j1 all
-	make clean_docs build_docs
 
 	cd ..
 
 	install -d "$pkgdir"/bin
 	install -d "$pkgdir"/lib/pkgconfig
 	install -d "$pkgdir"/include/nss
-	install -d "$pkgdir"/share/man/man1
 	NSS_VMAJOR=`awk '/#define.*NSS_VMAJOR/ {print $3}' nss/lib/nss/nss.h `
 	NSS_VMINOR=`awk '/#define.*NSS_VMINOR/ {print $3}' nss/lib/nss/nss.h`
 	NSS_VPATCH=`awk '/#define.*NSS_VPATCH/ {print $3}' nss/lib/nss/nss.h`
@@ -68,8 +63,6 @@ build='''
 	-e "s,@MOD_PATCH_VERSION@,${NSS_VPATCH},g" \
 	> "$pkgdir"/bin/nss-config
 	chmod 755 "$pkgdir"/bin/nss-config
-
-	install -t "$pkgdir/share/man/man1" -m644 nss/doc/nroff/*.1 ../nss-config.1
 
 	cd dist
 	install -t "$pkgdir/include/nss" -m644 public/nss/*.h

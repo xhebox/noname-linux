@@ -1,6 +1,6 @@
 version="1.3.0"
 desc="PAM (Pluggable Authentication Modules) library"
-makedeps=["docbook-xml", "docbook-xsl", "flex"]
+makedeps=["flex"]
 deps=["cracklib", "musl"]
 source=[
 	{url="http://linux-pam.org/library/Linux-PAM-$version.tar.bz2"},

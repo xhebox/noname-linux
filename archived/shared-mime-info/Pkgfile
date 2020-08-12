@@ -1,0 +1,17 @@
+version="2.0"
+desc="Freedesktop.org Shared MIME Info"
+makedeps=["glib", "libxml2"]
+deps=["glib", "libxml2"]
+source=[
+	{url="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/$version/shared-mime-info-$version.tar.gz"},
+	{url="https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz"},
+	{url="mime.toml"},
+]
+
+build='''
+	CFLAGS= make -C xdgmime-master
+	noname-meson shared-mime-info-$version build -Dupdate-mimedb=false -Dxdgmime-path=$PWD/xdgmime-master
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
+	install -Dm644 ../mime.toml "$pkgdir/${HOOKS#$ROOT}"/mime.toml
+'''

@@ -1,8 +1,8 @@
 name="firefox"
 version="77.0.1"
 desc="Firefox web browser"
-deps=["alsa-lib", "bzip2", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip"]
-makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "shared-mime-info", "unzip", "wayland-protocols", "nasm", "yasm"]
+deps=["alsa-lib", "bzip2", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
+makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},

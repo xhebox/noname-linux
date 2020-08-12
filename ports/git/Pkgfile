@@ -1,5 +1,5 @@
 version="2.20.1"
-makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "xmlto", "shadow", "libressl"]
+makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "shadow", "libressl"]
 deps=["curl", "pcre2", "grep", "expat", "perl", "perl-error", "shadow", "libressl"]
 desc="Directory content manager"
 source=[{url="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"}]

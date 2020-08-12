@@ -1,7 +1,7 @@
 version="245"
 desc="system and service manager"
-makedeps=["acl", "docbook-xsl", "gperf", "lz4", "xz", "pam", "elfutils", "intltool", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
-deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "libxslt", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
 	{
@@ -74,6 +74,7 @@ build='''
 	noname-meson systemd-$version build \
 	-Dsplit-usr=true \
 	-Dutmp=false \
+	-Dman=false \
 	-Dldconfig=false \
 	-Dgnu-efi=true \
 	-Dima=false \
