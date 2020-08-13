@@ -1,5 +1,5 @@
-version="2.38.0"
-makedeps=["libpng", "glib", "libjpeg-turbo", "libtiff", "gobject-introspection", "wayland-protocols"]
+version="2.40.0"
+makedeps=["libpng", "glib", "libjpeg-turbo", "libtiff", "wayland-protocols"]
 deps=["libpng", "glib", "libjpeg-turbo", "libtiff", "wayland"]
 desc="An image loading library for GTK+"
 source=[
@@ -8,7 +8,7 @@ source=[
 ]
 
 build='''
-	noname-meson gdk-pixbuf-$version build -Ddocs=false -Dx11=false
+	noname-meson gdk-pixbuf-$version build -Dbuiltin_loaders=all -Dgir=false -Dx11=false -Dgio_sniffing=false -Drelocatable=true
 	ninja -C build
 	DESTDIR="$pkgdir" ninja -C build install
 	install -Dm644 ../gdk-pixbuf-loaders.toml "$pkgdir/${HOOKS#$ROOT}"/gdk-pixbuf-loaders.toml
