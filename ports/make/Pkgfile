@@ -1,11 +1,8 @@
-version="4.2.1"
+version="4.3"
 deps=["musl"]
 desc="Controls the generation of executables and other compile-related tasks"
 source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/make/make-$version.tar.bz2"},
-	{url="fix-atexit-exit.patch"},
-	{url="make-4.2.1-glob1.patch"},
-	{url="make-4.2.1-glob2.patch"},
+	{url="http://ftp.gnu.org/gnu/make/make-$version.tar.gz"},
 ]
 
 ext='''

@@ -1,9 +1,9 @@
-version="2.0.4"
+version="2.3.0"
 makedeps=["pam"]
-deps=["pam", "musl"]
+deps=["pam"]
 desc="Linux keyboard utilities"
 source=[
-	{url="http://ftp.altlinux.org/pub/people/legion/kbd/${name}-${version}.tar.xz"},
+	{url="https://github.com/legionus/kbd/archive/v$version.tar.gz"},
 	{url="http://git.alpinelinux.org/cgit/aports/plain/main/kbd/error.h"},
 	{url="fix-eu.patch"},
 ]
@@ -13,7 +13,6 @@ ext='''
 	mv data/keymaps/i386/qwertz/cz.map data/keymaps/i386/qwertz/cz-qwertz.map
 	mv data/keymaps/i386/olpc/es.map data/keymaps/i386/olpc/es-olpc.map
 	mv data/keymaps/i386/olpc/pt.map data/keymaps/i386/olpc/pt-olpc.map
-	mv data/keymaps/i386/dvorak/no.map data/keymaps/i386/dvorak/no-dvorak.map
 	mv data/keymaps/i386/fgGIod/trf.map data/keymaps/i386/fgGIod/trf-fgGIod.map
 	mv data/keymaps/i386/colemak/en-latin9.map data/keymaps/i386/colemak/colemak.map
 
@@ -27,6 +26,7 @@ ext='''
 	
 build='''
 	cd kbd-$version
+	autoreconf -fi
 	./configure --prefix= --datadir=/share/kbd 
 	make KEYCODES_PROGS=yes RESIZECONS_PROGS=yes
 	make DESTDIR="$pkgdir" KEYCODES_PROGS=yes RESIZECONS_PROGS=yes install

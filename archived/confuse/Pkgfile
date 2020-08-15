@@ -1,12 +1,10 @@
-name=confuse
-version=3.2.1
+version="3.2.1"
 desc='C-library for parsing configuration files'
-deps=musl
-source="https://github.com/martinh/libconfuse/releases/download/v${version}/${name}-${version}.tar.gz"
+source=[{url="https://github.com/martinh/libconfuse/releases/download/v${version}/${name}-${version}.tar.gz"}]
 
-build() {
+build='''
 	cd $name-$version
 	./configure --prefix= --enable-shared --disable-rpath
-	make || die
-	make DESTDIR="${pkgdir}" install || die
-}
+	make 
+	make DESTDIR="${pkgdir}" install
+'''

@@ -1,0 +1,33 @@
+version="1.8"
+desc="Intel Wireless Daemon"
+makedeps=["readline", "ncurses", "dbus", "systemd"]
+deps=["readline", "ncurses"]
+source=[
+	{url="https://www.kernel.org/pub/linux/network/wireless/iwd-${version}.tar.gz"},
+]
+
+ext='''
+	cd iwd-$version
+	for i in $source;do
+		case $i in
+		*.patch) patch -p1 -i ../"$i" ;;
+		esac
+	done
+'''
+
+build='''
+	cd iwd-$version
+	dbus-run-session ./configure --prefix=/ \
+	--sysconfdir=/etc \
+	--localstatedir=/var \
+	--with-runstatedir=/run \
+	--libexecdir=/lib/iwd \
+	--enable-wired \
+	--enable-ofono \
+	--enable-sim-hardcoded \
+	--enable-hwsim \
+	--disable-tools
+	make
+	make DESTDIR="$pkgdir" install
+	rm "$pkgdir"/lib/systemd/network/80-iwd.link
+'''

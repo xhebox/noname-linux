@@ -21,6 +21,8 @@ ext='''
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
+	#patch -Np1 -i ../test.patch
+
 	cp ../config .config
 
 	sed -i 's/# CONFIG_EXPERT is not set/CONFIG_EXPERT=y/g' .config
