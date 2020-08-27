@@ -1,5 +1,4 @@
 #%PAM-1.0
-
 auth      required   pam_deny.so
 auth      required   pam_warn.so
 account   required   pam_deny.so

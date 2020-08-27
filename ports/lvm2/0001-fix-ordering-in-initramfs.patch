@@ -1,0 +1,11 @@
+--- scripts/lvm2_lvmetad_systemd_red_hat.service.in
++++ scripts/lvm2_lvmetad_systemd_red_hat.service.in
+@@ -3,7 +3,7 @@ Description=LVM2 metadata daemon
+ Documentation=man:lvmetad(8)
+ Requires=lvm2-lvmetad.socket
+ Before=shutdown.target
+-After=lvm2-lvmetad.socket
++After=lvm2-lvmetad.socket systemd-udevd.service
+ DefaultDependencies=no
+ Conflicts=shutdown.target
+ 

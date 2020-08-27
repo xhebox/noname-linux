@@ -1,10 +1,9 @@
-version="2.33"
+version="2.36"
 desc="Miscellaneous system utilities for Linux"
 makedeps=["python3", "libcap-ng"] 
 deps=["coreutils", "libcap-ng", "pam", "shadow"]
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/utils/util-linux/v$version/util-linux-$version.tar.xz"},
-	{url="0001-agetty-fix-output-of-escaped-characters.patch"},
 	{url="60-rfkill.rules"},
 	{url="util-linux.sysusers"},
 	{url="fix-musl.patch"},

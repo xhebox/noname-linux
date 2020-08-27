@@ -1,4 +1,4 @@
-version="5.8"
+version="5.8.3"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -9,6 +9,7 @@ esac
 desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
+	{url="amdgpu_backlight.patch"},
 	{url="linux.preset"},
 	{url="config"},
 ]
@@ -21,7 +22,7 @@ ext='''
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
-	#patch -Np1 -i ../test.patch
+	patch -Np1 -i ../amdgpu_backlight.patch
 
 	cp ../config .config
 

@@ -1,0 +1,66 @@
+version="2.02.186"
+makedeps=["libaio", "util-linux", "readline"]
+deps=["libaio", "util-linux", "readline"]
+desc="Logical Volume Manager 2 utilities"
+source=[
+	{url="0001-fix-ordering-in-initramfs.patch"},
+	{url="fix-stdio-usage.patch"},
+	{url="mlockall-default-config.patch"},
+	{url="portability.patch"},
+	{url="11-dm-initramfs.rules"},
+	{url="lvm2_hook"},
+	{url="lvm2_install"},
+	{url="sd-lvm2_install"},
+	{url="https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${version}.tgz"},
+]
+
+ext='''
+	cd LVM2.$version
+	for i in $source; do
+		case $i in
+		*.patch) patch -p0 -i "$srcdir"/$i ;;
+		esac
+	done
+	sed -i -e '/^\[Install\]$/,$d' \
+    scripts/dm_event_systemd_red_hat.socket.in \
+    scripts/lvm2_lvmetad_systemd_red_hat.socket.in \
+    scripts/lvm2_lvmpolld_systemd_red_hat.socket.in \
+    scripts/lvm2_monitoring_systemd_red_hat.service.in
+'''
+
+build='''
+	export CONFIG_SHELL=/bin/bash
+	cd LVM2.$version
+	bash ./configure --prefix=/ --sysconfdir=/etc --localstatedir=/var --sbindir=/bin \
+														--enable-applib \
+														--enable-cmdlib \
+														--enable-dmeventd \
+														--enable-lvmetad \
+														--enable-lvmpolld \
+														--enable-pkgconfig \
+														--enable-readline \
+														--enable-udev_rules \
+														--enable-udev_sync \
+														--enable-use-lvmetad \
+														--with-cache=internal \
+														--with-default-dm-run-dir=/run \
+														--with-default-locking-dir=/run/lock/lvm \
+														--with-default-pid-dir=/run \
+														--with-default-run-dir=/run/lvm \
+														--with-systemdsystemunitdir=/lib/systemd/system \
+														--with-thin=internal \
+														--with-udev-prefix=/ \
+														--enable-udev-systemd-background-jobs
+
+	make SHELL=/bin/bash
+	make SHELL=/bin/bash DESTDIR="$pkgdir" install
+	make -C liblvm DESTDIR="${pkgdir}" install
+
+	install -D -m644 "${srcdir}/11-dm-initramfs.rules" "${pkgdir}/lib/initcpio/udev/11-dm-initramfs.rules"
+	install -d "${pkgdir}"/etc/lvm/archive
+	install -d "${pkgdir}"/etc/lvm/backup
+	install -D -m644 "${srcdir}/lvm2_hook" "${pkgdir}/lib/initcpio/hooks/lvm2"
+	install -D -m644 "${srcdir}/lvm2_install" "${pkgdir}/lib/initcpio/install/lvm2"
+	install -D -m644 "${srcdir}/sd-lvm2_install" "${pkgdir}/lib/initcpio/install/sd-lvm2"
+	sed -i 's,use_mlockall = 0,use_mlockall = 1,' "${pkgdir}/etc/lvm/lvm.conf"
+'''

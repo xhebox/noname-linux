@@ -14,6 +14,7 @@ ext='''
 
 build='''
 	noname-meson pango-$version build -Denable_docs=false
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

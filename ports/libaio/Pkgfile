@@ -1,17 +1,13 @@
-name=libaio
-version=0.3.111
+version="0.3.112"
 desc="Asynchronous input/output library"
-source="http://ftp.debian.org/debian/pool/main/liba/$name/${name}_${version}.orig.tar.gz"
+source=[{url="http://ftp.debian.org/debian/pool/main/liba/libaio/libaio_${version}.orig.tar.xz"}]
 
-build() {
+build='''
 	cd libaio-$version
-	LDFLAGS="$LDFLAGS -lc"
 	make \
 	prefix="$pkgdir" \
 	sysconfdir="$pkgdir/etc" \
 	mandir="$pkgdir/share/man" \
 	infodir="$pkgdir/share/info" \
 	install
-	rm -rf "$pkgdir"/share/info
-}
-
+'''

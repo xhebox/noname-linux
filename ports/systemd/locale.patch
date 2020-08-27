@@ -1,0 +1,11 @@
+--- systemd-246/src/locale/localed.c	2020-07-31 03:02:36.000000000 +0800
++++ systemd-246/src/locale/localed.c	2020-07-31 03:02:36.000000000 +0800
+@@ -507,7 +507,7 @@
+ 
+ #define LOAD_SYMBOL(symbol, dl, name)                                   \
+         ({                                                              \
+-                (symbol) = (typeof(symbol)) dlvsym((dl), (name), "V_0.5.0"); \
++                (symbol) = (typeof(symbol)) dlsym((dl), (name)); \
+                 (symbol) ? 0 : -EOPNOTSUPP;                             \
+         })
+ 

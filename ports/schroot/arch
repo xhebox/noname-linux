@@ -1,6 +1,6 @@
 [arch]
 description=arch
-directory=/mnt/arch
+directory=/home/xhe/schroot/arch
 users=xhe
 groups=users
 profile=arch

@@ -1,33 +1,3 @@
---- modules/pam_lastlog/pam_lastlog.c.orig     2014-01-11 12:56:15.735248391 +0100
-+++ modules/pam_lastlog/pam_lastlog.c  2014-01-11 12:57:33.142756424 +0100
-@@ -26,6 +26,7 @@
- #include <sys/types.h>
- #include <syslog.h>
- #include <unistd.h>
-+#include <paths.h>
- 
- #if defined(hpux) || defined(sunos) || defined(solaris)
- # ifndef _PATH_LASTLOG
-@@ -403,7 +404,9 @@
- 
-     if (announce & LASTLOG_WTMP) {
- 	/* write wtmp entry for user */
-+#ifdef HAVE_LOGWTMP
- 	logwtmp(last_login.ll_line, user, remote_host);
-+#endif
-     }
- 
-     /* cleanup */
-@@ -714,7 +717,9 @@
-     terminal_line = get_tty(pamh);
- 
-     /* Wipe out utmp logout entry */
-+#ifdef HAVE_LOGWTMP
-     logwtmp(terminal_line, "", "");
-+#endif
- 
-     return PAM_SUCCESS;
- }
 --- modules/pam_rhosts/pam_rhosts.c.orig       2014-01-11 12:58:40.263196779 +0100
 +++ modules/pam_rhosts/pam_rhosts.c    2014-01-11 12:59:25.182491398 +0100
 @@ -113,8 +113,10 @@ int pam_sm_authenticate (pam_handle_t *p
@@ -42,3 +12,61 @@
  #endif
      if (retval != 0) {
        if (!opt_silent || opt_debug)
+--- modules/pam_lastlog/pam_lastlog.c.orig     2014-01-11 12:56:15.735248391 +0100
++++ modules/pam_lastlog/pam_lastlog.c  2014-01-11 12:57:33.142756424 +0100
+@@ -29,6 +29,7 @@
+ #include <sys/resource.h>
+ #include <syslog.h>
+ #include <unistd.h>
++#include <paths.h>
+ 
+ #if defined(hpux) || defined(sunos) || defined(solaris)
+ # ifndef _PATH_LASTLOG
+@@ -481,8 +482,10 @@
+     D(("unlocked"));
+ 
+     if (announce & LASTLOG_WTMP) {
++#ifdef HAVE_LOGWTMP
+ 	/* write wtmp entry for user */
+ 	logwtmp(last_login.ll_line, user, remote_host);
++#endif
+     }
+ 
+     /* cleanup */
+@@ -796,7 +799,9 @@
+     terminal_line = get_tty(pamh);
+ 
+     /* Wipe out utmp logout entry */
++#ifdef HAVE_LOGWTMP
+     logwtmp(terminal_line, "", "");
++#endif
+ 
+     return PAM_SUCCESS;
+ }
+--- modules/pam_faillock/pam_faillock.c	2020-06-08 18:17:27.000000000 +0800
++++ modules/pam_faillock/pam_faillock.c	2020-06-08 18:17:27.000000000 +0800
+@@ -348,7 +348,7 @@
+ static int
+ check_local_user (pam_handle_t *pamh, const char *user)
+ {
+-	struct passwd pw, *pwp;
++	struct passwd *pwp;
+ 	char buf[16384];
+ 	int found = 0;
+ 	FILE *fp;
+@@ -362,13 +362,8 @@
+ 	}
+ 
+ 	for (;;) {
+-		errn = fgetpwent_r(fp, &pw, buf, sizeof (buf), &pwp);
+-		if (errn == ERANGE) {
+-			pam_syslog(pamh, LOG_WARNING, "%s contains very long lines; corrupted?",
+-				   PATH_PASSWD);
+-			break;
+-		}
+-		if (errn != 0)
++		pwp = fgetpwent(fp);
++		if (pwp != NULL)
+ 			break;
+ 		if (strcmp(pwp->pw_name, user) == 0) {
+ 			found = 1;

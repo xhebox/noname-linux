@@ -1,0 +1,18 @@
+version="10.0.0"
+desc="Tool and a library for bi-directional translation between SPIR-V and LLVM IR"
+deps=["spirv-tools", "llvm"]
+makedeps=["spirv-tools", "llvm"]
+source=[
+	{url="https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-cmake SPIRV-LLVM-Translator-$version -Bbuild \
+		-DBUILD_SHARED_LIBS=ON \
+		-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+		-DLLVM_INCLUDE_TESTS=OFF \
+		-Wno-dev
+
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

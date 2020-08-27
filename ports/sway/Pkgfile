@@ -13,8 +13,8 @@ ext='''
 '''
 
 build='''
-  mkdir -p build
-  noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled
-  ninja -C build
-  DESTDIR="$pkgdir" ninja -C build install
+	noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

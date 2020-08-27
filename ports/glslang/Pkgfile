@@ -1,11 +1,11 @@
-version="7.13.3496"
+version="8.13.3743"
 desc='OpenGL and OpenGL ES shader front end and validator'
-makedeps=["spirv-tools", "cmake", "ninja"]
+makedeps=["spirv-tools"]
 deps=["spirv-tools"]
 source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"}]
 
 build='''
-	cmake glslang-$version -Bbuild \
+	noname-cmake glslang-$version -Bbuild \
 				-DCMAKE_INSTALL_PREFIX= \
 				-DCMAKE_BUILD_TYPE=Release \
 				-DBUILD_SHARED_LIBS=ON

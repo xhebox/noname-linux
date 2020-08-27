@@ -1,4 +1,4 @@
-pattern=["lib/initcpio"]
+pattern=["etc/mkinitcpio"]
 script='''
 mkinitcpio -P
 '''

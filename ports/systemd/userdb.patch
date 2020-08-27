@@ -1,0 +1,40 @@
+--- systemd-246/src/userdb/userdbctl.c	2020-07-31 03:02:36.000000000 +0800
++++ systemd-246/src/userdb/userdbctl.c	2020-07-31 03:02:36.000000000 +0800
+@@ -510,7 +510,8 @@
+                 if (fd < 0)
+                         return log_error_errno(r, "Failed to allocate AF_UNIX/SOCK_STREAM socket: %m");
+ 
+-                if (connect(fd, &sockaddr.un, sockaddr_len) < 0) {
++                const struct sockaddr *addr = (const struct sockaddr*)&sockaddr.un;
++                if (connect(fd, addr, sockaddr_len) < 0) {
+                         no = strjoin("No (", errno_to_name(errno), ")");
+                         if (!no)
+                                 return log_oom();
+--- systemd-246/src/userdb/userwork.c	2020-07-31 03:02:36.000000000 +0800
++++ systemd-246/src/userdb/userwork.c	2020-07-31 03:02:36.000000000 +0800
+@@ -337,7 +337,9 @@
+                                 _cleanup_(group_record_unrefp) GroupRecord *z = NULL;
+                                 _cleanup_free_ char *sbuf = NULL;
+                                 struct group *grp;
++#if ENABLE_GSHADOW
+                                 struct sgrp sgrp;
++#endif
+ 
+                                 errno = 0;
+                                 grp = getgrent();
+@@ -348,6 +350,7 @@
+                                         break;
+                                 }
+ 
++#if ENABLE_GSHADOW
+                                 r = nss_sgrp_for_group(grp, &sgrp, &sbuf);
+                                 if (r < 0)
+                                         log_debug_errno(r, "Failed to acquire shadow entry for group %s, ignoring: %m", grp->gr_name);
+@@ -357,6 +360,7 @@
+                                         endgrent();
+                                         return r;
+                                 }
++#endif
+ 
+                                 if (last) {
+                                         r = varlink_notify(link, last);

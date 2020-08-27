@@ -1,99 +1,72 @@
-version="10.0.0"
+version="10.0.1"
 desc="LLVM compiler and its backend"
-makedeps=["cmake", "flex", "bison", "libffi", "libxml2", "libedit"]
-deps=["libffi", "libxml2", "libedit"]
+makedeps=["flex", "bison", "libffi", "libxml2", "libedit", "ncurses", "python3"]
+deps=["libffi", "libxml2", "libedit", "ncurses"]
 source=[
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz"},
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lldb-$version.src.tar.xz"},
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lld-$version.src.tar.xz"},
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/clang-$version.src.tar.xz"},
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/clang-tools-extra-$version.src.tar.xz"},
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz"},
-	{url="enable-SSP-and-PIE-by-default.patch"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.tar.xz"},
 	{url="llvm-001-musl.patch"},
+	{url="libcxx-0001-musl-hacks.patch"},
 	{url="llvm-config.h"}
 ]
 
 ext='''
-	cd clang-$version.src
+	cd llvm-project-$version
+
+	sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
+	sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+
+	cd llvm
 	for i in $source;do
 		case $i in
-		clang*.patch) patch -p1 -i "$srcdir/$i";;
+		llvm*.patch) patch -Np1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
 
-	cd compiler-rt-$version.src
+	cd libcxx
 	for i in $source;do
 		case $i in
-		compiler-rt*.patch) patch -p1 -i "$srcdir/$i";;
+		libcxx*.patch) patch -Np1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
-
-	cd lldb-$version.src
-	for i in $source;do
-		case $i in
-		lldb*.patch) patch -p1 -i "$srcdir/$i";;
-		esac
-	done
-	cd ..
-
-	wrksrc="`pwd`/llvm-$version.src"
-	mv clang-${version}.src ${wrksrc}/tools/clang
-	mv lldb-${version}.src ${wrksrc}/tools/lldb
-	mv clang-tools-extra-${version}.src ${wrksrc}/tools/clang/tools/extra
-	mv compiler-rt-${version}.src ${wrksrc}/projects/compiler-rt
-	mv lld-${version}.src ${wrksrc}/projects/lld
-	sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' ${wrksrc}/projects/compiler-rt/cmake/config-ix.cmake
-
-	cd llvm-$version.src
-	for i in $source;do
-		case $i in
-		llvm*.patch) patch -p1 -i "$srcdir/$i";;
-		esac
-	done
-	rm test/tools/llvm-objdump/macho-compact-unwind-x86_64.test \
-	test/tools/llvm-objdump/macho-compact-unwind-i386.test \
-	test/Transforms/GlobalOpt/alias-used.ll \
-	test/tools/llvm-symbolizer/print_context.c
 '''
 
 build='''
-	cd llvm-$version.src
-	mkdir -p build
-	cd build
+	cd llvm-project-$version
 
-	cmake -G Ninja \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
+	export CC=clang
+	export CXX=clang++
+
+	noname-cmake llvm -Bbuild \
 		-DLLVM_BINUTILS_INCDIR=/include \
-		-DLLVM_BUILD_DOCS=YES \
+		-DLLVM_BUILD_DOCS=OFF \
 		-DLLVM_BUILD_TESTS=OFF \
 		-DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_BUILD_LLVM_DYLIB=ON \
+		-DLLVM_INSTALL_BINUTILS_SYMLINKS=OFF \
+		-DLLVM_INSTALL_CCTOOLS_SYMLINKS=OFF \
 		-DLLVM_INSTALL_UTILS=ON \
 		-DLLVM_ENABLE_FFI=YES \
 		-DLLVM_ENABLE_RTTI=YES \
+		-DLLVM_ENABLE_LIBXML2=YES \
+		-DLLVM_ENABLE_TERMINFO=YES \
+		-DLLVM_ENABLE_LIBEDIT=YES \
 		-DLLVM_ENABLE_ZLIB=YES \
-		-DLLDB_DISABLE_PYTHON=YES \
 		-DLLVM_APPEND_VC_REV=NO \
-		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET" \
-		-DLLVM_TARGETS_TO_BUILD='X86;AMDGPU;BPF' \
-		-DFFI_INCLUDE_DIR="$(pkg-config --cflags-only-I libffi | sed 's|^-I||g')" \
-		..
-	
-	ninja
-	DESTDIR="$pkgdir" ninja install
+		-DLLVM_ENABLE_LLD=YES \
+		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;libunwind;lldb;compiler-rt;lld;polly;openmp;pstl" \
+		-DLIBCXXABI_LIBCXX_INCLUDES=$PWD/libcxx/include \
+		-DLIBCXX_HAS_MUSL_LIBC=YES \
+		-DLIBCXXABI_USE_LLVM_UNWINDER=1 \
+		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET"
+
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 
 	install -d "$pkgdir"/lib/bfd-plugins
 	ln -s ../LLVMgold.so "$pkgdir"/lib/bfd-plugins/LLVMgold.so
 
 	mv "$pkgdir"/include/llvm/Config/llvm-config.h "$pkgdir"/include/llvm/Config/llvm-config-64.h
 	install -m 0644 "$srcdir"/llvm-config.h "$pkgdir"/include/llvm/Config/
-
-	mv "$pkgdir"/libexec/ccc-analyzer "$pkgdir/lib/clang/"
-	mv "$pkgdir"/libexec/c++-analyzer "$pkgdir/lib/clang/"
-	rmdir "$pkgdir/libexec"
-	sed -i 's|libexec|lib/clang|' "$pkgdir/bin/scan-build"
 '''

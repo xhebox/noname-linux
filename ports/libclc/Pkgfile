@@ -1,0 +1,10 @@
+version="10.0.1"
+desc="Library requirements of the OpenCL C programming language"
+source=[{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.tar.xz"}]
+
+build='''
+	cd llvm-project-$version
+	noname-cmake libclc -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

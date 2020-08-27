@@ -1,25 +1,28 @@
-version="1.3.0"
+version="1.4.0"
 desc="PAM (Pluggable Authentication Modules) library"
 makedeps=["flex"]
-deps=["cracklib", "musl"]
+deps=["musl"]
 source=[
-	{url="http://linux-pam.org/library/Linux-PAM-$version.tar.bz2"},
+	{url="https://github.com/linux-pam/linux-pam/releases/download/v$version/Linux-PAM-$version.tar.xz"},
 	{url="system-auth"},
 	{url="system-local-login"},
 	{url="system-login"},
 	{url="system-remote-login"},
 	{url="system-services"},
 	{url="other"},
-	{url="musl-fix-pam_exec.patch"},
 	{url="pam_unix_sys_resource.patch"},
 	{url="portability-fixes.patch"},
+	{url="0e9b286afe1224b91ff00936058b084ad4b776e4.patch"},
+	{url="395915dae1571e10e2766c999974de864655ea3a.patch"},
+	{url="af0faf666c5008e54dfe43684f210e3581ff1bca.patch"},
 ]
 
 ext='''
 	cd Linux-PAM-$version
 	for i in $source; do
 		case $i in
-		*patch) patch -p0 -i ../$i;;
+		pam_unix*|portability*) patch -p0 -i ../$i;;
+		*patch) patch -p1 -i ../$i;;
 		esac
 	done
 '''
@@ -27,9 +30,10 @@ ext='''
 build='''
 	cd Linux-PAM-$version
 
-	./configure --prefix= --includedir=/include/security --libdir=/lib --sbindir=/bin --disable-nis
+	export ac_cv_search_crypt=no
+	bash configure --prefix= --includedir=/include/security --libdir=/lib --sbindir=/bin --disable-nis --disable-db --disable-cracklib --disable-audio
 	make
-	make DESTDIR=$pkgdir SCONFIGDIR=/etc/security install
+	make -j1 DESTDIR=$pkgdir SCONFIGDIR=/etc/security install
 
 	chmod 4755 $pkgdir/bin/unix_chkpwd
 

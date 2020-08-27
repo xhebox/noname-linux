@@ -19,7 +19,7 @@ build='''
 	make
 	make DESTDIR="$pkgdir" install
 	cat >> "$pkgdir"/bin/noname-cmake << "EOF"
-cmake $@ -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=/lib
+cmake $@ -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=/lib -DCMAKE_BUILD_TYPE=Release
 EOF
 	chmod +x "$pkgdir"/bin/noname-cmake
 '''

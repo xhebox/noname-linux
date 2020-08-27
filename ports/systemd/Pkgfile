@@ -1,7 +1,7 @@
-version="245"
+version="246"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
-deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
 	{
@@ -9,6 +9,7 @@ source=[
 		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
 	},
 	{url="0001-Handle-missing-gshadow.patch"},
+	{url="0001-Use-PREFIX-ROOTPREFIX-correctly.patch"},
 	{url="0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch"},
 	{url="0001-do-not-disable-buffer-in-writing-files.patch"},
 	{url="0002-don-t-use-glibc-specific-qsort_r.patch"},
@@ -31,14 +32,19 @@ source=[
 	{url="0018-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch"},
 	{url="0019-Hide-__start_BUS_ERROR_MAP-and-__stop_BUS_ERROR_MAP.patch"},
 	{url="0020-missing_type.h-add-__compar_d_fn_t-definition.patch"},
+	{url="0021-Handle-missing-LOCK_EX.patch"},
 	{url="0021-avoid-redefinition-of-prctl_mm_map-structure.patch"},
+	{url="0022-Fix-incompatible-pointer-type-struct-sockaddr_un.patch"},
+	{url="0023-Fix-field-efi_loader_entry_one_shot_stat-has-incompl.patch"},
 	{url="0024-test-json.c-define-M_PIl.patch"},
 	{url="musl_missing_fs.patch"},
-	{url="musl_quota.patch"},
 	{url="portable_user_util.patch"},
 	{url="vt_perm.patch"},
+	{url="locale.patch"},
+	{url="userdb.patch"},
+	{url="home.patch"},
+	{url="musl_quota.patch"},
 	{url="libressl.patch"},
-	{url="poweroff.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},
@@ -57,6 +63,7 @@ source=[
 ]
 baks=[
 	"etc/systemd/journald.conf",
+	"etc/systemd/logind.conf",
 ]
 
 ext='''
@@ -81,15 +88,16 @@ build='''
 	-Dlibidn2=false \
 	-Dlibidn=false \
 	-Didn=false \
-	-Dlibcryptsetup=false \
+	-Dlibcryptsetup=true \
 	-Dgshadow=false \
-	-Dlocaled=false \
-	-Duserdb=false \
+	-Dlocaled=true \
+	-Duserdb=true \
+	-Dhomed=true \
 	-Dnss-resolve=false \
 	-Dnss-myhostname=false \
 	-Dnss-mymachines=false \
 	-Dnss-systemd=false \
-	-Dresolve=false \
+	-Dresolve=true \
 	-Dtimedated=true \
 	-Dtimesyncd=true \
 	-Dlz4=true \

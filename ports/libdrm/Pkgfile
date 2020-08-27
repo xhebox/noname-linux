@@ -1,9 +1,9 @@
-version="2.4.100"
+version="2.4.102"
 desc="Userspace interface to kernel DRM services"
 makedeps=["libpciaccess"]
 deps=["libpciaccess"]
 source=[
-	{url="http://dri.freedesktop.org/libdrm/libdrm-$version.tar.bz2"},
+	{url="http://dri.freedesktop.org/libdrm/libdrm-$version.tar.xz"},
 	{url="musl.patch"},
 ]
 
@@ -13,14 +13,9 @@ ext='''
 '''
 
 build='''
-	cd libdrm-$version
-	./configure \
-		--prefix= \
-		--disable-static --disable-udev \
-		--enable-radeon --enable-nouveau --enable-intel \
-		--enable-libkms \
-		--disable-valgrind
-
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson libdrm-$version build \
+		-Dudev=true \
+		-Dvalgrind=false
+	ninja -C build
+	DESTDIR="$pkgdir" ninja -C build install
 '''

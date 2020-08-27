@@ -3,15 +3,12 @@
 # (CHROOT_PATH)
 #
 # <file system> <mount point> <type> <options> <dump> <pass>
-proc /proc proc defaults 0 0
-/dev /dev none rw,bind 0 0
-/dev/pts /dev/pts none rw,bind 0 0
-tmpfs /dev/shm tmpfs defaults 0 0
-/sys /sys none rw,bind 0 0
-/tmp /tmp none rw,bind 0 0
-/home /home none rw,bind 0 0
+proc		/proc		proc	defaults	0	0
+/dev		/dev		none	rw,bind		0	0
+tmpfs		/dev/shm	tmpfs	defaults	0	0
+/sys		/sys		none	rw,bind		0	0
+/tmp		/tmp		none	rw,bind		0	0
+/home		/home		none	rw,bind		0	0
 /etc/sudoers.d /etc/sudoers.d none rw,rbind 0 0
 /etc/machine-id /etc/machine-id none rw,rbind 0 0
 /etc/resolv.conf /etc/resolv.conf none rw,rbind 0 0
-/run/dbus /run/dbus none rw,rbind 0 0
-/run/user /run/user none rw,rbind 0 0

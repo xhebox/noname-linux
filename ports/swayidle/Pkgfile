@@ -1,0 +1,14 @@
+version="1.6"
+desc='Idle management daemon for Wayland '
+deps=["wayland"]
+makedeps=["wayland-protocols"]
+source=[
+	{url="https://github.com/swaywm/swayidle/releases/download/$version/swayidle-$version.tar.gz"},
+]
+
+build='''
+	noname-meson swayidle-$version build -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

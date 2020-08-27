@@ -1,5 +1,5 @@
 name="ttyd"
-version="1.6.0"
+version="1.6.1"
 desc='Share your terminal over the web'
 deps=["json-c", "libwebsockets", "zlib"]
 makedeps=["json-c", "libwebsockets", "zlib", "cmake", "xxd"]
@@ -8,10 +8,7 @@ source=[
 ]
 
 build='''
-	cd ttyd-$version
-	mkdir build -p
-	cd build
-	cmake -DCMAKE_INSTALL_PREFIX=/ ..
-	make
-	make DESTDIR="$pkgdir" install
+	noname-cmake ttyd-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''
