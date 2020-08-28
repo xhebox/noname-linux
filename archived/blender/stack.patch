@@ -1,0 +1,11 @@
+--- a/intern/cycles/util/util_thread.cpp	2016-10-24 14:13:56.000000000 +0000
++++ b/intern/cycles/util/util_thread.cpp	2016-10-24 14:13:56.000000000 +0000
+@@ -23,7 +23,7 @@
+ 
+ thread::thread(function<void()> run_cb, int node) : run_cb_(run_cb), joined_(false), node_(node)
+ {
+-#ifdef __APPLE__
++#ifndef __GLIBC__
+   /* Set the stack size to 2MB to match Linux. The default 512KB on macOS is
+    * too small for Embree, and consistent stack size also makes things more
+    * predictable in general. */

@@ -1,44 +1,52 @@
-name=blender
-version=2.79b
+version="2.83.5"
 desc="3D Creation/Animation/Publishing System"
-deps="zlib ilmbase libpng libtiff openexr python desktop-file-utils shared-mime-info hicolor-icon-theme xdg-utils glew openjpeg harfbuzz ffmpeg fftw boost opencollada openimageio libsndfile opencolorio libspnav ptex opensubdiv openvdb log4cplus sdl2 glu libjpeg-turbo libx11 libxi libxxf86vm mesa llvm openal openshadinglanguage"
-source="http://download.blender.org/source/blender-${version}.tar.gz
-musl.patch"
+makedeps=["zlib", "libpng", "libtiff", "openexr", "python3", "glew", "openjpeg", "harfbuzz", "ffmpeg", "fftw", "boost", "opencollada", "openimageio", "libsndfile", "opencolorio", "libspnav", "ptex", "opensubdiv", "openvdb", "log4cplus", "sdl2", "glu", "libjpeg-turbo", "libx11", "libxi", "libxxf86vm", "mesa", "llvm", "openal", "openshadinglanguage"]
+deps=["zlib", "libpng", "libtiff", "openexr", "python3", "glew", "openjpeg", "harfbuzz", "ffmpeg", "fftw", "boost", "opencollada", "openimageio", "libsndfile", "opencolorio", "libspnav", "ptex", "opensubdiv", "openvdb", "log4cplus", "sdl2", "glu", "libjpeg-turbo", "libx11", "libxi", "libxxf86vm", "mesa", "llvm", "openal", "openshadinglanguage"]
+source=[
+	{url="http://download.blender.org/source/blender-${version}.tar.xz"},
+	{url="musl.patch"},
+	{url="stack.patch"},
+]
 
-build() {
+ext='''
 	cd blender-$version
 	for i in $source; do
 		case $i in
-		*patch) patch -p1 < ../$i;;
+		*patch) patch -p1 -i ../$i;;
 		esac
 	done
-	sed -e "s|GENERATE_HTMLHELP		 =YES|GENERATE_HTMLHELP		 =NO|" \
-	-i doc/doxygen/Doxyfile
-	sed -i '/${LD_VERSION}" MATCHES "GNU gold"/,+5d' build_files/cmake/platform/platform_unix.cmake
-	mkdir build && cd build
-	export CFLAGS="${CFLAGS} -DOPENVDB_3_ABI_COMPATIBLE"
-	export CXXFLAGS="${CXXFLAGS} -DOPENVDB_3_ABI_COMPATIBLE"
-	cmake -C ../build_files/cmake/config/blender_release.cmake .. \
+	sed -i "s/std=c++11/std=c++14/" CMakeLists.txt
+#sed -e "s|GENERATE_HTMLHELP		 =YES|GENERATE_HTMLHELP		 =NO|" -i doc/doxygen/Doxyfile
+#sed -i '/${LD_VERSION}" MATCHES "GNU gold"/,+5d' build_files/cmake/platform/platform_unix.cmake
+'''
+
+build='''
+#export CFLAGS="${CFLAGS} -DOPENVDB_3_ABI_COMPATIBLE"
+#export CXXFLAGS="${CXXFLAGS} -DOPENVDB_3_ABI_COMPATIBLE"
+#noname-cmake -Cblender-$version/build_files/cmake/config/blender_release.cmake -Bbuild \
+	pyver=`python -V | cut -d ' ' -f 2`
+	pyver=${pyver%.*}
+	noname-cmake -Bbuild blender-$version \
 	-DCMAKE_INSTALL_PREFIX=/ \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DWITH_INSTALL_PORTABLE=OFF \
 	-DWITH_PYTHON_INSTALL=OFF \
 	-DOPENIMAGEIO_ROOT_DIR=/ \
 	-DWITH_LLVM=ON \
+	-DWITH_X11=OFF \
 	-DWITH_SYSTEM_OPENJPEG=ON \
 	-DWITH_GL_PROFILE_CORE=OFF \
 	-DWITH_GL_PROFILE_ES20=OFF \
-	-DPYTHON_VERSION=3.6 \
+	-DPYTHON_VERSION=${pyver} \
 	-DPYTHON_LIBPATH=/lib \
-	-DPYTHON_LIBRARY=python3.6m \
-	-DPYTHON_INCLUDE_DIRS=/include/python3.6m \
+	-DPYTHON_LIBRARY=python${pyver} \
+	-DPYTHON_INCLUDE_DIRS=/include/python${pyver}m \
 	-DWITH_INTERNATIONAL=ON
 
-	sed -i 's;#if !(defined(_ISOC99_SOURCE) || (defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L) || defined(_MSC_VER));#if 0;g' \
-	../source/blender/blenlib/BLI_math_base.h
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 
-	make
-	make DESTDIR="${pkgdir}" install
-	python3 -m compileall "${pkgdir}/share/blender"
-	python3 -O -m compileall "${pkgdir}/share/blender"
-}
+	install -Dm755 release/bin/blender-softwaregl "${pkgdir}/bin/blender-softwaregl"
+	python -m compileall "${pkgdir}/share/blender"
+	python -O -m compileall "${pkgdir}/share/blender"
+'''
