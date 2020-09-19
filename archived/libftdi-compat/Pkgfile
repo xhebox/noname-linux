@@ -1,0 +1,12 @@
+version="0.20"
+makedeps=["libusb-compat", "boost"]
+deps=["libusb-compat"]
+desc="A library to talk to FTDI chips"
+source=[{url="https://www.intra2net.com/en/developer/libftdi/download/libftdi-$version.tar.gz"}]
+
+build='''
+	cd libftdi-$version
+	./configure --prefix= --libexecdir=/lib --without-examples
+	make
+	make DESTDIR="$pkgdir" install
+'''

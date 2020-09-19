@@ -1,4 +1,4 @@
-version="1.39.2"
+version="1.41.0"
 deps=["musl"]
 desc="Framing layer of HTTP/2 is implemented as a reusable C library"
 source=[{url="https://github.com/nghttp2/nghttp2/releases/download/v$version/nghttp2-$version.tar.xz"}]

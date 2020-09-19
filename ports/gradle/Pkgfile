@@ -1,0 +1,24 @@
+version="6.6"
+desc='Powerful build system for the JVM'
+deps=["openjdk8", "bash"]
+makedeps=["openjdk8"]
+source=[
+	{url="https://services.gradle.org/distributions/gradle-${version}-bin.zip"},
+	{url="gradle.sh"},
+]
+
+build='''
+	cd gradle-$version
+	sed gradle -e "s;@VERSION@;${version};" > gradle
+	install -Dm755 "${srcdir}/gradle.sh" "${pkgdir}/etc/profile.d/gradle.sh"
+
+	install -d "${pkgdir}/share/java/gradle/lib/plugins"
+	install -Dm 644 lib/*.jar "${pkgdir}/share/java/gradle/lib"
+	install -Dm 644 lib/plugins/*.jar "${pkgdir}/share/java/gradle/lib/plugins"
+
+	install -d "${pkgdir}/share/java/gradle/bin"
+	install -m 755 bin/gradle "${pkgdir}/share/java/gradle/bin"
+
+	install -d "${pkgdir}/bin"
+	ln -s /share/java/gradle/bin/gradle "${pkgdir}/bin"
+'''

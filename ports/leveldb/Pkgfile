@@ -6,7 +6,7 @@ makedeps=["gperf"]
 source=[{url="https://github.com/google/leveldb/archive/$version.tar.gz"}]
 
 build='''
-	noname-cmake leveldb-$version -Bbuild \
+	cmake leveldb-$version -Bbuild \
 				-DCMAKE_INSTALL_PREFIX= \
 				-DCMAKE_BUILD_TYPE=Release \
 				-DBUILD_SHARED_LIBS=ON

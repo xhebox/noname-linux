@@ -38,7 +38,8 @@ build='''
 	export CC=clang
 	export CXX=clang++
 
-	noname-cmake llvm -Bbuild \
+	cmake llvm -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \
 		-DLLVM_BUILD_TESTS=OFF \

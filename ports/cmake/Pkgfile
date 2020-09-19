@@ -10,6 +10,7 @@ source=[
 build='''
 	cd cmake-$version
 	patch -p1 -i ../cmake-isystem.patch
+	sed -i 's/\/usr//' Tests/RunCMake/GNUInstallDirs/*
 	./configure \
 		--prefix= \
 		--docdir=/share/doc/cmake-${version%.*} \
@@ -18,8 +19,4 @@ build='''
 		--no-system-librhash
 	make
 	make DESTDIR="$pkgdir" install
-	cat >> "$pkgdir"/bin/noname-cmake << "EOF"
-cmake $@ -DCMAKE_INSTALL_PREFIX= -DCMAKE_INSTALL_LIBDIR=/lib -DCMAKE_BUILD_TYPE=Release
-EOF
-	chmod +x "$pkgdir"/bin/noname-cmake
 '''

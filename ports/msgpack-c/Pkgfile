@@ -4,7 +4,8 @@ source=[{url="https://github.com/msgpack/msgpack-c/releases/download/cpp-${versi
 
 
 build='''
-	noname-cmake msgpack-${version} -Bbuild \
+	cmake msgpack-${version} -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
 		-DMSGPACK_CXX11=ON \
 		-DMSGPACK_BUILD_EXAMPLES=OFF
 	cmake --build build

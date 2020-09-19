@@ -1,5 +1,5 @@
-version="12.13.0"
-makedeps=["zlib", "python", "icu", "libuv", "libnghttp2"]
+version="14.9.0"
+makedeps=["zlib", "python3", "icu", "libuv", "libnghttp2"]
 deps=["zlib", "icu", "libuv", "libnghttp2"]
 desc="Nodejs interpreter"
 source=[{url="http://nodejs.org//dist/v${version}/node-v${version}.tar.gz"}]

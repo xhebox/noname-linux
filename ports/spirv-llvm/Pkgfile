@@ -7,7 +7,9 @@ source=[
 ]
 
 build='''
-	noname-cmake SPIRV-LLVM-Translator-$version -Bbuild \
+	cmake SPIRV-LLVM-Translator-$version -Bbuild \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
 		-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
 		-DLLVM_INCLUDE_TESTS=OFF \

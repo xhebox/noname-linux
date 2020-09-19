@@ -8,7 +8,7 @@ source=[
 ]
 
 build='''
-	noname-cmake ttyd-$version -Bbuild
+	cmake ttyd-$version -Bbuild -DCMAKE_INSTALL_PREFIX=
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

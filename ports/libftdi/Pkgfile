@@ -1,0 +1,25 @@
+version="1.4"
+makedeps=["libusb", "confuse"]
+deps=["libusb", "confuse"]
+desc="A library to talk to FTDI chips"
+source=[{url="https://www.intra2net.com/en/developer/libftdi/download/libftdi1-$version.tar.bz2"}]
+
+ext='''
+	cd libftdi1-$version
+	sed -i 's|LIB_SUFFIX 64|LIB_SUFFIX ""|' CMakeLists.txt
+	sed -i 's|MODE="0664", GROUP="plugdev"|TAG+="uaccess"|g' packages/99-libftdi.rules
+'''
+
+build='''
+	cmake libftdi1-$version -Bbuild \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_SKIP_BUILD_RPATH=ON \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_TESTS=OFF \
+		-DDOCUMENTATION=OFF \
+		-DEXAMPLES=OFF -DFTDI_EEPROM=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	install -Dm644 libftdi1-$version/packages/99-libftdi.rules "$pkgdir/lib/udev/rules.d/69-libftdi.rules"
+	rm -rf "$pkgdir"/usr
+'''

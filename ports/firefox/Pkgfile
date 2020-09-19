@@ -1,19 +1,20 @@
 name="firefox"
-version="77.0.1"
+version="80.0.1"
 desc="Firefox web browser"
-deps=["alsa-lib", "bzip2", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
-makedeps=["alsa-lib", "bzip2", "cargo", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
+deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
+makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},
 	{url="stab.h"},
 	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
-	{url="noname-fonts.patch"},
-	{url="no-x11.patch"},
 	{url="fix-fortify-inline.patch"},
 	{url="fix-seccomp-bpf.patch"},
 	{url="fix-tools.patch"},
+	{url="fix-musl.patch"},
 	{url="mallinfo.patch"},
+	{url="noname-fonts.patch"},
+	{url="no-x11.patch"},
 ]
 
 ext='''
@@ -28,9 +29,8 @@ EOF
 
 	cd firefox-$version
 	for i in ../*.patch; do
-		patch -p0 -i $i
+		patch -Np0 -i $i
 	done
-	truncate -s 0 memory/mozalloc/throw_gcc.h
 
 	find dom/plugins -type f | xargs sed -i \
 		-e 's/ifdef MOZ_WIDGET_GTK/if 0/g' \
@@ -38,6 +38,8 @@ EOF
 		-e 's/if (MOZ_WIDGET_GTK)/if 0/g' \
 		-e 's/!defined(MOZ_WIDGET_GTK)/1/g' \
 		-e 's/defined(MOZ_WIDGET_GTK)/0/g'
+
+	truncate -s 0 memory/mozalloc/throw_gcc.h
 
 	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/audio_thread_priority/.cargo-checksum.json
 
@@ -50,9 +52,19 @@ ac_add_options --enable-application=browser
 
 ac_add_options --prefix=
 ac_add_options --enable-release
-ac_add_options --enable-optimize="$CFLAGS"
+ac_add_options --enable-optimize
+ac_add_options --enable-hardening
+ac_add_options --enable-linker=lld
 ac_add_options --enable-rust-simd
+ac_add_options --disable-elf-hack
 ac_add_options --with-ccache=/bin/ccache
+ac_add_options --host=$TARGET
+ac_add_options --target=$TARGET
+export CC='clang --target=x86_64-pc-linux-musl'
+export CXX='clang++ --target=x86_64-pc-linux-musl'
+export AR=llvm-ar
+export NM=llvm-nm
+export RANLIB=llvm-ranlib
 
 # Branding
 ac_add_options --enable-official-branding
@@ -62,7 +74,6 @@ ac_add_options --with-distribution-id=noname-linux
 # System libraries
 ac_add_options --with-system-nspr
 ac_add_options --with-system-nss
-ac_add_options --with-system-bz2
 ac_add_options --with-system-jpeg
 ac_add_options --with-system-zlib
 ac_add_options --with-system-libevent
@@ -78,18 +89,13 @@ ac_add_options --disable-valgrind
 ac_add_options --disable-jack
 ac_add_options --disable-webrtc
 ac_add_options --disable-gold
-ac_add_options --disable-startup-notification
 ac_add_options --disable-crashreporter
 ac_add_options --disable-tests
-ac_add_options --disable-gconf
 ac_add_options --disable-install-strip
 ac_add_options --disable-strip
-ac_add_options --disable-elf-hack
 ac_add_options --disable-profiling
 ac_add_options --disable-jemalloc
 ac_add_options --disable-updater
-ac_add_options --host=$TARGET
-ac_add_options --target=$TARGET
 ac_add_options --enable-default-toolkit="cairo-gtk3-wayland"
 END
 '''
@@ -103,14 +109,14 @@ build='''
 
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.14.1 --locked cbindgen
+	cargo install --version 0.14.3 --locked cbindgen
 
 	cd firefox-$version
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
 
 	env >> env
 
-	./mach build -j3
+	./mach build
 	DESTDIR="$pkgdir" ./mach install
 	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
 	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END

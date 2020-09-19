@@ -14,7 +14,8 @@ ext='''
 '''
 
 build='''
-	noname-cmake luv-$version-0 -Bbuild \
+	cmake luv-$version-0 -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
 		-DWITH_SHARED_LIBUV=ON \
 		-DWITH_LUA_ENGINE=Lua \
 		-DLUA_BUILD_TYPE=System \

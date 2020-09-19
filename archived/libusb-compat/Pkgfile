@@ -1,0 +1,12 @@
+version="0.1.7"
+makedeps=["libusb"]
+deps=["libusb"]
+desc="Library to enable user space application programs to communicate with USB devices"
+source=[{url="https://github.com/libusb/libusb-compat-0.1/releases/download/v$version/libusb-compat-$version.tar.gz"}]
+
+build='''
+	cd libusb-compat-$version
+	./configure --prefix= --libexecdir=/lib
+	make
+	make DESTDIR="$pkgdir" install
+'''

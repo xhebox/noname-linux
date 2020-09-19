@@ -1,5 +1,4 @@
 version="3.30.1"
-deps=["hicolor-icon-theme"]
 desc="default fallback used by the icon theme specification"
 source=[{url="http://mirrors.ustc.edu.cn/archlinux/extra/os/x86_64/adwaita-icon-theme-$version-1-any.pkg.tar.xz"}]
 

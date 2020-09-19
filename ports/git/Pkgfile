@@ -6,28 +6,10 @@ source=[{url="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"}]
 
 build='''
 	cd git-$version
-	make \
-		bindir=/bin \
-		prefix= gitexecdir=/lib/git-core \
-		CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
-		USE_LIBPCRE=1 \
-		NO_NSEC=YesPlease \
-		NO_SVN_TESTS=YesPlease \
-		NO_CROSS_DIRECTORY_HARDLINKS=1 \
-		MAN_BOLD_LITERAL=1 \
-		NO_REGEX=NeedsStartEnd \
-		NEEDS_SSL_WITH_CURL=1 \
-	all
-	make DESTDIR="$pkgdir" \
-		bindir=/bin \
-		prefix= gitexecdir=/lib/git-core \
-		CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
-		USE_LIBPCRE=1 \
-		NO_NSEC=YesPlease \
-		NO_SVN_TESTS=YesPlease \
-		NO_CROSS_DIRECTORY_HARDLINKS=1 \
-		NO_REGEX=NeedsStartEnd \
-		MAN_BOLD_LITERAL=1 \
-		NEEDS_SSL_WITH_CURL=1 \
-	install
+	OPTIONS="bindir=/bin prefix= gitexecdir=/lib/git-core USE_LIBPCRE=1 NO_NSEC=YesPlease NO_SVN_TESTS=YesPlease  NO_CROSS_DIRECTORY_HARDLINKS=1 MAN_BOLD_LITERAL=1 NO_REGEX=NeedsStartEnd NEEDS_SSL_WITH_CURL=1"
+	make $OPTIONS all
+	make -C contrib/subtree $OPTIONS all
+
+	make DESTDIR="$pkgdir" $OPTIONS install
+	make -C contrib/subtree DESTDIR="$pkgdir" $OPTIONS install
 '''

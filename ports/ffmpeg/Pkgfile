@@ -1,4 +1,4 @@
-version="4.2.3"
+version="4.3"
 makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
 deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "pulseaudio", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
 desc="Complete solution to record, convert and stream audio and video."
@@ -18,13 +18,13 @@ build='''
 		--pkgconfigdir=/lib/pkgconfig \
 		--mandir=/share/man \
 		--disable-debug \
-		--enable-avisynth \
 		--enable-avresample \
 		--enable-fontconfig \
 		--enable-gmp \
 		--disable-gnutls \
 		--enable-gpl \
 		--disable-ladspa \
+		--disable-avisynth \
 		--enable-libass \
 		--enable-libfreetype \
 		--enable-libfribidi \

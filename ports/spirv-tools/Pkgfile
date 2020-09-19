@@ -8,7 +8,9 @@ source=[
 ]
 
 build='''
-	noname-cmake SPIRV-Tools-$version -Bbuild \
+	cmake SPIRV-Tools-$version -Bbuild \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DSPIRV_WERROR=Off \
 		-DBUILD_SHARED_LIBS=ON \
 		-DSPIRV-Headers_SOURCE_DIR=${srcdir}/SPIRV-Headers

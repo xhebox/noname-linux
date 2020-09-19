@@ -4,7 +4,7 @@ source=[{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$ve
 
 build='''
 	cd llvm-project-$version
-	noname-cmake libclc -Bbuild
+	cmake libclc -Bbuild -DCMAKE_INSTALL_PREFIX=
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

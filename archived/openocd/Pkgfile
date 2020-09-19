@@ -1,0 +1,50 @@
+version="git"
+makedeps=["hidapi", "libftdi-compat", "libusb-compat"]
+deps=["hidapi", "libftdi-compat", "libusb-compat"]
+desc="Debugging, in-system programming and boundary-scan testing for embedded target devices"
+source=[
+	{protocol="git", url="https://github.com/ntfreak/openocd"},
+]
+
+ext='''
+	cd openocd
+	proxychains -q git submodule update --init
+	#git submodule update --init
+	sed -i 's|GROUP="plugdev", ||g' contrib/60-openocd.rules
+'''
+
+build='''
+	cd openocd
+	autoreconf -vif
+	./configure \
+		--prefix=/ \
+		--disable-werror \
+		--enable-amtjtagaccel \
+		--enable-armjtagew \
+		--enable-buspirate \
+		--enable-ftdi \
+		--enable-gw16012 \
+		--enable-jlink \
+		--enable-oocd_trace \
+		--enable-opendous \
+		--enable-osbdm \
+		--enable-parport \
+		--enable-presto_libftdi \
+		--enable-remote-bitbang \
+		--enable-rlink \
+		--enable-stlink \
+		--enable-ti-icdi \
+		--enable-ulink \
+		--enable-usbprog \
+		--enable-vsllink \
+		--enable-aice \
+		--enable-cmsis-dap \
+		--enable-dummy \
+		--enable-jtag_vpi \
+		--enable-openjtag_ftdi \
+		--enable-usb-blaster-2 \
+		--enable-usb_blaster_libftdi 
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm 644 contrib/60-openocd.rules "$pkgdir"/lib/udev/rules.d/60-openocd.rules
+'''

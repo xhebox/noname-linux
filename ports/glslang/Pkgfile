@@ -5,7 +5,7 @@ deps=["spirv-tools"]
 source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"}]
 
 build='''
-	noname-cmake glslang-$version -Bbuild \
+	cmake glslang-$version -Bbuild \
 				-DCMAKE_INSTALL_PREFIX= \
 				-DCMAKE_BUILD_TYPE=Release \
 				-DBUILD_SHARED_LIBS=ON

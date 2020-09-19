@@ -1,0 +1,33 @@
+version="1.4.10"
+setver="0.7.7"
+ver="`echo $version | tr _ -`"
+desc="Statically typed programming language that can interoperate with Java"
+deps=["openjdk8"]
+makedeps=["openjdk8", "python3"]
+source=[
+	{url="https://setconf.roboticoverlords.org/setconf-$setver.tar.xz"},
+	{url="https://github.com/JetBrains/kotlin/releases/download/v${ver}/kotlin-compiler-${ver}.zip"},
+]
+
+build='''
+  cd kotlinc
+
+  python3 ../setconf-$setver/setconf.py bin/kotlin      DIR         /bin
+  python3 ../setconf-$setver/setconf.py bin/kotlinc-js  DIR         /bin
+  python3 ../setconf-$setver/setconf.py bin/kotlinc-jvm DIR         /bin
+  python3 ../setconf-$setver/setconf.py bin/kotlinc     KOTLIN_HOME /share/kotlin
+
+  install -Dm755 bin/kotlin      "$pkgdir/bin/kotlin"
+  install -Dm755 bin/kotlinc     "$pkgdir/bin/kotlinc"
+  install -Dm755 bin/kotlinc-js  "$pkgdir/bin/kotlinc-js"
+  install -Dm755 bin/kotlinc-jvm "$pkgdir/bin/kotlinc-jvm"
+
+  cd "$srcdir/kotlinc/lib"
+  install -d "$pkgdir/share/kotlin/lib"
+  for jar in *.jar; do
+    install -Dm644 "$jar" "$pkgdir/share/kotlin/lib"
+  done
+
+  cd "$srcdir/kotlinc"
+  install -Dm644 build.txt "$pkgdir/share/kotlin"
+'''
