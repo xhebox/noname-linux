@@ -1,0 +1,26 @@
+version="1.1.1h"
+desc="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
+source=[
+	{url="https://www.openssl.org/source/openssl-${version}.tar.gz"},
+	{url="ca-dir.patch"},
+]
+deps=["musl"]
+
+ext='''
+	cd openssl-$version
+	for i in $source; do
+		case $i in
+		*patch) patch -p0 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build='''
+	cd openssl-$version
+	./Configure --prefix=/ --openssldir=/etc/ssl --libdir=lib \
+		shared no-ssl3-method enable-ec_nistp_64_gcc_128 linux-x86_64 \
+		"-Wa,--noexecstack ${CPPFLAGS} ${CFLAGS} ${LDFLAGS}"
+	make depend
+	make
+	make DESTDIR=$pkgdir MANDIR=/share/man MANSUFFIX=ssl install_sw install_ssldirs install_man_docs
+'''

@@ -1,0 +1,20 @@
+version="3.7.0"
+desc="Protocol Buffers - Google's data interchange format"
+deps=["zlib"]
+makedeps=["zlib", "python3-setuptools"]
+source=[
+	{url="https://github.com/google/protobuf/archive/v${version}.tar.gz"},
+	{url="musl-fix.patch"},
+]
+
+build='''
+	cd protobuf-$version
+	patch -p0 -i ../musl-fix.patch
+	autoreconf -ifv
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
+
+	cd python
+	python3 setup.py install --prefix= --root="$pkgdir" --cpp_implementation
+'''

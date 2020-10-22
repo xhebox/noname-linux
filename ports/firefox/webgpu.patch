@@ -1,0 +1,14 @@
+--- gfx/thebes/gfxPlatform.cpp	2020-08-31 22:04:09.000000000 +0800
++++ gfx/thebes/gfxPlatform.cpp	2020-08-31 22:04:09.000000000 +0800
+@@ -2809,11 +2809,6 @@
+ void gfxPlatform::InitWebGPUConfig() {
+   FeatureState& feature = gfxConfig::GetFeature(Feature::WEBGPU);
+   feature.SetDefaultFromPref("dom.webgpu.enabled", true, false);
+-#ifndef NIGHTLY_BUILD
+-  feature.ForceDisable(FeatureStatus::Blocked,
+-                       "WebGPU can only be enabled in nightly",
+-                       "WEBGPU_DISABLE_NON_NIGHTLY"_ns);
+-#endif
+ }
+ 
+ void gfxPlatform::InitOMTPConfig() {

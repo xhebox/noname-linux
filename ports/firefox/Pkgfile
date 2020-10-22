@@ -1,20 +1,24 @@
 name="firefox"
-version="80.0.1"
+version="83.0b2"
 desc="Firefox web browser"
-deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
-makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "icu", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
+deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
+makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},
 	{url="stab.h"},
 	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
-	{url="fix-fortify-inline.patch"},
 	{url="fix-seccomp-bpf.patch"},
 	{url="fix-tools.patch"},
 	{url="fix-musl.patch"},
 	{url="mallinfo.patch"},
+	{url="webgpu.patch"},
 	{url="noname-fonts.patch"},
-	{url="no-x11.patch"},
+	{url="no-gnome.patch"},
+	# for 82
+	#{url="no-x11.patch"},
+	# for testing
+	{url="no-x11-1.patch"},
 ]
 
 ext='''
@@ -24,12 +28,15 @@ ext='''
 replace-with = 'ustc'
 
 [source.ustc]
-registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-	cd firefox-$version
-	for i in ../*.patch; do
-		patch -Np0 -i $i
+	cd firefox-${version%b*}
+	for i in $source; do
+		case $i in
+		*.patch) patch -Np0 -i ../$i;;
+		*.diff) patch -Np1 -i ../$i;;
+		esac
 	done
 
 	find dom/plugins -type f | xargs sed -i \
@@ -44,8 +51,6 @@ EOF
 	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/audio_thread_priority/.cargo-checksum.json
 
 	cp "$srcdir"/stab.h toolkit/crashreporter/google-breakpad/src/
-
-	rm -rf third_party/rust/x11
 
 	cat > .mozconfig << END
 ac_add_options --enable-application=browser
@@ -78,7 +83,6 @@ ac_add_options --with-system-jpeg
 ac_add_options --with-system-zlib
 ac_add_options --with-system-libevent
 ac_add_options --with-system-libvpx
-ac_add_options --with-system-icu
 ac_add_options --with-system-png
 ac_add_options --enable-system-pixman
 ac_add_options --enable-system-ffi
@@ -109,10 +113,11 @@ build='''
 
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.14.3 --locked cbindgen
+	cargo install --version 0.15.0 cbindgen
 
-	cd firefox-$version
+	cd firefox-${version%b*}
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
+	export MACH_USE_SYSTEM_PYTHON=/bin/python
 
 	env >> env
 

@@ -4,13 +4,11 @@ deps=["libftdi", "libusb", "libuargp"]
 desc="Universal utility for programming FPGA"
 source=[
 	{url="https://github.com/trabucayre/openFPGALoader/archive/v$version.tar.gz"},
-	{url="argp.patch"},
 ]
 
 ext='''
 	cd openFPGALoader-$version
-	sed -i 's|MODE="0664", GROUP="plugdev"|TAG+="uaccess"|g' 99-openfpgaloader.rules
-	patch -Np1 -i ../argp.patch
+	sed -i 's|MODE="664", GROUP="plugdev"|TAG+="uaccess"|g' 99-openfpgaloader.rules
 '''
 
 build='''
@@ -19,10 +17,9 @@ build='''
 		-DCMAKE_INSTALL_PREFIX= \
 		-DCMAKE_INSTALL_DATADIR=share \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DENABLE_UDEV=True
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
-	install -Dm 644 99-openfpgaloader.rules "$pkgdir"/lib/udev/rules.d/99-openfpgaloader.rules
+	install -Dm 644 99-openfpgaloader.rules "$pkgdir"/lib/udev/rules.d/69-openfpgaloader.rules
 	mv "$pkgdir/bin/openFPGALoader" "$pkgdir/bin/openfpgaloader"
 '''

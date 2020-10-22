@@ -1,4 +1,4 @@
-version="10.0.0"
+version="11.0.0"
 desc="Tool and a library for bi-directional translation between SPIR-V and LLVM IR"
 deps=["spirv-tools", "llvm"]
 makedeps=["spirv-tools", "llvm"]
@@ -8,7 +8,7 @@ source=[
 
 build='''
 	cmake SPIRV-LLVM-Translator-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX=/ \
+		-DCMAKE_INSTALL_PREFIX= \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
 		-DCMAKE_POSITION_INDEPENDENT_CODE=ON \

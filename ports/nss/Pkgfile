@@ -1,4 +1,4 @@
-version="3.56"
+version="3.58"
 _version="`echo $version | tr . _`"
 desc="Mozilla Network Security Services (NSS)"
 makedeps=["nspr", "sqlite", "zlib", "perl", "python3"]
@@ -31,7 +31,7 @@ build='''
 	export USE_64=1
 
 	make -j1 -C coreconf
-	make -j1 all
+	make all
 
 	cd ..
 

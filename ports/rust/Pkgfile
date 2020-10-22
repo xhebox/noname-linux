@@ -1,16 +1,28 @@
 name="rust"
 nostrip=true
-version="1.45.0"
-deps=["libffi", "ncurses", "libxml2", "zlib", "llvm"]
-makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "cmake", "curl", "python3"]
+version="1.47.0"
+_rust_dist_version="1.47.0"
+_cargo_dist_version="1.47.0"
+deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot"]
+makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "cmake", "curl", "python3"]
 source=[
+	{url="https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
 	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
-	{url="noname-target.patch"},
 	{url="musl-dont-use-crt-static.patch"},
 ]
 
 ext='''
+	mkdir -p stage0/bin
+	mkdir -p stage0/lib
+
+	cd rust-${_rust_dist_version}-x86_64-unknown-linux-musl
+	find . -name manifest.in -delete
+	cp -a rust-std-*/* ../stage0/
+	cp -a rustc/* ../stage0/
+	cp -a cargo/* ../stage0/
+	cd -
+
 	cd rustc-$version-src
 	for i in $source; do
 		case $i in
@@ -19,39 +31,51 @@ ext='''
 	done
 
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/libc/.cargo-checksum.json
-
+	rm -rf src/llvm-project
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
+	sed -i '/linker:/ s/rust-lld/wasm-ld/' src/librustc_target/spec/wasm32_base.rs
 
 	cat <<- EOF > config.toml
 [llvm]
 link-shared=true
-[target.$TARGET]
+[target.x86_64-unknown-linux-musl]
 llvm-config="/bin/llvm-config"
 crt-static=false
+[target.wasm32-unknown-unknown]
+linker="lld"
+wasi-root="/lib/wasi-sysroot"
+llvm-config="/bin/llvm-config"
+[target.wasm32-wasi]
+linker="lld"
+wasi-root="/lib/wasi-sysroot"
+llvm-config="/bin/llvm-config"
 [build]
-build="x86_64-pc-linux-musl"
+build="x86_64-unknown-linux-musl"
 tools=["cargo", "rls", "clippy", "miri", "rustfmt", "analysis", "src"]
-host=["$TARGET"]
-target=["$TARGET"]
+host=["x86_64-unknown-linux-musl"]
+target=["wasm32-wasi", "wasm32-unknown-unknown", "x86_64-unknown-linux-musl"]
 docs=false
 extended=true
 sanitizers=false
 profiler=true
 full-bootstrap=false
-cargo="/bin/cargo"
-rustc="/bin/rustc"
+local-rebuild=true
 vendor=true
+cargo="$srcdir/stage0/bin/cargo"
+rustc="$srcdir/stage0/bin/rustc"
 [install]
 prefix="/"
 libdir="lib"
 mandir="share/man"
 [rust]
 musl-root="/"
-channel="stable"
+channel="nightly"
 codegen-units-std=1
 codegen-tests=false
 jemalloc=false
 llvm-libunwind=false
+lld=false
+use-lld=false
 rpath=false
 [dist]
 src-tarball=false
@@ -69,7 +93,9 @@ EOF
 
 build='''
 	cd rustc-$version-src
+	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
+	export PATH="$srcdir/stage0/bin:$PATH"
 	export CARGO_HOME="$srcdir/.cargo"
-	./x.py build -j2 -v
+	./x.py build
 	DESTDIR="$pkgdir" ./x.py install
 '''

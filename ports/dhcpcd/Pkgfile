@@ -1,28 +1,36 @@
-version="7.0.8"
+version="9.2.0"
 desc="RFC2131 compliant DHCP client daemon"
-makedeps=["systemd"]
-deps=["systemd", "dash", "musl"]
+makedeps=["systemd", "openresolv"]
+deps=["systemd", "openresolv", "musl"]
 source=[
 	{url="http://roy.marples.name/downloads/dhcpcd/dhcpcd-$version.tar.xz"},
-	{url="https://git.archlinux.org/svntogit/packages.git/tree/trunk/dhcpcd.service?h=packages/dhcpcd", name="dhcpcd.service"},
-	{url="https://git.archlinux.org/svntogit/packages.git/tree/trunk/dhcpcd_.service?h=packages/dhcpcd", name="dhcpcd_.service"},
+	{url="musl.patch"},
+	{url="dhcpcd.service"},
+	{url="dhcpcd_.service"},
+	{url="dhcpcd.sysusers"},
+	{url="dhcpcd.tmpfiles"},
 ]
 
 build='''
 	cd dhcpcd-${version}
+	patch -Np1 -i ../musl.patch
+
 	./configure \
 		--prefix=/ \
 		--sysconfdir=/etc \
 		--sbindir=/bin \
 		--libexecdir=/lib/dhcpcd \
 		--dbdir=/var/lib/dhcpcd \
-		--rundir=/run 
+		--rundir=/run/dhcpcd \
+		--privsepuser=dhcpcd
 
-	make
+	make -j1
 	make DESTDIR="${pkgdir}" install
 
 	echo noipv4ll >> "${pkgdir}/etc/dhcpcd.conf" # Disable ip4vall
 
 	install -Dm644 ../dhcpcd_.service "${pkgdir}/lib/systemd/system/dhcpcd@.service"
 	install -Dm644 ../dhcpcd.service "${pkgdir}/lib/systemd/system/dhcpcd.service" # FS#31543
+  install -Dm644 ../dhcpcd.sysusers "${pkgdir}/lib/sysusers.d/dhcpcd.conf"
+  install -Dm644 ../dhcpcd.tmpfiles "${pkgdir}/lib/tmpfiles.d/dhcpcd.conf"
 '''

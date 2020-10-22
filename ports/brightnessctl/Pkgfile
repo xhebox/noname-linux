@@ -1,0 +1,11 @@
+version="0.5.1"
+desc="Lightweight brightness control tool"
+makedeps=["systemd"]
+edeps=["systemd"]
+source=[{url="https://github.com/Hummer12007/brightnessctl/archive/${version}.tar.gz"}]
+
+build='''
+	cd brightnessctl-$version
+	make ENABLE_SYSTEMD=1
+	make ENABLE_SYSTEMD=1 DESTDIR="$pkgdir" install
+'''

@@ -1,4 +1,4 @@
-version="2018i"
+version="2020a"
 desc="Sources for Time Zone and Daylight Saving Time Data"
 source= [
 	{url="http://www.iana.org/time-zones/repository/releases/tzdata$version.tar.gz"},

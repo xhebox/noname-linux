@@ -1,6 +1,6 @@
 version="git"
-makedeps=["hidapi", "libftdi-compat", "libusb-compat"]
-deps=["hidapi", "libftdi-compat", "libusb-compat"]
+makedeps=["hidapi", "libftdi", "libusb"]
+deps=["hidapi", "libftdi", "libusbk"]
 desc="Debugging, in-system programming and boundary-scan testing for embedded target devices"
 source=[
 	{protocol="git", url="https://github.com/ntfreak/openocd"},

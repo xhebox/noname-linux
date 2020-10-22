@@ -1,3 +1,28 @@
+--- widget/gtk/DMABufLibWrapper.cpp	2020-10-21 05:25:30.000000000 +0800
++++ widget/gtk/DMABufLibWrapper.cpp	2020-10-21 05:25:30.000000000 +0800
+@@ -12,7 +12,9 @@
+ #include "mozilla/gfx/gfxVars.h"
+ 
+ #include <gdk/gdk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
+--- dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
++++ dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
+@@ -6,8 +6,10 @@
+ 
+ #ifdef MOZ_WIDGET_GTK
+ #  include <gtk/gtk.h>
++#ifdef MOZ_X11
+ #  include <gdk/gdkx.h>
+ #endif
++#endif
+ 
+ #include "ContentChild.h"
+ 
 --- widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
 +++ widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
 @@ -4,4 +4,4 @@
@@ -601,19 +626,6 @@
  #  include <gdk/gdk.h>
 -#  include <gdk/gdkx.h>
  #endif
- 
---- dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
-+++ dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
-@@ -6,8 +6,10 @@
- 
- #ifdef MOZ_WIDGET_GTK
- #  include <gtk/gtk.h>
-+#ifdef MOZ_X11
- #  include <gdk/gdkx.h>
- #endif
-+#endif
- 
- #include "ContentChild.h"
  
 --- widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800
 +++ widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800

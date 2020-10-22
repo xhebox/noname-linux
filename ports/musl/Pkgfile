@@ -9,14 +9,16 @@ deps=[
 
 source=[
 	{ url="https://musl.libc.org/releases/musl-$version.tar.gz" },
-	{ url="https://github.com/AdelieLinux/gcompat/archive/0.4.0.tar.gz" },
+	{ url="https://github.com/AdelieLinux/gcompat/archive/1.0.0.tar.gz" },
 	{ url="emoji.patch" },
 	{ url="tmpl.h" },
 	{ url="__stack_chk_fail_local.c" },
 	{ url="getconf.c" },
 	{ url="iconv.c" },
 	{ url="getent.c" },
-	{ url="ldd" }
+	{ url="ldd" },
+	{ url="convert-hangs-to-crashes.patch" },
+	{ url="handle-aux-at_base.patch" },
 ]
 
 ext='''
@@ -57,6 +59,7 @@ build='''
 	make DESTDIR="$pkgdir" install
 
 	cd ../gcompat-*
+	sed -i 's/__count/_count/g' libgcompat/pthread.c
 	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-x86_64.so.1 LOADER_NAME=ld-linux-x86-64.so.2 install
 	cd ../musl-$version
 

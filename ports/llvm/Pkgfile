@@ -1,4 +1,4 @@
-version="10.0.1"
+version="11.0.0"
 desc="LLVM compiler and its backend"
 makedeps=["flex", "bison", "libffi", "libxml2", "libedit", "ncurses", "python3"]
 deps=["libffi", "libxml2", "libedit", "ncurses"]
@@ -39,6 +39,7 @@ build='''
 	export CXX=clang++
 
 	cmake llvm -Bbuild \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX= \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \

@@ -1,0 +1,13 @@
+--- dhcpcd-9.2.0/src/if-linux.c	2020-09-06 22:27:28.000000000 +0800
++++ dhcpcd-9.2.0/src/if-linux.c	2020-09-06 22:27:28.000000000 +0800
+@@ -57,7 +57,9 @@
+ #if defined(__GLIBC__)
+ #include <netinet/if_ether.h>
+ #else
+-#include <linux/if_arp.h>
++#define ARPHRD_ETHER  1
++#define ARPHRD_IEEE802  6
++#define ARPHRD_IEEE80211 801
+ #endif
+ 
+ #include <errno.h>
