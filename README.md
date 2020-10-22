@@ -4,16 +4,12 @@
 
 This **experimental(in the meaning of adding/removeing packages constantly)** distro is a personal project of mine and is designed to be lightweight and fast.
 
-You can join #nonamelinux in freenode to ask for help, if someone is there. Or leave me a mail: xw897002528@gmail.com.
+Leave me a mail if you have any questions: xw897002528@gmail.com.
 
 ## Differences from other distros
 
 1. using native intl instead of the one in gettext
 2. emoji wcwidth patch for musl
-
-## Rootfs
-
-Download the [noname.tar.gz](https://mega.nz/#F!lqpmnKxD!rWEfVB8ckIsscKFnSiy6bw)
 
 ## Important Information
 
