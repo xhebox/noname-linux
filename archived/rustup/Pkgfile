@@ -1,0 +1,11 @@
+version="1.22.1"
+deps=["rust", "curl", "xz"]
+makedeps=["rust"]
+desc="The Rust toolchain installer"
+source=[{url="https://github.com/rust-lang/rustup.rs/archive/${version}.tar.gz"}]
+
+build='''
+	cd rustup-$version
+	cargo build --release --features no-self-update --bin rustup-init
+	install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"
+'''

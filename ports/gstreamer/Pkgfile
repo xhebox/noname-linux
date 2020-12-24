@@ -1,0 +1,20 @@
+version="1.18.1"
+desc="Multimedia graph framework - core"
+url="https://gstreamer.freedesktop.org/"
+deps=["libxml2", "glib", "libcap", "elfutils", "python3"]
+makedeps=["libxml2", "glib", "libcap", "elfutils", "python3"]
+source=[{url="https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-$version.tar.xz"}]
+
+build='''
+	noname-meson gstreamer-$version build \
+		-D doc=disabled \
+		-D libunwind=disabled \
+		-D gtk_doc=disabled \
+		-D introspection=disabled \
+		-D bash-completion=disabled \
+		-D ptp-helper-permissions=capabilities \
+		-D dbghelp=disabled \
+		-D package-name="GStreamer (Noname Linux)"
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

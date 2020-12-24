@@ -1,0 +1,99 @@
+diff --git a/include/pthread.h b/include/pthread.h
+index 0492f26a..89fd9ff7 100644
+--- a/include/pthread.h
++++ b/include/pthread.h
+@@ -221,6 +221,7 @@ int pthread_getaffinity_np(pthread_t, size_t, struct cpu_set_t *);
+ int pthread_setaffinity_np(pthread_t, size_t, const struct cpu_set_t *);
+ int pthread_getattr_np(pthread_t, pthread_attr_t *);
+ int pthread_setname_np(pthread_t, const char *);
++int pthread_getname_np(pthread_t, char *, size_t);
+ int pthread_getattr_default_np(pthread_attr_t *);
+ int pthread_setattr_default_np(const pthread_attr_t *);
+ int pthread_tryjoin_np(pthread_t, void **);
+diff --git a/src/internal/proctidcomm.c b/src/internal/proctidcomm.c
+new file mode 100644
+index 00000000..91e81e16
+--- /dev/null
++++ b/src/internal/proctidcomm.c
+@@ -0,0 +1,8 @@
++#include <stdio.h>
++
++#include "pthread_impl.h"
++
++void __proctidcomm(char *buf, int tid)
++{
++	snprintf(buf, THREAD_NAME_PATH_SIZE, "/proc/self/task/%d/comm", tid);
++}
+diff --git a/src/internal/pthread_impl.h b/src/internal/pthread_impl.h
+index de2b9d8b..5cb3b74a 100644
+--- a/src/internal/pthread_impl.h
++++ b/src/internal/pthread_impl.h
+@@ -194,6 +194,9 @@ extern hidden volatile int __abort_lock[1];
+ extern hidden unsigned __default_stacksize;
+ extern hidden unsigned __default_guardsize;
+ 
++#define THREAD_NAME_PATH_SIZE (sizeof "/proc/self/task//comm" + 3*sizeof(int))
++hidden void __proctidcomm(char *, int);
++
+ #define DEFAULT_STACK_SIZE 131072
+ #define DEFAULT_GUARD_SIZE 8192
+ 
+diff --git a/src/thread/pthread_getname_np.c b/src/thread/pthread_getname_np.c
+new file mode 100644
+index 00000000..60e6fd4e
+--- /dev/null
++++ b/src/thread/pthread_getname_np.c
+@@ -0,0 +1,26 @@
++#define _GNU_SOURCE
++#include <fcntl.h>
++#include <unistd.h>
++#include <sys/prctl.h>
++
++#include "pthread_impl.h"
++
++int pthread_getname_np(pthread_t thread, char *name, size_t len)
++{
++	int fd, cs, status = 0;
++	char f[THREAD_NAME_PATH_SIZE];
++
++	if (len < 16) return ERANGE;
++
++	if (thread == pthread_self())
++		return prctl(PR_GET_NAME, (unsigned long)name, 0UL, 0UL, 0UL) ? errno : 0;
++
++	__proctidcomm(f, thread->tid);
++	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &cs);
++	if ((fd = open(f, O_RDONLY|O_CLOEXEC)) < 0 || (len = read(fd, name, len)) < 0) status = errno;
++	if (fd >= 0) close(fd);
++	pthread_setcancelstate(cs, 0);
++	/* remove trailing new line */
++	name[len-1] = 0;
++	return status;
++}
+diff --git a/src/thread/pthread_setname_np.c b/src/thread/pthread_setname_np.c
+index 82d35e17..6f53f408 100644
+--- a/src/thread/pthread_setname_np.c
++++ b/src/thread/pthread_setname_np.c
+@@ -9,7 +9,7 @@
+ int pthread_setname_np(pthread_t thread, const char *name)
+ {
+ 	int fd, cs, status = 0;
+-	char f[sizeof "/proc/self/task//comm" + 3*sizeof(int)];
++	char f[THREAD_NAME_PATH_SIZE];
+ 	size_t len;
+ 
+ 	if ((len = strnlen(name, 16)) > 15) return ERANGE;
+@@ -17,9 +17,9 @@ int pthread_setname_np(pthread_t thread, const char *name)
+ 	if (thread == pthread_self())
+ 		return prctl(PR_SET_NAME, (unsigned long)name, 0UL, 0UL, 0UL) ? errno : 0;
+ 
+-	snprintf(f, sizeof f, "/proc/self/task/%d/comm", thread->tid);
++	__proctidcomm(f, thread->tid);
+ 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &cs);
+-	if ((fd = open(f, O_WRONLY)) < 0 || write(fd, name, len) < 0) status = errno;
++	if ((fd = open(f, O_WRONLY|O_CLOEXEC)) < 0 || write(fd, name, len) < 0) status = errno;
+ 	if (fd >= 0) close(fd);
+ 	pthread_setcancelstate(cs, 0);
+ 	return status;
+-- 
+2.29.2

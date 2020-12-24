@@ -1,8 +1,14 @@
-version="7.7p1"
+version="8.4p1"
 makedeps=["zlib", "libressl"]
 deps=["zlib", "libressl"]
 desc="Free version of the SSH connectivity tools"
-source=[{url="https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz"}]
+source=[
+	{url="https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz"},
+	{url="sshd.conf"},
+	{url="sshd.pam"},
+	{url="sshd.service"},
+	{url="sshdgenkeys.service"},
+]
 
 build='''
 	cd openssh-$version
@@ -23,4 +29,8 @@ build='''
 	install -Dm755 contrib/findssl.sh "${pkgdir}"/bin/findssl.sh
 	install -Dm755 contrib/ssh-copy-id "${pkgdir}"/bin/ssh-copy-id
 	install -Dm644 contrib/ssh-copy-id.1 "${pkgdir}"/share/man/man1/ssh-copy-id.1
+	install -Dm644 ../sshdgenkeys.service "${pkgdir}"/lib/systemd/system/sshdgenkeys.service
+	install -Dm644 ../sshd.service "${pkgdir}"/lib/systemd/system/sshd.service
+	install -Dm644 ../sshd.conf "${pkgdir}"/lib/tmpfiles.d/sshd.conf
+	install -Dm644 ../sshd.pam "${pkgdir}"/etc/pam.d/sshd
 '''

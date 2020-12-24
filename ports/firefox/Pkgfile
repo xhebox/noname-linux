@@ -1,5 +1,5 @@
 name="firefox"
-version="83.0b2"
+version="84.0"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
@@ -15,10 +15,7 @@ source=[
 	{url="webgpu.patch"},
 	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
-	# for 82
-	#{url="no-x11.patch"},
-	# for testing
-	{url="no-x11-1.patch"},
+	{url="no-x11.patch"},
 ]
 
 ext='''
@@ -105,11 +102,11 @@ END
 '''
 
 build='''
-	cd autoconf-2.13
-	./configure --prefix=$srcdir/.a213 --program-suffix=-2.13
-	make
-	make install
-	cd ..
+#cd autoconf-2.13
+#	./configure --prefix=$srcdir/.a213 --program-suffix=-2.13
+#make
+#make install
+#cd ..
 
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"

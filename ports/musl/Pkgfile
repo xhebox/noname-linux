@@ -19,6 +19,7 @@ source=[
 	{ url="ldd" },
 	{ url="convert-hangs-to-crashes.patch" },
 	{ url="handle-aux-at_base.patch" },
+	{ url="pthread_getname.patch" },
 ]
 
 ext='''

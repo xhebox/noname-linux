@@ -1,10 +1,8 @@
 # /etc/profile
 
 umask 022
-PATH="/bin:/sbin:~/.local/bin"
-export PATH
-MANPATH=/share/man
-export MANPATH
+
+export PATH="/bin:/sbin:~/.local/bin"
 
 if test -d /etc/profile.d/; then
 	for profile in /etc/profile.d/*.sh; do

@@ -1,55 +1,35 @@
+--- widget/gtk/DMABufLibWrapper.cpp	2020-10-21 05:25:30.000000000 +0800
++++ widget/gtk/DMABufLibWrapper.cpp	2020-10-21 05:25:30.000000000 +0800
+@@ -12,7 +12,9 @@
+ #include "mozilla/gfx/gfxVars.h"
+ 
+ #include <gdk/gdk.h>
++#ifdef MOZ_X11
+ #include <gdk/gdkx.h>
++#endif
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
 --- widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
 +++ widget/gtk/mozgtk/moz.build	2020-01-18 05:35:31.000000000 +0800
 @@ -4,4 +4,4 @@
  # License, v. 2.0. If a copy of the MPL was not distributed with this
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
--DIRS += ['stub', 'gtk2', 'gtk3']
-+DIRS += ['stub', 'gtk3']
+-DIRS += ["stub", "gtk2", "gtk3"]
++DIRS += ["stub", "gtk3"]
 
---- toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
-+++ toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
-@@ -265,9 +265,6 @@
- def toolkit_gtk(toolkit):
-     return toolkit == 'gtk'
- 
--set_config('MOZ_X11', True, when=toolkit_gtk)
--set_define('MOZ_X11', True, when=toolkit_gtk)
--add_old_configure_assignment('MOZ_X11', True, when=toolkit_gtk)
- 
- # Wayland support
- # ==============================================================
---- old-configure.in	2020-01-18 05:34:42.000000000 +0800
-+++ old-configure.in	2020-01-18 05:34:42.000000000 +0800
-@@ -1773,16 +1773,7 @@
-     AC_DEFINE_UNQUOTED(GDK_VERSION_MAX_ALLOWED,$GDK_VERSION_MAX_ALLOWED)
-     GLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_32
-   fi
--  if test "$MOZ_ENABLE_GTK"; then
--    if test "$MOZ_X11"; then
--      GDK_PACKAGES=gdk-x11-2.0
--    fi
--    AC_DEFINE_UNQUOTED(GLIB_VERSION_MIN_REQUIRED,$GLIB_VERSION_MIN_REQUIRED)
--    AC_DEFINE_UNQUOTED(GLIB_VERSION_MAX_ALLOWED,$GLIB_VERSION_MAX_ALLOWED)
--
--    PKG_CHECK_MODULES(MOZ_GTK2, gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 $GDK_PACKAGES)
--    MOZ_GTK2_CFLAGS="-I${_topsrcdir}/widget/gtk/compat $MOZ_GTK2_CFLAGS"
--  fi
- fi # COMPILE_ENVIRONMENT
-+PS_SURFACE_FEATURE="#define CAIRO_HAS_PS_SURFACE 1"
- 
- AC_SUBST(MOZ_FS_LAYOUT)
 --- dom/moz.build	2020-01-18 05:34:16.000000000 +0800
 +++ dom/moz.build	2020-01-18 05:34:16.000000000 +0800
 @@ -118,7 +118,7 @@
-     'imptests',
+     "imptests",
  ]
  
--if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('gtk', 'cocoa', 'windows'):
-+if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('cocoa', 'windows'):
-     TEST_DIRS += ['plugins/test']
+-if CONFIG["MOZ_WIDGET_TOOLKIT"] in ("gtk", "cocoa", "windows"):
++if CONFIG["MOZ_WIDGET_TOOLKIT"] in ("cocoa", "windows"):
+     TEST_DIRS += ["plugins/test"]
  
- SPHINX_TREES['/dom'] = 'docs'
+ SPHINX_TREES["/dom"] = "docs"
 --- media/ffvpx/config_unix64.h	2020-01-18 05:34:42.000000000 +0800
 +++ media/ffvpx/config_unix64.h	2020-01-18 05:34:42.000000000 +0800
 @@ -213,7 +213,9 @@
@@ -73,18 +53,6 @@
  #endif
  
  #ifdef XP_WIN
---- gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
-+++ gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
-@@ -15,6 +15,8 @@
- elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
-     if CONFIG['MOZ_EGL_XRENDER_COMPOSITE']:
-         gl_provider = 'EGL'
-+    elif CONFIG['MOZ_WAYLAND']:
-+        gl_provider = 'EGL'
-     else:
-         gl_provider = 'EGL'
- elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'android':
- 
 --- gfx/thebes/gfxPlatformGtk.cpp	2020-01-18 05:34:25.000000000 +0800
 +++ gfx/thebes/gfxPlatformGtk.cpp	2020-01-18 05:34:25.000000000 +0800
 @@ -120,9 +120,11 @@
@@ -404,27 +372,6 @@
  
  NS_IMETHODIMP
  nsNativeAppSupportUnix::Start(bool* aRetVal) {
---- toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
-+++ toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
-@@ -13,12 +13,15 @@
- 
- if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
-     SOURCES += [
--        'nsGTKRemoteServer.cpp',
-         'nsUnixRemoteServer.cpp',
--        'nsXRemoteClient.cpp',
--        'nsXRemoteServer.cpp',
-         'RemoteUtils.cpp',
-     ]
-+    if CONFIG['MOZ_X11']:
-+        SOURCES += [
-+            'nsGTKRemoteServer.cpp',
-+            'nsXRemoteClient.cpp',
-+            'nsXRemoteServer.cpp',
-+        ]
-     if CONFIG['MOZ_ENABLE_DBUS']:
-         SOURCES += [
-             'nsDBusRemoteClient.cpp',
 --- widget/CompositorWidget.h	2020-01-18 05:35:31.000000000 +0800
 +++ widget/CompositorWidget.h	2020-01-18 05:35:31.000000000 +0800
 @@ -60,7 +60,7 @@
@@ -525,34 +472,34 @@
 --- widget/moz.build.orig	2020-02-04 00:53:25.385598257 +0800
 +++ widget/moz.build	2020-02-04 23:31:34.572990195 +0800
 @@ -252,13 +252,17 @@
- EXPORTS.ipc = ['nsGUIEventIPC.h']
+ EXPORTS.ipc = ["nsGUIEventIPC.h"]
  
- if CONFIG['MOZ_X11']:
--    DIRS += ['x11']
+ if CONFIG["MOZ_X11"]:
+-    DIRS += ["x11"]
      SOURCES += [
--        'GfxInfoX11.cpp',
-         'nsShmImage.cpp',
-         'WindowSurfaceX11SHM.cpp',
+-        "GfxInfoX11.cpp",
+         "nsShmImage.cpp",
+         "WindowSurfaceX11SHM.cpp",
      ]
  
-+if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
-+    DIRS += ['x11'] # for keysym2ucs
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
++    DIRS += ["x11"] # for keysym2ucs
 +    SOURCES += [
-+        'GfxInfoX11.cpp',
++        "GfxInfoX11.cpp",
 +    ]
 +
- if toolkit == 'windows':
+ if toolkit == "windows":
      EXPORTS += [
-         'PluginWidgetProxy.h',
+         "PluginWidgetProxy.h",
 @@ -311,7 +311,7 @@
-         'windows/PCompositorWidget.ipdl',
-         'windows/PlatformWidgetTypes.ipdlh',
+         "windows/PCompositorWidget.ipdl",
+         "windows/PlatformWidgetTypes.ipdlh",
      ]
--elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk' and CONFIG['MOZ_X11']:
-+elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
+-elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk" and CONFIG["MOZ_X11"]:
++elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
      IPDL_SOURCES = [
-         'gtk/PCompositorWidget.ipdl',
-         'gtk/PlatformWidgetTypes.ipdlh',
+         "gtk/PCompositorWidget.ipdl",
+         "gtk/PlatformWidgetTypes.ipdlh",
 --- security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-02-06 11:31:38.843267559 +0800
 +++ security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp	2020-02-06 11:31:38.843267559 +0800
 @@ -37,6 +37,9 @@
@@ -601,19 +548,6 @@
  #  include <gdk/gdk.h>
 -#  include <gdk/gdkx.h>
  #endif
- 
---- dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
-+++ dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
-@@ -6,8 +6,10 @@
- 
- #ifdef MOZ_WIDGET_GTK
- #  include <gtk/gtk.h>
-+#ifdef MOZ_X11
- #  include <gdk/gdkx.h>
- #endif
-+#endif
- 
- #include "ContentChild.h"
  
 --- widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800
 +++ widget/ScreenManager.cpp	2020-01-18 05:35:31.000000000 +0800
@@ -666,7 +600,7 @@
 +#ifdef MOZ_WAYLAND
 +  mIsWayland = true;
 +  if (mIsWayland) {
-+    mIsWaylandDRM = GetDMABufDevice()->IsDMABufEnabled();
++    mIsWaylandDRM = GetDMABufDevice()->IsDMABufVAAPIEnabled() || GetDMABufDevice()->IsDMABufWebGLEnabled() || GetDMABufDevice()->IsDMABufTexturesEnabled();
 +  }
 +#endif
 +
@@ -1090,51 +1024,51 @@
 --- widget/gtk/moz.build	2020-09-05 12:08:00.285049341 +0800
 +++ widget/gtk/moz.build	2020-09-05 12:08:00.285049341 +0800
 @@ -59,7 +59,7 @@
-     'WaylandVsyncSource.cpp', # conflicts with X11 headers
+     "WaylandVsyncSource.cpp", # conflicts with X11 headers
  ]
  
--if CONFIG['MOZ_X11']:
-+if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
      UNIFIED_SOURCES += [
-         'CompositorWidgetChild.cpp',
-         'CompositorWidgetParent.cpp',
+         "CompositorWidgetChild.cpp",
+         "CompositorWidgetParent.cpp",
 @@ -83,19 +83,22 @@
-         'nsPSPrinters.cpp',
+         "nsPSPrinters.cpp",
      ]
  
 +UNIFIED_SOURCES += [
-+    'nsClipboard.cpp',
-+    'nsDragService.cpp',
-+    'WindowSurfaceProvider.cpp',
++    "nsClipboard.cpp",
++    "nsDragService.cpp",
++    "WindowSurfaceProvider.cpp",
 +]
 +EXPORTS.mozilla.widget += [
-+    'WindowSurfaceProvider.h',
++    "WindowSurfaceProvider.h",
 +]
 +
- if CONFIG['MOZ_X11']:
+ if CONFIG["MOZ_X11"]:
      UNIFIED_SOURCES += [
--        'nsClipboard.cpp',
-         'nsClipboardX11.cpp',
--        'nsDragService.cpp',
--        'WindowSurfaceProvider.cpp',
-         'WindowSurfaceX11.cpp',
-         'WindowSurfaceX11Image.cpp',
-         'WindowSurfaceXRender.cpp',
+-        "nsClipboard.cpp",
+         "nsClipboardX11.cpp",
+-        "nsDragService.cpp",
+-        "WindowSurfaceProvider.cpp",
+         "WindowSurfaceX11.cpp",
+         "WindowSurfaceX11Image.cpp",
+         "WindowSurfaceXRender.cpp",
      ]
 -    EXPORTS.mozilla.widget += [
--        'WindowSurfaceProvider.h',
+-        "WindowSurfaceProvider.h",
 -    ]
  
- if CONFIG['MOZ_WAYLAND']:
+ if CONFIG["MOZ_WAYLAND"]:
      UNIFIED_SOURCES += [
 @@ -142,7 +145,7 @@
-     '/widget/headless',
+     "/widget/headless",
  ]
  
--if CONFIG['MOZ_X11']:
-+if CONFIG['MOZ_X11'] or CONFIG['MOZ_WAYLAND']:
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
      LOCAL_INCLUDES += [
-         '/widget/x11',
+         "/widget/x11",
      ]
 --- gfx/layers/AnimationHelper.h	2020-08-31 22:04:09.000000000 +0800
 +++ gfx/layers/AnimationHelper.h	2020-08-31 22:04:09.000000000 +0800
@@ -1720,3 +1654,134 @@
  }
  
  #ifdef MOZ_WAYLAND
+--- dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
++++ dom/ipc/ContentChild.cpp	2020-01-18 05:34:15.000000000 +0800
+@@ -5,7 +5,9 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #ifdef MOZ_WIDGET_GTK
++#ifdef MOZ_X11
+ #  include <gdk/gdkx.h>
++#endif
+ #  include <gtk/gtk.h>
+ #endif
+ 
+--- toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
++++ toolkit/components/remote/moz.build	2020-02-04 17:22:38.467180939 +0800
+@@ -13,12 +13,15 @@
+ 
+ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     SOURCES += [
+-        "nsGTKRemoteServer.cpp",
+         "nsUnixRemoteServer.cpp",
+-        "nsXRemoteClient.cpp",
+-        "nsXRemoteServer.cpp",
+         "RemoteUtils.cpp",
+     ]
++    if CONFIG["MOZ_X11"]:
++        SOURCES += [
++            "nsGTKRemoteServer.cpp",
++            "nsXRemoteClient.cpp",
++            "nsXRemoteServer.cpp",
++        ]
+     if CONFIG["MOZ_ENABLE_DBUS"]:
+         SOURCES += [
+             "nsDBusRemoteClient.cpp",
+--- toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
++++ toolkit/moz.configure	2020-01-18 05:35:24.000000000 +0800
+@@ -314,10 +314,6 @@
+     return toolkit == "gtk"
+ 
+ 
+-set_config("MOZ_X11", True, when=toolkit_gtk)
+-set_define("MOZ_X11", True, when=toolkit_gtk)
+-add_old_configure_assignment("MOZ_X11", True, when=toolkit_gtk)
+-
+ # Wayland support
+ # ==============================================================
+ wayland_headers = pkg_check_modules(
+--- gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
++++ gfx/gl/moz.build	2020-01-18 05:34:21.000000000 +0800
+@@ -15,6 +15,8 @@
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     if CONFIG["MOZ_EGL_XRENDER_COMPOSITE"]:
+         gl_provider = "EGL"
++    elif CONFIG["MOZ_WAYLAND"]:
++        gl_provider = "EGL"
+     else:
+         gl_provider = "GLX"
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "android":
+--- gfx/cairo/cairo/src/moz.build	2020-11-18 05:25:18.000000000 +0800
++++ gfx/cairo/cairo/src/moz.build	2020-11-18 05:25:18.000000000 +0800
+@@ -70,7 +70,7 @@
+     SOURCES += [
+         'cairo-beos-surface.cpp',
+     ]
+-elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk':
++elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk' and CONFIG['MOZ_X11']:
+     EXPORTS.cairo += [
+         'cairo-ps.h',
+     ]
+--- gfx/thebes/moz.build	2020-11-18 05:25:18.000000000 +0800
++++ gfx/thebes/moz.build	2020-11-18 05:25:18.000000000 +0800
+@@ -119,7 +119,6 @@
+     ]
+     EXPORTS.mozilla.gfx += [
+         "PrintTargetPDF.h",
+-        "PrintTargetPS.h",
+     ]
+     SOURCES += [
+         "gfxFcPlatformFontList.cpp",
+@@ -128,17 +127,18 @@
+         "gfxGdkNativeRenderer.cpp",
+         "gfxPlatformGtk.cpp",
+         "PrintTargetPDF.cpp",
+-        "PrintTargetPS.cpp",
+     ]
+ 
+     if CONFIG["MOZ_X11"]:
+         EXPORTS += [
+             "gfxXlibNativeRenderer.h",
+             "gfxXlibSurface.h",
++            "PrintTargetPS.h",
+         ]
+         SOURCES += [
+             "gfxXlibNativeRenderer.cpp",
+             "gfxXlibSurface.cpp",
++            "PrintTargetPS.cpp",
+         ]
+ 
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "windows":
+--- widget/gtk/nsDeviceContextSpecG.cpp	2020-11-18 05:26:41.000000000 +0800
++++ widget/gtk/nsDeviceContextSpecG.cpp	2020-11-18 05:26:41.000000000 +0800
+@@ -6,7 +6,6 @@
+ #include "nsDeviceContextSpecG.h"
+ 
+ #include "mozilla/gfx/PrintTargetPDF.h"
+-#include "mozilla/gfx/PrintTargetPS.h"
+ #include "mozilla/Logging.h"
+ #include "mozilla/Services.h"
+ 
+@@ -44,7 +43,6 @@
+ using mozilla::gfx::IntSize;
+ using mozilla::gfx::PrintTarget;
+ using mozilla::gfx::PrintTargetPDF;
+-using mozilla::gfx::PrintTargetPS;
+ 
+ nsDeviceContextSpecGTK::nsDeviceContextSpecGTK()
+     : mGtkPrintSettings(nullptr), mGtkPageSetup(nullptr) {}
+@@ -117,13 +115,7 @@
+     return PrintTargetPDF::CreateOrNull(stream, size);
+   }
+ 
+-  int32_t orientation;
+-  mPrintSettings->GetOrientation(&orientation);
+-  return PrintTargetPS::CreateOrNull(
+-      stream, size,
+-      orientation == nsIPrintSettings::kPortraitOrientation
+-          ? PrintTargetPS::PORTRAIT
+-          : PrintTargetPS::LANDSCAPE);
++  return nullptr;
+ }
+ 
+ #define DECLARE_KNOWN_MONOCHROME_SETTING(key_, value_) {"cups-" key_, value_},

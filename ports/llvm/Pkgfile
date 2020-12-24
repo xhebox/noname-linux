@@ -1,7 +1,7 @@
 version="11.0.0"
 desc="LLVM compiler and its backend"
-makedeps=["flex", "bison", "libffi", "libxml2", "libedit", "ncurses", "python3"]
-deps=["libffi", "libxml2", "libedit", "ncurses"]
+makedeps=["flex", "bison", "libffi", "libxml2", "libunwind", "libedit", "ncurses", "python3"]
+deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind"]
 source=[
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.tar.xz"},
 	{url="llvm-001-musl.patch"},
@@ -57,11 +57,12 @@ build='''
 		-DLLVM_ENABLE_ZLIB=YES \
 		-DLLVM_APPEND_VC_REV=NO \
 		-DLLVM_ENABLE_LLD=YES \
-		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;libunwind;lldb;compiler-rt;lld;polly;openmp;pstl" \
+		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lldb;compiler-rt;lld;polly;openmp;pstl" \
 		-DLIBCXXABI_LIBCXX_INCLUDES=$PWD/libcxx/include \
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
-		-DLIBCXXABI_USE_LLVM_UNWINDER=1 \
 		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET"
+#-DLIBCXX_USE_COMPILER_RT=YES \
+#-DLIBCXXABI_USE_COMPILER_RT=YES \
 
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

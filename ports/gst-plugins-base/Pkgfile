@@ -1,0 +1,24 @@
+version="1.18.1"
+desc="Multimedia graph framework - base"
+url="https://gstreamer.freedesktop.org/"
+deps=["gstreamer", "alsa-lib", "gtk3", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "sdl2"]
+makedeps=["gstreamer", "alsa-lib", "gtk3", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "sdl2"]
+source=[{url="https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-$version.tar.xz"}]
+
+build='''
+	noname-meson gst-plugins-base-$version build \
+		-D doc=disabled \
+		-D libunwind=disabled \
+		-D gtk_doc=disabled \
+		-D gl-graphene=disabled \
+		-D tremor=disabled \
+		-D cdparanoia=disabled \
+		-D x11=disabled \
+		-D xshm=disabled \
+		-D introspection=disabled \
+		-D libvisual=disabled \
+		-D bash-completion=disabled \
+		-D package-name="GStreamer Base (Noname Linux)"
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''
