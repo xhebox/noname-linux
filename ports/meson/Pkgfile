@@ -1,7 +1,7 @@
 version="0.54.2"
 desc='High productivity build system'
-makedeps=["python3-setuptools", "ninja"]
-deps=["python3-setuptools", "ninja"]
+makedeps=["python3", "ninja"]
+deps=["python3", "ninja"]
 source=[{url="https://github.com/mesonbuild/meson/releases/download/${version}/meson-${version}.tar.gz"}]
 
 build='''

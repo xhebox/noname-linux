@@ -1,0 +1,11 @@
+version="0.1831"
+desc='Meta-build system that generates build files for Ninja'
+makedeps=["python3", "llvm", "ninja"]
+source=[{url="https://gn.googlesource.com/gn", protocol="git", commit="e002e68a48d1c82648eadde2f6aafa20d08c36f2"}]
+
+build='''
+	cd gn
+	python ./build/gen.py
+	ninja -C out gn
+	install -D out/gn "$pkgdir/bin/gn"
+'''

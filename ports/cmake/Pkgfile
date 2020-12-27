@@ -1,4 +1,4 @@
-version="3.13.2"
+version="3.19.2"
 makedeps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 deps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 desc="CMake is a cross-platform open-source make system"

@@ -1,0 +1,20 @@
+--- media/base/subsample_entry.h
++++ media/base/subsample_entry.h
+@@ -9,6 +9,7 @@
+ #include <stdint.h>
+ 
+ #include <vector>
++#include <cstddef>
+ 
+ #include "media/base/media_export.h"
+
+--- chrome/browser/search/background/ntp_backgrounds.h.orig	2020-08-23 14:35:40.788447650 +0200
++++ chrome/browser/search/background/ntp_backgrounds.h	2020-08-23 14:36:16.414865836 +0200
+@@ -6,6 +6,7 @@
+ #define CHROME_BROWSER_SEARCH_BACKGROUND_NTP_BACKGROUNDS_H_
+ 
+ #include <array>
++#include <cstddef>
+ 
+ class GURL;
+ 

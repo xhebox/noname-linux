@@ -18,6 +18,7 @@ source=[
 	{ url="getent.c" },
 	{ url="ldd" },
 	{ url="convert-hangs-to-crashes.patch" },
+	{ url="cve.patch" },
 	{ url="handle-aux-at_base.patch" },
 	{ url="pthread_getname.patch" },
 ]
@@ -51,6 +52,7 @@ build='''
 		--build=$TARGET \
 		--prefix=	\
 		--libdir=/lib \
+		--libexecdir=/lib \
 		--syslibdir=/lib \
 		--sysconfdir=/etc \
 		--mandir=/share/man \
@@ -61,7 +63,7 @@ build='''
 
 	cd ../gcompat-*
 	sed -i 's/__count/_count/g' libgcompat/pthread.c
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-x86_64.so.1 LOADER_NAME=ld-linux-x86-64.so.2 install
+	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-x86_64.so.1 LOADER_NAME=ld-linux-x86-64.so.2 LIBGCOMPAT_PATH=/lib/libgcompat.so.0 LOADER_PATH=/lib/ld-linux-x86-64.so.2 install
 	cd ../musl-$version
 
 	make clean
@@ -71,17 +73,13 @@ build='''
 		--build=$TARGET32 \
 		--prefix= \
 		--libdir=/lib32 \
+		--libexecdir=/lib32 \
 		--syslibdir=/lib \
 		--sysconfdir=/etc \
 		--mandir=/share/man \
 		--localstatedir=/var 
 	make
 	make DESTDIR="$pkgdir"/32 install
-
-	cd ../gcompat-*
-	make clean
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-i386.so.1 LOADER_NAME=ld-linux.so.2 install
-	cd ../musl-$version
 
 	mkdir -p "$pkgdir"/include/$TARGET32
 	mkdir -p "$pkgdir"/include/$TARGET
@@ -107,6 +105,10 @@ build='''
 	mkdir -p "$pkgdir"/bin "$pkgdir"/etc "$pkgdir"/lib "$pkgdir"/lib32
 	cp libssp_nonshared.a "$pkgdir"/lib
 	cp libssp_nonshared32.a "$pkgdir"/lib32/libssp_nonshared.a
+
+	cd ../gcompat-*
+	make clean
+	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-i386.so.1 LOADER_NAME=ld-linux.so.2 LIBGCOMPAT_PATH=/lib32/libgcompat.so.0 LOADER_PATH=/lib/ld-linux.so.2 install
 
 	cat > "$pkgdir"/etc/ld-musl-"$ARCH".path << "EOF"
 /lib

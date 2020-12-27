@@ -1,7 +1,7 @@
 version="2.6.1"
 desc="An OpenType text shaping engine"
 deps=["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2"]
-makedeps=["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2", "xorgproto"]
+makedeps=["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2"]
 source=[{url="http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$version.tar.xz"}]
 
 build='''

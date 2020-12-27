@@ -41,6 +41,7 @@ build='''
 	cmake llvm -Bbuild \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBEXECDIR=/lib \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \
 		-DLLVM_BUILD_TESTS=OFF \

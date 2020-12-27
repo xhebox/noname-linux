@@ -1,0 +1,28 @@
+version="1.1.119"
+desc="Vulkan header files"
+deps=["vulkan-icd-loader", "wayland"]
+makedeps=["cmake", "wayland-protocols", "vulkan-headers", "glslang", "spirv-tools"]
+source=[
+	{url="https://github.com/KhronosGroup/Vulkan-Tools/archive/v${version}.tar.gz"},
+	{url="cmake.patch"},
+]
+
+build='''
+	cd Vulkan-Tools-$version
+	patch -Np0 -i ../cmake.patch
+	cd ..
+
+	cmake Vulkan-Tools-$version -Bbuild -DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_SKIP_RPATH=True \
+		-DBUILD_WSI_WAYLAND_SUPPORT=On \
+		-DBUILD_WSI_XCB_SUPPORT=Off \
+    -DBUILD_WSI_XLIB_SUPPORT=Off \
+    -DCUBE_WSI_SELECTION="WAYLAND" \
+		-DBUILD_CUBE=ON \
+		-DBUILD_VULKANINFO=ON \
+		-DBUILD_ICD=OFF \
+		-DGLSLANG_INSTALL_DIR=/ \
+		-DCMAKE_BUILD_TYPE=Release
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --build build --target install
+'''
