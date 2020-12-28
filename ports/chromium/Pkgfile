@@ -19,6 +19,7 @@ source=[
 	{url="no-mallinfo.patch"},
 	{url="resolver.patch"},
 	{url="swiftshader.patch"},
+	{url="ozone.patch"},
 
 	{url="chromium-89-patchset-3.tar.xz"},
 	{url="chromium.sh"},
@@ -91,7 +92,7 @@ build='''
 	
 	sed -i 's/use_atk = .*/use_atk = false/g' build/config/ui.gni
 	gn gen out/Release --args='use_lld=true use_gold=false symbol_level=0 enable_js_type_check=false is_clang=true clang_use_chrome_plugins=false is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true ffmpeg_branding="Chrome" proprietary_codecs=true link_pulseaudio=true use_cups=false use_gnome_keyring=false use_kerberos=false use_pulseaudio=true icu_use_data_file=false use_sysroot=false use_allocator="none" use_allocator_shim=false use_vaapi=true use_system_harfbuzz=true use_custom_libcxx=false enable_nacl=false enable_nacl_nonsfi=false enable_widevine=false enable_swiftshader=true enable_hangout_services_extension=false custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_ozone=true ozone_platform_wayland=true ozone_platform_x11=false ozone_auto_platforms=false use_system_libwayland=true use_system_minigbm=true use_system_libdrm=true enable_vulkan=true rtc_use_pipewire=false rtc_link_pipewire=false use_x11=false use_gtk=false' --script-executable=python2
-	ninja -C out/Release chrome chrome_sandbox -j14
+	ninja -C out/Release chrome chrome_sandbox
 	
 	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
 

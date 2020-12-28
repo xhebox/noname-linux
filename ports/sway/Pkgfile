@@ -1,15 +1,17 @@
-version="1.5"
+version="1.5.1"
 desc='Tiling Wayland compositor and replacement for the i3 window manager'
 deps=["swaybg", "cairo", "json-c", "pango", "libpcre", "wlroots"]
 makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols"]
 source=[
 	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
 	{url="ime2.patch"},
+	{url="5113.diff"},
 ]
 
 ext='''
 	cd sway-$version
 	patch -Np1 -i ../ime2.patch
+	patch -Np1 -i ../5113.diff
 '''
 
 build='''

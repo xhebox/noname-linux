@@ -1,12 +1,14 @@
 version="3.7.3"
 sversion="41.0.1"
+wversion="0.33.4"
 desc="A high-level scripting language(3.x)"
 deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
 makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
 source=[
 	{url="http://www.python.org/ftp/python/$version/Python-$version.tar.xz"},
 	{url="readonly.patch"},
-	{url="http://github.com/pypa/setuptools/archive/v$sversion.tar.gz"}
+	{url="http://github.com/pypa/setuptools/archive/v$sversion.tar.gz"},
+	{url="https://pypi.io/packages/source/w/wheel/wheel-$wversion.tar.gz"},
 ]
 
 build='''
@@ -60,4 +62,10 @@ build='''
 	"$pkgdir"/bin/python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+	
+	cd ../wheel-$wversion
+	"$pkgdir"/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
 '''
