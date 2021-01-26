@@ -1,0 +1,56 @@
+From d72ad9c226b4ed225c23d88ec5dbe6ba321b37ad Mon Sep 17 00:00:00 2001
+From: q66 <daniel@octaforge.org>
+Date: Sat, 21 Dec 2019 17:04:13 +0100
+Subject: [PATCH 11/15] Dynamically link libc on musl by default
+
+---
+ src/librustc_target/spec/linux_musl_base.rs | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/src/librustc_target/spec/linux_musl_base.rs b/src/librustc_target/spec/linux_musl_base.rs
+index 58ae91a9..1fae72d6 100644
+--- a/compiler/rustc_target/src/spec/linux_musl_base.rs
++++ b/compiler/rustc_target/src/spec/linux_musl_base.rs
+@@ -1,4 +1,3 @@
+-use crate::spec::crt_objects::{self, CrtObjectsFallback};
+ use crate::spec::TargetOptions;
+ 
+ pub fn opts() -> TargetOptions {
+@@ -5,12 +5,9 @@
+     let mut base = super::linux_base::opts();
+ 
+     base.env = "musl".to_string();
+-    base.pre_link_objects_fallback = crt_objects::pre_musl_fallback();
+-    base.post_link_objects_fallback = crt_objects::post_musl_fallback();
+-    base.crt_objects_fallback = Some(CrtObjectsFallback::Musl);
+ 
+     // These targets statically link libc by default
+-    base.crt_static_default = true;
++    base.crt_static_default = false;
+ 
+     base
+ }
+--- rustc-1.49.0-src/compiler/rustc_target/src/spec/crt_objects.rs	2020-12-29 11:03:08.000000000 +0800
++++ rustc-1.49.0-src/compiler/rustc_target/src/spec/crt_objects.rs	2020-12-29 11:03:08.000000000 +0800
+@@ -61,21 +61,6 @@
+     ])
+ }
+ 
+-pub(super) fn pre_musl_fallback() -> CrtObjects {
+-    new(&[
+-        (LinkOutputKind::DynamicNoPicExe, &["crt1.o", "crti.o"]),
+-        (LinkOutputKind::DynamicPicExe, &["Scrt1.o", "crti.o"]),
+-        (LinkOutputKind::StaticNoPicExe, &["crt1.o", "crti.o"]),
+-        (LinkOutputKind::StaticPicExe, &["rcrt1.o", "crti.o"]),
+-        (LinkOutputKind::DynamicDylib, &["crti.o"]),
+-        (LinkOutputKind::StaticDylib, &["crti.o"]),
+-    ])
+-}
+-
+-pub(super) fn post_musl_fallback() -> CrtObjects {
+-    all("crtn.o")
+-}
+-
+ pub(super) fn pre_mingw_fallback() -> CrtObjects {
+     new(&[
+         (LinkOutputKind::DynamicNoPicExe, &["crt2.o", "rsbegin.o"]),

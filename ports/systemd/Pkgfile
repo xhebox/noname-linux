@@ -44,6 +44,7 @@ source=[
 	{url="musl_quota.patch"},
 	{url="portable_user_util.patch"},
 	{url="userdb.patch"},
+	{url="vt_perm.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},

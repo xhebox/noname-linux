@@ -1,0 +1,11 @@
+version="0.2.1"
+desc="Screen recorder for wlroots-based compositors such as sway"
+deps=["ffmpeg", "wayland"]
+source=[{url="https://github.com/ammen99/wf-recorder/archive/v$version.tar.gz"}]
+
+build='''
+	noname-meson wf-recorder-$version build -Dopencl=disabled -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

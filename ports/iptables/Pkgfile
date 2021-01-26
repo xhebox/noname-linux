@@ -1,0 +1,42 @@
+version="1.8.6"
+desc='Linux kernel packet control tool'
+deps=["libnftnl","libpcap"]
+makedeps=["libnftnl","libpcap"]
+source=[
+	{url="http://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.bz2"},
+	{url="empty-filter.rules"},
+	{url="empty-mangle.rules"},
+	{url="empty-nat.rules"},
+	{url="empty-raw.rules"},
+	{url="empty-security.rules"},
+	{url="empty.rules"},
+	{url="ip6tables.service"},
+	{url="iptables-nft-flush"},
+	{url="iptables.service"},
+	{url="simple_firewall.rules"},
+]
+
+build='''
+	cd iptables-$version
+	rm include/linux/types.h
+	./configure --prefix= \
+		--sysconfdir=/etc \
+		--sbindir=/bin \
+		--libexecdir=/lib/iptables \
+		--with-xtlibdir=/lib/iptables \
+		--enable-bpf-compiler \
+		--enable-devel \
+		--enable-shared
+
+	make
+	make DESTDIR="$pkgdir" install
+	cd -
+
+  install -Dt "$pkgdir/lib/systemd/system" -m644 iptables.service ip6tables.service
+  install -D iptables-nft-flush "$pkgdir/lib/systemd/scripts/iptables-flush"
+
+  install -Dm644 empty.rules "$pkgdir/etc/iptables/iptables.rules"
+  install -Dm644 empty.rules "$pkgdir/etc/iptables/ip6tables.rules"
+  install -Dt "$pkgdir/share/iptables" -m644 *.rules
+  ln -srt "$pkgdir/etc/iptables" "$pkgdir"/share/iptables/empty.rules "$pkgdir"/share/iptables/simple_firewall.rules
+'''

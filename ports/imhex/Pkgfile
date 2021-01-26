@@ -1,0 +1,27 @@
+version="1.6.1"
+nostrip=true
+desc="A Hex Editor for Reverse Engineers, Programmers and people that value their eye sight when working at 3 AM. "
+deps=["glfw","file", "openssl", "nlohmann-json", "capstone", "llvm","mesa","glm"]
+makedeps=["glfw","file", "openssl", "nlohmann-json", "capstone", "llvm","mesa","glm"]
+source=[
+	{url="https://github.com/WerWolv/ImHex/archive/v$version.tar.gz"},
+	{url="gl.patch"},
+]
+
+ext='''
+	cd ImHex-$version
+	patch -Np1 -i ../gl.patch
+'''
+
+build='''
+	cmake ImHex-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Debug
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	install -d "$pkgdir/share"
+	mv "$pkgdir/magic" "$pkgdir"/share/
+'''

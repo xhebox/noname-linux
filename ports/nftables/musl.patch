@@ -1,0 +1,21 @@
+--- nftables-0.9.8/src/rule.c	2021-01-16 05:43:01.123858624 +0800
++++ nftables-0.9.8/src/rule.c	2021-01-16 05:43:01.123858624 +0800
+@@ -33,7 +33,6 @@
+ #include <linux/netfilter_arp.h>
+ #include <linux/netfilter_ipv4.h>
+ #include <linux/netfilter/nf_synproxy.h>
+-#include <net/if.h>
+ #include <linux/netfilter_bridge.h>
+ 
+ static const char *const tcp_state_to_name[] = {
+--- nftables-0.9.8/src/xt.c	2021-01-16 05:43:01.131858616 +0800
++++ nftables-0.9.8/src/xt.c	2021-01-16 05:43:01.131858616 +0800
+@@ -10,7 +10,7 @@
+ #include <stdlib.h>
+ #include <time.h>
+ #include <string.h>
+-#include <net/if.h>
++#define IFNAMSIZ 16
+ #include <getopt.h>
+ #include <ctype.h>	/* for isspace */
+ #include <statement.h>

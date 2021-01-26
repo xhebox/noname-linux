@@ -1,0 +1,14 @@
+version="3.9.1"
+desc="JSON for Modern C++"
+source=[{url="https://github.com/nlohmann/json/archive/v$version.tar.gz"}]
+
+build='''
+	cmake json-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DJSON_MultipleHeaders=ON \
+				-Wno-dev \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

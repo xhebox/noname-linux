@@ -1,0 +1,12 @@
+version="52"
+desc="a simple .INI file parser written in C"
+source=[
+	{url="https://github.com/benhoyt/inih/archive/r$version/inih-r$version.tar.gz"},
+]
+
+build='''
+	noname-meson inih-r$version build -Ddefault_library=shared -Ddistro_install=true
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

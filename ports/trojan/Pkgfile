@@ -1,0 +1,16 @@
+version="1.16.0"
+desc='proxy server'
+deps=["boost", "libressl"]
+makedeps=["boost", "libressl"]
+source=[
+	{name="trojan-$version.tar.gz", url="https://github.com/trojan-gfw/trojan/archive/v$version.tar.gz"},
+]
+
+build='''
+	cmake trojan-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DENABLE_MYSQL=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

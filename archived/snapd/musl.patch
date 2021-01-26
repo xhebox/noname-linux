@@ -1,0 +1,44 @@
+--- snapd-2.48.2/cmd/libsnap-confine-private/utils.h	2020-12-16 03:21:44.000000000 +0800
++++ snapd-2.48.2/cmd/libsnap-confine-private/utils.h	2020-12-16 03:21:44.000000000 +0800
+@@ -19,6 +19,8 @@
+ 
+ #include <stdlib.h>
+ #include <stdbool.h>
++#include <limits.h>
++#include <sys/types.h>
+ 
+ __attribute__((noreturn))
+     __attribute__((format(printf, 1, 2)))
+--- snapd-2.48.2/cmd/snapd-generator/main.c	2020-12-16 03:21:44.000000000 +0800
++++ snapd-2.48.2/cmd/snapd-generator/main.c	2020-12-16 03:21:44.000000000 +0800
+@@ -22,6 +22,7 @@
+ #include <dirent.h>
+ #include <errno.h>
+ #include <unistd.h>
++#include <limits.h>
+ 
+ #include "config.h"
+ 
+--- snapd-2.48.2/data/systemd/snapd.socket	2020-12-16 03:21:44.000000000 +0800
++++ snapd-2.48.2/data/systemd/snapd.socket	2020-12-16 03:21:44.000000000 +0800
+@@ -5,9 +5,6 @@
+ ListenStream=/run/snapd.socket
+ ListenStream=/run/snapd-snap.socket
+ SocketMode=0666
+-# these are the defaults, but can't hurt to specify them anyway:
+-SocketUser=root
+-SocketGroup=root
+ 
+ [Install]
+ WantedBy=sockets.target
+--- snapd-2.48.2//interfaces/system_key.go	2020-12-16 03:21:44.000000000 +0800
++++ snapd-2.48.2//interfaces/system_key.go	2020-12-16 03:21:44.000000000 +0800
+@@ -249,7 +249,7 @@
+ 	if mockedSystemKey == nil {
+ 		if exe, err := os.Readlink("/proc/self/exe"); err == nil {
+ 			// detect running local local builds
+-			if !strings.HasPrefix(exe, "/usr") && !strings.HasPrefix(exe, "/snap") {
++			if !strings.HasPrefix(exe, "/snap") {
+ 				logger.Noticef("running from non-installed location %s: ignoring system-key", exe)
+ 				return false, ErrSystemKeyVersion
+ 			}

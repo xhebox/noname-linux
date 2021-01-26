@@ -1,15 +1,17 @@
 name="rust"
 nostrip=true
-version="1.47.0"
-_rust_dist_version="1.47.0"
-_cargo_dist_version="1.47.0"
+version="1.49.0"
+_rust_dist_version="1.49.0"
+_cargo_dist_version="1.49.0"
 deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot"]
 makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "cmake", "curl", "python3"]
 source=[
 	{url="https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
+	{url="00016-do-not-copy-libunwind.patch"},
 	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
-	{url="musl-dont-use-crt-static.patch"},
+	{url="0011-Dynamically-link-libc-on-musl-by-default.patch"},
+	{url="need-ssp_nonshared.patch"},
 ]
 
 ext='''
@@ -25,15 +27,16 @@ ext='''
 
 	cd rustc-$version-src
 	for i in $source; do
+		echo $i
 		case $i in
-		*.patch) patch -p1 -i ../$i;;
+		*.patch) patch -Np1 -i ../$i;;
 		esac
 	done
 
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/libc/.cargo-checksum.json
 	rm -rf src/llvm-project
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
-	sed -i '/linker:/ s/rust-lld/wasm-ld/' src/librustc_target/spec/wasm32_base.rs
+	sed -i '/linker:/ s/rust-lld/wasm-ld/' compiler/rustc_target/src/spec/wasm32_base.rs
 
 	cat <<- EOF > config.toml
 [llvm]
@@ -73,7 +76,7 @@ channel="nightly"
 codegen-units-std=1
 codegen-tests=false
 jemalloc=false
-llvm-libunwind=false
+llvm-libunwind="no"
 lld=false
 use-lld=false
 rpath=false

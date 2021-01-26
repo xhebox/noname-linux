@@ -1,4 +1,4 @@
-version="10.1.0"
+version="10.2.0"
 desc="The GNU Compiler Collection"
 source=[
 	{url="http://mirrors.ustc.edu.cn/gnu/gcc/gcc-$version/gcc-${version}.tar.xz"},

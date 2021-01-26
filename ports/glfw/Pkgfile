@@ -1,0 +1,23 @@
+version="3.3.2"
+deps=["mesa", "wayland", "libxkbcommon"]
+makedeps=["mesa", "wayland-protocols", "libxkbcommon", "extra-cmake-modules"]
+desc="A free, open source, portable framework for graphical application development"
+source=[
+	{url="https://github.com/glfw/glfw/archive/${version}.tar.gz"},
+#	{url="test.patch"},
+]
+
+ext='''
+	cd glfw-$version
+#patch -Np1 -i ../test.patch
+'''
+
+build='''
+	cmake glfw-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DGLFW_USE_WAYLAND=ON \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

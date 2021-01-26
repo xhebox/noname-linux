@@ -1,11 +1,10 @@
 name="firefox"
-version="84.0"
+version="84.0.2"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
-	{url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz"},
 	{url="stab.h"},
 	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
 	{url="fix-seccomp-bpf.patch"},
@@ -102,12 +101,6 @@ END
 '''
 
 build='''
-#cd autoconf-2.13
-#	./configure --prefix=$srcdir/.a213 --program-suffix=-2.13
-#make
-#make install
-#cd ..
-
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
 	cargo install --version 0.15.0 cbindgen

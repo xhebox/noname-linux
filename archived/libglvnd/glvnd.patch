@@ -1,0 +1,58 @@
+--- libglvnd-v1.3.2/src/EGL/libeglvendor.c	2020-06-26 06:17:25.000000000 +0800
++++ libglvnd-v1.3.2/src/EGL/libeglvendor.c	2020-06-26 06:17:25.000000000 +0800
+@@ -313,11 +313,13 @@
+     }
+ 
+     node = cJSON_GetObjectItem(icdNode, "library_path");
++		printf("%s\n", node->valuestring);
+     if (node == NULL || node->type != cJSON_String) {
+         goto done;
+     }
+     libraryPath = node->valuestring;
+     vendor = LoadVendor(libraryPath);
++		printf("x %p\n", vendor);
+ 
+ done:
+     if (root != NULL) {
+@@ -451,6 +453,7 @@
+     }
+ 
+     vendor->dlhandle = dlopen(filename, RTLD_LAZY);
++		printf("x1 %p\n", vendor->dlhandle);
+     if (vendor->dlhandle == NULL) {
+         goto fail;
+     }
+@@ -463,6 +466,7 @@
+     }
+ 
+     eglMainProc = dlsym(vendor->dlhandle, __EGL_MAIN_PROTO_NAME);
++		printf("x2 %p\n", eglMainProc);
+     if (!eglMainProc) {
+         goto fail;
+     }
+--- libglvnd-v1.3.2/src/EGL/libeglvendor.c	2020-06-26 06:17:25.000000000 +0800
++++ libglvnd-v1.3.2/src/EGL/libeglvendor.c	2020-06-26 06:17:25.000000000 +0800
+@@ -65,6 +65,7 @@
+     tokens = SplitString(env, NULL, ":");
+     if (tokens != NULL) {
+         for (i=0; tokens[i] != NULL; i++) {
++					printf("%d:%s\n", i, tokens[i]);
+             LoadVendorsFromConfigDir(tokens[i]);
+         }
+         free(tokens);
+@@ -102,6 +103,7 @@
+     int i;
+ 
+     count = scandir(dirName, &entries, ScandirFilter, CompareFilenames);
++		printf("count %s:%d\n", dirName, count);
+     if (count <= 0) {
+         return;
+     }
+@@ -118,6 +120,7 @@
+     for (i=0; i<count; i++) {
+         char *path = NULL;
+         if (glvnd_asprintf(&path, "%s%s%s", dirName, pathSep, entries[i]->d_name) > 0) {
++					printf("loadVendor %s\n", path);
+             LoadVendorFromConfigFile(path);
+             free(path);
+         } else {

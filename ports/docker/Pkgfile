@@ -1,0 +1,174 @@
+version="20.10.2"
+runc_version="1.0.0-rc92"
+containerd_version="1.4.3"
+libnetwork_version="bump_19.03"
+app_version="0.9.1-beta3"
+tini_version="0.19.0"
+buildx_version="0.5.1"
+docker_commit="$version"
+common_version="0.33.1"
+image_version="5.9.0"
+podman_version="2.2.1"
+skopeo_version="1.2.1"
+storage_version="1.24.5"
+desc='CLI tool for managing OCI compliant containers'
+deps=["libseccomp", "linux"]
+makedeps=["libseccomp", "linux", "go"]
+source=[
+	{url="https://github.com/opencontainers/runc/releases/download/v$runc_version/runc.tar.xz",name="runc-$runc_version.tar.xz"},
+	{url="https://github.com/containerd/containerd/archive/v$containerd_version.tar.gz",name="containerd-$containerd_version.tar.gz"},
+	{url="https://github.com/docker/cli/archive/v$version.tar.gz",name="cli-$version.tar.gz"},
+	{url="https://github.com/moby/moby/archive/v$version.tar.gz",name="moby-$version.tar.gz"},
+	{url="https://github.com/docker/app/archive/v$app_version.tar.gz",name="app-$app_version.tar.gz"},
+	{url="https://github.com/krallin/tini/archive/v$tini_version.tar.gz",name="tini-$tini_version.tar.gz"},
+	{url="https://github.com/moby/libnetwork/archive/$libnetwork_version.tar.gz",name="libnetwork-$libnetwork_version.tar.gz"},
+	{url="https://github.com/docker/buildx/archive/v$buildx_version.tar.gz",name="buildx-$buildx_version.tar.gz"},
+	{url="docker.sysusers"},
+	{url="mounts.conf"},
+	{url="noname.patch"},
+	{name="common-${common_version}.tar.gz",url="https://github.com/containers/common/archive/v${common_version}.tar.gz"},
+	{name="image-${image_version}.tar.gz",url="https://github.com/containers/image/archive/v${image_version}.tar.gz"},
+	{name="podman-${podman_version}.tar.gz",url="https://github.com/containers/podman/archive/v${podman_version}.tar.gz"},
+	{name="skopeo-${skopeo_version}.tar.gz",url="https://github.com/containers/skopeo/archive/v${skopeo_version}.tar.gz"},
+	{name="storage-${storage_version}.tar.gz",url="https://github.com/containers/storage/archive/v${storage_version}.tar.gz"},
+]
+
+build='''
+set -x
+  export GOPATH="$PWD"
+  export PATH="$GOPATH/bin:$PATH"
+	export BUILDTAGS="no_btrfs seccomp"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+
+	mkdir -p src/github.com/docker
+  mv libnetwork-$libnetwork_version src/github.com/docker/libnetwork
+  cd src/github.com/docker/libnetwork
+  go build github.com/docker/libnetwork/cmd/proxy
+	install -Dm755 proxy "$pkgdir/bin/docker-proxy"
+	cd -
+
+	mkdir -p src/github.com/opencontainers
+  mv runc-$runc_version src/github.com/opencontainers/runc
+  cd src/github.com/opencontainers/runc
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+  make runc
+  install -Dm755 runc "$pkgdir/bin/runc"
+  install -Dm644 contrib/completions/bash/runc "$pkgdir/share/bash-completion/completions/runc"
+	cd -
+
+	mkdir -p src/github.com/containerd
+  mv containerd-$containerd_version src/github.com/containerd/containerd
+  cd src/github.com/containerd/containerd
+  sed -i 's,/sbin,/bin,;s,/usr/local,/,' containerd.service
+  export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+  make VERSION=v$pkgver
+  make install DESTDIR="$pkgdir"
+  install -Dm644 containerd.service "$pkgdir"/lib/systemd/system/containerd.service
+	cd -
+
+  export GOFLAGS='-buildmode=pie -trimpath -mod=readonly -modcacherw -ldflags=-linkmode=external'
+
+	mkdir -p src/github.com/docker
+	mv cli-$version src/github.com/docker/cli
+	cd src/github.com/docker/cli
+	LDFLAGS=""
+	DISABLE_WARN_OUTSIDE_CONTAINER=1 make VERSION=$version dynbinary
+	install -Dm755 build/docker "$pkgdir/bin/docker"
+	install -Dm644 'contrib/completion/bash/docker' "$pkgdir/share/bash-completion/completions/docker"
+	install -Dm644 'contrib/completion/zsh/_docker' "$pkgdir/share/zsh/site-functions/_docker"
+	install -Dm644 'contrib/completion/fish/docker.fish' "$pkgdir/share/fish/vendor_completions.d/docker.fish"
+#install -dm755 "$pkgdir/share/man"
+#cp -r man/man* "$pkgdir/share/man"
+	cd -
+
+	mkdir -p src/github.com/docker
+	mv moby-$version src/github.com/docker/docker
+	cd src/github.com/docker/docker
+	#patch -Np1 -i $srcdir/noname.patch
+	DOCKER_GITCOMMIT=$docker_commit \
+	DOCKER_BUILDTAGS="exclude_graphdriver_btrfs seccomp journald" \
+	VERSION=$version \
+	hack/make.sh dynbinary
+	install -Dm755 bundles/dynbinary-daemon/dockerd "$pkgdir"/bin/dockerd
+	install -Dm644 'contrib/init/systemd/docker.service' "$pkgdir/lib/systemd/system/docker.service"
+	install -Dm644 'contrib/init/systemd/docker.socket' "$pkgdir/lib/systemd/system/docker.socket"
+	install -Dm644 'contrib/udev/80-docker.rules' "$pkgdir/lib/udev/rules.d/80-docker.rules"
+	install -Dm644 "$srcdir/docker.sysusers" "$pkgdir/lib/sysusers.d/docker.conf"
+	cd -
+
+#mkdir -p src/github.com/docker
+#mv libnetwork-$version src/github.com/docker/libnetwork
+#cd src/github.com/docker/libnetwork
+#go build github.com/docker/libnetwork/cmd/proxy
+#install -Dm755 proxy "$pkgdir/bin/docker-proxy"
+#cd -
+
+	mkdir -p src/github.com/krallin
+	mv tini-$tini_version src/github.com/krallin/tini
+	cd src/github.com/krallin/tini
+  cmake .
+  make tini-static
+  install -Dm755 tini-static "$pkgdir/bin/docker-init"
+	cd -
+
+	mkdir -p src/github.com/docker
+	mv app-$app_version src/github.com/docker/app
+	cd src/github.com/docker/app
+	BUILDTAGS=""
+  make dynamic
+  install -Dm755 bin/docker-app "$pkgdir/lib/docker/cli-plugins/docker-app"
+	cd -
+
+	mkdir -p src/github.com/docker
+	mv buildx-$buildx_version src/github.com/docker/buildx
+	cd src/github.com/docker/buildx
+  go build -o docker-buildx -ldflags "-X main.experimental=1 -linkmode=external" ./cmd/buildx
+  install -Dm755 docker-buildx "$pkgdir/lib/docker/cli-plugins/docker-buildx"
+	cd -
+
+	install -vdm 755 "${pkgdir}/etc/containers/oci/hooks.d/"
+	install -vdm 755 "${pkgdir}/etc/containers/registries.conf.d/"
+	install -vdm 755 "${pkgdir}/share/containers/oci/hooks.d/"
+	install -vdm 755 "${pkgdir}/var/lib/containers/"
+
+  # configs
+  install -vDm 644 mounts.conf -t "${pkgdir}/etc/containers/"
+
+	cd "common-${common_version}"
+	install -vDm 644 pkg/config/containers.conf -t "${pkgdir}/etc/containers/"
+	install -vDm 644 pkg/config/containers.conf -t "${pkgdir}/share/containers/"
+	install -vDm 644 pkg/seccomp/seccomp.json -t "${pkgdir}/etc/containers/"
+	install -vDm 644 pkg/seccomp/seccomp.json -t "${pkgdir}/share/containers/"
+	#install -vDm 644 docs/*.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "image-${image_version}"
+	# configs
+	install -vDm 644 registries.conf -t "${pkgdir}/etc/containers/"
+	# man pages
+	#install -vDm 644 docs/*.1 -t "${pkgdir}/share/man/man1/"
+	#install -vDm 644 docs/man5/*.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "podman-${podman_version}"
+	#install -vDm 644 *.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "skopeo-${skopeo_version}"
+	# configs
+	install -vDm 644 default-policy.json "${pkgdir}/etc/containers/policy.json"
+	install -vDm 644 default.yaml -t "${pkgdir}/etc/containers/registries.d/"
+	cd -
+
+	cd "storage-${storage_version}"
+	# configs
+	install -vDm 644 storage.conf -t "${pkgdir}/etc/containers/"
+	install -vDm 644 storage.conf -t "${pkgdir}/share/containers/"
+	# man pages
+	#install -vDm 644 docs/*.1 -t "${pkgdir}/share/man/man1/"
+	#install -vDm 644 docs/*.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+'''

@@ -1,4 +1,4 @@
-version="3.59"
+version="3.61"
 _version="`echo $version | tr . _`"
 desc="Mozilla Network Security Services (NSS)"
 makedeps=["nspr", "sqlite", "zlib", "perl", "python3"]
@@ -25,6 +25,7 @@ build='''
 	export NSS_ALLOW_SSLKEYLOGFILE=1
 	export NSS_ENABLE_ECC=1
 	export NSS_ENABLE_WERROR=0
+	export NSS_DISABLE_GTESTS=1
 	export NSPR_INCLUDE_DIR="`nspr-config --includedir`"
 	export NSPR_LIB_DIR="`nspr-config --libdir`"
 	export XCFLAGS="${CFLAGS}"

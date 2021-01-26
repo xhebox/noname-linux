@@ -1,0 +1,17 @@
+version="5.10.0"
+desc="XFS filesystem utilities"
+deps=["util-linux", "inih", "systemd"]
+makedeps=["util-linux", "inih", "icu", "systemd", "python3"]
+source=[{url="http://mirrors.ustc.edu.cn/kernel.org/linux/utils/fs/xfs/xfsprogs/xfsprogs-$version.tar.gz"}]
+
+build='''
+	cd xfsprogs-$version
+	ARCH=`echo $ARCH64 | tr '_' '-'`
+	export OPTIMIZER="-march=$ARCH -O1"
+	export DEBUG=-DNDEBUG
+	make configure
+	./configure --prefix=/ --sbindir=/bin --with-systemd-unit-dir=/lib/systemd/system
+	make
+	make DIST_ROOT="${pkgdir}" PKG_ROOT_LIB_DIR="/lib" PKG_ROOT_SBIN_DIR="/bin" INSTALL_USER=root INSTALL_GROUP=root install
+	make DIST_ROOT="${pkgdir}" PKG_ROOT_LIB_DIR="/lib" PKG_ROOT_SBIN_DIR="/bin" INSTALL_USER=root INSTALL_GROUP=root install-dev
+'''

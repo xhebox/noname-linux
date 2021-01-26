@@ -1,4 +1,4 @@
-version="0.9.0"
+version="0.9.8"
 makedeps=["libmnl", "libnftnl", "readline", "libgmp"]
 deps=["libmnl", "libnftnl", "readline", "libgmp"]
 desc="Netfilter nftables userspace tools"
@@ -6,10 +6,12 @@ source=[
 	{url="http://www.netfilter.org/projects/${name}/files/nftables-${version}.tar.bz2"},
 	{url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/nftables.service?h=packages/nftables", name="nftables.service"},
 	{url="nftables.conf"},
+	{url="musl.patch"},
 ]
 
 build='''
 	cd nftables-$version
+	patch -Np1 -i ../musl.patch
 	./configure --prefix= \
 		--sbindir=/bin \
 		--sysconfdir=/share

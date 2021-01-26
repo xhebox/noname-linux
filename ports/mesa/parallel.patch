@@ -1,0 +1,11 @@
+--- mesa-20.3.3/src/intel/common/meson.build	2021-01-14 02:09:09.425540200 +0800
++++ mesa-20.3.3/src/intel/common/meson.build	2021-01-14 02:09:09.425540200 +0800
+@@ -42,7 +42,7 @@
+ )
+ 
+ libintel_common = static_library(
+-  ['intel_common', genX_xml_h],
++  ['intel_common', genX_xml_h, sha1_h],
+   files_libintel_common,
+   include_directories : [inc_include, inc_src, inc_mapi, inc_mesa, inc_gallium, inc_intel],
+   c_args : [no_override_init_args],

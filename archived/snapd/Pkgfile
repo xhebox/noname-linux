@@ -1,0 +1,136 @@
+desc="Service and tools for management of snap packages."
+deps=["squashfs-tools", "libseccomp", "systemd", "libcap", "xfsprogs"]
+makedeps=["go", "squashfs-tools", "libseccomp", "systemd", "libcap", "xfsprogs"]
+version="2.48.2"
+source=[
+	{url="https://github.com/snapcore/snapd/releases/download/${version}/snapd_${version}.vendor.tar.xz"},
+	{url="musl.patch"},
+]
+
+build='''
+	export GOPATH="$PWD/go"
+
+	cd snapd-$version
+
+	patch -Np1 -i ../musl.patch
+
+	set -x
+	mkdir -p "$GOPATH/src/github.com/snapcore"
+	ln --no-target-directory -fs "$PWD/../snapd-$version" "$GOPATH/src/github.com/snapcore/snapd"
+
+	GOFLAGS=""
+	GOFLAGS_SNAP="-tags nomanagers"
+	export GO111MODULE=off
+	export CGO_ENABLED="1"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+
+	./mkversion.sh $version-1
+
+	cd "$GOPATH/src/github.com/snapcore/snapd"
+	XDG_CONFIG_HOME="$srcdir" ./get-deps.sh
+
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS'" -trimpath \
+		-o "$srcdir/go/bin/snap" $GOFLAGS_SNAP "github.com/snapcore/snapd/cmd/snap"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS'" -trimpath \
+		-o "$srcdir/go/bin/snapd" $GOFLAGS "github.com/snapcore/snapd/cmd/snapd"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS'" -trimpath \
+		-o "$srcdir/go/bin/snap-seccomp" $GOFLAGS "github.com/snapcore/snapd/cmd/snap-seccomp"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS'" -trimpath \
+		-o "$srcdir/go/bin/snap-failure" $GOFLAGS "github.com/snapcore/snapd/cmd/snap-failure"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS -static'" -trimpath \
+		-o "$srcdir/go/bin/snap-update-ns" $GOFLAGS "github.com/snapcore/snapd/cmd/snap-update-ns"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS -static'" -trimpath \
+		-o "$srcdir/go/bin/snap-exec" $GOFLAGS "github.com/snapcore/snapd/cmd/snap-exec"
+	go build \
+		-buildmode=pie -ldflags "-s -linkmode external -extldflags '$LDFLAGS -static'" -trimpath \
+		-o "$srcdir/go/bin/snapctl" $GOFLAGS "github.com/snapcore/snapd/cmd/snapctl"
+	install -Dm755 "$srcdir/go/bin/snap" "$pkgdir/bin/snap"
+	install -Dm755 "$srcdir/go/bin/snapctl" "$pkgdir/lib/snapd/snapctl"
+	install -Dm755 "$srcdir/go/bin/snapd" "$pkgdir/lib/snapd/snapd"
+	install -Dm755 "$srcdir/go/bin/snap-seccomp" "$pkgdir/lib/snapd/snap-seccomp"
+	install -Dm755 "$srcdir/go/bin/snap-failure" "$pkgdir/lib/snapd/snap-failure"
+	install -Dm755 "$srcdir/go/bin/snap-update-ns" "$pkgdir/lib/snapd/snap-update-ns"
+	install -Dm755 "$srcdir/go/bin/snap-exec" "$pkgdir/lib/snapd/snap-exec"
+	ln -s /lib/snapd/snapctl "$pkgdir/bin/snapctl"
+
+	make -C data \
+		DESTDIR="$pkgdir" \
+		BINDIR=/bin \
+		LIBEXECDIR=/lib \
+		SYSTEMDSYSTEMUNITDIR=/lib/systemd/system \
+		SNAP_MOUNT_DIR=/var/lib/snapd/snap \
+		SNAPD_ENVIRONMENT_FILE=/etc/default/snapd \
+		install
+
+	cd cmd
+	autoreconf -i -f
+	./configure \
+				--prefix= \
+				--libexecdir=/lib/snapd \
+				--with-snap-mount-dir=/var/lib/snapd/snap \
+				--disable-apparmor \
+				--disable-nvidia-biarch \
+				--enable-merged-usr
+	make
+	make install DESTDIR="$pkgdir/"
+	cd ..
+
+# Install bash completion
+#install -Dm644 data/completion/bash/snap "$pkgdir/share/bash-completion/completions/snap"
+#install -Dm644 data/completion/bash/complete.sh "$pkgdir/lib/snapd/complete.sh"
+#install -Dm644 data/completion/bash/etelpmoc.sh "$pkgdir/lib/snapd/etelpmoc.sh"
+
+  # no tweaks for sudo are needed
+	rm -rfv "$pkgdir/etc/sudoers.d"
+
+  # pre-create directories
+	install -dm755 "$pkgdir/var/lib/snapd/snap"
+	install -dm755 "$pkgdir/var/cache/snapd"
+	install -dm755 "$pkgdir/var/lib/snapd/apparmor"
+	install -dm755 "$pkgdir/var/lib/snapd/assertions"
+	install -dm755 "$pkgdir/var/lib/snapd/dbus-1/services"
+	install -dm755 "$pkgdir/var/lib/snapd/dbus-1/system-services"
+	install -dm755 "$pkgdir/var/lib/snapd/desktop/applications"
+	install -dm755 "$pkgdir/var/lib/snapd/device"
+	install -dm755 "$pkgdir/var/lib/snapd/hostfs"
+	install -dm755 "$pkgdir/var/lib/snapd/mount"
+	install -dm755 "$pkgdir/var/lib/snapd/seccomp/bpf"
+	install -dm755 "$pkgdir/var/lib/snapd/snap/bin"
+	install -dm755 "$pkgdir/var/lib/snapd/snaps"
+	install -dm755 "$pkgdir/var/lib/snapd/inhibit"
+	install -dm755 "$pkgdir/var/lib/snapd/lib/gl"
+	install -dm755 "$pkgdir/var/lib/snapd/lib/gl32"
+	install -dm755 "$pkgdir/var/lib/snapd/lib/vulkan"
+	install -dm755 "$pkgdir/var/lib/snapd/lib/glvnd"
+  # these dirs have special permissions
+	install -dm111 "$pkgdir/var/lib/snapd/void"
+	install -dm700 "$pkgdir/var/lib/snapd/cookie"
+	install -dm700 "$pkgdir/var/lib/snapd/cache"
+
+  # Install man file
+	mkdir -p "$pkgdir/share/man/man8"
+	"$srcdir/go/bin/snap" help --man > "$pkgdir/share/man/man8/snap.8"
+
+  # Install the "info" data file with snapd version
+	install -m 644 -D "$srcdir/go/src/github.com/snapcore/snapd/data/info" "$pkgdir/lib/snapd/info"
+
+  # Remove snappy core specific units
+	rm -fv "$pkgdir/lib/systemd/system/snapd.system-shutdown.service"
+	rm -fv "$pkgdir/lib/systemd/system/snapd.autoimport.service"
+	rm -fv "$pkgdir/lib/systemd/system/snapd.recovery-chooser-trigger.service"
+	rm -fv "$pkgdir"/lib/systemd/system/snapd.snap-repair.*
+	rm -fv "$pkgdir"/lib/systemd/system/snapd.core-fixup.*
+  # and scripts
+	rm -fv "$pkgdir/lib/snapd/snapd.core-fixup.sh"
+	rm -fv "$pkgdir/bin/ubuntu-core-launcher"
+	rm -fv "$pkgdir/lib/snapd/system-shutdown"
+'''

@@ -1,12 +1,13 @@
-version="20.1.5"
+version="20.3.3"
 makedeps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "wayland-protocols", "python3-mako", "glslang"]
 deps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://mesa.freedesktop.org/archive/mesa-$version.tar.xz"},
+	{url="parallel.patch"},
 	{url="add-use-elf-tls.patch"},
-	{url="musl.patch"},
 	{url="no-x11.patch"},
+	{url="musl.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
 ]
@@ -14,6 +15,7 @@ source=[
 ext='''
 	cd mesa-$version
 	for i in $source; do
+		echo $i
 		case $i in
 		add-*patch|musl*patch) patch -p0 -i "$srcdir"/$i ;;
 		*patch)	patch -Np1 -i "$srcdir"/$i ;;
@@ -25,36 +27,39 @@ build='''
 	noname-meson mesa-$version build \
 		-D b_lto=true \
 		-D b_ndebug=true \
-		-D platforms=wayland,drm,surfaceless \
-		-D dri3=true \
+		-D platforms=wayland \
+		-D dri3=enabled \
 		-D dri-drivers=i915,i965,r100,r200,nouveau \
-		-D gallium-drivers=radeonsi,r300,r600,nouveau,swrast,svga,virgl,swr,iris,lima,zink \
+		-D gallium-drivers=radeonsi,r300,r600,nouveau,swrast,svga,virgl \
 		-D gallium-extra-hud=true \
-		-D gallium-vdpau=false \
-		-D gallium-xvmc=false \
+		-D gallium-vdpau=disabled \
+		-D gallium-xvmc=disabled \
 		-D gallium-omx=disabled \
-		-D gallium-va=true \
-		-D gallium-xa=false \
+		-D gallium-va=enabled \
+		-D gallium-xa=disabled \
 		-D gallium-nine=true \
 		-D gallium-opencl=icd \
 		-D opencl-spirv=true \
 		-D vulkan-drivers=amd,intel \
-		-D shader-cache=true \
+		-D shader-cache=enabled \
 		-D vulkan-overlay-layer=true \
     -D vulkan-device-select-layer=true \
-		-D shared-glapi=true \
-		-D gles1=true \
-		-D gles2=true \
+		-D shared-glapi=enabled \
+		-D gles1=disabled \
+		-D gles2=enabled \
 		-D glx=disabled \
-		-D gbm=true \
-		-D egl=true \
-		-D llvm=true \
-		-D valgrind=false \
-		-D lmsensors=true \
+		-D opengl=true \
+		-D gbm=enabled \
+		-D glvnd=false \
+		-D egl=enabled \
+		-D llvm=enabled \
+		-D valgrind=disabled \
+		-D lmsensors=enabled \
 		-D osmesa=gallium \
 		-D swr-arches=avx,avx2 \
-		-D zstd=true \
-		-D xlib-lease=false \
+		-D zstd=enabled \
+		-D xlib-lease=disabled \
+		-D cpp_std=gnu++14 \
 		-D use-elf-tls=false
 
 	meson configure build

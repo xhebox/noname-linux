@@ -1,0 +1,11 @@
+version="0.12.5"
+desc="v4l2-loopback device – module sources"
+deps=["dkms"]
+makedeps=["dkms"]
+source=[{url="https://github.com/umlaeute/v4l2loopback/archive/v${version}/v4l2loopback-${version}.tar.gz"}]
+
+build='''
+  cd v4l2loopback-$version
+  make DESTDIR="${pkgdir}" PREFIX=/ install-utils
+  install -Dm644 v4l2loopback.c v4l2loopback_formats.h dkms.conf Makefile -t "${pkgdir}"/src/v4l2loopback-$version
+'''

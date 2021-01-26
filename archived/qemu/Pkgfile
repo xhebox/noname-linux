@@ -1,5 +1,4 @@
-name=qemu
-version=2.12.0
+version="2.12.0"
 deps="sdl2 gtk3 libusb curl snappy libpng gnutls python libseccomp spice libaio lzo virglrenderer usbredir"
 source="https://download.qemu.org/qemu-$version.tar.xz
 0006-linux-user-signal.c-define-__SIGRTMIN-MAX-for-non-GN.patch

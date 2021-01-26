@@ -1,21 +1,10 @@
-version="2020-07-13"
+version="2021-01-18"
 desc="The Rust LSP"
 deps=["rust"]
-makedeps=["rust", "cargo"]
+makedeps=["rust"]
 source=[
 	{url="https://github.com/rust-analyzer/rust-analyzer/archive/${version}.tar.gz"},
 ]
-
-ext='''
-	mkdir .cargo
-	cat > .cargo/config << "EOF"
-[source.crates-io]
-replace-with = 'ustc'
-
-[source.ustc]
-registry = "https://mirrors.ustc.edu.cn/crates.io-index"
-EOF
-'''
 
 build='''
 	cd rust-analyzer-$version
