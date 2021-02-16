@@ -1,27 +1,26 @@
-version="2020.4"
+version="2020.6"
+hdrver="1.5.4.raytracing.fixed"
 desc="API and commands for processing SPIR-V modules"
 deps=["musl"]
 makedeps=["python3"]
 source=[
 	{url="https://github.com/KhronosGroup/SPIRV-Tools/archive/v${version}.tar.gz"},
-	{protocol="git", url="https://github.com/KhronosGroup/SPIRV-Headers"},
+	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/$hdrver.tar.gz"},
 ]
 
 build='''
+	cmake SPIRV-Headers-$hdrver -Bbu -DCMAKE_INSTALL_PREFIX=/
+	cmake --build bu
+	DESTDIR="${pkgdir}" cmake --build bu --target install
+
+	mv SPIRV-Headers-$hdrver SPIRV-Tools-$version/external/SPIRV-Headers
+
 	cmake SPIRV-Tools-$version -Bbuild \
 		-DCMAKE_INSTALL_PREFIX=/ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DSPIRV_WERROR=Off \
-		-DBUILD_SHARED_LIBS=ON \
-		-DSPIRV-Headers_SOURCE_DIR=${srcdir}/SPIRV-Headers
+		-DBUILD_SHARED_LIBS=ON
 
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
-
-	cd SPIRV-Headers
-	install -dm755 "$pkgdir"/include/spirv/unified1
-	ln -srf "$pkgdir"/include/spirv/unified1 "$pkgdir"/include/SPIRV
-	install -m644 include/spirv/unified1/*.h "$pkgdir"/include/spirv/unified1/
-	install -m644 include/spirv/unified1/*.hpp "$pkgdir"/include/spirv/unified1/
-	install -m644 include/spirv/unified1/*.hpp11 "$pkgdir"/include/spirv/unified1/
 '''

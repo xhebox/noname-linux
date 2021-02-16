@@ -1,4 +1,4 @@
-version="1.1.119"
+version="1.2.169"
 desc="Vulkan header files"
 makedeps=["cmake"]
 source=[{url="https://github.com/KhronosGroup/Vulkan-Headers/archive/v${version}.tar.gz"}]

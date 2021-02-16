@@ -1,4 +1,4 @@
-version="1.1.119"
+version="1.2.169"
 desc="Vulkan header files"
 deps=["vulkan-icd-loader", "wayland"]
 makedeps=["cmake", "wayland-protocols", "vulkan-headers", "glslang", "spirv-tools"]
