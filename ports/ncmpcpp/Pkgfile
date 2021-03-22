@@ -1,7 +1,7 @@
 version="0.9.2"
 desc='Almost exact clone of ncmpc with some new features'
-deps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost"]
-makedeps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost"]
+deps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost", "readline", "taglib"]
+makedeps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost", "readline", "taglib"]
 source=[{url="https://rybczak.net/ncmpcpp/stable/ncmpcpp-$version.tar.bz2"}]
 
 build='''
@@ -15,7 +15,7 @@ build='''
 		--enable-visualizer \
 		--with-curl \
 		--with-fftw \
-		--without-taglib
+		--with-taglib
 	make
 	make DESTDIR="${pkgdir}" install
 '''
