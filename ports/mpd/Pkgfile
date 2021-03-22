@@ -1,7 +1,7 @@
 version="0.22.6"
 desc='Flexible, powerful, server-side application for playing music'
-deps=["ffmpeg", "libmodplug", "curl", "sqlite", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
-makedeps=["ffmpeg", "libmodplug", "curl", "sqlite", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
+deps=["ffmpeg", "libmodplug", "curl", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
+makedeps=["ffmpeg", "libmodplug", "curl", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
 source=[
 	{url="https://www.musicpd.org/download/mpd/${version%.*}/mpd-${version}.tar.xz"},
 	{url="stacksize.patch"},
@@ -54,6 +54,7 @@ build='''
 		-Dwavpack=disabled \
 		-Dtwolame=disabled \
 		-Dshine=disabled \
+		-Dsqlite=disabled \
 		-Dlibsamplerate=disabled
 	meson configure build
 	meson compile -C build
