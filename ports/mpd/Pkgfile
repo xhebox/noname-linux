@@ -1,0 +1,61 @@
+version="0.22.6"
+desc='Flexible, powerful, server-side application for playing music'
+deps=["ffmpeg", "libmodplug", "curl", "sqlite", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
+makedeps=["ffmpeg", "libmodplug", "curl", "sqlite", "icu", "libsoxr", "boost", "pulseaudio", "systemd", "libpcre", "zlib", "lame", "alsa-lib", "bzip2", "libmpdclient", "expat"]
+source=[
+	{url="https://www.musicpd.org/download/mpd/${version%.*}/mpd-${version}.tar.xz"},
+	{url="stacksize.patch"},
+]
+
+ext='''
+	cd mpd-$version
+	patch -p0 < ../stacksize.patch
+'''
+
+build='''
+	noname-meson mpd-$version build -Ddocumentation=disabled -Dhtml_manual=false \
+		-Dqobuz=disabled \
+		-Dtidal=disabled \
+		-Dnfs=disabled \
+		-Dsoundcloud=disabled \
+		-Dio_uring=disabled \
+		-Dsndio=disabled \
+		-Dchromaprint=disabled \
+		-Did3tag=disabled \
+		-Dyajl=disabled \
+		-Ddbus=disabled \
+		-Dzzip=disabled \
+		-Dao=disabled \
+		-Djack=disabled \
+		-Doss=disabled \
+		-Dshout=disabled \
+		-Dopenal=disabled \
+		-Dudisks=disabled \
+		-Dcdio_paranoia=disabled \
+		-Dmms=disabled \
+		-Dupnp=disabled \
+		-Dsmbclient=disabled \
+		-Diso9660=disabled \
+		-Dvorbis=disabled \
+		-Dvorbisenc=disabled \
+		-Dtremor=disabled \
+		-Dfluidsynth=disabled \
+		-Daudiofile=disabled \
+		-Dadplug=disabled \
+		-Dfaad=disabled \
+		-Dflac=disabled \
+		-Dgme=disabled \
+		-Dmad=disabled \
+		-Dmikmod=disabled \
+		-Dmpcdec=disabled \
+		-Dmpg123=disabled \
+		-Dsidplay=disabled \
+		-Dwildmidi=disabled \
+		-Dwavpack=disabled \
+		-Dtwolame=disabled \
+		-Dshine=disabled \
+		-Dlibsamplerate=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -1,0 +1,17 @@
+version="0.9.72"
+desc="micro http daemon lib"
+deps=["curl"]
+makedeps=["curl"]
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/libmicrohttpd/libmicrohttpd-$version.tar.gz"},
+]
+
+build='''
+	cd libmicrohttpd-$version
+	./configure --prefix= \
+		--disable-examples \
+		--disable-https \
+		--enable-curl
+	make
+	make DESTDIR="$pkgdir" install
+'''

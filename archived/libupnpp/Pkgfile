@@ -1,0 +1,14 @@
+version="0.20.2"
+desc="c++ wrapper for libupnp"
+deps=["libnpupnp", "expat"]
+makedeps=["libnpupnp", "expat"]
+source=[
+	{url="http://www.lesbonscomptes.com/upmpdcli/downloads/libupnpp-$version.tar.gz"},
+]
+
+build='''
+	cd libupnpp-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

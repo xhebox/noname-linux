@@ -1,10 +1,10 @@
-name=ncmpcpp
-version=0.8.2
+version="0.9.2"
 desc='Almost exact clone of ncmpc with some new features'
-deps="curl libmpdclient taglib ncurses fftw boost"
-source="https://rybczak.net/ncmpcpp/stable/ncmpcpp-$version.tar.bz2"
+deps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost"]
+makedeps=["curl", "libmpdclient", "ncurses" ,"fftw", "boost"]
+source=[{url="https://rybczak.net/ncmpcpp/stable/ncmpcpp-$version.tar.bz2"}]
 
-build() {
+build='''
 	cd ncmpcpp-$version
 	CPPFLAGS="$CPPFLAGS -DU_USING_ICU_NAMESPACE=1"
 	BOOST_LIB_SUFFIX='' ./configure \
@@ -15,9 +15,7 @@ build() {
 		--enable-visualizer \
 		--with-curl \
 		--with-fftw \
-		--with-taglib
+		--without-taglib
 	make
-	make -C extras
 	make DESTDIR="${pkgdir}" install
-	install -Dm 755 extras/artist_to_albumartist -t "${pkgdir}/bin"
-}
+'''

@@ -1,0 +1,12 @@
+--- include/nfsc/libnfs.h	2019-02-13 05:38:04.000000000 +0800
++++ include/nfsc/libnfs.h	2019-02-13 05:38:04.000000000 +0800
+@@ -25,7 +25,8 @@
+ 
+ #include <stdint.h>
+ #if defined(__ANDROID__) || defined(AROS) \
+- || ( defined(__APPLE__) && defined(__MACH__) )
++ || ( defined(__APPLE__) && defined(__MACH__) ) \
++ || !defined(__GLIBC__)
+ #include <sys/time.h>
+ #else
+ #include <time.h>

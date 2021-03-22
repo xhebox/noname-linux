@@ -1,0 +1,14 @@
+version="4.0.14"
+desc="c++ base upnp lib"
+deps=["expat", "libmicrohttpd"]
+makedeps=["expat", "libmicrohttpd"]
+source=[
+	{url="http://www.lesbonscomptes.com/upmpdcli/downloads/libnpupnp-$version.tar.gz"},
+]
+
+build='''
+	cd libnpupnp-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

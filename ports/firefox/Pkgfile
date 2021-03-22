@@ -1,5 +1,5 @@
 name="firefox"
-version="84.0.2"
+version="86.0.1"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pulseaudio", "inetutils", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pulseaudio", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
@@ -15,6 +15,7 @@ source=[
 	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
 	{url="no-x11.patch"},
+	{url="no-ps.patch"},
 ]
 
 ext='''
@@ -103,7 +104,7 @@ END
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.15.0 cbindgen
+	cargo install --version 0.16.0 cbindgen
 
 	cd firefox-${version%b*}
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"

@@ -1,4 +1,4 @@
-version="20.3.3"
+version="21.0.0-rc5"
 makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "wayland-protocols", "python3-mako", "glslang"]
 deps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "wayland"]
 desc="Mesa 3D Graphics Library"
@@ -6,6 +6,7 @@ source=[
 	{url="https://archive.mesa3d.org/mesa-$version.tar.xz"},
 	{url="add-use-elf-tls.patch"},
 	{url="no-x11.patch"},
+	{url="no-isystem.patch"},
 	{url="musl.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
@@ -24,7 +25,6 @@ ext='''
 
 build='''
 	noname-meson mesa-$version build \
-		-D b_lto=true \
 		-D b_ndebug=true \
 		-D platforms=wayland \
 		-D dri3=enabled \

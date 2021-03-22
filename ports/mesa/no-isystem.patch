@@ -1,0 +1,10 @@
+--- mesa-21.0.0-rc5/meson.build	2021-02-21 01:12:40.792123261 +0800
++++ mesa-21.0.0-rc5/meson.build	2021-02-21 01:12:40.792123261 +0800
+@@ -1573,7 +1573,6 @@
+     static : not _shared_llvm,
+     method : _llvm_method,
+     fallback : ['llvm', 'dep_llvm'],
+-    include_type : 'system',
+   )
+   with_llvm = dep_llvm.found()
+ endif

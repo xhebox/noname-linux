@@ -1,0 +1,11 @@
+version="1.14.2"
+desc='Portable Open Source UPnP Development Kit'
+source=[{url="https://github.com/pupnp/pupnp/releases/download/release-$version/libupnp-$version.tar.bz2"}]
+
+build='''
+	cd libupnp-$version
+	autoreconf -fiv
+	./configure --prefix=/
+	make
+	make DESTDIR=${pkgdir} install
+'''

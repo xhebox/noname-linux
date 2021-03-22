@@ -1,4 +1,4 @@
-version="1.2.1"
+version="1.2.2"
 desc="An implementation of the standard C library for Linux-based systems."
 deps=[
 	"filesystem",
@@ -17,8 +17,6 @@ source=[
 	{ url="iconv.c" },
 	{ url="getent.c" },
 	{ url="ldd" },
-	{ url="convert-hangs-to-crashes.patch" },
-	{ url="cve.patch" },
 	{ url="handle-aux-at_base.patch" },
 	{ url="pthread_getname.patch" },
 ]
@@ -36,6 +34,8 @@ ext='''
 build='''
 	cd musl-$version
 	unset LDFLAGS
+	export CXXFLAGS=$(sed 's/\-O\d//g' $CXXFLAGS)
+	export CFLAGS=$(sed 's/\-O\d//g' $CFLAGS)
 
 	# ------------------------------
 	# ssp support

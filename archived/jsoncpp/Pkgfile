@@ -3,8 +3,8 @@ desc="JSON implementation in Cpp"
 source=[{url="https://github.com/open-source-parsers/jsoncpp/archive/$version.tar.gz"}]
 
 build='''
-	cd jsoncpp-$version
-	noname-meson --default-library shared build
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	noname-meson jsoncpp-$version build --default-library shared
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

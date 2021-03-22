@@ -1,0 +1,18 @@
+version="1.5.9"
+desc="upnp renderer based on mpd"
+deps=["libupnpp", "python3", "libmicrohttpd", "libmpdclient", "jsoncpp"]
+makedeps=["libupnpp", "python3", "libmicrohttpd", "libmpdclient", "jsoncpp"]
+source=[
+	{url="http://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-$version.tar.gz"},
+]
+
+build='''
+	cd upmpdcli-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+	install -Dm644 systemd/upmpdcli.service "$pkgdir"/lib/systemd/system/upmpdcli.service
+	sed -i '/\[Service\]/a User=upmpdcli' "$pkgdir"/lib/systemd/system/upmpdcli.service
+	sed -i '/^After/ s/$/ mpd.service/' "$pkgdir"/lib/systemd/system/upmpdcli.service
+	chmod 644 "$pkgdir"/etc/upmpdcli.conf
+'''

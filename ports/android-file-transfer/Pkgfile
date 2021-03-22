@@ -1,0 +1,19 @@
+version="4.2"
+desc='Android MTP client with minimalistic UI'
+deps=["fuse2", "file"]
+makedeps=["fuse2", "file"]
+source=[
+	{url="https://github.com/whoozle/android-file-transfer-linux/archive/v$version.tar.gz"},
+	{url="51-android.rules"},
+	{url="android-udev.conf"},
+]
+
+build='''
+	cmake android-file-transfer-linux-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DBUILD_QT_UI=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	install -Dm 644 51-android.rules "$pkgdir"/lib/udev/rules.d/51-android.rules
+	install -Dm 644 android-udev.conf "$pkgdir"/lib/sysusers.d/android-udev.conf
+'''

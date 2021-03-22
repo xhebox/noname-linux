@@ -1,0 +1,23 @@
+version="4.0.0"
+desc='client library for accessing NFS shares'
+source=[
+	{url="https://github.com/sahlberg/libnfs/archive/libnfs-$version.tar.gz"},
+	{url="libnfs.patch"},
+]
+
+ext='''
+	cd libnfs-libnfs-$version
+	patch -Np0 -i ../libnfs.patch
+'''
+
+build='''
+	cmake libnfs-libnfs-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

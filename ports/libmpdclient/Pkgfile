@@ -1,11 +1,10 @@
-version="2.16"
+version="2.19"
 desc='Asynchronous API library for interfacing MPD in the C, C++ & Objective C languages'
-makedeps=["meson"]
 source=[{url="https://www.musicpd.org/download/libmpdclient/${version%.*}/libmpdclient-${version}.tar.xz"}]
 
 build='''
-	cd libmpdclient-$version
-	noname-meson . build
-	ninja -C build
-	DESTDIR="${pkgdir}" ninja -C build install
+	noname-meson libmpdclient-$version build -Denable_docs=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''
