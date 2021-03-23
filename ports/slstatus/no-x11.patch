@@ -1,3 +1,14 @@
+--- slstatus/Makefile	2019-04-11 21:35:21.731986998 +0800
++++ slstatus/Makefile	2019-04-11 21:35:21.731986998 +0800
+@@ -14,8 +14,6 @@
+ 	components/hostname\
+ 	components/ip\
+ 	components/kernel_release\
+-	components/keyboard_indicators\
+-	components/keymap\
+ 	components/load_avg\
+ 	components/netspeeds\
+ 	components/num_files\
 --- slstatus/slstatus.c	2019-04-11 21:33:20.653530022 +0800
 +++ slstatus/slstatus.c	2019-04-11 21:33:20.653530022 +0800
 @@ -5,7 +5,6 @@
@@ -11,12 +22,12 @@
 @@ -19,7 +18,6 @@
  
  char buf[1024];
- static int done;
+ static volatile sig_atomic_t done;
 -static Display *dpy;
  
  #include "config.h"
  
-@@ -51,15 +49,11 @@
+@@ -50,18 +48,14 @@
  	struct sigaction act;
  	struct timespec start, current, diff, intspec, wait;
  	size_t i, len;
@@ -27,24 +38,27 @@
  
 -	sflag = 0;
  	ARGBEGIN {
+ 		case '1':
+ 			done = 1;
+ 			/* fallthrough */
 -		case 's':
 -			sflag = 1;
 -			break;
  		default:
  			usage();
  	} ARGEND
-@@ -73,10 +67,6 @@
- 	sigaction(SIGINT,  &act, NULL);
- 	sigaction(SIGTERM, &act, NULL);
+@@ -77,10 +71,6 @@
+ 	act.sa_flags |= SA_RESTART;
+ 	sigaction(SIGUSR1, &act, NULL);
  
 -	if (!sflag && !(dpy = XOpenDisplay(NULL))) {
 -		die("XOpenDisplay: Failed to open display");
 -	}
 -
- 	while (!done) {
+ 	do {
  		if (clock_gettime(CLOCK_MONOTONIC, &start) < 0) {
  			die("clock_gettime:");
-@@ -94,18 +84,10 @@
+@@ -98,18 +88,10 @@
  			len += ret;
  		}
  
@@ -67,9 +81,9 @@
  
  		if (!done) {
  			if (clock_gettime(CLOCK_MONOTONIC, &current) < 0) {
-@@ -126,12 +108,5 @@
+@@ -130,12 +112,5 @@
  		}
- 	}
+ 	} while (!done);
  
 -	if (!sflag) {
 -		XStoreName(dpy, DefaultRootWindow(dpy), NULL);
@@ -80,14 +94,3 @@
 -
  	return 0;
  }
---- slstatus/Makefile	2019-04-11 21:35:21.731986998 +0800
-+++ slstatus/Makefile	2019-04-11 21:35:21.731986998 +0800
-@@ -14,8 +14,6 @@
- 	components/hostname\
- 	components/ip\
- 	components/kernel_release\
--	components/keyboard_indicators\
--	components/keymap\
- 	components/load_avg\
- 	components/netspeeds\
- 	components/num_files\
