@@ -36,3 +36,14 @@
  
          *sg = s;
          return !!s;
+--- systemd-247/src/basic/alloc-util.h	2020-11-27 02:00:50.000000000 +0800
++++ systemd-247/src/basic/alloc-util.h	2020-11-27 02:00:50.000000000 +0800
+@@ -96,7 +96,7 @@
+         return malloc(size * need ?: 1);
+ }
+ 
+-#if !HAVE_REALLOCARRAY
++#if 0
+ _alloc_(2, 3) static inline void *reallocarray(void *p, size_t need, size_t size) {
+         if (size_multiply_overflow(size, need))
+                 return NULL;

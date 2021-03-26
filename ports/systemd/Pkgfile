@@ -38,7 +38,6 @@ source=[
 	{url="0025-Handle-__cpu_mask-usage.patch"},
 	{url="0026-Handle-missing-gshadow.patch"},
 	{url="home.patch"},
-	{url="libressl.patch"},
 	{url="locale.patch"},
 	{url="musl_missing_fs.patch"},
 	{url="musl_quota.patch"},

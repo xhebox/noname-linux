@@ -1,7 +1,7 @@
 version="9.2.0"
 desc="RFC2131 compliant DHCP client daemon"
-makedeps=["systemd", "openresolv"]
-deps=["systemd", "openresolv", "musl"]
+makedeps=["systemd"]
+deps=["systemd"]
 source=[
 	{url="http://roy.marples.name/downloads/dhcpcd/dhcpcd-$version.tar.xz"},
 	{url="musl.patch"},
