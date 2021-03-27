@@ -1,7 +1,7 @@
 version="2.0.10"
 desc="A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard (Version 2)"
-makedeps=["mesa", "dbus", "pulseaudio", "wayland-protocols"]
-deps=["mesa", "dbus", "pulseaudio", "wayland"]
+makedeps=["mesa", "dbus", "pipewire", "wayland-protocols"]
+deps=["mesa", "dbus", "pipewire", "wayland"]
 source=[
 	{name="sdl2-$version.tar.gz", url="http://www.libsdl.org/release/SDL2-${version}.tar.gz"},
 	{url="pure-wayland.patch"},
@@ -23,7 +23,7 @@ build='''
 		-DARTS=OFF \
 		-DESD=OFF \
 		-DNAS=OFF \
-		-DALSA=ON \
+		-DALSA=OFF \
 		-DPULSEAUDIO_SHARED=ON \
 		-DVIDEO_X11=OFF \
 		-DVIDEO_WAYLAND=ON \

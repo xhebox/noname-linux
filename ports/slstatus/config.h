@@ -17,8 +17,6 @@ static const struct arg args[] = {
 	{ cpu_perc,      "| %s ",									  NULL },
 	{ cpu_freq,      " %s ",                   NULL },
 	{ ram_perc,      "| %s ",										NULL },
-	{ run_command, 	 "| %s ",										"amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }'" },
-	{ run_command, 	 " %s ",										  "amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'" },
 	{ battery_perc,  "| %s ",                   "BAT0" },
 	{ datetime,      "| %s ",                   "%y-%m-%d %a %H:%M:%S" },
 };

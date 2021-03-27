@@ -1,6 +1,6 @@
 version="1.1.6"
-makedeps=["alsa-lib", "speex", "libsamplerate", "pulseaudio", "ffmpeg"]
-deps=["alsa-lib", "speex", "libsamplerate", "pulseaudio", "ffmpeg"]
+makedeps=["alsa-lib", "speex", "libsamplerate", "ffmpeg"]
+deps=["alsa-lib", "speex", "libsamplerate", "ffmpeg"]
 desc="ALSA plugins"
 source=[
 	{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/plugins/alsa-plugins-$version.tar.bz2"},

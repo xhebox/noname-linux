@@ -1,0 +1,10 @@
+pattern=["lib/pipewire"]
+when=["post"]
+operation=["remove", "install"]
+script='''
+if [ -e /bin/systemctl ]; then
+	systemctl --global enable pipewire.socket
+	systemctl --global enable pipewire-pulse.socket
+	systemctl --global enable pipewire-media-session.service
+fi
+'''

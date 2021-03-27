@@ -1,0 +1,110 @@
+version = "0.3.24"
+pulseversion = "13.0"
+desc = "library for layout and rendering of text"
+deps = [
+  "gcc",
+  "alsa-lib",
+  "systemd",
+  "dbus",
+  "gst-plugins-base",
+  "ncurses",
+  "libsndfile",
+  "vulkan-icd-loader",
+  "bluez",
+  "sbc",
+]
+makedeps = [
+  "gcc",
+  "systemd",
+  "dbus",
+  "alsa-lib",
+  "gst-plugins-base",
+  "ncurses",
+  "libsndfile",
+  "vulkan-headers",
+  "vulkan-icd-loader",
+  "bluez",
+  "sbc",
+]
+source = [
+  { url = "https://github.com/PipeWire/pipewire/archive/refs/tags/$version.tar.gz" },
+  { url = "http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$pulseversion.tar.xz" },
+  { url = "pipewire.toml" },
+]
+
+build = '''
+	noname-meson pipewire-$version build \
+		-Dman=disabled \
+		-Dgstreamer=enabled -Dgstreamer-device-provider=enabled \
+		-Dbluez5-codec-ldac=disabled \
+		-Dbluez5-codec-aac=disabled \
+		-Dbluez5-codec-aptx=disabled \
+		-Djack=disabled \
+		-Dlibcamera=disabled \
+		-Dsystemd-user-unit-dir=/lib/systemd/user
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+
+	noname-meson pulseaudio-$pulseversion pabuild \
+	-Dman=false \
+	-Dtests=false \
+	-Dgcov=false \
+	-Dudevruelsdir=/lib/udev/rules.d \
+	-Ddatabase=simple \
+	-Dalsa=disabled \
+	-Dasyncns=disabled \
+	-Davahi=disabled \
+	-Dbluez5=false \
+	-Dbluez5-native-headset=false \
+	-Dbluez5-ofono-headset=false \
+	-Ddbus=disabled \
+	-Dfftw=disabled \
+	-Dsdl2=disabled \
+	-Dglib=disabled \
+	-Dgsettings=disabled \
+	-Dgtk=disabled \
+	-Dhal-compat=false \
+	-Dipv6=false \
+	-Djack=disabled \
+	-Dlirc=disabled \
+	-Dopenssl=disabled \
+	-Dorc=disabled \
+	-Dsamplerate=disabled \
+	-Dsoxr=disabled \
+	-Dspeex=disabled \
+	-Dsystemd=disabled \
+	-Dudev=disabled \
+	-Dx11=disabled \
+	-Dadrian-aec=true \
+	-Dwebrtc-aec=disabled
+
+	meson configure pabuild
+	ninja -C pabuild \
+		PulseAudioConfig.cmake \
+		src/libpulsecommon-$pulseversion.so \
+		src/utils/pacat \
+		src/utils/pactl \
+		src/utils/pacmd
+
+	install -Dm644 pabuild/src/pulse/client.conf "$pkgdir"/etc/pulse/client.conf
+	install -Dm755 pabuild/src/utils/pacat "$pkgdir"/bin/pacat
+	install -Dm755 pabuild/src/utils/pactl "$pkgdir"/bin/pactl
+	install -Dm755 pabuild/src/utils/pacmd "$pkgdir"/bin/pacmd
+	rm -rf pabuild/src/*.so*.p pabuild/src/pulse/*.so*.p
+	for i in pabuild/src/*.so* pabuild/src/pulse/*.so*; do
+		mv $i "$pkgdir"/lib
+	done
+	mkdir -p "$pkgdir"/lib/pkgconfig
+	for i in pabuild/*.pc; do
+		mv $i "$pkgdir"/lib/pkgconfig/
+	done
+	mkdir -p "$pkgdir"/lib/cmake
+	for i in pabuild/*.cmake; do
+		mv $i "$pkgdir"/lib/cmake/
+	done
+	for i in pulseaudio-$pulseversion/src/pulse/*.h; do
+		mv $i "$pkgdir"/include/
+	done
+	install -Dm644 pipewire.toml "$pkgdir/${HOOKS#$ROOT}"/pipewire.toml
+'''

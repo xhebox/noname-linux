@@ -63,6 +63,8 @@ source=[
 baks=[
 	"etc/systemd/journald.conf",
 	"etc/systemd/logind.conf",
+	"etc/systemd/networkd.conf",
+	"etc/systemd/resolved.conf",
 ]
 
 ext='''

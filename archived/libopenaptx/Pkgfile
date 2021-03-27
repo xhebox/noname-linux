@@ -1,0 +1,9 @@
+version="0.2.0"
+desc="Open Source aptX codec library"
+source=[{url="https://github.com/pali/libopenaptx/releases/download/$version/libopenaptx-$version.tar.gz"}]
+
+build='''
+  cd libopenaptx-$version
+  make CC="cc" CPPFLAGS="$CPPFLAGS" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" PREFIX=/
+  make CC="cc" CPPFLAGS="$CPPFLAGS" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" PREFIX=/ DESTDIR="$pkgdir" install
+'''
