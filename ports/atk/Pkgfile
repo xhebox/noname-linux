@@ -1,4 +1,4 @@
-version="2.30.0"
+version="2.35.1"
 makedeps=["glib"]
 deps=["glib"]
 desc="A set of interfaces for accessibility"

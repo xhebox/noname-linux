@@ -1,8 +1,7 @@
-version="0.34.0"
+version="0.40.0"
 desc="Pixel manipulation library"
 source=[
 	{url="https://www.x.org/archive/individual/lib/pixman-$version.tar.gz"},
-	{url="float-header-fix.patch"},
 ]
 deps=["libpng"]
 makedeps=["libpng"]

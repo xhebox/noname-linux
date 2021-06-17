@@ -1,20 +1,20 @@
-version="1.5.1"
+version="1.6"
 desc='Tiling Wayland compositor and replacement for the i3 window manager'
 deps=["swaybg", "cairo", "json-c", "pango", "libpcre", "wlroots"]
 makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols"]
 source=[
 	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
-	{url="ime2.patch"},
+	{url="50-systemd-user.conf"},
 ]
 
 ext='''
 	cd sway-$version
-	patch -Np1 -i ../ime2.patch
 '''
 
 build='''
-	noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled
+	noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled -Dsd-bus-provider=libsystemd
 	meson configure build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 50-systemd-user.conf -t "$pkgdir/etc/sway/config.d/"
 '''

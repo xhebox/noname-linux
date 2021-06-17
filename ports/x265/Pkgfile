@@ -1,6 +1,6 @@
 version="2.9"
 desc="Open Source H265/HEVC video encoder"
-makedeps=["yasm"]
+makedeps=["nasm"]
 source=[{url="https://bitbucket.org/multicoreware/x265/downloads/x265_${version}.tar.gz"}]
 
 build='''

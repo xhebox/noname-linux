@@ -1,17 +1,14 @@
-version="1.18.0"
+version="1.19.0"
 desc="A computer display server protocol"
 deps=["expat", "libffi", "libxml2"]
 makedeps=["expat", "libffi", "libxml2"]
 source=[
 	{url="https://wayland.freedesktop.org/releases/wayland-$version.tar.xz"},
-	{url="no-graphviz.patch"},
 ]
 
 build='''
-	cd wayland-$version
-	patch -p1 -i ../no-graphviz.patch
-	autoreconf -ifv
-	./configure --prefix= --disable-documentation --disable-static
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson wayland-$version build -Ddocumentation=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''
