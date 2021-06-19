@@ -1,45 +1,48 @@
-version="20200601"
+version="20210119"
+nss_version="3.66"
+nss_versions="`echo $version | tr . _`"
 desc="Common CA certificate"
 source=[
-	{url="http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_$version.tar.xz"},
-	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/certdata2pem.c"},
-	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/ca-certificates/files/remove-expired-certs.sh"},
+	{url="https://archive.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${nss_versions}_RTM/src/nss-${nss_version}.tar.gz"},
+	{url="update-ca-trust.sh"},
 	{url="ca-certs.toml"},
+	{url="bundle.sh"},
+	{url="certdata2pem.py"},
 ]
-deps=["run-parts", "coreutils", "libressl", "dash"]
-
-ext='''
-	cd work
-
-	find . -type f -exec sed -i -e 's/\/usr\/share/\/share/g' -e 's/\/usr\/bin/\/bin/g' -e 's/\/usr\/sbin/\/bin/g' {} \;
-
-	gcc ../certdata2pem.c -o mozilla/certdata2pem
-
-	install -Dm755 ../remove-expired-certs.sh mozilla
-
-	sed -i mozilla/Makefile -e 's,python certdata2pem.py,./certdata2pem,g'
-	sed -i mozilla/Makefile -e "s;\(.*\)\(certdata2pem.*\);\1\2\n\1./remove-expired-certs.sh;"
-	sed -i 's/openssl rehash/openssl certhash/g' sbin/update-ca-certificates
-'''
+makedeps=["p11-kit", "bash", "python3"]
+deps=["p11-kit"]
 
 build='''
-	cd work
-	make
+	mv update-ca-trust.sh update-ca-trust
+	install -Dt "$pkgdir/bin" update-ca-trust
 
-	mkdir -p "$pkgdir"/bin
-	mkdir -p "$pkgdir"/share/ca-certificates
-	mkdir -p "$pkgdir"/etc/ca-certificates/update.d
-	mkdir -p "$pkgdir"/etc/ssl/certs
-	make install DESTDIR=${pkgdir}
+# Trust source directories
+# Upstream also adds "blocklist" but that's useless without support in p11-kit
+	install -d "$pkgdir"/etc/ca-certificates/trust-source/anchors
+	install -d "$pkgdir"/etc/ca-certificates/trust-source/blocklist
+	install -d "$pkgdir"/share/ca-certificates/trust-source/anchors
+	install -d "$pkgdir"/share/ca-certificates/trust-source/blocklist
 
-	install -Dm644 sbin/update-ca-certificates.8 "${pkgdir}"/share/man/man8/update-ca-certificates.8
+# Directories used by update-ca-trust (aka "trust extract-compat")
+	install -d "$pkgdir"/etc/ssl/certs/edk2
+	install -d "$pkgdir"/etc/ssl/certs/java
+	install -d "$pkgdir"/etc/ca-certificates/extracted
 
-	sed -i 's,c_rehash,openssl certhash,g' "${pkgdir}"/bin/update-ca-certificates
+# Compatibility link for OpenSSL using /etc/ssl as CAdir
+# Used in preference to the individual links in /etc/ssl/certs
+	ln -sr "$pkgdir/etc/ca-certificates/extracted/tls-ca-bundle.pem" "$pkgdir/etc/ssl/cert.pem"
 
-	ln -sr "$pkgdir"/etc/ssl/certs/ca-certificates.crt "$pkgdir"/etc/ssl/certs.pem
-
+# Compatiblity link for legacy bundle
+	ln -sr "$pkgdir/etc/ca-certificates/extracted/tls-ca-bundle.pem" "$pkgdir/etc/ssl/certs/ca-certificates.crt"
 	install -Dm644 ../ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
 
-	cd "${pkgdir}"/share/ca-certificates
-	find . -name '*.crt' | sort | cut -b3- > "${pkgdir}"/etc/ca-certificates.conf
+	cd nss-${nss_version}
+  mkdir certs
+  ln -srt certs nss/lib/ckfw/builtins/certdata.txt
+  ln -srt certs nss/lib/ckfw/builtins/nssckbi.h
+	cd certs
+  python3 "$srcdir/certdata2pem.py"
+  cd ..
+  bash "$srcdir/bundle.sh"
+	install -Dm644 ca-bundle.trust.p11-kit "$pkgdir/share/ca-certificates/trust-source/mozilla.trust.p11-kit"
 '''

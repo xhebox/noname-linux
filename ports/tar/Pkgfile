@@ -1,16 +1,10 @@
-version="1.30"
+version="1.34"
 desc="GNU tar"
 makedeps=["acl", "attr"]
 deps=["musl", "acl", "attr"]
 source=[
 	{url="http://ftp.gnu.org/gnu/tar/tar-$version.tar.xz"},
-	{url="argp.patch"},
 ]
-
-ext='''
-	cd tar-$version
-	patch -p1 -i ../argp.patch
-'''
 
 build='''
 	cd tar-$version

@@ -1,7 +1,7 @@
 version="247"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup"]
-deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
 	{

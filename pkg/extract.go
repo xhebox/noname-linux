@@ -114,7 +114,9 @@ func opt_extract(name string, opts map[harg]bool) error {
 
 			command := ""
 			switch {
-			case strings.HasSuffix(spath, ".tgz"), strings.HasSuffix(spath, ".tar.gz"), strings.HasSuffix(spath, ".txz"), strings.HasSuffix(spath, ".tar.xz"), strings.HasSuffix(spath, ".tbz2"), strings.HasSuffix(spath, ".tar.bz2"), strings.HasSuffix(spath, ".tlz4"), strings.HasSuffix(spath, ".tar.lz4"), strings.HasSuffix(spath, ".tsz"), strings.HasSuffix(spath, ".tar.sz"), strings.HasSuffix(spath, ".tar"), strings.HasSuffix(spath, ".tlz"), strings.HasSuffix(spath, ".tar.lz"):
+			case strings.HasSuffix(spath, ".tgz"), strings.HasSuffix(spath, ".tar.gz"), strings.HasSuffix(spath, ".txz"), strings.HasSuffix(spath, ".tar.xz"), strings.HasSuffix(spath, ".tbz2"), strings.HasSuffix(spath, ".tar.bz2"), strings.HasSuffix(spath, ".tlz4"), strings.HasSuffix(spath, ".tar.lz4"), strings.HasSuffix(spath, ".tsz"), strings.HasSuffix(spath, ".tar.sz"), strings.HasSuffix(spath, ".tar"),
+				strings.HasSuffix(spath, ".tlz"), strings.HasSuffix(spath, ".tar.lz"),
+				strings.HasSuffix(spath, ".tar.zst"):
 				if exist("/bin/bsdtar") || exist("/usr/bin/bsdtar") {
 					command = "bsdtar xpf " + spath
 				} else if exist("/bin/tar") || exist("/usr/bin/tar") {

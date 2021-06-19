@@ -1,0 +1,19 @@
+version="0.24.0"
+desc="Provides a way to load and enumerate PKCS#11 modules"
+makedeps=["libffi", "libtasn1"]
+deps=["libffi", "libtasn1"]
+source=[
+	{url="https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$version.tar.xz"},
+]
+
+build='''
+	noname-meson p11-kit-$version build \
+		-Denable_docs=false \
+		-Dgtk_doc=false \
+		-Dman=false \
+		-Dbash_completion=disabled \
+		-Dtrust_paths=/etc/ca-certificates/trust-source:/share/ca-certificates/trust-source
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

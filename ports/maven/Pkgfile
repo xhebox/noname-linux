@@ -1,0 +1,19 @@
+version="3.8.1"
+deps=["openjdk16", "procps-ng"]
+makedeps=["openjdk16", "procps-ng"]
+source=[
+	{url="https://www-us.apache.org/dist/maven/maven-3/${version}/binaries/apache-maven-${version}-bin.tar.gz"},
+	{url="settings.xml"},
+]
+
+build='''
+	install -dm644 "$pkgdir/lib"
+	mv apache-maven-${version} "$pkgdir/lib/mvn"
+
+	install -dm644 "${pkgdir}/etc/profile.d"
+	cat >> "${pkgdir}/etc/profile.d/mvn.sh" << EOF
+export MVN_HOME="/lib/mvn"
+export PATH="\$PATH:\$MVN_HOME/bin"
+EOF
+	chmod +x "$pkgdir/etc/profile.d/mvn.sh"
+'''

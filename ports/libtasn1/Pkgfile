@@ -1,12 +1,10 @@
-name=libtasn1
-version=4.13
+version="4.17.0"
 desc="The ASN.1 library used in GNUTLS"
-deps=musl
-source="https://ftp.gnu.org/gnu/libtasn1/libtasn1-${version}.tar.gz"
+source=[{url="https://ftp.gnu.org/gnu/libtasn1/libtasn1-${version}.tar.gz"}]
 
-build() {
+build='''
 	cd libtasn1-${version}
 	./configure --prefix=
 	make
 	make DESTDIR="${pkgdir}" install
-}
+'''
