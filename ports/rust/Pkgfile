@@ -1,13 +1,15 @@
 name="rust"
 nostrip=true
+rustup_version="1.22.1"
 version="1.49.0"
 _rust_dist_version="1.49.0"
 _cargo_dist_version="1.49.0"
-deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot"]
+deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "curl", "xz"]
 makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "cmake", "curl", "python3"]
 source=[
 	{url="https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
+	{url="https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz"},
 	{url="00016-do-not-copy-libunwind.patch"},
 	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
 	{url="0011-Dynamically-link-libc-on-musl-by-default.patch"},
@@ -95,7 +97,10 @@ EOF
 '''
 
 build='''
-	cd rustc-$version-src
+	cd rustup-$rustup_version
+	cargo build --release --features no-self-update --bin rustup-init
+	install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"
+	cd ../rustc-$version-src
 	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
 	export PATH="$srcdir/stage0/bin:$PATH"
 	export CARGO_HOME="$srcdir/.cargo"

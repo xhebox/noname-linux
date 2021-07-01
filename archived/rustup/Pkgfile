@@ -2,7 +2,9 @@ version="1.22.1"
 deps=["rust", "curl", "xz"]
 makedeps=["rust"]
 desc="The Rust toolchain installer"
-source=[{url="https://github.com/rust-lang/rustup.rs/archive/${version}.tar.gz"}]
+source=[
+	{url="https://github.com/rust-lang/rustup.rs/archive/${version}.tar.gz"},
+]
 
 build='''
 	cd rustup-$version
