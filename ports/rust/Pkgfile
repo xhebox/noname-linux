@@ -1,19 +1,20 @@
 name="rust"
 nostrip=true
-rustup_version="1.22.1"
-version="1.49.0"
-_rust_dist_version="1.49.0"
-_cargo_dist_version="1.49.0"
+rustup_version="1.24.3"
+version="1.53.0"
+_rust_dist_version="$version"
+makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "xz", "curl", "cmake", "python3"]
 deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "curl", "xz"]
-makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "cmake", "curl", "python3"]
 source=[
 	{url="https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
 	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
 	{url="https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz"},
-	{url="00016-do-not-copy-libunwind.patch"},
-	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
 	{url="0011-Dynamically-link-libc-on-musl-by-default.patch"},
-	{url="need-ssp_nonshared.patch"},
+	{url="0001-bootstrap-Change-libexec-dir.patch"},
+	{url="0001-cargo-Change-libexec-dir.patch"},
+	{url="0002-compiler-Change-LLVM-targets.patch"},
+	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
+	{url="0007-do-not-install-libunwind-source.patch"},
 ]
 
 ext='''
@@ -35,11 +36,6 @@ ext='''
 		esac
 	done
 
-	sed -i 's/\("files":{\)[^}]*/\1/' vendor/libc/.cargo-checksum.json
-	rm -rf src/llvm-project
-	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
-	sed -i '/linker:/ s/rust-lld/wasm-ld/' compiler/rustc_target/src/spec/wasm32_base.rs
-
 	cat <<- EOF > config.toml
 [llvm]
 link-shared=true
@@ -47,22 +43,24 @@ link-shared=true
 llvm-config="/bin/llvm-config"
 crt-static=false
 [target.wasm32-unknown-unknown]
-linker="lld"
+linker="wasm-ld"
 wasi-root="/lib/wasi-sysroot"
 llvm-config="/bin/llvm-config"
+profiler=false
 [target.wasm32-wasi]
-linker="lld"
+linker="wasm-ld"
 wasi-root="/lib/wasi-sysroot"
 llvm-config="/bin/llvm-config"
+profiler=false
 [build]
-build="x86_64-unknown-linux-musl"
-tools=["cargo", "rls", "clippy", "miri", "rustfmt", "analysis", "src"]
+tools=["cargo", "rls", "clippy", "rustfmt", "analysis", "src", "rust-demangler"]
 host=["x86_64-unknown-linux-musl"]
+build="x86_64-unknown-linux-musl"
 target=["wasm32-wasi", "wasm32-unknown-unknown", "x86_64-unknown-linux-musl"]
 docs=false
+profiler=true
 extended=true
 sanitizers=false
-profiler=true
 full-bootstrap=false
 local-rebuild=true
 vendor=true
@@ -77,10 +75,9 @@ musl-root="/"
 channel="nightly"
 codegen-units-std=1
 codegen-tests=false
+remap-debuginfo=true
 jemalloc=false
 llvm-libunwind="no"
-lld=false
-use-lld=false
 rpath=false
 [dist]
 src-tarball=false
@@ -88,22 +85,22 @@ EOF
 
 	mkdir .cargo
 	cat > .cargo/config << "EOF"
-[source.crates-io]
-replace-with='ustc'
-
-[source.ustc]
-registry="https://mirrors.ustc.edu.cn/crates.io-index"
+[http]
+multiplexing = false
 EOF
 '''
 
 build='''
+	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
+	export PATH="$srcdir/stage0/bin:$PATH"
+	export CARGO_HOME="$srcdir/.cargo"
 	cd rustup-$rustup_version
 	cargo build --release --features no-self-update --bin rustup-init
 	install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"
 	cd ../rustc-$version-src
-	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
-	export PATH="$srcdir/stage0/bin:$PATH"
-	export CARGO_HOME="$srcdir/.cargo"
 	./x.py build
 	DESTDIR="$pkgdir" ./x.py install
+	rm -rf "$pkgdir"/lib/rustlib/manifest-*
+	rm -rf "$pkgdir/lib/rustlib/install.log"
+	rm -rf "$pkgdir/lib/rustlib/rust-installer-version"
 '''

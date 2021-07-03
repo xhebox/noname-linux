@@ -19,15 +19,6 @@ source=[
 ]
 
 ext='''
-	mkdir .cargo
-	cat > .cargo/config << "EOF"
-[source.crates-io]
-replace-with = 'ustc'
-
-[source.ustc]
-registry = "git://mirrors.ustc.edu.cn/crates.io-index"
-EOF
-
 	cd firefox-${version%b*}
 	for i in $source; do
 		case $i in
@@ -44,8 +35,6 @@ EOF
 		-e 's/defined(MOZ_WIDGET_GTK)/0/g'
 
 	truncate -s 0 memory/mozalloc/throw_gcc.h
-
-	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/audio_thread_priority/.cargo-checksum.json
 
 	cp "$srcdir"/stab.h toolkit/crashreporter/google-breakpad/src/
 

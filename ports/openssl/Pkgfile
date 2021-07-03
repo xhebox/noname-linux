@@ -1,4 +1,4 @@
-version="1.1.1h"
+version="1.1.1k"
 desc="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
 source=[
 	{url="https://www.openssl.org/source/openssl-${version}.tar.gz"},
