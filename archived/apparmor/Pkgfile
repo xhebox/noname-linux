@@ -1,0 +1,63 @@
+version="3.0.1"
+desc="Linux application security framework - mandatory access control for programs"
+makedeps=["sed", "bison", "flex", "gettext-tiny", "pam"]
+source=[
+	{url="https://gitlab.com/apparmor/apparmor/-/archive/v$version/apparmor-v$version.tar.gz"},
+	{url="0001-Fix-linking-against-gettext-on-musl-libc.patch"},
+	{url="0003-parser-remove-specific-tests-for-rttime.patch"},
+	{url="0004-parser-remove-specific-tests-for-ofile.patch"},
+	{url="0005-utils-adjust-tests-to-match-the-Alpine-layout.patch"},
+	{url="0006-utils-adjust-rc-functions-for-aa-remove-unknown.patch"},
+	{url="0007-Remove-Locale-gettext-from-parser-tests.patch"},
+]
+
+ext='''
+	cd apparmor-v$version
+	for i in $source; do
+		echo $i
+		case $i in
+		*patch) patch -p1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build='''
+	builddir="$srcdir/apparmor-v$version"
+	cd "$builddir"/libraries/libapparmor
+	./autogen.sh
+	./configure --prefix=/ --without-python --without-perl --without-ruby --disable-man_pages
+	make
+
+	cd "$builddir"
+	sed -i \
+		-e 's/pod2man/true/g' \
+		-e 's/pod2html/true/g' \
+	common/Make.rules
+	make -C parser
+	make -C binutils
+	make -C utils
+	make -C profiles
+	make -C changehat/pam_apparmor
+	make -C utils/vim
+
+	make -C parser install DESTDIR="$pkgdir"
+	make -C libraries/libapparmor DESTDIR="${pkgdir}" install
+	make -C changehat/pam_apparmor DESTDIR="${pkgdir}" install
+	#make -C changehat/mod_apparmor DESTDIR="${pkgdir}" install
+	make -C binutils DESTDIR="${pkgdir}" \
+		SBINDIR="${pkgdir}/bin" \
+		USR_SBINDIR="${pkgdir}/bin" \
+	install
+	make -C parser -j1 DESTDIR="${pkgdir}" \
+		SBINDIR="${pkgdir}/bin" \
+		USR_SBINDIR="${pkgdir}/bin" \
+		APPARMOR_BIN_PREFIX="${pkgdir}/lib/apparmor" \
+	install install-systemd
+	make -C profiles DESTDIR="${pkgdir}" install
+	make -C utils DESTDIR="${pkgdir}" \
+		SBINDIR="${pkgdir}/bin" \
+		USR_SBINDIR="${pkgdir}/bin" \
+		BINDIR="${pkgdir}/bin" \
+		VIM_INSTALL_PATH="${pkgdir}/share/vim/vimfiles/syntax" \
+	install
+'''

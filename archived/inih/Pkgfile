@@ -1,4 +1,4 @@
-version="52"
+version="53"
 desc="a simple .INI file parser written in C"
 source=[
 	{url="https://github.com/benhoyt/inih/archive/r$version/inih-r$version.tar.gz"},
