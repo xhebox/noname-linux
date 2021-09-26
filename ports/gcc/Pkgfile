@@ -53,7 +53,6 @@ build='''
 		--enable-shared \
 		--enable-threads=posix \
 		--enable-checking=release \
-		--enable-cloog-backend \
 		--enable-libstdcxx-time \
 		--with-system-zlib \
 		--enable-__cxa_atexit \
@@ -70,8 +69,6 @@ build='''
 		--disable-libstdcxx-pch \
 		--disable-libunwind-exceptions \
 		--disable-libsanitizer \
-		--disable-libmudflap \
-		--disable-libmpx \
 		--disable-libssp \
 		--disable-werror \
 		--disable-symvers \
