@@ -1,4 +1,4 @@
-version="2.20.1"
+version="2.33.0"
 makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "shadow", "libressl"]
 deps=["curl", "pcre2", "grep", "expat", "perl", "perl-error", "shadow", "libressl"]
 desc="Directory content manager"

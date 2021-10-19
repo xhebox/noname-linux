@@ -1,6 +1,6 @@
-version="1.3.9"
+version="1.5.5"
 desc="The interactive build tool"
-deps=["openjdk8"]
+deps=["openjdk11"]
 source=[
 	{url="https://github.com/sbt/sbt/releases/download/v${version}/sbt-${version}.tgz"},
 ]
@@ -9,7 +9,6 @@ build='''
 	cd sbt
 
 	mkdir -p "${pkgdir}"/share/sbt
-	cp -r lib "${pkgdir}"/share/sbt
 	cp -r bin "${pkgdir}"/share/sbt
 	rm "${pkgdir}"/share/sbt/bin/*.bat
 	chmod -x "${pkgdir}"/share/sbt/bin/*

@@ -1,9 +1,9 @@
-version="nightly"
+version="0.5.1"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
-makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv"]
-deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv"]
+makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
+deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
 source=[
-	{url="https://github.com/neovim/neovim/archive/${version}.tar.gz"},
+	{url="https://github.com/neovim/neovim/archive/refs/tags/v${version}.tar.gz"},
 ]
 
 build='''

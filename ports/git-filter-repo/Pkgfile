@@ -1,0 +1,24 @@
+version="2.29.0"
+makedeps=["python3"]
+deps=["python3"]
+desc="Quickly rewrite git repository history (filter-branch replacement)"
+source=[
+	{url="https://github.com/newren/git-filter-repo/releases/download/v$version/git-filter-repo-$version.tar.xz"},
+	{url="version.patch"},
+]
+
+ext='''
+	cd git-filter-repo-$version
+	patch -Np1 -i ../version.patch
+	sed -i "s|@PKGVER@|$version|" release/setup.py
+'''
+
+build='''
+	cd git-filter-repo-$version/release
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+	cd ..
+	install -Dm644 Documentation/man1/git-filter-repo.1 "$pkgdir/share/man/man1/git-filter-repo.1"
+'''

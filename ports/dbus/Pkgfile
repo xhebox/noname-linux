@@ -1,6 +1,6 @@
 version="1.12.12"
-deps=["expat", "util-linux", "systemd", "apparmor"]
-makedeps=["expat", "util-linux", "python3", "systemd", "apparmor"]
+deps=["expat", "util-linux", "systemd"]
+makedeps=["expat", "util-linux", "python3", "systemd"]
 desc="Freedesktop.org message bus system"
 source=[
 	{url="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz"},
@@ -30,7 +30,7 @@ build='''
 	--disable-xml-docs \
 	--disable-verbose-mode \
 	--enable-inotify \
-	--enable-apparmor \
+	--disable-apparmor \
 	--enable-user-session \
 	--without-x \
 	--disable-tests \

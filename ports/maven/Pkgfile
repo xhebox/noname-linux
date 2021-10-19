@@ -1,6 +1,6 @@
 version="3.8.1"
-deps=["openjdk16", "procps-ng"]
-makedeps=["openjdk16", "procps-ng"]
+deps=["openjdk11", "procps-ng"]
+makedeps=["openjdk11", "procps-ng"]
 source=[
 	{url="https://www-us.apache.org/dist/maven/maven-3/${version}/binaries/apache-maven-${version}-bin.tar.gz"},
 	{url="settings.xml"},
