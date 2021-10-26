@@ -1,9 +1,9 @@
-version="3.3"
+version="3.4.2"
 deps=["musl"]
 makedeps=["musl"]
 desc="Portable Foreign Function Interface Library"
 source=[
-	{url="http://sourceware.org/pub/libffi/libffi-$version.tar.gz"},
+	{url="https://github.com/libffi/libffi/releases/download/v$version/libffi-$version.tar.gz"},
 ]
 
 build='''

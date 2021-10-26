@@ -106,5 +106,6 @@ build = '''
 	for i in pulseaudio-$pulseversion/src/pulse/*.h; do
 		mv $i "$pkgdir"/include/
 	done
+	rm "$pkgdir"/include/error.h
 	install -Dm644 pipewire.toml "$pkgdir/${HOOKS#$ROOT}"/pipewire.toml
 '''

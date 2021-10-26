@@ -1,7 +1,7 @@
 version="3.18"
 _dbversion="2019.06.03"
-makedeps=["libressl", "libnl", "python-m2crypto"]
-deps=["iw", "libressl", "libnl"]
+makedeps=["openssl", "libnl", "python-m2crypto"]
+deps=["iw", "openssl", "libnl"]
 desc="Central Regulatory Domain Agent for wireless networks"
 source=[
 	{url="https://mirrors.ustc.edu.cn/kernel.org/software/network/crda/crda-${version}.tar.xz"},

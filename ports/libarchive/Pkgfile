@@ -4,8 +4,8 @@ source=[
 	{url="http://www.libarchive.org/downloads/libarchive-${version}.tar.gz"},
 	{url="filter-xz-enable-threads.patch"}
 ]
-makedeps=["zlib", "bzip2", "acl", "lz4", "libressl", "expat", "xz"]
-deps=["zlib", "bzip2", "acl", "lz4", "libressl", "expat", "xz"]
+makedeps=["zlib", "bzip2", "acl", "lz4", "openssl", "expat", "xz"]
+deps=["zlib", "bzip2", "acl", "lz4", "openssl", "expat", "xz"]
 
 ext='''
 	cd libarchive-$version

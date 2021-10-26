@@ -1,0 +1,21 @@
+version="2.7.3"
+_stackage="lts-18.14"
+desc="Cross-platform program for developing haskell projects"
+deps=["libgmp", "ghc"]
+makedeps=["libgmp", "ghc", "zlib"]
+source=[
+	{url="https://hackage.haskell.org/package/stack-${version}/stack-${version}.tar.gz"},
+	{url="https://www.stackage.org/${_stackage}/cabal.config", name="cabal.config-${_stackage}"},
+	{url="stack.sh"},
+]
+
+build='''
+	cd stack-$version
+	cp ../cabal.config-${_stackage} cabal.config
+	sed -i 's;pantry >=0.5.2;pantry <0.5.3;g' stack.cabal
+	HOME=$PWD cabal update
+	HOME=$PWD cabal new-build -j --flag disable-git-info \
+		--constraint 'lukko -ofd-locking'
+	install -m 755 -D dist-newstyle/build/*/*/*/build/stack/stack "$pkgdir/lib/stack"
+	install -m 755 -D ../stack.sh "$pkgdir/bin/stack"
+'''

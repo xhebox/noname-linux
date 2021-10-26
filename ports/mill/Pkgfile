@@ -1,0 +1,12 @@
+version="0.10.0-M3"
+desc="Your shiny new Java/Scala build tool"
+deps=["openjdk11"]
+source=[
+	{url="https://github.com/com-lihaoyi/mill/releases/download/$version/$version"},
+]
+
+build='''
+	mkdir -p "${pkgdir}"/bin
+	cp ../$version "${pkgdir}"/bin/mill
+	chmod +x "${pkgdir}"/bin/mill
+'''

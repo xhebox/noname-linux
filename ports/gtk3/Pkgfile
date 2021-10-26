@@ -1,9 +1,9 @@
-version="3.24.29"
+version="3.24.30"
 desc="A multi-platform toolkit for creating graphical user interfaces"
 makedeps=["cairo", "atk", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols"]
 deps=["atk", "cairo", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
 source=[
-	{url="http://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
+	{url="https://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
 	{url="gtk3-immodules.toml"},
 	{url="0004-Remove-Gdk-dependency-from-gtk-encode-symbolic-svg.patch"},
 	{url="icon.toml"},

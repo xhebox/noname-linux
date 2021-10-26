@@ -1,0 +1,19 @@
+version="3.0.1"
+makedeps=["go"]
+deps=["git"]
+desc="Git extension for versioning large files"
+source=[
+	{url="https://github.com/git-lfs/git-lfs/archive/refs/tags/v${version}.tar.gz"},
+]
+
+build='''
+	cd git-lfs-$version
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export GOFLAGS="-buildmode=pie -trimpath -mod=vendor -modcacherw -ldflags=-linkmode=external"
+	go generate ./commands
+	go build .
+  install -Dm755 git-lfs "$pkgdir"/bin/git-lfs
+'''

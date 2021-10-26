@@ -1,7 +1,7 @@
 version="1.4.5"
 desc="Captures data transmitted as part of TCP connections then stores the data conveniently"
-makedeps=["libpcap", "cairo", "libressl", "sqlite", "boost"]
-deps=["libpcap", "cairo", "libressl", "sqlite", "boost"]
+makedeps=["libpcap", "cairo", "openssl", "sqlite", "boost"]
+deps=["libpcap", "cairo", "openssl", "sqlite", "boost"]
 source=[
 	{url="http://digitalcorpora.org/downloads/tcpflow/tcpflow-$version.tar.gz"},
 	{url="tcpflow-openssl-1.1.patch"},

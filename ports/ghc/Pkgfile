@@ -1,0 +1,46 @@
+version="8.10.4"
+bin_version="8.8.4"
+desc="The Glasgow Haskell Compiler"
+deps=["libgmp", "gcc", "perl", "llvm", "libffi", "ncurses"]
+makedeps=["libgmp", "gcc", "perl", "llvm", "libffi", "ncurses", "xz"]
+nostrip=true
+source=[
+	{url="https://mirrors.ustc.edu.cn/alpine/edge/community/x86_64/ghc-$bin_version-r2.apk", name="ghc-bin-$bin_version.tar.gz"},
+	{url="https://downloads.haskell.org/~ghc/$version/ghc-$version-src.tar.xz"},
+]
+
+ext='''
+	sed -i \
+		-e "s;/usr/bin;$srcdir/usr/bin;g" \
+		-e "s;/usr/lib;$srcdir/usr/lib;g" \
+	$srcdir/usr/bin/* $srcdir/usr/lib/ghc-$bin_version/package.conf.d/*.conf
+	$srcdir/usr/bin/ghc-pkg recache
+
+	cd ghc-$version
+
+	cp mk/build.mk.sample mk/build.mk
+
+	cat >> mk/build.mk <<-EOF
+		BuildFlavour         = perf-llvm
+		INTEGER_LIBRARY      = integer-gmp
+		BeConservative       = YES
+		GhcStage3HcOpts     += -O3
+		SplitSections        = YES
+	EOF
+
+	autoreconf -fi
+'''
+
+build='''
+	export PATH="$PATH:$srcdir/usr/bin"
+	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$srcdir/usr/lib"
+	cd ghc-$version
+	./configure \
+		--prefix=/ \
+		--with-system-libffi
+
+	make
+	make DESTDIR="$pkgdir" install
+	find "$pkgdir"/lib -type f \( -name "*.so" -o -name "*.a" \) -exec strip --strip-unneeded {} \;
+	find $pkgdir/bin -type f -exec strip {} \;
+'''

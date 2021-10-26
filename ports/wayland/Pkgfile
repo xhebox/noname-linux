@@ -6,6 +6,11 @@ source=[
 	{url="https://wayland.freedesktop.org/releases/wayland-$version.tar.xz"},
 ]
 
+ext='''
+	cd wayland-$version
+#patch -Np1 -i ../debug.patch
+'''
+
 build='''
 	noname-meson wayland-$version build -Ddocumentation=false
 	meson configure build

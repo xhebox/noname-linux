@@ -1,20 +1,3 @@
---- a/gdk/gdk.c	2021-04-15 02:44:15.000000000 +0800
-+++ b/gdk/gdk.c	2021-04-15 02:44:15.000000000 +0800
-@@ -232,9 +232,14 @@
-     /* Placeholder in --name=NAME in --help output */          N_("NAME") },
- #ifndef G_OS_WIN32
-   { "display",      0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,   &_gdk_display_name,
-+#if defined(GDK_WINDOWING_WAYLAND)
-+    /* Description of --display=DISPLAY in --help output */    N_("WAYLAND display to use"),
-+    /* Placeholder in --display=DISPLAY in --help output */    N_("WAYLAND_DISPLAY") },
-+#else
-     /* Description of --display=DISPLAY in --help output */    N_("X display to use"),
-     /* Placeholder in --display=DISPLAY in --help output */    N_("DISPLAY") },
- #endif
-+#endif
- #ifdef G_ENABLE_DEBUG
-   { "gdk-debug",    0, 0, G_OPTION_ARG_CALLBACK, gdk_arg_debug_cb,  
-     /* Description of --gdk-debug=FLAGS in --help output */    N_("GDK debugging flags to set"),
 --- gtk+-3.24.1/gdk/wayland/gdkwaylanddisplay.h	2018-02-18 06:30:46.000000000 +0800
 +++ gtk+-3.24.1/gdk/wayland/gdkwaylanddisplay.h	2018-02-18 06:30:46.000000000 +0800
 @@ -39,6 +39,7 @@

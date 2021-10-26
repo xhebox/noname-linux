@@ -21,7 +21,7 @@ ext='''
 '''
 
 build='''
-	noname-meson glib-$version build -D selinux=false -D man=true
+	noname-meson glib-$version build -D selinux=false -D man=false
 	ninja -C build
 	DESTDIR="$pkgdir" meson install -C build
 	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"

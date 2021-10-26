@@ -1,0 +1,11 @@
+version="3.2.0.0"
+desc="The Haskell Cabal"
+deps=["libgmp", "ghc", "zlib"]
+makedeps=["libgmp", "ghc", "zlib", "libffi"]
+source=[
+  {url="https://mirrors.ustc.edu.cn/alpine/edge/community/x86_64/cabal-$version-r1.apk", name="cabal-$version.tar.gz"},
+]
+
+build='''
+	install -m 755 -D usr/bin/cabal "$pkgdir/bin/cabal"
+'''

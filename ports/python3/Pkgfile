@@ -2,8 +2,8 @@ version="3.7.3"
 sversion="41.0.1"
 wversion="0.33.4"
 desc="A high-level scripting language(3.x)"
-deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
-makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "libressl", "zlib", "mpdecimal"]
+deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
+makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
 source=[
 	{url="http://www.python.org/ftp/python/$version/Python-$version.tar.xz"},
 	{url="readonly.patch"},
@@ -49,7 +49,8 @@ build='''
 	install -dm755 "${pkgdir}"/lib/python${version%.*}/Tools/scripts
 	install -m755 Tools/scripts/*py "${pkgdir}"/lib/python${version%.*}/Tools/scripts/
 
-	ln -s /bin/python${version%.*} $pkgdir/bin/python3
+	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$pkgdir/lib"
+	ln -s python${version%.*} $pkgdir/bin/python3
 	ln -s python3               "${pkgdir}"/bin/python
 	ln -s python3.7m-config     "${pkgdir}"/bin/python3-config
 	ln -s idle3                 "${pkgdir}"/bin/idle

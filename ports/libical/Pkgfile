@@ -1,19 +1,16 @@
-version="3.0.3"
+version="3.0.11"
 desc="An open source reference implementation of the icalendar data type and serialization format"
 makedeps=["glib", "icu", "db"]
 deps=["glib", "icu", "db"]
 source=[{url="https://github.com/libical/libical/archive/v${version}.tar.gz"}]
 
 build='''
-	mkdir build
-	cd build
-
-	cmake ../libical-$version \
-		-G Ninja \
+	cmake libical-$version -Bbuild \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DSHARED_ONLY=true \
+		-DENABLE_GTK_DOC=OFF \
 		-DCMAKE_INSTALL_PREFIX= \
 		-DCMAKE_INSTALL_LIBDIR=/lib
-	ninja
-	DESTDIR="${pkgdir}" ninja install
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

@@ -1,38 +1,33 @@
 name="firefox"
-version="86.0.1"
+version="93.0"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pipewire", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
-	{url="https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/firefox/patches/disable-image-format-warning.patch"},
-	{url="fix-seccomp-bpf.patch"},
-	{url="fix-tools.patch"},
-	{url="fix-musl.patch"},
+	{url="fix-fortify-system-wrappers.patch"},
 	{url="mallinfo.patch"},
+	{url="sandbox-fork.patch"},
+	{url="sandbox-largefile.patch"},
+	{url="sandbox-sched_setscheduler.patch"},
+	{url="fix-musl.patch"},
 	{url="webgpu.patch"},
 	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
 	{url="no-x11.patch"},
-	{url="no-ps.patch"},
 ]
 
 ext='''
 	cd firefox-${version%b*}
 	for i in $source; do
 		case $i in
+		mallinfo*.patch) patch -Np1 -i ../$i;;
+		sandbox*.patch) patch -Np1 -i ../$i;;
+		*fortify*.patch) patch -Np1 -i ../$i;;
 		*.patch) patch -Np0 -i ../$i;;
-		*.diff) patch -Np1 -i ../$i;;
 		esac
 	done
-
-	find dom/plugins -type f | xargs sed -i \
-		-e 's/ifdef MOZ_WIDGET_GTK/if 0/g' \
-		-e 's/if MOZ_WIDGET_GTK/if 0/g' \
-		-e 's/if (MOZ_WIDGET_GTK)/if 0/g' \
-		-e 's/!defined(MOZ_WIDGET_GTK)/1/g' \
-		-e 's/defined(MOZ_WIDGET_GTK)/0/g'
 
 	truncate -s 0 memory/mozalloc/throw_gcc.h
 
@@ -93,7 +88,7 @@ END
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.16.0 cbindgen
+	cargo install --version 0.19.0 cbindgen
 
 	cd firefox-${version%b*}
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"

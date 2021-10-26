@@ -1,5 +1,10 @@
 #!/bin/sh
 rm -f reloc
-find /lib -type f -exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq > reloc
-find /lib32 -type f -exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq >> reloc
-find /bin -type f -exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq >> reloc
+find /lib -type f \
+	\( -path /lib/modules -o -path /lib/python3.7 -o -path /lib/jvm \) -prune \
+	-exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq > reloc
+find /lib32 -type f \
+	\( -path /lib/modules -o -path /lib/python3.7 -o -path /lib/jvm \) -prune \
+	-exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq >> reloc
+find /bin \
+	-type f -exec ldd {} 2>&1 \; | grep 'Error loading shared library' | sed 's/^Error loading shared library //g' | uniq >> reloc

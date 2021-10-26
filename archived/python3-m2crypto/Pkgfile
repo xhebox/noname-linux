@@ -1,15 +1,13 @@
 version="0.35.2"
-deps=["python", "python-typing", "libressl"]
-makedeps=["python-setuptools", "libressl", "swig"]
+deps=["python3", "openssl"]
+makedeps=["python3", "openssl"]
 desc="A crypto and SSL toolkit for Python"
 source=[
 	{url="https://gitlab.com/m2crypto/m2crypto/repository/${version}/archive.tar.gz"},
-	{url="libressl.patch"},
 ]
 
 build='''
 	cd m2crypto-*
-	patch -p0 -i ../libressl.patch
 	/bin/python setup.py install \
 		--prefix= \
 		--root=$pkgdir \

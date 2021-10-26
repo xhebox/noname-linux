@@ -1,6 +1,6 @@
 version="1.8.27"
-makedeps=["pam", "libressl"]
-deps=["pam", "libressl"]
+makedeps=["pam", "openssl"]
+deps=["pam", "openssl"]
 source=[
  {url="http://www.courtesan.com/sudo/dist/sudo-$version.tar.gz"},
  {url="sudo.pam"},
