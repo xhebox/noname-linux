@@ -1,0 +1,22 @@
+version="2.0.14"
+deps=["musl"]
+desc="simple numa policy support"
+source=[
+	{url="https://github.com/numactl/numactl/archive/v${version}.tar.gz"},
+	{url="musl.patch"},
+	{url="hardening.patch"},
+]
+
+ext='''
+	cd numactl-$version
+	patch -Np1 -i ../musl.patch
+	patch -Np1 -i ../hardening.patch
+	autoreconf -fi
+'''
+
+build='''
+	cd numactl-$version
+	./configure --prefix=
+	make
+	make install DESTDIR="$pkgdir"
+'''

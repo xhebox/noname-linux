@@ -10,7 +10,8 @@ build='''
 		-DSHARED_ONLY=true \
 		-DENABLE_GTK_DOC=OFF \
 		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=/lib
+		-DCMAKE_INSTALL_LIBDIR=/lib \
+		-DCMAKE_INSTALL_LIBEXECDIR=/lib
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

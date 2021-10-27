@@ -4,6 +4,7 @@ makedeps=["flex", "bison", "libffi", "libxml2", "libunwind", "libedit", "ncurses
 deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind"]
 source=[
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.tar.xz"},
+	{url="clang-libexec.patch"},
 	{url="llvm-001-musl.patch"},
 	{url="libcxx-0001-musl-hacks.patch"},
 	{url="llvm-config.h"}
@@ -30,6 +31,14 @@ ext='''
 		esac
 	done
 	cd ..
+
+	cd clang
+	for i in $source;do
+		case $i in
+		clang*.patch) patch -Np1 -i "$srcdir/$i";;
+		esac
+	done
+	cd ..
 '''
 
 build='''
@@ -41,6 +50,7 @@ build='''
 	cmake llvm -Bbuild \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=/lib \
 		-DCMAKE_INSTALL_LIBEXECDIR=/lib \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \

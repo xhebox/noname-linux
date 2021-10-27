@@ -1,0 +1,11 @@
+--- ghc-9.0.1/compiler/main/SysTools/Process.hs	2021-01-26 00:30:28.000000000 +0800
++++ ghc-9.0.1/compiler/main/SysTools/Process.hs	2021-01-26 00:30:28.000000000 +0800
+@@ -86,7 +86,7 @@
+ 
+ -- Don't let gcc localize version info string, #8825
+ c_locale_env :: (String, String)
+-c_locale_env = ("LANGUAGE", "C")
++c_locale_env = ("LANG", "C")
+ 
+ -- If the -B<dir> option is set, add <dir> to PATH.  This works around
+ -- a bug in gcc on Windows Vista where it can't find its auxiliary

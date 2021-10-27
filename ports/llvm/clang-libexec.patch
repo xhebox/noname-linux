@@ -1,0 +1,24 @@
+--- clang/tools/scan-build/CMakeLists.txt	2020-10-07 18:10:48.000000000 +0800
++++ clang/tools/scan-build/CMakeLists.txt	2020-10-07 18:10:48.000000000 +0800
+@@ -61,7 +61,7 @@
+                        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libexec/${LibexecFile})
+     list(APPEND Depends ${CMAKE_BINARY_DIR}/libexec/${LibexecFile})
+     install(PROGRAMS libexec/${LibexecFile}
+-            DESTINATION libexec
++            DESTINATION lib
+             COMPONENT scan-build)
+   endforeach()
+ 
+--- clang/tools/scan-build/bin/scan-build	2020-10-07 18:10:48.000000000 +0800
++++ clang/tools/scan-build/bin/scan-build	2020-10-07 18:10:48.000000000 +0800
+@@ -1932,8 +1932,8 @@
+ 
+ # Determine the location of ccc-analyzer.
+ my $AbsRealBin = Cwd::realpath($RealBin);
+-my $Cmd = "$AbsRealBin/../libexec/ccc-analyzer";
+-my $CmdCXX = "$AbsRealBin/../libexec/c++-analyzer";
++my $Cmd = "$AbsRealBin/../lib/ccc-analyzer";
++my $CmdCXX = "$AbsRealBin/../lib/c++-analyzer";
+ 
+ # Portability: use less strict but portable check -e (file exists) instead of
+ # non-portable -x (file is executable). On some windows ports -x just checks

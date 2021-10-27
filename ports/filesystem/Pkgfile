@@ -1,4 +1,4 @@
-version="3.0"
+version="3.1"
 desc="Base files"
 source=[
 	{url="sysctl"},
@@ -17,6 +17,7 @@ source=[
 	{url="passwd"},
 	{url="profile"},
 	{url="resolv.conf"},
+	{url="ldconfig"},
 ]
 baks=[
 	"etc/passwd",
@@ -119,4 +120,6 @@ EOF
 
 	# setup systemd.environment-generator
 	install -D -m755 "$srcdir"/env-generator lib/systemd/system-environment-generators/10-noname
+
+	install -D -m755 "$srcdir"/ldconfig bin/ldconfig
 '''
