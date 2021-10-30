@@ -1,4 +1,4 @@
-version="8.10.7"
+version="9.2.1"
 bin_version="8.10.7"
 desc="The Glasgow Haskell Compiler"
 deps=["libgmp", "gcc", "perl", "llvm", "libffi", "ncurses"]
@@ -40,6 +40,6 @@ build='''
 
 	make
 	make DESTDIR="$pkgdir" install
-	find "$pkgdir"/lib -type f \( -name "*.so" -o -name "*.a" \) -exec strip --strip-unneeded {} \;
-	find $pkgdir/bin -type f -exec strip {} \;
+	find "$pkgdir/lib" -type f \( -name "*.so" -o -name "*.a" \) -exec strip --strip-unneeded {} \;
+	find "$pkgdir/bin" -type f -exec strip {} \;
 '''
