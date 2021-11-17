@@ -1,0 +1,15 @@
+version="3.1"
+desc='A serial communication program'
+deps=["bash"]
+source=[
+	{url="https://github.com/npat-efault/picocom/archive/refs/tags/$version.tar.gz"},
+	{url="https://raw.githubusercontent.com/npat-efault/picocom/master/bash_completion/picocom", name="picocom-$version.bash"},
+]
+
+build='''
+	cd picocom-$version
+	CPPFLAGS="$CPPFLAGS -DNO_CUSTOM_BAUD" make
+	install -D -m 755 ./picocom "$pkgdir/bin/picocom"
+	install -D -m 644 picocom.1 "$pkgdir/share/man/man1/picocom.1"
+	install -D -m 644 ../picocom-$version.bash "$pkgdir/etc/bash_completion.d/picocom"
+'''

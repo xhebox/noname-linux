@@ -8,7 +8,7 @@ source=[
 
 build='''
 	cd libffi-$version
-	./configure --prefix=/ --disable-static --enable-pax_emutramp
+	./configure --prefix=/ --disable-static --enable-pax_emutramp --disable-exec-static-tramp
 	make
 	make DESTDIR="$pkgdir" install
 '''

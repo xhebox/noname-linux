@@ -1,4 +1,4 @@
-version="9.2.1"
+version="9.0.1"
 bin_version="8.10.7"
 desc="The Glasgow Haskell Compiler"
 deps=["libgmp", "gcc", "perl", "llvm", "libffi", "ncurses"]
