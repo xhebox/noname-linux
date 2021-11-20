@@ -10,7 +10,7 @@ build='''
 	make
 	make USRDIR= DESTDIR="${pkgdir}" install
 
-	timezones="africa antarctica asia australasia backward europe northamerica southamerica pacificnew etcetera systemv factory"
+	timezones="africa antarctica asia australasia backward europe northamerica southamerica pacificnew etcetera factory"
 	./zic -d ${pkgdir}/share/zoneinfo ${timezones}
 	./zic -d ${pkgdir}/share/zoneinfo/posix ${timezones}
 	./zic -d ${pkgdir}/share/zoneinfo/right -L leapseconds ${timezones}
