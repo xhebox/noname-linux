@@ -6,9 +6,7 @@ source=[{url="https://github.com/YosysHQ/nextpnr/archive/refs/tags/nextpnr-$vers
 
 build='''
 	cmake nextpnr-nextpnr-$version -Bbuild \
-				-DARCH="generic" \
-				-DARCH="ice40" \
-				-DARCH="ecp5" \
+				-DARCH="generic;ice40;ecp5" \
 				-DCMAKE_INSTALL_PREFIX= \
 				-DCMAKE_INSTALL_LIBDIR=/lib \
 				-DCMAKE_INSTALL_DATADIR=/share \

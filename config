@@ -1,29 +1,17 @@
-#!/bin/sh
-ARCH=x86_64
-ARCH32=i386
-TARGET=x86_64-pc-linux-musl
-TARGET32=i386-pc-linux-musl
-ROOT=/mnt
-DB=$ROOT/var/db/pkg
-HOOKS=$ROOT/etc/hooks
-COLORS_F=1
-SUM="sha512sum"
-PKG_BINARY=1
-#PKG_BINARY=0
-PORTS="/ports"
-#PORTS="/ports
-#/ports2"
+arch64 = "x86_64"
+arch32 = "i386"
+target64 = "x86_64-pc-linux-musl"
+target32 = "i386-pc-linux-musl"
+color = true
+ccache = true
+root = "/"
+database = "/var/db/npkg"
+hooks = "/etc/pkg/hooks"
+ports = [
+	"/home/xhe/media/hdd1/noname-linux/ports"
+]
 
-export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong"
-export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro"
-export MAKEFLAGS="-j$((`grep -c ^processor /proc/cpuinfo`+1))"
-export CC="gcc"
-export CXX="g++"
-export QMAKE_CFLAGS_ISYSTEM=
-# comment it if u don't want ccache
-export PATH="/lib/ccache:$PATH"
-
-##url_fetch() {
-## .....
-##}
+CFLAGS = "-march=haswell -mtune=znver2 -O2 -pipe -fno-plt"
+CXXFLAGS = "-march=haswell -mtune=znver2 -O2 -pipe -fno-plt"
+LDFLAGS = "-Wl,--as-needed,-z,relro"
+MAKEFLAGS = 16
