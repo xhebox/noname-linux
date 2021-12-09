@@ -1,0 +1,13 @@
+version="git"
+deps=["libftdi"]
+makedeps=["python3", "libftdi"]
+desc="Lattice iCE40 FPGAs Bitstream Documentation (Reverse Engineered)"
+source=[{protocol="git", url="https://github.com/YosysHQ/icestorm"}]
+
+build='''
+	cd icestorm
+	make \
+		DESTDIR="$pkgdir" \
+		PREFIX=$_prefix \
+		install
+'''

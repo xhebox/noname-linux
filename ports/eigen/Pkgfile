@@ -1,0 +1,15 @@
+version="3.4.0"
+desc="Lightweight C++ template library for vector and matrix math, a.k.a. linear algebra."
+deps=["cmake", "fftw", "boost"]
+makedeps=["cmake", "fftw", "boost"]
+source=[{url="https://gitlab.com/libeigen/eigen/-/archive/$version/eigen-$version.tar.gz"}]
+
+build='''
+	cmake eigen-$version -Bbuild \
+		-DEIGEN_ROOT_DIR= \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

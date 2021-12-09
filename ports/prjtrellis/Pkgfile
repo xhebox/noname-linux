@@ -1,0 +1,24 @@
+version="1.1"
+deps=["python3", "boost"]
+makedeps=["python3", "boost"]
+desc="Documentation and definitions for the Lattice ECP5 bit-stream format"
+source=[
+	{url="https://github.com/YosysHQ/prjtrellis/archive/refs/tags/$version.tar.gz"},
+	{protocol="git", url="https://github.com/YosysHQ/prjtrellis-db"},
+]
+
+build='''
+	cd prjtrellis-db
+	install -dm 755 "$pkgdir"/share/trellis/database
+	cp -r --no-preserve=ownership devices.json ECP5 "$pkgdir"/share/trellis/database/
+
+	cd ../prjtrellis-$version
+	sed -i 's|set(LIBDIR "lib64")|set(LIBDIR "lib")|
+		s|project(libtrellis)|project(libtrellis VERSION 1.0)|' libtrellis/CMakeLists.txt
+	cmake libtrellis -Bbuild \
+		-DCMAKE_INSTALL_PREFIX= \
+		-DCMAKE_INSTALL_LIBDIR=/lib \
+		-DCMAKE_BUILD_TYPE=Release
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''
