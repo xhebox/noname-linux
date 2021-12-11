@@ -1,0 +1,35 @@
+version="2.2.0"
+desc="opengl extension wrangler library"
+deps=["mesa", "glu"]
+makedeps=["mesa", "glu", "perl", "python3"]
+source=[
+	{protocol="git", url="https://github.com/nigels-com/glew"},
+	{protocol="git", url="https://github.com/KhronosGroup/OpenGL-Registry"},
+	{protocol="git", url="https://github.com/KhronosGroup/EGL-Registry"},
+	{protocol="git", commit="b63c8d3e676097d610efda64870cbe6f10543bd3", url="https://github.com/nigels-com/glfixes"},
+	{url="source.patch"},
+]
+
+ext='''
+	cd glew
+	ln -srf ../OpenGL-Registry auto/OpenGL-Registry
+	ln -srf ../EGL-Registry auto/EGL-Registry
+	ln -srf ../glfixes auto/glfixes
+	patch -Np1 -i ../source.patch
+	make extensions -j1
+'''
+
+build='''
+	unset LDFLAGS
+	cmake glew/build/cmake -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DGLEW_EGL=ON \
+				-DGLEW_X11=OFF \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build -v
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

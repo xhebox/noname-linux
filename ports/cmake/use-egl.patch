@@ -1,0 +1,10 @@
+--- a/Modules/FindOpenGL.cmake	2021-12-07 23:44:21.000000000 +0800
++++ b/Modules/FindOpenGL.cmake	2021-12-07 23:44:21.000000000 +0800
+@@ -151,6 +151,7 @@
+   string(TOUPPER ${component} _COMPONENT)
+   set(OPENGL_USE_${_COMPONENT} 1)
+ endforeach()
++set(OPENGL_USE_EGL 1)
+ 
+ set(_OpenGL_CACHE_VARS)
+ 

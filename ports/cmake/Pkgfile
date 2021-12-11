@@ -1,15 +1,21 @@
-version="3.19.2"
+version="3.22.1"
 makedeps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 deps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 desc="CMake is a cross-platform open-source make system"
 source=[
 	{url="https://www.cmake.org/files/v${version%.*}/cmake-${version}.tar.gz"},
 	{url="cmake-isystem.patch"},
+	{url="use-egl.patch"},
 ]
+
+ext='''
+	cd cmake-$version
+	patch -p1 -i ../cmake-isystem.patch
+	patch -p1 -i ../use-egl.patch
+'''
 
 build='''
 	cd cmake-$version
-	patch -p1 -i ../cmake-isystem.patch
 	sed -i 's/\/usr//' Tests/RunCMake/GNUInstallDirs/*
 	./configure \
 		--prefix= \

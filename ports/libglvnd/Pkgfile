@@ -1,4 +1,4 @@
-version="1.3.2"
+version="1.3.4"
 desc="The GL Vendor-Neutral Dispatch library"
 makedeps=["python3"]
 deps=["python3"]
@@ -9,11 +9,11 @@ source=[
 
 ext='''
 	cd libglvnd-v$version
-	patch -Np1 -i ../glvnd.patch
+#patch -Np1 -i ../glvnd.patch
 '''
 
 build='''
-	noname-meson libglvnd-v$version build -Denable_docs=false -Dgles1=false -Dx11=disabled -Dglx=disabled
+	noname-meson libglvnd-v$version build -Denable_docs=false -Dgles1=false -Dx11=disabled -Dglx=disabled -Dtls=disabled
 	meson configure build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build

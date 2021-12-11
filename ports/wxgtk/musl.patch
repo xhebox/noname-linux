@@ -1,0 +1,58 @@
+--- a/include/wx/xlocale.h	2021-04-13 06:23:58.000000000 +0800
++++ b/include/wx/xlocale.h	2021-04-13 06:23:58.000000000 +0800
+@@ -239,9 +239,9 @@
+     //       MSVC++8 does not have _strto[u]ll_l functions;
+     //       thus we take the minimal set of functions provided in both environments:
+ 
+-    #define wxCRT_Strtod_lA wxXLOCALE_IDENT(strtod_l)
+-    #define wxCRT_Strtol_lA wxXLOCALE_IDENT(strtol_l)
+-    #define wxCRT_Strtoul_lA wxXLOCALE_IDENT(strtoul_l)
++    #define wxCRT_Strtod_lA wxXLOCALE_IDENT(strtod)
++    #define wxCRT_Strtol_lA wxXLOCALE_IDENT(strtol)
++    #define wxCRT_Strtoul_lA wxXLOCALE_IDENT(strtoul)
+ 
+     inline double wxStrtod_lA(const char *c, char **endptr, const wxXLocale& loc)
+         { return wxCRT_Strtod_lA(c, endptr, loc.Get()); }
+@@ -244,11 +244,11 @@
+     #define wxCRT_Strtoul_lA wxXLOCALE_IDENT(strtoul)
+ 
+     inline double wxStrtod_lA(const char *c, char **endptr, const wxXLocale& loc)
+-        { return wxCRT_Strtod_lA(c, endptr, loc.Get()); }
++        { return wxCRT_Strtod_lA(c, endptr); }
+     inline long wxStrtol_lA(const char *c, char **endptr, int base, const wxXLocale& loc)
+-        { return wxCRT_Strtol_lA(c, endptr, base, loc.Get()); }
++        { return wxCRT_Strtol_lA(c, endptr, base); }
+     inline unsigned long wxStrtoul_lA(const char *c, char **endptr, int base, const wxXLocale& loc)
+-        { return wxCRT_Strtoul_lA(c, endptr, base, loc.Get()); }
++        { return wxCRT_Strtoul_lA(c, endptr, base); }
+ 
+     #if wxUSE_UNICODE
+ 
+@@ -297,9 +297,9 @@
+ 
+         // stdlib functions for numeric <-> string conversion
+         // (see notes above about missing functions)
+-        #define wxCRT_Strtod_lW wxXLOCALE_IDENT(wcstod_l)
+-        #define wxCRT_Strtol_lW wxXLOCALE_IDENT(wcstol_l)
+-        #define wxCRT_Strtoul_lW wxXLOCALE_IDENT(wcstoul_l)
++        #define wxCRT_Strtod_lW wxXLOCALE_IDENT(wcstod)
++        #define wxCRT_Strtol_lW wxXLOCALE_IDENT(wcstol)
++        #define wxCRT_Strtoul_lW wxXLOCALE_IDENT(wcstoul)
+ 
+         inline double wxStrtod_l(const wchar_t *c, wchar_t **endptr, const wxXLocale& loc)
+             { return wxCRT_Strtod_lW(c, endptr, loc.Get()); }
+@@ -302,11 +302,11 @@
+         #define wxCRT_Strtoul_lW wxXLOCALE_IDENT(wcstoul)
+ 
+         inline double wxStrtod_l(const wchar_t *c, wchar_t **endptr, const wxXLocale& loc)
+-            { return wxCRT_Strtod_lW(c, endptr, loc.Get()); }
++            { return wxCRT_Strtod_lW(c, endptr); }
+         inline long wxStrtol_l(const wchar_t *c, wchar_t **endptr, int base, const wxXLocale& loc)
+-            { return wxCRT_Strtol_lW(c, endptr, base, loc.Get()); }
++            { return wxCRT_Strtol_lW(c, endptr, base); }
+         inline unsigned long wxStrtoul_l(const wchar_t *c, wchar_t **endptr, int base, const wxXLocale& loc)
+-            { return wxCRT_Strtoul_lW(c, endptr, base, loc.Get()); }
++            { return wxCRT_Strtoul_lW(c, endptr, base); }
+     #else // !wxUSE_UNICODE
+         inline double wxStrtod_l(const char *c, char **endptr, const wxXLocale& loc)
+             { return wxCRT_Strtod_lA(c, endptr, loc.Get()); }

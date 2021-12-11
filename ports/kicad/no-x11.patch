@@ -1,0 +1,46 @@
+--- a/libs/kiplatform/gtk/environment.cpp	2021-11-16 10:33:46.000000000 +0800
++++ b/libs/kiplatform/gtk/environment.cpp	2021-11-16 10:33:46.000000000 +0800
+@@ -35,10 +35,6 @@
+     if( wxGetEnv( wxT( "XDG_CURRENT_DESKTOP" ), &wm ) && wm.CmpNoCase( wxT( "Unity" ) ) == 0 )
+         wxSetEnv ( wxT("UBUNTU_MENUPROXY" ), wxT( "0" ) );
+ 
+-    // Force the use of X11 backend (or wayland-x11 compatibility layer).  This is
+-    // required until wxWidgets supports the Wayland compositors
+-    wxSetEnv( wxT( "GDK_BACKEND" ), wxT( "x11" ) );
+-
+     // Disable overlay scrollbars as they mess up wxWidgets window sizing and cause
+     // excessive redraw requests.
+     wxSetEnv( wxT( "GTK_OVERLAY_SCROLLING" ), wxT( "0" ) );
+--- a/include/gal/opengl/kiglew.h	2021-11-16 10:33:46.000000000 +0800
++++ b/include/gal/opengl/kiglew.h	2021-11-16 10:33:46.000000000 +0800
+@@ -42,7 +42,7 @@
+ 
+         #if wxUSE_GLCANVAS_EGL
+             // wxWidgets was compiled with the EGL canvas, so use the EGL header for GLEW
+-            #include <GL/eglew.h>
++            #include <GL/glew.h>
+         #else
+             #error "KICAD_USE_EGL can only be used when wxWidgets is compiled with the EGL canvas"
+         #endif
+--- a/common/CMakeLists.txt	2021-11-16 10:33:46.000000000 +0800
++++ b/common/CMakeLists.txt	2021-11-16 10:33:46.000000000 +0800
+@@ -71,6 +71,7 @@
+     ${CAIRO_LIBRARIES}
+     ${PIXMAN_LIBRARIES}
+     ${OPENGL_LIBRARIES}
++    ${OPENGL_opengl_LIBRARY}
+     ${GDI_PLUS_LIBRARIES}
+ )
+ 
+--- a/common/gl_context_mgr.cpp	2021-11-16 10:33:46.000000000 +0800
++++ b/common/gl_context_mgr.cpp	2021-11-16 10:33:46.000000000 +0800
+@@ -93,9 +93,6 @@
+     wxGLCanvas* canvas = aCanvas ? aCanvas : m_glContexts.at( aContext );
+ 
+     // Prevent assertion failure in wxGLContext::SetCurrent during GAL teardown
+-#ifdef __WXGTK__
+-    if( canvas->GetXWindow() )
+-#endif
+     {
+         canvas->SetCurrent( *aContext );
+     }

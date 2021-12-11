@@ -1,12 +1,12 @@
-version="9.0.1"
+version="9.0.2"
 makedeps=["mesa"]
 deps=["mesa"]
 desc="Mesa OpenGL Utility library"
 source=[{url="https://mesa.freedesktop.org/archive/glu/glu-$version.tar.xz"}]
 
 build='''
-	cd glu-$version
-	./configure --prefix= --disable-static
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson glu-$version build
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

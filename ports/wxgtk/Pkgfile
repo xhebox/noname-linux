@@ -1,0 +1,31 @@
+version="3.1.5"
+desc="GTK+ implementation of wxWidgets API for GUI"
+deps=["gtk3", "libpng", "libjpeg-turbo", "libtiff", "expat", "zlib", "sdl2", "mesa"]
+makedeps=["gtk3", "libpng", "libjpeg-turbo", "libtiff", "expat", "zlib", "sdl2", "mesa"]
+source=[
+	{url="musl.patch"},
+	{url="redef.patch"},
+	{url="https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2"},
+]
+
+ext='''
+	cd wxWidgets-$version
+	patch -Np1 -i ../musl.patch
+	patch -Np1 -i ../redef.patch
+'''
+
+build='''
+	export CCACHE_SLOPPINESS="pch_defines,time_macros"
+	cmake wxWidgets-$version -Bbuild \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DwxUSE_GLCANVAS_EGL=ON \
+				-DBUILD_PRECOMP=OFF \
+				-DBUILD_SAMPLES=ON \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

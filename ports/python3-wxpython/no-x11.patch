@@ -1,0 +1,61 @@
+--- a/sip/cpp/sip_corewxWindow.cpp	2020-11-22 03:09:55.000000000 +0800
++++ b/sip/cpp/sip_corewxWindow.cpp	2020-11-22 03:09:55.000000000 +0800
+@@ -49,9 +49,11 @@
+         #endif
+         
+         #ifdef __WXGTK__
+-        #include <gdk/gdkx.h>
+         #include <gtk/gtk.h>
+-        #ifdef __WXGTK3__
++        #ifndef __WXX11__
++        #define GetXWindow(wxwin) (NULL)
++        #elif defined(__WXX11__)
++        #include <gdk/gdkx.h>
+         // Unlike GDK_WINDOW_XWINDOW, GDK_WINDOW_XID can't handle a NULL, so check 1st
+         static XID GetXWindow(const wxWindow* wxwin) {
+             if ((wxwin)->m_wxwindow) {
+--- a/src/window_ex.cpp	2020-11-22 02:55:25.000000000 +0800
++++ b/src/window_ex.cpp	2020-11-22 02:55:25.000000000 +0800
+@@ -4,9 +4,11 @@
+ #endif
+ 
+ #ifdef __WXGTK__
+-#include <gdk/gdkx.h>
+ #include <gtk/gtk.h>
+-#ifdef __WXGTK3__
++#ifndef __WXX11__
++#define GetXWindow(wxwin) (NULL)
++#elif defined(__WXX11__)
++#include <gdk/gdkx.h>
+ // Unlike GDK_WINDOW_XWINDOW, GDK_WINDOW_XID can't handle a NULL, so check 1st
+ static XID GetXWindow(const wxWindow* wxwin) {
+     if ((wxwin)->m_wxwindow) {
+--- a/sip/cpp/sip_corewxPyApp.cpp	2020-11-22 03:09:56.000000000 +0800
++++ b/sip/cpp/sip_corewxPyApp.cpp	2020-11-22 03:09:56.000000000 +0800
+@@ -24,7 +24,9 @@
+         #include <wx/object.h>
+         
+         #ifdef __WXGTK__
++        #ifdef __WXX11__
+         #include <gdk/gdkx.h>
++				#endif
+         #include <gtk/gtk.h>
+         #endif
+         
+@@ -325,12 +325,16 @@
+         bool wxPyApp::IsDisplayAvailable()
+         {
+         #ifdef __WXGTK__
++        #ifdef __WXX11__
+             Display* display;
+             display = XOpenDisplay(NULL);
+             if (display == NULL)
+                 return false;
+             XCloseDisplay(display);
+             return true;
++				#else
++            return true;
++				#endif
+         #endif
+         
+         #ifdef __WXMAC__

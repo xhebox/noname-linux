@@ -1,4 +1,4 @@
-version="2.6.1"
+version="2.13.0"
 desc="vaapi"
 deps=["libdrm", "wayland"]
 makedeps=["libdrm", "wayland-protocols"]

@@ -1,0 +1,34 @@
+version="4.1.1"
+desc='Cross-platform GUI toolkit'
+deps=["python3", "wxgtk"]
+makedeps=["python3", "wxgtk"]
+source=[
+	{url="no-x11.patch"},
+	{url="new.patch"},
+	{url="https://files.pythonhosted.org/packages/source/w/wxPython/wxPython-$version.tar.gz"},
+#{protocol="git", commit="63b8099bc295e767923a9dd05693aa8a23e8c6b1", url="https://github.com/wxWidgets/Phoenix"},
+#{protocol="git", url="https://github.com/wxWidgets/wxWidgets"},
+#{protocol="git", url="https://github.com/wxWidgets/nanosvg"},
+]
+
+ext='''
+	cd wxPython-$version
+	patch -Np1 -i ../no-x11.patch
+	patch -Np1 -i ../new.patch
+'''
+
+build='''
+	cd wxPython-$version
+
+	python3 -m venv ss
+	. ss/bin/activate
+	pip install requests
+	python3 build.py build --use_syswx --release
+	deactivate
+
+	/bin/python3 setup.py install \
+		--skip-build \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

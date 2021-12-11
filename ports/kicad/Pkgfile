@@ -1,0 +1,68 @@
+version="6.0.0-rc1"
+pkgdesc="Electronic schematic and printed circuit board (PCB) design tools"
+nostrip=true
+deps=['wxgtk', 'python3', 'python3-wxpython', 'boost', 'curl', 'ngspice', 'zlib', 'mesa', 'glew']
+makedeps=['wxgtk', 'python3', 'python3-wxpython', 'boost', 'curl', 'ngspice', 'zlib', 'mesa', 'glew', 'swig']
+source=[
+	{url="https://gitlab.com/kicad/code/kicad/-/archive/$version/kicad-$version.tar.gz"},
+	{url="https://gitlab.com/kicad/libraries/kicad-symbols/-/archive/$version/kicad-symbols-$version.tar.gz"},
+	{url="https://gitlab.com/kicad/libraries/kicad-footprints/-/archive/$version/kicad-footprints-$version.tar.gz"},
+	{url="https://gitlab.com/kicad/libraries/kicad-packages3D/-/archive/$version/kicad-packages3D-$version.tar.gz"},
+	{url="no-x11.patch"},
+]
+
+ext='''
+	cd kicad-$version
+	patch -Np1 -i ../no-x11.patch
+'''
+
+build='''
+	cmake kicad-symbols-$version -Bbuild_s \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build_s
+	DESTDIR="${pkgdir}" cmake --build build_s --target install
+
+	cmake kicad-footprints-$version -Bbuild_f \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build_f
+	DESTDIR="${pkgdir}" cmake --build build_f --target install
+
+	cmake kicad-packages3D-$version -Bbuild_d \
+				-DCMAKE_INSTALL_PREFIX= \
+				-DCMAKE_INSTALL_LIBDIR=/lib \
+				-DCMAKE_INSTALL_DATADIR=/share \
+				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+				-DCMAKE_BUILD_TYPE=Release \
+				-DBUILD_SHARED_LIBS=ON
+	cmake --build build_d
+	DESTDIR="${pkgdir}" cmake --build build_d --target install
+
+  cmake -Bbuild kicad-$version -DCMAKE_BUILD_TYPE=Release    \
+		-DCMAKE_INSTALL_PREFIX=   \
+		-DCMAKE_INSTALL_LIBDIR=/lib   \
+		-DKICAD_USE_OCE=OFF           \
+		-DKICAD_USE_OCC=OFF           \
+		-DKICAD_USE_EGL=ON            \
+		-DKICAD_USE_BUNDLED_GLEW=OFF \
+		-DKICAD_SCRIPTING=ON          \
+		-DKICAD_SCRIPTING_PYTHON3=ON  \
+		-DKICAD_SCRIPTING_MODULES=ON  \
+		-DKICAD_SCRIPTING_WXPYTHON=ON \
+		-DKICAD_BUILD_I18N=ON \
+		-DKICAD_SCRIPTING_WXPYTHON_PHOENIX=ON \
+		-DKICAD_SCRIPTING_ACTION_MENU=ON \
+		-DwxWidgets_CONFIG_EXECUTABLE=/bin/wx-config \
+		-DBUILD_GITHUB_PLUGIN=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

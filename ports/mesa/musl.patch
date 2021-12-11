@@ -30,25 +30,3 @@
  #include <unistd.h>
  #include <fcntl.h>
  #endif
---- src/amd/vulkan/winsys/amdgpu/radv_amdgpu_winsys.h
-+++ src/amd/vulkan/winsys/amdgpu/radv_amdgpu_winsys.h
-@@ -28,6 +28,8 @@
- #ifndef RADV_AMDGPU_WINSYS_H
- #define RADV_AMDGPU_WINSYS_H
- 
-+#include <sys/types.h>
-+
- #include "radv_radeon_winsys.h"
- #include "ac_gpu_info.h"
- #include "addrlib/addrinterface.h"
---- src/gallium/frontends/nine/nine_debug.c.orig	2020-03-06 07:46:48.278918421 +0100
-+++ src/gallium/frontends/nine/nine_debug.c	2020-03-06 07:51:32.919964119 +0100
-@@ -65,7 +65,7 @@ _nine_debug_printf( unsigned long flag,
- {
-     static boolean first = TRUE;
-     static unsigned long dbg_flags = DBG_ERROR | DBG_WARN;
--    unsigned long tid = 0;
-+    pthread_t tid = 0;
- 
-     if (first) {
-         first = FALSE;

@@ -1,0 +1,18 @@
+--- a/auto/Makefile	2021-12-10 00:21:27.732865470 +0800
++++ b/auto/Makefile	2021-12-10 00:21:27.732865470 +0800
+@@ -92,15 +92,12 @@
+ 	@echo "--------------------------------------------------------------------"
+ 	@echo "Downloading OpenGL-Registry"
+ 	@echo "--------------------------------------------------------------------"
+-	git clone $(REPO_OPENGL) OpenGL-Registry
+-	git clone --branch glew $(REPO_GLFIXES) glfixes
+ 	touch $@
+ 
+ EGL-Registry/.dummy:
+ 	@echo "--------------------------------------------------------------------"
+ 	@echo "Downloading EGL-Registry"
+ 	@echo "--------------------------------------------------------------------"
+-	git clone $(REPO_EGL) EGL-Registry
+ 	touch $@
+ 
+ $(EXT)/.dummy: OpenGL-Registry/.dummy EGL-Registry/.dummy

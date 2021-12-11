@@ -1,4 +1,4 @@
-version="1.5.2"
+version="1.5.9"
 desc="Direct Rendering Manager runtime library"
 makedeps=["mesa", "meson"]
 deps=["mesa"]
@@ -13,6 +13,7 @@ ext='''
 
 build='''
 	noname-meson libepoxy-$version build -Dglx=no -Dx11=false -Denable_docs=false
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

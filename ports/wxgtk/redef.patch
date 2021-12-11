@@ -1,0 +1,12 @@
+--- a/build/cmake/setup.h.in	2021-04-13 06:23:58.000000000 +0800
++++ b/build/cmake/setup.h.in	2021-04-13 06:23:58.000000000 +0800
++++ 1	2021-12-10 22:05:28.833052398 +0800
+@@ -33,7 +33,7 @@
+ #cmakedefine size_t unsigned
+ 
+ /* Define if ssize_t type is available.  */
+-#cmakedefine HAVE_SSIZE_T
++#cmakedefine HAVE_SSIZE_T 1
+ 
+ /* Define if you have the ANSI C header files.  */
+ #cmakedefine STDC_HEADERS 1
