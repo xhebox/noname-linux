@@ -1,0 +1,12 @@
+--- a/tools/arch/x86/include/asm/insn.h	2021-12-08 16:04:57.000000000 +0800
++++ b/tools/arch/x86/include/asm/insn.h	2021-12-08 16:04:57.000000000 +0800
+@@ -7,6 +7,9 @@
+  * Copyright (C) IBM Corporation, 2009
+  */
+ 
++#ifndef __always_inline
++#define __always_inline inline
++#endif
+ #include <asm/byteorder.h>
+ /* insn_attr_t is defined in inat.h */
+ #include "inat.h" /* __ignore_sync_check__ */

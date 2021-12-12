@@ -80,6 +80,7 @@ build='''
 	gcc_cv_libc_provides_ssp=yes \
 	make
 	make -j1 DESTDIR="${pkgdir}" install
+	make -C mpc DESTDIR="${pkgdir}" install
 	make -C gcc DESTDIR="${pkgdir}" install-po
 
 	ln -srf "$pkgdir"/bin/gcc "$pkgdir"/bin/cc

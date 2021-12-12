@@ -1,0 +1,11 @@
+pattern=["lib/modules"]
+operation=["remove","install"]
+script='''
+for i in /lib/modules/*; do
+	case $i in
+	*.*);;
+	*) continue;;
+	esac
+	depmod $(basename "$i")
+done
+'''

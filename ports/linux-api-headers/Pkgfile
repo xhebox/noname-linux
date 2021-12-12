@@ -1,4 +1,4 @@
-version="5.8.3"
+version="5.15.7"
 desc="Linux API headers for userspace"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v4.x/linux-${version}.tar.xz"},
@@ -12,10 +12,8 @@ build='''
 	make mrproper
 	make headers_check
 	make headers
-	find usr/include -name '.*' -delete
-	rm usr/include/Makefile
-	cp -rv usr/include "$pkgdir"/include
-	find "$pkgdir" -name ".install" -exec rm -rf {} \;
-	find "$pkgdir" -name "..install.cmd" -exec rm -rf {} \;
+	find usr/include -type f -not -name '*.h' -exec rm -rf {} \;
+	find usr/include -type d -empty -delete
+	cp -rv usr/include "$pkgdir"
 	rm -rf "$pkgdir/include/drm"
 '''

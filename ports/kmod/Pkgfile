@@ -1,13 +1,20 @@
-version="25"
+version="29"
 desc="Kernel module utilities and library"
-deps=["musl", "zlib", "xz"]
-source=[{url="http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"}]
+deps=["zlib", "xz", "zstd"]
+makedeps=["zlib", "xz", "zstd"]
+source=[
+	{url="http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"},
+	{url="depmod-search.conf"},
+	{url="depmod.toml"},
+]
 
 build='''
 	cd kmod-$version
+
 	./configure --prefix= \
 		--with-xz \
 		--with-zlib \
+		--with-zstd \
 		--enable-tools \
 		--bindir=/bin \
 		--sysconfdir=/etc 
@@ -24,4 +31,8 @@ build='''
 	ln -s kmod "$pkgdir"/bin/rmmod
 	ln -s kmod "$pkgdir"/bin/modprobe
 	ln -s kmod "$pkgdir"/bin/lsmod
+
+	install -Dm755 ../depmod.toml "$pkgdir/${HOOKS#$ROOT}"/depmod.toml
+
+	install -Dm644 "$srcdir/depmod-search.conf" "$pkgdir/lib/depmod.d/search.conf"
 '''

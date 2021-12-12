@@ -1,4 +1,4 @@
-version="5.8.3"
+version="5.15.7"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -9,11 +9,11 @@ esac
 desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
-	{url="amdgpu_backlight.patch"},
+	{url="fix-musl-objtool.patch"},
 	{url="linux.preset"},
 	{url="config"},
 ]
-makedeps=["bc", "bash", "inetutils", "elfutils", "pahole"]
+makedeps=["linux-api-headers", "bc", "bash", "inetutils", "elfutils", "pahole", "libarchive"]
 deps=["kmod" , "linux-firmware", "coreutils"]
 
 ext='''
@@ -22,7 +22,7 @@ ext='''
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
-	patch -Np1 -i ../amdgpu_backlight.patch
+	patch -Np1 -i ../fix-musl-objtool.patch
 
 	cp ../config .config
 
@@ -34,6 +34,7 @@ ext='''
 
 	sed -i 's/\$(LIBS)/& $(LDFLAGS)/' tools/power/cpupower/bench/Makefile
 	sed -i 's/SIGCLD/SIGCHLD/g' tools/usb/usbip/src/usbipd.c
+	sed -i 's/cpio/bsdcpio/g' kernel/gen_kheaders.sh
 
 	make olddefconfig
 	make -s kernelrelease > ../version
@@ -47,7 +48,7 @@ build='''
 	unset LDFLAGS
 	cd linux-${version}
 
-	make bzImage modules
+	make headers bzImage modules
 
 	install -Dm644 `make -s image_name` "${pkgdir}/boot/vmlinuz-${_kernelname}"
 
@@ -105,5 +106,4 @@ build='''
 	
 	mkdir -p "$pkgdir/src"
 	ln -srf "$builddir" "$pkgdir/src/$version-$_kernelname"
-	chmod -Rc u=rwX,go=rX "$pkgdir"
 '''

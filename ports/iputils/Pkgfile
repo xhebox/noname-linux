@@ -1,5 +1,5 @@
 version="20190729"
-makedeps=["libcap", "openssl", "kernel-libc-headers"]
+makedeps=["libcap", "openssl"]
 deps=["libcap", "openssl"]
 desc="IP Configuration Utilities (and ping)"
 source=[

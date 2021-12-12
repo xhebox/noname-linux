@@ -1,6 +1,5 @@
 version="2.26"
 desc="POSIX.1e capabilities library"
-makedeps=["kernel-libc-headers"]
 deps=["attr"]
 source=[{url="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz"}]
 

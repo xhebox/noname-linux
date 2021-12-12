@@ -1,19 +1,17 @@
-version="5.8.3"
+version="5.15.7"
 desc="Linux kernel tools"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="linux.preset"},
 	{url="musl.patch"},
-	{url="usbip.patch"},
 	{url="config"},
 ]
-makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz", "binutils"]
-deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "libressl", "xz", "binutils"]
+makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
+deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
 
 ext='''
 	cd linux-${version}
 	patch -p0 -i ../musl.patch
-	patch -p1 -i ../usbip.patch
 '''
 
 build='''

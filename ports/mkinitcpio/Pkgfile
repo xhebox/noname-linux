@@ -1,4 +1,4 @@
-version="28"
+version="31"
 busyboxver="1.27.2"
 desc="Next generation of initramfs creation"
 source=[
@@ -12,13 +12,12 @@ deps=["bzip2", "grep", "gawk", "coreutils", "findutils", "kmod", "libarchive", "
 
 build='''
 	cd mkinitcpio-$version
+
+	sed -i -e 's/a2x/true/g' -e 's;/usr;;g' Makefile
+
 	make PREFIX=/ DESTDIR="$pkgdir" install
 
-	mv "$pkgdir"/usr/* "$pkgdir"
-	rmdir "$pkgdir"/usr
-
-	chmod 755 "$pkgdir/lib/initcpio/install"
-	chmod 755 "$pkgdir/lib/initcpio/hooks"
+	rm -rf "$pkgdir"/share/libalpm
 
 	cd ../busybox-$busyboxver
 	safeflags="-march=x86-64 -mtune=generic -Os -pipe -fno-strict-aliasing"
@@ -27,5 +26,6 @@ build='''
 	install -Dm755 busybox "$pkgdir/lib/initcpio/busybox"
 
 	sed -i 's/udev/& resume/g' "$pkgdir"/etc/mkinitcpio.conf
+
 	install -Dm755 ../mkinitcpio.toml "$pkgdir/${HOOKS#$ROOT}"/mkinitcpio.toml
 '''
