@@ -2,7 +2,7 @@
 
 umask 022
 
-export PATH="/bin:/sbin:~/.local/bin"
+export PATH="/bin:/sbin:$HOME/.local/bin"
 
 if test -d /etc/profile.d/; then
 	for profile in /etc/profile.d/*.sh; do

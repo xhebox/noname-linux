@@ -1,15 +1,12 @@
-version="20200817"
+version="20211027"
 desc="Firmware files for Linux"
 source=[
-	{
-		url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware",
-		commit="7a30af16115959cf5a817ae51429e72c0084fc0c",
-		protocol="git"
-	}
+	{url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$version.tar.gz"},
 ]
 
 build='''
-	cd linux-firmware*
+	cd linux-firmware-$version
+
 	make DESTDIR="${pkgdir}" FIRMWAREDIR=/lib/firmware install
 	rm -f "${pkgdir}"/lib/firmware/Makefile
 	rm -f "${pkgdir}"/lib/firmware/README

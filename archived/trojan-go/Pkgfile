@@ -1,0 +1,30 @@
+version="0.10.6"
+geo_version="202111082210"
+desc="trojan go"
+makedeps=['go']
+source=[
+	{name="trojan-${version}.tar.gz", url="https://github.com/p4gefau1t/trojan-go/archive/refs/tags/v$version.tar.gz"},
+	{name="geosite-${geo_version}.dat", url="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geo_version}/geosite.dat"},
+	{name="geoip-${geo_version}.dat", url="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geo_version}/geoip.dat"},
+]
+
+build='''
+	install -Dm 644 "geoip-${geo_version}.dat" "${pkgdir}"/lib/trojan-go/geoip.dat
+	install -Dm 644 "geosite-${geo_version}.dat" "${pkgdir}"/lib/trojan-go/geosite.dat
+
+	export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+
+	cd trojan-go-$version
+	go build -v -buildmode=pie -trimpath -mod=readonly -modcacherw -tags "full" -o trojan-go .
+	install -Dm 755 trojan-go "${pkgdir}"/lib/trojan-go/trojan-go
+
+	mkdir -p "$pkgdir"/bin
+	ln -sf /lib/trojan-go/trojan-go "$pkgdir"/bin/trojan-go
+
+	sed -i "10s/bin/lib/g" example/trojan-go.service
+	install -Dm644 example/trojan-go@.service -t "$pkgdir"/lib/systemd/system
+	install -Dm644 example/trojan-go.service -t "$pkgdir"/lib/systemd/system
+'''

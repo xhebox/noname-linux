@@ -1,4 +1,4 @@
-version="1.8"
+version="1.20"
 desc="Intel Wireless Daemon"
 makedeps=["readline", "ncurses", "dbus", "systemd"]
 deps=["readline", "ncurses"]
@@ -29,5 +29,5 @@ build='''
 	--disable-tools
 	make
 	make DESTDIR="$pkgdir" install
-	rm "$pkgdir"/lib/systemd/network/80-iwd.link
+#rm "$pkgdir"/lib/systemd/network/80-iwd.link
 '''

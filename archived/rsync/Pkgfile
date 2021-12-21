@@ -1,0 +1,28 @@
+version="3.2.3"
+desc='A fast and versatile file copying tool for remote and local files'
+deps=['acl', 'lz4', 'openssl', 'perl', 'popt', 'zlib', 'zstd']
+makedeps=['acl', 'lz4', 'openssl', 'perl', 'popt', 'zlib', 'zstd']
+source=[
+	{url="https://github.com/WayneD/rsync/archive/refs/tags/v$version.tar.gz"},
+	{url="rsyncd.conf"},
+]
+
+build='''
+	cd rsync-$version
+	./configure \
+		--prefix=/ \
+		--disable-debug \
+		--disable-md2man \
+		--disable-xxhash \
+		--with-included-popt=no \
+		--with-included-zlib=no
+	make
+	make DESTDIR="$pkgdir" install
+
+	install -Dm0644 ../rsyncd.conf "$pkgdir/etc/rsyncd.conf"
+	install -Dm0644 packaging/lsb/rsync.xinetd "$pkgdir/etc/xinetd.d/rsync"
+	install -Dm0644 packaging/systemd/rsync.service "$pkgdir/lib/systemd/system/rsyncd.service"
+	install -Dm0644 packaging/systemd/rsync.socket "$pkgdir/lib/systemd/system/rsyncd.socket"
+	install -Dm0644 packaging/systemd/rsync@.service "$pkgdir/lib/systemd/system/rsyncd@.service"
+	install -Dm0755 support/rrsync "$pkgdir/lib/rsync/rrsync"
+'''

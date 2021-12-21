@@ -1,0 +1,18 @@
+version="6.14"
+desc="CIFS filesystem user-space tools"
+deps=['libcap', 'pam']
+makedeps=['libcap', 'pam']
+source=[{url="https://download.samba.org/pub/linux-cifs/cifs-utils/cifs-utils-$version.tar.bz2"}]
+
+ext='''
+  # Fix install to honor DESTDIR
+  sed -e 's|cd \$(ROOTSBINDIR)|cd $(DESTDIR)$(ROOTSBINDIR)|g' -i cifs-utils-$version/Makefile.am
+'''
+
+build='''
+	cd cifs-utils-$version
+	autoreconf -i
+	./configure --prefix=/ --with-libcap=yes --sbindir=/bin --disable-systemd 
+	make
+	make DESTDIR="$pkgdir" ROOTSBINDIR=/bin install
+'''
