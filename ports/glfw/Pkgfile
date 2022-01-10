@@ -1,15 +1,13 @@
-version="3.3.2"
+version="3.3.6"
 deps=["mesa", "wayland", "libxkbcommon"]
 makedeps=["mesa", "wayland-protocols", "libxkbcommon", "extra-cmake-modules"]
 desc="A free, open source, portable framework for graphical application development"
 source=[
 	{url="https://github.com/glfw/glfw/archive/${version}.tar.gz"},
-#	{url="test.patch"},
 ]
 
 ext='''
 	cd glfw-$version
-#patch -Np1 -i ../test.patch
 '''
 
 build='''

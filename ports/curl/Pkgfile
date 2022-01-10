@@ -1,7 +1,7 @@
-version="7.60.0"
+version="7.81.0"
 desc="A tool for transfering files with URL syntax"
-makedeps=["libressl", "zlib", "libssh2", "libnghttp2"]
-deps=["ca-certificates", "libressl", "zlib", "libssh2", "libnghttp2"]
+makedeps=["openssl", "zlib", "libssh2", "libnghttp2"]
+deps=["ca-certificates", "openssl", "zlib", "libssh2", "libnghttp2"]
 source=[{url="http://curl.haxx.se/download/curl-$version.tar.bz2"}]
 
 build='''
@@ -10,6 +10,7 @@ build='''
 		--prefix=/ \
 		--with-gssapi \
 		--with-libssh2 \
+		--with-openssl \
 		--with-random=/dev/urandom \
 		--disable-ldap \
 		--disable-ldaps \

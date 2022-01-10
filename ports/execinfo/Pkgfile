@@ -1,0 +1,30 @@
+version = "1.1"
+desc = "BSD licensed clone of the GNU libc backtrace facility"
+source = [
+  { url = "http://distcache.freebsd.org/local-distfiles/itetcu/libexecinfo-${version}.tar.bz2" },
+  { url = "01-execinfo.patch" },
+  { url = "02-makefile.patch" },
+  { url = "03-define-gnu-source.patch" },
+  { url = "libexecinfo_pc.patch" },
+]
+
+ext = '''
+	cd libexecinfo-$version
+	for i in $source;do
+		case $i in
+		*patch) patch -Np1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build = '''
+	cd libexecinfo-$version
+	make
+	sed -e "/Version:/s@version@${version}@" -i libexecinfo.pc
+	install -Dm644 execinfo.h -t "$pkgdir/include"
+	install -Dm644 stacktraverse.h -t "$pkgdir/include"
+	install -Dm644 libexecinfo.pc -t"$pkgdir/lib/pkgconfig"
+	install -Dm755 libexecinfo.a -t "$pkgdir/lib"
+	install -Dm755 libexecinfo.so.1 -t "$pkgdir/lib"
+	ln -s libexecinfo.so.1 "${pkgdir}/lib/libexecinfo.so"
+'''

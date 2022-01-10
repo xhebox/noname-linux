@@ -1,23 +1,47 @@
-name="rust"
-nostrip=true
-rustup_version="1.24.3"
-version="1.53.0"
-_rust_dist_version="$version"
-makedeps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "xz", "curl", "cmake", "python3"]
-deps=["libffi", "ncurses", "libxml2", "zlib", "llvm", "wasi-sysroot", "curl", "xz"]
-source=[
-	{url="https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz"},
-	{url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz"},
-	{url="https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz"},
-	{url="0011-Dynamically-link-libc-on-musl-by-default.patch"},
-	{url="0001-bootstrap-Change-libexec-dir.patch"},
-	{url="0001-cargo-Change-libexec-dir.patch"},
-	{url="0002-compiler-Change-LLVM-targets.patch"},
-	{url="0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch"},
-	{url="0007-do-not-install-libunwind-source.patch"},
+name = "rust"
+nostrip = true
+rustup_version = "1.24.3"
+version = "1.57.0"
+_rust_dist_version = "1.56.1"
+makedeps = [
+  "libffi",
+  "ncurses",
+  "libxml2",
+  "zlib",
+  "llvm",
+  "wasi-sysroot",
+  "xz",
+  "curl",
+  "execinfo",
+  "cmake",
+  "python3",
+]
+deps = [
+  "libffi",
+  "ncurses",
+  "libxml2",
+  "zlib",
+  "llvm",
+  "wasi-sysroot",
+  "curl",
+  "xz",
+  "execinfo",
+]
+source = [
+  { url = "https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz" },
+  { url = "https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz" },
+  { url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
+  { url = "0001-bootstrap-Change-libexec-dir.patch" },
+  { url = "0001-cargo-Change-libexec-dir.patch" },
+  { url = "0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch" },
+  { url = "0007-do-not-install-libunwind-source.patch" },
+  { url = "0008-link-stage-2-tools-dynamically-to-libstd.patch" },
+  { url = "need-ssp-nonshared-and-execinfo.patch" },
+  { url = "link-musl-dynamically.patch" },
+  { url = "musl-fix-linux_musl_base.patch" },
 ]
 
-ext='''
+ext = '''
 	mkdir -p stage0/bin
 	mkdir -p stage0/lib
 
@@ -35,6 +59,10 @@ ext='''
 		*.patch) patch -Np1 -i ../$i;;
 		esac
 	done
+	for i in libc typenum cc rustc-ap-rustc_target target-lexicon; do
+		sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
+	done
+	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
 
 	cat <<- EOF > config.toml
 [llvm]
@@ -62,7 +90,7 @@ profiler=true
 extended=true
 sanitizers=false
 full-bootstrap=false
-local-rebuild=true
+local-rebuild=false
 vendor=true
 cargo="$srcdir/stage0/bin/cargo"
 rustc="$srcdir/stage0/bin/rustc"
@@ -71,6 +99,7 @@ prefix="/"
 libdir="lib"
 mandir="share/man"
 [rust]
+deny-warnings = false
 musl-root="/"
 channel="nightly"
 codegen-units-std=1
@@ -90,17 +119,19 @@ multiplexing = false
 EOF
 '''
 
-build='''
-	export LD_LIBRARY_PATH="$srcdir/stage0/lib"
-	export PATH="$srcdir/stage0/bin:$PATH"
+build = '''
+	export LD_LIBRARY_PATH="$pkgdir/lib:$srcdir/stage0/lib"
+	export PATH="$pkgdir/bin:$srcdir/stage0/bin:$PATH"
 	export CARGO_HOME="$srcdir/.cargo"
-	cd rustup-$rustup_version
-	cargo build --release --features no-self-update --bin rustup-init
-	install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"
-	cd ../rustc-$version-src
+
+	cd "$srcdir/rustc-$version-src"
 	./x.py build
 	DESTDIR="$pkgdir" ./x.py install
 	rm -rf "$pkgdir"/lib/rustlib/manifest-*
 	rm -rf "$pkgdir/lib/rustlib/install.log"
 	rm -rf "$pkgdir/lib/rustlib/rust-installer-version"
+
+	cd "$srcdir/rustup-$rustup_version"
+	cargo build --release --features no-self-update --bin rustup-init
+	install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"
 '''

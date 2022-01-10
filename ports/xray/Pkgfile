@@ -10,6 +10,10 @@ source=[
 	{url="xray@.service"},
 ]
 
+ext='''
+	cd "Xray-core-${version}"
+'''
+
 build='''
 	install -Dm 644 "geoip-${geo_version}.dat" "${pkgdir}"/share/xray/geoip.dat
 	install -Dm 644 "geosite-${geo_version}.dat" "${pkgdir}"/share/xray/geosite.dat

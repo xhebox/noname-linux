@@ -1,101 +1,57 @@
---- ImHex-1.6.1/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
-+++ ImHex-1.6.1/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
-@@ -35,7 +35,6 @@
-     find_library(CRYPTO crypto REQUIRED)
- endif()
- pkg_search_module(CAPSTONE REQUIRED capstone)
--find_package(OpenGL REQUIRED)
- find_package(nlohmann_json REQUIRED)
- find_package(Python COMPONENTS Development)
+--- ImHex/plugins/libimhex/source/ui/imgui_imhex_extensions.cpp	2022-01-10 14:52:29.875748172 +0800
++++ ImHex/plugins/libimhex/source/ui/imgui_imhex_extensions.cpp	2022-01-10 14:52:29.875748172 +0800
+@@ -11,7 +11,7 @@
  
---- ImHex-1.6.1/source/window.cpp	2021-01-11 16:56:09.000000000 +0800
-+++ ImHex-1.6.1/source/window.cpp	2021-01-11 16:56:09.000000000 +0800
-@@ -13,7 +13,6 @@
+ #include <string>
  
- #include "helpers/plugin_handler.hpp"
+-#include <imgui_impl_opengl3_loader.h>
++#include <GLFW/glfw3.h>
  
--#include <glad/glad.h>
- #include <GLFW/glfw3.h>
+ namespace ImGui {
  
- namespace hex {
-@@ -270,8 +270,8 @@
+--- ImHex/source/window/window.cpp	2022-01-10 14:29:37.146517784 +0800
++++ ImHex/source/window/window.cpp	2022-01-10 14:29:37.146517784 +0800
+@@ -759,8 +759,6 @@
+         #endif
+ 
+         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
++        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
++        glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+
+         this->m_windowTitle = "ImHex";
+         this->m_window = glfwCreateWindow(1280 * SharedData::globalScale, 720 * SharedData::globalScale, this->m_windowTitle.c_str(), nullptr, nullptr);
+--- ImHex/source/init/splash_window.cpp	2022-01-10 14:29:37.146517784 +0800
++++ ImHex/source/init/splash_window.cpp	2022-01-10 14:29:37.146517784 +0800
+@@ -155,8 +155,7 @@
          }
  
          glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 -        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 -        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 +        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 +        glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
  
- 
-         this->m_window = glfwCreateWindow(1280 * this->m_globalScale, 720 * this->m_globalScale, "ImHex", nullptr, nullptr);
-@@ -320,9 +320,6 @@
- 
- 
-         glfwSetWindowSizeLimits(this->m_window, 720, 480, GLFW_DONT_CARE, GLFW_DONT_CARE);
--
--        if (gladLoadGL() == 0)
--            throw std::runtime_error("Failed to initialize OpenGL loader!");
-     }
- 
-     void Window::initImGui() {
-@@ -374,7 +374,7 @@
-         ImGui::StyleColorsDark();
- 
-         ImGui_ImplGlfw_InitForOpenGL(this->m_window, true);
--        ImGui_ImplOpenGL3_Init("#version 150");
-+        ImGui_ImplOpenGL3_Init("#version 100");
-     }
- 
-     void Window::initPlugins() {
- #include <GLES2/gl2.h>
+         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+         glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
 --- ImHex-1.6.1/external/ImGui/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
 +++ ImHex-1.6.1/external/ImGui/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
-@@ -7,6 +7,7 @@
- find_package(Freetype REQUIRED)
- pkg_search_module(GLM REQUIRED glm)
- pkg_search_module(GLFW REQUIRED glfw3)
-+pkg_search_module(GLESV2 REQUIRED glesv2)
+@@ -10,6 +10,7 @@
  
- add_library(imgui
-     source/imgui.cpp
-@@ -24,9 +25,9 @@
+ if (UNIX)
+     find_package(OpenGL REQUIRED)
++    add_compile_definitions(IMGUI_IMPL_OPENGL_ES2)
+ endif ()
  
- add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../glad ${CMAKE_CURRENT_BINARY_DIR}/external/glad)
- 
--target_include_directories(imgui PUBLIC include ${FREETYPE_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS})
-+target_include_directories(imgui PUBLIC include ${FREETYPE_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLESV2_INCLUDE_DIRS})
- 
--target_link_directories(imgui PUBLIC ${GLM_INCLUDE_DIRS} ${GLFW_LIBRARY_DIRS})
-+target_link_directories(imgui PUBLIC ${GLM_INCLUDE_DIRS} ${GLFW_LIBRARY_DIRS} ${GLESV2_LIBRARY_DIRS})
- 
+ add_library(imgui OBJECT
+@@ -46,5 +47,5 @@
  if (WIN32)
-     target_link_libraries(imgui libstdc++.a libgcc.a libharfbuzz.a libfreetype.a libharfbuzz.a libgraphite2.a libpng.a libbrotlidec-static.a libbrotlicommon-static.a libz.a libbz2.a librpcrt4.a glad libglfw3.a)
-@@ -32,5 +32,5 @@
- if (WIN32)
-     target_link_libraries(imgui libstdc++.a libgcc.a libharfbuzz.a libfreetype.a libharfbuzz.a libgraphite2.a libpng.a libbrotlidec-static.a libbrotlicommon-static.a libz.a libbz2.a librpcrt4.a glad libglfw3.a)
+     target_link_libraries(imgui PUBLIC Freetype::Freetype glfw3 opengl32.lib)
  elseif (UNIX)
--    target_link_libraries(imgui Freetype::Freetype glad glfw)
-+    target_link_libraries(imgui Freetype::Freetype glad glfw GLESv2)
+-    target_link_libraries(imgui PUBLIC Freetype::Freetype glfw OpenGL::GL)
++    target_link_libraries(imgui PUBLIC Freetype::Freetype glfw OpenGL::OpenGL)
  endif()
---- ImHex-1.6.1/external/ImGui/source/imgui_impl_opengl3.cpp	2021-01-11 16:56:09.000000000 +0800
-+++ ImHex-1.6.1/external/ImGui/source/imgui_impl_opengl3.cpp	2021-01-11 16:56:09.000000000 +0800
-@@ -86,6 +86,8 @@
- #include <stdint.h>     // intptr_t
- #endif
- 
-+#define IMGUI_IMPL_OPENGL_ES2
-+
- // GL includes
- #if defined(IMGUI_IMPL_OPENGL_ES2)
-
-@@ -184,7 +184,9 @@
-     if (g_GlVersion >= 320)
-         io.BackendFlags |= ImGuiBackendFlags_RendererHasVtxOffset;  // We can honor the ImDrawCmd::VtxOffset field, allowing for large meshes.
- #endif
-+#if !defined(IMGUI_IMPL_OPENGL_ES2)
-     io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports;  // We can create multi-viewports on the Renderer side (optional)
-+#endif
- 
-     // Store GLSL version string so we can refer to it later in case we recreate shaders.
-     // Note: GLSL version is NOT the same as GL version. Leave this to NULL if unsure.
