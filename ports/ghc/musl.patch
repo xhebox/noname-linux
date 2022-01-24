@@ -1,5 +1,5 @@
---- ghc-9.0.1/compiler/GHC/SysTools/Process.hs	2021-01-26 00:30:28.000000000 +0800
-+++ ghc-9.0.1/compiler/GHC/SysTools/Process.hs	2021-01-26 00:30:28.000000000 +0800
+--- a/compiler/main/SysTools/Process.hs
++++ b/compiler/main/SysTools/Process.hs
 @@ -86,7 +86,7 @@
  
  -- Don't let gcc localize version info string, #8825

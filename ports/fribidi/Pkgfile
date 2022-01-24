@@ -1,11 +1,12 @@
-version="1.0.5"
+version="1.0.11"
 desc="A Free Implementation of the Unicode Bidirectional Algorithm"
 makedeps=["glib"]
 deps=["glib"]
-source=[{url="https://github.com/fribidi/fribidi/releases/download/v$version/fribidi-$version.tar.bz2"}]
+source=[{url="https://github.com/fribidi/fribidi/releases/download/v$version/fribidi-$version.tar.xz"}]
 
 build='''
 	noname-meson fribidi-$version build -D docs=false
-	ninja -C build
-	DESTDIR="${pkgdir}" ninja -C build install
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

@@ -1,0 +1,13 @@
+version="1.0.1"
+deps=["zlib", "openssl"]
+makedeps=["zlib", "openssl", "cmake"]
+desc="modern fast linker"
+source=[
+	{url="https://github.com/rui314/mold/archive/refs/tags/v${version}.tar.gz"},
+]
+
+build='''
+	cd mold-$version
+	make
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

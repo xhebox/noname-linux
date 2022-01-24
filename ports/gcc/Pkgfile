@@ -15,6 +15,7 @@ source=[
 	{url="libgcc-always-build-gcceh.a.patch"},
 	{url="0016-invalid_tls_model.patch"},
 	{url="locale.patch"},
+	{url="mold.patch"},
 ]
 makedeps=["zlib"]
 deps=["zlib", "binutils"]

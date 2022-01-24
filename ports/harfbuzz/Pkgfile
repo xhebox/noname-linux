@@ -1,20 +1,14 @@
-version = "3.0.0"
+version = "3.2.0"
 desc = "An OpenType text shaping engine"
 deps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2"]
-makedeps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2"]
+makedeps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2", "gobject-introspection"]
 source = [
   { url = "https://github.com/harfbuzz/harfbuzz/releases/download/$version/harfbuzz-$version.tar.xz" },
 ]
 
 build = '''
-	cd harfbuzz-$version
-	./configure --prefix= \
-		--with-glib \
-		--with-cairo \
-		--with-icu \
-		--without-graphite2 \
-		--disable-static \
-		--disable-tests
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson harfbuzz-$version build -Dchafa=disabled -Ddocs=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

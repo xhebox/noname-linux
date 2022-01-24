@@ -1,8 +1,8 @@
-version="3.4.2"
+version="3.6.2"
 desc="C/C++ wrapper for sass"
 deps=["libsass"]
 makedeps=["libsass"]
-source=[{url="https://github.com/sass/sassc/archive/${version}.tar.gz"}]
+source=[{url="https://github.com/sass/sassc/archive/refs/tags/${version}.tar.gz"}]
 
 build='''
 	cd sassc-$version

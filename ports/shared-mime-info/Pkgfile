@@ -1,0 +1,16 @@
+version="2.0"
+desc="Freedesktop.org Shared MIME Info"
+makedeps=["glib", "libxml2"]
+deps=["glib", "libxml2"]
+source=[
+	{protocol="git", url="https://github.com/freedesktop/xdg-shared-mime-info"},
+	{url="mime.toml"},
+]
+
+build='''
+	noname-meson xdg-shared-mime-info build -Dupdate-mimedb=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 ../mime.toml "$pkgdir/${HOOKS#$ROOT}"/mime.toml
+'''

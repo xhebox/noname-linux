@@ -1,9 +1,11 @@
-version="11.0.0"
+version="13.0.0"
+wasi_version="14.0"
 desc="LLVM compiler and its backend"
-makedeps=["flex", "bison", "libffi", "libxml2", "libunwind", "libedit", "ncurses", "python3"]
-deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind"]
+deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot"]
+makedeps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot", "flex", "bison", "python3"]
 source=[
-	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.tar.xz"},
+	{url="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${wasi_version%.*}/libclang_rt.builtins-wasm32-wasi-${wasi_version}.tar.gz"},
+	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.src.tar.xz"},
 	{url="clang-libexec.patch"},
 	{url="llvm-001-musl.patch"},
 	{url="libcxx-0001-musl-hacks.patch"},
@@ -11,7 +13,7 @@ source=[
 ]
 
 ext='''
-	cd llvm-project-$version
+	cd llvm-project-$version.src
 
 	sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
 	sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
@@ -42,7 +44,7 @@ ext='''
 '''
 
 build='''
-	cd llvm-project-$version
+	cd llvm-project-$version.src
 
 	export CC=clang
 	export CXX=clang++
@@ -83,4 +85,6 @@ build='''
 
 	mv "$pkgdir"/include/llvm/Config/llvm-config.h "$pkgdir"/include/llvm/Config/llvm-config-64.h
 	install -m 0644 "$srcdir"/llvm-config.h "$pkgdir"/include/llvm/Config/
+	
+	cp -a "$srcdir/lib/wasi" "$pkgdir"/lib/clang/*/lib/
 '''

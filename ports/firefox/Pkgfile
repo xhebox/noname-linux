@@ -1,8 +1,8 @@
 name="firefox"
-version="93.0"
+version="96.0.2"
 desc="Firefox web browser"
-deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "unzip"]
-makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "nasm", "zip", "rust", "pipewire", "inetutils", "unzip", "wayland-protocols", "nasm", "yasm"]
+deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
+makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
@@ -16,15 +16,13 @@ source=[
 	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
 	{url="no-x11.patch"},
+	{url="warnings.patch"},
 ]
 
 ext='''
 	cd firefox-${version%b*}
 	for i in $source; do
 		case $i in
-		mallinfo*.patch) patch -Np1 -i ../$i;;
-		sandbox*.patch) patch -Np1 -i ../$i;;
-		*fortify*.patch) patch -Np1 -i ../$i;;
 		*.patch) patch -Np0 -i ../$i;;
 		esac
 	done
@@ -43,11 +41,13 @@ ac_add_options --enable-hardening
 ac_add_options --enable-linker=lld
 ac_add_options --enable-rust-simd
 ac_add_options --disable-elf-hack
+ac_add_options --with-wasi-sysroot=/lib/wasi
 ac_add_options --with-ccache=/bin/ccache
 ac_add_options --host=$TARGET
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
 export CXX='clang++ --target=x86_64-pc-linux-musl'
+export LDFLAGS='-Wl,-z,stack-size=2097152'
 export AR=llvm-ar
 export NM=llvm-nm
 export RANLIB=llvm-ranlib
@@ -83,6 +83,16 @@ ac_add_options --disable-jemalloc
 ac_add_options --disable-updater
 ac_add_options --enable-default-toolkit="cairo-gtk3-wayland"
 END
+
+	mkdir -p "$srcdir/.cargo"
+	cat > "$srcdir/.cargo/config" << EOF
+[net]
+git-fetch-with-cli = true
+
+[http]
+debug = false
+proxy = "127.0.0.1:8080"
+EOF
 '''
 
 build='''

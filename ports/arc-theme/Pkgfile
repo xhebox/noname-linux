@@ -1,7 +1,0 @@
-version="20190213"
-desc="A flat theme with transparent elements for GTK 3, GTK 2 and Gnome-Shell. Official releases only."
-source=[{url="http://mirrors.ustc.edu.cn/archlinux/community/os/x86_64/arc-gtk-theme-$version-1-any.pkg.tar.xz"}]
-
-build='''
-	mv usr/share "$pkgdir"
-'''

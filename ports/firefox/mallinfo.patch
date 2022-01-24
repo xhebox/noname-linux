@@ -1,7 +1,7 @@
 diff --git a/xpcom/base/nsMemoryReporterManager.cpp b/xpcom/base/nsMemoryReporterManager.cpp
 index 865e1b5430..9a00dafecb 100644
---- a/xpcom/base/nsMemoryReporterManager.cpp
-+++ b/xpcom/base/nsMemoryReporterManager.cpp
+--- xpcom/base/nsMemoryReporterManager.cpp
++++ xpcom/base/nsMemoryReporterManager.cpp
 @@ -124,6 +124,7 @@ static MOZ_MUST_USE nsresult ResidentUniqueDistinguishedAmount(int64_t* aN) {
    return GetProcSelfSmapsPrivate(aN);
  }

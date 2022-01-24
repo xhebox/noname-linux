@@ -1,8 +1,8 @@
 version = "1.13.0"
 nostrip = true
 desc = "A Hex Editor for Reverse Engineers, Programmers and people that value their eye sight when working at 3 AM. "
-deps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm"]
-makedeps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm"]
+deps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm", "capstone"]
+makedeps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm", "capstone"]
 source = [
   { protocol = "git", url = "https://github.com/WerWolv/ImHex", commit = "44a1bbf4144c22557fc15d229111e0f319566967" },
   { url = "gl.patch" },
@@ -22,6 +22,7 @@ build = '''
 				-DCMAKE_INSTALL_DATADIR=/share \
 				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
 				-DCMAKE_BUILD_TYPE=Debug \
+				-DUSE_SYSTEM_CAPSTONE=ON \
 				-DUSE_SYSTEM_LLVM=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

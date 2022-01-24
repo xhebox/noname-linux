@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
 rustup_version = "1.24.3"
-version = "1.57.0"
-_rust_dist_version = "1.56.1"
+version = "1.58.0"
+_rust_dist_version = "1.58.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -72,12 +72,12 @@ llvm-config="/bin/llvm-config"
 crt-static=false
 [target.wasm32-unknown-unknown]
 linker="wasm-ld"
-wasi-root="/lib/wasi-sysroot"
+wasi-root="/lib/wasi"
 llvm-config="/bin/llvm-config"
 profiler=false
 [target.wasm32-wasi]
 linker="wasm-ld"
-wasi-root="/lib/wasi-sysroot"
+wasi-root="/lib/wasi"
 llvm-config="/bin/llvm-config"
 profiler=false
 [build]
@@ -111,12 +111,6 @@ rpath=false
 [dist]
 src-tarball=false
 EOF
-
-	mkdir .cargo
-	cat > .cargo/config << "EOF"
-[http]
-multiplexing = false
-EOF
 '''
 
 build = '''
@@ -125,6 +119,7 @@ build = '''
 	export CARGO_HOME="$srcdir/.cargo"
 
 	cd "$srcdir/rustc-$version-src"
+	env >> env
 	./x.py build
 	DESTDIR="$pkgdir" ./x.py install
 	rm -rf "$pkgdir"/lib/rustlib/manifest-*

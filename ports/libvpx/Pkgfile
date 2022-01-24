@@ -1,5 +1,5 @@
 version="1.8.1"
-makedeps=["yasm"]
+makedeps=["nasm"]
 deps=["bash"]
 desc="Library for the vp8 codec"
 source=[
@@ -30,6 +30,7 @@ build='''
 		--enable-pic \
 		--enable-experimental \
 		--disable-install-docs \
+		--as=nasm \
 		--disable-install-srcs
 	make
 	make DIST_DIR="$pkgdir" install

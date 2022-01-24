@@ -1,11 +1,11 @@
-version="1.19"
+version="1.24"
 desc='Specifications of extended Wayland protocols'
 makedeps=["wayland"]
 source=[{url="https://wayland.freedesktop.org/releases/wayland-protocols-$version.tar.xz"}]
 
 build='''
-	cd wayland-protocols-$version
-	./configure --prefix=
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson wayland-protocols-$version build -Denable_docs=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

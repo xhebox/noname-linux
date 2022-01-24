@@ -1,8 +1,8 @@
 The wrapper features.h gets pulled in by system headers causing thigns to
 break. We work around it by simply not wrap features.h
 
---- ./config/system-headers.mozbuild.orig
-+++ ./config/system-headers.mozbuild
+--- config/system-headers.mozbuild.orig
++++ config/system-headers.mozbuild
 @@ -229,7 +229,6 @@
      'execinfo.h',
      'extras.h',

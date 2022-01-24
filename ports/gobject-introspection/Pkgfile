@@ -5,8 +5,8 @@ desc="Introspection system for GObject-based libraries"
 source=[{url="http://download.gnome.org/sources/gobject-introspection/${version%.*}/gobject-introspection-$version.tar.xz"}]
 
 build='''
-	noname-meson gobject-introspection-$version build \
-		-Dcairo=disabled -Ddoctool=disabled -Dgtk_doc=false
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	noname-meson gobject-introspection-$version build -Dcairo=disabled -Ddoctool=disabled -Dgtk_doc=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

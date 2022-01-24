@@ -1,6 +1,6 @@
 version="2.33.0"
-makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "shadow", "libressl"]
-deps=["curl", "pcre2", "grep", "expat", "perl", "perl-error", "shadow", "libressl"]
+makedeps=["curl", "pcre2", "expat", "perl", "perl-error", "shadow", "openssl"]
+deps=["curl", "pcre2", "grep", "expat", "perl", "perl-error", "shadow", "openssl"]
 desc="Directory content manager"
 source=[{url="https://www.kernel.org/pub/software/scm/git/git-$version.tar.xz"}]
 
@@ -12,4 +12,6 @@ build='''
 
 	make DESTDIR="$pkgdir" $OPTIONS install
 	make -C contrib/subtree DESTDIR="$pkgdir" $OPTIONS install
+
+	find "$pkgdir/lib/git-core" -type f -exec strip {} \;
 '''

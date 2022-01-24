@@ -1,4 +1,4 @@
-version="2.58.3"
+version="2.70.2"
 desc="Low-level data structure handling, portability wrappers, and interfaces for runtime functionality"
 makedeps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
 deps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
@@ -21,7 +21,7 @@ ext='''
 '''
 
 build='''
-	noname-meson glib-$version build -D selinux=false -D man=false
+	noname-meson glib-$version build -D selinux=disabled -D man=false
 	ninja -C build
 	DESTDIR="$pkgdir" meson install -C build
 	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
