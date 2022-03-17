@@ -1,5 +1,5 @@
---- a/compiler/main/SysTools/Process.hs
-+++ b/compiler/main/SysTools/Process.hs
+--- a/compiler/GHC/SysTools/Process.hs
++++ b/compiler/GHC/SysTools/Process.hs
 @@ -86,7 +86,7 @@
  
  -- Don't let gcc localize version info string, #8825

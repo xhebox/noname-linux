@@ -1,4 +1,4 @@
-version="0.57.1"
+version="0.61.1"
 desc='High productivity build system'
 makedeps=["python3", "ninja"]
 deps=["python3", "ninja"]

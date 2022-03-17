@@ -39,6 +39,7 @@ ac_add_options --enable-release
 ac_add_options --enable-optimize
 ac_add_options --enable-hardening
 ac_add_options --enable-linker=lld
+ac_add_options --enable-forkserver
 ac_add_options --enable-rust-simd
 ac_add_options --disable-elf-hack
 ac_add_options --with-wasi-sysroot=/lib/wasi
@@ -47,7 +48,7 @@ ac_add_options --host=$TARGET
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
 export CXX='clang++ --target=x86_64-pc-linux-musl'
-export LDFLAGS='-Wl,-z,stack-size=2097152'
+export LDFLAGS='-Wl,-z,stack-size=2097152 -Wl,-rpath=/lib/firefox'
 export AR=llvm-ar
 export NM=llvm-nm
 export RANLIB=llvm-ranlib
@@ -76,8 +77,6 @@ ac_add_options --disable-webrtc
 ac_add_options --disable-gold
 ac_add_options --disable-crashreporter
 ac_add_options --disable-tests
-ac_add_options --disable-install-strip
-ac_add_options --disable-strip
 ac_add_options --disable-profiling
 ac_add_options --disable-jemalloc
 ac_add_options --disable-updater
@@ -101,7 +100,6 @@ build='''
 	cargo install --version 0.19.0 cbindgen
 
 	cd firefox-${version%b*}
-	export LDFLAGS="$LDFLAGS -Wl,-rpath=/lib/firefox"
 	export MACH_USE_SYSTEM_PYTHON=/bin/python
 
 	env >> env

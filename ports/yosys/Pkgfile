@@ -1,15 +1,15 @@
-version="474cd02eb57ede3ea03ce9ce924c0daa0d5ee8ff"
+version="0.15"
 abcversion="4b4646283fef561671191949cfb7149d87e06696"
 makedeps=["python3", "libffi"]
 deps=["bash", "python3", "libffi"]
 desc="a framework for rtl synthesis"
 source=[
-	{url="https://github.com/cliffordwolf/yosys/archive/$version.tar.gz"},
+	{url="https://github.com/YosysHQ/yosys/archive/refs/tags/yosys-$version.tar.gz"},
 	{url="https://github.com/berkeley-abc/abc/archive/$abcversion.tar.gz"},
 ]
 
 build='''
-	cd yosys-$version
+	cd yosys-yosys-$version
 	ln -srf ../abc-$abcversion abc
 	make \
 		PREFIX="/" \

@@ -1,0 +1,20 @@
+version="4.94.0"
+desc='Lists open files for running Unix processes'
+source=[
+	{url="https://github.com/lsof-org/lsof/archive/${version}/lsof-${version}.tar.gz"},
+]
+
+ext='''
+  cd lsof-${version}
+
+  sed -i 's|/\* #define\tHASSECURITY\t1 \*/|#define\tHASSECURITY\t1|' dialects/linux/machine.h
+  sed -i "s|.so ./version|.ds VN ${version}|" -i Lsof.8
+'''
+
+build='''
+  cd lsof-${version}
+  ./Configure -n linux
+  make CC="cc ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
+  install -Dm 755 lsof -t "${pkgdir}"/bin
+  install -Dm 644 Lsof.8 "${pkgdir}"/share/man/man8/lsof.8
+'''

@@ -1,0 +1,19 @@
+--- a/ghcide/src/Development/IDE/Core/Rules.hs	2022-01-30 05:12:57.000000000 +0800
++++ b/ghcide/src/Development/IDE/Core/Rules.hs	2022-01-30 05:12:57.000000000 +0800
+@@ -823,15 +823,7 @@
+       summarize SourceUnmodifiedAndStable = BS.singleton 3
+ 
+ displayTHWarning :: LspT c IO ()
+-displayTHWarning
+-  | not isWindows && not hostIsDynamic = do
+-      LSP.sendNotification SWindowShowMessage $
+-        ShowMessageParams MtInfo $ T.unwords
+-          [ "This HLS binary does not support Template Haskell."
+-          , "Follow the [instructions](" <> templateHaskellInstructions <> ")"
+-          , "to build an HLS binary with support for Template Haskell."
+-          ]
+-  | otherwise = return ()
++displayTHWarning = return ()
+ 
+ newtype DisplayTHWarning = DisplayTHWarning (IO ())
+ instance IsIdeGlobal DisplayTHWarning

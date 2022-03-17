@@ -1,4 +1,4 @@
-version="8.10.7"
+version="9.2.1"
 stack_version="2.7.3"
 cabal_version="3.6.2.0"
 stackage_version="lts-18.21"
@@ -17,11 +17,15 @@ source=[
 	{url="https://downloads.haskell.org/~ghc/$version/ghc-$version-src.tar.xz"},
 
 	{url="stack.sh"},
+	{url="5677.diff"},
 	{url="musl.patch"},
 ]
 
 ext='''
-	cd ghc-${bootstrap_ghc_version}-x86_64-unknown-linux
+	cd "$srcdir/stack-$stack_version"
+	patch -Np1 -i ../5677.diff
+
+	cd "$srcdir"/ghc-${bootstrap_ghc_version}-x86_64-unknown-linux
 
 	mkdir "$srcdir"/bin "$srcdir"/lib "$srcdir"/share
 
@@ -31,14 +35,14 @@ ext='''
 	cd ../ghc-$version
 	patch -Np1 -i ../musl.patch
 
-	cp mk/build.mk.sample mk/build.mk
-
 	cat >> mk/build.mk <<-EOF
 BuildFlavour         = perf-llvm
+DYNAMIC_GHC_PROGRAMS = yes
 EOF
 '''
 
 build='''
+#export http_proxy=socks5://127.0.0.1:1080
 	export PATH="$srcdir/bin:$PATH"
 	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$srcdir/lib"
 
@@ -46,7 +50,6 @@ build='''
 	HOME=$srcdir "$srcdir/usr/bin/cabal" update -v
 
 	cd "$srcdir/stack-$stack_version"
-	sed -i 's;pantry >=0.5.2;pantry <0.5.3;g' stack.cabal
 	HOME=$srcdir "$srcdir/usr/bin/cabal" new-build -j --flag disable-git-info --constraint 'lukko -ofd-locking' --constraint="cryptonite -integer-gmp"
 	install -m 755 -D dist-newstyle/build/*/*/*/build/stack/stack "$pkgdir/lib/stack"
 	install -m 755 -D ../stack.sh "$pkgdir/bin/stack"
@@ -64,4 +67,5 @@ build='''
 
 	find "$pkgdir/bin" -type f -exec strip {} \;
 	find "$pkgdir/lib" -type f \( -name "*.so" -o -name "*.a" \) -exec strip --strip-unneeded {} \;
+	find "$pkgdir"/lib/*/bin -type f -exec strip {} \;
 '''

@@ -1,0 +1,14 @@
+version="0.6.3"
+desc="easy seat management"
+makedeps=["systemd"]
+deps=["systemd"]
+source=[
+	{url="https://git.sr.ht/~kennylevinsen/seatd/archive/${version}.tar.gz"},
+]
+
+build='''
+	noname-meson seatd-$version build -Dlibseat-logind=systemd -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

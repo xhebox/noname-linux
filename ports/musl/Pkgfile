@@ -19,6 +19,7 @@ source=[
 	{ url="ldd" },
 	{ url="handle-aux-at_base.patch" },
 	{ url="pthread_getname.patch" },
+#{ url="test.patch" },
 ]
 
 ext='''
@@ -26,7 +27,7 @@ ext='''
 	for i in $source;do
 		echo $i
 		case $i in
-		*patch) patch -p1 -i "$srcdir"/$i;;
+		*patch) patch -Nbp1 -i "$srcdir"/$i;;
 		esac
 	done
 '''
@@ -34,8 +35,8 @@ ext='''
 build='''
 	cd musl-$version
 	unset LDFLAGS
-	export CXXFLAGS=$(sed 's/\-O\d//g' $CXXFLAGS)
-	export CFLAGS=$(sed 's/\-O\d//g' $CFLAGS)
+	unset CXXFLAGS
+	unset CFLAGS
 
 	# ------------------------------
 	# ssp support

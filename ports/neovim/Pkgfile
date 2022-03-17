@@ -1,4 +1,4 @@
-version="0.5.1"
+version="0.6.1"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
 deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
@@ -13,4 +13,5 @@ build='''
 		-DPREFER_LUA=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
+	find "$pkgdir/bin" -type f -exec strip {} \;
 '''

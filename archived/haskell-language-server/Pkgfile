@@ -1,15 +1,18 @@
-version="1.5.1"
+version="1.6.1.0"
 desc="haskell language server"
 deps=["libgmp", "zlib", "icu", "ncurses"]
 makedeps=["libgmp", "zlib", "icu", "ncurses", "ghc"]
 source=[
 	{url="https://github.com/haskell/haskell-language-server/releases/download/$version/haskell-language-server-${version}-src.tar.gz"},
+	{url="nowarning.patch"},
 ]
 
 build='''
-	export HTTP_PROXY=socks5://127.0.0.1:1080
-	export HTTPS_PROXY=socks5://127.0.0.1:1080
+	export http_proxy=socks5://127.0.0.1:1080
+	export https_proxy=socks5://127.0.0.1:1080
 	cd haskell-language-server-$version
-	stack --system-ghc build
+	patch -Np1 -i ../nowarning.patch
+	HOME=$srcdir cabal update -v
+	HOME=$srcdir cabal build  --project-file=cabal-ghc90.project
 	install -Dm755 .stack-work/dist/*/*/build/haskell-language-server/haskell-language-server "$pkgdir/bin/haskell-language-server"
 '''

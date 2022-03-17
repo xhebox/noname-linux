@@ -1,0 +1,11 @@
+--- a/meson.build	2018-07-31 01:31:12.000000000 +0800
++++ b/meson.build	2018-07-31 01:31:12.000000000 +0800
+@@ -301,7 +301,7 @@
+   pango_deps += freetype_dep
+ endif
+ 
+-xft_dep = dependency('xft', version: xft_req_version, required: false)
++xft_dep = dependency('___xft', version: xft_req_version, required: false)
+ if xft_dep.found()
+   pango_conf.set('HAVE_XFT', 1)
+   pango_deps += dependency('xrender', required: false)

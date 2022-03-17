@@ -1,11 +1,11 @@
-version="2020.6"
-hdrver="1.5.4.raytracing.fixed"
+version="2021.4"
+hdrver="sdk-1.2.198.0"
 desc="API and commands for processing SPIR-V modules"
 deps=["musl"]
 makedeps=["python3"]
 source=[
 	{url="https://github.com/KhronosGroup/SPIRV-Tools/archive/v${version}.tar.gz"},
-	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/$hdrver.tar.gz"},
+	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/${hdrver}.tar.gz"},
 ]
 
 build='''
@@ -13,14 +13,12 @@ build='''
 	cmake --build bu
 	DESTDIR="${pkgdir}" cmake --build bu --target install
 
-	mv SPIRV-Headers-$hdrver SPIRV-Tools-$version/external/SPIRV-Headers
-
 	cmake SPIRV-Tools-$version -Bbuild \
 		-DCMAKE_INSTALL_PREFIX=/ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DSPIRV_WERROR=Off \
+		-DSPIRV-Headers_SOURCE_DIR="${srcdir}"/SPIRV-Headers-$hdrver \
 		-DBUILD_SHARED_LIBS=ON
-
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

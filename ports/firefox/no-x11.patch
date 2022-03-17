@@ -767,87 +767,6 @@ index 0050af3af3..c2c02e59ff 100644
  
  nsresult nsWidgetGtk2ModuleCtor() { return nsAppShellInit(); }
  
---- widget/gtk/components.conf	2022-01-18 20:32:02.547700057 +0800
-+++ widget/gtk/components.conf	2022-01-18 20:32:02.547700057 +0800
-@@ -76,43 +76,42 @@
-         'headers': ['/widget/gtk/nsApplicationChooser.h'],
-         'processes': ProcessSelector.MAIN_PROCESS_ONLY,
-     },
--]
--
-+    {
-+        'js_name': 'clipboard',
-+        'cid': '{8b5314ba-db01-11d2-96ce-0060b0fb9956}',
-+        'contract_ids': ['@mozilla.org/widget/clipboard;1'],
-+        'interfaces': ['nsIClipboard'],
-+        'type': 'nsIClipboard',
-+        'processes': ProcessSelector.MAIN_PROCESS_ONLY,
-+        'overridable': True,
-+    },
-+    {
-+        'cid': '{77221d5a-1dd2-11b2-8c69-c710f15d2ed5}',
-+        'contract_ids': ['@mozilla.org/widget/clipboardhelper;1'],
-+        'type': 'nsClipboardHelper',
-+        'headers': ['/widget/nsClipboardHelper.h'],
-+    },
-+    {
-+        'cid': '{8b5314bb-db01-11d2-96ce-0060b0fb9956}',
-+        'contract_ids': ['@mozilla.org/widget/dragservice;1'],
-+        'singleton': True,
-+        'type': 'nsDragService',
-+        'headers': ['/widget/gtk/nsDragService.h'],
-+        'constructor': 'nsDragService::GetInstance',
-+        'processes': ProcessSelector.MAIN_PROCESS_ONLY,
-+    },
-+    {
-+        'name': 'GfxInfo',
-+        'cid': '{d755a760-9f27-11df-0800-200c9a664242}',
-+        'contract_ids': ['@mozilla.org/gfx/info;1'],
-+        'type': 'mozilla::widget::GfxInfo',
-+        'headers': ['/widget/gtk/GfxInfo.h'],
-+        'init_method': 'Init',
-+        'processes': ProcessSelector.ALLOW_IN_GPU_PROCESS,
-+    },
-+  ]
- if defined('MOZ_X11'):
--    Classes += [
--        {
--            'js_name': 'clipboard',
--            'cid': '{8b5314ba-db01-11d2-96ce-0060b0fb9956}',
--            'contract_ids': ['@mozilla.org/widget/clipboard;1'],
--            'interfaces': ['nsIClipboard'],
--            'type': 'nsIClipboard',
--            'processes': ProcessSelector.MAIN_PROCESS_ONLY,
--            'overridable': True,
--        },
--        {
--            'cid': '{77221d5a-1dd2-11b2-8c69-c710f15d2ed5}',
--            'contract_ids': ['@mozilla.org/widget/clipboardhelper;1'],
--            'type': 'nsClipboardHelper',
--            'headers': ['/widget/nsClipboardHelper.h'],
--        },
--        {
--            'cid': '{8b5314bb-db01-11d2-96ce-0060b0fb9956}',
--            'contract_ids': ['@mozilla.org/widget/dragservice;1'],
--            'singleton': True,
--            'type': 'nsDragService',
--            'headers': ['/widget/gtk/nsDragService.h'],
--            'constructor': 'nsDragService::GetInstance',
--            'processes': ProcessSelector.MAIN_PROCESS_ONLY,
--        },
--        {
--            'name': 'GfxInfo',
--            'cid': '{d755a760-9f27-11df-0800-200c9a664242}',
--            'contract_ids': ['@mozilla.org/gfx/info;1'],
--            'type': 'mozilla::widget::GfxInfo',
--            'headers': ['/widget/gtk/GfxInfo.h'],
--            'init_method': 'Init',
--            'processes': ProcessSelector.ALLOW_IN_GPU_PROCESS,
--        },
-+  Classes += [
-         {
-             'cid': '{6987230e-0098-4e78-bc5f-1493ee7519fa}',
-             'contract_ids': ['@mozilla.org/widget/useridleservice;1'],
 --- toolkit/xre/moz.build	2022-01-23 14:14:30.545217387 +0800
 +++ toolkit/xre/moz.build	2022-01-23 14:14:30.545217387 +0800
 @@ -156,7 +156,7 @@
@@ -868,65 +787,6 @@ index 0050af3af3..c2c02e59ff 100644
      DEFINES["USE_GLX_TEST"] = True
  
  for var in (
---- widget/gtk/moz.build.orig	2022-01-20 06:44:28.000000000 +0800
-+++ widget/gtk/moz.build	2022-01-24 15:17:22.079211024 +0800
-@@ -22,6 +22,7 @@
- DIRS += ["mozgtk"]
- 
- if CONFIG["MOZ_WAYLAND"]:
-+    OS_LIBS += ["wayland-client", "wayland-egl"]
-     DIRS += ["wayland", "mozwayland"]
- 
- EXPORTS += [
-@@ -33,6 +34,7 @@
- EXPORTS.mozilla += ["WidgetUtilsGtk.h"]
- 
- EXPORTS.mozilla.widget += [
-+    "GtkCompositorWidget.h",
-     "WindowSurface.h",
-     "WindowSurfaceProvider.h",
- ]
-@@ -81,8 +83,11 @@
- 
- if CONFIG["MOZ_WAYLAND"]:
-     UNIFIED_SOURCES += [
-+        "CompositorWidgetChild.cpp",
-+        "CompositorWidgetParent.cpp",
-         "DMABufLibWrapper.cpp",
-         "DMABufSurface.cpp",
-+        "InProcessGtkCompositorWidget.cpp",
-         "MozContainerWayland.cpp",
-         "nsClipboardWayland.cpp",
-         "nsClipboardWaylandAsync.cpp",
-@@ -91,8 +96,11 @@
-         "WindowSurfaceWaylandMultiBuffer.cpp",
-     ]
-     EXPORTS.mozilla.widget += [
-+        "CompositorWidgetChild.h",
-+        "CompositorWidgetParent.h",
-         "DMABufLibWrapper.h",
-         "DMABufSurface.h",
-+        "InProcessGtkCompositorWidget.h",
-         "MozContainerWayland.h",
-         "nsWaylandDisplay.h",
-         "WaylandBuffer.h",
-@@ -113,7 +121,6 @@
-     EXPORTS.mozilla.widget += [
-         "CompositorWidgetChild.h",
-         "CompositorWidgetParent.h",
--        "GtkCompositorWidget.h",
-         "InProcessGtkCompositorWidget.h",
-     ]
- 
-@@ -144,7 +151,7 @@
-     "/widget/headless",
- ]
- 
--if CONFIG["MOZ_X11"]:
-+if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
-     LOCAL_INCLUDES += [
-         "/widget/x11",
-     ]
 --- widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
 +++ widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
 @@ -12,7 +12,7 @@
@@ -1334,3 +1194,260 @@ index 0050af3af3..c2c02e59ff 100644
  }
  
  #ifdef MOZ_X11
+--- widget/gtk/components.conf.orig	2022-01-25 02:05:43.811930918 +0800
++++ widget/gtk/components.conf	2022-01-25 02:06:34.430234335 +0800
+@@ -76,53 +76,49 @@
+         'headers': ['/widget/gtk/nsApplicationChooser.h'],
+         'processes': ProcessSelector.MAIN_PROCESS_ONLY,
+     },
++    {
++        'js_name': 'clipboard',
++        'cid': '{8b5314ba-db01-11d2-96ce-0060b0fb9956}',
++        'contract_ids': ['@mozilla.org/widget/clipboard;1'],
++        'interfaces': ['nsIClipboard'],
++        'type': 'nsIClipboard',
++        'processes': ProcessSelector.MAIN_PROCESS_ONLY,
++        'overridable': True,
++    },
++    {
++        'cid': '{77221d5a-1dd2-11b2-8c69-c710f15d2ed5}',
++        'contract_ids': ['@mozilla.org/widget/clipboardhelper;1'],
++        'type': 'nsClipboardHelper',
++        'headers': ['/widget/nsClipboardHelper.h'],
++    },
++    {
++        'cid': '{8b5314bb-db01-11d2-96ce-0060b0fb9956}',
++        'contract_ids': ['@mozilla.org/widget/dragservice;1'],
++        'singleton': True,
++        'type': 'nsDragService',
++        'headers': ['/widget/gtk/nsDragService.h'],
++        'constructor': 'nsDragService::GetInstance',
++        'processes': ProcessSelector.MAIN_PROCESS_ONLY,
++    },
++    {
++        'name': 'GfxInfo',
++        'cid': '{d755a760-9f27-11df-0800-200c9a664242}',
++        'contract_ids': ['@mozilla.org/gfx/info;1'],
++        'type': 'mozilla::widget::GfxInfo',
++        'headers': ['/widget/gtk/GfxInfo.h'],
++        'init_method': 'Init',
++        'processes': ProcessSelector.ALLOW_IN_GPU_PROCESS,
++    },
++    {
++        'cid': '{6987230e-0098-4e78-bc5f-1493ee7519fa}',
++        'contract_ids': ['@mozilla.org/widget/useridleservice;1'],
++        'singleton': True,
++        'type': 'nsUserIdleService',
++        'headers': ['/widget/gtk/nsUserIdleServiceGTK.h'],
++        'constructor': 'nsUserIdleServiceGTK::GetInstance',
++    },
+ ]
+ 
+-if defined('MOZ_X11'):
+-    Classes += [
+-        {
+-            'js_name': 'clipboard',
+-            'cid': '{8b5314ba-db01-11d2-96ce-0060b0fb9956}',
+-            'contract_ids': ['@mozilla.org/widget/clipboard;1'],
+-            'interfaces': ['nsIClipboard'],
+-            'type': 'nsIClipboard',
+-            'processes': ProcessSelector.MAIN_PROCESS_ONLY,
+-            'overridable': True,
+-        },
+-        {
+-            'cid': '{77221d5a-1dd2-11b2-8c69-c710f15d2ed5}',
+-            'contract_ids': ['@mozilla.org/widget/clipboardhelper;1'],
+-            'type': 'nsClipboardHelper',
+-            'headers': ['/widget/nsClipboardHelper.h'],
+-        },
+-        {
+-            'cid': '{8b5314bb-db01-11d2-96ce-0060b0fb9956}',
+-            'contract_ids': ['@mozilla.org/widget/dragservice;1'],
+-            'singleton': True,
+-            'type': 'nsDragService',
+-            'headers': ['/widget/gtk/nsDragService.h'],
+-            'constructor': 'nsDragService::GetInstance',
+-            'processes': ProcessSelector.MAIN_PROCESS_ONLY,
+-        },
+-        {
+-            'name': 'GfxInfo',
+-            'cid': '{d755a760-9f27-11df-0800-200c9a664242}',
+-            'contract_ids': ['@mozilla.org/gfx/info;1'],
+-            'type': 'mozilla::widget::GfxInfo',
+-            'headers': ['/widget/gtk/GfxInfo.h'],
+-            'init_method': 'Init',
+-            'processes': ProcessSelector.ALLOW_IN_GPU_PROCESS,
+-        },
+-        {
+-            'cid': '{6987230e-0098-4e78-bc5f-1493ee7519fa}',
+-            'contract_ids': ['@mozilla.org/widget/useridleservice;1'],
+-            'singleton': True,
+-            'type': 'nsUserIdleService',
+-            'headers': ['/widget/gtk/nsUserIdleServiceGTK.h'],
+-            'constructor': 'nsUserIdleServiceGTK::GetInstance',
+-        },
+-    ]
+-
+ if defined('NS_PRINTING'):
+     Classes += [
+         {
+--- widget/gtk/nsUserIdleServiceGTK.h	2022-01-20 06:07:50.000000000 +0800
++++ widget/gtk/nsUserIdleServiceGTK.h	2022-01-20 06:07:50.000000000 +0800
+@@ -9,6 +9,7 @@
+ #define nsUserIdleServiceGTK_h__
+ 
+ #include "nsUserIdleService.h"
++#ifdef MOZ_X11
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
+ #include <gdk/gdkx.h>
+@@ -21,6 +22,7 @@
+   unsigned long idle;          // milliseconds idle
+   unsigned long event_mask;    // event stuff
+ } XScreenSaverInfo;
++#endif
+ 
+ class nsUserIdleServiceGTK : public nsUserIdleService {
+  public:
+@@ -40,7 +42,9 @@
+ 
+  private:
+   ~nsUserIdleServiceGTK();
++#ifdef MOZ_X11
+   XScreenSaverInfo* mXssInfo;
++#endif
+ 
+  protected:
+   nsUserIdleServiceGTK();
+--- widget/gtk/moz.build.orig	2022-01-25 11:04:49.650420160 +0800
++++ widget/gtk/moz.build	2022-01-25 11:05:04.417401668 +0800
+@@ -22,6 +22,7 @@
+ DIRS += ["mozgtk"]
+ 
+ if CONFIG["MOZ_WAYLAND"]:
++    OS_LIBS += ["wayland-client", "wayland-egl"]
+     DIRS += ["wayland", "mozwayland"]
+ 
+ EXPORTS += [
+@@ -33,6 +34,7 @@
+ EXPORTS.mozilla += ["WidgetUtilsGtk.h"]
+ 
+ EXPORTS.mozilla.widget += [
++    "GtkCompositorWidget.h",
+     "WindowSurface.h",
+     "WindowSurfaceProvider.h",
+ ]
+@@ -81,18 +83,25 @@
+ 
+ if CONFIG["MOZ_WAYLAND"]:
+     UNIFIED_SOURCES += [
++        "CompositorWidgetChild.cpp",
++        "CompositorWidgetParent.cpp",
+         "DMABufLibWrapper.cpp",
+         "DMABufSurface.cpp",
++        "InProcessGtkCompositorWidget.cpp",
+         "MozContainerWayland.cpp",
+         "nsClipboardWayland.cpp",
+         "nsClipboardWaylandAsync.cpp",
++        "nsUserIdleServiceGTK.cpp",
+         "nsWaylandDisplay.cpp",
+         "WaylandBuffer.cpp",
+         "WindowSurfaceWaylandMultiBuffer.cpp",
+     ]
+     EXPORTS.mozilla.widget += [
++        "CompositorWidgetChild.h",
++        "CompositorWidgetParent.h",
+         "DMABufLibWrapper.h",
+         "DMABufSurface.h",
++        "InProcessGtkCompositorWidget.h",
+         "MozContainerWayland.h",
+         "nsWaylandDisplay.h",
+         "WaylandBuffer.h",
+@@ -113,7 +122,6 @@
+     EXPORTS.mozilla.widget += [
+         "CompositorWidgetChild.h",
+         "CompositorWidgetParent.h",
+-        "GtkCompositorWidget.h",
+         "InProcessGtkCompositorWidget.h",
+     ]
+ 
+@@ -144,7 +152,7 @@
+     "/widget/headless",
+ ]
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     LOCAL_INCLUDES += [
+         "/widget/x11",
+     ]
+--- widget/gtk/nsUserIdleServiceGTK.cpp.orig	2022-01-25 11:04:49.697087816 +0800
++++ widget/gtk/nsUserIdleServiceGTK.cpp	2022-01-25 11:09:44.370573483 +0800
+@@ -17,6 +17,7 @@
+ 
+ static mozilla::LazyLogModule sIdleLog("nsIUserIdleService");
+ 
++#ifdef MOZ_X11
+ typedef bool (*_XScreenSaverQueryExtension_fn)(Display* dpy, int* event_base,
+                                                int* error_base);
+ 
+@@ -25,16 +26,18 @@
+ typedef void (*_XScreenSaverQueryInfo_fn)(Display* dpy, Drawable drw,
+                                           XScreenSaverInfo* info);
+ 
+-static bool sInitialized = false;
+ static _XScreenSaverQueryExtension_fn _XSSQueryExtension = nullptr;
+ static _XScreenSaverAllocInfo_fn _XSSAllocInfo = nullptr;
+ static _XScreenSaverQueryInfo_fn _XSSQueryInfo = nullptr;
++#endif
++static bool sInitialized = false;
+ 
+ static void Initialize() {
+   if (!mozilla::widget::GdkIsX11Display()) {
+     return;
+   }
+ 
++#ifdef MOZ_X11
+   // This will leak - See comments in ~nsUserIdleServiceGTK().
+   PRLibrary* xsslib = PR_LoadLibrary("libXss.so.1");
+   if (!xsslib)  // ouch.
+@@ -57,16 +60,23 @@
+     MOZ_LOG(sIdleLog, LogLevel::Warning, ("Failed to get XSSAllocInfo!\n"));
+   if (!_XSSQueryInfo)
+     MOZ_LOG(sIdleLog, LogLevel::Warning, ("Failed to get XSSQueryInfo!\n"));
++#endif
+ 
+   sInitialized = true;
+ }
+ 
+-nsUserIdleServiceGTK::nsUserIdleServiceGTK() : mXssInfo(nullptr) {
++nsUserIdleServiceGTK::nsUserIdleServiceGTK()
++#ifdef MOZ_X11
++    : mXssInfo(nullptr)
++#endif
++{
+   Initialize();
+ }
+ 
+ nsUserIdleServiceGTK::~nsUserIdleServiceGTK() {
++#ifdef MOZ_X11
+   if (mXssInfo) XFree(mXssInfo);
++#endif
+ 
+ // It is not safe to unload libXScrnSaver until each display is closed because
+ // the library registers callbacks through XESetCloseDisplay (Bug 397607).
+@@ -85,6 +95,7 @@
+     return false;
+   }
+ 
++#ifdef MOZ_X11
+   // Ask xscreensaver about idle time:
+   *aIdleTime = 0;
+ 
+@@ -107,6 +118,7 @@
+     *aIdleTime = mXssInfo->idle;
+     return true;
+   }
++#endif
+   // If we get here, we couldn't get to XScreenSaver:
+   MOZ_LOG(sIdleLog, LogLevel::Warning, ("XSSQueryExtension returned false!\n"));
+   return false;
