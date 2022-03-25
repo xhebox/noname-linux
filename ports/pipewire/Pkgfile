@@ -9,7 +9,7 @@ deps = [
   "gst-plugins-base",
   "ncurses",
   "libsndfile",
-  "vulkan-icd-loader",
+  "vulkan",
   "bluez",
   "sbc",
 ]
@@ -21,8 +21,8 @@ makedeps = [
   "gst-plugins-base",
   "ncurses",
   "libsndfile",
+  "vulkan",
   "vulkan-headers",
-  "vulkan-icd-loader",
   "bluez",
   "sbc",
 ]
@@ -46,11 +46,11 @@ build = '''
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 
+	export LDFLAGS="$LDFLAGS -lexecinfo"
 	noname-meson pulseaudio-$pulseversion pabuild \
 	-Dman=false \
 	-Dtests=false \
 	-Dgcov=false \
-	-Dudevruelsdir=/lib/udev/rules.d \
 	-Ddatabase=simple \
 	-Dalsa=disabled \
 	-Dasyncns=disabled \
@@ -60,7 +60,6 @@ build = '''
 	-Dbluez5-ofono-headset=false \
 	-Ddbus=disabled \
 	-Dfftw=disabled \
-	-Dsdl2=disabled \
 	-Dglib=disabled \
 	-Dgsettings=disabled \
 	-Dgtk=disabled \
@@ -99,13 +98,14 @@ build = '''
 	for i in pabuild/*.pc; do
 		mv $i "$pkgdir"/lib/pkgconfig/
 	done
-	mkdir -p "$pkgdir"/lib/cmake
+	mkdir -p "$pkgdir"/lib/cmake/PulseAudio
 	for i in pabuild/*.cmake; do
-		mv $i "$pkgdir"/lib/cmake/
+		mv $i "$pkgdir"/lib/cmake/PulseAudio
 	done
+	install -Dm644 "$srcdir"/pulseaudio-$pulseversion/PulseAudioConfigVersion.cmake.in "$pkgdir"/lib/cmake/PulseAudioConfigVersion.cmake
+	mkdir -p "$pkgdir"/include/pulse
 	for i in pulseaudio-$pulseversion/src/pulse/*.h; do
-		mv $i "$pkgdir"/include/
+		mv $i "$pkgdir"/include/pulse
 	done
-	rm "$pkgdir"/include/error.h
 	install -Dm644 pipewire.toml "$pkgdir/${HOOKS#$ROOT}"/pipewire.toml
 '''

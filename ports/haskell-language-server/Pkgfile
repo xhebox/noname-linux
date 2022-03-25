@@ -13,6 +13,6 @@ build='''
 	cd haskell-language-server-$version
 	patch -Np1 -i ../nowarning.patch
 	HOME=$srcdir cabal update -v
-	HOME=$srcdir cabal build  --project-file=cabal-ghc90.project
-	install -Dm755 .stack-work/dist/*/*/build/haskell-language-server/haskell-language-server "$pkgdir/bin/haskell-language-server"
+	HOME=$srcdir cabal build --project-file=cabal-ghc90.project
+	install -m 755 -D dist-newstyle/build/*/*/*/*/*/build/haskell-language-server/haskell-language-server "$pkgdir/bin/haskell-language-server"
 '''
