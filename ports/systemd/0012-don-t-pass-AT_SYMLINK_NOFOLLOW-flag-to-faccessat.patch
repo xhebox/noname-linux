@@ -1,7 +1,7 @@
-From 03e89da266edf70121a19ffc32a78cc3b97585ef Mon Sep 17 00:00:00 2001
+From 5d4c6b2f4b88b69b31f967371d2a6136c65dc3fd Mon Sep 17 00:00:00 2001
 From: Andre McCurdy <armccurdy@gmail.com>
 Date: Tue, 10 Oct 2017 14:33:30 -0700
-Subject: [PATCH 12/26] don't pass AT_SYMLINK_NOFOLLOW flag to faccessat()
+Subject: [PATCH] don't pass AT_SYMLINK_NOFOLLOW flag to faccessat()
 
 Avoid using AT_SYMLINK_NOFOLLOW flag. It doesn't seem like the right
 thing to do and it's not portable (not supported by musl). See:
@@ -25,20 +25,18 @@ just historical and not actually necessary or desired behaviour?
 Upstream-Status: Inappropriate [musl specific]
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- src/basic/fs-util.h          | 22 +++++++++++++++++++++-
- src/shared/base-filesystem.c |  6 +++---
- 2 files changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/src/basic/fs-util.h b/src/basic/fs-util.h
-index 5dc8853eac..0491b3dae2 100644
+---
+ src/basic/fs-util.h          | 23 +++++++++++++++++++++--
+ src/shared/base-filesystem.c |  6 +++---
+ 2 files changed, 24 insertions(+), 5 deletions(-)
+
 --- a/src/basic/fs-util.h
 +++ b/src/basic/fs-util.h
-@@ -43,7 +43,27 @@ int futimens_opath(int fd, const struct timespec ts[2]);
+@@ -46,8 +46,27 @@ int futimens_opath(int fd, const struct
  int fd_warn_permissions(const char *path, int fd);
  int stat_warn_permissions(const char *path, const struct stat *st);
  
--#define laccess(path, mode) faccessat(AT_FDCWD, (path), (mode), AT_SYMLINK_NOFOLLOW)
 +/*
 +   Avoid using AT_SYMLINK_NOFOLLOW flag. It doesn't seem like the right thing to
 +   do and it's not portable (not supported by musl). See:
@@ -58,25 +56,24 @@ index 5dc8853eac..0491b3dae2 100644
 +   or why it needs to return success for broken symlinks. Maybe just historical
 +   and not actually necessary or desired behaviour?
 +*/
-+
-+#define laccess(path, mode) faccessat(AT_FDCWD, (path), (mode), 0)
+ #define laccess(path, mode)                                             \
+-        RET_NERRNO(faccessat(AT_FDCWD, (path), (mode), AT_SYMLINK_NOFOLLOW))
++        RET_NERRNO(faccessat(AT_FDCWD, (path), (mode), 0))
  
  int touch_file(const char *path, bool parents, usec_t stamp, uid_t uid, gid_t gid, mode_t mode);
  int touch(const char *path);
-diff --git a/src/shared/base-filesystem.c b/src/shared/base-filesystem.c
-index 1d05409086..1ed06c31ab 100644
 --- a/src/shared/base-filesystem.c
 +++ b/src/shared/base-filesystem.c
-@@ -54,7 +54,7 @@ int base_filesystem_create(const char *root, uid_t uid, gid_t gid) {
+@@ -117,7 +117,7 @@ int base_filesystem_create(const char *r
                  return log_error_errno(errno, "Failed to open root file system: %m");
  
-         for (i = 0; i < ELEMENTSOF(table); i ++) {
+         for (size_t i = 0; i < ELEMENTSOF(table); i++) {
 -                if (faccessat(fd, table[i].dir, F_OK, AT_SYMLINK_NOFOLLOW) >= 0)
 +                if (faccessat(fd, table[i].dir, F_OK, 0) >= 0)
                          continue;
  
                  if (table[i].target) {
-@@ -62,7 +62,7 @@ int base_filesystem_create(const char *root, uid_t uid, gid_t gid) {
+@@ -125,7 +125,7 @@ int base_filesystem_create(const char *r
  
                          /* check if one of the targets exists */
                          NULSTR_FOREACH(s, table[i].target) {
@@ -85,7 +82,7 @@ index 1d05409086..1ed06c31ab 100644
                                          continue;
  
                                  /* check if a specific file exists at the target path */
-@@ -73,7 +73,7 @@ int base_filesystem_create(const char *root, uid_t uid, gid_t gid) {
+@@ -136,7 +136,7 @@ int base_filesystem_create(const char *r
                                          if (!p)
                                                  return log_oom();
  
@@ -94,6 +91,3 @@ index 1d05409086..1ed06c31ab 100644
                                                  continue;
                                  }
  
--- 
-2.27.0
-

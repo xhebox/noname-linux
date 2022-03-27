@@ -1,6 +1,6 @@
 version="5.3.1"
 deps=["python3"]
-makedeps=["python3-setuptools"]
+makedeps=["python3"]
 source=[{url="https://pyyaml.org/download/pyyaml/PyYAML-${version}.tar.gz"}]
 
 build='''

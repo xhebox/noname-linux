@@ -1,0 +1,12 @@
+version="2.1.1"
+deps=["python3"]
+makedeps=["python3"]
+source=[{url="https://github.com/pallets/markupsafe/archive/$version/python-markupsafe-$version.tar.gz"}]
+
+build='''
+	cd markupsafe-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

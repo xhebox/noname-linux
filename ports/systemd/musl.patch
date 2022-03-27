@@ -1,0 +1,136 @@
+--- systemd-245/src/shared/quota-util.h	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/shared/quota-util.h	2020-03-06 20:38:52.000000000 +0800
+@@ -2,6 +2,7 @@
+ #pragma once
+ 
+ #include <inttypes.h>
++#include <linux/quota.h>
+ #include <sys/quota.h>
+ #include <sys/types.h>
+ 
+--- systemd-250/src/import/curl-util.c	2021-12-24 04:09:35.000000000 +0800
++++ systemd-250/src/import/curl-util.c	2021-12-24 04:09:35.000000000 +0800
+@@ -365,13 +365,13 @@
+                 return -errno;
+ 
+         /* RFC822 */
+-        e = strptime_l(t, "%a, %d %b %Y %H:%M:%S %Z", &tm, loc);
++        e = strptime(t, "%a, %d %b %Y %H:%M:%S %Z", &tm);
+         if (!e || *e != 0)
+                 /* RFC 850 */
+-                e = strptime_l(t, "%A, %d-%b-%y %H:%M:%S %Z", &tm, loc);
++                e = strptime(t, "%A, %d-%b-%y %H:%M:%S %Z", &tm);
+         if (!e || *e != 0)
+                 /* ANSI C */
+-                e = strptime_l(t, "%a %b %d %H:%M:%S %Y", &tm, loc);
++                e = strptime(t, "%a %b %d %H:%M:%S %Y", &tm);
+         if (!e || *e != 0)
+                 return -EINVAL;
+ 
+--- systemd-245/src/basic/path-util.h	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/basic/path-util.h	2020-03-06 20:38:52.000000000 +0800
+@@ -9,6 +9,7 @@
+ #include "string-util.h"
+ #include "strv.h"
+ #include "time-util.h"
++#include "missing_type.h"
+ 
+ #define PATH_SPLIT_SBIN_BIN(x) x "sbin:" x "bin"
+ #define PATH_SPLIT_SBIN_BIN_NULSTR(x) x "sbin\0" x "bin\0"
+--- systemd-246/src/home/homework-luks.c	2020-07-31 03:02:36.000000000 +0800
++++ systemd-246/src/home/homework-luks.c	2020-07-31 03:02:36.000000000 +0800
+@@ -49,6 +49,7 @@
+ #include "strv.h"
+ #include "sync-util.h"
+ #include "tmpfile-util.h"
++#include "missing_stdlib.h"
+ #include "udev-util.h"
+ #include "user-util.h"
+ 
+--- systemd-246/src/home/homed-manager.c	2020-08-22 23:50:41.812026674 +0800
++++ systemd-246/src/home/homed-manager.c	2020-08-22 23:50:41.812026674 +0800
+@@ -44,6 +44,7 @@
+ #include "user-record-util.h"
+ #include "user-record.h"
+ #include "user-util.h"
++#include "missing_stdlib.h"
+ 
+ /* Where to look for private/public keys that are used to sign the user records. We are not using
+  * CONF_PATHS_NULSTR() here since we want to insert /var/lib/systemd/home/ in the middle. And we insert that
+--- systemd-246/src/locale/localed.c	2020-07-31 03:02:36.000000000 +0800
++++ systemd-246/src/locale/localed.c	2020-07-31 03:02:36.000000000 +0800
+@@ -507,7 +507,7 @@
+ 
+ #define LOAD_SYMBOL(symbol, dl, name)                                   \
+         ({                                                              \
+-                (symbol) = (typeof(symbol)) dlvsym((dl), (name), "V_0.5.0"); \
++                (symbol) = (typeof(symbol)) dlsym((dl), (name)); \
+                 (symbol) ? 0 : -EOPNOTSUPP;                             \
+         })
+ 
+--- systemd-245/src/basic/user-util.c	2020-03-06 20:38:52.000000000 +0800
++++ systemd-245/src/basic/user-util.c	2020-03-06 20:38:52.000000000 +0800
+@@ -913,8 +913,6 @@
+ 
+         errno = 0;
+         p = fgetpwent(stream);
+-        if (!p && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *pw = p;
+         return !!p;
+@@ -928,8 +926,6 @@
+ 
+         errno = 0;
+         s = fgetspent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *sp = s;
+         return !!s;
+@@ -943,8 +939,6 @@
+ 
+         errno = 0;
+         g = fgetgrent(stream);
+-        if (!g && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *gr = g;
+         return !!g;
+@@ -959,8 +953,6 @@
+ 
+         errno = 0;
+         s = fgetsgent(stream);
+-        if (!s && errno != ENOENT)
+-                return errno_or_else(EIO);
+ 
+         *sg = s;
+         return !!s;
+--- systemd-247/src/basic/alloc-util.h	2020-11-27 02:00:50.000000000 +0800
++++ systemd-247/src/basic/alloc-util.h	2020-11-27 02:00:50.000000000 +0800
+@@ -96,7 +96,7 @@
+         return malloc(size * need ?: 1);
+ }
+ 
+-#if !HAVE_REALLOCARRAY
++#if 0
+ _alloc_(2, 3) static inline void *reallocarray(void *p, size_t need, size_t size) {
+         if (size_multiply_overflow(size, need))
+                 return NULL;
+--- systemd-250/src/login/logind-dbus.c	2021-12-24 04:09:35.000000000 +0800
++++ systemd-250/src/login/logind-dbus.c	2021-12-24 04:09:35.000000000 +0800
+@@ -1847,14 +1847,6 @@
+                         return 1; /* No authorization for now, but the async polkit stuff will call us again when it has it */
+         }
+ 
+-        if (!multiple_sessions && !blocked) {
+-                r = bus_verify_polkit_async(message, CAP_SYS_BOOT, action, NULL, interactive, UID_INVALID, &m->polkit_registry, error);
+-                if (r < 0)
+-                        return r;
+-                if (r == 0)
+-                        return 1; /* No authorization for now, but the async polkit stuff will call us again when it has it */
+-        }
+-
+         return 0;
+ }
+ 

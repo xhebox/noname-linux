@@ -1,0 +1,12 @@
+version="3.0.3"
+deps=["python3", "python3-markupsafe"]
+makedeps=["python3", "python3-markupsafe"]
+source=[{url="https://files.pythonhosted.org/packages/source/J/Jinja2/Jinja2-$version.tar.gz"}]
+
+build='''
+	cd Jinja2-$version
+	/bin/python3 setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

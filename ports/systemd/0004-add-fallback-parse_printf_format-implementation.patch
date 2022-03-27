@@ -1,7 +1,7 @@
-From f3dbe29f7620a063af4d8eb3ea7c48ecd410200d Mon Sep 17 00:00:00 2001
-From: Chen Qi <Qi.Chen@windriver.com>
-Date: Mon, 25 Feb 2019 14:04:21 +0800
-Subject: [PATCH 04/26] add fallback parse_printf_format implementation
+From 3e0df2c22bfd37bc62bf09a01ec498e40d3599de Mon Sep 17 00:00:00 2001
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Sat, 22 May 2021 20:26:24 +0200
+Subject: [PATCH] add fallback parse_printf_format implementation
 
 Upstream-Status: Inappropriate [musl specific]
 
@@ -10,22 +10,21 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 [rebased for systemd 243]
 Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+
 ---
- meson.build                     |   1 +
- src/basic/meson.build           |   5 +
- src/basic/parse-printf-format.c | 273 ++++++++++++++++++++++++++++++++
- src/basic/parse-printf-format.h |  57 +++++++
- src/basic/stdio-util.h          |   2 +-
- src/journal/journal-send.c      |   2 +-
+ meson.build                              |   1 +
+ src/basic/meson.build                    |   5 +
+ src/basic/parse-printf-format.c          | 273 +++++++++++++++++++++++
+ src/basic/parse-printf-format.h          |  57 +++++
+ src/basic/stdio-util.h                   |   2 +-
+ src/libsystemd/sd-journal/journal-send.c |   2 +-
  6 files changed, 338 insertions(+), 2 deletions(-)
  create mode 100644 src/basic/parse-printf-format.c
  create mode 100644 src/basic/parse-printf-format.h
 
-diff --git a/meson.build b/meson.build
-index f406d595e6..6aa47fc755 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -646,6 +646,7 @@ endif
+@@ -686,6 +686,7 @@ endif
  foreach header : ['crypt.h',
                    'linux/memfd.h',
                    'linux/vm_sockets.h',
@@ -33,25 +32,20 @@ index f406d595e6..6aa47fc755 100644
                    'sys/auxv.h',
                    'valgrind/memcheck.h',
                    'valgrind/valgrind.h',
-diff --git a/src/basic/meson.build b/src/basic/meson.build
-index 1183ea83ad..aa5c958850 100644
 --- a/src/basic/meson.build
 +++ b/src/basic/meson.build
-@@ -322,6 +322,11 @@ foreach item : [['af',     af_list_txt,     'af',         ''],
- endforeach
+@@ -335,6 +335,11 @@ endforeach
  
  basic_sources += generated_gperf_headers
-+
+ 
 +if conf.get('HAVE_PRINTF_H') != 1
 +        basic_sources += [files('parse-printf-format.c')]
 +endif
 +
- basic_gcrypt_sources = files(
-         'gcrypt-util.c',
-         'gcrypt-util.h')
-diff --git a/src/basic/parse-printf-format.c b/src/basic/parse-printf-format.c
-new file mode 100644
-index 0000000000..49437e5445
++
+ ############################################################
+ 
+ arch_list = [
 --- /dev/null
 +++ b/src/basic/parse-printf-format.c
 @@ -0,0 +1,273 @@
@@ -328,9 +322,6 @@ index 0000000000..49437e5445
 +
 +        return last;
 +}
-diff --git a/src/basic/parse-printf-format.h b/src/basic/parse-printf-format.h
-new file mode 100644
-index 0000000000..47be7522d7
 --- /dev/null
 +++ b/src/basic/parse-printf-format.h
 @@ -0,0 +1,57 @@
@@ -391,8 +382,6 @@ index 0000000000..47be7522d7
 +size_t parse_printf_format(const char *fmt, size_t n, int *types);
 +
 +#endif /* HAVE_PRINTF_H */
-diff --git a/src/basic/stdio-util.h b/src/basic/stdio-util.h
-index 6dc1e72312..cea76b36cf 100644
 --- a/src/basic/stdio-util.h
 +++ b/src/basic/stdio-util.h
 @@ -1,13 +1,13 @@
@@ -408,12 +397,10 @@ index 6dc1e72312..cea76b36cf 100644
  #include "memory-util.h"
 +#include "parse-printf-format.h"
  
- #define snprintf_ok(buf, len, fmt, ...) \
-         ((size_t) snprintf(buf, len, fmt, __VA_ARGS__) < (len))
-diff --git a/src/journal/journal-send.c b/src/journal/journal-send.c
-index fd3fd7ef9c..e8e6ad555b 100644
---- a/src/journal/journal-send.c
-+++ b/src/journal/journal-send.c
+ #define snprintf_ok(buf, len, fmt, ...)                                \
+         ({                                                             \
+--- a/src/libsystemd/sd-journal/journal-send.c
++++ b/src/libsystemd/sd-journal/journal-send.c
 @@ -2,7 +2,6 @@
  
  #include <errno.h>
@@ -430,6 +417,3 @@ index fd3fd7ef9c..e8e6ad555b 100644
  
  #define SNDBUF_SIZE (8*1024*1024)
  
--- 
-2.27.0
-

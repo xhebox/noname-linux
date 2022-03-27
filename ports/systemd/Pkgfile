@@ -1,6 +1,6 @@
-version="247"
+version="250"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "python3-jinja"]
 deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
@@ -8,15 +8,18 @@ source=[
 		name="0001-Use-Arch-Linux-device-access-groups.patch",
 		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
 	},
+
+	{url="0001-Adjust-for-musl-headers.patch"},
 	{url="0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch"},
-	{url="0001-logind-Restore-chvt-as-non-root-user-without-polkit.patch"},
+	{url="0001-pass-correct-parameters-to-getdents64.patch"},
 	{url="0001-systemd.pc.in-use-ROOTPREFIX-without-suffixed-slash.patch"},
+	{url="0001-test-parse-argument-Include-signal.h.patch"},
+	{url="0002-Add-sys-stat.h-for-S_IFDIR.patch"},
 	{url="0002-don-t-use-glibc-specific-qsort_r.patch"},
 	{url="0003-implment-systemd-sysv-install-for-OE.patch"},
 	{url="0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch"},
 	{url="0004-add-fallback-parse_printf_format-implementation.patch"},
 	{url="0005-src-basic-missing.h-check-for-missing-strndupa.patch"},
-	{url="0006-Include-netinet-if_ether.h.patch"},
 	{url="0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch"},
 	{url="0008-add-missing-FTW_-macros-for-musl.patch"},
 	{url="0009-fix-missing-of-__register_atfork-for-non-glibc-build.patch"},
@@ -33,17 +36,15 @@ source=[
 	{url="0020-Fix-incompatible-pointer-type-struct-sockaddr_un.patch"},
 	{url="0021-test-json.c-define-M_PIl.patch"},
 	{url="0022-do-not-disable-buffer-in-writing-files.patch"},
-	{url="0023-Include-sys-wait.h.patch"},
-	{url="0024-Include-signal.h.patch"},
 	{url="0025-Handle-__cpu_mask-usage.patch"},
 	{url="0026-Handle-missing-gshadow.patch"},
-	{url="home.patch"},
-	{url="locale.patch"},
-	{url="musl_missing_fs.patch"},
-	{url="musl_quota.patch"},
-	{url="portable_user_util.patch"},
-	{url="userdb.patch"},
-	{url="vt_perm.patch"},
+	{url="0028-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch"},
+	{url="0029-network-enable-KeepConfiguration-when-running-on-net.patch"},
+
+
+	{url="musl.patch"},
+#{url="userdb.patch"},
+#{url="vt_perm.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},
@@ -59,6 +60,8 @@ source=[
 	{url="systemd-sysusers.toml"},
 	{url="systemd-tmpfiles.toml"},
 	{url="systemd-udev-reload.toml"},
+
+	{url="ntfs3_by_default.rules"},
 ]
 baks=[
 	"etc/systemd/journald.conf",
@@ -70,7 +73,7 @@ baks=[
 ext='''
 	cd systemd-$version
 	for i in $source; do
-		echo $i
+		echo "#### $i"
 		case $i in
 		*patch) patch -Np1 -i ../$i;;
 		esac
@@ -112,7 +115,9 @@ build='''
 	-Ddns-servers="1.1.1.1 114.114.114.114" \
 	-Drpmmacrosdir=no \
 	-Dsysvinit-path= \
-	-Dsysvrcnd-path=
+	-Dsysvrcnd-path= \
+	-Dsbat-distro=noname \
+	-Dsbat-distro-url=https://github.com/xhebox/noname-linux
 
 	ninja -C build
 	DESTDIR="$pkgdir" ninja -C build install
@@ -127,4 +132,5 @@ build='''
 	install -D -m0644 initcpio-install-systemd "$pkgdir"/lib/initcpio/install/systemd
 	install -D -m0644 initcpio-install-udev "$pkgdir"/lib/initcpio/install/udev
 	install -D -m0644 initcpio-hook-udev "$pkgdir"/lib/initcpio/hooks/udev
+	install -D -m0644 "$srcdir"/ntfs3_by_default.rules "$pkgdir"/lib/udev/rules.d/ntfs3_by_default.rules
 '''
