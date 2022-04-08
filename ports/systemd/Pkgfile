@@ -60,8 +60,6 @@ source=[
 	{url="systemd-sysusers.toml"},
 	{url="systemd-tmpfiles.toml"},
 	{url="systemd-udev-reload.toml"},
-
-	{url="ntfs3_by_default.rules"},
 ]
 baks=[
 	"etc/systemd/journald.conf",
@@ -132,5 +130,4 @@ build='''
 	install -D -m0644 initcpio-install-systemd "$pkgdir"/lib/initcpio/install/systemd
 	install -D -m0644 initcpio-install-udev "$pkgdir"/lib/initcpio/install/udev
 	install -D -m0644 initcpio-hook-udev "$pkgdir"/lib/initcpio/hooks/udev
-	install -D -m0644 "$srcdir"/ntfs3_by_default.rules "$pkgdir"/lib/udev/rules.d/ntfs3_by_default.rules
 '''

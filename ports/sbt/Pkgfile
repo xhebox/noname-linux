@@ -1,4 +1,4 @@
-version="1.5.5"
+version="1.6.2"
 desc="The interactive build tool"
 deps=["openjdk11"]
 source=[

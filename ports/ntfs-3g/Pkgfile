@@ -19,5 +19,4 @@ build='''
 		--enable-xattr-mappings 
 	make
 	make DESTDIR="${pkgdir}" rootbindir=/bin rootsbindir=/bin rootlibdir=/lib install
-	ln -s /bin/ntfs-3g "${pkgdir}/bin/mount.ntfs"
 '''
