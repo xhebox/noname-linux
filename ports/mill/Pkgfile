@@ -1,4 +1,4 @@
-version="0.10.0-M3"
+version="0.10.2"
 desc="Your shiny new Java/Scala build tool"
 deps=["openjdk11"]
 source=[
