@@ -1,8 +1,8 @@
-version="1.18.4"
-makedeps=["python3-setuptools", "python3-cython"]
-deps=["python3-cython"]
+version="1.22.3"
+makedeps=["python3", "python3-cython"]
+deps=["python3"]
 source=[
-	{url="https://github.com/numpy/numpy/archive/v${version}.tar.gz"},
+	{url="https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz"},
 	{url="site.cfg"},
 ]
 desc="Scientific tools for Python"
@@ -17,11 +17,11 @@ build='''
 
 	cd numpy-$version
 
-	/bin/python3 setup.py \
-		build \
-		install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 
 	install -m755 -d "${pkgdir}/include/python${pyver}m"

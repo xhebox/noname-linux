@@ -22,3 +22,14 @@
  
  # Portability: use less strict but portable check -e (file exists) instead of
  # non-portable -x (file is executable). On some windows ports -x just checks
+--- clang/tools/scan-build-py/CMakeLists.txt	2021-09-25 00:18:10.000000000 +0800
++++ clang/tools/scan-build-py/CMakeLists.txt	2021-09-25 00:18:10.000000000 +0800
+@@ -72,7 +72,7 @@
+                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libexec/${lib})
+   list(APPEND Depends ${CMAKE_BINARY_DIR}/libexec/${lib})
+   install(PROGRAMS libexec/${lib}
+-          DESTINATION libexec
++          DESTINATION lib
+           COMPONENT scan-build-py)
+ endforeach()
+ 

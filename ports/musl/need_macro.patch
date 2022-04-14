@@ -1,0 +1,8 @@
+--- musl-1.2.3/tools/mkalltypes.sed	2022-04-11 22:27:55.438436720 +0800
++++ musl-1.2.3/tools/mkalltypes.sed	2022-04-11 22:27:55.438436720 +0800
+@@ -1,4 +1,4 @@
+-/^TYPEDEF/s/TYPEDEF \(.*\) \([^ ]*\);$/#if defined(__NEED_\2) \&\& !defined(__DEFINED_\2)\
++/^TYPEDEF/s/TYPEDEF \(.*\) \([^ ]*\);$/#if (defined(__NEED_\2) \&\& !defined(__DEFINED_\2)) || (defined(__need_\2) \&\& !defined(__DEFINED_\2))\
+ typedef \1 \2;\
+ #define __DEFINED_\2\
+ #endif\

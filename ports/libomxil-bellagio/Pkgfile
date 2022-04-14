@@ -8,7 +8,7 @@ source=[
 
 ext='''
 	cd libomxil-bellagio-$version
-	patch -Np1 -i ../fedora-fixes.patch
+	patch -Nbp1 -i ../fedora-fixes.patch
 	sed -e 's/-Werror//' -i configure.ac
 	autoreconf -fiv
 '''

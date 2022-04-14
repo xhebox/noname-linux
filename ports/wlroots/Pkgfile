@@ -1,4 +1,4 @@
-version="0.15.0"
+version="0.15.1"
 desc='Modular Wayland compositor library'
 deps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "wayland"]
 makedeps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "vulkan-headers", "wayland-protocols"]

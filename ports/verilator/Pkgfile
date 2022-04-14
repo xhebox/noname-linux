@@ -1,10 +1,11 @@
-version="4.030"
-deps=["musl"]
+version="4.220"
+deps=["musl", "perl"]
 desc="fast free Verilog simulator"
-source=[{url="https://www.veripool.org/ftp/verilator-$version.tgz"}]
+source=[{url="https://github.com/verilator/verilator/archive/v$version/verilator-$version.tar.gz"}]
 
 build='''
 	cd verilator-$version
+	autoconf
 	./configure --prefix= --libexecdir=/lib
 	make
 	make DESTDIR="$pkgdir" install

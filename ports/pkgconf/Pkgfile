@@ -1,4 +1,4 @@
-version="1.5.4"
+version="1.8.0"
 desc="A system for managing library compile/link flags"
 deps=["musl", "dash"]
 source=[
@@ -13,7 +13,7 @@ build='''
 		--prefix=/ \
 		--sysconfdir=/etc \
 		--with-pkg-config-dir=/lib/pkgconfig:/share/pkgconfig \
-		--with-system-libdir=/lib:/lib64:/lib32 \
+		--with-system-libdir=/lib \
 		--with-system-includedir=/include \
 		--disable-static
 
@@ -21,7 +21,6 @@ build='''
 	make DESTDIR="$pkgdir" install
 	mkdir -p "$pkgdir"/lib/pkgconfig
 	mkdir -p "$pkgdir"/share/pkgconfig
-	mkdir -p "$pkgdir"/lib32/pkgconfig
 
 	sed -e "s|@TARGET_PLATFORM@|$TARGET|g" \
 			-e "s|@PKGCONF_LIBDIRS@|/lib/pkgconfig:/share/pkgconfig|g" \
@@ -29,13 +28,6 @@ build='''
 			-e "s|@PKGCONF_SYSINCDIR@|/include|g" \
 			../platform-pkg-config.in |
 	install -D /dev/stdin "$pkgdir/bin/pkg-config"
-
-	sed -e "s|@TARGET_PLATFORM@|$TARGET32|g" \
-			-e "s|@PKGCONF_LIBDIRS@|/lib32/pkgconfig:/share/pkgconfig|g" \
-			-e "s|@PKGCONF_SYSLIBDIR@|/lib32|g" \
-			-e "s|@PKGCONF_SYSINCDIR@|/include|g" \
-			../platform-pkg-config.in |
-	install -D /dev/stdin "$pkgdir/bin/pkg-config-32"
 
 	ln -s pkgconf.1 "$pkgdir/share/man/man1/pkg-config.1"
 '''

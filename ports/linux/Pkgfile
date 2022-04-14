@@ -22,7 +22,7 @@ ext='''
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
-	patch -Np1 -i ../fix-musl-objtool.patch
+	patch -Nbp1 -i ../fix-musl-objtool.patch
 
 	cp ../config .config
 

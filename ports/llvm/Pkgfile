@@ -9,7 +9,6 @@ source=[
 	{url="clang-libexec.patch"},
 	{url="llvm-001-musl.patch"},
 	{url="libcxx-0001-musl-hacks.patch"},
-	{url="llvm-config.h"}
 ]
 
 ext='''
@@ -21,7 +20,7 @@ ext='''
 	cd llvm
 	for i in $source;do
 		case $i in
-		llvm*.patch) patch -Np1 -i "$srcdir/$i";;
+		llvm*.patch) patch -Nbp1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
@@ -29,7 +28,7 @@ ext='''
 	cd libcxx
 	for i in $source;do
 		case $i in
-		libcxx*.patch) patch -Np1 -i "$srcdir/$i";;
+		libcxx*.patch) patch -Nbp1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
@@ -37,7 +36,7 @@ ext='''
 	cd clang
 	for i in $source;do
 		case $i in
-		clang*.patch) patch -Np1 -i "$srcdir/$i";;
+		clang*.patch) patch -Nbp1 -i "$srcdir/$i";;
 		esac
 	done
 	cd ..
@@ -74,8 +73,6 @@ build='''
 		-DLIBCXXABI_LIBCXX_INCLUDES=$PWD/libcxx/include \
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
 		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET"
-#-DLIBCXX_USE_COMPILER_RT=YES \
-#-DLIBCXXABI_USE_COMPILER_RT=YES \
 
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
@@ -83,8 +80,5 @@ build='''
 	install -d "$pkgdir"/lib/bfd-plugins
 	ln -s ../LLVMgold.so "$pkgdir"/lib/bfd-plugins/LLVMgold.so
 
-	mv "$pkgdir"/include/llvm/Config/llvm-config.h "$pkgdir"/include/llvm/Config/llvm-config-64.h
-	install -m 0644 "$srcdir"/llvm-config.h "$pkgdir"/include/llvm/Config/
-	
 	cp -a "$srcdir/lib/wasi" "$pkgdir"/lib/clang/*/lib/
 '''

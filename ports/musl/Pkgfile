@@ -1,57 +1,73 @@
-version="1.2.2"
-desc="An implementation of the standard C library for Linux-based systems."
-deps=[
-	"filesystem",
-	"libc-dev",
-	"fortify-headers",
-	"pthread-stubs"
+version = "1.2.3"
+desc = "An implementation of the standard C library for Linux-based systems."
+deps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs"]
+
+source = [
+  { url = "https://musl.libc.org/releases/musl-$version.tar.gz" },
+  { url = "https://git.adelielinux.org/adelie/gcompat/-/archive/1.0.0/gcompat-1.0.0.tar.gz" },
+  { url = "__stack_chk_fail_local.c" },
+  { url = "getconf.c" },
+  { url = "iconv.c" },
+  { url = "getent.c" },
+  { url = "need_macro.patch" },
+  { url = "emoji.patch" },
+  { url = "handle-aux-at_base.patch" },
 ]
 
-source=[
-	{ url="https://musl.libc.org/releases/musl-$version.tar.gz" },
-	{ url="https://github.com/AdelieLinux/gcompat/archive/1.0.0.tar.gz" },
-	{ url="emoji.patch" },
-	{ url="tmpl.h" },
-	{ url="__stack_chk_fail_local.c" },
-	{ url="getconf.c" },
-	{ url="iconv.c" },
-	{ url="getent.c" },
-	{ url="ldd" },
-	{ url="handle-aux-at_base.patch" },
-	{ url="pthread_getname.patch" },
-#{ url="test.patch" },
-]
-
-ext='''
+ext = '''
 	cd musl-$version
 	for i in $source;do
-		echo $i
+		echo "### $i"
 		case $i in
 		*patch) patch -Nbp1 -i "$srcdir"/$i;;
 		esac
 	done
 '''
 
-build='''
-	cd musl-$version
+build = '''
 	unset LDFLAGS
 	unset CXXFLAGS
 	unset CFLAGS
 
-	# ------------------------------
-	# ssp support
-	gcc $CFLAGS -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+	if [ ! -z "$OTARGETS" ]; then
+		for OTARGET in $OTARGETS; do
+			mkdir -p "$srcdir"/build-$OTARGET
+			cd "$srcdir"/build-$OTARGET
+
+			mkdir -p "$pkgdir"/$OTARGET/bin "$pkgdir"/$OTARGET/lib
+
+			ln -srf "$pkgdir"/$OTARGET/ "$pkgdir"/$OTARGET/usr
+
+			$OTARGET-gcc -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+			$OTARGET-ar r libssp_nonshared.a __stack_chk_fail_local.o
+			cp libssp_nonshared.a "$pkgdir"/$OTARGET/lib
+
+			"$srcdir"/musl-$version/configure \
+				--target=$OTARGET \
+				--prefix=/$OTARGET	\
+				--libdir=/$OTARGET/lib \
+				--libexecdir=/$OTARGET/lib \
+				--syslibdir=/$OTARGET/lib \
+				--sysconfdir=/etc \
+				--mandir=/share/man \
+				--localstatedir=/var 
+
+			make
+			make DESTDIR="$pkgdir" install
+			sed -i 's/#define __DEFINED_size_t/&\n#define _SIZE_T/g' "$pkgdir"/$OTARGET/include/bits/alltypes.h
+		done
+	fi
+
+	mkdir -p "$srcdir"/build
+	cd "$srcdir"/build
+
+	mkdir -p "$pkgdir"/bin "$pkgdir"/lib
+	gcc -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
 	ar r libssp_nonshared.a __stack_chk_fail_local.o
-	gcc $CFLAGS -m32 -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local32.o
-	ar r libssp_nonshared32.a __stack_chk_fail_local32.o
-	# ------------------------------
-	
-	mkdir -p "$pkgdir"/include/$TARGET
-	mkdir -p "$pkgdir"/include/$TARGET32
-	./configure \
-		--host=$TARGET \
-		--build=$TARGET \
-		--prefix=	\
+	cp libssp_nonshared.a "$pkgdir"/lib
+
+	"$srcdir"/musl-$version/configure \
+		--prefix= \
 		--libdir=/lib \
 		--libexecdir=/lib \
 		--syslibdir=/lib \
@@ -62,71 +78,15 @@ build='''
 	make
 	make DESTDIR="$pkgdir" install
 
-	cd ../gcompat-*
+	cd "$srcdir"/gcompat-*
 	sed -i 's/__count/_count/g' libgcompat/pthread.c
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-x86_64.so.1 LOADER_NAME=ld-linux-x86-64.so.2 LIBGCOMPAT_PATH=/lib/libgcompat.so.0 LOADER_PATH=/lib/ld-linux-x86-64.so.2 install
-	cd ../musl-$version
+	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-${ARCH}.so.1 LOADER_NAME=ld-linux-${ARCH}.so.2 LIBGCOMPAT_PATH=/lib/libgcompat.so.0 LOADER_PATH=/lib/ld-linux-${ARCH}.so.2 install
 
-	make clean
-	export CFLAGS="$CFLAGS -m32"
-	./configure \
-		--host=$TARGET32 \
-		--build=$TARGET32 \
-		--prefix= \
-		--libdir=/lib32 \
-		--libexecdir=/lib32 \
-		--syslibdir=/lib \
-		--sysconfdir=/etc \
-		--mandir=/share/man \
-		--localstatedir=/var 
-	make
-	make DESTDIR="$pkgdir"/32 install
-
-	mkdir -p "$pkgdir"/include/$TARGET32
-	mkdir -p "$pkgdir"/include/$TARGET
-	mv "$pkgdir"/include/bits "$pkgdir"/include/$TARGET/bits
-	mv "$pkgdir"/32/include/bits "$pkgdir"/include/$TARGET32/bits
-	mkdir -p "$pkgdir"/include/bits
-
-	list="`ls $pkgdir/include/$TARGET32/bits`"
-	list="$list `ls $pkgdir/include/$TARGET/bits`"
-	for i in $list;do
-		sed -e "s/__name/$i/g" \
-			-e "s/__target32/$TARGET32/g" \
-			-e "s/__target64/$TARGET/g" \
-			"$srcdir"/tmpl.h > "$pkgdir"/include/bits/"$i"
-	done
-
-	rm -r "$pkgdir"/32/include
-	mv "$pkgdir"/32/lib/* "$pkgdir"/lib
-	rmdir "$pkgdir"/32/lib
-	mv "$pkgdir"/32/* "$pkgdir"/
-	rmdir "$pkgdir"/32
-
-	mkdir -p "$pkgdir"/bin "$pkgdir"/etc "$pkgdir"/lib "$pkgdir"/lib32
-	cp libssp_nonshared.a "$pkgdir"/lib
-	cp libssp_nonshared32.a "$pkgdir"/lib32/libssp_nonshared.a
-
-	cd ../gcompat-*
-	make clean
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-i386.so.1 LOADER_NAME=ld-linux.so.2 LIBGCOMPAT_PATH=/lib32/libgcompat.so.0 LOADER_PATH=/lib/ld-linux.so.2 install
-
-	cat > "$pkgdir"/etc/ld-musl-"$ARCH".path << "EOF"
-/lib
-EOF
-#/lib/opencollada
-#/lib/R/lib
-#/lib/openmpi
-
-	cat > "$pkgdir"/etc/ld-musl-"$ARCH32".path << "EOF"
-/lib32
-EOF
-
-	ln -s ../lib/libc.so "$pkgdir"/lib/ldd
-	ln -s ../lib32/libc.so "$pkgdir"/lib32/ldd
-	install -D -m755 "$srcdir"/ldd "$pkgdir"/bin
+	ln -s /lib/libc.so "$pkgdir"/bin/ldd
 
 	for i in getconf getent iconv ; do
-		gcc $CFLAGS "$srcdir"/$i.c -o "$pkgdir"/bin/$i
+		gcc "$srcdir"/$i.c -o "$pkgdir"/bin/$i
 	done
+
+	sed -i 's/#define __DEFINED_size_t/&\n#define _SIZE_T/g' "$pkgdir"/include/bits/alltypes.h
 '''

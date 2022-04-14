@@ -1,0 +1,19 @@
+version="0.5.1"
+deps=["python3"]
+makedeps=["python3"]
+source=[
+	{url="https://github.com/pypa/installer/archive/refs/tags/${version}.tar.gz"},
+	{url="prefix.patch"},
+]
+
+build='''
+	cd installer-$version
+	patch -Nbp1 -i ../prefix.patch
+	python3 -m venv ss --system-site-packages
+	. ss/bin/activate
+	pip install build installer flit
+	python3 -m build -w -x -n
+	python3 -m installer -d f dist/*.whl
+	deactivate
+	mv f/"$PWD"/ss/* "$pkgdir"
+'''

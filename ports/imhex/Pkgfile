@@ -11,7 +11,7 @@ source = [
 ext = '''
 	cd ImHex
 	git submodule update --init --recursive
-	patch -Np1 -i "$srcdir/gl.patch"
+	patch -Nbp1 -i "$srcdir/gl.patch"
 	sed -i 's;usr/;;g' cmake/build_helpers.cmake
 '''
 

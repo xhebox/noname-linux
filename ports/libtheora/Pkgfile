@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd libtheora-${version}
-	patch -Np0 -i ../libtheora-1.1.1-libpng16.patch
+	patch -Nbp0 -i ../libtheora-1.1.1-libpng16.patch
 '''
 
 build='''

@@ -1,5 +1,5 @@
 name="firefox"
-version="96.0.2"
+version="99.0.1"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
@@ -17,13 +17,14 @@ source=[
 	{url="no-gnome.patch"},
 	{url="no-x11.patch"},
 	{url="warnings.patch"},
+	{url="python.patch"},
 ]
 
 ext='''
 	cd firefox-${version%b*}
 	for i in $source; do
 		case $i in
-		*.patch) patch -Np0 -i ../$i;;
+		*.patch) patch -Nbp0 -i ../$i;;
 		esac
 	done
 
@@ -74,7 +75,6 @@ ac_add_options --enable-alsa
 ac_add_options --disable-valgrind
 ac_add_options --disable-jack
 ac_add_options --disable-webrtc
-ac_add_options --disable-gold
 ac_add_options --disable-crashreporter
 ac_add_options --disable-tests
 ac_add_options --disable-profiling
@@ -87,17 +87,13 @@ END
 	cat > "$srcdir/.cargo/config" << EOF
 [net]
 git-fetch-with-cli = true
-
-[http]
-debug = false
-proxy = "127.0.0.1:8080"
 EOF
 '''
 
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.19.0 cbindgen
+	cargo install --version 0.21.0 cbindgen
 
 	cd firefox-${version%b*}
 	export MACH_USE_SYSTEM_PYTHON=/bin/python

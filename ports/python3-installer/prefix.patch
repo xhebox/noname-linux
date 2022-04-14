@@ -1,0 +1,97 @@
+diff --git a/src/installer/__main__.py b/src/installer/__main__.py
+index 6695d4b..1c0e40a 100644
+--- a/src/installer/__main__.py
++++ b/src/installer/__main__.py
+@@ -24,6 +24,13 @@
+         help="destination directory (prefix to prepend to each file)",
+     )
+     parser.add_argument(
++        "--prefix",
++        "-p",
++        metavar="path",
++        type=str,
++        help="override prefix to install packages to",
++    )
++    parser.add_argument(
+         "--compile-bytecode",
+         action="append",
+         metavar="level",
+@@ -39,9 +46,13 @@
+     return parser
+ 
+ 
+-def _get_scheme_dict(distribution_name: str) -> Dict[str, str]:
++def _get_scheme_dict(distribution_name: str, prefix:Optional[str] = None) -> Dict[str, str]:
+     """Calculate the scheme dictionary for the current Python environment."""
+-    scheme_dict = sysconfig.get_paths()
++    vars = {}
++    if prefix is not None:
++        vars["base"] = vars["platbase"] = prefix
++
++    scheme_dict = sysconfig.get_paths(vars=vars)
+ 
+     installed_base = sysconfig.get_config_var("base")
+     assert installed_base
+@@ -50,7 +61,7 @@
+     # https://bugs.python.org/issue44445. This is based on what distutils does.
+     # TODO: figure out original vs normalised distribution names
+     scheme_dict["headers"] = os.path.join(
+-        sysconfig.get_path("include", vars={"installed_base": installed_base}),
++        sysconfig.get_path("include", vars={"installed_base": prefix if prefix is not None else installed_base}),
+         distribution_name,
+     )
+ 
+@@ -72,7 +83,7 @@
+ 
+     with WheelFile.open(args.wheel) as source:
+         destination = SchemeDictionaryDestination(
+-            scheme_dict=_get_scheme_dict(source.distribution),
++            scheme_dict=_get_scheme_dict(source.distribution, prefix=args.prefix),
+             interpreter=sys.executable,
+             script_kind=get_launcher_kind(),
+             bytecode_optimization_levels=bytecode_levels,
+diff --git a/tests/test_main.py b/tests/test_main.py
+index ca22892..7aee685 100644
+--- a/tests/test_main.py
++++ b/tests/test_main.py
+@@ -6,6 +6,12 @@ def test_get_scheme_dict():
+     assert set(d.keys()) >= {"purelib", "platlib", "headers", "scripts", "data"}
+ 
+ 
++def test_get_scheme_dict_prefix():
++    d = get_scheme_dict(distribution_name="foo", prefix="/foo")
++    for key in ("purelib", "platlib", "headers", "scripts", "data"):
++        assert d[key].startswith("/foo"), f"{key} does not start with /foo: {d[key]}"
++
++
+ def test_main(fancy_wheel, tmp_path):
+     destdir = tmp_path / "dest"
+ 
+@@ -22,6 +28,26 @@ def test_main(fancy_wheel, tmp_path):
+     }
+ 
+ 
++def test_main_prefix(fancy_wheel, tmp_path):
++    destdir = tmp_path / "dest"
++
++    main([str(fancy_wheel), "-d", str(destdir), "-p", "/foo"], "python -m installer")
++
++    installed_py_files = list(destdir.rglob("*.py"))
++
++    for f in installed_py_files:
++        assert str(f.parent).startswith(
++            str(destdir / "foo")
++        ), f"path does not respect destdir+prefix: {f}"
++    assert {f.stem for f in installed_py_files} == {"__init__", "__main__", "data"}
++
++    installed_pyc_files = destdir.rglob("*.pyc")
++    assert {f.name.split(".")[0] for f in installed_pyc_files} == {
++        "__init__",
++        "__main__",
++    }
++
++
+ def test_main_no_pyc(fancy_wheel, tmp_path):
+     destdir = tmp_path / "dest"
+ 
+

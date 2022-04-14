@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd libva-utils-$version
-	patch -Np1 -i ../no-x11.patch
+	patch -Nbp1 -i ../no-x11.patch
 '''
 
 build='''

@@ -8,10 +8,8 @@ source=[
 ]
 
 build='''
-	export http_proxy=socks5://127.0.0.1:1080
-	export https_proxy=socks5://127.0.0.1:1080
 	cd haskell-language-server-$version
-	patch -Np1 -i ../nowarning.patch
+	patch -Nbp1 -i ../nowarning.patch
 	HOME=$srcdir cabal update -v
 	HOME=$srcdir cabal build --project-file=cabal-ghc90.project
 	install -m 755 -D dist-newstyle/build/*/*/*/*/*/build/haskell-language-server/haskell-language-server "$pkgdir/bin/haskell-language-server"

@@ -1,0 +1,16 @@
+version="4.1.1"
+deps=["python3"]
+makedeps=["python3", "python3-installer"]
+source=[
+	{url="https://github.com/python/typing/archive/refs/tags/$version.tar.gz"},
+]
+
+build='''
+	cd typing-$version/typing_extensions
+	python3 -m venv ss --system-site-packages
+	. ss/bin/activate
+	pip install build
+	python3 -m build -w
+	deactivate
+	python3 -m installer --destdir="${pkgdir}" --prefix= dist/*.whl
+'''

@@ -10,7 +10,7 @@ source=[
 ext='''
 	cd luv-$version-0
 	cp ../libluv.pc.in .
-	patch -Np1 -i ../install.patch
+	patch -Nbp1 -i ../install.patch
 '''
 
 build='''

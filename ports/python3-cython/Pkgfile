@@ -1,4 +1,4 @@
-version="0.29.21"
+version="0.29.28"
 makedeps=["python3"]
 deps=["python3"]
 source=[
@@ -11,11 +11,10 @@ desc="C-Extensions for Python"
 
 build='''
 	cd cython-$version
-	/bin/python3 setup.py install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
-	for f in cygdb cython cythonize; do
-		mv "$pkgdir"/bin/$f "$pkgdir"/bin/${f}3
-	done
 '''

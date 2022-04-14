@@ -9,7 +9,8 @@ source=[
 
 build='''
 	cd gtkwave/gtkwave3-gtk3
-	patch -Np1 -i ../../no-x11.patch
+	patch -Nbp1 -i ../../no-x11.patch
+	./autogen.sh
 	./configure --prefix= --libexecdir=/lib --disable-tcl --enable-gtk3
 	make
 	make DESTDIR="$pkgdir" install

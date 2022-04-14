@@ -1,48 +1,80 @@
-version="2.35"
-desc="The GNU Binutils are a collection of binary tools"
-makedeps=["zlib"]
-deps=["zlib"]
-source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.xz"},
+version = "2.38"
+desc = "The GNU Binutils are a collection of binary tools"
+makedeps = ["zlib"]
+deps = ["zlib"]
+source = [
+  { url = "https://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.xz" },
+  { url = "fix-incorrect-undefined-symbol.patch" },
+  { url = "gold-warn-unsupported.patch" },
 ]
 
-ext='''
+ext = '''
 	cd binutils-$version
 	for i in $source; do
+		echo "### $i"
 		case $i in
-		*.patch) patch -p1 -i "$srcdir/$i" ;;
+		*.patch) patch -Nbp1 -i "$srcdir/$i" ;;
 		esac
 	done
-'''
-
-build='''
-	cd binutils-$version
 	sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
 	sed -e 's,source,\.,g' -i ld/scripttempl/elf32msp430.sc
-	./configure \
-		--target=$TARGET \
-		--host=$TARGET \
-		--build=$TARGET \
+'''
+
+build = '''
+	if [ ! -z "$OTARGETS" ]; then
+		for OTARGET in $OTARGETS; do
+			mkdir -p "$srcdir"/build-$OTARGET
+			cd "$srcdir"/build-$OTARGET
+			"$srcdir"/binutils-$version/configure \
+				--prefix= \
+				--target=$OTARGET \
+				--with-system-zlib \
+				--enable-interwork \
+				--enable-ld=default \
+				--enable-plugins \
+				--enable-relro \
+				--enable-gold \
+				--enable-deterministic-archives \
+				--disable-nls \
+				--disable-gdb \
+				--disable-werror
+
+			make
+			make DESTDIR="$pkgdir" install
+		done
+	fi
+
+	rm -rf "$pkgdir"/lib
+
+	mkdir -p "$srcdir"/build
+	cd "$srcdir"/build
+	"$srcdir"/binutils-$version/configure \
 		--prefix= \
 		--with-lib-path=/lib:/local/lib:/usr/lib:/usr/local/lib \
 		--enable-plugins \
 		--enable-threads \
 		--enable-ld=default \
-		--with-pic \
+		--enable-pgo-build=lto \
+    --enable-plugins \
 		--enable-relro \
 		--enable-gold \
 		--enable-shared \
 		--enable-deterministic-archives \
 		--with-system-zlib \
 		--disable-gdb \
+		--disable-gdbserver \
+		--disable-libdecnumber \
+		--disable-readline \
+		--disable-sim \
 		--disable-werror \
-		--enable-targets=x86_64-pep \
+		--enable-targets=x86_64-pep,bpf-unknown-none \
 		--enable-nls
 
-	make configure-host
-	make tooldir=/usr
+	make tooldir=/
 	make DESTDIR="$pkgdir" tooldir=/ install
+
 	rm "$pkgdir"/bin/ld
 	ln -sf ld.bfd "$pkgdir"/bin/ld
+
 	sed -i "s|-L$srcdir[^ ]* ||g" "$pkgdir"/lib/libbfd.la	"$pkgdir"/lib/libopcodes.la
 '''

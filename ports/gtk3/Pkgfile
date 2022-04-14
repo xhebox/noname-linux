@@ -14,7 +14,7 @@ ext='''
 	cd gtk+-$version
 	for i in $source;do
 		case $i in
-		test.patch) patch -Np0 -i "$srcdir/$i" ;;
+		test.patch) patch -Nbp0 -i "$srcdir/$i" ;;
 		*.patch) patch -p1 -i "$srcdir/$i" ;;
 		esac
 	done

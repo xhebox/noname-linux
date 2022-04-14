@@ -15,7 +15,7 @@ ext='''
 	ln -srf ../OpenGL-Registry auto/OpenGL-Registry
 	ln -srf ../EGL-Registry auto/EGL-Registry
 	ln -srf ../glfixes auto/glfixes
-	patch -Np1 -i ../source.patch
+	patch -Nbp1 -i ../source.patch
 	make extensions -j1
 '''
 

@@ -1,14 +1,13 @@
-version="3.7.3"
-sversion="41.0.1"
-wversion="0.33.4"
+version="3.10.4"
+sversion="62.1.0"
+pversion="21.0"
 desc="A high-level scripting language(3.x)"
 deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
 makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
 source=[
-	{url="http://www.python.org/ftp/python/$version/Python-$version.tar.xz"},
-	{url="readonly.patch"},
-	{url="http://github.com/pypa/setuptools/archive/v$sversion.tar.gz"},
-	{url="https://pypi.io/packages/source/w/wheel/wheel-$wversion.tar.gz"},
+	{url="https://www.python.org/ftp/python/$version/Python-$version.tar.xz", name="python-$version.tar.xz"},
+	{url="https://files.pythonhosted.org/packages/source/s/setuptools/setuptools-${sversion}.tar.gz", name="setuptools-$sversion.tar.gz"},
+	{url="https://pypi.io/packages/source/p/pip/pip-${pversion}.tar.gz"},
 ]
 
 build='''
@@ -19,9 +18,7 @@ build='''
 	Modules/_ctypes/libffi* \
 	Modules/zlib
 
-	patch -p1 -i ../readonly.patch
 	./configure --prefix=/ \
-		--libdir=/lib \
 		--exec-prefix=/ \
 		--enable-shared \
 		--with-threads \
@@ -52,21 +49,44 @@ build='''
 	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$pkgdir/lib"
 	ln -s python${version%.*} $pkgdir/bin/python3
 	ln -s python3               "${pkgdir}"/bin/python
-	ln -s python3.7m-config     "${pkgdir}"/bin/python3-config
+	ln -s python${version%.*}m-config  "${pkgdir}"/bin/python3-config
 	ln -s idle3                 "${pkgdir}"/bin/idle
 	ln -s pydoc3                "${pkgdir}"/bin/pydoc
-	ln -s python${_pybasever}.1 "${pkgdir}"/share/man/man1/python.1
+	ln -s python${version%.*}.1 "${pkgdir}"/share/man/man1/python.1
 
 	cd ../setuptools-$sversion
-	"$pkgdir"/bin/python3 bootstrap.py
+	export SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0
+	#rm -r pkg_resources/extern
+	#rm -r pkg_resources/_vendor
+	#rm -r setuptools/extern
+	#rm -r setuptools/_vendor
+
+#	for _module in setuptools pkg_resources '' ; do
+#		find . -name \*.py -exec sed -i \
+#				-e 's/from '$_module.extern' import/import/' \
+#				-e 's/from '$_module.extern'./from /' \
+#				-e 's/import '$_module.extern'./import /' \
+#				-e "s/__import__('$_module.extern./__import__('/" \
+#				{} +
+#	done
+
+  # https://github.com/pypa/setuptools/issues/2466
+  sed -i '/ignore:lib2to3 package is deprecated:DeprecationWarning/a \    ignore:Creating a LegacyVersion has been deprecated and will be removed in the next major release:DeprecationWarning' pytest.ini
+  # Remove post-release tag since we are using stable tags
+	sed -e '/tag_build = .post/d' -e '/tag_date = 1/d' -i setup.cfg
+
 	"$pkgdir"/bin/python3 setup.py build
 	"$pkgdir"/bin/python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
-	
-	cd ../wheel-$wversion
+		--skip-build \
+		--optimize=1
+
+	cd ../pip-$pversion
+	"$pkgdir"/bin/python3 setup.py build
 	"$pkgdir"/bin/python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 '''

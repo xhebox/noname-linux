@@ -1,36 +1,46 @@
 --- a/c10/macros/Macros.h	2020-06-01 19:46:19.212517401 +0800
 +++ b/c10/macros/Macros.h	2020-06-01 19:46:19.212517401 +0800
-@@ -237,7 +237,7 @@
+@@ -357,7 +357,7 @@
+ extern SYCL_EXTERNAL void __assert_fail(
+     const char* expr,
+     const char* file,
+-    unsigned int line,
++    int line,
+     const char* func);
+ #else // __SYCL_DEVICE_ONLY__
+ #if (defined(__CUDA_ARCH__) && !(defined(__clang__) && defined(__CUDA__))) || \
+@@ -368,7 +368,7 @@
      __assert_fail(
          const char* assertion,
          const char* file,
 -        unsigned int line,
--        const char* function) throw();
+-        const char* function) throw()
 +        int line,
-+        const char* function);
- }
- #endif // NDEBUG
---- a/c10/util/Backtrace.cpp	2020-06-01 20:51:00.919317244 +0800
-+++ b/c10/util/Backtrace.cpp	2020-06-01 20:51:00.919317244 +0800
-@@ -15,9 +15,7 @@
- // No backtrace on mobile, windows and emscripten platforms.
- #define SUPPORTS_BACKTRACE 0
- #else
--#define SUPPORTS_BACKTRACE 1
--#include <cxxabi.h>
--#include <execinfo.h>
-+#define SUPPORTS_BACKTRACE 0
- #endif
- 
- namespace c10 {
---- a/c10/util/Type.cpp	2020-06-01 20:59:47.242668643 +0800
-+++ b/c10/util/Type.cpp	2020-06-01 20:59:47.242668643 +0800
-@@ -10,7 +10,7 @@
-     (TARGET_IPHONE_SIMULATOR || TARGET_OS_SIMULATOR || TARGET_OS_IPHONE)
- #define HAS_DEMANGLE 0
- #else
--#define HAS_DEMANGLE 1
-+#define HAS_DEMANGLE 0
- #endif
- 
- #if HAS_DEMANGLE
++        const char* function)
+ // We match the declaration of __assert_fail exactly how it is in glibc in case
+ // parts of the program are compiled with different NDEBUG settings. Otherwise
+ // we might get 'ambiguous declaration' error.
+--- a/third_party/flatbuffers/include/flatbuffers/util.h	2022-03-11 01:01:52.000000000 +0800
++++ b/third_party/flatbuffers/include/flatbuffers/util.h	2022-03-11 01:01:52.000000000 +0800
+@@ -222,8 +222,8 @@
+     #define __strtod_impl(s, pe) _strtod_l(s, pe, ClassicLocale::Get())
+     #define __strtof_impl(s, pe) _strtof_l(s, pe, ClassicLocale::Get())
+   #else
+-    #define __strtoull_impl(s, pe, b) strtoull_l(s, pe, b, ClassicLocale::Get())
+-    #define __strtoll_impl(s, pe, b) strtoll_l(s, pe, b, ClassicLocale::Get())
++    #define __strtoull_impl(s, pe, b) strtoull(s, pe, b)
++    #define __strtoll_impl(s, pe, b) strtoll(s, pe, b)
+     #define __strtod_impl(s, pe) strtod_l(s, pe, ClassicLocale::Get())
+     #define __strtof_impl(s, pe) strtof_l(s, pe, ClassicLocale::Get())
+   #endif
+--- a/third_party/ideep/include/ideep/operators/matmul.hpp	2022-03-11 01:01:52.000000000 +0800
++++ b/third_party/ideep/include/ideep/operators/matmul.hpp	2022-03-11 01:01:52.000000000 +0800
+@@ -106,7 +106,7 @@
+     auto x_dims = weights_dims;
+     x_dims[ndims-2] = 1;
+     x_dims[ndims-1] = weights_dims[ndims-2];
+-    auto y_dims = {x_dims[0], weights_dims[1]};
++    dims y_dims = {x_dims[0], weights_dims[1]};
+     if (ndims == 3) 
+         y_dims = {x_dims[0], x_dims[1], weights_dims[2]};
+     auto y_dtype = (dtype != data_type::s8) ? dtype : data_type::s32;

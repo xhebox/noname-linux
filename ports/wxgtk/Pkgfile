@@ -10,8 +10,8 @@ source=[
 
 ext='''
 	cd wxWidgets-$version
-	patch -Np1 -i ../musl.patch
-	patch -Np1 -i ../redef.patch
+	patch -Nbp1 -i ../musl.patch
+	patch -Nbp1 -i ../redef.patch
 '''
 
 build='''

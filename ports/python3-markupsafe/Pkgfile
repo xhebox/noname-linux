@@ -5,8 +5,10 @@ source=[{url="https://github.com/pallets/markupsafe/archive/$version/python-mark
 
 build='''
 	cd markupsafe-$version
-	/bin/python3 setup.py install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 '''

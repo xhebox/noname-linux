@@ -5,8 +5,10 @@ source=[{url="https://files.pythonhosted.org/packages/source/J/Jinja2/Jinja2-$ve
 
 build='''
 	cd Jinja2-$version
-	/bin/python3 setup.py install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 '''

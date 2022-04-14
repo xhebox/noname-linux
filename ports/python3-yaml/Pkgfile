@@ -1,12 +1,16 @@
-version="5.3.1"
-deps=["python3"]
-makedeps=["python3"]
-source=[{url="https://pyyaml.org/download/pyyaml/PyYAML-${version}.tar.gz"}]
+version="6.0"
+deps=["python3", "libyaml"]
+makedeps=["python3", "python3-cython", "libyaml"]
+source=[
+	{url="https://pypi.io/packages/source/P/PyYAML/PyYAML-${version}.tar.gz"},
+]
 
 build='''
 	cd PyYAML-$version
-	/bin/python3 setup.py install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 '''

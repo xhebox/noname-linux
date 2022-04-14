@@ -25,23 +25,24 @@ func (c harg) String() string {
 }
 
 type config struct {
-	ARCH64    string   `toml:"arch64"`
-	ARCH32    string   `toml:"arch32"`
-	TARGET64  string   `toml:"target64"`
-	TARGET32  string   `toml:"target32"`
-	ROOT      string   `toml:"root"`
-	Database  string   `toml:"database"`
-	Hooks     string   `toml:"hooks"`
-	Color     bool     `toml:"color"`
-	Ports     []string `toml:"ports"`
-	CFLAGS    string   `toml:"CFLAGS"`
-	CXXFLAGS  string   `toml:"CXXFLAGS"`
-	LDFLAGS   string   `toml:"LDFLAGS"`
-	Makeflags int      `toml:"makeflags"`
-	CC        string   `toml:"CC"`
-	CXX       string   `toml:"CXX"`
-	LD        string   `toml:"LD"`
-	Ccache    bool     `toml:"ccache"`
+	HTTP_PROXY  string   `toml:"http_proxy"`
+	HTTPS_PROXY string   `toml:"https_proxy"`
+	ARCH        string   `toml:"arch"`
+	TARGET      string   `toml:"target"`
+	OTARGETS    []string `toml:"other_targets"`
+	ROOT        string   `toml:"root"`
+	Database    string   `toml:"database"`
+	Hooks       string   `toml:"hooks"`
+	Color       bool     `toml:"color"`
+	Ports       string   `toml:"ports"`
+	CFLAGS      string   `toml:"CFLAGS"`
+	CXXFLAGS    string   `toml:"CXXFLAGS"`
+	LDFLAGS     string   `toml:"LDFLAGS"`
+	Makeflags   int      `toml:"makeflags"`
+	CC          string   `toml:"CC"`
+	CXX         string   `toml:"CXX"`
+	LD          string   `toml:"LD"`
+	Ccache      bool     `toml:"ccache"`
 }
 
 var (
@@ -137,17 +138,26 @@ func main() {
 		Compression:  diskv.NewZlibCompression(),
 	})
 
+	os.Setenv("HTTP_PROXY", cfg.HTTP_PROXY)
+	os.Setenv("HTTPS_PROXY", cfg.HTTPS_PROXY)
+
 	fmt.Fprintln(shenv, "set -e")
 	fmt.Fprintln(shenv, "export QMAKE_CFLAGS_ISYSTEM=")
-	fmt.Fprintf(shenv, "ARCH=%s\n", cfg.ARCH64)
-	fmt.Fprintf(shenv, "ARCH64=%s\n", cfg.ARCH64)
-	fmt.Fprintf(shenv, "ARCH32=%s\n", cfg.ARCH32)
-	fmt.Fprintf(shenv, "TARGET=%s\n", cfg.TARGET64)
-	fmt.Fprintf(shenv, "TARGET64=%s\n", cfg.TARGET64)
-	fmt.Fprintf(shenv, "TARGET32=%s\n", cfg.TARGET32)
+	fmt.Fprintf(shenv, "ARCH=%s\n", cfg.ARCH)
+	fmt.Fprintf(shenv, "TARGET=%s\n", cfg.TARGET)
+	fmt.Fprintf(shenv, "OTARGETS=\"")
+	for i := range cfg.OTARGETS {
+		if i != 0 {
+			fmt.Fprintf(shenv, " ")
+		}
+		fmt.Fprintf(shenv, "%s", cfg.OTARGETS[i])
+	}
+	fmt.Fprintf(shenv, "\"\n")
 	fmt.Fprintf(shenv, "ROOT=%s\n", cfg.ROOT)
 	fmt.Fprintf(shenv, "DB=%s\n", cfg.Database)
 	fmt.Fprintf(shenv, "HOOKS=%s\n", cfg.Hooks)
+	fmt.Fprintf(shenv, "export HTTPS_PROXY=%s\n", cfg.HTTPS_PROXY)
+	fmt.Fprintf(shenv, "export HTTP_PROXY=%s\n", cfg.HTTP_PROXY)
 	if len(cfg.CC) != 0 {
 		fmt.Fprintf(shenv, "export CC=\"%s\"\n", cfg.CC)
 	}

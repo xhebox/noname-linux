@@ -11,7 +11,7 @@ source=[
 
 build='''
 	cd nftables-$version
-	patch -Np1 -i ../musl.patch
+	patch -Nbp1 -i ../musl.patch
 	./configure --prefix= \
 		--sbindir=/bin \
 		--sysconfdir=/share

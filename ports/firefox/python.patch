@@ -1,0 +1,11 @@
+--- python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
++++ python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
+@@ -756,7 +756,7 @@
+         sysconfig_paths = sysconfig.get_paths(scheme)
+         data_path = Path(sysconfig_paths["data"])
+         purelib_path = Path(sysconfig_paths["purelib"])
+-        relative_purelib_path = purelib_path.relative_to(data_path)
++        relative_purelib_path = purelib_path.resolve().relative_to(data_path)
+ 
+         normalized_venv_root = os.path.normpath(self.prefix)
+         # Path to virtualenv's "site-packages" directory

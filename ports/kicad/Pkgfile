@@ -13,7 +13,8 @@ source=[
 
 ext='''
 	cd kicad-$version
-	patch -Np1 -i ../no-x11.patch
+	patch -Nbp1 -i ../no-x11.patch
+	sed -i 's/wxChar) NULL/wxChar) 0/g' kicad/pcm/*.cpp
 '''
 
 build='''
@@ -47,7 +48,7 @@ build='''
 	cmake --build build_d
 	DESTDIR="${pkgdir}" cmake --build build_d --target install
 
-  cmake -Bbuild kicad-$version -DCMAKE_BUILD_TYPE=Release    \
+	cmake -Bbuild kicad-$version -DCMAKE_BUILD_TYPE=Release    \
 		-DCMAKE_INSTALL_PREFIX=   \
 		-DCMAKE_INSTALL_LIBDIR=/lib   \
 		-DKICAD_USE_OCE=OFF           \

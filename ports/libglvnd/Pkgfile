@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd libglvnd-v$version
-#patch -Np1 -i ../glvnd.patch
+#patch -Nbp1 -i ../glvnd.patch
 '''
 
 build='''

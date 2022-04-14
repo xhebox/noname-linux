@@ -56,7 +56,7 @@ ext = '''
 	for i in $source; do
 		echo $i
 		case $i in
-		*.patch) patch -Np1 -i ../$i;;
+		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
 	for i in libc typenum cc rustc-ap-rustc_target target-lexicon; do

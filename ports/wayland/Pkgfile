@@ -8,7 +8,7 @@ source=[
 
 ext='''
 	cd wayland-$version
-#patch -Np1 -i ../debug.patch
+#patch -Nbp1 -i ../debug.patch
 '''
 
 build='''

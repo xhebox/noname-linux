@@ -35,7 +35,6 @@ baks=[
 ]
 
 ext='''
-#export https_proxy=socks5://127.0.0.1:1080
 	curl -O -L https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
 	curl -O -L https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
 '''
@@ -43,7 +42,7 @@ ext='''
 build='''
 	cd "$pkgdir/"
 	ln -s . usr
-	for d in boot dev etc/modprobe.d home mnt var/lock run include share/misc lib lib32 bin; do
+	for d in boot dev etc/modprobe.d home mnt var/lock run include share/misc lib bin; do
 		mkdir -p "$d" && chmod 755 "$d"
 	done
 	for d in $(seq 8); do

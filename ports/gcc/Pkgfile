@@ -1,56 +1,109 @@
-version="10.2.0"
-desc="The GNU Compiler Collection"
-source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/gcc/gcc-$version/gcc-${version}.tar.xz"},
-	{url="http://isl.gforge.inria.fr/isl-0.21.tar.bz2"},
-	{url="http://gmplib.org/download/gmp/gmp-6.1.2.tar.xz"},
-	{url="http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz"},
-	{url="https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz"},
-	{url="0002-posix_memalign.patch"},
-	{url="003_all_default-fortify-source.patch"},
-	{url="013_all_default-ssp-fix.patch"},
-	{url="203-libgcc_s.patch"},
-	{url="fix-musl-execinfo.patch"},
-	{url="gcc-6.1-musl-libssp.patch"},
-	{url="libgcc-always-build-gcceh.a.patch"},
-	{url="0016-invalid_tls_model.patch"},
-	{url="locale.patch"},
-	{url="mold.patch"},
+version = "11.2.0"
+desc = "The GNU Compiler Collection"
+isl_version = "0.24"
+gmp_version = "6.1.2"
+mpfr_version = "4.1.0"
+mpc_version = "1.2.1"
+source = [
+  { url = "https://mirrors.ustc.edu.cn/gnu/gcc/gcc-$version/gcc-${version}.tar.xz" },
+  { url = "https://libisl.sourceforge.io/isl-${isl_version}.tar.xz" },
+  { url = "https://gmplib.org/download/gmp/gmp-${gmp_version}.tar.xz" },
+  { url = "https://www.mpfr.org/mpfr-${mpfr_version}/mpfr-${mpfr_version}.tar.xz" },
+  { url = "https://ftp.gnu.org/gnu/mpc/mpc-${mpc_version}.tar.gz" },
+  { url = "0002-posix_memalign.patch" },
+  { url = "003_all_default-fortify-source.patch" },
+  { url = "013_all_default-ssp-fix.patch" },
+  { url = "203-libgcc_s.patch" },
+  { url = "fix-musl-execinfo.patch" },
+  { url = "gcc-6.1-musl-libssp.patch" },
+  { url = "libgcc-always-build-gcceh.a.patch" },
+  { url = "0016-invalid_tls_model.patch" },
+  { url = "locale.patch" },
 ]
-makedeps=["zlib"]
-deps=["zlib", "binutils"]
+makedeps = ["zlib"]
+deps = ["zlib", "binutils"]
 
-ext='''
+ext = '''
 	cd gcc-$version
 	for i in $source; do
+		echo "### $i"
 		case "$i" in
 			*execinfo*.patch) patch -p0 -i ../"$i";;
-			*.patch) patch -Np1 -i ../"$i";;
+			*.patch) patch -Nbp1 -i ../"$i";;
 		esac
 	done
 
 	sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 	sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
-	ln -s ../isl-0.21 isl
-	ln -s ../gmp-6.1.2 gmp
-	ln -s ../mpfr-4.0.1 mpfr
-	ln -s ../mpc-1.1.0 mpc
+	ln -s ../isl-${isl_version} isl
+	ln -s ../gmp-${gmp_version} gmp
+	ln -s ../mpfr-${mpfr_version} mpfr
+	ln -s ../mpc-${mpc_version} mpc
 	echo ${version} > gcc/BASE-VER
 '''
 
-build='''
+build = '''
 	export libat_cv_have_ifunc=no
-	mkdir -p build
-	cd build
-	../gcc-$version/configure \
-		--host=$TARGET \
-		--build=$TARGET \
+
+	if [ ! -z "$OTARGETS" ]; then
+		for OTARGET in $OTARGETS; do
+			mkdir -p "$srcdir"/build-$OTARGET
+			cd "$srcdir"/build-$OTARGET
+			"$srcdir"/gcc-$version/configure \
+				--target=$OTARGET \
+				--with-sysroot=/$OTARGET \
+				--prefix= \
+				--libexecdir=/lib \
+				--libdir=/lib \
+				--program-prefix=$OTARGET- \
+				--enable-languages=c,c++ \
+				--enable-shared \
+				--enable-threads=posix \
+				--with-pkgversion=noname \
+				--enable-checking=release \
+				--enable-libstdcxx-time \
+				--with-system-zlib \
+				--enable-__cxa_atexit \
+				--with-linker-hash-style=gnu \
+				--enable-linker-build-id \
+				--enable-cet \
+				--disable-default-pie \
+				--enable-default-ssp \
+				--enable-clocale=generic \
+				--enable-gnu-indirect-function \
+				--enable-lto --enable-plugin \
+				--disable-nls \
+				--disable-vtable-verify \
+				--disable-target-libiberty \
+				--disable-fixed-point \
+				--disable-libstdcxx-pch \
+				--disable-libunwind-exceptions \
+				--disable-libsanitizer \
+				--disable-libssp \
+				--disable-werror \
+				--disable-symvers \
+				--disable-multilib \
+				--disable-sjlj-exceptions \
+				--disable-bootstrap
+
+			gcc_cv_libc_provides_ssp=yes \
+			make
+			make -j1 DESTDIR="${pkgdir}" install-gcc install-target-libgcc install-target-libstdc++-v3
+			rm -rf "$pkgdir"/share/man/man7
+			rm -rf "$pkgdir"/share/gcc-*
+			rm -rf "$pkgdir"/share/info
+		done
+	fi
+
+	mkdir -p "$srcdir"/build
+	cd "$srcdir"/build
+	"$srcdir"/gcc-$version/configure \
 		--target=$TARGET \
 		--prefix=	\
 		--libexecdir=/lib \
+		--libdir=/lib \
 		--enable-languages=c,c++,lto \
 		--with-pkgversion=noname \
-		--with-isl \
 		--enable-shared \
 		--enable-threads=posix \
 		--enable-checking=release \
@@ -62,8 +115,10 @@ build='''
 		--enable-cet=auto \
 		--enable-default-pie \
 		--enable-default-ssp \
+		--enable-clocale=generic \
 		--enable-gnu-indirect-function \
 		--enable-lto --enable-plugin \
+		--enable-nls \
 		--disable-vtable-verify \
 		--disable-target-libiberty \
 		--disable-fixed-point \
@@ -73,28 +128,23 @@ build='''
 		--disable-libssp \
 		--disable-werror \
 		--disable-symvers \
-		--enable-clocale=generic \
-		--enable-nls \
-		--enable-multilib \
+		--disable-multilib \
+		--disable-sjlj-exceptions \
 		--disable-bootstrap
 
 	gcc_cv_libc_provides_ssp=yes \
 	make
 	make -j1 DESTDIR="${pkgdir}" install
-	make -C mpc DESTDIR="${pkgdir}" install
+	#make -C mpc DESTDIR="${pkgdir}" install
 	make -C gcc DESTDIR="${pkgdir}" install-po
 
 	ln -srf "$pkgdir"/bin/gcc "$pkgdir"/bin/cc
 
-	find "$pkgdir" -name libgcj.a -o -name libgtkpeer.a \
+	find "$pkgdir/lib" -name libgcj.a -o -name libgtkpeer.a \
 		-o -name libgjsmalsa.a -o -name libgcj-tools.a \
 		-o -name libjvm.a -o -name libgij.a -o -name libgcj_bc.a \
 		-o -name libjavamath.a \
 		| xargs rm -f
 
-	if [ -e "$pkgdir"/lib/gcc/$TARGET/$version/liblto_plugin.so ]; then
-		mkdir -p "$pkgdir"/lib/bfd-plugins
-		ln -sf ../../lib/gcc/$TARGET/$version/liblto_plugin.so \
-		"$pkgdir"/lib/bfd-plugins/liblto_plugin.so
-	fi
+  find "$pkgdir/bin/" "$pkgdir/lib/gcc" -type f -and \( -executable \) -exec strip '{}' \;
 '''

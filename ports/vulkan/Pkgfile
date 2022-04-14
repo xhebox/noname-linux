@@ -18,7 +18,7 @@ source = [
 
 ext = '''
 	cd $srcdir/Vulkan-Tools-$version
-	patch -Np0 -i ../cmake.patch
+	patch -Nbp0 -i ../cmake.patch
 
 	cd $srcdir/Vulkan-ValidationLayers-$version
 '''

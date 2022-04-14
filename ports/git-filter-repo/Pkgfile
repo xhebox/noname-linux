@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd git-filter-repo-$version
-	patch -Np1 -i ../version.patch
+	patch -Nbp1 -i ../version.patch
 	sed -i "s|@PKGVER@|$version|" release/setup.py
 '''
 

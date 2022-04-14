@@ -6,8 +6,10 @@ source=[{url="https://pypi.io/packages/source/M/Mako/Mako-$version.tar.gz"}]
 
 build='''
 	cd Mako-$version
-	/bin/python3 setup.py install \
+	python3 setup.py build
+	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
+		--skip-build \
 		--optimize=1
 '''

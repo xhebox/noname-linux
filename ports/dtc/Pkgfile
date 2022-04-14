@@ -1,0 +1,11 @@
+version="1.6.1"
+desc="device tree compiler"
+source=[{url="https://www.kernel.org/pub/software/utils/dtc/dtc-$version.tar.xz"}]
+deps=["musl"]
+
+build='''
+	cd dtc-$version
+	sed -i 's/-Werror//' Makefile
+	make
+	DESTDIR="$pkgdir" make SETUP_PREFIX="$pkgdir" PREFIX="$pkgdir" install
+'''

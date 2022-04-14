@@ -17,7 +17,7 @@ ext='''
 		echo $i
 		case $i in
 		add-*patch|musl*patch) patch -p0 -i "$srcdir"/$i ;;
-		*patch)	patch -Np1 -i "$srcdir"/$i ;;
+		*patch)	patch -Nbp1 -i "$srcdir"/$i ;;
 		esac
 	done
 '''

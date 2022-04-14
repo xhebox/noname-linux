@@ -87,7 +87,7 @@ set -x
 	mkdir -p src/github.com/docker
 	mv moby-$version src/github.com/docker/docker
 	cd src/github.com/docker/docker
-	#patch -Np1 -i $srcdir/noname.patch
+	#patch -Nbp1 -i $srcdir/noname.patch
 	DOCKER_GITCOMMIT=$docker_commit \
 	DOCKER_BUILDTAGS="exclude_graphdriver_btrfs seccomp journald" \
 	VERSION=$version \

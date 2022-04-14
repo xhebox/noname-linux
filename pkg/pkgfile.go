@@ -69,145 +69,143 @@ func (s byPos) Less(i, j int) bool {
 	}
 }
 
-func NewPkgfile(name string, ports []string) (*Pkgfile, error) {
-	for _, port := range ports {
-		pkgfile := filepath.Join(port, name, "Pkgfile")
+func NewPkgfile(name string, ports string) (*Pkgfile, error) {
+	pkgfile := filepath.Join(ports, name, "Pkgfile")
 
-		if exist(pkgfile) {
-			pkg := &Pkgfile{Name: name, Dir: filepath.Join(port, name)}
+	if exist(pkgfile) {
+		pkg := &Pkgfile{Name: name, Dir: filepath.Join(ports, name)}
 
-			var e error
-			pkg.raw, e = toml.LoadFile(pkgfile)
-			if e != nil {
-				return nil, errors.Wrapf(e, "can not unmarshal pkgfile [%v]", name)
+		var e error
+		pkg.raw, e = toml.LoadFile(pkgfile)
+		if e != nil {
+			return nil, errors.Wrapf(e, "can not unmarshal pkgfile [%v]", name)
+		}
+
+		pkg.lock = flock.New(pkgfile)
+		if r := pkg.raw.Get("build"); r != nil {
+			pkg.Build = r.(string)
+		} else {
+			return nil, errors.Errorf("%v: build() can not be empty", name)
+		}
+
+		if r := pkg.raw.Get("desc"); r != nil {
+			pkg.Desc = r.(string)
+		}
+		if r := pkg.raw.Get("ext"); r != nil {
+			pkg.Ext = r.(string)
+		}
+		if r := pkg.raw.Get("keepla"); r != nil {
+			pkg.KeepLa = r.(bool)
+		}
+
+		if r := pkg.raw.Get("baks"); r != nil {
+			for _, v := range r.([]interface{}) {
+				pkg.Baks = append(pkg.Baks, v.(string))
 			}
+		}
 
-			pkg.lock = flock.New(pkgfile)
-			if r := pkg.raw.Get("build"); r != nil {
-				pkg.Build = r.(string)
-			} else {
-				return nil, errors.Errorf("%v: build() can not be empty", name)
+		if r := pkg.raw.Get("deps"); r != nil {
+			for _, v := range r.([]interface{}) {
+				pkg.Deps = append(pkg.Deps, v.(string))
 			}
+		}
 
-			if r := pkg.raw.Get("desc"); r != nil {
-				pkg.Desc = r.(string)
+		if r := pkg.raw.Get("makedeps"); r != nil {
+			for _, v := range r.([]interface{}) {
+				pkg.Makedeps = append(pkg.Makedeps, v.(string))
 			}
-			if r := pkg.raw.Get("ext"); r != nil {
-				pkg.Ext = r.(string)
-			}
-			if r := pkg.raw.Get("keepla"); r != nil {
-				pkg.KeepLa = r.(bool)
-			}
+		}
 
-			if r := pkg.raw.Get("baks"); r != nil {
-				for _, v := range r.([]interface{}) {
-					pkg.Baks = append(pkg.Baks, v.(string))
-				}
-			}
+		{
+			pkg.env = &bytes.Buffer{}
 
-			if r := pkg.raw.Get("deps"); r != nil {
-				for _, v := range r.([]interface{}) {
-					pkg.Deps = append(pkg.Deps, v.(string))
-				}
-			}
+			fmt.Fprintf(pkg.env, "name=\"%s\"\n", pkg.Name)
 
-			if r := pkg.raw.Get("makedeps"); r != nil {
-				for _, v := range r.([]interface{}) {
-					pkg.Makedeps = append(pkg.Makedeps, v.(string))
-				}
-			}
+			keys := byPos{pkg.raw, pkg.raw.Keys()}
+			sort.Sort(keys)
 
-			{
-				pkg.env = &bytes.Buffer{}
-
-				fmt.Fprintf(pkg.env, "name=\"%s\"\n", pkg.Name)
-
-				keys := byPos{pkg.raw, pkg.raw.Keys()}
-				sort.Sort(keys)
-
-				var srcs []*toml.Tree
-				for _, v := range keys.keys {
-					switch v {
-					case "deps", "makedeps", "build", "ext":
-					case "source":
-						srcs = pkg.raw.Get("source").([]*toml.Tree)
-					default:
-						cmd := exec.Command("/bin/sh")
-						cmd.Dir = "/"
-						cmd.Stdin = strings.NewReader(
-							fmt.Sprintf("%s\n printf \"%v\"", pkg.env.String(), pkg.raw.Get(v)))
-						cmd.Stderr = os.Stderr
-
-						pbytes, _ := cmd.Output()
-
-						fmt.Fprintf(pkg.env, "%v=\"%v\"\n", v, string(pbytes))
-
-						if v == "version" {
-							pkg.Version = string(pbytes)
-						}
-					}
-				}
-
-				for _, src := range srcs {
+			var srcs []*toml.Tree
+			for _, v := range keys.keys {
+				switch v {
+				case "deps", "makedeps", "build", "ext":
+				case "source":
+					srcs = pkg.raw.Get("source").([]*toml.Tree)
+				default:
 					cmd := exec.Command("/bin/sh")
 					cmd.Dir = "/"
 					cmd.Stdin = strings.NewReader(
-						fmt.Sprintf("%s\n printf \"%v\"", pkg.env.String(), src.Get("url")))
+						fmt.Sprintf("%s\n printf \"%v\"", pkg.env.String(), pkg.raw.Get(v)))
 					cmd.Stderr = os.Stderr
+
 					pbytes, _ := cmd.Output()
-					url := string(pbytes)
-					src.Set("url", url)
 
-					// auto detect protocol & name
-					if src.Get("protocol") == nil {
-						if s := strings.SplitN(url, ":", 2); len(s) == 2 {
-							src.Set("protocol", s[0])
-						} else if s := strings.SplitN(url, "+", 2); len(s) == 2 {
-							src.Set("protocol", s[0])
-							src.Set("url", s[1])
-						}
-					}
+					fmt.Fprintf(pkg.env, "%v=\"%v\"\n", v, string(pbytes))
 
-					if src.Get("name") == nil {
-						src.Set("name", path.Base(url))
-					} else {
-						cmd = exec.Command("/bin/sh")
-						cmd.Dir = "/"
-						cmd.Stdin = strings.NewReader(
-							fmt.Sprintf("%s\nprintf \"%v\"", pkg.env.String(), src.Get("name")))
-						cmd.Stderr = os.Stderr
-						pbytes, _ = cmd.Output()
-						src.Set("name", string(pbytes))
+					if v == "version" {
+						pkg.Version = string(pbytes)
 					}
-
-					srcmap := map[string]string{}
-					for _, v := range src.Keys() {
-						srcmap[v] = fmt.Sprint(src.Get(v))
-					}
-					pkg.Source = append(pkg.Source, srcmap)
 				}
 			}
 
-			fmt.Fprintf(pkg.env, "source=\"\n")
-			for _, v := range pkg.Source {
-				if len(v["name"]) != 0 {
-					fmt.Fprintf(pkg.env, "%v\n", v["name"])
+			for _, src := range srcs {
+				cmd := exec.Command("/bin/sh")
+				cmd.Dir = "/"
+				cmd.Stdin = strings.NewReader(
+					fmt.Sprintf("%s\n printf \"%v\"", pkg.env.String(), src.Get("url")))
+				cmd.Stderr = os.Stderr
+				pbytes, _ := cmd.Output()
+				url := string(pbytes)
+				src.Set("url", url)
+
+				// auto detect protocol & name
+				if src.Get("protocol") == nil {
+					if s := strings.SplitN(url, ":", 2); len(s) == 2 {
+						src.Set("protocol", s[0])
+					} else if s := strings.SplitN(url, "+", 2); len(s) == 2 {
+						src.Set("protocol", s[0])
+						src.Set("url", s[1])
+					}
+				}
+
+				if src.Get("name") == nil {
+					src.Set("name", path.Base(url))
 				} else {
-					fmt.Fprintf(pkg.env, "%v\n", v["url"])
+					cmd = exec.Command("/bin/sh")
+					cmd.Dir = "/"
+					cmd.Stdin = strings.NewReader(
+						fmt.Sprintf("%s\nprintf \"%v\"", pkg.env.String(), src.Get("name")))
+					cmd.Stderr = os.Stderr
+					pbytes, _ = cmd.Output()
+					src.Set("name", string(pbytes))
 				}
+
+				srcmap := map[string]string{}
+				for _, v := range src.Keys() {
+					srcmap[v] = fmt.Sprint(src.Get(v))
+				}
+				pkg.Source = append(pkg.Source, srcmap)
 			}
-			fmt.Fprintf(pkg.env, "\"\n")
-
-			pkg.Srcdir = filepath.Join(pkg.Dir, "src")
-			pkg.Pkgdir = filepath.Join(pkg.Dir, "pkg")
-			pkg.Tarball = filepath.Join(pkg.Dir, pkg.Name+"#"+pkg.Version+".tgz")
-			pkg.Checksum = filepath.Join(pkg.Dir, ".checksum")
-
-			fmt.Fprintf(pkg.env, "srcdir=\"%v\"\n", pkg.Srcdir)
-			fmt.Fprintf(pkg.env, "pkgdir=\"%v\"\n", pkg.Pkgdir)
-
-			return pkg, nil
 		}
+
+		fmt.Fprintf(pkg.env, "source=\"\n")
+		for _, v := range pkg.Source {
+			if len(v["name"]) != 0 {
+				fmt.Fprintf(pkg.env, "%v\n", v["name"])
+			} else {
+				fmt.Fprintf(pkg.env, "%v\n", v["url"])
+			}
+		}
+		fmt.Fprintf(pkg.env, "\"\n")
+
+		pkg.Srcdir = filepath.Join(pkg.Dir, "src")
+		pkg.Pkgdir = filepath.Join(pkg.Dir, "pkg")
+		pkg.Tarball = filepath.Join(pkg.Dir, pkg.Name+"#"+pkg.Version+".tgz")
+		pkg.Checksum = filepath.Join(pkg.Dir, ".checksum")
+
+		fmt.Fprintf(pkg.env, "srcdir=\"%v\"\n", pkg.Srcdir)
+		fmt.Fprintf(pkg.env, "pkgdir=\"%v\"\n", pkg.Pkgdir)
+
+		return pkg, nil
 	}
 
 	return nil, errors.Errorf("%s not found", name)

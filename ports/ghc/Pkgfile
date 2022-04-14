@@ -23,7 +23,7 @@ source=[
 
 ext='''
 	cd "$srcdir/stack-$stack_version"
-	patch -Np1 -i ../5677.diff
+	patch -Nbp1 -i ../5677.diff
 
 	cd "$srcdir"/ghc-${bootstrap_ghc_version}-x86_64-unknown-linux
 
@@ -33,7 +33,7 @@ ext='''
 	make install DESTDIR="$srcdir/"
 
 	cd ../ghc-$version
-	patch -Np1 -i ../musl.patch
+	patch -Nbp1 -i ../musl.patch
 
 	cat >> mk/build.mk <<-EOF
 BuildFlavour         = perf-llvm

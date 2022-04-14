@@ -1,10 +1,9 @@
-version="5.50"
+version="5.64"
 makedeps=["dbus", "libical", "alsa-lib", "systemd"]
 deps=["dbus", "libical", "alsa-lib", "systemd"]
 source=[
 	{url="https://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz"},
 	{url="musl.patch"},
-	{url="refresh_adv_manager_for_non-LE_devices.diff"},
 	{url="bluetooth.modprobe"},
 ]
 
@@ -12,8 +11,7 @@ ext='''
 	cd bluez-$version
 	for i in $source; do
 		case $i in
-			*.diff) patch -Np1 -i ../$i;;
-			*.patch) patch -Np0 -i ../$i;;
+			*.patch) patch -Nbp0 -i ../$i;;
 		esac
 	done
 '''
@@ -26,16 +24,22 @@ build='''
 		--sysconfdir=/etc \
 		--localstatedir=/var \
 		--libexecdir=/lib \
+		--with-dbusconfdir=/share \
 		--enable-systemd \
+		--disable-manpages \
+		--enable-btpclient \
 		--enable-midi \
 		--enable-sixaxis \
+		--enable-mesh \
+		--enable-hid2hci \
 		--enable-experimental \
 		--enable-library
 	make
-	make DESTDIR=${pkgdir} install
+	make DESTDIR="${pkgdir}" install
 
 	install -dm755 "${pkgdir}"/etc/bluetooth
 	install -Dm644 src/main.conf "${pkgdir}"/etc/bluetooth/main.conf
+	sed -i 's/#AutoEnable=false/AutoEnable=true/g' "$pkgdir"/etc/bluetooth/main.conf
 
 	install -dm755 "${pkgdir}"/share/doc/bluez/dbus-apis
 	cp -a doc/*.txt "${pkgdir}"/share/doc/bluez/dbus-apis/
@@ -44,13 +48,14 @@ build='''
 	install -Dm644 ../bluetooth.modprobe "${pkgdir}"/etc/modprobe.d/bluetooth-usb.conf
 
 	# https://bugzilla.kernel.org/show_bug.cgi?id=196621
-	install -dm755 $pkgdir/lib/modules-load.d
-	echo "crypto_user" > $pkgdir/lib/modules-load.d/bluez.conf
+	install -dm755 "$pkgdir"/lib/modules-load.d
+	echo "crypto_user" > "$pkgdir"/lib/modules-load.d/bluez.conf
 
 	for files in `find tools/ -type f -perm -755`; do
 		filename=`basename $files`
 		install -Dm755 tools/$filename "${pkgdir}"/bin/$filename
 	done
 
-	ln -fs /lib/systemd/user/obex.service "${pkgdir}"/lib/systemd/user/dbus-org.bluez.obex.service
+# FS#74157 - bluez systemd service fails without localstatedir present
+	install -dm700 "${pkgdir}"/var/lib/bluetooth
 '''

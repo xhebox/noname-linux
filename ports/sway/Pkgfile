@@ -5,12 +5,12 @@ makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols"]
 source=[
 	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
 	{url="50-systemd-user.conf"},
-	{url="5890.diff"},
+#{url="5890.diff"},
 ]
 
 ext='''
 	cd sway-$version
-	patch -Nbp1 -i ../5890.diff
+#patch -Nbp1 -i ../5890.diff
 '''
 
 build='''

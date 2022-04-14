@@ -9,5 +9,5 @@ source=[
 build='''
 	cd mold-$version
 	make
-	make PREFIX= DESTDIR="$pkgdir" install
+	make PREFIX= LIBEXECDIR=/lib DESTDIR="$pkgdir" install
 '''

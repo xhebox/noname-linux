@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd SDL2-$version
-	patch -Np1 -i ../pure-wayland.patch
+	patch -Nbp1 -i ../pure-wayland.patch
 '''
 
 build='''

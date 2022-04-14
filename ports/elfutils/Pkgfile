@@ -20,7 +20,7 @@ ext='''
 	for i in $source;do
 		echo $i
 		case $i in
-		*.patch) patch -Np0 -i ../$i ;;
+		*.patch) patch -Nbp0 -i ../$i ;;
 		esac
 	done
 	cp ../error.h lib

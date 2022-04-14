@@ -13,7 +13,7 @@ source=[
 
 build='''
 	cd dhcpcd-${version}
-	patch -Np1 -i ../musl.patch
+	patch -Nbp1 -i ../musl.patch
 
 	./configure \
 		--prefix=/ \
