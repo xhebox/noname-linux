@@ -9,7 +9,6 @@ source = [
   { url = "getconf.c" },
   { url = "iconv.c" },
   { url = "getent.c" },
-  { url = "need_macro.patch" },
   { url = "emoji.patch" },
   { url = "handle-aux-at_base.patch" },
 ]
@@ -54,7 +53,6 @@ build = '''
 
 			make
 			make DESTDIR="$pkgdir" install
-			sed -i 's/#define __DEFINED_size_t/&\n#define _SIZE_T/g' "$pkgdir"/$OTARGET/include/bits/alltypes.h
 		done
 	fi
 
@@ -87,6 +85,4 @@ build = '''
 	for i in getconf getent iconv ; do
 		gcc "$srcdir"/$i.c -o "$pkgdir"/bin/$i
 	done
-
-	sed -i 's/#define __DEFINED_size_t/&\n#define _SIZE_T/g' "$pkgdir"/include/bits/alltypes.h
 '''

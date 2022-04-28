@@ -89,4 +89,6 @@ build='''
 		--root=$pkgdir \
 		--skip-build \
 		--optimize=1
+
+		sed -i "s;$pkgdir;/;g" "$pkgdir"/bin/pip*
 '''
