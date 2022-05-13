@@ -36,7 +36,6 @@ build = '''
 				--enable-gold \
 				--enable-deterministic-archives \
 				--disable-nls \
-				--disable-gdb \
 				--disable-werror
 
 			make
@@ -61,11 +60,6 @@ build = '''
 		--enable-shared \
 		--enable-deterministic-archives \
 		--with-system-zlib \
-		--disable-gdb \
-		--disable-gdbserver \
-		--disable-libdecnumber \
-		--disable-readline \
-		--disable-sim \
 		--disable-werror \
 		--enable-targets=x86_64-pep,bpf-unknown-none \
 		--enable-nls
