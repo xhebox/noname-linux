@@ -34,8 +34,7 @@ func pkg_build(name string, opts map[harg]bool) error {
 
 	defer func() {
 		if !opts['k'] {
-			pkg.RmPkgDir()
-			pkg.RmSrcDir()
+			pkg.RmDirs()
 		}
 	}()
 

@@ -1,6 +1,7 @@
-version="250"
+version="251"
 desc="system and service manager"
 makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "python3-jinja"]
+nocache=true
 deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 source=[
 	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
@@ -17,12 +18,11 @@ source=[
 	{url="0002-Add-sys-stat.h-for-S_IFDIR.patch"},
 	{url="0002-don-t-use-glibc-specific-qsort_r.patch"},
 	{url="0003-implment-systemd-sysv-install-for-OE.patch"},
-	{url="0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch"},
+	{url="0003-missing_type.h-add-comparison_fn_t.patch"},
 	{url="0004-add-fallback-parse_printf_format-implementation.patch"},
 	{url="0005-src-basic-missing.h-check-for-missing-strndupa.patch"},
 	{url="0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch"},
 	{url="0008-add-missing-FTW_-macros-for-musl.patch"},
-	{url="0009-fix-missing-of-__register_atfork-for-non-glibc-build.patch"},
 	{url="0010-Use-uintmax_t-for-handling-rlim_t.patch"},
 	{url="0011-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch"},
 	{url="0012-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
@@ -39,7 +39,6 @@ source=[
 	{url="0025-Handle-__cpu_mask-usage.patch"},
 	{url="0026-Handle-missing-gshadow.patch"},
 	{url="0028-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch"},
-	{url="0029-network-enable-KeepConfiguration-when-running-on-net.patch"},
 
 
 	{url="musl.patch"},
@@ -79,12 +78,13 @@ ext='''
 '''
 
 build='''
+	export CC="clang"
 	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0"
 	noname-meson systemd-$version build \
-	-Dsplit-usr=true \
 	-Dutmp=false \
 	-Dman=false \
 	-Dldconfig=false \
+	-Defi=true \
 	-Dgnu-efi=true \
 	-Dima=false \
 	-Dlibidn2=false \
@@ -110,15 +110,15 @@ build='''
 	-Ddefault-kill-user-processes=false \
 	-Dfallback-hostname='PC' \
 	-Dntp-servers="pool.ntp.org" \
-	-Ddns-servers="1.1.1.1 114.114.114.114" \
+	-Ddns-servers="1.1.1.1 223.5.5.5 119.29.29.29" \
 	-Drpmmacrosdir=no \
 	-Dsysvinit-path= \
 	-Dsysvrcnd-path= \
 	-Dsbat-distro=noname \
 	-Dsbat-distro-url=https://github.com/xhebox/noname-linux
 
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 
 	install -D -m0644 -t "$pkgdir"/${HOOKS#$ROOT} ../*.toml
 

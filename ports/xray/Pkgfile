@@ -1,5 +1,5 @@
-version="1.5.1"
-geo_version="202112202210"
+version="1.5.6"
+geo_version="202206062212"
 desc="xray core"
 makedeps=['go']
 source=[
@@ -24,7 +24,7 @@ build='''
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_CPPFLAGS="${CPPFLAGS}"
 	export GOPROXY=https://goproxy.cn,direct
-	go build -v -x -o xray ./main
+	go build -v -o xray ./main
 	install -d "${pkgdir}"/etc/xray/
 	install -Dm 755 xray -t "${pkgdir}"/bin/
 	install -Dm 644 "${srcdir}"/xray.service -t "${pkgdir}"/lib/systemd/system/

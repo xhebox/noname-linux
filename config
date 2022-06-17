@@ -5,6 +5,7 @@ target32 = "i386-pc-linux-musl"
 color = true
 ccache = true
 root = "/"
+buildroot = "/root/.cache/pkg"
 database = "/var/db/npkg"
 hooks = "/etc/pkg/hooks"
 ports = [

@@ -1,5 +1,6 @@
 # use "reset=1" as default, since it should be safe for recent devices and
 # solves all kind of problems.
 options btusb reset=1
+
 # prevent too frequent idle
-option usbcore autosuspend=30
+options usbcore autosuspend=30

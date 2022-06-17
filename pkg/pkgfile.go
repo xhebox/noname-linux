@@ -33,6 +33,7 @@ type Pkgfile struct {
 	KeepLa   bool
 	Source   []map[string]string
 
+	Builddir string
 	Srcdir   string
 	Pkgdir   string
 	Tarball  string
@@ -197,13 +198,14 @@ func NewPkgfile(name string, ports string) (*Pkgfile, error) {
 		}
 		fmt.Fprintf(pkg.env, "\"\n")
 
-		pkg.Srcdir = filepath.Join(pkg.Dir, "src")
-		pkg.Pkgdir = filepath.Join(pkg.Dir, "pkg")
-		pkg.Tarball = filepath.Join(pkg.Dir, pkg.Name+"#"+pkg.Version+".tgz")
-		pkg.Checksum = filepath.Join(pkg.Dir, ".checksum")
-
+		pkg.Builddir = filepath.Join(cfg.BuildRoot, pkg.Name)
+		pkg.Srcdir = filepath.Join(cfg.BuildRoot, pkg.Name, "src")
+		pkg.Pkgdir = filepath.Join(cfg.BuildRoot, pkg.Name, "pkg")
 		fmt.Fprintf(pkg.env, "srcdir=\"%v\"\n", pkg.Srcdir)
 		fmt.Fprintf(pkg.env, "pkgdir=\"%v\"\n", pkg.Pkgdir)
+
+		pkg.Tarball = filepath.Join(pkg.Dir, pkg.Name+"#"+pkg.Version+".tgz")
+		pkg.Checksum = filepath.Join(pkg.Dir, ".checksum")
 
 		return pkg, nil
 	}
@@ -234,16 +236,8 @@ func (c *Pkgfile) MkSrcDir() error {
 		return errors.Wrapf(e, "can not remove src [%v]", c.Name)
 	}
 
-	if e := os.Mkdir(c.Srcdir, 0755); e != nil {
+	if e := os.MkdirAll(c.Srcdir, 0755); e != nil {
 		return errors.Wrapf(e, "can not mkdir src [%v]", c.Name)
-	}
-
-	return nil
-}
-
-func (c *Pkgfile) RmSrcDir() error {
-	if e := os.RemoveAll(c.Srcdir); e != nil {
-		return errors.Wrapf(e, "can not remove src [%v]", c.Name)
 	}
 
 	return nil
@@ -254,16 +248,16 @@ func (c *Pkgfile) MkPkgDir() error {
 		return errors.Wrapf(e, "can not remove pkg [%v]", c.Name)
 	}
 
-	if e := os.Mkdir(c.Pkgdir, 0755); e != nil {
+	if e := os.MkdirAll(c.Pkgdir, 0755); e != nil {
 		return errors.Wrapf(e, "can not mkdir pkg [%v]", c.Name)
 	}
 
 	return nil
 }
 
-func (c *Pkgfile) RmPkgDir() error {
-	if e := os.RemoveAll(c.Pkgdir); e != nil {
-		return errors.Wrapf(e, "can not remove pkg [%v]", c.Name)
+func (c *Pkgfile) RmDirs() error {
+	if e := os.RemoveAll(c.Builddir); e != nil {
+		return errors.Wrapf(e, "can not remove src [%v]", c.Name)
 	}
 
 	return nil

@@ -1,4 +1,4 @@
-version="3.2.3"
+version="3.2.4"
 desc='A fast and versatile file copying tool for remote and local files'
 deps=['acl', 'lz4', 'openssl', 'perl', 'popt', 'zlib', 'zstd']
 makedeps=['acl', 'lz4', 'openssl', 'perl', 'popt', 'zlib', 'zstd']

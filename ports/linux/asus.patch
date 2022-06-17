@@ -1,0 +1,63 @@
+--- linux-5.15.7/drivers/hid/hid-asus.c	2021-12-08 16:04:57.000000000 +0800
++++ linux-5.15.7/drivers/hid/hid-asus.c	2021-12-08 16:04:57.000000000 +0800
+@@ -1016,6 +1016,7 @@
+ 
+ 	drvdata->quirks = id->driver_data;
+ 
++	hid_info(hdev, "%s quirks %x\n", hdev->name, id->driver_data);
+ 	/*
+ 	 * T90CHI's keyboard dock returns same ID values as T100CHI's dock.
+ 	 * Thus, identify T90CHI dock with product name string.
+--- a/drivers/input/keyboard/atkbd.c	2021-12-08 16:04:57.000000000 +0800
++++ b/drivers/input/keyboard/atkbd.c	2021-12-08 16:04:57.000000000 +0800
+@@ -786,21 +786,25 @@
+ 
+ 	param[0] = param[1] = 0xa5;	/* initialize with invalid values */
+ 	if (ps2_command(ps2dev, param, ATKBD_CMD_GETID)) {
+-
++		dev_warn(&ps2dev->serio->dev, "keyboard got id on %s\n", ps2dev->serio->phys);
+ /*
+  * If the get ID command failed, we check if we can at least set the LEDs on
+  * the keyboard. This should work on every keyboard out there. It also turns
+  * the LEDs off, which we want anyway.
+  */
+ 		param[0] = 0;
+-		if (ps2_command(ps2dev, param, ATKBD_CMD_SETLEDS))
++		if (ps2_command(ps2dev, param, ATKBD_CMD_SETLEDS)) {
++			dev_warn(&ps2dev->serio->dev, "keyboard got led on %s\n", ps2dev->serio->phys);
+ 			return -1;
++		}
+ 		atkbd->id = 0xabba;
+ 		return 0;
+ 	}
+ 
+-	if (!ps2_is_keyboard_id(param[0]))
++	if (!ps2_is_keyboard_id(param[0])) {
++		dev_warn(&ps2dev->serio->dev, "keyboard not kid on %s\n", ps2dev->serio->phys);
+ 		return -1;
++	}
+ 
+ 	atkbd->id = (param[0] << 8) | param[1];
+ 
+--- a/drivers/input/serio/libps2.c	2022-06-16 17:12:51.191561464 +0800
++++ b/drivers/input/serio/libps2.c	2022-06-16 17:12:51.191561464 +0800
+@@ -260,7 +260,7 @@
+ 	 * ACKing the reset command, and so it can take a long
+ 	 * time before the ACK arrives.
+ 	 */
+-	timeout = command == PS2_CMD_RESET_BAT ? 1000 : 200;
++	timeout = command == PS2_CMD_RESET_BAT ? 4000 : 1000;
+ 
+ 	rc = ps2_do_sendbyte(ps2dev, command & 0xff, timeout, 2);
+ 	if (rc)
+--- a/drivers/input/serio/i8042.c	2022-06-17 10:47:57.720009843 +0800
++++ b/drivers/input/serio/i8042.c	2022-06-17 10:47:57.720009843 +0800
+@@ -1514,7 +1514,7 @@
+ 	if (error)
+ 		return error;
+ 
+-	error = request_irq(I8042_KBD_IRQ, i8042_interrupt, IRQF_SHARED,
++	error = request_irq(I8042_KBD_IRQ, i8042_interrupt, IRQF_SHARED | IRQF_IRQPOLL | IRQF_NO_THREAD,
+ 			    "i8042", i8042_platform_device);
+ 	if (error)
+ 		goto err_free_port;

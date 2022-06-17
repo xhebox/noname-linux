@@ -1,4 +1,4 @@
-version="5.15.7"
+version="5.18.3"
 desc="Linux kernel tools"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},

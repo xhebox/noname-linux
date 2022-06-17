@@ -1,0 +1,10 @@
+version="20220331"
+desc="ACPI tools, including Intel ACPI Source Language compiler"
+source=[{url="https://acpica.org/sites/acpica/files/acpica-unix-${version}.tar.gz"}]
+makedeps=["flex", "bison"]
+
+build='''
+	cd acpica-unix-$version
+	make
+	make DESTDIR="$pkgdir" install
+'''

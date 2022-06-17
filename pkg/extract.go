@@ -151,8 +151,8 @@ func opt_extract(name string, opts map[harg]bool) error {
 					command = "pbzip2 -dkc " + spath + " > " + filepath.Join(pkg.Srcdir, strings.TrimSuffix(source["name"], ".bz2"))
 				}
 			default:
-				if e := os.Link(spath, filepath.Join(pkg.Srcdir, source["name"])); e != nil {
-					return errors.Wrapf(e, "can not hardlink [%v]", source["url"])
+				if _, e := copyFile(spath, filepath.Join(pkg.Srcdir, source["name"])); e != nil {
+					return errors.Wrapf(e, "can not copy [%v]", source["url"])
 				}
 
 				continue

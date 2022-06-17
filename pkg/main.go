@@ -31,6 +31,7 @@ type config struct {
 	TARGET      string   `toml:"target"`
 	OTARGETS    []string `toml:"other_targets"`
 	ROOT        string   `toml:"root"`
+	BuildRoot   string   `toml:"buildroot"`
 	Database    string   `toml:"database"`
 	Hooks       string   `toml:"hooks"`
 	Color       bool     `toml:"color"`
