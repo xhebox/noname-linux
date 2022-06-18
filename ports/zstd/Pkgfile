@@ -9,6 +9,5 @@ build='''
 	make
 	make -C contrib/pzstd
 	make PREFIX=/ DESTDIR="$pkgdir/" install
-	ln -sf /bin/zstd "$pkgdir/bin/zstdmt"
 	install -Dm755 contrib/pzstd/pzstd "$pkgdir/bin/pzstd"
 '''
