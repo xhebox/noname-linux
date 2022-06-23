@@ -1,28 +1,26 @@
-version="20.10.2"
-runc_version="1.0.0-rc92"
-containerd_version="1.4.3"
-libnetwork_version="bump_19.03"
-app_version="0.9.1-beta3"
-tini_version="0.19.0"
-buildx_version="0.5.1"
+version="20.10.17"
+runc_version="1.1.3"
+containerd_version="1.6.6"
 docker_commit="$version"
-common_version="0.33.1"
-image_version="5.9.0"
-podman_version="2.2.1"
-skopeo_version="1.2.1"
-storage_version="1.24.5"
+tini_version="master"
+libnetwork_version="master"
+buildx_version="master"
+common_version="0.48.0"
+image_version="5.19.4"
+podman_version="4.1.1"
+skopeo_version="1.8.0"
+storage_version="1.38.4"
 desc='CLI tool for managing OCI compliant containers'
 deps=["libseccomp", "linux"]
-makedeps=["libseccomp", "linux", "go"]
+makedeps=["libseccomp", "linux", "git", "go"]
 source=[
 	{url="https://github.com/opencontainers/runc/releases/download/v$runc_version/runc.tar.xz",name="runc-$runc_version.tar.xz"},
 	{url="https://github.com/containerd/containerd/archive/v$containerd_version.tar.gz",name="containerd-$containerd_version.tar.gz"},
 	{url="https://github.com/docker/cli/archive/v$version.tar.gz",name="cli-$version.tar.gz"},
 	{url="https://github.com/moby/moby/archive/v$version.tar.gz",name="moby-$version.tar.gz"},
-	{url="https://github.com/docker/app/archive/v$app_version.tar.gz",name="app-$app_version.tar.gz"},
-	{url="https://github.com/krallin/tini/archive/v$tini_version.tar.gz",name="tini-$tini_version.tar.gz"},
-	{url="https://github.com/moby/libnetwork/archive/$libnetwork_version.tar.gz",name="libnetwork-$libnetwork_version.tar.gz"},
-	{url="https://github.com/docker/buildx/archive/v$buildx_version.tar.gz",name="buildx-$buildx_version.tar.gz"},
+	{url="https://github.com/krallin/tini/archive/refs/heads/$tini_version.zip",name="tini-$tini_version.zip"},
+	{url="https://github.com/moby/libnetwork/archive/refs/heads/$libnetwork_version.zip",name="libnetwork-$libnetwork_version.zip"},
+	{url="https://github.com/docker/buildx/archive/refs/heads/$buildx_version.zip",name="buildx-$buildx_version.zip"},
 	{url="docker.sysusers"},
 	{url="mounts.conf"},
 	{url="noname.patch"},
@@ -34,42 +32,40 @@ source=[
 ]
 
 build='''
-set -x
-  export GOPATH="$PWD"
-  export PATH="$GOPATH/bin:$PATH"
+	set -x
+	export GO111MODULE=off
+	export GOPATH="$PWD"
+	export PATH="$GOPATH/bin:$PATH"
 	export BUILDTAGS="no_btrfs seccomp"
-  export CGO_CPPFLAGS="${CPPFLAGS}"
-  export CGO_CFLAGS="${CFLAGS}"
-  export CGO_CXXFLAGS="${CXXFLAGS}"
-  export CGO_LDFLAGS="${LDFLAGS}"
-
-	mkdir -p src/github.com/docker
-  mv libnetwork-$libnetwork_version src/github.com/docker/libnetwork
-  cd src/github.com/docker/libnetwork
-  go build github.com/docker/libnetwork/cmd/proxy
-	install -Dm755 proxy "$pkgdir/bin/docker-proxy"
-	cd -
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
 
 	mkdir -p src/github.com/opencontainers
-  mv runc-$runc_version src/github.com/opencontainers/runc
-  cd src/github.com/opencontainers/runc
-  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
-  make runc
-  install -Dm755 runc "$pkgdir/bin/runc"
-  install -Dm644 contrib/completions/bash/runc "$pkgdir/share/bash-completion/completions/runc"
+	mv runc-$runc_version src/github.com/opencontainers/runc
+	cd src/github.com/opencontainers/runc
+	git init
+	git commit --allow-empty -m "init"
+	export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+	make runc
+	install -Dm755 runc "$pkgdir/bin/runc"
+	install -Dm644 contrib/completions/bash/runc "$pkgdir/share/bash-completion/completions/runc"
 	cd -
 
 	mkdir -p src/github.com/containerd
-  mv containerd-$containerd_version src/github.com/containerd/containerd
-  cd src/github.com/containerd/containerd
-  sed -i 's,/sbin,/bin,;s,/usr/local,/,' containerd.service
-  export GOFLAGS="-trimpath -mod=readonly -modcacherw"
-  make VERSION=v$pkgver
-  make install DESTDIR="$pkgdir"
-  install -Dm644 containerd.service "$pkgdir"/lib/systemd/system/containerd.service
+	mv containerd-$containerd_version src/github.com/containerd/containerd
+	cd src/github.com/containerd/containerd
+	git init
+	git commit --allow-empty -m "init"
+	sed -i 's,/sbin,/bin,;s,/usr/local,/,' containerd.service
+	export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+	make VERSION=v$containerd_version GO_GCFLAGS="" EXTRA_LDFLAGS="-buildid="
+	make install PREFIX=/ DESTDIR="$pkgdir"
+	install -Dm644 containerd.service "$pkgdir"/lib/systemd/system/containerd.service
 	cd -
 
-  export GOFLAGS='-buildmode=pie -trimpath -mod=readonly -modcacherw -ldflags=-linkmode=external'
+	export GOFLAGS='-buildmode=pie -trimpath -mod=readonly -modcacherw -ldflags=-linkmode=external'
 
 	mkdir -p src/github.com/docker
 	mv cli-$version src/github.com/docker/cli
@@ -80,14 +76,13 @@ set -x
 	install -Dm644 'contrib/completion/bash/docker' "$pkgdir/share/bash-completion/completions/docker"
 	install -Dm644 'contrib/completion/zsh/_docker' "$pkgdir/share/zsh/site-functions/_docker"
 	install -Dm644 'contrib/completion/fish/docker.fish' "$pkgdir/share/fish/vendor_completions.d/docker.fish"
-#install -dm755 "$pkgdir/share/man"
-#cp -r man/man* "$pkgdir/share/man"
+	#install -dm755 "$pkgdir/share/man"
+	#cp -r man/man* "$pkgdir/share/man"
 	cd -
 
 	mkdir -p src/github.com/docker
 	mv moby-$version src/github.com/docker/docker
 	cd src/github.com/docker/docker
-	#patch -Nbp1 -i $srcdir/noname.patch
 	DOCKER_GITCOMMIT=$docker_commit \
 	DOCKER_BUILDTAGS="exclude_graphdriver_btrfs seccomp journald" \
 	VERSION=$version \
@@ -99,34 +94,26 @@ set -x
 	install -Dm644 "$srcdir/docker.sysusers" "$pkgdir/lib/sysusers.d/docker.conf"
 	cd -
 
-#mkdir -p src/github.com/docker
-#mv libnetwork-$version src/github.com/docker/libnetwork
-#cd src/github.com/docker/libnetwork
-#go build github.com/docker/libnetwork/cmd/proxy
-#install -Dm755 proxy "$pkgdir/bin/docker-proxy"
-#cd -
+	mkdir -p src/github.com/docker
+	mv libnetwork-$libnetwork_version src/github.com/docker/libnetwork
+	cd src/github.com/docker/libnetwork
+	go build github.com/docker/libnetwork/cmd/proxy
+	install -Dm755 proxy "$pkgdir/bin/docker-proxy"
+	cd -
 
 	mkdir -p src/github.com/krallin
 	mv tini-$tini_version src/github.com/krallin/tini
 	cd src/github.com/krallin/tini
-  cmake .
-  make tini-static
-  install -Dm755 tini-static "$pkgdir/bin/docker-init"
-	cd -
-
-	mkdir -p src/github.com/docker
-	mv app-$app_version src/github.com/docker/app
-	cd src/github.com/docker/app
-	BUILDTAGS=""
-  make dynamic
-  install -Dm755 bin/docker-app "$pkgdir/lib/docker/cli-plugins/docker-app"
+	cmake .
+	make tini-static
+	install -Dm755 tini-static "$pkgdir/bin/docker-init"
 	cd -
 
 	mkdir -p src/github.com/docker
 	mv buildx-$buildx_version src/github.com/docker/buildx
 	cd src/github.com/docker/buildx
-  go build -o docker-buildx -ldflags "-X main.experimental=1 -linkmode=external" ./cmd/buildx
-  install -Dm755 docker-buildx "$pkgdir/lib/docker/cli-plugins/docker-buildx"
+	go build -o docker-buildx -ldflags "-X main.experimental=1 -linkmode=external" ./cmd/buildx
+	install -Dm755 docker-buildx "$pkgdir/lib/docker/cli-plugins/docker-buildx"
 	cd -
 
 	install -vdm 755 "${pkgdir}/etc/containers/oci/hooks.d/"
@@ -134,8 +121,8 @@ set -x
 	install -vdm 755 "${pkgdir}/share/containers/oci/hooks.d/"
 	install -vdm 755 "${pkgdir}/var/lib/containers/"
 
-  # configs
-  install -vDm 644 mounts.conf -t "${pkgdir}/etc/containers/"
+	# configs
+	install -vDm 644 mounts.conf -t "${pkgdir}/etc/containers/"
 
 	cd "common-${common_version}"
 	install -vDm 644 pkg/config/containers.conf -t "${pkgdir}/etc/containers/"

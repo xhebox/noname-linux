@@ -10,6 +10,7 @@ source = [
   { url = "iconv.c" },
   { url = "getent.c" },
   { url = "emoji.patch" },
+  { url = "styp.patch" },
   { url = "handle-aux-at_base.patch" },
 ]
 

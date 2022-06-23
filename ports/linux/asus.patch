@@ -1,63 +1,43 @@
---- linux-5.15.7/drivers/hid/hid-asus.c	2021-12-08 16:04:57.000000000 +0800
-+++ linux-5.15.7/drivers/hid/hid-asus.c	2021-12-08 16:04:57.000000000 +0800
-@@ -1016,6 +1016,7 @@
+diff --git a/drivers/acpi/resource.c b/drivers/acpi/resource.c
+index c2d494784425..f888c62b8b96 100644
+--- a/drivers/acpi/resource.c
++++ b/drivers/acpi/resource.c
+@@ -399,6 +399,17 @@ static const struct dmi_system_id medion_laptop[] = {
+ 	{ }
+ };
  
- 	drvdata->quirks = id->driver_data;
++static const struct dmi_system_id irq1_edge_low_shared[] = {
++	{
++		.ident = "Asus Zenbook S 13 OLED UM5302",
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "ASUSTeK COMPUTER INC."),
++			DMI_MATCH(DMI_BOARD_NAME, "UM5302TA"),
++		},
++	},
++	{ }
++};
++
+ struct irq_override_cmp {
+ 	const struct dmi_system_id *system;
+ 	unsigned char irq;
+@@ -408,6 +419,7 @@ struct irq_override_cmp {
+ };
  
-+	hid_info(hdev, "%s quirks %x\n", hdev->name, id->driver_data);
- 	/*
- 	 * T90CHI's keyboard dock returns same ID values as T100CHI's dock.
- 	 * Thus, identify T90CHI dock with product name string.
---- a/drivers/input/keyboard/atkbd.c	2021-12-08 16:04:57.000000000 +0800
-+++ b/drivers/input/keyboard/atkbd.c	2021-12-08 16:04:57.000000000 +0800
-@@ -786,21 +786,25 @@
+ static const struct irq_override_cmp skip_override_table[] = {
++	{ irq1_edge_low_shared, 1, ACPI_EDGE_SENSITIVE, ACPI_ACTIVE_LOW, 1 },
+ 	{ medion_laptop, 1, ACPI_LEVEL_SENSITIVE, ACPI_ACTIVE_LOW, 0 },
+ };
+ diff --git a/drivers/bluetooth/btusb.c b/drivers/bluetooth/btusb.c
+index e25fcd49db70..fb1a67189412 100644
+--- a/drivers/bluetooth/btusb.c
++++ b/drivers/bluetooth/btusb.c
+@@ -477,6 +477,9 @@ static const struct usb_device_id blacklist_table[] = {
+ 	{ USB_DEVICE(0x0489, 0xe0d9), .driver_info = BTUSB_MEDIATEK |
+ 						     BTUSB_WIDEBAND_SPEECH |
+ 						     BTUSB_VALID_LE_STATES },
++	{ USB_DEVICE(0x0489, 0xe0e2), .driver_info = BTUSB_MEDIATEK |
++						     BTUSB_WIDEBAND_SPEECH |
++						     BTUSB_VALID_LE_STATES },
  
- 	param[0] = param[1] = 0xa5;	/* initialize with invalid values */
- 	if (ps2_command(ps2dev, param, ATKBD_CMD_GETID)) {
--
-+		dev_warn(&ps2dev->serio->dev, "keyboard got id on %s\n", ps2dev->serio->phys);
- /*
-  * If the get ID command failed, we check if we can at least set the LEDs on
-  * the keyboard. This should work on every keyboard out there. It also turns
-  * the LEDs off, which we want anyway.
-  */
- 		param[0] = 0;
--		if (ps2_command(ps2dev, param, ATKBD_CMD_SETLEDS))
-+		if (ps2_command(ps2dev, param, ATKBD_CMD_SETLEDS)) {
-+			dev_warn(&ps2dev->serio->dev, "keyboard got led on %s\n", ps2dev->serio->phys);
- 			return -1;
-+		}
- 		atkbd->id = 0xabba;
- 		return 0;
- 	}
- 
--	if (!ps2_is_keyboard_id(param[0]))
-+	if (!ps2_is_keyboard_id(param[0])) {
-+		dev_warn(&ps2dev->serio->dev, "keyboard not kid on %s\n", ps2dev->serio->phys);
- 		return -1;
-+	}
- 
- 	atkbd->id = (param[0] << 8) | param[1];
- 
---- a/drivers/input/serio/libps2.c	2022-06-16 17:12:51.191561464 +0800
-+++ b/drivers/input/serio/libps2.c	2022-06-16 17:12:51.191561464 +0800
-@@ -260,7 +260,7 @@
- 	 * ACKing the reset command, and so it can take a long
- 	 * time before the ACK arrives.
- 	 */
--	timeout = command == PS2_CMD_RESET_BAT ? 1000 : 200;
-+	timeout = command == PS2_CMD_RESET_BAT ? 4000 : 1000;
- 
- 	rc = ps2_do_sendbyte(ps2dev, command & 0xff, timeout, 2);
- 	if (rc)
---- a/drivers/input/serio/i8042.c	2022-06-17 10:47:57.720009843 +0800
-+++ b/drivers/input/serio/i8042.c	2022-06-17 10:47:57.720009843 +0800
-@@ -1514,7 +1514,7 @@
- 	if (error)
- 		return error;
- 
--	error = request_irq(I8042_KBD_IRQ, i8042_interrupt, IRQF_SHARED,
-+	error = request_irq(I8042_KBD_IRQ, i8042_interrupt, IRQF_SHARED | IRQF_IRQPOLL | IRQF_NO_THREAD,
- 			    "i8042", i8042_platform_device);
- 	if (error)
- 		goto err_free_port;
+ 	/* Additional Realtek 8723AE Bluetooth devices */
+ 	{ USB_DEVICE(0x0930, 0x021d), .driver_info = BTUSB_REALTEK },

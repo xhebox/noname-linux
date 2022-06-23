@@ -1,4 +1,4 @@
-version="5.15.7"
+version="5.18.3"
 desc="Linux API headers for userspace"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v4.x/linux-${version}.tar.xz"},
@@ -10,7 +10,6 @@ build='''
 	patch -p1 -i ../libc-4.16-portability.patch
 
 	make mrproper
-	make headers_check
 	make headers
 	find usr/include -type f -not -name '*.h' -exec rm -rf {} \;
 	find usr/include -type d -empty -delete

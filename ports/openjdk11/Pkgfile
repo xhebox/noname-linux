@@ -1,4 +1,4 @@
-desc="OpenJDK 16"
+desc="OpenJDK"
 nostrip=true
 _majorver=11
 _minorver=0
