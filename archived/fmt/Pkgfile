@@ -1,18 +1,14 @@
-version="5.3.0"
+version="8.1.1"
 desc='Open-source formatting library for C++'
 source=[{url="https://github.com/fmtlib/fmt/releases/download/$version/fmt-$version.zip"}]
 
 build='''
-	mkdir -p build
-	cd build
-
-	cmake ../fmt-$version \
-		-G Ninja \
+	cmake fmt-$version -Bbuild \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_INSTALL_PREFIX= \
 		-DCMAKE_INSTALL_LIBDIR=/lib \
 		-DBUILD_SHARED_LIBS='1'
 
-	ninja
-	DESTDIR="${pkgdir}" ninja install
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''
