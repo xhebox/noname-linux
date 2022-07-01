@@ -1,5 +1,5 @@
 pattern=["lib/modules"]
-operation=["remove","install"]
+operation=["install"]
 script='''
 for i in /lib/modules/*; do
 	case $i in

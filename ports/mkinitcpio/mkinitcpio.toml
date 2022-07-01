@@ -1,4 +1,5 @@
 pattern=["etc/mkinitcpio", "lib/modules"]
+operation=["install"]
 script='''
 mkinitcpio -P
 '''
