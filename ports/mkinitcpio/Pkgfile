@@ -9,6 +9,9 @@ source=[
 ]
 makedeps=["bzip2", "grep", "gawk", "coreutils", "findutils", "kmod", "libarchive", "util-linux", "lz4", "xz", "gzip", "systemd"]
 deps=["bzip2", "grep", "gawk", "coreutils", "findutils", "kmod", "libarchive", "util-linux", "lz4", "xz", "gzip", "systemd"]
+baks=[
+	"etc/mkinitcpio.conf",
+]
 
 build='''
 	cd mkinitcpio-$version

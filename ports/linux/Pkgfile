@@ -10,6 +10,7 @@ desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="fix-musl-objtool.patch"},
+	{url="sound.patch"},
 	{url="asus.patch"},
 	{url="linux.preset"},
 	{url="config"},
@@ -24,6 +25,7 @@ ext='''
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
 	patch -Nbp1 -i ../fix-musl-objtool.patch
+	patch -Np1 -i ../sound.patch
 	patch -Np1 -i ../asus.patch
 
 	cp ../config .config
