@@ -1,16 +1,29 @@
-version="0.6.1"
+version="master"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
-makedeps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "gperf", "cmake", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
-deps=["libtermkey", "libuv", "msgpack-c", "unibilium", "libvterm", "lua51-lpeg", "lua51-mpack", "lua51-bitop", "lua51", "lua51-libluv", "tree-sitter"]
+makedeps=["libuv", "gperf", "cmake"]
+deps=["libuv"]
 source=[
-	{url="https://github.com/neovim/neovim/archive/refs/tags/v${version}.tar.gz"},
+        {url="https://github.com/neovim/neovim/archive/refs/heads/${version}.zip"},
 ]
 
 build='''
-	cmake -Hneovim-${version} -Bbuild \
+	cd neovim-${version}
+
+	cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=OFF \
+		-DUSE_BUNDLED_UNIBILIUM=ON \
+		-DUSE_BUNDLED_LIBVTERM=ON \
+		-DUSE_BUNDLED_LIBTERMKEY=ON \
+		-DUSE_BUNDLED_MSGPACK=ON \
+		-DUSE_BUNDLED_LUAJIT=ON \
+		-DUSE_BUNDLED_LUAROCKS=ON \
+		-DUSE_BUNDLED_LUV=ON \
+		-DUSE_BUNDLED_TS_PARSERS=ON \
+		-DUSE_BUNDLED_TS=ON
+	cmake --build .deps
+
+	cmake -H. -Bbuild \
 		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DPREFER_LUA=ON
+		-DCMAKE_BUILD_TYPE=Release
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	find "$pkgdir/bin" -type f -exec strip {} \;

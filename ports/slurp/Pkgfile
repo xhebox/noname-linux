@@ -1,0 +1,14 @@
+version="1.3.2"
+desc='screen select utility for Wayland'
+deps=["cairo", "libxkbcommon", "wayland"]
+makedeps=["cairo", "libxkbcommon", "wayland-protocols"]
+source=[
+	{url="https://github.com/emersion/slurp/releases/download/v$version/slurp-$version.tar.gz"},
+]
+
+build='''
+	noname-meson slurp-$version build -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

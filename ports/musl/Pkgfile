@@ -79,7 +79,7 @@ build = '''
 
 	cd "$srcdir"/gcompat-*
 	sed -i 's/__count/_count/g' libgcompat/pthread.c
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-${ARCH}.so.1 LOADER_NAME=ld-linux-${ARCH}.so.2 LIBGCOMPAT_PATH=/lib/libgcompat.so.0 LOADER_PATH=/lib/ld-linux-${ARCH}.so.2 install
+	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-${ARCH}.so.1 LOADER_NAME=ld-linux-${ARCH}.so.2 install
 
 	ln -s /lib/libc.so "$pkgdir"/bin/ldd
 

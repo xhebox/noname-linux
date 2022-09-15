@@ -1,0 +1,14 @@
+version="0.6.2"
+desc='Unprivileged sandboxing tool'
+deps=["libcap"]
+makedeps=["libcap", "meson"]
+source=[
+	{url="https://github.com/containers/bubblewrap/releases/download/v$version/bubblewrap-$version.tar.xz"},
+]
+
+build='''
+	noname-meson bubblewrap-$version build -Dselinux=disabled -Dman=disabled
+	meson compile -C build
+	meson install -C build --destdir "$pkgdir"
+	chmod u+s "$pkgdir/bin/bwrap"
+'''

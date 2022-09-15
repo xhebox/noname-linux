@@ -1,6 +1,6 @@
 version="1.36.0"
-makedeps=["lua51", "libuv"]
-edeps=["lua51", "libuv"]
+makedeps=["luajit", "libuv"]
+edeps=["luajit", "libuv"]
 source=[
 	{url="https://github.com/luvit/luv/releases/download/${version}-0/luv-${version}-0.tar.gz"},
 	{url="libluv.pc.in"},
@@ -17,7 +17,6 @@ build='''
 	cmake luv-$version-0 -Bbuild \
 		-DCMAKE_INSTALL_PREFIX= \
 		-DWITH_SHARED_LIBUV=ON \
-		-DWITH_LUA_ENGINE=Lua \
 		-DLUA_BUILD_TYPE=System \
 		-DBUILD_MODULE=OFF \
 		-DBUILD_SHARED_LIBS=ON

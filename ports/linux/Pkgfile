@@ -1,4 +1,4 @@
-version="5.18.8"
+version="5.19.4"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -10,8 +10,7 @@ desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="fix-musl-objtool.patch"},
-	{url="sound.patch"},
-	{url="asus.patch"},
+	{url="kbd.patch"},
 	{url="linux.preset"},
 	{url="config"},
 ]
@@ -25,8 +24,7 @@ ext='''
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
 	patch -Nbp1 -i ../fix-musl-objtool.patch
-	patch -Np1 -i ../sound.patch
-	patch -Np1 -i ../asus.patch
+	patch -Np1 -i ../kbd.patch
 
 	cp ../config .config
 

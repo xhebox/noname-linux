@@ -1,0 +1,14 @@
+version="2.1.3"
+desc="ocaml package manager"
+deps=["unzip", "bubblewrap"]
+makedeps=["bubblewrap"]
+source=[
+	{url="https://github.com/ocaml/opam/releases/download/$version/opam-$version-x86_64-linux"}
+]
+
+build='''
+	install -Dm755 opam-$version-x86_64-linux "$pkgdir"/bin/opam
+	ori="add_sys_mounts /usr /bin /lib /lib32 /lib64 /etc /opt /home /var /tmp"
+	new="add_sys_mounts /usr /bin /lib /lib32 /lib64 /etc /include   /var /tmp"
+	sed -i "s;$ori;$new;g" "$pkgdir"/bin/opam
+'''

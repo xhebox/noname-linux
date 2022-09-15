@@ -1,0 +1,15 @@
+version="1.4.0"
+desc='Screenshot utility for Wayland'
+deps=["cairo", "libjpeg-turbo", "wayland"]
+makedeps=["cairo", "libjpeg-turbo", "wayland-protocols"]
+source=[
+	{url="https://git.sr.ht/~emersion/grim/archive/v$version.tar.gz"},
+]
+
+build='''
+ls
+	noname-meson grim-$version build -Dman-pages=disabled
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

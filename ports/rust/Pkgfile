@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
-rustup_version = "1.24.3"
-version = "1.58.0"
-_rust_dist_version = "1.58.0"
+rustup_version = "1.25.1"
+version = "1.63.0"
+_rust_dist_version = "1.63.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -59,7 +59,7 @@ ext = '''
 		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
-	for i in libc typenum cc rustc-ap-rustc_target target-lexicon; do
+	for i in libc typenum cc target-lexicon; do
 		sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
 	done
 	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs

@@ -1,8 +1,7 @@
-version="fc8557e941034566939231bbdeb1e6789606145a"
+version="20220708"
 desc="Firmware files for Linux"
 source=[
 	{url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$version.tar.gz"},
-	{url="WIFI_MT7922_patch_mcu_1_1_hdr.bin"},
 ]
 
 build='''
@@ -14,13 +13,13 @@ build='''
 	rm -f "${pkgdir}"/lib/firmware/configure
 	rm -f "${pkgdir}"/lib/firmware/GPL-3
 
-	cp -a ../*7922*bin "$pkgdir"/lib/firmware/mediatek/
-
 	mkdir -p kernel/x86/microcode
 	cat amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin
 	echo kernel/x86/microcode/AuthenticAMD.bin | bsdcpio -o -H newc -R 0:0 > amd-ucode.img
 	install -d "${pkgdir}/lib/tmpfiles.d"
 	install -D -m0644 amd-ucode.img "${pkgdir}"/boot/amd-ucode.img	
+
+	ln -srf "$pkgdir"/lib/firmware/iwlwifi-ty-a0-gf-a0-73.ucode "$pkgdir"/lib/firmware/iwlwifi-ty-a0-gf-a0-72.ucode 
 
 	install -d "${pkgdir}/lib/tmpfiles.d"
 	echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' > "${pkgdir}/lib/tmpfiles.d/linux-firmware.conf"
