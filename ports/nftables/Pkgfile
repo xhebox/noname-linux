@@ -1,11 +1,9 @@
-version="0.9.8"
+version="1.0.5"
 makedeps=["libmnl", "libnftnl", "readline", "libgmp"]
 deps=["libmnl", "libnftnl", "readline", "libgmp"]
 desc="Netfilter nftables userspace tools"
 source=[
 	{url="http://www.netfilter.org/projects/${name}/files/nftables-${version}.tar.bz2"},
-	{url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/nftables.service?h=packages/nftables", name="nftables.service"},
-	{url="nftables.conf"},
 	{url="musl.patch"},
 ]
 
@@ -17,6 +15,4 @@ build='''
 		--sysconfdir=/share
 	make
 	make DESTDIR="$pkgdir" install
-	install -Dm644 ../nftables.conf "$pkgdir/etc/nftables.conf"
-	install -Dm644 ../nftables.service "$pkgdir/lib/systemd/system/nftables.service"
 '''

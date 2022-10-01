@@ -1,4 +1,4 @@
-version="2.3.3"
+version="2.5.4"
 desc="High level interface to the Linux Kernel's seccomp filter"
 source=[{url="https://github.com/seccomp/libseccomp/releases/download/v$version/libseccomp-$version.tar.gz"}]
 

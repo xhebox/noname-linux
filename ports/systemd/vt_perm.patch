@@ -1,0 +1,23 @@
+--- systemd-240/src/login/logind-dbus.c
++++ systemd-240/src/login/logind-dbus.c
+@@ -2451,19 +2451,7 @@
+         }
+ 
+         if (!multiple_sessions && !blocked) {
+-                /* If neither inhibit nor multiple sessions
+-                 * apply then just check the normal policy */
+-
+-                r = bus_test_polkit(message, CAP_SYS_BOOT, a->polkit_action, NULL, UID_INVALID, &challenge, error);
+-                if (r < 0)
+-                        return r;
+-
+-                if (r > 0)
+-                        result = "yes";
+-                else if (challenge)
+-                        result = "challenge";
+-                else
+-                        result = "no";
++					result = "yes";
+         }
+ 
+  finish:

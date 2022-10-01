@@ -1,9 +1,9 @@
-version="1.12.12"
+version="1.14.2"
 deps=["expat", "util-linux", "systemd"]
 makedeps=["expat", "util-linux", "python3", "systemd"]
 desc="Freedesktop.org message bus system"
 source=[
-	{url="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz"},
+	{url="http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.xz"},
 	{url="dbus.sysusers"},
 ]
 

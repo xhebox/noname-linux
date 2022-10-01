@@ -1,8 +1,8 @@
 name="libwebsockets"
 version="4.0.1"
 desc="C library for websocket clients and servers"
-deps=["libressl", "libuv"]
-makedeps=["libressl", "libuv", "cmake"]
+deps=["openssl", "libuv"]
+makedeps=["openssl", "libuv", "cmake"]
 source=[{url="https://github.com/warmcat/libwebsockets/archive/v$version.tar.gz"}]
 
 build='''

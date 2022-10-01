@@ -1,0 +1,11 @@
+version='0.15.0'
+desc='Small utility to modify the dynamic linker and RPATH of ELF executables'
+source=[{url="https://github.com/NixOS/patchelf/archive/${version}/patchelf-${version}.tar.gz"}]
+
+build='''
+	cd patchelf-$version
+	autoreconf -fiv
+  ./configure --prefix=/
+  make
+  make DESTDIR="${pkgdir}" install
+'''

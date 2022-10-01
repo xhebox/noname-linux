@@ -1,0 +1,10 @@
+version = "1.2"
+desc = "ucontext implementation featuring glibc-compatible ABI"
+source = [{url="https://github.com/kaniini/libucontext/archive/refs/tags/v$version.tar.gz"}]
+
+build='''
+	cd libucontext-$version
+	sed -i 's|/usr|/|g' Makefile
+	make ARCH=$ARCH
+	make ARCH=$ARCH PREFIX=/ DESTDIR=$pkgdir install
+'''

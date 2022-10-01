@@ -1,4 +1,4 @@
-version="2.70.2"
+version="2.74.0"
 desc="Low-level data structure handling, portability wrappers, and interfaces for runtime functionality"
 makedeps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
 deps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
@@ -26,6 +26,6 @@ build='''
 	DESTDIR="$pkgdir" meson install -C build
 	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
 	python -O -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"
-	install -Dm644 ../gio.toml "$pkgdir/${HOOKS#$ROOT}"/gio.toml
-	install -Dm644 ../glib-schemas.toml "$pkgdir/${HOOKS#$ROOT}"/glib-schemas.toml
+	install -Dm644 gio.toml "$pkgdir/${HOOKS#$ROOT}"/gio.toml
+	install -Dm644 glib-schemas.toml "$pkgdir/${HOOKS#$ROOT}"/glib-schemas.toml
 '''

@@ -1,10 +1,10 @@
-version="251"
+version="251.4"
 desc="system and service manager"
 makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "python3-jinja"]
 nocache=true
 deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 source=[
-	{url="https://github.com/systemd/systemd/archive/v$version.tar.gz"},
+	{url="https://github.com/systemd/systemd-stable/archive/refs/tags/v$version.tar.gz"},
 	{
 		name="0001-Use-Arch-Linux-device-access-groups.patch",
 		url="https://git.archlinux.org/svntogit/packages.git/plain/trunk/0001-Use-Arch-Linux-device-access-groups.patch?h=packages/systemd"
@@ -43,7 +43,7 @@ source=[
 
 	{url="musl.patch"},
 #{url="userdb.patch"},
-#{url="vt_perm.patch"},
+	{url="vt_perm.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},
@@ -68,7 +68,7 @@ baks=[
 ]
 
 ext='''
-	cd systemd-$version
+	cd systemd-stable-$version
 	for i in $source; do
 		echo "#### $i"
 		case $i in
@@ -80,7 +80,7 @@ ext='''
 build='''
 	export CC="clang"
 	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0"
-	noname-meson systemd-$version build \
+	noname-meson systemd-stable-$version build \
 	-Dutmp=false \
 	-Dman=false \
 	-Dldconfig=false \
@@ -100,6 +100,7 @@ build='''
 	-Dnss-mymachines=false \
 	-Dnss-systemd=false \
 	-Dresolve=true \
+	-Dhostnamed=false \
 	-Dtimedated=true \
 	-Dtimesyncd=true \
 	-Dlz4=true \
@@ -120,7 +121,7 @@ build='''
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 
-	install -D -m0644 -t "$pkgdir"/${HOOKS#$ROOT} ../*.toml
+	install -D -m0644 -t "$pkgdir"/${HOOKS#$ROOT} *.toml
 
 	install -D -m0644 noname.conf "$pkgdir"/share/systemd/bootctl/noname.conf
 	install -D -m0644 loader.conf "$pkgdir"/share/systemd/bootctl/loader.conf

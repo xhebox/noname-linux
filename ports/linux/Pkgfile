@@ -1,4 +1,4 @@
-version="5.19.4"
+version="5.19.11"
 _kernelname="noname"
 ver='''$(
 case $version in
@@ -10,7 +10,7 @@ desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
 	{url="fix-musl-objtool.patch"},
-	{url="kbd.patch"},
+	{url="amd.patch"},
 	{url="linux.preset"},
 	{url="config"},
 ]
@@ -24,11 +24,12 @@ ext='''
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
 	patch -Nbp1 -i ../fix-musl-objtool.patch
-	patch -Np1 -i ../kbd.patch
+	patch -Nbp1 -i ../amd.patch
 
 	cp ../config .config
 
 	sed -i 's/# CONFIG_EXPERT is not set/CONFIG_EXPERT=y/g' .config
+	sed -i 's/CONFIG_X86_AMD_PSTATE=m/CONFIG_X86_AMD_PSTATE=y/g' .config
 
 	sed -i 's;# CONFIG_MODULE_SIG_SHA1 is not set;CONFIG_MODULE_SIG_SHA1=y;g' .config
 	sed -i 's;CONFIG_MODULE_SIG_SHA512=y;# CONFIG_MODULE_SIG_SHA512 is not set;g' .config

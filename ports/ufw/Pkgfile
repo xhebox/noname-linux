@@ -1,0 +1,22 @@
+version="0.36.1"
+desc="Uncomplicated and easy to use CLI tool for managing a netfilter firewall"
+deps=["nftables", "python3"]
+source=[
+	{url="https://launchpad.net/ufw/${version%.*}/$version/+download/ufw-$version.tar.gz"},
+	{url="service"},
+]
+
+ext='''
+  cd ufw-$version
+  sed -i -e 's|sbin|bin|g' setup.py
+  sed -i -e 's|sbin|bin|g' setup.py
+  sed -i -e 's|sbin|bin|g' src/util.py
+'''
+
+build='''
+  cd ufw-$version
+
+  python3 setup.py install --root="$pkgdir" --prefix=
+  install -Dm644 "$srcdir/service" "$pkgdir/lib/systemd/system/ufw.service"
+  chmod 644 "$pkgdir/etc/ufw/"*.rules
+'''

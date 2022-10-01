@@ -1,4 +1,4 @@
-version="1.18.3"
+version="1.19.1"
 makedeps=["bash"]
 deps=["git"]
 desc="The Go Programming Language"

@@ -1,8 +1,8 @@
-version="10.32"
+version="10.40"
 desc="A library that implements Perl 5-style regular expressions. 2nd version"
 makedeps=["readline", "zlib", "bzip2", "bash"]
 deps=["readline", "zlib", "bzip2", "bash"]
-source=[{url="https://ftp.pcre.org/pub/pcre/pcre2-$version.tar.bz2"}]
+source=[{url="https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$version/pcre2-$version.tar.gz"}]
 
 build='''
 	cd pcre2-$version
