@@ -5,13 +5,9 @@ deps=["glib", "icu", "db"]
 source=[{url="https://github.com/libical/libical/archive/v${version}.tar.gz"}]
 
 build='''
-	cmake libical-$version -Bbuild \
-		-DCMAKE_BUILD_TYPE=Release \
+	noname-cmake libical-$version -Bbuild \
 		-DSHARED_ONLY=true \
-		-DENABLE_GTK_DOC=OFF \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=/lib \
-		-DCMAKE_INSTALL_LIBEXECDIR=/lib
+		-DENABLE_GTK_DOC=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

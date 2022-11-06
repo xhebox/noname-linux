@@ -6,13 +6,7 @@ makedeps=["gperf"]
 source=[{url="https://github.com/google/leveldb/archive/$version.tar.gz"}]
 
 build='''
-	cmake leveldb-$version -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake leveldb-$version -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

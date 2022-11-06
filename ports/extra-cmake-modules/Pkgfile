@@ -9,9 +9,7 @@ build='''
 
 	mkdir build; cd build
 	
-	cmake .. \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_BUILD_TYPE=Release \
+	noname-cmake .. \
 		-DBUILD_HTML_DOCS=OFF \
 		-DBUILD_MAN_DOCS=ON \
 		-DBUILD_QTHELP_DOCS=OFF \

@@ -9,6 +9,11 @@ _network_commit="0dde5c895075df6e3630e76f750a447cf63f4789"
 tini_version="de40ad007797e0dcd8b7126f27bb87401d224240"
 libnetwork_version="0dde5c895075df6e3630e76f750a447cf63f4789"
 buildx_version="0.9.1"
+common_version="0.50.1"
+image_version="5.23.0"
+podman_version="4.3.0"
+skopeo_version="1.10.0"
+storage_version="1.43.0"
 desc='CLI tool for managing OCI compliant containers'
 nostrip=true
 deps=["libseccomp", "linux"]
@@ -23,6 +28,11 @@ source=[
 	{url="https://github.com/docker/buildx/archive/refs/tags/v$buildx_version.tar.gz",name="buildx-$buildx_version.tar.gz"},
 	{url="docker.sysusers"},
 	{url="mounts.conf"},
+	{name="common-${common_version}.tar.gz",url="https://github.com/containers/common/archive/v${common_version}.tar.gz"},
+	{name="image-${image_version}.tar.gz",url="https://github.com/containers/image/archive/v${image_version}.tar.gz"},
+	{name="podman-${podman_version}.tar.gz",url="https://github.com/containers/podman/archive/v${podman_version}.tar.gz"},
+	{name="skopeo-${skopeo_version}.tar.gz",url="https://github.com/containers/skopeo/archive/v${skopeo_version}.tar.gz"},
+	{name="storage-${storage_version}.tar.gz",url="https://github.com/containers/storage/archive/v${storage_version}.tar.gz"},
 ]
 
 build='''
@@ -75,7 +85,7 @@ build='''
 	export GO111MODULE=on
 	cd tini
 	export CFLAGS="$CFLAGS -DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
-	cmake . -DCMAKE_BUILD_TYPE=None
+	noname-cmake . -DCMAKE_BUILD_TYPE=None
 	make tini-static
 	install -Dm755 tini-static "$pkgdir/bin/docker-init"
 	cd -
@@ -83,5 +93,48 @@ build='''
 	cd buildx-$buildx_version
 	go build -o docker-buildx -ldflags "-X main.experimental=1 -linkmode=external" ./cmd/buildx
 	install -Dm755 docker-buildx "$pkgdir/lib/docker/cli-plugins/docker-buildx"
+	cd -
+
+	install -vdm 755 "${pkgdir}/etc/containers/oci/hooks.d/"
+	install -vdm 755 "${pkgdir}/etc/containers/registries.conf.d/"
+	install -vdm 755 "${pkgdir}/share/containers/oci/hooks.d/"
+	install -vdm 755 "${pkgdir}/var/lib/containers/"
+
+	# configs
+	install -vDm 644 mounts.conf -t "${pkgdir}/etc/containers/"
+
+	cd "common-${common_version}"
+	install -vDm 644 pkg/config/containers.conf -t "${pkgdir}/etc/containers/"
+	install -vDm 644 pkg/config/containers.conf -t "${pkgdir}/share/containers/"
+	install -vDm 644 pkg/seccomp/seccomp.json -t "${pkgdir}/etc/containers/"
+	install -vDm 644 pkg/seccomp/seccomp.json -t "${pkgdir}/share/containers/"
+	#install -vDm 644 docs/*.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "image-${image_version}"
+	# configs
+	install -vDm 644 registries.conf -t "${pkgdir}/etc/containers/"
+	# man pages
+	#install -vDm 644 docs/*.1 -t "${pkgdir}/share/man/man1/"
+	#install -vDm 644 docs/man5/*.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "podman-${podman_version}"
+	#install -vDm 644 *.5 -t "${pkgdir}/share/man/man5/"
+	cd -
+
+	cd "skopeo-${skopeo_version}"
+	# configs
+	install -vDm 644 default-policy.json "${pkgdir}/etc/containers/policy.json"
+	install -vDm 644 default.yaml -t "${pkgdir}/etc/containers/registries.d/"
+	cd -
+
+	cd "storage-${storage_version}"
+	# configs
+	install -vDm 644 storage.conf -t "${pkgdir}/etc/containers/"
+	install -vDm 644 storage.conf -t "${pkgdir}/share/containers/"
+	# man pages
+	#install -vDm 644 docs/*.1 -t "${pkgdir}/share/man/man1/"
+	#install -vDm 644 docs/*.5 -t "${pkgdir}/share/man/man5/"
 	cd -
 '''

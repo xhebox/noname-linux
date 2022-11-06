@@ -4,11 +4,7 @@ source=[{url="http://nchc.dl.sourceforge.net/project/soxr/soxr-$version-Source.t
 
 build='''
 	cd soxr-$version-Source
-	cmake \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DBUILD_EXAMPLES=OFF \
-		-DBUILD_SHARED_LIBS=ON \
-		-DCMAKE_BUILD_TYPE=Release \
+	noname-cmake \
 		-DVISIBILITY_HIDDENL=ON \
 		-DWITH_AVFFT=ON \
 		-DWITH_DOUBLE_PRECISION=ON \

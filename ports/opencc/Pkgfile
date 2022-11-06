@@ -5,7 +5,7 @@ source=[{url="https://github.com/BYVoid/OpenCC/archive/ver.$version.tar.gz"}]
 
 build='''
 	cd OpenCC-ver.$version
-	cmake -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=OFF
+	noname-cmake -DBUILD_DOCUMENTATION=OFF
 	make
 	make DESTDIR="$pkgdir" install
 '''

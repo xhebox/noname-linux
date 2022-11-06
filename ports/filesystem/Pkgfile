@@ -58,17 +58,17 @@ build='''
 	mkdir var/tmp && chmod 1777 var/tmp
 
 	for f in fstab group hosts passwd resolv.conf shells profile issue securetty; do
-		install -m644 ../$f etc/
+		install -m644 "$srcdir/$f" etc/
 	done
-	install -m600 ../shadow etc/shadow
-	install -m600 ../gshadow etc/gshadow
-	install -m600 ../crypttab etc/crypttab
+	install -m600 "$srcdir"/shadow etc/shadow
+	install -m600 "$srcdir"/gshadow etc/gshadow
+	install -m600 "$srcdir"/crypttab etc/crypttab
 
 	for d in cache local opt log/old lib/misc empty; do
 		mkdir -p var/$d && chmod 755 var/$d
 	done
 
-	install -m755 ../locale.sh etc/profile.d/locale.sh
+	install -m755 "$srcdir"/locale.sh etc/profile.d/locale.sh
 
 	ln -s ../run var/run
 	echo "PC" > etc/hostname
@@ -108,6 +108,7 @@ BEGIN {
 }' "$srcdir"/service-names-port-numbers.xml > etc/services
 
 	cat >> etc/os-release << "EOF"
+ID=noname
 NAME=noname-linux
 PRETTY_NAME="Noname Linux"
 EOF

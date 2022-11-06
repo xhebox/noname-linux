@@ -5,11 +5,7 @@ deps=["spirv-tools"]
 source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"}]
 
 build='''
-	cmake glslang-$version -Bbuild \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DBUILD_SHARED_LIBS=ON
+	noname-cmake glslang-$version -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	cd "${pkgdir}"/lib

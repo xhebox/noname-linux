@@ -1,5 +1,5 @@
 name="firefox"
-version="99.0.1"
+version="106.0.3"
 desc="Firefox web browser"
 deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
 makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
@@ -12,12 +12,11 @@ source=[
 	{url="sandbox-largefile.patch"},
 	{url="sandbox-sched_setscheduler.patch"},
 	{url="fix-musl.patch"},
-	{url="webgpu.patch"},
 	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
 	{url="no-x11.patch"},
-	{url="warnings.patch"},
 	{url="python.patch"},
+	{url="libevent.patch"},
 ]
 
 ext='''
@@ -31,6 +30,8 @@ ext='''
 	truncate -s 0 memory/mozalloc/throw_gcc.h
 
 	cp "$srcdir"/stab.h toolkit/crashreporter/google-breakpad/src/
+
+	sed -i '/CHECK_EVENT_SIZEOF(TIME_T, time_t);/d' ipc/chromium/src/base/message_pump_libevent.cc
 
 	cat > .mozconfig << END
 ac_add_options --enable-application=browser
@@ -92,11 +93,11 @@ EOF
 
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
-	export PATH="$srcdir/.a213/bin:$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.21.0 cbindgen
+	export PATH="$srcdir/.cargo/bin:$PATH"
+	cargo install --version 0.24.3 cbindgen
 
 	cd firefox-${version%b*}
-	export MACH_USE_SYSTEM_PYTHON=/bin/python
+	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
 
 	env >> env
 

@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
 rustup_version = "1.25.1"
-version = "1.63.0"
-_rust_dist_version = "1.63.0"
+version = "1.64.0"
+_rust_dist_version = "1.64.0"
 makedeps = [
   "libffi",
   "ncurses",

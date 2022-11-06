@@ -9,8 +9,7 @@ build='''
 	cd libwebsockets-$version
 	mkdir build -p
 	cd build
-	cmake -DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX:PATH=/ \
+	noname-cmake \
 		-DLWS_WITH_STATIC=OFF \
 		-DLWS_WITH_LIBUV=ON \
 		-DLWS_WITHOUT_EXTENSIONS=OFF \

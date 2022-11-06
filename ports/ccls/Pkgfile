@@ -6,7 +6,7 @@ source=[{url="https://github.com/MaskRay/ccls/archive/$version.tar.gz"}]
 
 build='''
 	cd ccls-$version
-	cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=
+	noname-cmake . -Bbuild
 	cmake --build build
 	DESTDIR="$pkgdir" cmake --build build --target install
 '''

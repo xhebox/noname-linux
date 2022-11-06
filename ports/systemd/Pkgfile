@@ -1,6 +1,6 @@
 version="251.4"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "python3-jinja"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 nocache=true
 deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
 source=[
@@ -78,6 +78,9 @@ ext='''
 '''
 
 build='''
+	python3 -m venv ss
+	. ./ss/bin/activate
+	pip install jinja2
 	export CC="clang"
 	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0"
 	noname-meson systemd-stable-$version build \

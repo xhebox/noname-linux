@@ -16,8 +16,7 @@ build='''
 	cd SDL2-$version
 	mkdir build
 	cd build
-	cmake .. \
-		-DCMAKE_INSTALL_PREFIX= \
+	noname-cmake .. \
 		-DSDL_STATIC=OFF \
 		-DSDL_DLOPEN=ON \
 		-DARTS=OFF \

@@ -1,5 +1,5 @@
-version="13.0.0"
-wasi_version="14.0"
+version="14.0.6"
+wasi_version="16.0"
 desc="LLVM compiler and its backend"
 deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot"]
 makedeps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot", "flex", "bison", "python3"]
@@ -14,7 +14,8 @@ source=[
 ext='''
 	cd llvm-project-$version.src
 
-	sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
+	sed -i 's,# Set common link flags.,list(APPEND SANITIZER_COMMON_LINK_LIBS execinfo),' compiler-rt/CMakeLists.txt
+	sed -i 's,# We don.t use the C++ standard library. so avoid including it by mistake.,list(APPEND SCUDO_LINK_FLAGS -lexecinfo),' compiler-rt/lib/scudo/standalone/CMakeLists.txt
 	sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
 
 	cd llvm
@@ -48,16 +49,13 @@ build='''
 	export CC=clang
 	export CXX=clang++
 
-	cmake llvm -Bbuild \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=/lib \
-		-DCMAKE_INSTALL_LIBEXECDIR=/lib \
+	noname-cmake llvm -Bbuild \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \
 		-DLLVM_BUILD_TESTS=OFF \
 		-DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_BUILD_LLVM_DYLIB=ON \
+		-DBUILD_SHARED_LIBS=OFF \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=OFF \
 		-DLLVM_INSTALL_CCTOOLS_SYMLINKS=OFF \
 		-DLLVM_INSTALL_UTILS=ON \

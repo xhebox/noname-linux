@@ -1,0 +1,986 @@
+diff --git a/src/DHTConnectionSocksProxyImpl.cc b/src/DHTConnectionSocksProxyImpl.cc
+new file mode 100644
+index 000000000..f7dd7e7c9
+--- /dev/null
++++ b/src/DHTConnectionSocksProxyImpl.cc
+@@ -0,0 +1,145 @@
++/* <!-- copyright */
++/*
++ * aria2 - The high speed download utility
++ *
++ * Copyright (C) 2006 Tatsuhiro Tsujikawa
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ *
++ * In addition, as a special exception, the copyright holders give
++ * permission to link the code of portions of this program with the
++ * OpenSSL library under certain conditions as described in each
++ * individual source file, and distribute linked combinations
++ * including the two.
++ * You must obey the GNU General Public License in all respects
++ * for all of the code used other than OpenSSL.  If you modify
++ * file(s) with this exception, you may extend this exception to your
++ * version of the file(s), but you are not obligated to do so.  If you
++ * do not wish to do so, delete this exception statement from your
++ * version.  If you delete this exception statement from all source
++ * files in the program, then also delete it here.
++ */
++/* copyright --> */
++#include "DHTConnectionSocksProxyImpl.h"
++
++#include <netinet/in.h>
++#include <cstring>
++
++#include "SocketCore.h"
++#include "a2functional.h"
++#include "SocksProxySocket.h"
++
++namespace aria2 {
++
++DHTConnectionSocksProxyImpl::DHTConnectionSocksProxyImpl(int family)
++    : DHTConnectionImpl(family), family_(family)
++{
++}
++
++DHTConnectionSocksProxyImpl::~DHTConnectionSocksProxyImpl() = default;
++
++bool DHTConnectionSocksProxyImpl::startProxy(const std::string& host,
++                                             uint16_t port,
++                                             const std::string& user,
++                                             const std::string& passwd,
++                                             const std::string& listenAddr,
++                                             uint16_t listenPort)
++{
++  socket_ = make_unique<SocksProxySocket>(family_);
++  socket_->establish(host, port);
++
++  // Authentication negotiation
++  bool res = socket_->authByUserpassOrNone(user, passwd);
++  if (!res) {
++    return false;
++  }
++
++  // UDP associate
++  int i =
++      socket_->startUdpAssociate(listenAddr, listenPort, bndAddr_, bndPort_);
++  if (i != 0) {
++    return false;
++  }
++  return true;
++}
++
++ssize_t DHTConnectionSocksProxyImpl::receiveMessage(unsigned char* data,
++                                                    size_t len,
++                                                    std::string& host,
++                                                    uint16_t& port)
++{
++  Endpoint remoteEndpoint;
++  size_t resLen = len + (family_ == AF_INET ? 10 : 22);
++  std::string buf;
++  buf.resize(resLen);
++  ssize_t length = getSocket()->readDataFrom(&buf[0], resLen, remoteEndpoint);
++  if (length == 0) {
++    return length;
++  }
++
++  // unencapsulate SOCKS5 UDP header if has
++  if (length > (family_ == AF_INET ? 10 : 22) &&
++      buf.substr(0, 3) == std::string("\x00\x00\x00", 3) &&
++      buf[3] == (family_ == AF_INET ? '\x01' : '\x04')) {
++    if (family_ == AF_INET) {
++      char addrBuf[20];
++      inetNtop(AF_INET, &buf[4], addrBuf, 20);
++      host = std::string(addrBuf);
++      port = ntohs(*(reinterpret_cast<uint16_t*>(&buf[8])));
++      memcpy(data, &buf[10], length - 10);
++      return length - 10;
++    }
++    else {
++      char addrBuf[50];
++      inetNtop(AF_INET6, &buf[4], addrBuf, 50);
++      host = std::string(addrBuf);
++      port = ntohs(*(reinterpret_cast<uint16_t*>(&buf[20])));
++      memcpy(data, &buf[22], length - 22);
++      return length - 22;
++    }
++  }
++  else {
++    host = remoteEndpoint.addr;
++    port = remoteEndpoint.port;
++    return length;
++  }
++}
++
++ssize_t DHTConnectionSocksProxyImpl::sendMessage(const unsigned char* data,
++                                                 size_t len,
++                                                 const std::string& host,
++                                                 uint16_t port)
++{
++  std::string buf;
++  if (family_ == AF_INET) {
++    buf.resize(10);
++    buf[3] = '\x01';
++    // host is got from receiveMessage(). And as socket is binded according to
++    // family, host should be the same family as family_. Omit family checking.
++    net::getBinAddr(&buf[4], host);
++    *(reinterpret_cast<uint16_t*>(&buf[8])) = htons(port);
++    buf.append(reinterpret_cast<const char*>(data), len);
++  }
++  else {
++    buf.resize(22);
++    buf[3] = '\x04';
++    net::getBinAddr(&buf[4], host);
++    *(reinterpret_cast<uint16_t*>(&buf[20])) = htons(port);
++    buf.append(reinterpret_cast<const char*>(data), len);
++  }
++  return getSocket()->writeData(&buf[0], buf.length(), bndAddr_, bndPort_);
++}
++
++} // namespace aria2
+diff --git a/src/DHTConnectionSocksProxyImpl.h b/src/DHTConnectionSocksProxyImpl.h
+new file mode 100644
+index 000000000..cbb39dcc3
+--- /dev/null
++++ b/src/DHTConnectionSocksProxyImpl.h
+@@ -0,0 +1,78 @@
++/* <!-- copyright */
++/*
++ * aria2 - The high speed download utility
++ *
++ * Copyright (C) 2006 Tatsuhiro Tsujikawa
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ *
++ * In addition, as a special exception, the copyright holders give
++ * permission to link the code of portions of this program with the
++ * OpenSSL library under certain conditions as described in each
++ * individual source file, and distribute linked combinations
++ * including the two.
++ * You must obey the GNU General Public License in all respects
++ * for all of the code used other than OpenSSL.  If you modify
++ * file(s) with this exception, you may extend this exception to your
++ * version of the file(s), but you are not obligated to do so.  If you
++ * do not wish to do so, delete this exception statement from your
++ * version.  If you delete this exception statement from all source
++ * files in the program, then also delete it here.
++ */
++/* copyright --> */
++#ifndef D_DHT_CONNECTION_SOCKS_PROXY_IMPL_H
++#define D_DHT_CONNECTION_SOCKS_PROXY_IMPL_H
++
++#include <memory>
++
++#include "DHTConnectionImpl.h"
++#include "SocksProxySocket.h"
++
++namespace aria2 {
++
++class SocketCore;
++
++class DHTConnectionSocksProxyImpl : public DHTConnectionImpl {
++private:
++  std::unique_ptr<SocksProxySocket> socket_;
++  int family_;
++  std::string bndAddr_;
++  uint16_t bndPort_;
++
++public:
++  DHTConnectionSocksProxyImpl(int family);
++
++  virtual ~DHTConnectionSocksProxyImpl();
++
++  // Connect to SOCKS5 server to start UDP proxy.
++  // Leave user and passwd empty to indicate no authentication.
++  // Leave listen host and port empty / 0 to indicate no receiving from proxy.
++  // MUST call the method before any receiveMessage/sendMessage.
++  bool startProxy(const std::string& host, uint16_t port,
++                  const std::string& user, const std::string& passwd,
++                  const std::string& listenAddr, uint16_t listenPort);
++
++  virtual ssize_t receiveMessage(unsigned char* data, size_t len,
++                                 std::string& host,
++                                 uint16_t& port) CXX11_OVERRIDE;
++
++  virtual ssize_t sendMessage(const unsigned char* data, size_t len,
++                              const std::string& host,
++                              uint16_t port) CXX11_OVERRIDE;
++};
++
++} // namespace aria2
++
++#endif // D_DHT_CONNECTION_SOCKS_PROXY_IMPL_H
+diff --git a/src/DHTSetup.cc b/src/DHTSetup.cc
+index d107a53ea..02e20f290 100644
+--- a/src/DHTSetup.cc
++++ b/src/DHTSetup.cc
+@@ -41,6 +41,7 @@
+ #include "util.h"
+ #include "DHTNode.h"
+ #include "DHTConnectionImpl.h"
++#include "DHTConnectionSocksProxyImpl.h"
+ #include "DHTRoutingTable.h"
+ #include "DHTMessageFactoryImpl.h"
+ #include "DHTMessageTracker.h"
+@@ -113,7 +114,10 @@ DHTSetup::setup(DownloadEngine* e, int family)
+     }
+ 
+     uint16_t port;
+-    auto connection = make_unique<DHTConnectionImpl>(family);
++    const std::string& proxyUri = e->getOption()->get(PREF_BT_UDP_SOCKS_PROXY);
++    auto connection = proxyUri.empty()
++                          ? make_unique<DHTConnectionImpl>(family)
++                          : make_unique<DHTConnectionSocksProxyImpl>(family);
+     {
+       port = e->getBtRegistry()->getUdpPort();
+       const std::string& addr = e->getOption()->get(
+@@ -139,6 +143,24 @@ DHTSetup::setup(DownloadEngine* e, int family)
+     }
+     A2_LOG_DEBUG(fmt("Initialized local node ID=%s",
+                      util::toHex(localNode->getID(), DHT_ID_LENGTH).c_str()));
++    if (!proxyUri.empty()) {
++      auto c = static_cast<DHTConnectionSocksProxyImpl*>(connection.get());
++      const std::string& user =
++          e->getOption()->get(PREF_BT_UDP_SOCKS_PROXY_USER);
++      const std::string& passwd =
++          e->getOption()->get(PREF_BT_UDP_SOCKS_PROXY_PASSWD);
++      uri::UriStruct us;
++      uri::parse(us, proxyUri);
++      const std::string& host = us.host;
++      uint16_t port = us.port;
++      if (!c->startProxy(host, port, user, passwd, localNode->getIPAddress(),
++                         localNode->getPort())) {
++        throw DL_ABORT_EX("Error occurred while connecting to SOCKS5 relay "
++                          "server for UDP proxy for DHT and UDP trackers");
++      }
++      A2_LOG_DEBUG(fmt("Connected to SOCKS5 relay server %s:%u for UDP proxy",
++                       host.c_str(), port));
++    }
+     auto tracker = std::make_shared<DHTMessageTracker>();
+     auto routingTable = make_unique<DHTRoutingTable>(localNode);
+     auto factory = make_unique<DHTMessageFactoryImpl>(family);
+diff --git a/src/FeatureConfig.cc b/src/FeatureConfig.cc
+index 2b43c8b15..98e6b115a 100644
+--- a/src/FeatureConfig.cc
++++ b/src/FeatureConfig.cc
+@@ -88,6 +88,9 @@ uint16_t getDefaultPort(const std::string& protocol)
+   else if (protocol == "sftp") {
+     return 22;
+   }
++  else if (protocol == "socks") {
++    return 1080;
++  }
+   else {
+     return 0;
+   }
+diff --git a/src/Makefile.am b/src/Makefile.am
+index cb6e3b7cf..c8d6f4f0b 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -231,6 +231,7 @@ SRCS =  \
+ 	SocketBuffer.cc SocketBuffer.h\
+ 	SocketCore.cc SocketCore.h\
+ 	SocketRecvBuffer.cc SocketRecvBuffer.h\
++	SocksProxySocket.cc SocksProxySocket.h\
+ 	SpeedCalc.cc SpeedCalc.h\
+ 	StatCalc.h\
+ 	StreamCheckIntegrityEntry.cc StreamCheckIntegrityEntry.h\
+@@ -503,6 +504,7 @@ SRCS += \
+ 	DHTBucketTree.cc DHTBucketTree.h\
+ 	DHTConnection.h\
+ 	DHTConnectionImpl.cc DHTConnectionImpl.h\
++	DHTConnectionSocksProxyImpl.cc DHTConnectionSocksProxyImpl.h\
+ 	DHTConstants.h\
+ 	DHTEntryPointNameResolveCommand.cc DHTEntryPointNameResolveCommand.h\
+ 	DHTFindNodeMessage.cc DHTFindNodeMessage.h\
+diff --git a/src/OptionHandlerFactory.cc b/src/OptionHandlerFactory.cc
+index 6bff4caa3..413f01ebb 100644
+--- a/src/OptionHandlerFactory.cc
++++ b/src/OptionHandlerFactory.cc
+@@ -1371,6 +1371,37 @@ std::vector<OptionHandler*> OptionHandlerFactory::createOptionHandlers()
+     op->setChangeOptionForReserved(true);
+     handlers.push_back(op);
+   }
++  {
++    OptionHandler* op(new SocksProxyOptionHandler(
++        PREF_BT_UDP_SOCKS_PROXY, TEXT_BT_UDP_SOCKS_PROXY, NO_DEFAULT_VALUE));
++    op->addTag(TAG_BITTORRENT);
++    op->setInitialOption(true);
++    op->setChangeGlobalOption(true);
++    op->setChangeOptionForReserved(true);
++    handlers.push_back(op);
++  }
++  {
++    OptionHandler* op(new DefaultOptionHandler(PREF_BT_UDP_SOCKS_PROXY_PASSWD,
++                                               TEXT_BT_UDP_SOCKS_PROXY_PASSWD,
++                                               NO_DEFAULT_VALUE));
++    op->addTag(TAG_BITTORRENT);
++    op->setEraseAfterParse(true);
++    op->setInitialOption(true);
++    op->setChangeGlobalOption(true);
++    op->setChangeOptionForReserved(true);
++    handlers.push_back(op);
++  }
++  {
++    OptionHandler* op(new DefaultOptionHandler(PREF_BT_UDP_SOCKS_PROXY_USER,
++                                               TEXT_BT_UDP_SOCKS_PROXY_USER,
++                                               NO_DEFAULT_VALUE));
++    op->addTag(TAG_BITTORRENT);
++    op->setEraseAfterParse(true);
++    op->setInitialOption(true);
++    op->setChangeGlobalOption(true);
++    op->setChangeOptionForReserved(true);
++    handlers.push_back(op);
++  }
+   {
+     OptionHandler* op(new HttpProxyOptionHandler(PREF_ALL_PROXY, TEXT_ALL_PROXY,
+                                                  NO_DEFAULT_VALUE));
+diff --git a/src/OptionHandlerImpl.cc b/src/OptionHandlerImpl.cc
+index 6214e84b3..93c82c7da 100644
+--- a/src/OptionHandlerImpl.cc
++++ b/src/OptionHandlerImpl.cc
+@@ -529,6 +529,48 @@ std::string HttpProxyOptionHandler::createPossibleValuesString() const
+   return "[http://][USER:PASSWORD@]HOST[:PORT]";
+ }
+ 
++SocksProxyOptionHandler::SocksProxyOptionHandler(
++    PrefPtr pref, const char* description, const std::string& defaultValue,
++    char shortName)
++    : AbstractOptionHandler(pref, description, defaultValue,
++                            OptionHandler::REQ_ARG, shortName),
++      proxyUserPref_(option::k2p(std::string(pref->k) + "-user")),
++      proxyPasswdPref_(option::k2p(std::string(pref->k) + "-passwd"))
++{
++}
++
++SocksProxyOptionHandler::~SocksProxyOptionHandler() = default;
++
++void SocksProxyOptionHandler::parseArg(Option& option,
++                                       const std::string& optarg) const
++{
++  if (optarg.empty()) {
++    option.put(pref_, optarg);
++  }
++  else {
++    std::string uri;
++    if (util::startsWith(optarg, "socks://") ||
++        util::startsWith(optarg, "socks5://")) {
++      uri = optarg;
++    }
++    else {
++      uri = "socks://";
++      uri += optarg;
++    }
++    uri::UriStruct us;
++    if (!uri::parse(us, uri)) {
++      throw DL_ABORT_EX(_("unrecognized proxy format"));
++    }
++    us.protocol = "socks";
++    option.put(pref_, uri::construct(us));
++  }
++}
++
++std::string SocksProxyOptionHandler::createPossibleValuesString() const
++{
++  return "[socks[5]://][USER:PASSWORD@]HOST[:PORT]";
++}
++
+ LocalFilePathOptionHandler::LocalFilePathOptionHandler(
+     PrefPtr pref, const char* description, const std::string& defaultValue,
+     bool acceptStdin, char shortName, bool mustExist,
+diff --git a/src/OptionHandlerImpl.h b/src/OptionHandlerImpl.h
+index 7846b2269..7404e3b6e 100644
+--- a/src/OptionHandlerImpl.h
++++ b/src/OptionHandlerImpl.h
+@@ -230,6 +230,20 @@ class HttpProxyOptionHandler : public AbstractOptionHandler {
+   virtual std::string createPossibleValuesString() const CXX11_OVERRIDE;
+ };
+ 
++class SocksProxyOptionHandler : public AbstractOptionHandler {
++private:
++  PrefPtr proxyUserPref_;
++  PrefPtr proxyPasswdPref_;
++
++public:
++  SocksProxyOptionHandler(PrefPtr pref, const char* description,
++                          const std::string& defaultValue, char shortName = 0);
++  virtual ~SocksProxyOptionHandler();
++  virtual void parseArg(Option& option,
++                        const std::string& optarg) const CXX11_OVERRIDE;
++  virtual std::string createPossibleValuesString() const CXX11_OVERRIDE;
++};
++
+ class LocalFilePathOptionHandler : public AbstractOptionHandler {
+ private:
+   std::string possibleValuesString_;
+diff --git a/src/SocksProxySocket.cc b/src/SocksProxySocket.cc
+new file mode 100644
+index 000000000..5f4d6270f
+--- /dev/null
++++ b/src/SocksProxySocket.cc
+@@ -0,0 +1,245 @@
++/* <!-- copyright */
++/*
++ * aria2 - The high speed download utility
++ *
++ * Copyright (C) 2006 Tatsuhiro Tsujikawa
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ *
++ * In addition, as a special exception, the copyright holders give
++ * permission to link the code of portions of this program with the
++ * OpenSSL library under certain conditions as described in each
++ * individual source file, and distribute linked combinations
++ * including the two.
++ * You must obey the GNU General Public License in all respects
++ * for all of the code used other than OpenSSL.  If you modify
++ * file(s) with this exception, you may extend this exception to your
++ * version of the file(s), but you are not obligated to do so.  If you
++ * do not wish to do so, delete this exception statement from your
++ * version.  If you delete this exception statement from all source
++ * files in the program, then also delete it here.
++ */
++/* copyright --> */
++#include "SocksProxySocket.h"
++
++#include <netinet/in.h>
++#include <sstream>
++
++#include "SocketCore.h"
++#include "a2functional.h"
++
++namespace {
++const char C_SOCKS_VER = '\x05';
++const char C_AUTH_NONE = '\xff';
++const char C_AUTH_USERPASS_VER = '\x01';
++const char C_AUTH_USERPASS_OK = '\x00';
++const char C_OK = '\x00';
++} // namespace
++
++namespace aria2 {
++
++enum SocksProxyAddrType {
++  SOCKS_ADDR_INET = 1,
++  SOCKS_ADDR_DOMAIN = 3,
++  SOCKS_ADDR_INET6 = 4,
++};
++
++SocksProxySocket::SocksProxySocket(int family) : family_(family) {}
++
++SocksProxySocket::~SocksProxySocket() = default;
++
++void SocksProxySocket::establish(const std::string& host, uint16_t port)
++{
++  socket_ = make_unique<SocketCore>();
++  socket_->establishConnection(host, port);
++  socket_->setBlockingMode();
++}
++
++void SocksProxySocket::establish(std::unique_ptr<SocketCore> socket)
++{
++  socket_ = std::move(socket);
++}
++
++int SocksProxySocket::negotiateAuth(std::vector<SocksProxyAuthMethod> expected)
++{
++  std::stringstream req;
++  req << C_SOCKS_VER;
++  req << static_cast<char>(expected.size());
++  for (auto c : expected) {
++    req << static_cast<char>(c);
++  }
++  socket_->writeData(req.str());
++
++  char res[2];
++  size_t resLen = sizeof(res);
++  socket_->readData(res, resLen);
++  int authMethod = res[1];
++  if (authMethod == C_AUTH_NONE) {
++    socket_->closeConnection();
++    return -1;
++  }
++  return authMethod;
++}
++
++int SocksProxySocket::authByUserpass(const std::string& user,
++                                     const std::string& passwd)
++{
++  std::stringstream req;
++  req << C_AUTH_USERPASS_VER;
++  req << static_cast<char>(user.length()) << user;
++  req << static_cast<char>(passwd.length()) << passwd;
++  socket_->writeData(req.str());
++
++  char res[2];
++  size_t resLen = sizeof(res);
++  socket_->readData(res, resLen);
++  if (res[1] != C_AUTH_USERPASS_OK) {
++    socket_->closeConnection();
++  }
++  return res[1];
++}
++
++bool SocksProxySocket::authByUserpassOrNone(const std::string& user,
++                                            const std::string& passwd)
++{
++  bool noAuth = user.empty() || passwd.empty();
++  if (noAuth) {
++    int authMethod =
++        negotiateAuth(std::vector<SocksProxyAuthMethod>{SOCKS_AUTH_NO_AUTH});
++    if (authMethod < 0) {
++      return false;
++    }
++  }
++  else {
++    int authMethod = negotiateAuth(std::vector<SocksProxyAuthMethod>{
++        SOCKS_AUTH_NO_AUTH, SOCKS_AUTH_USERPASS});
++    if (authMethod < 0) {
++      return false;
++    }
++    if (authMethod == SOCKS_AUTH_USERPASS) {
++      int status = authByUserpass(user, passwd);
++      if (status != 0) {
++        return false;
++      }
++    }
++  }
++  return true;
++}
++
++void SocksProxySocket::sendCmd(SocksProxyCmd cmd, const std::string& dstAddr,
++                               uint16_t dstPort, bool allowEmpty)
++{
++  std::stringstream req;
++  req << C_SOCKS_VER << static_cast<char>(cmd) << '\x00';
++  if (family_ == AF_INET) {
++    if (!allowEmpty || !dstAddr.empty()) {
++      char addrBuf[10];
++      net::getBinAddr(addrBuf, dstAddr);
++      req << static_cast<char>(SOCKS_ADDR_INET) << std::string(addrBuf, 4);
++    }
++    else {
++      req << std::string(4, '\x00');
++    }
++  }
++  else {
++    if (!allowEmpty || !dstAddr.empty()) {
++      char addrBuf[20];
++      net::getBinAddr(addrBuf, dstAddr);
++      req << static_cast<char>(SOCKS_ADDR_INET6) << std::string(addrBuf, 16);
++    }
++    else {
++      req << std::string(16, '\x00');
++    }
++  }
++  if (dstPort) {
++    uint16_t listenPortBuf = htons(dstPort);
++    req << std::string(reinterpret_cast<const char*>(&listenPortBuf), 2);
++  }
++  else {
++    req << std::string(2, '\x00');
++  }
++  socket_->writeData(req.str());
++}
++
++int SocksProxySocket::receiveReply(int& bndFamily, std::string& bndAddr,
++                                   uint16_t& bndPort)
++{
++  char res[5];
++  size_t resLen = sizeof(res);
++  socket_->readData(res, resLen);
++  int rep = res[1];
++  if (rep != C_OK) {
++    socket_->closeConnection();
++    return rep;
++  }
++
++  if (res[3] == SOCKS_ADDR_INET) {
++    char addrBuf[6];
++    addrBuf[0] = res[4];
++    size_t addrLen = sizeof(addrBuf) - 1;
++    socket_->readData(addrBuf + 1, addrLen);
++    char addrStrBuf[20];
++    inetNtop(AF_INET, addrBuf, addrStrBuf, 20);
++    bndFamily = AF_INET;
++    bndAddr = std::string(addrStrBuf);
++    bndPort = ntohs(*reinterpret_cast<uint16_t*>(addrBuf + 4));
++  }
++  else if (res[3] == SOCKS_ADDR_INET6) {
++    char addrBuf[18];
++    addrBuf[0] = res[4];
++    size_t addrLen = sizeof(addrBuf) - 1;
++    socket_->readData(addrBuf + 1, addrLen);
++    char addrStrBuf[50];
++    inetNtop(AF_INET6, addrBuf, addrStrBuf, 50);
++    bndFamily = AF_INET6;
++    bndAddr = std::string(addrStrBuf);
++    bndPort = ntohs(*reinterpret_cast<uint16_t*>(addrBuf + 16));
++  }
++  else if (res[3] == SOCKS_ADDR_DOMAIN) {
++    // 2 more bytes to hold port temporarily.
++    size_t resLen = res[4] + 2;
++    bndAddr = std::string(resLen, '\x00');
++    socket_->readData(&bndAddr[0], resLen);
++    bndFamily = AF_INET + AF_INET6;
++    bndPort = ntohs(*reinterpret_cast<uint16_t*>(&bndAddr[0] + res[4]));
++    bndAddr.resize(res[4]);
++  }
++  else {
++    socket_->closeConnection();
++    return -1;
++  }
++  return rep;
++}
++
++int SocksProxySocket::startUdpAssociate(const std::string& listenAddr,
++                                        uint16_t listenPort,
++                                        std::string& bndAddr, uint16_t& bndPort)
++{
++  sendCmd(SOCKS_CMD_UDP_ASSOCIATE, listenAddr, listenPort, true);
++
++  int bFamily;
++  std::string bAddr;
++  uint16_t bPort;
++  int rep = receiveReply(bFamily, bAddr, bPort);
++  if (rep != C_OK) {
++    return rep;
++  }
++
++  bndAddr = bAddr;
++  bndPort = bPort;
++  return rep;
++}
++
++} // namespace aria2
+diff --git a/src/SocksProxySocket.h b/src/SocksProxySocket.h
+new file mode 100644
+index 000000000..0b6039502
+--- /dev/null
++++ b/src/SocksProxySocket.h
+@@ -0,0 +1,112 @@
++/* <!-- copyright */
++/*
++ * aria2 - The high speed download utility
++ *
++ * Copyright (C) 2006 Tatsuhiro Tsujikawa
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ *
++ * In addition, as a special exception, the copyright holders give
++ * permission to link the code of portions of this program with the
++ * OpenSSL library under certain conditions as described in each
++ * individual source file, and distribute linked combinations
++ * including the two.
++ * You must obey the GNU General Public License in all respects
++ * for all of the code used other than OpenSSL.  If you modify
++ * file(s) with this exception, you may extend this exception to your
++ * version of the file(s), but you are not obligated to do so.  If you
++ * do not wish to do so, delete this exception statement from your
++ * version.  If you delete this exception statement from all source
++ * files in the program, then also delete it here.
++ */
++/* copyright --> */
++#ifndef D_SOCKS_PROXY_SOCKET_H
++#define D_SOCKS_PROXY_SOCKET_H
++
++#include <memory>
++#include <vector>
++#include <string>
++
++namespace aria2 {
++
++class SocketCore;
++
++enum SocksProxyAuthMethod {
++  // No authentication required
++  SOCKS_AUTH_NO_AUTH = 0,
++  // Username/Password authentication
++  SOCKS_AUTH_USERPASS = 2,
++};
++
++// Other than transferring proxy traffic,
++// the class helps to start proxy connections.
++class SocksProxySocket {
++private:
++  int family_;
++  // The socket is not shared because as it is used as some kind of controller,
++  // when it is closed, all related proxy connections are closed.
++  std::unique_ptr<SocketCore> socket_;
++
++  enum SocksProxyCmd {
++    SOCKS_CMD_CONNECT = 1,
++    SOCKS_CMD_BIND = 2,
++    SOCKS_CMD_UDP_ASSOCIATE = 3,
++  };
++
++  // When allowEmtpy is true, allow dst* to be empty.
++  void sendCmd(SocksProxyCmd cmd, const std::string& dstAddr, uint16_t dstPort,
++               bool allowEmpty);
++  // Returns status replied from proxy server. 0 is OK. > 0 with error messages.
++  // < 0 for invalid replies from server.
++  // bndFamily may be AF_INET + AF_INET6 to indicate domain format.
++  int receiveReply(int& bndFamily, std::string& bndAddr, uint16_t& bndPort);
++
++public:
++  SocksProxySocket(int family);
++
++  virtual ~SocksProxySocket();
++
++  // Establish connection to SOCKS port.
++  void establish(const std::string& host, uint16_t port);
++
++  // Customize the TCP socket for SOCKS protocol.
++  // Socket should be blocking to ensure latter steps finished in order.
++  void establish(std::unique_ptr<SocketCore> socket);
++
++  // Negotiate authentication that returns selected auth method in 0-255.
++  // When no auth method is selected, return -1.
++  // Returned auth method SHOULD be in expected but it is not checked.
++  int negotiateAuth(std::vector<SocksProxyAuthMethod> expected);
++
++  // Username/Password authentication.
++  // user and pass should not be empty.
++  // Returns status replied from proxy server. 0 is OK.
++  int authByUserpass(const std::string& user, const std::string& passwd);
++
++  // Helper to negotiate and auth by username/password authentication, or skip
++  // it if not required.
++  // Leave either user or pass empty to force no authentication.
++  bool authByUserpassOrNone(const std::string& user, const std::string& passwd);
++
++  // Create an UDP association to start UDP proxy.
++  // Leave listen host and port empty / 0 to indicate no receiving from proxy.
++  // Returns status replied from proxy server. 0 is OK.
++  int startUdpAssociate(const std::string& listenAddr, uint16_t listenPort,
++                        std::string& bndAddr, uint16_t& bndPort);
++};
++
++} // namespace aria2
++
++#endif // D_SOCKS_PROXY_SOCKET_H
+diff --git a/src/option_processing.cc b/src/option_processing.cc
+index f9891fed8..bf4c0196a 100644
+--- a/src/option_processing.cc
++++ b/src/option_processing.cc
+@@ -263,6 +263,7 @@ error_code::Value option_processing(Option& op, bool standalone,
+     overrideWithEnv(*confOption, oparser, PREF_HTTP_PROXY, "http_proxy");
+     overrideWithEnv(*confOption, oparser, PREF_HTTPS_PROXY, "https_proxy");
+     overrideWithEnv(*confOption, oparser, PREF_FTP_PROXY, "ftp_proxy");
++    overrideWithEnv(*confOption, oparser, PREF_BT_UDP_SOCKS_PROXY, "bt_udp_sokcs_proxy");
+     overrideWithEnv(*confOption, oparser, PREF_ALL_PROXY, "all_proxy");
+     overrideWithEnv(*confOption, oparser, PREF_NO_PROXY, "no_proxy");
+     if (!standalone) {
+diff --git a/src/prefs.cc b/src/prefs.cc
+index fe982685a..0184a163c 100644
+--- a/src/prefs.cc
++++ b/src/prefs.cc
+@@ -437,6 +437,7 @@ PrefPtr PREF_HTTP_PROXY = makePref("http-proxy");
+ PrefPtr PREF_HTTPS_PROXY = makePref("https-proxy");
+ PrefPtr PREF_FTP_PROXY = makePref("ftp-proxy");
+ PrefPtr PREF_ALL_PROXY = makePref("all-proxy");
++PrefPtr PREF_BT_UDP_SOCKS_PROXY = makePref("bt-udp-socks-proxy");
+ // values: comma separated hostname or domain
+ PrefPtr PREF_NO_PROXY = makePref("no-proxy");
+ // values: get | tunnel
+@@ -447,6 +448,8 @@ PrefPtr PREF_HTTPS_PROXY_USER = makePref("https-proxy-user");
+ PrefPtr PREF_HTTPS_PROXY_PASSWD = makePref("https-proxy-passwd");
+ PrefPtr PREF_FTP_PROXY_USER = makePref("ftp-proxy-user");
+ PrefPtr PREF_FTP_PROXY_PASSWD = makePref("ftp-proxy-passwd");
++PrefPtr PREF_BT_UDP_SOCKS_PROXY_USER = makePref("bt-udp-socks-proxy-user");
++PrefPtr PREF_BT_UDP_SOCKS_PROXY_PASSWD = makePref("bt-udp-socks-proxy-passwd");
+ PrefPtr PREF_ALL_PROXY_USER = makePref("all-proxy-user");
+ PrefPtr PREF_ALL_PROXY_PASSWD = makePref("all-proxy-passwd");
+ 
+diff --git a/src/prefs.h b/src/prefs.h
+index 9719b3be0..35da0406e 100644
+--- a/src/prefs.h
++++ b/src/prefs.h
+@@ -388,6 +388,7 @@ extern PrefPtr PREF_CONTENT_DISPOSITION_DEFAULT_UTF8;
+ extern PrefPtr PREF_HTTP_PROXY;
+ extern PrefPtr PREF_HTTPS_PROXY;
+ extern PrefPtr PREF_FTP_PROXY;
++extern PrefPtr PREF_BT_UDP_SOCKS_PROXY;
+ extern PrefPtr PREF_ALL_PROXY;
+ // values: comma separated hostname or domain
+ extern PrefPtr PREF_NO_PROXY;
+@@ -399,6 +400,8 @@ extern PrefPtr PREF_HTTPS_PROXY_USER;
+ extern PrefPtr PREF_HTTPS_PROXY_PASSWD;
+ extern PrefPtr PREF_FTP_PROXY_USER;
+ extern PrefPtr PREF_FTP_PROXY_PASSWD;
++extern PrefPtr PREF_BT_UDP_SOCKS_PROXY_USER;
++extern PrefPtr PREF_BT_UDP_SOCKS_PROXY_PASSWD;
+ extern PrefPtr PREF_ALL_PROXY_USER;
+ extern PrefPtr PREF_ALL_PROXY_PASSWD;
+ 
+diff --git a/src/usage_text.h b/src/usage_text.h
+index ebf67e3d3..55f790277 100644
+--- a/src/usage_text.h
++++ b/src/usage_text.h
+@@ -83,6 +83,9 @@
+     "                              previously defined proxy, use \"\".\n" \
+     "                              See also the --all-proxy option.\n"     \
+     "                              This affects all ftp downloads.")
++#define TEXT_BT_UDP_SOCKS_PROXY                                                 \
++  _(" --bt-udp-socks-proxy=PROXY   Use a SOCKS5 proxy server for UDP in BitTorrent.\n"\
++    "                              This affects DHT and connecting UDP trackers in BitTorrent.")
+ #define TEXT_ALL_PROXY                                                  \
+   _(" --all-proxy=PROXY            Use a proxy server for all protocols. To override\n" \
+     "                              a previously defined proxy, use \"\".\n" \
+@@ -690,6 +693,10 @@
+   _(" --ftp-proxy-user=USER        Set user for --ftp-proxy.")
+ #define TEXT_FTP_PROXY_PASSWD                                           \
+   _(" --ftp-proxy-passwd=PASSWD    Set password for --ftp-proxy.")
++#define TEXT_BT_UDP_SOCKS_PROXY_USER                                    \
++  _(" --bt-udp-socks-proxy-user=USER Set user for --http-proxy.")
++#define TEXT_BT_UDP_SOCKS_PROXY_PASSWD                                  \
++  _(" --bt-udp-socks-proxy-passwd=PASSWD Set password for --http-proxy.")
+ #define TEXT_REMOVE_CONTROL_FILE                \
+   _(" --remove-control-file[=true|false] Remove control file before download. Using\n" \
+     "                              with --allow-overwrite=true, download always\n" \
+diff --git a/test/DHTConnectionSocksProxyImplTest.cc b/test/DHTConnectionSocksProxyImplTest.cc
+new file mode 100644
+index 000000000..3af6b7be9
+--- /dev/null
++++ b/test/DHTConnectionSocksProxyImplTest.cc
+@@ -0,0 +1,82 @@
++#include "DHTConnectionSocksProxyImpl.h"
++
++#include <iostream>
++#include <cppunit/extensions/HelperMacros.h>
++
++#include "Exception.h"
++#include "SocketCore.h"
++#include "A2STR.h"
++
++namespace aria2 {
++
++class DHTConnectionSocksProxyImplTest : public CppUnit::TestFixture {
++
++  CPPUNIT_TEST_SUITE(DHTConnectionSocksProxyImplTest);
++  CPPUNIT_TEST(testWriteAndReadData);
++  CPPUNIT_TEST_SUITE_END();
++
++public:
++  void setUp() {}
++
++  void tearDown() {}
++
++  void testWriteAndReadData();
++};
++
++CPPUNIT_TEST_SUITE_REGISTRATION(DHTConnectionSocksProxyImplTest);
++
++void DHTConnectionSocksProxyImplTest::testWriteAndReadData()
++{
++  try {
++    DHTConnectionSocksProxyImpl con1(AF_INET);
++    uint16_t con1port = 0;
++    CPPUNIT_ASSERT(con1.bind(con1port, "127.0.0.1"));
++
++    DHTConnectionImpl con2(AF_INET);
++    uint16_t con2port = 0;
++    CPPUNIT_ASSERT(con2.bind(con2port, "127.0.0.1"));
++
++    // TODO: Requires a SOCKS5 proxy server for tests
++    return;
++    CPPUNIT_ASSERT(
++        con1.startProxy("localhost", 10801, "", "", "127.0.0.1", con1port));
++
++    std::string message1 = "hello world.";
++    con1.sendMessage(reinterpret_cast<const unsigned char*>(message1.c_str()),
++                     message1.size(), "127.0.0.1", con2port);
++
++    unsigned char readbuffer[100];
++    std::string remoteHost;
++    uint16_t remotePort;
++    {
++      while (!con2.getSocket()->isReadable(0))
++        ;
++      ssize_t rlength = con2.receiveMessage(readbuffer, sizeof(readbuffer),
++                                            remoteHost, remotePort);
++      CPPUNIT_ASSERT_EQUAL((ssize_t)message1.size(), rlength);
++      CPPUNIT_ASSERT_EQUAL(message1,
++                           std::string(&readbuffer[0], &readbuffer[rlength]));
++    }
++
++    std::string message2 = "hello world too.";
++    con2.sendMessage(reinterpret_cast<const unsigned char*>(message2.c_str()),
++                     message2.size(), remoteHost, remotePort);
++
++    {
++      std::string remoteHost;
++      uint16_t remotePort;
++      while (!con1.getSocket()->isReadable(0))
++        ;
++      ssize_t rlength = con1.receiveMessage(readbuffer, sizeof(readbuffer),
++                                            remoteHost, remotePort);
++      CPPUNIT_ASSERT_EQUAL((ssize_t)message2.size(), rlength);
++      CPPUNIT_ASSERT_EQUAL(message2,
++                           std::string(&readbuffer[0], &readbuffer[rlength]));
++    }
++  }
++  catch (Exception& e) {
++    CPPUNIT_FAIL(e.stackTrace());
++  }
++}
++
++} // namespace aria2
+diff --git a/test/Makefile.am b/test/Makefile.am
+index c71144490..d1cf5cb9d 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -170,6 +170,7 @@ aria2c_SOURCES += BtAllowedFastMessageTest.cc\
+ 	DHTMessageTrackerEntryTest.cc\
+ 	DHTMessageTrackerTest.cc\
+ 	DHTConnectionImplTest.cc\
++	DHTConnectionSocksProxyImplTest.cc\
+ 	DHTPingMessageTest.cc\
+ 	DHTPingReplyMessageTest.cc\
+ 	DHTFindNodeMessageTest.cc\

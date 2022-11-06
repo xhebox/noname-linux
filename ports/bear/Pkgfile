@@ -6,12 +6,7 @@ source=[{url="https://github.com/rizsotto/Bear/archive/$version.tar.gz", name="b
 build='''
 	mkdir -p build
 	cd build
-	cmake \
-		-GNinja \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-		-DCMAKE_BUILD_TYPE=plain \
-		-DCMAKE_INSTALL_LIBDIR=lib \
+	noname-cmake -DCMAKE_BUILD_TYPE=plain \
 		../Bear-$version
 	cmake --build .
 	DESTDIR="$pkgdir" cmake --build . -- install

@@ -1,4 +1,4 @@
-version="20220708"
+version="20220913"
 desc="Firmware files for Linux"
 source=[
 	{url="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$version.tar.gz"},

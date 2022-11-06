@@ -1,0 +1,29 @@
+version="16.04.0"
+desc="Library for passing menus over DBus'"
+makedeps=["gtk3", "gobject-introspection"]
+deps=["gtk3"]
+source=[
+	{url="nls.patch"},
+	{url="https://launchpad.net/libdbusmenu/${version%.?}/${version}/+download/libdbusmenu-${version}.tar.gz"},
+]
+
+build='''
+	cd libdbusmenu-$version
+	sed -i '/INTLTOOL/d' configure.ac
+	export HAVE_VALGRIND_TRUE='#'
+	export HAVE_VALGRIND_FALSE=''
+	sed -i 's/-Werror//' libdbusmenu-*/Makefile.am libdbusmenu-*/Makefile.in
+	patch -Np1 -i ../nls.patch
+	autoreconf -fi
+	./configure --prefix= \
+		--libexecdir=/lib \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-dumper \
+		--disable-static \
+		--disable-tests \
+		--disable-vala \
+		--with-gtk=3
+	make
+	make DESTDIR="$pkgdir" install
+'''

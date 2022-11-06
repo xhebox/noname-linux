@@ -1,4 +1,4 @@
-version="14.17.4"
+version="16.16.0"
 makedeps=["zlib", "python3", "icu", "libuv", "libnghttp2", "openssl"]
 deps=["zlib", "icu", "libuv", "libnghttp2", "openssl"]
 desc="Nodejs interpreter"

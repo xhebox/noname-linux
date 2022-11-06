@@ -7,9 +7,7 @@ source=[
 ]
 
 build='''
-	cmake openmp-$version.src -Bbuild \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
+	noname-cmake openmp-$version.src -Bbuild \
 		-DLIBOMP_INSTALL_ALIASES=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

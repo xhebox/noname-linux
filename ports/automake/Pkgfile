@@ -1,4 +1,4 @@
-version="1.16.1"
+version="1.16.5"
 makedeps=["autoconf"]
 deps=["bash", "autoconf", "perl"]
 desc="A tool for automatically generating Makefiles"

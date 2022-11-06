@@ -9,8 +9,7 @@ source=[
 ]
 
 build='''
-	cmake android-file-transfer-linux-$version -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
+	noname-cmake android-file-transfer-linux-$version -Bbuild \
 				-DBUILD_QT_UI=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

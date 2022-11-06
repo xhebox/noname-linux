@@ -1,5 +1,5 @@
-version="1.5.6"
-geo_version="202206062212"
+version="1.6.0"
+geo_version="202210022213"
 desc="xray core"
 makedeps=['go']
 source=[

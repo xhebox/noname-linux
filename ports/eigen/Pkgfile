@@ -5,11 +5,8 @@ makedeps=["cmake", "fftw", "boost"]
 source=[{url="https://gitlab.com/libeigen/eigen/-/archive/$version/eigen-$version.tar.gz"}]
 
 build='''
-	cmake eigen-$version -Bbuild \
-		-DEIGEN_ROOT_DIR= \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=lib
+	noname-cmake eigen-$version -Bbuild \
+		-DEIGEN_ROOT_DIR=
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

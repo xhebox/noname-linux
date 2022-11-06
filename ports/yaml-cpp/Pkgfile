@@ -6,9 +6,7 @@ makedeps=["boost"]
 source=[{url="https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-$version.tar.gz"}]
 
 build='''
-	cmake yaml-cpp-yaml-cpp-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DYAML_BUILD_SHARED_LIBS=ON
+	noname-cmake yaml-cpp-yaml-cpp-$version -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

@@ -9,16 +9,13 @@ source=[
 ]
 
 build='''
-	cmake SPIRV-Headers-$hdrver -Bbu -DCMAKE_INSTALL_PREFIX=/
+	noname-cmake SPIRV-Headers-$hdrver -Bbu
 	cmake --build bu
 	DESTDIR="${pkgdir}" cmake --build bu --target install
 
-	cmake SPIRV-Tools-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX=/ \
-		-DCMAKE_BUILD_TYPE=Release \
+	noname-cmake SPIRV-Tools-$version -Bbuild \
 		-DSPIRV_WERROR=Off \
-		-DSPIRV-Headers_SOURCE_DIR="${srcdir}"/SPIRV-Headers-$hdrver \
-		-DBUILD_SHARED_LIBS=ON
+		-DSPIRV-Headers_SOURCE_DIR="${srcdir}"/SPIRV-Headers-$hdrver
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

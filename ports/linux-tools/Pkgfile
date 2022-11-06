@@ -1,21 +1,22 @@
-version="5.18.3"
+version="6.0.7"
+xanmod="1"
 desc="Linux kernel tools"
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v5.x/linux-${version}.tar.xz"},
-	{url="linux.preset"},
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/linux-${version%.*}.tar.xz"},
+	{url="https://github.com/xanmod/linux/releases/download/${version}-xanmod1/patch-${version}-xanmod1.xz"},
 	{url="musl.patch"},
-	{url="config"},
 ]
 makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
 deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
 
 ext='''
-	cd linux-${version}
+	cd linux-${version%.*}
+	patch -Np1 -i ../patch-${version}-xanmod${xanmod}
 	patch -p0 -i ../musl.patch
 '''
 
 build='''
-	cd linux-${version}
+	cd linux-${version%.*}
 
 	echo 'tmon'
 	cd tools/thermal/tmon

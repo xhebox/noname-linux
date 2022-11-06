@@ -16,16 +16,10 @@ ext='''
 
 build='''
 	export CCACHE_SLOPPINESS="pch_defines,time_macros"
-	cmake wxWidgets-$version -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
+	noname-cmake wxWidgets-$version -Bbuild \
 				-DwxUSE_GLCANVAS_EGL=ON \
 				-DBUILD_PRECOMP=OFF \
-				-DBUILD_SAMPLES=ON \
-				-DBUILD_SHARED_LIBS=ON
+				-DBUILD_SAMPLES=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

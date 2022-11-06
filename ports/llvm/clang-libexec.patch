@@ -1,14 +1,3 @@
---- clang/tools/scan-build/CMakeLists.txt	2020-10-07 18:10:48.000000000 +0800
-+++ clang/tools/scan-build/CMakeLists.txt	2020-10-07 18:10:48.000000000 +0800
-@@ -61,7 +61,7 @@
-                        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libexec/${LibexecFile})
-     list(APPEND Depends ${CMAKE_BINARY_DIR}/libexec/${LibexecFile})
-     install(PROGRAMS libexec/${LibexecFile}
--            DESTINATION libexec
-+            DESTINATION lib
-             COMPONENT scan-build)
-   endforeach()
- 
 --- clang/tools/scan-build/bin/scan-build	2020-10-07 18:10:48.000000000 +0800
 +++ clang/tools/scan-build/bin/scan-build	2020-10-07 18:10:48.000000000 +0800
 @@ -1932,8 +1932,8 @@
@@ -22,14 +11,3 @@
  
  # Portability: use less strict but portable check -e (file exists) instead of
  # non-portable -x (file is executable). On some windows ports -x just checks
---- clang/tools/scan-build-py/CMakeLists.txt	2021-09-25 00:18:10.000000000 +0800
-+++ clang/tools/scan-build-py/CMakeLists.txt	2021-09-25 00:18:10.000000000 +0800
-@@ -72,7 +72,7 @@
-                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libexec/${lib})
-   list(APPEND Depends ${CMAKE_BINARY_DIR}/libexec/${lib})
-   install(PROGRAMS libexec/${lib}
--          DESTINATION libexec
-+          DESTINATION lib
-           COMPONENT scan-build-py)
- endforeach()
- 

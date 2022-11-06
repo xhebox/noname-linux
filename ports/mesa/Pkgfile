@@ -1,5 +1,5 @@
 version="21.3.1"
-makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "python3-mako", "vulkan-headers"]
+makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
 deps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
@@ -23,6 +23,9 @@ ext='''
 '''
 
 build='''
+	python3 -m venv ss
+	. ./ss/bin/activate
+	pip install mako
 	noname-meson mesa-$version build \
 		-D b_ndebug=true \
 		-D platforms=wayland \

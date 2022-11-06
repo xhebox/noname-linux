@@ -1,15 +1,15 @@
-version="master"
+version="0.8.0"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
 source=[
-        {url="https://github.com/neovim/neovim/archive/refs/heads/${version}.zip"},
+        {url="https://github.com/neovim/neovim/archive/refs/tags/v$version.tar.gz"},
 ]
 
 build='''
 	cd neovim-${version}
 
-	cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=OFF \
+	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=OFF \
 		-DUSE_BUNDLED_UNIBILIUM=ON \
 		-DUSE_BUNDLED_LIBVTERM=ON \
 		-DUSE_BUNDLED_LIBTERMKEY=ON \
@@ -21,9 +21,7 @@ build='''
 		-DUSE_BUNDLED_TS=ON
 	cmake --build .deps
 
-	cmake -H. -Bbuild \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_BUILD_TYPE=Release
+	noname-cmake -H. -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	find "$pkgdir/bin" -type f -exec strip {} \;

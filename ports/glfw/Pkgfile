@@ -11,11 +11,8 @@ ext='''
 '''
 
 build='''
-	cmake glfw-$version -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DGLFW_USE_WAYLAND=ON \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake glfw-$version -Bbuild \
+				-DGLFW_USE_WAYLAND=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

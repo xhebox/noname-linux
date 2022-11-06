@@ -8,13 +8,7 @@ source=[
 ]
 
 build='''
-	cmake ttyd-$version -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake ttyd-$version -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

@@ -6,11 +6,7 @@ makedeps=["boost", "yaml-cpp", "marisa", "opencc", "leveldb", "google-glog"]
 source=[{url="https://github.com/rime/librime/archive/$version.tar.gz"}]
 
 build='''
-	cmake librime-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DBUILD_TEST=OFF \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DBUILD_SHARED_LIBS=ON
+	noname-cmake librime-$version -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

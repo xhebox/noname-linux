@@ -1,0 +1,12 @@
+--- a/Makefile.am	2016-02-28 02:58:43.000000000 +0800
++++ b/Makefile.am	2016-02-28 02:58:43.000000000 +0800
+@@ -18,8 +18,7 @@
+ 	$(LIBDBUSMENUGTK_SUBDIR) \
+ 	tools \
+ 	$(TESTS_SUBDIR) \
+-	docs \
+-	po
++	docs
+ 
+ DISTCHECK_CONFIGURE_FLAGS = --enable-introspection --enable-gtk-doc
+ 

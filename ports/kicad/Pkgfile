@@ -18,39 +18,19 @@ ext='''
 '''
 
 build='''
-	cmake kicad-symbols-$version -Bbuild_s \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake kicad-symbols-$version -Bbuild_s
 	cmake --build build_s
 	DESTDIR="${pkgdir}" cmake --build build_s --target install
 
-	cmake kicad-footprints-$version -Bbuild_f \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake kicad-footprints-$version -Bbuild_f
 	cmake --build build_f
 	DESTDIR="${pkgdir}" cmake --build build_f --target install
 
-	cmake kicad-packages3D-$version -Bbuild_d \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-				-DCMAKE_BUILD_TYPE=Release \
-				-DBUILD_SHARED_LIBS=ON
+	noname-cmake kicad-packages3D-$version -Bbuild_d
 	cmake --build build_d
 	DESTDIR="${pkgdir}" cmake --build build_d --target install
 
-	cmake -Bbuild kicad-$version -DCMAKE_BUILD_TYPE=Release    \
-		-DCMAKE_INSTALL_PREFIX=   \
-		-DCMAKE_INSTALL_LIBDIR=/lib   \
+	noname-cmake -Bbuild kicad-$version \
 		-DKICAD_USE_OCE=OFF           \
 		-DKICAD_USE_OCC=OFF           \
 		-DKICAD_USE_EGL=ON            \

@@ -1,0 +1,12 @@
+version="2.10.8"
+desc="Callback Framework for C++"
+source=[
+	{url="https://github.com/libsigcplusplus/libsigcplusplus/releases/download/$version/libsigc++-$version.tar.xz"}
+]
+
+build='''
+	noname-meson libsigc++-$version build
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

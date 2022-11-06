@@ -1,0 +1,12 @@
+version="0.9.13"
+desc="Highly customizable Wayland bar for Sway and Wlroots based compositors"
+deps=["wayland", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "libnl", "dbusmenu-gtk3", "jsoncpp"]
+makedeps=["wayland-protocols", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "libnl", "dbusmenu-gtk3", "jsoncpp", "meson", "gobject-introspection"]
+source=[{url="https://github.com/Alexays/Waybar/archive/refs/tags/$version.tar.gz"}]
+
+build='''
+	noname-meson Waybar-$version build -Dmpd=disabled -Dsndio=disabled -Dman-pages=disabled -Dupower_glib=disabled --wrap-mode=nopromote
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

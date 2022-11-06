@@ -1,0 +1,14 @@
+version="3.24.7"
+desc="gtk3 cpp binding"
+makedeps=["gtk3", "pangomm", "glibmm", "cairomm"]
+deps=["gtk3", "pangomm", "glibmm", "cairomm"]
+source=[
+	{url="https://download.gnome.org/sources/gtkmm/${version%.*}/gtkmm-$version.tar.xz"}
+]
+
+build='''
+	noname-meson gtkmm-$version build -Dmaintainer-mode=false -Dbuild-x11-api=false -Dbuild-atkmm-api=false -Dbuild-documentation=false
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

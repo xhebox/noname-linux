@@ -1,12 +1,23 @@
 version="7.81.0"
+quiche_version="0.14.0"
 desc="A tool for transfering files with URL syntax"
 makedeps=["openssl", "zlib", "libssh2", "libnghttp2"]
 deps=["ca-certificates", "openssl", "zlib", "libssh2", "libnghttp2"]
-source=[{url="http://curl.haxx.se/download/curl-$version.tar.bz2"}]
+source=[
+	{url="http://curl.haxx.se/download/curl-$version.tar.bz2"},
+	{url="https://github.com/cloudflare/quiche/archive/refs/tags/$quiche_version.tar.gz"},
+]
 
 build='''
+	cd quiche-$version
+	cargo build --package quiche --release --features ffi,pkg-config-meta,qlog
+	ln -vnf $(find target/release -name libcrypto.a -o -name libssl.a) quiche/deps/boringssl/src/lib/
+
 	cd curl-${version}
 	./configure \
+		LDFLAGS="-Wl,-rpath,$PWD/../quiche-$version/target/release" \
+		--with-openssl=$PWD/../quiche-$version/quiche/deps/boringssl/src \
+		--with-quiche=$PWD/../quiche-$version/target/release \
 		--prefix=/ \
 		--with-gssapi \
 		--with-libssh2 \

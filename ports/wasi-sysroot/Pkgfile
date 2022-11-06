@@ -1,4 +1,4 @@
-version="14.0"
+version="16.0"
 desc="WASI-enabled WebAssembly C/C++ toolchain sysroot"
 source=[
 	{url="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${version%.*}/wasi-sysroot-$version.tar.gz"},

@@ -11,10 +11,8 @@ ext='''
 '''
 
 build='''
-	cmake libftdi1-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX=/ \
+	noname-cmake libftdi1-$version -Bbuild \
 		-DCMAKE_SKIP_BUILD_RPATH=ON \
-		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_TESTS=OFF \
 		-DDOCUMENTATION=OFF \
 		-DEXAMPLES=OFF -DFTDI_EEPROM=ON

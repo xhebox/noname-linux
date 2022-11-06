@@ -16,16 +16,11 @@ ext = '''
 '''
 
 build = '''
-	cmake ImHex -Bbuild \
-				-DCMAKE_INSTALL_PREFIX= \
-				-DCMAKE_INSTALL_LIBDIR=/lib \
-				-DCMAKE_INSTALL_DATADIR=/share \
-				-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+	noname-cmake ImHex -Bbuild \
 				-DCMAKE_BUILD_TYPE=Debug \
 				-DUSE_SYSTEM_CAPSTONE=ON \
 				-DUSE_SYSTEM_LLVM=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	rm -rf "$pkgdir/DEBIAN"
-	exit
 '''

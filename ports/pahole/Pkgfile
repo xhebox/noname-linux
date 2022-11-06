@@ -25,7 +25,7 @@ ext='''
 '''
 
 build='''
-	cmake pahole-$version -Bbuild -DCMAKE_BUILD_TYPE=None -D__LIB=lib
+	noname-cmake pahole-$version -Bbuild -DCMAKE_BUILD_TYPE=None -D__LIB=lib
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

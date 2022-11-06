@@ -1,10 +1,17 @@
-version="1.35.0"
+version="1.36.0"
 desc="Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink."
-makedeps=["expat", "libgmp", "libxml2", "libressl", "sqlite", "libssh2"]
-deps=["expat", "libgmp", "libxml2", "libressl", "sqlite", "libssh2"]
+makedeps=["expat", "libgmp", "libxml2", "openssl", "sqlite", "libssh2"]
+deps=["expat", "libgmp", "libxml2", "openssl", "sqlite", "libssh2"]
 source=[
 	{url="https://github.com/aria2/aria2/releases/download/release-$version/aria2-$version.tar.xz"},
+	{url="1857.diff"},
 ]
+
+ext='''
+	cd aria2-$version
+	patch -Np1 -i "$srcdir/1857.diff"
+	autoreconf -fi
+'''
 
 build='''
 	cd aria2-$version

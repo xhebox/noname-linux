@@ -7,7 +7,7 @@ source=[{url="https://github.com/miloyip/rapidjson/archive/v$version.tar.gz"}]
 build='''
 	cd rapidjson-$version
 	find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i
-	cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=
+	noname-cmake . -Bbuild
 	cmake --build build
 	DESTDIR="$pkgdir" cmake --build build --target install
 '''

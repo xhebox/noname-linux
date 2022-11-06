@@ -1,0 +1,13 @@
+version="2.66.5"
+makedeps=["glib", "libsigcpp"]
+deps=["glib", "libsigcpp"]
+source=[
+	{url="https://download.gnome.org/sources/glibmm/${version%.*}/glibmm-$version.tar.xz"},
+]
+
+build='''
+	noname-meson glibmm-$version build -Dmaintainer-mode=false -Dbuild-documentation=false --wrap-mode=nopromote
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

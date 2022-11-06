@@ -24,10 +24,7 @@ ext = '''
 '''
 
 build = '''
-	cmake Vulkan-Loader-$version -Bbuild1 -DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-		-DCMAKE_INSTALL_DATADIR=/share \
+	noname-cmake Vulkan-Loader-$version -Bbuild1 \
 		-DCMAKE_SKIP_RPATH=True \
 		-DBUILD_TESTS=Off \
 		-DBUILD_WSI_XCB_SUPPORT=OFF \
@@ -37,7 +34,7 @@ build = '''
 	cmake --build build1
 	DESTDIR="$pkgdir" cmake --build build1 --target install
 
-	cmake Vulkan-Tools-$version -Bbuild2 -DCMAKE_INSTALL_PREFIX= \
+	noname-cmake Vulkan-Tools-$version -Bbuild2 \
 		-DCMAKE_SKIP_RPATH=True \
 		-DBUILD_WSI_WAYLAND_SUPPORT=On \
 		-DBUILD_WSI_XCB_SUPPORT=Off \
@@ -51,11 +48,7 @@ build = '''
 	cmake --build build2
 	DESTDIR="$pkgdir" cmake --build build2 --target install
 
-	cmake Vulkan-ValidationLayers-$version -Bbuild3 \
-		-DCMAKE_INSTALL_PREFIX= \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-		-DCMAKE_INSTALL_DATADIR=/share \
+	noname-cmake Vulkan-ValidationLayers-$version -Bbuild3 \
 		-DCMAKE_INSTALL_INCLUDEDIR="/include/" \
 		-DSPIRV_HEADERS_INSTALL_DIR=/include/spirv \
 		-DSPIRV_TOOLS_INSTALL_DIR=/bin \

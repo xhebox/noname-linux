@@ -1,0 +1,13 @@
+version="2.46.3"
+makedeps=["pango", "cairomm", "glibmm"]
+deps=["pango", "cairomm", "glibmm"]
+source=[
+	{url="https://download.gnome.org/sources/pangomm/${version%.*}/pangomm-$version.tar.xz"}
+]
+
+build='''
+	noname-meson pangomm-$version build -Dmaintainer-mode=false -Dbuild-documentation=false --wrap-mode=nopromote
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''
