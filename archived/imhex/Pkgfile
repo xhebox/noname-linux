@@ -1,0 +1,24 @@
+version = "1.27.1"
+nostrip = true
+desc = "A Hex Editor for Reverse Engineers, Programmers and people that value their eye sight when working at 3 AM. "
+deps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm"]
+makedeps = ["glfw", "file", "mbedtls", "llvm", "mesa", "glm"]
+source = [
+  { protocol = "git", url = "https://github.com/WerWolv/ImHex", commit = "504037c115200882e2108f2230e02a3516d1f290"},
+]
+
+ext = '''
+	cd ImHex
+	git submodule update --init --recursive
+	#patch -Nbp1 -i "$srcdir/gl.patch"
+	sed -i 's;usr/;;g' cmake/build_helpers.cmake
+'''
+
+build = '''
+	noname-cmake ImHex -Bbuild \
+				-DCMAKE_BUILD_TYPE=Debug \
+				-DUSE_SYSTEM_LLVM=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	rm -rf "$pkgdir/DEBIAN"
+'''

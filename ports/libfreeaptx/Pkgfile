@@ -1,0 +1,10 @@
+version="master"
+desc="Free implementation of Audio Processing Technology codec (aptX) forked from libopenaptx 0.2.0 "
+source=[
+	{url="https://github.com/iamthehorker/libfreeaptx/archive/refs/heads/master.zip"},
+]
+
+build='''
+	cd libfreeaptx-$version
+	make CC=cc PREFIX= DESTDIR="$pkgdir" install
+'''

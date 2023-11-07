@@ -1,0 +1,86 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3b7c1b30b44..2234989f5fd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -124,6 +124,13 @@ endif()
+ 
+ set(ZIG_PIE off CACHE BOOL "produce a position independent zig executable")
+ 
++# Detect system libcxx name.
++if ("c++" IN_LIST CMAKE_CXX_IMPLICIT_LINK_LIBRARIES)
++    set(ZIG_SYSTEM_LIBCXX "c++" CACHE STRING "system libcxx name for build.zig")
++else()
++    set(ZIG_SYSTEM_LIBCXX "stdc++" CACHE STRING "system libcxx name for build.zig")
++endif()
++
+ find_package(llvm 16)
+ find_package(clang 16)
+ find_package(lld 16)
+diff --git a/build.zig b/build.zig
+index 5b5f0004ccf..5211a9a70a9 100644
+--- a/build.zig
++++ b/build.zig
+@@ -632,16 +632,14 @@ fn addCmakeCfgOptionsToExe(
+         const lib_suffix = if (static) exe.target.staticLibSuffix()[1..] else exe.target.dynamicLibSuffix()[1..];
+         switch (exe.target.getOsTag()) {
+             .linux => {
+-                // First we try to link against system libstdc++ or libc++.
+-                // If that doesn't work, we fall to -lc++ and cross our fingers.
+-                const found = for ([_][]const u8{ "stdc++", "c++" }) |name| {
+-                    addCxxKnownPath(b, cfg, exe, b.fmt("lib{s}.{s}", .{ name, lib_suffix }), "", need_cpp_includes) catch |err| switch (err) {
+-                        error.RequiredLibraryNotFound => continue,
+-                        else => |e| return e,
+-                    };
+-                    break true;
+-                } else false;
+-                if (!found) exe.linkLibCpp();
++                // First we try to link against the detected libcxx name. If that doesn't work, we fall
++                // back to -lc++ and cross our fingers.
++                addCxxKnownPath(b, cfg, exe, b.fmt("lib{s}.{s}", .{ cfg.system_libcxx, lib_suffix }), "", need_cpp_includes) catch |err| switch (err) {
++                    error.RequiredLibraryNotFound => {
++                        exe.linkLibCpp();
++                    },
++                    else => |e| return e,
++                };
+                 exe.linkSystemLibrary("unwind");
+             },
+             .ios, .macos, .watchos, .tvos => {
+@@ -775,6 +773,7 @@ const CMakeConfig = struct {
+     llvm_include_dir: []const u8,
+     llvm_libraries: []const u8,
+     dia_guids_lib: []const u8,
++    system_libcxx: []const u8,
+ };
+ 
+ const max_config_h_bytes = 1 * 1024 * 1024;
+@@ -840,6 +839,7 @@ fn parseConfigH(b: *std.Build, config_h_text: []const u8) ?CMakeConfig {
+         .llvm_include_dir = undefined,
+         .llvm_libraries = undefined,
+         .dia_guids_lib = undefined,
++        .system_libcxx = undefined,
+     };
+ 
+     const mappings = [_]struct { prefix: []const u8, field: []const u8 }{
+@@ -891,6 +891,10 @@ fn parseConfigH(b: *std.Build, config_h_text: []const u8) ?CMakeConfig {
+             .prefix = "#define ZIG_LLVM_LIB_PATH ",
+             .field = "llvm_lib_dir",
+         },
++        .{
++            .prefix = "#define ZIG_SYSTEM_LIBCXX",
++            .field = "system_libcxx",
++        },
+         // .prefix = ZIG_LLVM_LINK_MODE parsed manually below
+     };
+ 
+diff --git a/stage1/config.h.in b/stage1/config.h.in
+index 0f1d902ef94..615967de509 100644
+--- a/stage1/config.h.in
++++ b/stage1/config.h.in
+@@ -28,5 +28,6 @@
+ #define ZIG_LLVM_LIBRARIES "@LLVM_LIBRARIES@"
+ #define ZIG_LLVM_LIB_PATH "@LLVM_LIBDIRS@"
+ #define ZIG_LLVM_LINK_MODE "@LLVM_LINK_MODE@"
++#define ZIG_SYSTEM_LIBCXX "@ZIG_SYSTEM_LIBCXX@"
+ 
+ #endif
+

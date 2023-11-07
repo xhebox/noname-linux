@@ -1,0 +1,61 @@
+--- hyprland-source/meson.build	2023-02-21 07:25:32.000000000 +0800
++++ hyprland-source/meson.build	2023-02-21 07:25:32.000000000 +0800
+@@ -39,7 +39,7 @@
+   ],
+   language: 'cpp')
+ 
+-wlroots = subproject('wlroots', default_options: ['examples=false'])
++wlroots = subproject('wlroots', default_options: ['examples=false','xwayland=disabled','backends=drm,libinput'])
+ have_xwlr = wlroots.get_variable('features').get('xwayland')
+ xcb_dep = dependency('xcb', required: get_option('xwayland'))
+ 
+--- hyprland-source/src/debug/CrashReporter.cpp	2023-02-20 23:25:32.000000000 +0000
++++ hyprland-source/src/debug/CrashReporter.cpp	2023-02-20 23:25:32.000000000 +0000
+@@ -1,7 +1,9 @@
+ #include "CrashReporter.hpp"
+ #include <random>
+ #include <sys/utsname.h>
++#ifdef __GLIBC__
+ #include <execinfo.h>
++#endif
+ #include <fstream>
+ 
+ #if defined(__DragonFly__) || defined(__FreeBSD__) || defined(__NetBSD__)
+--- hyprland-source/src/helpers/MiscFunctions.cpp	2023-09-23 07:18:10.000000000 +0800
++++ hyprland-source/src/helpers/MiscFunctions.cpp	2023-09-23 07:18:10.000000000 +0800
+@@ -6,7 +6,9 @@
+ #include <sys/utsname.h>
+ #include <iomanip>
+ #include <sstream>
++#ifdef __GLIBC__
+ #include <execinfo.h>
++#endif
+ 
+ #if defined(__DragonFly__) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
+ #include <sys/sysctl.h>
+@@ -688,6 +688,7 @@
+ 
+ std::vector<SCallstackFrameInfo> getBacktrace() {
+     std::vector<SCallstackFrameInfo> callstack;
++#ifdef __GLIBC__
+ 
+     void*                            bt[1024];
+     size_t                           btSize;
+@@ -699,6 +700,7 @@
+     for (size_t i = 0; i < btSize; ++i) {
+         callstack.emplace_back(SCallstackFrameInfo{bt[i], std::string{btSymbols[i]}});
+     }
++#endif
+ 
+     return callstack;
+ }
+--- hyprland-source/CMakeLists.txt	2023-09-23 07:18:10.000000000 +0800
++++ hyprland-source/CMakeLists.txt	2023-09-23 07:18:10.000000000 +0800
+@@ -200,7 +200,6 @@
+ target_link_libraries(Hyprland
+         ${CMAKE_SOURCE_DIR}/subprojects/wlroots/build/libwlroots.so.12032 # wlroots is provided by us
+         OpenGL::EGL
+-        OpenGL::GL
+         Threads::Threads
+         ${CMAKE_SOURCE_DIR}/subprojects/udis86/build/libudis86/liblibudis86.a
+ )

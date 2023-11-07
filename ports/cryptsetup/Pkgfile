@@ -1,7 +1,7 @@
 version="2.3.3"
 desc="Userspace setup tool for transparent encryption of block devices using dm-crypt"
-makedeps=["libressl", "json-c", "lvm2", "popt", "util-linux"]
-deps=["libressl", "json-c", "lvm2", "popt", "util-linux"]
+makedeps=["openssl", "json-c", "lvm2", "popt", "util-linux"]
+deps=["openssl", "json-c", "lvm2", "popt", "util-linux"]
 source=[
 	{url="https://www.kernel.org/pub/linux/utils/cryptsetup/v${version%.*}/cryptsetup-${version}.tar.xz"},
 	{url="encrypt_hook"},

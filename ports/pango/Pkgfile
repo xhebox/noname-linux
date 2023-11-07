@@ -12,7 +12,7 @@ ext='''
 
 build='''
 	noname-meson pango-$version build -Dlibthai=disabled -Dxft=disabled
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

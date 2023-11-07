@@ -1,6 +1,6 @@
-version="4.3"
-makedeps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
-deps=["libgmp", "fontconfig", "libressl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
+version="5.1.2"
+makedeps=["libgmp", "fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
+deps=["libgmp", "fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
 desc="Complete solution to record, convert and stream audio and video."
 source=[{url="https://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
@@ -18,7 +18,6 @@ build='''
 		--pkgconfigdir=/lib/pkgconfig \
 		--mandir=/share/man \
 		--disable-debug \
-		--enable-avresample \
 		--enable-fontconfig \
 		--enable-gmp \
 		--disable-gnutls \
@@ -35,7 +34,6 @@ build='''
 		--enable-libopencore_amrwb \
 		--enable-libopenjpeg \
 		--enable-libopus \
-		--disabled-libpulse \
 		--enable-libsoxr \
 		--enable-libspeex \
 		--disable-libssh \

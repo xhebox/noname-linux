@@ -1,0 +1,72 @@
+--- a/server/TracyFileRead.hpp    2023-02-26 22:30:03.000000000 +0800
++++ b/server/TracyFileRead.hpp    2023-02-26 22:30:03.000000000 +0800
+@@ -11,7 +11,9 @@
+ #include <thread>
+ #include <utility>
+ 
++#include <sys/types.h>
+ #include <sys/stat.h>
++#include <unistd.h>
+ 
+ #ifdef _MSC_VER
+ #  define stat64 _stat64
+--- a/server/TracySortedVector.hpp        2023-02-26 22:30:03.000000000 +0800
++++ b/server/TracySortedVector.hpp        2023-02-26 22:30:03.000000000 +0800
+@@ -3,6 +3,7 @@
+ 
+ #include "TracySort.hpp"
+ #include "TracyVector.hpp"
++#include <execution>
+ 
+ namespace tracy
+ {
+--- a/server/TracyTexture.cpp	2023-02-26 22:30:03.000000000 +0800
++++ a/server/TracyTexture.cpp	2023-02-26 22:30:03.000000000 +0800
+@@ -5,7 +5,7 @@
+ #  include <emscripten/html5.h>
+ #  include <GLES2/gl2.h>
+ #else
+-#  include "../profiler/src/imgui/imgui_impl_opengl3_loader.h"
++#  include <GLES2/gl2.h>
+ #endif
+ #include "TracyTexture.hpp"
+ #include "../public/common/TracyForceInline.hpp"
+@@ -23,7 +23,9 @@
+ {
+ #ifdef __EMSCRIPTEN__
+     s_hardwareS3tc = emscripten_webgl_enable_extension( emscripten_webgl_get_current_context(), "WEBGL_compressed_texture_s3tc" );
+-#else
++#elif 1
++    s_hardwareS3tc = true;
++#else
+     s_hardwareS3tc = false;
+     GLint num;
+     glGetIntegerv( GL_NUM_EXTENSIONS, &num );
+--- a/profiler/src/BackendGlfw.cpp     2023-07-21 23:34:28.080483595 +0800
++++ a/profiler/src/BackendGlfw.cpp     2023-07-21 23:34:28.080483595 +0800
+@@ -4,7 +4,7 @@
+ #  include <GLES2/gl2.h>
+ #  include <emscripten/html5.h>
+ #else
+-#  include "imgui/imgui_impl_opengl3_loader.h"
++#  include <GLES2/gl2.h>
+ #endif
+ 
+ #include <chrono>
+@@ -66,12 +66,15 @@
+     if( !glfwInit() ) exit( 1 );
+ #ifdef DISPLAY_SERVER_WAYLAND
+     glfwWindowHint( GLFW_ALPHA_BITS, 0 );
++    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
++    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
++    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+ #else
+     glfwWindowHint( GLFW_VISIBLE, 0 );
+-#endif
+     glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
+     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 2 );
+     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
++#endif
+ #ifdef __APPLE__
+     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
+ #endif

@@ -4,17 +4,15 @@ makedeps=["python3"]
 deps=["python3"]
 source=[
 	{url="https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v${version}/libglvnd-v${version}.tar.gz"},
-	{url="glvnd.patch"},
 ]
 
 ext='''
 	cd libglvnd-v$version
-#patch -Nbp1 -i ../glvnd.patch
 '''
 
 build='''
-	noname-meson libglvnd-v$version build -Denable_docs=false -Dgles1=false -Dx11=disabled -Dglx=disabled -Dtls=disabled
-	meson configure build
+	noname-meson libglvnd-v$version build -Dgles1=false -Dx11=disabled -Dglx=disabled -Dtls=disabled
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

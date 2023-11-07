@@ -1,0 +1,48 @@
+version="1.15.1"
+desc="onnx"
+deps=["boost", "onednn", "zlib"]
+makedeps=["python3-pybind11", "boost", "onednn", "python3-numpy", "python3", "zlib"]
+source=[
+	{url="https://github.com/microsoft/onnxruntime/archive/refs/tags/v$version.tar.gz"},
+	{url="musl.patch"},
+	{url="system-dnnl.diff"},
+]
+
+ext='''
+  cd onnxruntime-$version
+	sed '/NAMES Flatbuffers/s/^/#/g' -i cmake/external/onnxruntime_external_deps.cmake
+	sed '/NAMES Protobuf/s/^/#/g' -i cmake/external/onnxruntime_external_deps.cmake
+  sed 's|dims)|TensorShape(dims))|g' \
+    -i onnxruntime/contrib_ops/cuda/quantization/qordered_ops/qordered_qdq.cc
+  sed '11a#include <iostream>' \
+    -i orttraining/orttraining/test/training_api/trainer/trainer.cc
+  sed -e 's|PRIVATE  |PRIVATE |g' \
+      -e 's|2">|2>"|g' \
+      -i cmake/onnxruntime_mlas.cmake
+	patch -Np1 -i "$srcdir"/musl.patch
+	patch -Np1 -i "$srcdir"/system-dnnl.diff
+'''
+
+build='''
+	export CXXFLAGS="$CXXFLAGS -Wno-maybe-uninitialized -Wno-array-bounds"
+	python3 -m venv --system-site-packages ss
+	. ss/bin/activate
+	pip install packaging
+	noname-cmake onnxruntime-$version/cmake -Bbuild \
+		-Donnxruntime_ENABLE_PYTHON=ON \
+		-Donnxruntime_BUILD_UNIT_TESTS=OFF \
+    -Donnxruntime_BUILD_SHARED_LIB=ON \
+    -Donnxruntime_ENABLE_TRAINING=ON \
+    -Donnxruntime_ENABLE_LAZY_TENSOR=OFF \
+    -Donnxruntime_USE_DNNL=ON \
+		-Deigen_SOURCE_PATH=$(pkg-config --cflags eigen3 | sed 's|-I||g') \
+    -DCMAKE_CXX_STANDARD=17
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	cd build
+	python ../onnxruntime-$version/setup.py \
+		install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

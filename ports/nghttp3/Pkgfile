@@ -1,0 +1,12 @@
+version="0.8.0"
+desc='HTTP/3 library written in C '
+source=[{url="https://github.com/ngtcp2/nghttp3/releases/download/v$version/nghttp3-$version.tar.xz"}]
+
+build='''
+	cd nghttp3-$version
+	./configure --prefix=/ \
+		 --mandir=/share/man \
+		 --infodir=/share/info
+	make
+	make DESTDIR="$pkgdir" install
+'''

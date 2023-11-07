@@ -1,6 +1,6 @@
 version="5.64"
-makedeps=["dbus", "libical", "alsa-lib", "systemd"]
-deps=["dbus", "libical", "alsa-lib", "systemd"]
+makedeps=["dbus", "alsa-lib", "systemd"]
+deps=["dbus", "alsa-lib", "systemd"]
 source=[
 	{url="https://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz"},
 	{url="musl.patch"},
@@ -32,6 +32,7 @@ build='''
 		--enable-sixaxis \
 		--enable-mesh \
 		--enable-hid2hci \
+		--disable-obex \
 		--enable-experimental \
 		--enable-library
 	make

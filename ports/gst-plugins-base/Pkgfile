@@ -1,8 +1,8 @@
 version="1.18.1"
 desc="Multimedia graph framework - base"
 url="https://gstreamer.freedesktop.org/"
-deps=["gstreamer", "alsa-lib", "gtk3", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "sdl2", "zlib", "iso-codes", "libogg"]
-makedeps=["gstreamer", "alsa-lib", "gtk3", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "sdl2", "zlib", "iso-codes", "libogg"]
+deps=["gstreamer", "alsa-lib", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "zlib", "iso-codes", "libogg"]
+makedeps=["gstreamer", "alsa-lib", "libvorbis", "libpng", "libtheora", "pango", "opus", "libjpeg-turbo", "zlib", "iso-codes", "libogg"]
 source=[{url="https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-$version.tar.xz"}]
 
 build='''

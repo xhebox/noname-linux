@@ -1,0 +1,28 @@
+name="bind"
+version="9.18.10"
+_major="${version%%.*}"
+desc="A fast and lightweight key/value database library"
+deps=["libcap", "openssl", "libuv", "libnghttp2", "json-c", "libedit", "zlib"]
+makedeps=["libcap", "openssl", "libuv", "libnghttp2", "json-c", "libedit", "zlib"]
+source=[{url="https://downloads.isc.org/isc/bind$_major/$version/bind-$version.tar.xz"}]
+
+build='''
+	cd bind-$version
+	./configure \
+		--prefix=/ \
+		--sysconfdir=/etc/bind \
+		--localstatedir=/var \
+		--mandir=/share/man \
+		--infodir=/share/info \
+		--with-gssapi=no \
+		--without-libxml2 \
+		--with-openssl=yes \
+		--disable-dnstap \
+		--disable-largefile \
+		--enable-linux-caps \
+		--enable-shared \
+		--disable-static
+	make DESTDIR="$pkgdir" install
+	mv "$pkgdir"/sbin/* "$pkgdir"/bin
+	rm -rf "$pkgdir"/sbin
+'''

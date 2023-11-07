@@ -1,7 +1,7 @@
-version="3.6.2"
+version="3.9.0"
 desc="Library and utilities to access the PCI bus configuration registers"
-makedeps=["hwids", "kmod"]
-deps=["hwids", "kmod"]
+deps=["hwdata", "kmod"]
+makedeps=["hwdata", "kmod"]
 source=[{url="http://kernel.org/pub/software/utils/pciutils/pciutils-$version.tar.gz"}]
 
 build='''

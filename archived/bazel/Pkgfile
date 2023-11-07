@@ -1,15 +1,16 @@
-version="0.28.0"
-deps=["libarchive", "openjdk8", "zip", "unzip"]
-makedeps=["libarchive", "openjdk8", "zip", "unzip"]
+version="6.0.0"
+deps=["libarchive", "openjdk", "zip", "unzip"]
+makedeps=["libarchive", "openjdk", "zip", "unzip"]
 source=[
 	{url="https://github.com/bazelbuild/bazel/releases/download/${version}/bazel-${version}-dist.zip"},
-	{url="bfd.patch"},
 ]
 
 build='''
-	patch -p1 -i ../bfd.patch
-	env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" ./compile.sh
-  cd output
-  install -Dm755 "${srcdir}/scripts/packages/bazel.sh" "${pkgdir}/bin/bazel"
-  install -Dm755 "${srcdir}/output/bazel" "${pkgdir}/bin/bazel-real"
+	EXTRA_BAZEL_ARGS="--tool_java_runtime_version=local_jdk" ./compile.sh
+	install -Dm755 scripts/packages/bazel.sh "${pkgdir}/bin/bazel"
+	install -Dm755 output/bazel "${pkgdir}/bin/bazel-real"
+	mkdir -p "${pkgdir}/opt/bazel"
+	for d in examples third_party tools; do
+		cp -r ${d} "${pkgdir}/opt/bazel/"
+	done
 '''

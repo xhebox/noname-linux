@@ -8,7 +8,7 @@ source=[
 
 build='''
 	noname-meson gtkmm-$version build -Dmaintainer-mode=false -Dbuild-x11-api=false -Dbuild-atkmm-api=false -Dbuild-documentation=false
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

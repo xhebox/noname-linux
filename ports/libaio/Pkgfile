@@ -1,6 +1,6 @@
-version="0.3.112"
+version="0.3.113"
 desc="Asynchronous input/output library"
-source=[{url="http://ftp.debian.org/debian/pool/main/liba/libaio/libaio_${version}.orig.tar.xz"}]
+source=[{url="http://ftp.debian.org/debian/pool/main/liba/libaio/libaio_${version}.orig.tar.gz"}]
 
 build='''
 	cd libaio-$version

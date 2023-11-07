@@ -1,25 +1,34 @@
-version = "1.2.3"
+version = "1.2.4"
 desc = "An implementation of the standard C library for Linux-based systems."
 deps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
 makedeps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
 
 source = [
   { url = "https://musl.libc.org/releases/musl-$version.tar.gz" },
-  { url = "https://git.adelielinux.org/adelie/gcompat/-/archive/1.0.0/gcompat-1.0.0.tar.gz" },
+  { url = "https://git.adelielinux.org/adelie/gcompat/-/archive/current/gcompat-1.1.0.tar.gz" },
   { url = "__stack_chk_fail_local.c" },
   { url = "getconf.c" },
   { url = "iconv.c" },
   { url = "getent.c" },
   { url = "styp.patch" },
-  { url = "handle-aux-at_base.patch" },
 	{ url = "emoji.patch" },
+	{ url = "lfs64.patch" },
+	{ url = "lfs64-2.patch" },
+	{ url = "res_init.patch" },
+	{ url = "ifunc.patch" },
+	{ url = "handle_aux_at_base.patch" },
 ]
 
 ext = '''
+	cd gcompat-*
+	patch -Np1 -i "$srcdir"/res_init.patch
+	cd ..
+
 	cd musl-$version
 	for i in $source;do
 		echo "### $i"
 		case $i in
+		res_init.patch) ;;
 		*patch) patch -Nbp1 -i "$srcdir"/$i;;
 		esac
 	done
@@ -29,6 +38,10 @@ build = '''
 	unset LDFLAGS
 	unset CXXFLAGS
 	unset CFLAGS
+
+	cd "$srcdir"/gcompat-*
+	sed -i 's/__count/_count/g' libgcompat/pthread.c
+	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-x86_64.so.1 LOADER_NAME=ld-linux-x86-64.so.2 WITH_LIBUCONTEXT=1 install
 
 	if [ ! -z "$OTARGETS" ]; then
 		for OTARGET in $OTARGETS; do
@@ -78,9 +91,11 @@ build = '''
 	make
 	make DESTDIR="$pkgdir" install
 
-	cd "$srcdir"/gcompat-*
-	sed -i 's/__count/_count/g' libgcompat/pthread.c
-	make DESTDIR="$pkgdir" LINKER_PATH=/lib/ld-musl-${ARCH}.so.1 LOADER_NAME=ld-linux-${ARCH}.so.2 WITH_LIBUCONTEXT=1 install
+	mkdir -p  "$pkgdir"/etc/
+	cat >>  "$pkgdir"/etc/ld-musl-$ARCH.path << EOF
+/lib
+/lib/$ARCH-unknown-linux-musl
+EOF
 
 	ln -s /lib/libc.so "$pkgdir"/bin/ldd
 

@@ -1,7 +1,7 @@
 version="1.8.0"
 desc="A library implementing the SSH2 protocol as defined by Internet Drafts"
-makedeps=["libressl", "zlib"]
-deps=["libressl", "zlib"]
+makedeps=["openssl", "zlib"]
+deps=["openssl", "zlib"]
 source=[{url="https://www.libssh2.org/download/libssh2-$version.tar.gz"}]
 
 build='''

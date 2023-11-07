@@ -1,0 +1,14 @@
+version="1.0"
+desc='Wallpaper tool for Wayland compositors'
+deps=["wayland", "cairo", "gdk-pixbuf"]
+makedeps=["wayland-protocols", "cairo", "gdk-pixbuf"]
+source=[
+	{name="swaybg-$version.tar.gz", url="https://github.com/swaywm/swaybg/archive/$version.tar.gz"},
+]
+
+build='''
+	noname-meson swaybg-$version build -Dman-pages=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

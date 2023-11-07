@@ -1,11 +1,26 @@
-version="16.16.0"
+version="18.18.0"
 makedeps=["zlib", "python3", "icu", "libuv", "libnghttp2", "openssl"]
 deps=["zlib", "icu", "libuv", "libnghttp2", "openssl"]
 desc="Nodejs interpreter"
-source=[{url="https://nodejs.org//dist/v${version}/node-v${version}.tar.gz"}]
+source=[
+	{url="https://nodejs.org//dist/v${version}/node-v${version}.tar.gz"},
+	{url="icu72.patch"},
+]
+
+ext='''
+	cd node-v$version
+	for i in $source;do
+		echo "### $i"
+		case $i in
+		*patch) patch -Nbp1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
 
 build='''
 	cd node-v$version
+	export CFLAGS="$CFLAGS -Wno-enum-constexpr-conversion"
+	export CXXFLAGS="$CXXFLAGS -Wno-enum-constexpr-conversion"
 	GYP_DEFINES="linux_use_gold_flags=0 \
 		linux_use_bundled_binutils=0 \
 		linux_use_bundled_gold=0" \

@@ -1,0 +1,54 @@
+version="1.13.1"
+makedeps=["python3", "onednn", "protobuf", "flatbuffers", "boost", "eigen", "python3-pybind11"]
+deps=["python3", "onednn", "protobuf", "flatbuffers"]
+source=[
+	{protocol="git", url="https://github.com/microsoft/onnxruntime", commit="b353e0b41d588605958b03f9a223d10a2fbeb514"},
+	{url="install-orttraining-files.diff"},
+	{url="no-execinfo.patch"},
+	{url="system-dnnl.diff"},
+	{url="system.patch"},
+]
+desc="Scientific tools for Python"
+
+ext='''
+	cd onnxruntime
+	for i in $source;do
+		case $i in
+		*diff) patch -Nbp1 -i "$srcdir"/$i;;
+		*patch) patch -Nbp1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
+
+build='''
+	python -m venv --system-site-packages ss
+	. ss/bin/activate
+	pip install cython pybind11 packaging
+
+	cd onnxruntime
+	for mod in onnx SafeInt tensorboard dlpack cxxopts pytorch_cpuinfo json date protobuf re2 nsync flatbuffers eigen; do
+		git submodule update --init --depth=1 cmake/external/$mod
+	done
+	noname-cmake -S cmake -Bbuild \
+		-DBUILD_ONNX_PYTHON=ON \
+		-Donnxruntime_BUILD_SHARED_LIB=ON \
+		-Donnxruntime_BUILD_UNIT_TESTS=OFF \
+		-Donnxruntime_ENABLE_PYTHON=ON \
+		-Donnxruntime_PREFER_SYSTEM_LIB=ON \
+		-Donnxruntime_ENABLE_TRAINING=ON \
+		-Donnxruntime_ENABLE_LAZY_TENSOR=OFF \
+		-Donnxruntime_USE_MPI=ON \
+		-Donnxruntime_USE_PREINSTALLED_EIGEN=OFF \
+		-Donnxruntime_USE_DNNL=ON \
+		-Donnxruntime_ENABLE_PYTHON=ON \
+		-DONNX_CUSTOM_PROTOC_EXECUTABLE=/bin/protoc \
+		-Donnxruntime_USE_FULL_PROTOBUF=OFF
+	cd build
+	cmake --build .
+	DESTDIR="${pkgdir}" cmake --install .
+	python ../setup.py build
+	python ../setup.py install \
+		--prefix= \
+		--root=$pkgdir \
+		--optimize=1
+'''

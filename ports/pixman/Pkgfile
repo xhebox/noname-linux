@@ -1,4 +1,4 @@
-version="0.40.0"
+version="0.42.2"
 desc="Pixel manipulation library"
 source=[
 	{url="https://www.x.org/archive/individual/lib/pixman-$version.tar.gz"},

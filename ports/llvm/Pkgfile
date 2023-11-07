@@ -1,22 +1,20 @@
-version="14.0.6"
+version="16.0.6"
 wasi_version="16.0"
 desc="LLVM compiler and its backend"
-deps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot"]
-makedeps=["libffi", "libxml2", "libedit", "ncurses", "libunwind", "wasi-sysroot", "flex", "bison", "python3"]
+deps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd"]
+makedeps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd", "flex", "bison", "python3"]
 source=[
 	{url="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${wasi_version%.*}/libclang_rt.builtins-wasm32-wasi-${wasi_version}.tar.gz"},
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.src.tar.xz"},
 	{url="clang-libexec.patch"},
-	{url="llvm-001-musl.patch"},
-	{url="libcxx-0001-musl-hacks.patch"},
 ]
 
 ext='''
 	cd llvm-project-$version.src
 
-	sed -i 's,# Set common link flags.,list(APPEND SANITIZER_COMMON_LINK_LIBS execinfo),' compiler-rt/CMakeLists.txt
-	sed -i 's,# We don.t use the C++ standard library. so avoid including it by mistake.,list(APPEND SCUDO_LINK_FLAGS -lexecinfo),' compiler-rt/lib/scudo/standalone/CMakeLists.txt
 	sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+
+	sed -i 's/RUNTIME_DIR_default ON/RUNTIME_DIR_default OFF/g' llvm/runtimes/CMakeLists.txt
 
 	cd llvm
 	for i in $source;do
@@ -46,34 +44,45 @@ ext='''
 build='''
 	cd llvm-project-$version.src
 
-	export CC=clang
-	export CXX=clang++
-
-	noname-cmake llvm -Bbuild \
+	noname-cmake llvm -Wno-dev -Bbuild \
+		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET" \
+		-DLLVM_HOST_TRIPLE="$TARGET" \
 		-DLLVM_BINUTILS_INCDIR=/include \
 		-DLLVM_BUILD_DOCS=OFF \
 		-DLLVM_BUILD_TESTS=OFF \
 		-DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_BUILD_LLVM_DYLIB=ON \
-		-DBUILD_SHARED_LIBS=OFF \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=OFF \
 		-DLLVM_INSTALL_CCTOOLS_SYMLINKS=OFF \
+		-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
+		-DLLVM_LIBGCC_EXPLICIT_OPT_IN=ON \
+		-DLLVM_ENABLE_LLD=ON \
+		-DLLVM_ENABLE_LIBCXX=ON \
 		-DLLVM_INSTALL_UTILS=ON \
 		-DLLVM_ENABLE_FFI=YES \
-		-DLLVM_ENABLE_RTTI=YES \
 		-DLLVM_ENABLE_LIBXML2=YES \
 		-DLLVM_ENABLE_TERMINFO=YES \
 		-DLLVM_ENABLE_LIBEDIT=YES \
 		-DLLVM_ENABLE_ZLIB=YES \
+		-DLLVM_ENABLE_ZSTD=YES \
 		-DLLVM_APPEND_VC_REV=NO \
-		-DLLVM_ENABLE_LLD=YES \
-		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lldb;compiler-rt;lld;polly;openmp;pstl" \
-		-DLIBCXXABI_LIBCXX_INCLUDES=$PWD/libcxx/include \
+		-DCLANG_DEFAULT_CXX_STDLIB=libc++ \
+		-DCLANG_DEFAULT_RTLIB=compiler-rt \
+		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;mlir;lld;openmp;pstl;compiler-rt" \
+		-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+		-DCOMPILER_RT_BUILD_GWP_ASAN=OFF \
+		-DCOMPILER_RT_BUILD_XRAY=OFF \
+		-DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+		-DCOMPILER_RT_BUILD_SANITIZERS=ON \
+		-DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+		-DLIBCXXABI_USE_COMPILER_RT=ON \
+		-DLIBUNWIND_USE_COMPILER_RT=ON \
+		-DLIBUNWIND_INSTALL_HEADERS=ON \
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
-		-DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET"
+		-DLIBCXX_USE_COMPILER_RT=YES
 
-	cmake --build build
-	DESTDIR="${pkgdir}" cmake --build build --target install
+	cmake --build build -j12
+	DESTDIR="${pkgdir}" cmake --build build --target install install-runtimes
 
 	install -d "$pkgdir"/lib/bfd-plugins
 	ln -s ../LLVMgold.so "$pkgdir"/lib/bfd-plugins/LLVMgold.so

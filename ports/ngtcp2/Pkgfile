@@ -1,0 +1,14 @@
+version="0.11.0"
+desc='ngtcp2 project is an effort to implement IETF QUIC protocol'
+deps=["nghttp3", "openssl"]
+makedeps=["nghttp3", "openssl"]
+source=[{url="https://github.com/ngtcp2/ngtcp2/releases/download/v$version/ngtcp2-$version.tar.xz"}]
+
+build='''
+	cd ngtcp2-$version
+	./configure --prefix=/ \
+		 --mandir=/share/man \
+		 --infodir=/share/info
+	make
+	make DESTDIR="$pkgdir" install
+'''

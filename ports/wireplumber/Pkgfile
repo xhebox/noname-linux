@@ -1,0 +1,14 @@
+version="0.4.13"
+makedeps=["gobject-introspection", "graphviz", "meson", "pipewire", "systemd"]
+deps=["gobject-introspection", "graphviz", "meson", "pipewire", "systemd"]
+source=[
+	{url="https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/wireplumber-$version.tar.gz"},
+]
+
+build='''
+	sed -i "/subdir('docs')/d" wireplumber-$version/meson.build
+	noname-meson wireplumber-$version build --wrap-mode default -Delogind=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

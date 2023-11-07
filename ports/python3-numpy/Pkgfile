@@ -1,6 +1,6 @@
-version="1.22.3"
-makedeps=["python3", "python3-cython"]
-deps=["python3"]
+version="1.24.2"
+makedeps=["python3", "openblas"]
+deps=["python3", "openblas"]
 source=[
 	{url="https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz"},
 	{url="site.cfg"},
@@ -11,6 +11,9 @@ build='''
 	pyver=$(python3 -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))')
 
 	cp site.cfg numpy-$version/numpy-$version 
+	python -m venv --system-site-packages ss
+	. ss/bin/activate
+	pip install cython
 
 	export LDFLAGS="$LDFLAGS -shared"
 	export ATLAS=None
@@ -21,7 +24,6 @@ build='''
 	python3 setup.py install \
 		--prefix= \
 		--root=$pkgdir \
-		--skip-build \
 		--optimize=1
 
 	install -m755 -d "${pkgdir}/include/python${pyver}m"

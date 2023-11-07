@@ -1,7 +1,7 @@
-version="010"
+version="015"
 desc="USB Device Utilities"
-makedeps=["libusb", "hwids"]
-deps=["libusb", "hwids"]
+makedeps=["libusb", "hwdata"]
+deps=["libusb", "hwdata"]
 source=[{url="http://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz"}]
 
 build='''

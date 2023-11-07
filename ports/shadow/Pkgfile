@@ -1,11 +1,13 @@
-version="4.8"
-makedeps=["acl", "pam"]
+version="4.13"
+makedeps=["acl", "pam", "libcap"]
 deps=["acl", "pam"]
 desc="Shadow password file utilities"
 source=[
 	{url="https://github.com/shadow-maint/shadow/releases/download/$version/shadow-$version.tar.gz"},
-	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/xstrdup.patch"},
-	{url="https://raw.githubusercontent.com/voidlinux/void-packages/master/srcpkgs/shadow/patches/shadow-strncpy-usage.patch"},
+	{url="0001-Disable-replaced-tools-and-man-pages.patch"},
+	{url="0002-Adapt-login.defs-for-PAM-and-util-linux.patch"},
+	{url="0003-Add-Arch-Linux-defaults-for-login.defs.patch"},
+	{url="0004-Add-Arch-Linux-defaults-for-etc-pam.d.patch"},
 	{url="useradd.defaults"},
 	{url="defaults.pam"},
 	{url="chgpasswd"},
@@ -19,7 +21,7 @@ ext='''
 	cd shadow-$version
 	for i in $source;do
 		case $i in
-		*.patch) patch -p0 -i ../$i;;
+		*.patch) patch -Np1 -i ../$i;;
 		esac
 	done
 	sed -i '/^SUBDIRS/s/pam\.d//' etc/Makefile.in
@@ -32,11 +34,13 @@ build='''
 		--libexecdir=/lib \
 		--bindir=/bin --sbindir=/bin \
 		--libdir=/lib --enable-shared \
-		--enable-account-tools-setuid=no \
+		--disable-account-tools-setuid \
 		--with-fcaps \
 		--disable-man \
 		--with-libpam \
-		--without-selinux --with-acl --with-attr --with-group-name-max-length=32
+		--without-selinux \
+		--without-su \
+		--with-acl --with-attr --with-group-name-max-length=32
 	make
 	make DESTDIR="$pkgdir" install
 
@@ -50,21 +54,9 @@ build='''
 		install -Dm644 ../defaults.pam "$pkgdir/etc/pam.d/$file"
 	done
 
-	for i in login su chsh chfn sg nologin vipw vigr; do
+	for i in login chfn sg nologin; do
 		rm "$pkgdir"/bin/$i
 	done
 
 	mv "$pkgdir"/bin/newgrp "$pkgdir"/bin/sg
-
-	find "$pkgdir"/share/man \
-	'(' -name 'chsh.1'		-o \
-	-name 'chfn.1'		-o \
-	-name 'su.1'			-o \
-	-name 'logoutd.8' -o \
-	-name 'login.1'	 -o \
-	-name 'nologin.8' -o \
-	-name 'vipw.8'		-o \
-	-name 'vigr.8'		-o \
-	-name 'newgrp.1' ')' \
-	-delete
 '''

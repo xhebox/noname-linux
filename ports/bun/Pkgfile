@@ -1,0 +1,81 @@
+version="0.8.1"
+makedeps=["ruby", "zig"]
+zstd_version="1.5.5"
+cares_version="1.19.1"
+_cares_version="`echo $cares_version | tr . _`"
+base64_version="e77bd70bdd860c52c561568cffb251d88bba064c"
+uwebsockets_version="master"
+usockets_version="4ca9ca21b72eda7a988ad1daa3103c2aeb45aaf9"
+lsquic_version="108c4e7629a8c10b9a73e3d95be0a1652e620fb9"
+lol_version="master"
+zlib_version="gcc.amd64"
+tinycc_version="mob"
+libarchive_version="3.7.1"
+boringssl_version="master"
+mimalloc_version="master"
+webkit_version="a780bdf0255ae1a7ed15e4b3f31c14af705facae"
+bun_webkit_version="2023-aug3-5"
+pico_version="master"
+source=[
+	{url="https://github.com/oven-sh/bun/archive/refs/tags/bun-v$version.tar.gz"},
+	{url="patches.tar.gz"},
+
+	{url="https://github.com/facebook/zstd/releases/download/v$zstd_version/zstd-$zstd_version.tar.gz", name="zstd_$zstd_version.tar.gz"},
+	{url="https://github.com/c-ares/c-ares/releases/download/cares-$_cares_version/c-ares-$cares_version.tar.gz", name="c-ares_$cares_version.tar.gz"},
+	{url="https://github.com/aklomp/base64/archive/$base64_version.tar.gz", name="base64-$base64_version.tar.gz"},
+
+	{url="https://github.com/Jarred-Sumner/uWebSockets/archive/refs/heads/$uwebsockets_version.zip", name="uWebSockets-$uwebsockets_version.zip"},
+	{url="https://github.com/Jarred-Sumner/uSockets/archive/$usockets_version.zip", name="uSockets-$usockets_version.zip"},
+	{url="https://github.com/litespeedtech/lsquic/archive/$lsquic_version.zip", name="lsquic-$lsquic_version.zip"},
+
+	{url="https://github.com/cloudflare/lol-html/archive/refs/heads/$lol_version.zip", name="lol-html-$lol_version.zip"},
+	{url="https://github.com/oven-sh/boringssl/archive/refs/heads/$boringssl_version.zip", name="boringssl-$boringssl_version.zip"},
+	{url="https://github.com/cloudflare/zlib/archive/refs/heads/$zlib_version.zip", name="zlib_$zlib_version.zip"},
+	{url="https://github.com/Jarred-Sumner/tinycc/archive/refs/heads/$tinycc_version.zip", name="tinycc_$tinycc_version.zip"},
+	{url="https://github.com/libarchive/libarchive/releases/download/v$libarchive_version/libarchive-$libarchive_version.tar.gz"},
+	{url="https://github.com/Jarred-Sumner/mimalloc/archive/refs/heads/$mimalloc_version.zip", name="mimalloc-$mimalloc_version.zip"},
+	{url="https://github.com/oven-sh/WebKit/archive/$webkit_version.zip", name="webkit-$webkit_version.zip"},
+	{url="https://github.com/h2o/picohttpparser/archive/refs/heads/$pico_version.zip", name="picohttpparser-$pico_version.zip"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd bun-bun-v$version
+	rm -rf src/deps/base64 src/deps/zstd src/deps/zlib src/deps/c-ares src/deps/tinycc src/deps/uws src/deps/lol-html src/deps/boringssl src/deps/libarchive src/deps/mimalloc src/deps/picohttpparser src/bun.js/WebKit
+	ln -sr ../base64-$base64_version src/deps/base64
+	ln -sr ../zstd-$zstd_version src/deps/zstd
+	ln -sr ../zlib-$zlib_version src/deps/zlib
+	ln -sr ../c-ares-$cares_version src/deps/c-ares
+	ln -sr ../tinycc-$tinycc_version src/deps/tinycc
+
+	ln -sr ../uWebSockets-$uwebsockets_version src/deps/uws
+	rm -rf src/deps/uws/uSockets
+	ln -sr ../uSockets-$usockets_version src/deps/uws/uSockets
+	rm -rf src/deps/uws/uSockets/lsquic src/deps/uws/uSockets/boringssl
+	ln -sr ../lsquic-$lsquic_version src/deps/uws/uSockets/lsquic
+	ln -sr ../boringssl-$boringssl_version src/deps/uws/uSockets/boringssl
+
+	ln -sr ../lol-html-$lol_version src/deps/lol-html
+	ln -sr ../boringssl-$boringssl_version src/deps/boringssl
+	ln -sr ../libarchive-$libarchive_version src/deps/libarchive
+	ln -sr ../mimalloc-$mimalloc_version src/deps/mimalloc
+	ln -sr ../WebKit-$webkit_version src/bun.js/WebKit
+	ln -sr ../picohttpparser-$pico_version src/deps/picohttpparser
+	patch -Np1 -i ../musl.patch
+	cp -a ../src .
+'''
+
+build='''
+	cd bun-bun-v$version
+	export JSC_BASE_DIR=$PWD/src/bun.js/WebKit/WebKitBuild/Release/
+	export LIB_ICU_PATH=/lib
+	make vendor-without-check -j1
+	make identifier-cache -j1
+	make jsc-build -j1
+	make jsc-copy-headers -j1
+	make headers -j1
+	make release-bindings
+	make build-obj -j1
+	make bun-link-lld-release -j1
+	install -D -m 755 packages/bun-linux-x64/bun "$pkgdir/bin/bun"
+'''

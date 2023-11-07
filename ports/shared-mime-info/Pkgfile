@@ -9,7 +9,7 @@ source=[
 
 build='''
 	noname-meson xdg-shared-mime-info build -Dupdate-mimedb=false
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 	install -Dm644 ../mime.toml "$pkgdir/${HOOKS#$ROOT}"/mime.toml

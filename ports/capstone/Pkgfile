@@ -1,15 +1,8 @@
-version="4.0.2"
-deps=["python3"]
-makedeps=["python3"]
-source=[{url="https://github.com/aquynh/capstone/archive/${version}/capstone-${version}.tar.gz"}]
+version="5.0-rc4"
+source=[{url="https://github.com/capstone-engine/capstone/releases/download/$version/capstone-$version.tar.xz"}]
 
 build='''
 	cd capstone-$version
 	make
 	make DESTDIR="${pkgdir}" install
-	cd bindings/python
-	/bin/python3 setup.py install \
-		--prefix= \
-		--root=$pkgdir \
-		--optimize=1
 '''

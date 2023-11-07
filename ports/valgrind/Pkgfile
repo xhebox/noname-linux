@@ -1,0 +1,19 @@
+version="3.21.0"
+desc="An open-source memory debugger for GNU/Linux"
+source=[
+	{url="https://ftp.gwdg.de/pub/linux/sources.redhat.com/valgrind/valgrind-$version.tar.bz2"},
+	{url="valgrind-3.7.0-fno-stack-protector.patch"},
+	{url="valgrind-3.7.0-respect-flags.patch"},
+]
+
+build='''
+	cd valgrind-$version
+	patch -p1 -i "$srcdir"/valgrind-3.7.0-respect-flags.patch
+	patch -p1 -i "$srcdir"/valgrind-3.7.0-fno-stack-protector.patch
+	sed -i -e "s:doc/valgrind:doc/${PF}:" docs/Makefile.am
+	sed -i -e 's:-arch \(i386\|x86_64\)::g' Makefile.all.am
+	autoreconf -i
+	./configure --prefix=/ --without-mpicc
+	make
+	make DESTDIR="${pkgdir}" install
+'''

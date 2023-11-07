@@ -1,0 +1,16 @@
+version="5.0.0"
+desc="A functional language with OO extensions"
+makedeps=["ncurses"]
+deps=["ncurses"]
+source=[
+	{url="https://caml.inria.fr/distrib/ocaml-${version%.*}/ocaml-${version}.tar.xz"},
+]
+
+build='''
+  cd ocaml-$version
+  export CFLAGS="$CFLAGS -ffat-lto-objects"
+  export CXXFLAGS="$CXXFLAGS -ffat-lto-objects"
+  ./configure --prefix / --mandir /share/man -enable-frame-pointers
+  make world.opt
+  make DESTDIR="${pkgdir}" install
+'''

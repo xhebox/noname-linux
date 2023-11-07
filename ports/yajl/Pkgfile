@@ -1,0 +1,9 @@
+version="2.1.0"
+desc='Yet Another JSON Library'
+source=[{url="https://github.com/lloyd/yajl/archive/refs/tags/${version}.tar.gz"}]
+
+build='''
+	noname-cmake yajl-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --install build
+'''

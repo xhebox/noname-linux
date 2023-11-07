@@ -1,8 +1,8 @@
 name="firefox"
-version="106.0.3"
+version="114.0.2"
 desc="Firefox web browser"
-deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
-makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libevent", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "nspr", "nss", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
+deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
+makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
@@ -47,6 +47,7 @@ ac_add_options --disable-elf-hack
 ac_add_options --with-wasi-sysroot=/lib/wasi
 ac_add_options --with-ccache=/bin/ccache
 ac_add_options --host=$TARGET
+ac_add_options --disable-bootstrap
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
 export CXX='clang++ --target=x86_64-pc-linux-musl'
@@ -61,15 +62,15 @@ ac_add_options --enable-update-channel=release
 ac_add_options --with-distribution-id=noname-linux
 
 # System libraries
-ac_add_options --with-system-nspr
-ac_add_options --with-system-nss
 ac_add_options --with-system-jpeg
 ac_add_options --with-system-zlib
-ac_add_options --with-system-libevent
 ac_add_options --with-system-libvpx
 ac_add_options --with-system-png
 ac_add_options --enable-system-pixman
 ac_add_options --enable-system-ffi
+ac_add_options --without-system-libevent
+ac_add_options --without-system-nspr
+ac_add_options --without-system-nss
 
 # Features
 ac_add_options --enable-alsa

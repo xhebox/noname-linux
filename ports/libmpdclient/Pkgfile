@@ -4,7 +4,7 @@ source=[{url="https://www.musicpd.org/download/libmpdclient/${version%.*}/libmpd
 
 build='''
 	noname-meson libmpdclient-$version build -Denable_docs=false
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

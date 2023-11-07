@@ -1,4 +1,4 @@
-version="6.1"
+version="6.3"
 desc="A SystemV Release4.0 cursese mulation library"
 source=[{url="http://mirrors.ustc.edu.cn/gnu/ncurses/ncurses-$version.tar.gz"}]
 deps=["musl"]
@@ -34,6 +34,8 @@ build='''
 	for lib in tic tinfo; do
 		echo "INPUT(libncursesw.so.${version%.*})" > "$pkgdir/lib/lib${lib}.so"
 		ln -s libncursesw.so.${version%.*} "$pkgdir/lib/lib${lib}.so.${version%.*}"
+		ln -s libncursesw.so.${version%.*} "$pkgdir/lib/lib${lib}.so.5"
+		ln -s ncursesw.pc "$pkgdir/lib/pkgconfig/${lib}.pc"
 	done
 
 	echo "INPUT(-lncursesw)" > "$pkgdir"/lib/libcursesw.so

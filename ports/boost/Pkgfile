@@ -1,10 +1,10 @@
-version="1.69.0"
+version="1.81.0"
 ver="`echo $version | tr . _`"
-deps=["icu", "zlib", "bzip2"]
-makedeps=["icu", "zlib", "bzip2"]
+deps=["icu", "zlib", "bzip2", "zstd", "python3-numpy"]
+makedeps=["icu", "zlib", "bzip2", "zstd", "python3-numpy"]
 desc="Free peer-reviewed portable C++ source libraries."
 source=[
-	{url="https://dl.bintray.com/boostorg/release/$version/source/boost_$ver.tar.gz"},
+	{url="https://boostorg.jfrog.io/artifactory/main/release/${version}/source/boost_${ver}.tar.gz"},
 	{url="musl.patch"},
 ]
 
@@ -19,16 +19,14 @@ build='''
 	JOBS=`echo $MAKEFLAGS | awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}'`
 	test -n "$JOBS" && export JOBS="-j $JOBS"
 
-	./bootstrap.sh --with-toolset=gcc --with-icu --without-libraries="python"
-	./b2 stage threading=multi link=shared debug-symbols=off variant=release \
+	./bootstrap.sh --with-toolset=gcc --with-icu --with-python="python3"
+	./b2 install threading=multi link=shared,static debug-symbols=off variant=release \
 	runtime-link=shared \
 	toolset=gcc \
 	cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
-	cxxflags="${CPPFLAGS} ${CXXFLAGS} -std=c++14 -fPIC -O3" \
+	cxxflags="${CPPFLAGS} ${CXXFLAGS} -fPIC -O3" \
 	linkflags="${LDFLAGS}" \
-	--without-python \
 	--prefix=$pkgdir \
 	--layout=system \
-	$JOBS \
-	install
+	$JOBS
 '''

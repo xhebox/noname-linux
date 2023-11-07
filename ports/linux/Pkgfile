@@ -1,4 +1,4 @@
-version="6.0.7"
+version="6.4.3"
 compiler_flags="CC=clang HOSTCC=clang LD=ld.lld LLVM=1 LLVM_IAS=1"
 _kernelname="noname"
 xanmod="1"
@@ -8,7 +8,6 @@ source=[
 	{url="https://github.com/xanmod/linux/releases/download/${version}-xanmod1/patch-${version}-xanmod1.xz"},
 	{url="fix-musl-objtool.patch"},
 	{url="headers.patch"},
-	{url="musl.patch"},
 	{url="linux.preset"},
 ]
 makedeps=["bc", "bash", "inetutils", "elfutils", "pahole", "libarchive", "llvm"]
@@ -22,13 +21,12 @@ ext='''
 	unset LDFLAGS
 
 	cd linux-${version%.*}
-	scripts/setlocalversion --save-scmversion
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
 	patch -Np1 -i ../fix-musl-objtool.patch
 	patch -Np1 -i ../headers.patch
-	patch -Np1 -i ../patch-${version}-xanmod${xanmod}
+	patch -Np1 -i ../patch-${version}-xanmod${xanmod} || true
 
 	cp -vf CONFIGS/xanmod/gcc/config_x86-64-v3 .config
 

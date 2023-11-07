@@ -6,7 +6,7 @@ source=[{url="http://download.gnome.org/sources/gobject-introspection/${version%
 
 build='''
 	noname-meson gobject-introspection-$version build -Dcairo=disabled -Ddoctool=disabled -Dgtk_doc=false
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

@@ -1,0 +1,102 @@
+version="1.36.1"
+_getrandom1_ver="0.1.16"
+_rusty_v8_ver="0.74.3"
+_stacker_ver="0.1.15"
+desc="A modern runtime for JavaScript and TypeScript."
+makedeps=["rust", "python3", "nodejs", "llvm", "libffi", "zlib", "zstd", "sqlite", "icu"]
+deps=["rust", "python3", "nodejs", "llvm", "libffi", "zlib", "zstd", "sqlite", "icu"]
+source=[
+	{url="https://github.com/denoland/deno/archive/refs/tags/v$version.tar.gz"},
+	{url="https://github.com/rust-random/getrandom/archive/v$_getrandom1_ver.tar.gz",name="getrandom-v$_getrandom1_ver.tar.gz"},
+	{url="https://static.crates.io/crates/v8/v8-$_rusty_v8_ver.crate",name="v8-$_rusty_v8_ver.tar.gz"},
+	{url="https://github.com/rust-lang/stacker/archive/stacker-$_stacker_ver.tar.gz",name="stacker_$_stacker_ver.tar.gz"},
+	{url="https://raw.githubusercontent.com/chromium/chromium/117.0.5881.2/tools/generate_shim_headers/generate_shim_headers.py"},
+	{url="musl.patch"},
+	{url="v8-use-system-zlib.patch"},
+	{url="v8-use-system-icu.patch"},
+	{url="v8-revert-llvm16-linker-flag.patch"},
+	{url="getrandom-0.1-musl-compat.patch"},
+]
+
+ext='''
+	cd deno-$version
+	mkdir -p vendor
+	mv ../getrandom-$_getrandom1_ver vendor/getrandom1
+	mv ../stacker-stacker-$_stacker_ver vendor/stacker
+	mv ../v8-$_rusty_v8_ver vendor/v8
+	install -Dm755 "$srcdir"/generate_shim_headers.py vendor/v8/tools/generate_shim_headers/generate_shim_headers.py
+	cd vendor/v8
+	use_system="icu zlib"
+	python3 build/linux/unbundle/replace_gn_files.py --system-libraries $use_system
+	for lib in $use_system; do
+		sed -i '/"\/\/base"/d' third_party/$lib/BUILD.gn
+		find . -type f -path "*third_party/$lib/*" \
+			\! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+			\! -name 'compression_utils_portable.*' \
+			-delete
+	done
+	cd ../..
+
+	for i in $source;do
+		echo "### $i"
+		case $i in
+		*patch) patch -Nbp1 -i "$srcdir"/$i;;
+		esac
+	done
+
+	cat >> Cargo.toml <<-EOF
+		[patch.crates-io]
+		getrandom1 = { path = "vendor/getrandom1", package = "getrandom" }
+		stacker = { path = "vendor/stacker" }
+		v8 = { path = "vendor/v8" }
+	EOF
+	sed -Ei \
+		-e '/^deno_core\s*=/{ s/\}/, default-features = false }/ }' \
+		-e 's/^(flate2\s*=)\s*"([^"]+)".*/\1 { version = "\2", default-features = false, features = ["zlib"] }/' \
+		-e '/^rusqlite\s*=/{ s/"bundled"/"buildtime_bindgen"/ }' \
+		Cargo.toml
+	sed -Ei 's/^(libffi-sys\s*=)\s*"([^"]+)".*/\1 { version = "\2", features = ["system"] }/' \
+		ext/ffi/Cargo.toml
+	sed -Ei '/^libz-sys\s*/{ s/"static"// }' \
+		ext/node/Cargo.toml
+'''
+
+build='''
+	cd deno-$version
+
+	export CFLAGS="${CFLAGS} -O2 -Wno-unknown-warning-option -Wno-builtin-macro-redefined -Wno-deprecated-declarations"
+	export CXXFLAGS="${CXXFLAGS} -O2 -Wno-unknown-warning-option -Wno-builtin-macro-redefined -Wno-deprecated-declarations"
+	export CPPFLAGS="$CPPFLAGS -D__DATE__=  -D__TIME__=  -D__TIMESTAMP__="
+	export V8_FROM_SOURCE=1
+	export GN_ARGS="
+	chrome_pgo_phase=0
+	custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
+	host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+	v8_snapshot_toolchain=\"//build/toolchain/linux/unbundle:default\"
+	fatal_linker_warnings=false
+	is_debug=false
+	symbol_level=0
+	use_custom_libcxx=false
+	use_sysroot=false
+	"
+	export EXTRA_GN_ARGS="use_custom_libcxx=false"
+	export RUSTFLAGS="$RUSTFLAGS -C linker=clang++ -C link-arg=-fuse-ld=lld -C link-args=-Wl,-zstack-size=8388608 -A warnings"
+	export CLANG_BASE_PATH="$(llvm-config --prefix)"
+	export CARGO_PROFILE_RELEASE_LTO="thin"
+	export AR=llvm-ar
+	export CXXSTDLIB=c++
+	export CC=clang
+	export CXX=clang++
+	export LD=clang++
+	export NM=llvm-nm
+	env >> 1
+	export CARGO_HOME=$srcdir
+	cargo build --release --no-default-features
+	install -Dm755 target/release/deno "$pkgdir"/bin/deno
+  install -dm755 "$pkgdir"/share/bash-completion/completions
+  ./target/release/deno completions bash > "$pkgdir"/share/bash-completion/completions/deno
+  install -dm755 "$pkgdir"/share/zsh/site-functions
+  ./target/release/deno completions zsh > "$pkgdir"/share/zsh/site-functions/_deno
+  install -dm755 "$pkgdir"/share/fish/vendor_functions.d
+  ./target/release/deno completions fish > "$pkgdir"/share/fish/vendor_functions.d/deno.fish
+'''

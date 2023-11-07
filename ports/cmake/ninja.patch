@@ -1,0 +1,13 @@
+diff --git a/meta/classes/cmake.bbclass b/meta/classes/cmake.bbclass
+index 74a952142ff..d60dad8d66b 100644
+--- a/meta/classes/cmake.bbclass
++++ b/meta/classes/cmake.bbclass
+@@ -9,7 +9,7 @@  CCACHE = ""
+ 
+ # What CMake generator to use.
+ # The supported options are "Unix Makefiles" or "Ninja".
+-OECMAKE_GENERATOR ?= "Unix Makefiles"
++OECMAKE_GENERATOR ?= "Ninja"
+ 
+ python() {
+     generator = d.getVar("OECMAKE_GENERATOR")

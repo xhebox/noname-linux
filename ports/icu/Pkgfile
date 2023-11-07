@@ -1,19 +1,29 @@
-version="68.2"
+version="73.2"
 ver="`echo $version | tr . -`"
 verd="`echo $version | tr . _`"
 desc="International Components for Unicode library"
 source=[
-	{ url="https://github.com/unicode-org/icu/releases/download/release-${ver}/icu4c-${verd}-src.tgz", name="icu4c-$version.tar.gz" },
+	{url="https://github.com/unicode-org/icu/releases/download/release-${ver}/icu4c-${verd}-src.tgz", name="icu4c-$version.tar.gz"},
+	{url="ICU-22132.patch"},
 ]
+
+ext='''
+	cd icu/source
+	for i in $source;do
+		echo "### $i"
+		case $i in
+		*patch) patch -Nbp1 -i "$srcdir"/$i;;
+		esac
+	done
+'''
 
 build='''
 	cd icu/source
-
 	bash ./configure \
 		--prefix= \
 		--sbindir=/bin \
-		--sysconfdir=/etc \
-		--with-data-packaging=library
+		--enable-static \
+		--sysconfdir=/etc
 	make
 	make -j1 DESTDIR="$pkgdir" install
 '''

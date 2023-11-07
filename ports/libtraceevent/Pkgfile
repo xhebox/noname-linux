@@ -1,0 +1,9 @@
+version="1.7.3"
+desc="Linux kernel trace event library"
+source=[{url="https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/snapshot/libtraceevent-$version.tar.gz"}]
+
+build='''
+	cd libtraceevent-$version
+	make
+	make libdir_relative=lib prefix=/ DESTDIR="$pkgdir" install
+'''

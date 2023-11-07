@@ -1,18 +1,17 @@
-version="3.3.6"
+version="3.3.8-master"
 deps=["mesa", "wayland", "libxkbcommon", "vulkan"]
 makedeps=["mesa", "wayland-protocols", "libxkbcommon", "vulkan", "vulkan-headers", "extra-cmake-modules"]
 desc="A free, open source, portable framework for graphical application development"
 source=[
-	{url="https://github.com/glfw/glfw/archive/${version}.tar.gz"},
+	{url="https://github.com/glfw/glfw/archive/refs/heads/master.zip", name="$version.zip"},
 ]
 
 ext='''
-	cd glfw-$version
+	cd glfw-master
 '''
 
 build='''
-	noname-cmake glfw-$version -Bbuild \
-				-DGLFW_USE_WAYLAND=ON
+	noname-cmake glfw-master -Bbuild -DGLFW_USE_WAYLAND=ON -DGLFW_BUILD_X11=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

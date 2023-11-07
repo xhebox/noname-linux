@@ -1,0 +1,17 @@
+--- ImHex-1.6.1/external/ImGui/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
++++ ImHex-1.6.1/external/ImGui/CMakeLists.txt	2021-01-11 16:56:09.000000000 +0800
+@@ -10,6 +10,7 @@
+ 
+ if (UNIX)
+     find_package(OpenGL REQUIRED)
++    add_compile_definitions(IMGUI_IMPL_OPENGL_ES2)
+ endif ()
+ 
+ add_library(imgui OBJECT
+@@ -46,5 +47,5 @@
+ if (WIN32)
+     target_link_libraries(imgui PUBLIC Freetype::Freetype glfw3 opengl32.lib)
+ elseif (UNIX)
+-    target_link_libraries(imgui PUBLIC Freetype::Freetype glfw OpenGL::GL)
++    target_link_libraries(imgui PUBLIC Freetype::Freetype glfw OpenGL::OpenGL)
+ endif()

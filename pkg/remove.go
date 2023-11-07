@@ -89,20 +89,25 @@ func pkg_required(name []string) ([]string, error) {
 }
 
 func pkg_rmfiles(files []Fileinfo, baks []string) error {
+	dirs := files[0:]
 	for _, x := range files {
-		if x.Type != tar.TypeDir {
-			os.Remove(filepath.Join(cfg.ROOT, x.Path))
+		if x.Type&tar.TypeDir != tar.TypeDir {
+			if err := os.Remove(filepath.Join(cfg.ROOT, x.Path)); err != nil && !errors.Is(err, os.ErrNotExist) {
+				return err
+			}
+		} else {
+			dirs = append(dirs, x)
 		}
 	}
 
 	for {
 		uns := false
-		for _, x := range files {
-			if x.Type == tar.TypeDir {
-				p, e := ioutil.ReadDir(x.Path)
-				if e == nil && len(p) != 0 {
-					uns = true
-					os.Remove(filepath.Join(cfg.ROOT, x.Path))
+		for _, x := range dirs {
+			p, e := ioutil.ReadDir(filepath.Join(cfg.ROOT, x.Path))
+			if e == nil && len(p) == 0 {
+				uns = true
+				if err := os.Remove(filepath.Join(cfg.ROOT, x.Path)); err != nil && !errors.Is(err, os.ErrNotExist) {
+					return err
 				}
 			}
 		}
@@ -112,7 +117,9 @@ func pkg_rmfiles(files []Fileinfo, baks []string) error {
 	}
 
 	for _, x := range baks {
-		os.Remove(filepath.Join(cfg.ROOT, x+".bak"))
+		if err := os.Remove(filepath.Join(cfg.ROOT, x+".bak")); err != nil && !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
 	}
 
 	return nil

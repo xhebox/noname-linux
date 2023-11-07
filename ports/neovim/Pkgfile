@@ -1,9 +1,9 @@
-version="0.8.0"
+version="nightly"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
 source=[
-        {url="https://github.com/neovim/neovim/archive/refs/tags/v$version.tar.gz"},
+        {url="https://github.com/neovim/neovim/archive/refs/tags/$version.tar.gz"},
 ]
 
 build='''

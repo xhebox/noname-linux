@@ -1,11 +1,9 @@
-version = "2.38"
+version = "2.40"
 desc = "The GNU Binutils are a collection of binary tools"
 makedeps = ["zlib"]
 deps = ["zlib"]
 source = [
   { url = "https://mirrors.ustc.edu.cn/gnu/binutils/binutils-$version.tar.xz" },
-  { url = "fix-incorrect-undefined-symbol.patch" },
-  { url = "gold-warn-unsupported.patch" },
 ]
 
 ext = '''
@@ -61,7 +59,12 @@ build = '''
 		--enable-deterministic-archives \
 		--with-system-zlib \
 		--disable-werror \
-		--enable-targets=x86_64-pep,bpf-unknown-none \
+		--enable-64-bit-bfd \
+		--disable-gprofng \
+		--enable-colored-disassembly \
+		--enable-default-execstack=no \
+		--enable-default-hash-style=gnu \
+		--enable-new-dtags \
 		--enable-nls
 
 	make tooldir=/

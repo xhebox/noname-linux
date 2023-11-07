@@ -1,0 +1,44 @@
+version="0.6.0"
+desc="Purely functional programming language with first class types"
+deps=["chezschema"]
+makedeps=["chezschema"]
+source=[
+	{protocol="git", url="github.com/idris-lang/Idris2"},
+]
+
+build='''
+	unset MAKEFLAGS
+	export SCHEME=chez
+
+	cd Idris2
+	mkdir -p "$srcdir/bootstrap"
+	PREFIX="$srcdir/bootstrap" make bootstrap
+	PREFIX="$srcdir/bootstrap" make install
+	make clean
+
+	PATH="$srcdir/bootstrap/bin:$PATH" \
+	LD_LIBRARY_PATH="$srcdir/bootstrap/lib:$LD_LIBRARY_PATH" \
+	PREFIX=/lib \
+	make all
+
+	PATH="$srcdir/bootstrap/bin:$PATH" \
+	LD_LIBRARY_PATH="$srcdir/bootstrap/lib:$LD_LIBRARY_PATH" \
+	PREFIX="$pkgdir/lib" \
+	make install-idris2 install-support install-with-src-api install-with-src-libs
+
+	# See also: The Nix package for idris2 in nix/package.nix.
+	mkdir -p "$pkgdir/bin"
+	mv "$pkgdir"/lib/bin "$pkgdir"/lib/idris2-$version
+	ln -srf "$pkgdir"/lib/idris2-$version/bin/idris2 "$pkgdir"/bin/idris2
+	cp -r "$srcdir"/bootstrap/idris2-$version "$pkgdir"/lib
+
+	# Make sure idris2 --install works by default.
+	# See https://github.com/idris-lang/Idris2/issues/737
+	mkdir -p "$pkgdir"/etc/profile.d/
+	cat > "$pkgdir"/etc/profile.d/idris2.sh <<-EOF
+		export IDRIS2_PREFIX="\$HOME/.idris2"
+		export IDRIS2_PACKAGE_PATH="/lib/idris2-$version"
+		export IDRIS2_LIBS="/lib/idris2-$version/lib"
+		export IDRIS2_DATA="/lib/idris2-$version/support"
+	EOF
+'''

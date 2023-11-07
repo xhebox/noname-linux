@@ -1,6 +1,6 @@
 ## Intro
 
-**300++ packages, 500+ inactive packages.**
+**300++ packages, 600+ archived packages.**
 
 This **experimental(in the meaning of adding/removeing packages constantly)** distro is a personal project of mine and is designed to be lightweight and fast.
 

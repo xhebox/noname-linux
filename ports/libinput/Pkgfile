@@ -1,8 +1,8 @@
-version="1.17.2"
+version="1.24.0"
 makedeps=["mtdev", "libevdev", "systemd"]
 deps=["mtdev", "libevdev", "systemd"]
 desc="Libinput translates evdev events into Wayland events"
-source=[{name="libinput-$version.tar.gz", url="https://github.com/wayland-project/libinput/archive/$version.tar.gz"}]
+source=[{name="libinput-$version.tar.gz", url="https://gitlab.freedesktop.org/libinput/libinput/-/archive/$version/libinput-$version.tar.gz"}]
 
 build='''
 	noname-meson libinput-$version build -Dtests=false -Ddebug-gui=false -Dlibwacom=false -Ddocumentation=false

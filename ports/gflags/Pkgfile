@@ -1,0 +1,15 @@
+version="2.2.2"
+desc="C++ Library for commandline flag processing"
+makedeps=["cmake"]
+source=[{url="https://github.com/schuhschuh/gflags/archive/v${version}.tar.gz"}]
+
+build='''
+	noname-cmake gflags-$version -Bbuild \
+		-DCMAKE_INSTALL_PREFIX=/ \
+		-DREGISTER_INSTALL_PREFIX=OFF \
+    -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_STATIC_LIBS=ON \
+    -DBUILD_TESTING=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

@@ -1,17 +1,20 @@
-version = "0.3.24"
+version = "0.3.66"
 pulseversion = "13.0"
 desc = "library for layout and rendering of text"
 deps = [
   "gcc",
   "alsa-lib",
+  "readline",
   "systemd",
   "dbus",
   "gst-plugins-base",
   "ncurses",
   "libsndfile",
+  "tinycompress",
   "vulkan",
   "bluez",
   "sbc",
+  "libfreeaptx",
 ]
 makedeps = [
   "gcc",
@@ -21,10 +24,13 @@ makedeps = [
   "gst-plugins-base",
   "ncurses",
   "libsndfile",
+  "tinycompress",
   "vulkan",
   "vulkan-headers",
+  "readline",
   "bluez",
   "sbc",
+  "libfreeaptx",
 ]
 source = [
   { url = "https://github.com/PipeWire/pipewire/archive/refs/tags/$version.tar.gz" },
@@ -38,15 +44,27 @@ build = '''
 		-Dgstreamer=enabled -Dgstreamer-device-provider=enabled \
 		-Dbluez5-codec-ldac=disabled \
 		-Dbluez5-codec-aac=disabled \
-		-Dbluez5-codec-aptx=disabled \
+		-Dbluez5-codec-lc3=disabled \
+		-Dbluez5-codec-lc3plus=disabled \
+		-Dbluez5-codec-aptx=enabled \
+		-Dcompress-offload=enabled \
+		-Dlibmysofa=disabled \
+		-Davahi=disabled \
+		-Dx11=disabled \
+		-Droc=disabled \
+		-Dx11-xfixes=disabled \
+    -Drlimits-install=false \
+    -Dsession-managers=[] \
 		-Djack=disabled \
+		-Dlibcanberra=disabled \
+		-Decho-cancel-webrtc=disabled \
 		-Dlibcamera=disabled \
+		-Dlv2=disabled \
 		-Dsystemd-user-unit-dir=/lib/systemd/user
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 
-	export LDFLAGS="$LDFLAGS -lexecinfo"
 	noname-meson pulseaudio-$pulseversion pabuild \
 	-Dman=false \
 	-Dtests=false \
@@ -78,7 +96,7 @@ build = '''
 	-Dadrian-aec=true \
 	-Dwebrtc-aec=disabled
 
-	meson configure pabuild
+	meson configure --no-pager pabuild
 	ninja -C pabuild \
 		PulseAudioConfig.cmake \
 		src/libpulsecommon-$pulseversion.so \

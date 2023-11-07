@@ -1,6 +1,6 @@
-version="8.4p1"
-makedeps=["zlib", "libressl"]
-deps=["zlib", "libressl"]
+version="9.1p1"
+makedeps=["zlib", "openssl"]
+deps=["zlib", "openssl"]
 desc="Free version of the SSH connectivity tools"
 source=[
 	{url="https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz"},

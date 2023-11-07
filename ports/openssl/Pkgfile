@@ -1,13 +1,14 @@
-version="1.1.1k"
+version="3.0.7+quic1"
+nversion="openssl-3.0.7-quic1"
 desc="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
 source=[
-	{url="https://www.openssl.org/source/openssl-${version}.tar.gz"},
+	{url="https://github.com/quictls/openssl/archive/refs/tags/openssl-$version.tar.gz"},
 	{url="ca-dir.patch"},
 ]
 deps=["musl"]
 
 ext='''
-	cd openssl-$version
+	cd openssl-$nversion
 	for i in $source; do
 		case $i in
 		*patch) patch -p0 -i "$srcdir"/$i;;
@@ -16,7 +17,7 @@ ext='''
 '''
 
 build='''
-	cd openssl-$version
+	cd openssl-$nversion
 	./Configure --prefix=/ --openssldir=/etc/ssl --libdir=lib \
 		shared no-ssl3-method enable-ec_nistp_64_gcc_128 linux-x86_64 \
 		"-Wa,--noexecstack ${CPPFLAGS} ${CFLAGS} ${LDFLAGS}"

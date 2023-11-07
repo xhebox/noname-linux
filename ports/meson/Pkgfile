@@ -1,4 +1,4 @@
-version="0.61.1"
+version="1.0.1"
 desc='High productivity build system'
 makedeps=["python3", "ninja"]
 deps=["python3", "ninja"]
@@ -9,13 +9,11 @@ build='''
 	python3 setup.py build
 	python3 setup.py install \
 		--prefix= \
-		--root="$pkgdir" \
-		--optimize=1 \
-		--skip-build
+		--root="$pkgdir"
 	cat >> "$pkgdir"/bin/noname-meson << "EOF"
 #!/bin/sh
 meson setup \
-	--prefix				// \
+	--prefix				/ \
 	--libdir				lib \
 	--libexecdir		lib \
 	--bindir				bin \

@@ -1,8 +1,8 @@
 version="251.4"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "hwdata"]
 nocache=true
-deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "hwdata"]
 source=[
 	{url="https://github.com/systemd/systemd-stable/archive/refs/tags/v$version.tar.gz"},
 	{
@@ -98,6 +98,7 @@ build='''
 	-Dlocaled=true \
 	-Duserdb=true \
 	-Dhomed=true \
+	-Dbinfmt=true \
 	-Dnss-resolve=false \
 	-Dnss-myhostname=false \
 	-Dnss-mymachines=false \

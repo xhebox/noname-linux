@@ -6,7 +6,7 @@ source=[
 
 build='''
 	noname-meson libsigc++-$version build
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

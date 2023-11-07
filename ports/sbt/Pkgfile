@@ -1,6 +1,6 @@
 version="1.6.2"
 desc="The interactive build tool"
-deps=["openjdk11"]
+deps=["openjdk"]
 source=[
 	{url="https://github.com/sbt/sbt/releases/download/v${version}/sbt-${version}.tgz"},
 ]

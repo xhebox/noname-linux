@@ -4,7 +4,7 @@ source=[{url="https://github.com/open-source-parsers/jsoncpp/archive/$version.ta
 
 build='''
 	noname-meson jsoncpp-$version build --default-library shared
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

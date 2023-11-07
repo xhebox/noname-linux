@@ -1,11 +1,11 @@
-version="1.24"
+version="1.32"
 desc='Specifications of extended Wayland protocols'
 makedeps=["wayland"]
-source=[{url="https://wayland.freedesktop.org/releases/wayland-protocols-$version.tar.xz"}]
+source=[{url="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/$version/downloads/wayland-protocols-$version.tar.xz"}]
 
 build='''
-	noname-meson wayland-protocols-$version build -Denable_docs=false
-	meson configure build
+	noname-meson wayland-protocols-$version build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

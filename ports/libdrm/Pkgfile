@@ -1,4 +1,4 @@
-version="2.4.109"
+version="2.4.115"
 desc="Userspace interface to kernel DRM services"
 makedeps=["libpciaccess"]
 deps=["libpciaccess"]
@@ -15,8 +15,9 @@ ext='''
 build='''
 	noname-meson libdrm-$version build \
 		-Dudev=true \
-		-Dvalgrind=false
-	meson configure build
+		-Dman-pages=disabled \
+		-Dvalgrind=disabled
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

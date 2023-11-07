@@ -1,0 +1,33 @@
+version="0.9.1"
+desc="A fast and lightweight key/value database library"
+deps=["wayland", "libxkbcommon", "freetype", "dbus", "capstone", "glfw"]
+makedeps=["wayland-protocols", "libxkbcommon", "freetype", "dbus", "capstone", "glfw"]
+source=[
+	{url="https://github.com/wolfpld/tracy/archive/refs/tags/v$version.tar.gz", name="tracy-v$version.tar.gz"},
+	{url="no-comp.patch"},
+]
+
+ext='''
+	cd "tracy-$version"
+	patch -Np1 -i ../no-comp.patch
+'''
+
+build='''
+	cd "tracy-$version"
+	find . -name release.mk -exec sed -i 's/CFLAGS :=/CFLAGS +=/g' {} \;
+	make -C profiler/build/unix release \
+		CFLAGS="$CFLAGS -g -O1 -DIMGUI_IMPL_OPENGL_ES2 -DDISPLAY_SERVER_WAYLAND -lGLESv2 -lwayland-client" LEGACY=1
+	make -C capture/build/unix release \
+		CFLAGS="$CFLAGS -g -O1 -DIMGUI_IMPL_OPENGL_ES2 -DDISPLAY_SERVER_WAYLAND -lGLESv2 -lwayland-client" LEGACY=1
+	make -C csvexport/build/unix release \
+		CFLAGS="$CFLAGS -g -O1 -DIMGUI_IMPL_OPENGL_ES2 -DDISPLAY_SERVER_WAYLAND -lGLESv2 -lwayland-client" LEGACY=1
+	make -C import-chrome/build/unix release \
+		CFLAGS="$CFLAGS -g -O1 -DIMGUI_IMPL_OPENGL_ES2 -DDISPLAY_SERVER_WAYLAND -lGLESv2 -lwayland-client" LEGACY=1
+	make -C update/build/unix release \
+		CFLAGS="$CFLAGS -g -O1 -DIMGUI_IMPL_OPENGL_ES2 -DDISPLAY_SERVER_WAYLAND -lGLESv2 -lwayland-client" LEGACY=1
+	install -Dm755 capture/build/unix/capture-* $pkgdir/bin/tracy-capture
+	install -Dm755 csvexport/build/unix/csvexport-* $pkgdir/bin/tracy-csvexport
+	install -Dm755 import-chrome/build/unix/import-chrome-* $pkgdir/bin/tracy-import-chrome
+	install -Dm755 profiler/build/unix/Tracy-* $pkgdir/bin/tracy
+	install -Dm755 update/build/unix/update-* $pkgdir/bin/tracy-update
+'''

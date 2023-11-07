@@ -1,0 +1,14 @@
+version="23.1.21"
+desc="An efficient cross platform serialization library for C++, with support for Java, C# and Go"
+source=[
+	{url="https://github.com/google/flatbuffers/archive/v$version/flatbuffers-$version.tar.gz"},
+]
+
+build='''
+	sed -i 's/-Werror=/-W/g;s/-Werror//g' flatbuffers-$version/CMakeLists.txt
+	noname-cmake flatbuffers-$version -Bbuild \
+		-DFLATBUFFERS_BUILD_FLATLIB=OFF \
+		-DFLATBUFFERS_BUILD_SHAREDLIB=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

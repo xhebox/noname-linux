@@ -1,0 +1,14 @@
+version="1.5"
+desc="Screen locker for Wayland"
+deps=["wayland", "cairo", "gdk-pixbuf", "libxkbcommon", "pam"]
+makedeps=["wayland-protocols", "cairo", "gdk-pixbuf", "libxkbcommon", "pam"]
+source=[
+	{url="https://github.com/swaywm/swaylock/releases/download/$version/swaylock-$version.tar.gz"},
+]
+
+build='''
+	noname-meson swaylock-$version build -Dman-pages=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

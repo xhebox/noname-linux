@@ -1,4 +1,4 @@
-version = "0.34.1"
+version = "0.35.1"
 desc = 'a free, open source, and cross-platform media player'
 waf_version = "2.0.23"
 deps = [
@@ -37,6 +37,10 @@ source = [
 
 build = '''
 	cd mpv-$version
+
+	python -m venv ss
+	. ./ss/bin/activate
+	pip install docutils
 
 	python ../waf-${waf_version} configure --prefix=/ \
 		--confdir=/etc/mpv \

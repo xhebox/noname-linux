@@ -1,0 +1,12 @@
+version="8.0.0"
+desc="Binary format rules for QEMU static user mode emulation"
+source=[
+	{url="https://archlinux.org/packages/extra/x86_64/qemu-user-static/download/", name="qemu.tar.zst"},
+	{url="https://archlinux.org/packages/extra/x86_64/qemu-user-static-binfmt/download/", name="qemu-binfmt.tar.zst"},
+]
+
+build='''
+	mv usr/bin "$pkgdir"
+	mv usr/lib "$pkgdir"
+	sed -i 's/\/usr//g' "$pkgdir"/lib/binfmt.d/*
+'''

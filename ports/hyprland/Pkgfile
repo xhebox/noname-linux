@@ -1,0 +1,47 @@
+version="0.29.1"
+paper_version="0.4.0"
+desc="A dynamic tiling Wayland compositor based on wlroots that doesn't sacrifice on its looks."
+deps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "vulkan", "wayland"]
+makedeps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "vulkan-headers", "wayland-protocols", "meson"]
+source=[
+	{url="https://github.com/hyprwm/hyprpaper/archive/refs/tags/v$paper_version.tar.gz"},
+	{url="https://github.com/hyprwm/Hyprland/releases/download/v${version}/source-v${version}.tar.gz"},
+	{url="xwayland.patch"},
+]
+
+build='''
+	cd "$srcdir/hyprland-source"
+	patch -Np1 -i "$srcdir"/xwayland.patch
+
+	make fixwlr
+
+	cd "./subprojects/wlroots/" && \
+	noname-meson build/ --buildtype=release \
+				-Dxwayland=disabled \
+				-Drenderers="gles2" \
+				-Dbackends="drm,libinput" \
+	&& meson compile -C build/ && cd ../..
+	install -Dm755 "subprojects/wlroots/build/libwlroots.so.12032" -t "${pkgdir}/lib"
+
+	cd subprojects/udis86
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -H./ -B./build -G Ninja
+	cmake --build ./build --config Release --target all
+	cd ../..
+
+	make protocols
+	noname-cmake . -Bbuild -DNO_XWAYLAND=true --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -G Ninja
+	cmake --build ./build --config Release --target all
+	cd ./hyprctl && make all && cd ..
+
+	mkdir -p "${pkgdir}/share/wayland-sessions"
+	mkdir -p "${pkgdir}/share/hyprland"
+	install -Dm755 build/Hyprland -t "${pkgdir}/bin"
+	install -Dm755 hyprctl/hyprctl -t "${pkgdir}/bin"
+	install -Dm644 assets/*.png -t "${pkgdir}/share/hyprland"
+	install -Dm644 example/hyprland.desktop -t "${pkgdir}/share/wayland-sessions"
+	install -Dm644 example/hyprland.conf -t "${pkgdir}/share/hyprland"
+
+	cd "$srcdir/hyprpaper-$paper_version"
+	make all
+	install -Dm755 build/hyprpaper -t "${pkgdir}/bin"
+'''

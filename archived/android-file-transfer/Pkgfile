@@ -1,0 +1,14 @@
+version="4.2"
+desc='Android MTP client with minimalistic UI'
+deps=["fuse2", "file"]
+makedeps=["fuse2", "file"]
+source=[
+	{url="https://github.com/whoozle/android-file-transfer-linux/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-cmake android-file-transfer-linux-$version -Bbuild \
+				-DBUILD_QT_UI=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

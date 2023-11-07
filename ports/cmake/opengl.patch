@@ -1,0 +1,22 @@
+--- a/Modules/FindOpenGL.cmake	2023-04-01 22:03:30.850451173 +0800
++++ b/Modules/FindOpenGL.cmake	2023-04-01 22:03:30.850451173 +0800
+@@ -564,11 +564,17 @@
+   # OPENGL_LIBRARIES mirrors OpenGL::GL's logic ...
+   if(OPENGL_gl_LIBRARY)
+     set(OPENGL_LIBRARIES ${OPENGL_gl_LIBRARY})
+-  elseif(TARGET OpenGL::OpenGL AND TARGET OpenGL::GLX)
+-    set(OPENGL_LIBRARIES ${OPENGL_opengl_LIBRARY} ${OPENGL_glx_LIBRARY})
++  elseif(TARGET OpenGL::OpenGL)
++    set(OPENGL_LIBRARIES ${OPENGL_opengl_LIBRARY})
+   else()
+     set(OPENGL_LIBRARIES "")
+   endif()
++	if (TARGET OpenGL::GLX)
++		list(APPEND OPENGL_LIBRARIES ${OPENGL_glx_LIBRARY})
++  endif()
++	if (TARGET OpenGL::EGL)
++		list(APPEND OPENGL_LIBRARIES ${OPENGL_egl_LIBRARY})
++  endif()
+   # ... and also includes GLU, if available.
+   if(TARGET OpenGL::GLU)
+     list(APPEND OPENGL_LIBRARIES ${OPENGL_glu_LIBRARY})

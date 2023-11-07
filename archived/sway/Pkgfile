@@ -1,23 +1,22 @@
-name=sway
-version=1.0-alpha.1
-desc='i3 compatible window manager for Wayland'
-deps="json-c libpcre wlroots wayland wayland-protocols libxkbcommon cairo pango gdk-pixbuf pixman libcap libinput meson ninja git"
-source="https://github.com/swaywm/sway/archive/$version.tar.gz
-drop.patch
-no-swaylock.patch"
+version="1.7"
+desc='Tiling Wayland compositor and replacement for the i3 window manager'
+deps=["swaybg", "cairo", "json-c", "pango", "libpcre", "wlroots"]
+makedeps=["cairo", "json-c", "pango", "libpcre", "wlroots", "wayland-protocols"]
+source=[
+	{url="https://github.com/swaywm/sway/archive/$version.tar.gz"},
+	{url="50-systemd-user.conf"},
+#{url="5890.diff"},
+]
 
-ext() {
+ext='''
 	cd sway-$version
-	patch -Np1 -i ../no-swaylock.patch || die
-	patch -Np1 -i ../drop.patch || die
-}
+#patch -Nbp1 -i ../5890.diff
+'''
 
-build() {
-	cd sway-$version
-	PKG_NO_SRTIP=yes
-	CFLAGS="$CFLAGS -g2"
-	noname-meson build
-	ninja -C build || die
-	DESTDIR="$pkgdir" ninja -C build install || die
-	chmod a+s "$pkgdir"/bin/sway
-}
+build='''
+	noname-meson build sway-$version -Dwerror=false -Dxwayland=disabled -Dman-pages=disabled -Dsd-bus-provider=libsystemd
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 50-systemd-user.conf -t "$pkgdir/etc/sway/config.d/"
+'''

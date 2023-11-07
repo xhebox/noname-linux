@@ -1,0 +1,10 @@
+version="0.3.21"
+desc="An optimized BLAS library based on GotoBLAS2 1.13 BSD"
+makedeps=["gcc", "perl", "cmake"]
+source=[{url="https://github.com/xianyi/OpenBLAS/releases/download/v$version/OpenBLAS-$version.tar.gz"}]
+
+build='''
+	noname-cmake OpenBLAS-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

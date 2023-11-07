@@ -1,0 +1,485 @@
+diff --git a/Makefile b/Makefile
+index fbc2649aa..bb945c577 100644
+--- a/Makefile
++++ b/Makefile
+@@ -185,7 +185,7 @@ DEBUG_OPTIMIZATION_LEVEL= -O1 $(MARCH_NATIVE) -gdwarf-4
+ CFLAGS_WITHOUT_MARCH = $(MACOS_MIN_FLAG) $(OPTIMIZATION_LEVEL) -fno-exceptions -fvisibility=hidden -fvisibility-inlines-hidden
+ BUN_CFLAGS = $(MACOS_MIN_FLAG) $(MARCH_NATIVE)  $(OPTIMIZATION_LEVEL) -fno-exceptions -fvisibility=hidden -fvisibility-inlines-hidden
+ BUN_TMP_DIR := /tmp/make-bun
+-CFLAGS=$(CFLAGS_WITHOUT_MARCH) $(MARCH_NATIVE)
++CFLAGS=$(CFLAGS_WITHOUT_MARCH) $(MARCH_NATIVE) -Wno-implicit-int -Wno-gnu-line-marker -Wno-implicit-function-declaration -Wno-incompatible-function-pointer-types
+ 
+ DEFAULT_USE_BMALLOC := 1
+ 
+@@ -491,8 +491,6 @@
+ 		-Wl,--as-needed \
+ 		-Wl,--gc-sections \
+ 		-Wl,-z,stack-size=12800000 \
+-		-static-libstdc++ \
+-		-static-libgcc \
+ 		-fno-omit-frame-pointer \
+ 		-Wl,--compress-debug-sections,zlib \
+ 		-l:libatomic.a \
+@@ -549,7 +549,7 @@ TINYCC_CFLAGS= -DTCC_LIBTCC1=\"\0\"
+ tinycc:
+ 	cd $(TINYCC_DIR) && \
+ 		make clean && \
+-		AR=$(AR) $(CCACHE_CC_FLAG) CFLAGS='$(CFLAGS_WITHOUT_MARCH) $(NATIVE_OR_OLD_MARCH) -mtune=native $(TINYCC_CFLAGS)' ./configure --enable-static --cc=$(CCACHE_CC_OR_CC) --ar=$(AR) --config-predefs=yes  && \
++		AR=$(AR) $(CCACHE_CC_FLAG) CFLAGS='$(CFLAGS_WITHOUT_MARCH) $(NATIVE_OR_OLD_MARCH) -mtune=native $(TINYCC_CFLAGS)' ./configure --enable-static --cc=$(CCACHE_CC_OR_CC) --ar=$(AR) --config-predefs=yes  --config-musl && \
+ 		make -j10 && \
+ 		cp $(TINYCC_DIR)/*.a $(BUN_DEPS_OUT_DIR)
+ 
+@@ -1290,7 +1290,7 @@
+ jsc-build-linux-compile-build:
+ 		mkdir -p $(WEBKIT_RELEASE_DIR)  && \
+ 		cd $(WEBKIT_RELEASE_DIR)  && \
+-	CFLAGS="$(CFLAGS) -Wl,--whole-archive -ffat-lto-objects" CXXFLAGS="$(CXXFLAGS) -Wl,--whole-archive -ffat-lto-objects" -DUSE_BUN_JSC_ADDITIONS=ON \
++	CFLAGS="$(CFLAGS) -Wl,--whole-archive -ffat-lto-objects" CXXFLAGS="$(CXXFLAGS) -Wl,--whole-archive -ffat-lto-objects" \
+ 		cmake --build $(WEBKIT_RELEASE_DIR) --config relwithdebuginfo --target jsc
+ 
+ 
+@@ -1879,7 +1879,7 @@
+ 
+ .PHONY: base64
+ base64:
+-	cd $(BUN_DEPS_DIR)/base64 && make clean && cmake $(CMAKE_FLAGS) . && make
++	cd $(BUN_DEPS_DIR)/base64 && make clean && cmake -G "Ninja" $(CMAKE_FLAGS) . && ninja
+ 	cp $(BUN_DEPS_DIR)/base64/libbase64.a $(BUN_DEPS_OUT_DIR)/libbase64.a
+ 
+ .PHONY: cold-jsc-start
+diff --git a/build.zig b/build.zig
+index 6a860221a..a1dc5675a 100644
+--- a/build.zig
++++ b/build.zig
+@@ -167,7 +167,7 @@ pub fn build_(b: *Build) !void {
+         os_tagname = "darwin";
+         target.os_version_min = std.zig.CrossTarget.OsVersion{ .semver = .{ .major = 11, .minor = 0, .patch = 0 } };
+     } else if (target.isLinux()) {
+-        target.setGnuLibCVersion(2, 27, 0);
++        //target.setGnuLibCVersion(2, 27, 0);
+     }
+     std.mem.copy(
+         u8,
+@@ -290,6 +290,7 @@
+         obj.linkLibC();
+ 
+         obj.strip = false;
++        obj.pie = true;
+         obj.bundle_compiler_rt = false;
+         obj.omit_frame_pointer = optimize != .Debug;
+         // Disable stack probing on x86 so we don't need to include compiler_rt
+@@ -483,7 +483,8 @@
+     // obj.setTarget(target);
+     try addInternalPackages(b, obj, std.heap.page_allocator, b.zig_exe, target);
+ 
+-    obj.strip = false;
++    obj.strip = true;
++    obj.pie = true;
+ 
+     // obj.setBuildMode(optimize);
+     obj.bundle_compiler_rt = false;
+--- a/src/bun.js/bindings/workaround-missing-symbols.cpp	2023-08-25 14:05:27.000000000 +0800
++++ a/src/bun.js/bindings/workaround-missing-symbols.cpp	2023-08-25 14:05:27.000000000 +0800
+@@ -22,12 +22,6 @@
+ #endif
+ #endif
+ 
+-#if defined(__x86_64__)
+-// Force older versions of symbols
+-__asm__(".symver pow,pow@GLIBC_2.2.5");
+-__asm__(".symver log,log@GLIBC_2.2.5");
+-#endif
+-
+ // ban statx, for now
+ extern "C" int __wrap_statx(int fd, const char* path, int flags,
+     unsigned int mask, struct statx* buf)
+@@ -169,18 +169,6 @@
+     return __fxstatat64(_STAT_VER, dirfd, path, stat, flags);
+ }
+ 
+-extern "C" int __xmknod(int ver, const char* path, __mode_t mode, __dev_t dev);
+-extern "C" int __wrap_mknod(const char* path, __mode_t mode, __dev_t dev)
+-{
+-    return __xmknod(_MKNOD_VER, path, mode, dev);
+-}
+-
+-extern "C" int __xmknodat(int ver, int dirfd, const char* path, __mode_t mode, __dev_t dev);
+-extern "C" int __wrap_mknodat(int dirfd, const char* path, __mode_t mode, __dev_t dev)
+-{
+-    return __xmknodat(_MKNOD_VER, dirfd, path, mode, dev);
+-}
+-
+ #endif
+ 
+ // macOS
+--- a/src/bun.js/bindings/header-gen.zig	2023-08-25 14:05:27.000000000 +0800
++++ b/src/bun.js/bindings/header-gen.zig	2023-08-25 14:05:27.000000000 +0800
+@@ -762,188 +762,186 @@
+             inline for (TypesToCheck) |BaseType| {
+                 const all_decls = comptime std.meta.declarations(BaseType);
+                 inline for (all_decls) |_decls| {
+-                    if (comptime _decls.is_pub) {
+-                        @setEvalBranchQuota(99999);
+-                        const Type = @field(BaseType, _decls.name);
+-                        if (@TypeOf(Type) == type) {
+-                            const TypeTypeInfo: std.builtin.Type = @typeInfo(@field(BaseType, _decls.name));
+-                            const is_container_type = switch (TypeTypeInfo) {
+-                                .Opaque, .Struct, .Enum => true,
+-                                else => false,
+-                            };
+-
+-                            if (is_container_type and (@hasDecl(Type, "Extern") or @hasDecl(Type, "Export") or @hasDecl(Type, "lazy_static_functions"))) {
+-                                const identifier = comptime std.fmt.comptimePrint("{s}_{s}", .{ Type.shim.name, Type.shim.namespace });
+-                                if (!bufset.contains(identifier)) {
+-                                    self.startFile(
+-                                        Type,
+-                                        Type.shim.name,
+-                                        writer,
+-                                        impl,
+-                                    );
+-
+-                                    bufset.insert(identifier) catch unreachable;
+-
+-                                    var gen = C_Generator.init(Type.name, @TypeOf(writer), writer);
+-                                    defer gen.deinit();
+-
+-                                    if (@hasDecl(Type, "Extern")) {
+-                                        if (comptime !(std.mem.eql(u8, Type.name, exclude_from_cpp[0]) or std.mem.eql(u8, Type.name, exclude_from_cpp[1]))) {
+-                                            if (to_get_sizes > 0) {
+-                                                impl_second_writer.writeAll(", ") catch unreachable;
+-                                                impl_third_writer.writeAll(", ") catch unreachable;
+-                                                impl_fourth_writer.writeAll(", ") catch unreachable;
+-                                            }
++                    @setEvalBranchQuota(99999);
++                    const Type = @field(BaseType, _decls.name);
++                    if (@TypeOf(Type) == type) {
++                        const TypeTypeInfo: std.builtin.Type = @typeInfo(@field(BaseType, _decls.name));
++                        const is_container_type = switch (TypeTypeInfo) {
++                            .Opaque, .Struct, .Enum => true,
++                            else => false,
++                        };
++
++                        if (is_container_type and (@hasDecl(Type, "Extern") or @hasDecl(Type, "Export") or @hasDecl(Type, "lazy_static_functions"))) {
++                            const identifier = comptime std.fmt.comptimePrint("{s}_{s}", .{ Type.shim.name, Type.shim.namespace });
++                            if (!bufset.contains(identifier)) {
++                                self.startFile(
++                                    Type,
++                                    Type.shim.name,
++                                    writer,
++                                    impl,
++                                );
++
++                                bufset.insert(identifier) catch unreachable;
++
++                                var gen = C_Generator.init(Type.name, @TypeOf(writer), writer);
++                                defer gen.deinit();
++
++                                if (@hasDecl(Type, "Extern")) {
++                                    if (comptime !(std.mem.eql(u8, Type.name, exclude_from_cpp[0]) or std.mem.eql(u8, Type.name, exclude_from_cpp[1]))) {
++                                        if (to_get_sizes > 0) {
++                                            impl_second_writer.writeAll(", ") catch unreachable;
++                                            impl_third_writer.writeAll(", ") catch unreachable;
++                                            impl_fourth_writer.writeAll(", ") catch unreachable;
+                                         }
++                                    }
+ 
+-                                        const formatted_name = comptime brk: {
+-                                            var original: [Type.name.len]u8 = undefined;
+-                                            _ = std.mem.replace(u8, Type.name, ":", "_", &original);
+-                                            break :brk original;
++                                    const formatted_name = comptime brk: {
++                                        var original: [Type.name.len]u8 = undefined;
++                                        _ = std.mem.replace(u8, Type.name, ":", "_", &original);
++                                        break :brk original;
++                                    };
++
++                                    if (comptime !(std.mem.eql(u8, Type.name, exclude_from_cpp[0]) or std.mem.eql(u8, Type.name, exclude_from_cpp[1]))) {
++                                        impl_third_writer.print("sizeof({s})", .{comptime Type.name}) catch unreachable;
++                                        impl_fourth_writer.print("alignof({s})", .{comptime Type.name}) catch unreachable;
++                                        impl_second_writer.print("\"{s}\"", .{formatted_name}) catch unreachable;
++                                        to_get_sizes += 1;
++                                    }
++                                    const ExternList = comptime brk: {
++                                        const Sorder = struct {
++                                            pub fn lessThan(_: @This(), lhs: []const u8, rhs: []const u8) bool {
++                                                return std.ascii.orderIgnoreCase(lhs, rhs) == std.math.Order.lt;
++                                            }
+                                         };
+-
+-                                        if (comptime !(std.mem.eql(u8, Type.name, exclude_from_cpp[0]) or std.mem.eql(u8, Type.name, exclude_from_cpp[1]))) {
+-                                            impl_third_writer.print("sizeof({s})", .{comptime Type.name}) catch unreachable;
+-                                            impl_fourth_writer.print("alignof({s})", .{comptime Type.name}) catch unreachable;
+-                                            impl_second_writer.print("\"{s}\"", .{formatted_name}) catch unreachable;
+-                                            to_get_sizes += 1;
+-                                        }
+-                                        const ExternList = comptime brk: {
+-                                            const Sorder = struct {
+-                                                pub fn lessThan(_: @This(), lhs: []const u8, rhs: []const u8) bool {
+-                                                    return std.ascii.orderIgnoreCase(lhs, rhs) == std.math.Order.lt;
+-                                                }
++                                        var extern_list = Type.Extern;
++                                        std.sort.block([]const u8, &extern_list, Sorder{}, Sorder.lessThan);
++                                        break :brk extern_list;
++                                    };
++                                    // impl_writer.print("  #include {s}\n", .{Type.include}) catch unreachable;
++                                    inline for (&ExternList) |extern_decl| {
++                                        if (@hasDecl(Type, extern_decl)) {
++                                            const normalized_name = comptime brk: {
++                                                var _normalized_name: [Type.name.len]u8 = undefined;
++                                                _ = std.mem.replace(u8, Type.name, ":", "_", &_normalized_name);
++                                                break :brk _normalized_name;
+                                             };
+-                                            var extern_list = Type.Extern;
+-                                            std.sort.block([]const u8, &extern_list, Sorder{}, Sorder.lessThan);
+-                                            break :brk extern_list;
+-                                        };
+-                                        // impl_writer.print("  #include {s}\n", .{Type.include}) catch unreachable;
+-                                        inline for (&ExternList) |extern_decl| {
+-                                            if (@hasDecl(Type, extern_decl)) {
+-                                                const normalized_name = comptime brk: {
+-                                                    var _normalized_name: [Type.name.len]u8 = undefined;
+-                                                    _ = std.mem.replace(u8, Type.name, ":", "_", &_normalized_name);
+-                                                    break :brk _normalized_name;
+-                                                };
+-
+-                                                processDecl(
+-                                                    self,
+-                                                    writer,
+-                                                    &gen,
+-                                                    Type,
+-                                                    comptime std.meta.declarationInfo(Type, extern_decl),
+-                                                    comptime extern_decl,
+-                                                    &normalized_name,
+-                                                );
+-                                            }
++
++                                            processDecl(
++                                                self,
++                                                writer,
++                                                &gen,
++                                                Type,
++                                                comptime std.meta.declarationInfo(Type, extern_decl),
++                                                comptime extern_decl,
++                                                &normalized_name,
++                                            );
+                                         }
+                                     }
++                                }
+ 
+-                                    if (@hasDecl(Type, "Export")) {
+-                                        const ExportList = comptime brk: {
+-                                            const SortContext = struct {
+-                                                data: []StaticExport,
+-                                                pub fn lessThan(comptime ctx: @This(), comptime lhs: usize, comptime rhs: usize) bool {
+-                                                    return std.ascii.orderIgnoreCase(ctx.data[lhs].symbol_name, ctx.data[rhs].symbol_name) == std.math.Order.lt;
+-                                                }
+-                                                pub fn swap(comptime ctx: @This(), comptime lhs: usize, comptime rhs: usize) void {
+-                                                    const tmp = ctx.data[lhs];
+-                                                    ctx.data[lhs] = ctx.data[rhs];
+-                                                    ctx.data[rhs] = tmp;
+-                                                }
+-                                            };
+-                                            var extern_list = Type.Export;
+-                                            std.sort.insertionContext(0, extern_list.len, SortContext{
+-                                                .data = &extern_list,
+-                                            });
+-                                            break :brk extern_list;
+-                                        };
+-
+-                                        gen.direction = C_Generator.Direction.export_zig;
+-                                        if (ExportList.len > 0) {
+-                                            gen.write("\n#ifdef __cplusplus\n\n");
+-                                            inline for (ExportList) |static_export| {
+-                                                processStaticExport(
+-                                                    self,
+-                                                    file,
+-                                                    &gen,
+-                                                    comptime static_export,
+-                                                );
++                                if (@hasDecl(Type, "Export")) {
++                                    const ExportList = comptime brk: {
++                                        const SortContext = struct {
++                                            data: []StaticExport,
++                                            pub fn lessThan(comptime ctx: @This(), comptime lhs: usize, comptime rhs: usize) bool {
++                                                return std.ascii.orderIgnoreCase(ctx.data[lhs].symbol_name, ctx.data[rhs].symbol_name) == std.math.Order.lt;
+                                             }
+-                                            gen.write("\n#endif\n");
++                                            pub fn swap(comptime ctx: @This(), comptime lhs: usize, comptime rhs: usize) void {
++                                                const tmp = ctx.data[lhs];
++                                                ctx.data[lhs] = ctx.data[rhs];
++                                                ctx.data[rhs] = tmp;
++                                            }
++                                        };
++                                        var extern_list = Type.Export;
++                                        std.sort.insertionContext(0, extern_list.len, SortContext{
++                                            .data = &extern_list,
++                                        });
++                                        break :brk extern_list;
++                                    };
++
++                                    gen.direction = C_Generator.Direction.export_zig;
++                                    if (ExportList.len > 0) {
++                                        gen.write("\n#ifdef __cplusplus\n\n");
++                                        inline for (ExportList) |static_export| {
++                                            processStaticExport(
++                                                self,
++                                                file,
++                                                &gen,
++                                                comptime static_export,
++                                            );
+                                         }
++                                        gen.write("\n#endif\n");
+                                     }
+-
+-                                    // if (@hasDecl(Type, "lazy_static_functions")) {
+-                                    //     const ExportLIst = comptime brk: {
+-                                    //         const Sorder = struct {
+-                                    //             pub fn lessThan(_: @This(), comptime lhs: StaticExport, comptime rhs: StaticExport) bool {
+-                                    //                 return std.ascii.orderIgnoreCase(lhs.symbol_name, rhs.symbol_name) == std.math.Order.lt;
+-                                    //             }
+-                                    //         };
+-                                    //         var extern_list = Type.lazy_static_functions;
+-                                    //         std.sort.block(StaticExport, &extern_list, Sorder{}, Sorder.lessThan);
+-                                    //         break :brk extern_list;
+-                                    //     };
+-
+-                                    //     gen.direction = C_Generator.Direction.export_zig;
+-                                    //     if (ExportLIst.len > 0) {
+-                                    //         lazy_function_definitions_writer.writeAll("\n#pragma mark ") catch unreachable;
+-                                    //         lazy_function_definitions_writer.writeAll(Type.shim.name) catch unreachable;
+-                                    //         lazy_function_definitions_writer.writeAll("\n\n") catch unreachable;
+-
+-                                    //         inline for (ExportLIst) |static_export| {
+-                                    //             const exp: StaticExport = static_export;
+-                                    //             lazy_function_definitions_writer.print("  JSC::LazyProperty<Zig::GlobalObject, Zig::JSFFIFunction> m_{s};", .{exp.symbol_name}) catch unreachable;
+-                                    //             lazy_function_definitions_writer.writeAll("\n") catch unreachable;
+-
+-                                    //             lazy_function_definitions_writer.print(
+-                                    //                 "  Zig::JSFFIFunction* get__{s}(Zig::GlobalObject *globalObject) {{ return m_{s}.getInitializedOnMainThread(globalObject); }}",
+-                                    //                 .{ exp.symbol_name, exp.symbol_name },
+-                                    //             ) catch unreachable;
+-                                    //             lazy_function_definitions_writer.writeAll("\n") catch unreachable;
+-
+-                                    //             const impl_format =
+-                                    //                 \\
+-                                    //                 \\  m_{s}.initLater(
+-                                    //                 \\      [](const JSC::LazyProperty<Zig::GlobalObject, Zig::JSFFIFunction>::Initializer& init) {{
+-                                    //                 \\          WTF::String functionName = WTF::String("{s}"_s);
+-                                    //                 \\          Zig::JSFFIFunction* function = Zig::JSFFIFunction::create(
+-                                    //                 \\               init.vm,
+-                                    //                 \\               init.owner,
+-                                    //                 \\               1,
+-                                    //                 \\               functionName,
+-                                    //                 \\               {s},
+-                                    //                 \\               JSC::NoIntrinsic,
+-                                    //                 \\               {s}
+-                                    //                 \\          );
+-                                    //                 \\          init.set(function);
+-                                    //                 \\      }});
+-                                    //                 \\
+-                                    //             ;
+-
+-                                    //             lazy_functions_buffer_writer.print(
+-                                    //                 impl_format,
+-                                    //                 .{
+-                                    //                     exp.symbol_name,
+-                                    //                     exp.local_name,
+-                                    //                     exp.symbol_name,
+-                                    //                     exp.symbol_name,
+-                                    //                 },
+-                                    //             ) catch unreachable;
+-
+-                                    //             lazy_function_visitor_writer.print(
+-                                    //                 \\  this->m_{s}.visit(visitor);
+-                                    //                 \\
+-                                    //             ,
+-                                    //                 .{exp.symbol_name},
+-                                    //             ) catch unreachable;
+-                                    //         }
+-                                    //         gen.write("\n");
+-                                    //     }
+-                                    // }
+                                 }
++
++                                // if (@hasDecl(Type, "lazy_static_functions")) {
++                                //     const ExportLIst = comptime brk: {
++                                //         const Sorder = struct {
++                                //             pub fn lessThan(_: @This(), comptime lhs: StaticExport, comptime rhs: StaticExport) bool {
++                                //                 return std.ascii.orderIgnoreCase(lhs.symbol_name, rhs.symbol_name) == std.math.Order.lt;
++                                //             }
++                                //         };
++                                //         var extern_list = Type.lazy_static_functions;
++                                //         std.sort.block(StaticExport, &extern_list, Sorder{}, Sorder.lessThan);
++                                //         break :brk extern_list;
++                                //     };
++
++                                //     gen.direction = C_Generator.Direction.export_zig;
++                                //     if (ExportLIst.len > 0) {
++                                //         lazy_function_definitions_writer.writeAll("\n#pragma mark ") catch unreachable;
++                                //         lazy_function_definitions_writer.writeAll(Type.shim.name) catch unreachable;
++                                //         lazy_function_definitions_writer.writeAll("\n\n") catch unreachable;
++
++                                //         inline for (ExportLIst) |static_export| {
++                                //             const exp: StaticExport = static_export;
++                                //             lazy_function_definitions_writer.print("  JSC::LazyProperty<Zig::GlobalObject, Zig::JSFFIFunction> m_{s};", .{exp.symbol_name}) catch unreachable;
++                                //             lazy_function_definitions_writer.writeAll("\n") catch unreachable;
++
++                                //             lazy_function_definitions_writer.print(
++                                //                 "  Zig::JSFFIFunction* get__{s}(Zig::GlobalObject *globalObject) {{ return m_{s}.getInitializedOnMainThread(globalObject); }}",
++                                //                 .{ exp.symbol_name, exp.symbol_name },
++                                //             ) catch unreachable;
++                                //             lazy_function_definitions_writer.writeAll("\n") catch unreachable;
++
++                                //             const impl_format =
++                                //                 \\
++                                //                 \\  m_{s}.initLater(
++                                //                 \\      [](const JSC::LazyProperty<Zig::GlobalObject, Zig::JSFFIFunction>::Initializer& init) {{
++                                //                 \\          WTF::String functionName = WTF::String("{s}"_s);
++                                //                 \\          Zig::JSFFIFunction* function = Zig::JSFFIFunction::create(
++                                //                 \\               init.vm,
++                                //                 \\               init.owner,
++                                //                 \\               1,
++                                //                 \\               functionName,
++                                //                 \\               {s},
++                                //                 \\               JSC::NoIntrinsic,
++                                //                 \\               {s}
++                                //                 \\          );
++                                //                 \\          init.set(function);
++                                //                 \\      }});
++                                //                 \\
++                                //             ;
++
++                                //             lazy_functions_buffer_writer.print(
++                                //                 impl_format,
++                                //                 .{
++                                //                     exp.symbol_name,
++                                //                     exp.local_name,
++                                //                     exp.symbol_name,
++                                //                     exp.symbol_name,
++                                //                 },
++                                //             ) catch unreachable;
++
++                                //             lazy_function_visitor_writer.print(
++                                //                 \\  this->m_{s}.visit(visitor);
++                                //                 \\
++                                //             ,
++                                //                 .{exp.symbol_name},
++                                //             ) catch unreachable;
++                                //         }
++                                //         gen.write("\n");
++                                //     }
++                                // }
+                             }
+                         }
+                     }
+--- a/src/string_mutable.zig	2023-08-25 14:05:27.000000000 +0800
++++ a/src/string_mutable.zig	2023-08-25 14:05:27.000000000 +0800
+@@ -14,7 +14,7 @@
+     allocator: std.mem.Allocator,
+     list: std.ArrayListUnmanaged(u8),
+ 
+-    pub fn init2048(allocator: std.mem.Allocator) !MutableString {
++    pub fn init2048(allocator: std.mem.Allocator) std.mem.Allocator.Error!MutableString {
+         return MutableString.init(allocator, 2048);
+     }
+ 

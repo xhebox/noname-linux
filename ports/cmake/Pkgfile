@@ -1,17 +1,21 @@
-version="3.22.1"
+version="3.26.1"
 makedeps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 deps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 desc="CMake is a cross-platform open-source make system"
 source=[
 	{url="https://www.cmake.org/files/v${version%.*}/cmake-${version}.tar.gz"},
 	{url="cmake-isystem.patch"},
+	{url="opengl.patch"},
 	{url="use-egl.patch"},
+	{url="ninja.patch"},
 ]
 
 ext='''
 	cd cmake-$version
 	patch -p1 -i ../cmake-isystem.patch
 	patch -p1 -i ../use-egl.patch
+	patch -p1 -i ../opengl.patch
+	patch -p1 -i ../ninja.patch
 '''
 
 build='''
@@ -28,12 +32,11 @@ build='''
 	cat >> "$pkgdir/bin/noname-cmake" << "EOF"
 #!/bin/sh
 cmake -G Ninja -DCMAKE_INSTALL_PREFIX= \
-			-DCMAKE_INSTALL_LIBDIR=/lib \
-			-DCMAKE_INSTALL_LIBEXECDIR=/lib \
-			-DCMAKE_INSTALL_DATADIR=/share \
-			-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+			-DCMAKE_INSTALL_LIBDIR=lib \
+			-DCMAKE_INSTALL_LIBEXECDIR=lib \
+			-DCMAKE_INSTALL_DATADIR=share \
+			-DCMAKE_INSTALL_SYSCONFDIR=etc \
 			-DCMAKE_BUILD_TYPE=Release \
-			-DBUILD_SHARED_LIBS=ON \
 			"$@"
 EOF
 	chmod +x "$pkgdir"/bin/noname-cmake

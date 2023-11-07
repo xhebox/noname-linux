@@ -1,0 +1,19 @@
+version="1.21.3"
+desc="Network utility to retrieve files from the Web"
+makedeps=["openssl", "zlib"]
+deps=["ca-certificates", "openssl", "zlib"]
+source=[
+	{url="https://ftp.gnu.org/gnu/wget/wget-${version}.tar.gz"},
+]
+
+build='''
+	cd wget-${version}
+	./configure \
+		--prefix=/ \
+    --sysconfdir=/etc \
+    --disable-rpath \
+    --enable-nls \
+    --with-ssl=openssl
+	make
+	make DESTDIR="$pkgdir" install
+'''

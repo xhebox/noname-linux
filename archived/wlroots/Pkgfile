@@ -1,23 +1,21 @@
-name=wlroots
-version=r2339.7efd9885
+version="0.15.1"
 desc='Modular Wayland compositor library'
-deps="eudev wayland xcb-util-image xcb-util-wm libxkbcommon libinput pixman mesa meson ninja libcap"
+deps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "wayland"]
+makedeps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "vulkan-headers", "wayland-protocols"]
+source=[
+	{url="https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$version/wlroots-$version.tar.gz"},
+]
 
-ext() {
-	proxychains git clone https://github.com/swaywm/wlroots
-	cd wlroots
-	git reset --hard 5f48c7fddd6a28b529eb02ca156db577b76edfb6
-}
+ext='''
+	cd wlroots-$version
+'''
 
-build () {
-	cd wlroots
-	noname-meson build \
-		-Denable-libcap=false \
-		-Denable-systemd=false \
-		-Denable-elogind=false \
-		-Denable-xcb_errors=false \
-		-Denable-xwayland=true \
-		-Denable-x11_backend=true
-	ninja -C build || die
-	DESTDIR="${pkgdir}" ninja -C build install || die
-}
+build='''
+	noname-meson "wlroots-$version" build \
+				-Dxwayland=disabled \
+				-Drenderers="gles2,vulkan" \
+				-Dbackends="drm,libinput"
+	meson configure build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

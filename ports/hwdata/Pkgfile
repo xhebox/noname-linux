@@ -1,0 +1,9 @@
+version="0.368"
+desc="hardware identification databases"
+source=[{url="https://github.com/vcrhonek/hwdata/archive/refs/tags/v$version.tar.gz"}]
+
+build='''
+  cd hwdata-*
+  ./configure --prefix=/ --datadir=/share --disable-blacklist
+  make DESTDIR="${pkgdir}" install
+'''

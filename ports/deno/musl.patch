@@ -1,0 +1,11 @@
+--- a/ext/node/ops/os.rs	2023-08-10 18:53:54.000000000 +0800
++++ b/ext/node/ops/os.rs	2023-08-10 18:53:54.000000000 +0800
+@@ -65,7 +65,7 @@
+   type priority_t = i32;
+   #[cfg(target_os = "linux")]
+   #[allow(non_camel_case_types)]
+-  type priority_t = u32;
++  type priority_t = i32;
+ 
+   const PRIORITY_HIGH: i32 = -14;
+ 

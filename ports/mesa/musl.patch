@@ -1,14 +1,3 @@
---- src/gallium/winsys/svga/drm/vmw_screen.h.orig	2015-05-07 14:02:28.033079796 +0200
-+++ src/gallium/winsys/svga/drm/vmw_screen.h	2015-05-07 14:02:48.832054666 +0200
-@@ -35,6 +35,8 @@
- #define VMW_SCREEN_H_
- 
- 
-+#include <sys/types.h> 	/* dev_t */
-+
- #include "pipe/p_compiler.h"
- #include "pipe/p_state.h"
- 
 --- src/gallium/frontends/nine/threadpool.h.orig	2015-05-07 14:10:53.443337212 +0200
 +++ src/gallium/frontends/nine/threadpool.h	2015-05-07 14:11:04.210307653 +0200
 @@ -24,6 +24,8 @@
@@ -30,3 +19,14 @@
  #include <unistd.h>
  #include <fcntl.h>
  #endif
+--- meson.build	2023-08-20 12:33:35.535852780 +0800
++++ meson.build	2023-08-20 12:33:35.535852780 +0800
+@@ -1626,7 +1626,7 @@
+   pre_args += '-DHAVE_LIBUDEV'
+ endif
+ 
+-llvm_modules = ['bitwriter', 'engine', 'mcdisassembler', 'mcjit', 'core', 'executionengine', 'scalaropts', 'transformutils', 'instcombine']
++llvm_modules = ['bitwriter', 'engine', 'mcdisassembler', 'mcjit', 'core', 'executionengine', 'scalaropts', 'transformutils', 'instcombine', 'passes', 'ipo', 'orcjit']
+ llvm_optional_modules = ['coroutines']
+ if with_amd_vk or with_gallium_radeonsi or with_gallium_r600
+   llvm_modules += ['amdgpu', 'bitreader', 'ipo']

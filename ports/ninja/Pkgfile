@@ -1,23 +1,12 @@
-version="1.10.0"
-re2c_version="1.1.1"
+version="1.11.1"
 makedeps=["python3"]
 deps=["python3"]
 desc="Small build system with a focus on speed"
 source=[
-	{url="https://github.com/skvadrik/re2c/archive/${re2c_version}.tar.gz"},
 	{url="https://github.com/martine/ninja/archive/v${version}.tar.gz"},
 ]
 
 build='''
-	export PATH="$srcdir/bin:$PATH"
-
-	cd re2c-${re2c_version}/re2c
-	./autogen.sh
-	./configure --prefix=
-	make
-	make DESTDIR="$srcdir/bin" install
-	cd -
-
 	cd ninja-$version
 	sed -e "s|subprocess.check_call(rebuild_args)|pass|" -i configure.py
 	python configure.py --bootstrap

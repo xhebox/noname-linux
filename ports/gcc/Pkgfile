@@ -1,7 +1,7 @@
-version = "11.2.0"
+version = "12.2.0"
 desc = "The GNU Compiler Collection"
 isl_version = "0.24"
-gmp_version = "6.1.2"
+gmp_version = "6.2.1"
 mpfr_version = "4.1.0"
 mpc_version = "1.2.1"
 source = [
@@ -10,15 +10,17 @@ source = [
   { url = "https://gmplib.org/download/gmp/gmp-${gmp_version}.tar.xz" },
   { url = "https://www.mpfr.org/mpfr-${mpfr_version}/mpfr-${mpfr_version}.tar.xz" },
   { url = "https://ftp.gnu.org/gnu/mpc/mpc-${mpc_version}.tar.gz" },
-  { url = "0002-posix_memalign.patch" },
-  { url = "003_all_default-fortify-source.patch" },
-  { url = "013_all_default-ssp-fix.patch" },
-  { url = "203-libgcc_s.patch" },
-  { url = "fix-musl-execinfo.patch" },
-  { url = "gcc-6.1-musl-libssp.patch" },
-  { url = "libgcc-always-build-gcceh.a.patch" },
-  { url = "0016-invalid_tls_model.patch" },
-  { url = "locale.patch" },
+	{url="consistent-library-paths.patch"},
+	{url="fix-cxxflags-passing.patch"},
+	{url="fix-musl-execinfo.patch"},
+	{url="fix-vtv-link-order.patch"},
+	{url="force-override-clocale.patch"},
+	{url="gccgo-musl.patch"},
+	{url="gomp.patch"},
+	{url="libgcc-ibm128-no-tag.patch"},
+	{url="libgnarl-musl.patch"},
+	{url="libssp-musl.patch"},
+	{url="musl-generic-locale.patch"},
 ]
 makedeps = ["zlib"]
 deps = ["zlib", "binutils"]
@@ -28,7 +30,6 @@ ext = '''
 	for i in $source; do
 		echo "### $i"
 		case "$i" in
-			*execinfo*.patch) patch -p0 -i ../"$i";;
 			*.patch) patch -Nbp1 -i ../"$i";;
 		esac
 	done
@@ -70,9 +71,10 @@ build = '''
 				--disable-default-pie \
 				--enable-default-ssp \
 				--enable-clocale=generic \
-				--enable-gnu-indirect-function \
+				--disable-gnu-indirect-function \
 				--enable-lto --enable-plugin \
 				--disable-nls \
+				--with-pic \
 				--disable-vtable-verify \
 				--disable-target-libiberty \
 				--disable-fixed-point \
@@ -102,7 +104,7 @@ build = '''
 		--prefix=	\
 		--libexecdir=/lib \
 		--libdir=/lib \
-		--enable-languages=c,c++,lto \
+		--enable-languages=c,c++,fortran,lto \
 		--with-pkgversion=noname \
 		--enable-shared \
 		--enable-threads=posix \
@@ -118,13 +120,14 @@ build = '''
 		--enable-clocale=generic \
 		--enable-gnu-indirect-function \
 		--enable-lto --enable-plugin \
+		--enable-libsanitizer \
+		--with-pic \
 		--enable-nls \
 		--disable-vtable-verify \
 		--disable-target-libiberty \
 		--disable-fixed-point \
 		--disable-libstdcxx-pch \
 		--disable-libunwind-exceptions \
-		--disable-libsanitizer \
 		--disable-libssp \
 		--disable-werror \
 		--disable-symvers \

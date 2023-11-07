@@ -1,7 +1,7 @@
 version="5.28.0"
 desc="Perl programming language"
-makedeps=["db", "gdbm"]
-deps=["db", "gdbm", "musl"]
+makedeps=["gdbm"]
+deps=["gdbm", "musl"]
 source=[
 	{url="http://www.cpan.org/src/5.0/perl-$version.tar.gz"},
 	{url="perlbin.sh"}

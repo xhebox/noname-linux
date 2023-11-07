@@ -1,0 +1,14 @@
+version="4.7.0"
+desc="General purpose TCP-IP emulator"
+makedeps=["glib", "meson"]
+deps=["glib"]
+source=[
+	{url="https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v${version}/libslirp-v${version}.tar.gz"},
+]
+
+build='''
+	noname-meson libslirp-v$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

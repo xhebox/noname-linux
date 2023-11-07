@@ -1,0 +1,17 @@
+version="140201"
+desc="Offline NT Password Editor - reset passwords in a Windows NT SAM user database file"
+makedeps=["openssl"]
+source=[
+	{url="https://pogostick.net/~pnh/ntpasswd/chntpw-source-$version.zip"},
+	{url="musl.patch"},
+]
+
+build='''
+  cd chntpw-$version
+	patch -Np1 -i "$srcdir/musl.patch"
+  sed -i 's/^CFLAGS= \(.*\) -m32 $/CFLAGS= \1/' Makefile
+  make
+  install -Dm0755 chntpw "${pkgdir}/bin/chntpw"
+  install -Dm0755 reged "${pkgdir}/bin/reged"
+  install -Dm0755 cpnt "${pkgdir}/bin/cpnt"
+'''

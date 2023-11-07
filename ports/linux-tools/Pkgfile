@@ -1,4 +1,4 @@
-version="6.0.7"
+version="6.4.3"
 xanmod="1"
 desc="Linux kernel tools"
 source=[
@@ -6,8 +6,8 @@ source=[
 	{url="https://github.com/xanmod/linux/releases/download/${version}-xanmod1/patch-${version}-xanmod1.xz"},
 	{url="musl.patch"},
 ]
-makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
-deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils"]
+makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils", "libtraceevent"]
+deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils", "libtraceevent"]
 
 ext='''
 	cd linux-${version%.*}
@@ -30,30 +30,18 @@ build='''
 	prefix=/ \
 	lib=lib/perf \
 	perfexecdir=lib/perf \
-	WERROR=0 \
+	EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=implicit-function-declaration -Wno-error=switch-enum' \
 	NO_SDT=1 \
 	all
 
 	make -f Makefile.perf \
+	DESTDIR="$pkgdir" \
 	prefix=/ \
-	WERROR=0 \
 	lib=lib/perf \
 	perfexecdir=lib/perf \
+	EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=implicit-function-declaration -Wno-error=switch-enum' \
 	NO_SDT=1 \
-	DESTDIR="$pkgdir" \
 	install
-	cd -
-
-	cd "$pkgdir"
-	install -Dm644 etc/bash_completion.d/perf share/bash-completion/completions/perf
-	find share -type f -exec chmod a-x {} \;
-	cd -
-
-	echo 'libtraceevent'
-	cd tools/lib/traceevent
-	make
-	install -dm 755 "$pkgdir/lib"
-	install -m 644 libtraceevent.so "$pkgdir/lib"
 	cd -
 
 	echo 'cpupower'
@@ -63,6 +51,7 @@ build='''
 	DESTDIR="$pkgdir" \
 	bindir='/bin' \
 	sbindir='/bin' \
+	bash_completion_dir= '/share/bash-completion/completions' \
 	libdir='/lib' \
 	includedir='/include' \
 	mandir='/share/man' \

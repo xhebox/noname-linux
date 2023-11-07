@@ -1,0 +1,40 @@
+version="1.0.0.75"
+desc="Valve's digital software delivery system"
+deps=["bash", "diffutils", "curl", "dbus", "freetype", "gdk-pixbuf", "nss", "usbutils", "vulkan", "mesa", "python3"]
+source=[
+	{url="https://repo.steampowered.com/steam/pool/steam/s/steam/steam_${version}.tar.gz"},
+	{url="steam-runtime.sh"},
+]
+
+ext='''
+  cd steam-launcher
+  # apply roundups for udev rules
+  sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i subprojects/steam-devices/60-steam-input.rules
+  sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i subprojects/steam-devices/60-steam-input.rules
+  sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i subprojects/steam-devices/60-steam-vr.rules
+  # separated runtime/native desktop files
+  sed -r 's|(Name=Steam)|\1 (Runtime)|' -i steam.desktop
+  sed -r 's|(/usr/bin/steam)|\1-runtime|' -i steam.desktop
+'''
+
+build='''
+  cd steam-launcher
+  make DESTDIR="${pkgdir}" PREFIX= install
+
+  install -Dm 755 "${srcdir}/steam-runtime.sh" "${pkgdir}/bin/steam-runtime"
+  install -d "${pkgdir}/lib/steam"
+
+  mv "${pkgdir}/bin/steam" "${pkgdir}/lib/steam/steam"
+  ln -sf /bin/steam-runtime "${pkgdir}/bin/steam"
+
+  install -Dm 644 COPYING steam_subscriber_agreement.txt -t "${pkgdir}/share/licenses/steam"
+  install -Dm 644 debian/changelog -t "${pkgdir}/share/doc/steam"
+
+  # blank steamdeps because apt-get
+  ln -sf /bin/true "${pkgdir}/bin/steamdeps"
+
+  install -Dm 644 subprojects/steam-devices/60-steam-input.rules \
+    "${pkgdir}/lib/udev/rules.d/70-steam-input.rules"
+  install -Dm 644 subprojects/steam-devices/60-steam-vr.rules \
+    "${pkgdir}/lib/udev/rules.d/70-steam-vr.rules"
+'''

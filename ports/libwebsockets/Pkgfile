@@ -1,21 +1,17 @@
 name="libwebsockets"
-version="4.0.1"
+version="4.3.2"
 desc="C library for websocket clients and servers"
 deps=["openssl", "libuv"]
 makedeps=["openssl", "libuv", "cmake"]
 source=[{url="https://github.com/warmcat/libwebsockets/archive/v$version.tar.gz"}]
 
 build='''
-	cd libwebsockets-$version
-	mkdir build -p
-	cd build
-	noname-cmake \
+	noname-cmake libwebsockets-$version -Bbuild \
 		-DLWS_WITH_STATIC=OFF \
 		-DLWS_WITH_LIBUV=ON \
 		-DLWS_WITHOUT_EXTENSIONS=OFF \
 		-DLWS_LINK_TESTAPPS_DYNAMIC=ON \
-		-DLWS_UNIX_SOCK=ON \
-		..
-	make
-	make DESTDIR="${pkgdir}" install
+		-DLWS_UNIX_SOCK=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

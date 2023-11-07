@@ -1,19 +1,12 @@
-version="1.20.0"
+version="1.22.0"
 desc="A computer display server protocol"
 deps=["expat", "libffi", "libxml2"]
 makedeps=["expat", "libffi", "libxml2"]
-source=[
-	{url="https://wayland.freedesktop.org/releases/wayland-$version.tar.xz"},
-]
-
-ext='''
-	cd wayland-$version
-#patch -Nbp1 -i ../debug.patch
-'''
+source=[{url="https://gitlab.freedesktop.org/wayland/wayland/-/releases/$version/downloads/wayland-$version.tar.xz"}]
 
 build='''
 	noname-meson wayland-$version build -Ddocumentation=false
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

@@ -1,4 +1,4 @@
-version="7.0"
+version="8.2"
 desc="The GNU readline lib"
 makedeps=["ncurses"]
 deps=["ncurses"]
@@ -9,10 +9,6 @@ source=[
 
 ext='''
 	cd readline-$version
-	url="http://ftp.gnu.org/gnu/readline/readline-$version-patches"
-	for p in $(seq -w 001 005); do
-		curl "$url/readline`echo $version | tr -d '.'`-${p}" | patch -p0 -i -
-	done
 	sed -i 's|-Wl,-rpath,$(libdir) ||g' support/shobj-conf
 '''
 

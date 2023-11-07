@@ -1,0 +1,10 @@
+version="1.8.0"
+desc="Google's framework for writing C++ tests"
+makedeps=["cmake"]
+source=[{url="https://github.com/google/googletest/archive/release-${version}.tar.gz"}]
+
+build='''
+	noname-cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_SKIP_RPATH=ON -B build googletest-release-$version
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --install build
+'''

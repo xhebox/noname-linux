@@ -8,7 +8,7 @@ source=[
 
 build='''
 	noname-meson seatd-$version build -Dlibseat-logind=systemd -Dman-pages=disabled
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

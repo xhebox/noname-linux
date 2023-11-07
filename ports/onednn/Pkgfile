@@ -1,0 +1,11 @@
+version="3.1.1"
+desc="oneAPI Deep Neural Network Library (oneDNN)"
+source=[
+	{url="https://github.com/oneapi-src/oneDNN/archive/v${version}.tar.gz"},
+]
+
+build='''
+	noname-cmake oneDNN-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

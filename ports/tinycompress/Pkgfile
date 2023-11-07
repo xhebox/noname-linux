@@ -1,0 +1,12 @@
+version="master"
+desc="The Advanced Linux Sound Architecture (ALSA) - tinycompress"
+source=[
+	{url="https://github.com/alsa-project/tinycompress/archive/refs/heads/master.zip"},
+]
+
+build='''
+	cd tinycompress-$version
+	./autogen.sh
+	./configure --prefix=
+	make PREFIX= DESTDIR="$pkgdir" install
+'''

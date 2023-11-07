@@ -1,20 +1,20 @@
-version="3.7.0"
+version="21.10"
 desc="Protocol Buffers - Google's data interchange format"
-deps=["zlib"]
-makedeps=["zlib", "python3-setuptools"]
+deps=["zlib", "python3"]
+makedeps=["zlib", "python3"]
 source=[
 	{url="https://github.com/google/protobuf/archive/v${version}.tar.gz"},
 	{url="musl-fix.patch"},
 ]
 
 build='''
+	noname-cmake -B build -S protobuf-$version -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_BUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --install build
 	cd protobuf-$version
-	patch -p0 -i ../musl-fix.patch
-	autoreconf -ifv
-	./configure --prefix=/
-	make
-	make DESTDIR="$pkgdir" install
-
+	install -vDm 644 editors/protobuf-mode.el -t "$pkgdir/share/emacs/site-lisp/"
+	install -vDm 644 editors/proto.vim  -t "${pkgdir}/share/vim/vimfiles/syntax"
+	python_version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 	cd python
-	python3 setup.py install --prefix= --root="$pkgdir" --cpp_implementation
+	PROTOC="$srcdir"/build/protoc python setup.py install --optimize=1 --cpp_implementation
 '''

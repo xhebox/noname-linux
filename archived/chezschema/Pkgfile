@@ -1,0 +1,11 @@
+version="9.5.8a"
+desc="Compiler and run-time system for the language of the Revised^6 Report on Scheme (R6RS), with numerous extensions."
+deps=["ncurses"]
+makedeps=["ncurses"]
+source=[{url="https://github.com/cisco/ChezScheme/releases/download/v$version/csv$version.tar.gz"}]
+
+build='''
+	cd csv$version
+  ./configure --installprefix=/ --temproot=$pkgdir --threads --installschemename=chez --installscriptname=chez-script --disable-x11
+  make install DESTDIR="$pkgdir"
+'''

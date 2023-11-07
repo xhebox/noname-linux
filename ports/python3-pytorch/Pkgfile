@@ -1,23 +1,38 @@
-version="1.11.0"
-makedeps=["python3", "python3-numpy", "python3-yaml", "python3-typing", "openmp"]
-deps=["python3", "python3-numpy", "python3-yaml", "python3-typing", "openmp"]
+version="2.0.1"
+makedeps=["python3", "python3-numpy", "openmp", "openblas", "python3-pybind11"]
+deps=["python3", "python3-numpy", "openmp", "openblas", "python3-pybind11"]
 source=[
-	{url="https://github.com/pytorch/pytorch/releases/download/v$version/pytorch-v$version.tar.gz"},
+	{url="https://github.com/pytorch/pytorch/releases/download/v${version}/pytorch-v${version}.tar.gz"},
 	{url="musl.patch"},
-	{url="fix_include_system.patch"},
 ]
 desc="torch for python"
 
 build='''
 	cd pytorch-v$version
+	sed -i '/Werror=/d' CMakeLists.txt
+	python3 -m venv --system-site-packages ss
+	. ss/bin/activate
+	pip install PyYAML typing_extensions
 	patch -Nbp1 -i ../musl.patch
 	sed -i 's/isystem/I/g' torch/utils/cpp_extension.py
+	export PYTORCH_BUILD_VERSION="${version}"
+  export PYTORCH_BUILD_NUMBER=1
+	export LD=mold
 	export USE_DISTRIBUTED=OFF
 	export USE_CUDA=OFF
 	export USE_FFMPEG=OFF
+	export BUILD_CAFFE2=OFF
+  export BUILD_CAFFE2_OPS=OFF
 	export BUILD_TEST=OFF
 	export USE_OPENMP=ON
-	export USE_FBGEMM=ON
+	export USE_FBGEMM=OFF
+	export USE_GLOG=OFF
+  export USE_VULKAN=OFF
+  export BUILD_BINARY=ON
+	export USE_MKLDNN=OFF
+	export CMAKE_BUILD_PARALLEL_LEVEL=8
+	export CXXFLAGS="$CXXFLAGS -DFLATBUFFERS_LOCALE_INDEPENDENT=0 -Wno-error"
+	export CXXFLAGS="${CXXFLAGS} -I third_party/ideep/mkl-dnn/third_party/oneDNN/include/"
 	python3 setup.py build
 	python3 setup.py install \
 		--prefix= \

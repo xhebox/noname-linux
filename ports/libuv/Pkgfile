@@ -1,4 +1,4 @@
-version="1.39.0"
+version="1.47.0"
 deps=["musl"]
 desc="Multi-platform support library with a focus on asynchronous I/O"
 source=[{url="http://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"}]

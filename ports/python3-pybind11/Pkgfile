@@ -1,0 +1,16 @@
+version="2.11.1"
+desc='A lightweight header-only library that exposes C++ types in Python and vice versa'
+deps=["python3"]
+makedeps=["python3", "boost", "eigen", "cmake"]
+source=[{url="https://github.com/pybind/pybind11/archive/v${version}/pybind11-${version}.tar.gz"}]
+
+build='''
+    cd pybind11-${version}
+    python setup.py build
+    python setup.py install --prefix= --root="$pkgdir" --optimize='1'
+		_pyver="$(python -c 'import sys; print("%s.%s" %sys.version_info[0:2])')"
+		install -d -m755 "${pkgdir}"/include "${pkgdir}"/lib/cmake "${pkgdir}"/lib/pkgconfig
+		ln -s "../lib/python${_pyver}/site-packages/pybind11/include/pybind11" "${pkgdir}/include/pybind11"
+		ln -s "../../lib/python${_pyver}/site-packages/pybind11/share/cmake/pybind11" "${pkgdir}/lib/cmake/pybind11"
+		ln -s "../../lib/python${_pyver}/site-packages/pybind11/share/pkgconfig/pybind11.pc" "${pkgdir}/lib/pkgconfig/pybind11.pc"
+'''

@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
-rustup_version = "1.25.1"
-version = "1.64.0"
-_rust_dist_version = "1.64.0"
+rustup_version = "1.25.2"
+version = "1.71.0"
+_rust_dist_version = "1.71.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -12,7 +12,6 @@ makedeps = [
   "wasi-sysroot",
   "xz",
   "curl",
-  "execinfo",
   "cmake",
   "python3",
 ]
@@ -25,27 +24,25 @@ deps = [
   "wasi-sysroot",
   "curl",
   "xz",
-  "execinfo",
 ]
 source = [
   { url = "https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz" },
   { url = "https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz" },
   { url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
-  { url = "0001-bootstrap-Change-libexec-dir.patch" },
-  { url = "0001-cargo-Change-libexec-dir.patch" },
-  { url = "0006-Prefer-libgcc_eh-over-libunwind-for-musl.patch" },
-  { url = "0007-do-not-install-libunwind-source.patch" },
-  { url = "0008-link-stage-2-tools-dynamically-to-libstd.patch" },
-  { url = "need-ssp-nonshared-and-execinfo.patch" },
-  { url = "link-musl-dynamically.patch" },
+	{ url = "fix-crt-static-Bdynamic-linkage.patch"},
+  { url = "need-rpath.patch" },
+  { url = "need-ssp_nonshared.patch" },
   { url = "musl-fix-linux_musl_base.patch" },
+	{url="lfs64-getrandom.patch.noauto"},
+	{url="lfs64-libc.patch.noauto"},
+	{url="lfs64-rust.patch"},
 ]
 
 ext = '''
 	mkdir -p stage0/bin
 	mkdir -p stage0/lib
 
-	cd rust-${_rust_dist_version}-x86_64-unknown-linux-musl
+	cd rust-${_rust_dist_version}-$TARGET
 	find . -name manifest.in -delete
 	cp -a rust-std-*/* ../stage0/
 	cp -a rustc/* ../stage0/
@@ -59,39 +56,33 @@ ext = '''
 		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
-	for i in libc typenum cc target-lexicon; do
+	patch -Np1 -d vendor/getrandom-0.2.8 < "$srcdir"/lfs64-getrandom.patch.noauto
+	patch -Np1 -d vendor/libc < "$srcdir"/lfs64-libc.patch.noauto
+	patch -Np1 -d vendor/libc-0.2.138 < "$srcdir"/lfs64-libc.patch.noauto
+	patch -Np1 -d vendor/libc-0.2.139 < "$srcdir"/lfs64-libc.patch.noauto
+	patch -Np1 -d vendor/libc-0.2.140 < "$srcdir"/lfs64-libc.patch.noauto
+	patch -Np1 -d vendor/libc-0.2.143 < "$srcdir"/lfs64-libc.patch.noauto
+	for i in libc typenum cc target-lexicon getrandom-0.2.8 libc-0.2.138 libc-0.2.139 libc-0.2.140 libc-0.2.143; do
 		sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
 	done
-	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
 
 	cat <<- EOF > config.toml
-[llvm]
-link-shared=true
-[target.x86_64-unknown-linux-musl]
-llvm-config="/bin/llvm-config"
-crt-static=false
-[target.wasm32-unknown-unknown]
-linker="wasm-ld"
-wasi-root="/lib/wasi"
-llvm-config="/bin/llvm-config"
-profiler=false
-[target.wasm32-wasi]
-linker="wasm-ld"
-wasi-root="/lib/wasi"
-llvm-config="/bin/llvm-config"
-profiler=false
+[target.$TARGET]
+crt-static = false
+llvm-config = "$ROOT/bin/llvm-config"
 [build]
 tools=["cargo", "rls", "clippy", "rustfmt", "analysis", "src", "rust-demangler"]
-host=["x86_64-unknown-linux-musl"]
-build="x86_64-unknown-linux-musl"
-target=["wasm32-wasi", "wasm32-unknown-unknown", "x86_64-unknown-linux-musl"]
+host=["$TARGET"]
+build="$TARGET"
+target=["$TARGET"]
 docs=false
 profiler=true
 extended=true
 sanitizers=false
+vendor=true
+locked-deps=true
 full-bootstrap=false
 local-rebuild=false
-vendor=true
 cargo="$srcdir/stage0/bin/cargo"
 rustc="$srcdir/stage0/bin/rustc"
 [install]
@@ -100,14 +91,18 @@ libdir="lib"
 mandir="share/man"
 [rust]
 deny-warnings = false
-musl-root="/"
 channel="nightly"
+lto="thin"
 codegen-units-std=1
 codegen-tests=false
+backtrace-on-ice=true
 remap-debuginfo=true
-jemalloc=false
-llvm-libunwind="no"
-rpath=false
+musl-root="/"
+llvm-libunwind = "system"
+[llvm]
+link-shared = true
+static-libstdcpp = false
+use-libcxx = true
 [dist]
 src-tarball=false
 EOF

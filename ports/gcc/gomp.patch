@@ -1,0 +1,11 @@
+--- a/libgomp/Makefile.am 2022-08-19 16:15:35.209048325 +0800
++++ b/libgomp/Makefile.am 2022-08-19 16:15:35.209048325 +0800
+@@ -17,7 +17,7 @@
+ vpath % $(strip $(search_path))
+ 
+ AM_CPPFLAGS = $(addprefix -I, $(search_path))
+-AM_CFLAGS = $(XCFLAGS)
++AM_CFLAGS = $(XCFLAGS) -fPIC
+ AM_LDFLAGS = $(XLDFLAGS) $(SECTION_LDFLAGS) $(OPT_LDFLAGS)
+ 
+ toolexeclib_LTLIBRARIES = libgomp.la 

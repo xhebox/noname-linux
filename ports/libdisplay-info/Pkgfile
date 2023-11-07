@@ -1,0 +1,12 @@
+version="0.1.1"
+desc="EDID and DisplayID library"
+deps=["musl"]
+makedeps=["hwdata", "meson", "python3", "ninja"]
+source=[{url="https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/$version/downloads/libdisplay-info-$version.tar.xz"}]
+
+build='''
+	noname-meson libdisplay-info-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

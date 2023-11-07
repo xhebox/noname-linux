@@ -1,11 +1,12 @@
 diff --git ./include/c11/threads_posix.h ./include/c11/threads_posix.h
 index 45cb6075e6..1a2ea1a450 100644
---- ./include/c11/threads_posix.h
-+++ ./include/c11/threads_posix.h
-@@ -281,15 +281,29 @@ static inline int
- thrd_create(thrd_t *thr, thrd_start_t func, void *arg)
- {
-     struct impl_thrd_param *pack;
+--- ./src/c11/impl/threads_posix.c	2023-02-23 10:36:49.000000000 +0800
++++ ./src/c11/impl/threads_posix.c	2023-02-23 10:36:49.000000000 +0800
+@@ -259,10 +259,24 @@
+     if (!pack) return thrd_nomem;
+     pack->func = func;
+     pack->arg = arg;
+-    if (pthread_create(thr, NULL, impl_thrd_routine, pack) != 0) {
 +#ifdef __GLIBC__
 +    pthread_attr_t *attrp = NULL;
 +#else
@@ -14,12 +15,6 @@ index 45cb6075e6..1a2ea1a450 100644
 +    pthread_attr_setstacksize(&attr, 8388608);
 +    pthread_attr_t *attrp = &attr;
 +#endif
-     assert(thr != NULL);
-     pack = (struct impl_thrd_param *)malloc(sizeof(struct impl_thrd_param));
-     if (!pack) return thrd_nomem;
-     pack->func = func;
-     pack->arg = arg;
--    if (pthread_create(thr, NULL, impl_thrd_routine, pack) != 0) {
 +    if (pthread_create(thr, attrp, impl_thrd_routine, pack) != 0) {
 +#ifndef __GLIBC__
 +        pthread_attr_destroy(&attr);

@@ -6,7 +6,7 @@ source=[{url="https://github.com/Alexays/Waybar/archive/refs/tags/$version.tar.g
 
 build='''
 	noname-meson Waybar-$version build -Dmpd=disabled -Dsndio=disabled -Dman-pages=disabled -Dupower_glib=disabled --wrap-mode=nopromote
-	meson configure build
+	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

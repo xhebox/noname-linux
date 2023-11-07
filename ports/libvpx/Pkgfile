@@ -1,4 +1,4 @@
-version="1.8.1"
+version="1.12.0"
 makedeps=["nasm"]
 deps=["bash"]
 desc="Library for the vp8 codec"

@@ -172,6 +172,7 @@ func main() {
 	fmt.Fprintf(shenv, "export CXXFLAGS=\"%s\"\n", cfg.CXXFLAGS)
 	fmt.Fprintf(shenv, "export LDFLAGS=\"%s\"\n", cfg.LDFLAGS)
 	fmt.Fprintf(shenv, "export MAKEFLAGS=\"-j%d\"\n", cfg.Makeflags)
+	fmt.Fprintf(shenv, "export CMAKE_GENERATOR=\"Ninja\"\n")
 	if cfg.Ccache {
 		fmt.Fprintln(shenv, "export PATH=\"/lib/ccache:$PATH\"")
 	}

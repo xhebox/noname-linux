@@ -1,0 +1,17 @@
+version="3.14.0"
+desc="A library that makes it possible to implement a filesystem in a userspace program."
+makdeps=["pkgconf", "meson", "systemd"]
+source=[
+	{url="https://github.com/libfuse/libfuse/releases/download/fuse-$version/fuse-$version.tar.xz"},
+]
+
+build='''
+	noname-meson fuse-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 fuse-${version}/util/fuse.conf "${pkgdir}"/etc/fuse.conf
+	rm -fr ${pkgdir}/etc/init.d
+	rm -fr ${pkgdir}/etc/udev
+	rm -fr ${pkgdir}/dev
+'''
