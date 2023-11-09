@@ -1,4 +1,4 @@
-version = "12.2.0"
+version = "13.2.0"
 desc = "The GNU Compiler Collection"
 isl_version = "0.24"
 gmp_version = "6.2.1"
@@ -10,14 +10,12 @@ source = [
   { url = "https://gmplib.org/download/gmp/gmp-${gmp_version}.tar.xz" },
   { url = "https://www.mpfr.org/mpfr-${mpfr_version}/mpfr-${mpfr_version}.tar.xz" },
   { url = "https://ftp.gnu.org/gnu/mpc/mpc-${mpc_version}.tar.gz" },
-	{url="consistent-library-paths.patch"},
 	{url="fix-cxxflags-passing.patch"},
 	{url="fix-musl-execinfo.patch"},
-	{url="fix-vtv-link-order.patch"},
 	{url="force-override-clocale.patch"},
-	{url="gccgo-musl.patch"},
+	{url="libiberty.patch"},
+	{url="libgcc.patch"},
 	{url="gomp.patch"},
-	{url="libgcc-ibm128-no-tag.patch"},
 	{url="libgnarl-musl.patch"},
 	{url="libssp-musl.patch"},
 	{url="musl-generic-locale.patch"},
@@ -45,61 +43,14 @@ ext = '''
 
 build = '''
 	export libat_cv_have_ifunc=no
-
-	if [ ! -z "$OTARGETS" ]; then
-		for OTARGET in $OTARGETS; do
-			mkdir -p "$srcdir"/build-$OTARGET
-			cd "$srcdir"/build-$OTARGET
-			"$srcdir"/gcc-$version/configure \
-				--target=$OTARGET \
-				--with-sysroot=/$OTARGET \
-				--prefix= \
-				--libexecdir=/lib \
-				--libdir=/lib \
-				--program-prefix=$OTARGET- \
-				--enable-languages=c,c++ \
-				--enable-shared \
-				--enable-threads=posix \
-				--with-pkgversion=noname \
-				--enable-checking=release \
-				--enable-libstdcxx-time \
-				--with-system-zlib \
-				--enable-__cxa_atexit \
-				--with-linker-hash-style=gnu \
-				--enable-linker-build-id \
-				--enable-cet \
-				--disable-default-pie \
-				--enable-default-ssp \
-				--enable-clocale=generic \
-				--disable-gnu-indirect-function \
-				--enable-lto --enable-plugin \
-				--disable-nls \
-				--with-pic \
-				--disable-vtable-verify \
-				--disable-target-libiberty \
-				--disable-fixed-point \
-				--disable-libstdcxx-pch \
-				--disable-libunwind-exceptions \
-				--disable-libsanitizer \
-				--disable-libssp \
-				--disable-werror \
-				--disable-symvers \
-				--disable-multilib \
-				--disable-sjlj-exceptions \
-				--disable-bootstrap
-
-			gcc_cv_libc_provides_ssp=yes \
-			make
-			make -j1 DESTDIR="${pkgdir}" install-gcc install-target-libgcc install-target-libstdc++-v3
-			rm -rf "$pkgdir"/share/man/man7
-			rm -rf "$pkgdir"/share/gcc-*
-			rm -rf "$pkgdir"/share/info
-		done
-	fi
+	export CC=gcc
+	export CXX=g++
 
 	mkdir -p "$srcdir"/build
 	cd "$srcdir"/build
 	"$srcdir"/gcc-$version/configure \
+		--host=$TARGET \
+		--build=$TARGET \
 		--target=$TARGET \
 		--prefix=	\
 		--libexecdir=/lib \
@@ -107,35 +58,31 @@ build = '''
 		--enable-languages=c,c++,fortran,lto \
 		--with-pkgversion=noname \
 		--enable-shared \
-		--enable-threads=posix \
+		--enable-threads \
 		--enable-checking=release \
-		--enable-libstdcxx-time \
 		--with-system-zlib \
 		--enable-__cxa_atexit \
 		--with-linker-hash-style=gnu \
 		--enable-linker-build-id \
-		--enable-cet=auto \
 		--enable-default-pie \
 		--enable-default-ssp \
 		--enable-clocale=generic \
-		--enable-gnu-indirect-function \
 		--enable-lto --enable-plugin \
-		--enable-libsanitizer \
-		--with-pic \
+		--enable-link-serialization=2 \
+		--enable-linker-build-id \
+		--enable-tls \
 		--enable-nls \
+		--disable-cet \
+		--disable-gnu-indirect-function \
+		--disable-libsanitizer \
 		--disable-vtable-verify \
-		--disable-target-libiberty \
 		--disable-fixed-point \
 		--disable-libstdcxx-pch \
-		--disable-libunwind-exceptions \
 		--disable-libssp \
 		--disable-werror \
 		--disable-symvers \
-		--disable-multilib \
-		--disable-sjlj-exceptions \
-		--disable-bootstrap
+		--disable-multilib
 
-	gcc_cv_libc_provides_ssp=yes \
 	make
 	make -j1 DESTDIR="${pkgdir}" install
 	make -C mpc DESTDIR="${pkgdir}" install

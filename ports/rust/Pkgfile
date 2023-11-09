@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
 rustup_version = "1.25.2"
-version = "1.71.0"
-_rust_dist_version = "1.71.0"
+version = "1.73.0"
+_rust_dist_version = "1.73.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -29,11 +29,9 @@ source = [
   { url = "https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz" },
   { url = "https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz" },
   { url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
-	{ url = "fix-crt-static-Bdynamic-linkage.patch"},
   { url = "need-rpath.patch" },
   { url = "need-ssp_nonshared.patch" },
   { url = "musl-fix-linux_musl_base.patch" },
-	{url="lfs64-getrandom.patch.noauto"},
 	{url="lfs64-libc.patch.noauto"},
 	{url="lfs64-rust.patch"},
 ]
@@ -56,13 +54,9 @@ ext = '''
 		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
-	patch -Np1 -d vendor/getrandom-0.2.8 < "$srcdir"/lfs64-getrandom.patch.noauto
-	patch -Np1 -d vendor/libc < "$srcdir"/lfs64-libc.patch.noauto
 	patch -Np1 -d vendor/libc-0.2.138 < "$srcdir"/lfs64-libc.patch.noauto
-	patch -Np1 -d vendor/libc-0.2.139 < "$srcdir"/lfs64-libc.patch.noauto
 	patch -Np1 -d vendor/libc-0.2.140 < "$srcdir"/lfs64-libc.patch.noauto
-	patch -Np1 -d vendor/libc-0.2.143 < "$srcdir"/lfs64-libc.patch.noauto
-	for i in libc typenum cc target-lexicon getrandom-0.2.8 libc-0.2.138 libc-0.2.139 libc-0.2.140 libc-0.2.143; do
+	for i in libc typenum cc target-lexicon libc-0.2.138 libc-0.2.140; do
 		sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
 	done
 

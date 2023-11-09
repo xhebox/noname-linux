@@ -1,4 +1,4 @@
-version="0.29.1"
+version="0.32.0"
 paper_version="0.4.0"
 desc="A dynamic tiling Wayland compositor based on wlroots that doesn't sacrifice on its looks."
 deps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "vulkan", "wayland"]
@@ -11,27 +11,30 @@ source=[
 
 build='''
 	cd "$srcdir/hyprland-source"
+	export CC=gcc
+	export CXX=g++
 	patch -Np1 -i "$srcdir"/xwayland.patch
 
-	make fixwlr
-
-	cd "./subprojects/wlroots/" && \
-	noname-meson build/ --buildtype=release \
-				-Dxwayland=disabled \
-				-Drenderers="gles2" \
-				-Dbackends="drm,libinput" \
-	&& meson compile -C build/ && cd ../..
-	install -Dm755 "subprojects/wlroots/build/libwlroots.so.12032" -t "${pkgdir}/lib"
-
-	cd subprojects/udis86
-	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -H./ -B./build -G Ninja
-	cmake --build ./build --config Release --target all
-	cd ../..
-
-	make protocols
+#	make fixwlr
+#
+#	cd "./subprojects/wlroots/" && \
+#	noname-meson build/ --buildtype=release \
+#				-Dxwayland=disabled \
+#				-Drenderers="gles2" \
+#				-Dbackends="drm,libinput" \
+#	&& meson compile -C build/ && cd ../..
+#
+#	cd subprojects/udis86
+#	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -H./ -B./build -G Ninja
+#	cmake --build ./build --config Release --target all
+#	cd ../..
+#
+#	make protocols
 	noname-cmake . -Bbuild -DNO_XWAYLAND=true --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -G Ninja
 	cmake --build ./build --config Release --target all
 	cd ./hyprctl && make all && cd ..
+
+	install -Dm755 "subprojects/wlroots/build/libwlroots.so.12032" -t "${pkgdir}/lib"
 
 	mkdir -p "${pkgdir}/share/wayland-sessions"
 	mkdir -p "${pkgdir}/share/hyprland"

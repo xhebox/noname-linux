@@ -78,7 +78,7 @@ diff --git a/library/std/src/sys/unix/fs.rs b/library/std/src/sys/unix/fs.rs
 index 09db5b11dbfd3..e31f987c7dc9a 100644
 --- a/library/std/src/sys/unix/fs.rs
 +++ b/library/std/src/sys/unix/fs.rs
-@@ -47,9 +47,13 @@ use libc::{c_int, mode_t};
+@@ -39,9 +39,13 @@
      all(target_os = "linux", target_env = "gnu")
  ))]
  use libc::c_char;
@@ -94,11 +94,11 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
  use libc::fstatat64;
  #[cfg(any(
      target_os = "android",
-@@ -58,9 +62,10 @@ use libc::fstatat64;
-     target_os = "redox",
+@@ -51,9 +55,10 @@
      target_os = "illumos",
      target_os = "nto",
-+    target_env = "musl",
+     target_os = "vita",
++    all(target_os = "linux", target_env = "musl"),
  ))]
  use libc::readdir as readdir64;
 -#[cfg(target_os = "linux")]
@@ -106,7 +106,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
  use libc::readdir64;
  #[cfg(any(target_os = "emscripten", target_os = "l4re"))]
  use libc::readdir64_r;
-@@ -81,7 +86,13 @@ use libc::{
+@@ -75,7 +80,13 @@
      dirent as dirent64, fstat as fstat64, fstatat as fstatat64, ftruncate64, lseek64,
      lstat as lstat64, off64_t, open as open64, stat as stat64,
  };
@@ -120,7 +120,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
      target_os = "linux",
      target_os = "emscripten",
      target_os = "l4re",
-@@ -91,7 +102,7 @@ use libc::{
+@@ -85,7 +96,7 @@
      dirent as dirent64, fstat as fstat64, ftruncate as ftruncate64, lseek as lseek64,
      lstat as lstat64, off_t as off64_t, open as open64, stat as stat64,
  };
@@ -129,7 +129,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
  use libc::{dirent64, fstat64, ftruncate64, lseek64, lstat64, off64_t, open64, stat64};
  
  pub use crate::sys_common::fs::try_exists;
-@@ -278,6 +289,7 @@ unsafe impl Sync for Dir {}
+@@ -272,6 +283,7 @@
  #[cfg(any(
      target_os = "android",
      target_os = "linux",
@@ -137,7 +137,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
      target_os = "solaris",
      target_os = "illumos",
      target_os = "fuchsia",
-@@ -312,6 +324,7 @@ struct dirent64_min {
+@@ -313,6 +325,7 @@
  }
  
  #[cfg(not(any(
@@ -145,7 +145,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
      target_os = "android",
      target_os = "linux",
      target_os = "solaris",
-@@ -798,7 +811,7 @@ impl DirEntry {
+@@ -809,7 +822,7 @@
      }
  
      #[cfg(all(
@@ -154,7 +154,7 @@ index 09db5b11dbfd3..e31f987c7dc9a 100644
          not(miri)
      ))]
      pub fn metadata(&self) -> io::Result<FileAttr> {
-@@ -822,7 +835,7 @@ impl DirEntry {
+@@ -833,7 +846,7 @@
      }
  
      #[cfg(any(
