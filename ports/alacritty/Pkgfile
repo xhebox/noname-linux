@@ -1,0 +1,22 @@
+version="0.12.3"
+desc="A cross-platform, OpenGL terminal emulator."
+deps=["rust", "wayland", "mesa", "libxkbcommon", "freetype", "ncurses"]
+makedeps=["rust", "wayland-protocols", "mesa", "libxkbcommon", "freetype", "ncurses"]
+source=[
+	{url="https://github.com/alacritty/alacritty/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	cd alacritty-$version
+	export CARGO_HOME="$srcdir/.cargo"
+	cargo build $MAKEFLAGS --release
+	install -D -m755 "target/release/alacritty" "$pkgdir/bin/alacritty"
+  install -D -m644 "extra/alacritty.man" "$pkgdir/share/man/man1/alacritty.1"
+  install -D -m644 "extra/alacritty-msg.man" "$pkgdir/share/man/man1/alacritty-msg.1"
+  install -D -m644 "extra/linux/org.alacritty.Alacritty.appdata.xml" "$pkgdir/share/appdata/org.alacritty.Alacritty.appdata.xml"
+  install -D -m644 "alacritty.yml" "$pkgdir/share/doc/alacritty/example/alacritty.yml"
+  install -D -m644 "extra/completions/alacritty.bash" "$pkgdir/share/bash-completion/completions/alacritty"
+  install -D -m644 "extra/completions/_alacritty" "$pkgdir/share/zsh/site-functions/_alacritty"
+  install -D -m644 "extra/completions/alacritty.fish" "$pkgdir/share/fish/vendor_completions.d/alacritty.fish"
+  install -D -m644 "extra/logo/alacritty-term.svg" "$pkgdir/share/pixmaps/Alacritty.svg"
+'''

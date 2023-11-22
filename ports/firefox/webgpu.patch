@@ -1,0 +1,29 @@
+--- dom/webgpu/Instance.cpp	2023-11-17 01:42:53.000000000 +0800
++++ dom/webgpu/Instance.cpp	2023-11-17 01:42:53.000000000 +0800
+@@ -66,11 +66,6 @@
+   // Check if we should allow the request.
+ 
+   const auto errStr = [&]() -> std::optional<std::string_view> {
+-#ifdef RELEASE_OR_BETA
+-    if (true) {
+-      return "WebGPU is not yet available in Release or Beta builds.";
+-    }
+-#endif
+     if (!gfx::gfxVars::AllowWebGPU()) {
+       return "WebGPU is disabled by blocklist.";
+     }
+--- gfx/thebes/gfxPlatform.cpp	2023-11-17 01:42:53.000000000 +0800
++++ gfx/thebes/gfxPlatform.cpp	2023-11-17 01:42:53.000000000 +0800
+@@ -3092,12 +3092,6 @@
+     feature.Disable(FeatureStatus::Blocklisted, message.get(), failureId);
+   }
+ 
+-#ifdef RELEASE_OR_BETA
+-  feature.ForceDisable(FeatureStatus::Blocked,
+-                       "WebGPU cannot be enabled in release or beta",
+-                       "WEBGPU_DISABLE_RELEASE_OR_BETA"_ns);
+-#endif
+-
+   gfxVars::SetAllowWebGPU(feature.IsEnabled());
+ }
+ 

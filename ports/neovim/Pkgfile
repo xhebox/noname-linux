@@ -1,26 +1,21 @@
-version="nightly"
+version="0.9.4"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
 source=[
-        {url="https://github.com/neovim/neovim/archive/refs/tags/$version.tar.gz"},
+        {url="https://github.com/neovim/neovim/archive/refs/tags/v$version.tar.gz"},
 ]
+
+ext='''
+	cd neovim-${version}
+'''
 
 build='''
 	cd neovim-${version}
+	export CC=gcc
 
-	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=OFF \
-		-DUSE_BUNDLED_UNIBILIUM=ON \
-		-DUSE_BUNDLED_LIBVTERM=ON \
-		-DUSE_BUNDLED_LIBTERMKEY=ON \
-		-DUSE_BUNDLED_MSGPACK=ON \
-		-DUSE_BUNDLED_LUAJIT=ON \
-		-DUSE_BUNDLED_LUAROCKS=ON \
-		-DUSE_BUNDLED_LUV=ON \
-		-DUSE_BUNDLED_TS_PARSERS=ON \
-		-DUSE_BUNDLED_TS=ON
+	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=ON -DUSE_BUNDLED_LIBUV=OFF
 	cmake --build .deps
-
 	noname-cmake -H. -Bbuild
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

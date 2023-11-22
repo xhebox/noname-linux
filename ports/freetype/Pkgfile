@@ -1,10 +1,12 @@
-version="2.9.1"
-makedeps=["zlib", "libpng", "bzip2"]
-deps=["zlib", "libpng", "bzip2"]
+version="2.13.2"
+makedeps=["zlib", "libpng", "bzip2", "brotli"]
+deps=["zlib", "libpng", "bzip2", "brotli"]
 desc="A free and portable TrueType font rendering engine"
 source=[
-	{url="https://savannah.nongnu.org/download/freetype/freetype-$version.tar.bz2"},
-	{url="freetype2.sh"},
+	{url="https://savannah.nongnu.org/download/freetype/freetype-$version.tar.xz"},
+	{url="0001-Enable-table-validation-modules.patch"},
+	{url="0002-Enable-subpixel-rendering.patch"},
+	{url="0003-Enable-long-PCF-family-names.patch"},
 ]
 
 ext='''
@@ -17,14 +19,9 @@ ext='''
 '''
 
 build='''
-	cd freetype-$version
-	./configure --prefix= \
-		--disable-static \
-		--enable-freetype-config \
-		--without-x \
-		--without-harfbuzz \
-		--with-zlib 
-	make
-	make DESTDIR="$pkgdir" install
-	install -Dm644 ../freetype2.sh "$pkgdir"/etc/profile.d/freetype2.sh
+	#noname-meson freetype-$version build -Dharfbuzz=disabled
+	noname-meson freetype-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

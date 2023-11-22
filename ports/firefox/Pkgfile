@@ -1,8 +1,8 @@
 name="firefox"
-version="114.0.2"
+version="120.0"
 desc="Firefox web browser"
-deps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
-makedeps=["alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
+deps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
+makedeps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
@@ -17,6 +17,7 @@ source=[
 	{url="no-x11.patch"},
 	{url="python.patch"},
 	{url="libevent.patch"},
+	{url="webgpu.patch"},
 ]
 
 ext='''
@@ -69,8 +70,8 @@ ac_add_options --with-system-png
 ac_add_options --enable-system-pixman
 ac_add_options --enable-system-ffi
 ac_add_options --without-system-libevent
-ac_add_options --without-system-nspr
-ac_add_options --without-system-nss
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
 
 # Features
 ac_add_options --enable-alsa
@@ -95,7 +96,7 @@ EOF
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.24.3 cbindgen
+	cargo install --version 0.26.0 cbindgen
 
 	cd firefox-${version%b*}
 	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none

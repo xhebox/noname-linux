@@ -1,9 +1,9 @@
-version="2.13.0"
+version="2.14.2"
 desc="A library for configuring and customizing font access"
 makedeps=["freetype", "expat", "gperf"]
 deps=["freetype", "expat"]
 source=[
-	{url="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.bz2"},
+	{url="https://www.freedesktop.org/software/fontconfig/release/$name-$version.tar.xz"},
 	{url="font-cache.toml"},
 ]
 
