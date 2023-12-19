@@ -1,0 +1,11 @@
+--- a/utils/exportd/exportd.c	2023-11-18 01:32:39.000000000 +0800
++++ b/utils/exportd/exportd.c	2023-11-18 01:32:39.000000000 +0800
+@@ -53,7 +53,7 @@
+  */
+ inline static void set_signals(void);
+ 
+-inline void
++static void
+ cleanup_lockfiles (void)
+ {
+ 	unlink(etab.lockfn);

@@ -1,11 +1,12 @@
 version="2.35.1"
-makedeps=["glib"]
-deps=["glib"]
+deps=["glib", "gobject-introspection"]
+makedeps=["glib", "gobject-introspection"]
 desc="A set of interfaces for accessibility"
 source=[{url="http://download.gnome.org/sources/atk/${version%.*}/atk-$version.tar.xz"}]
 
 build='''
-	noname-meson atk-$version build -Denable_docs=false -Dintrospection=false
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	noname-meson atk-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

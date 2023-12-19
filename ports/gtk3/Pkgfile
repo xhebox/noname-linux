@@ -1,13 +1,12 @@
 version="3.24.31"
 desc="A multi-platform toolkit for creating graphical user interfaces"
 makedeps=["cairo", "atk", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "wayland-protocols", "gobject-introspection"]
-deps=["atk", "cairo", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
+deps=["cairo", "atk", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "wayland"]
 source=[
 	{url="https://mirrors.ustc.edu.cn/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz"},
 	{url="gtk3-immodules.toml"},
 	{url="icon.toml"},
 	{url="wayland.patch"},
-	{url="atk.patch"},
 ]
 
 ext='''
@@ -27,8 +26,9 @@ build='''
 		-Dcolord=no \
 		-Dgtk_doc=false \
 		-Dintrospection=true
-	ninja -C build
-	DESTDIR="$pkgdir" ninja -C build install
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 	install -Dm644 icon.toml "$pkgdir/${HOOKS#$ROOT}"/icon.toml
 	install -Dm644 gtk3-immodules.toml "$pkgdir/${HOOKS#$ROOT}"/gtk3-immodules.toml
 	sed -i 's/x11//g' "$pkgdir/lib/pkgconfig/gtk+-wayland-3.0.pc" "$pkgdir/lib/pkgconfig/gtk+-3.0.pc"

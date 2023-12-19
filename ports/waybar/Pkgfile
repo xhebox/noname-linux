@@ -1,11 +1,11 @@
-version="0.9.13"
+version="0.9.24"
 desc="Highly customizable Wayland bar for Sway and Wlroots based compositors"
-deps=["wayland", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "libnl", "dbusmenu-gtk3", "jsoncpp"]
-makedeps=["wayland-protocols", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "libnl", "dbusmenu-gtk3", "jsoncpp", "meson", "gobject-introspection"]
+deps=["wayland", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "wireplumber", "libnl", "dbusmenu-gtk3", "jsoncpp"]
+makedeps=["wayland-protocols", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "wireplumber", "libnl", "dbusmenu-gtk3", "jsoncpp", "meson", "gobject-introspection"]
 source=[{url="https://github.com/Alexays/Waybar/archive/refs/tags/$version.tar.gz"}]
 
 build='''
-	noname-meson Waybar-$version build -Dmpd=disabled -Dsndio=disabled -Dman-pages=disabled -Dupower_glib=disabled --wrap-mode=nopromote
+	noname-meson Waybar-$version build -Dcava=disabled -Djack=disabled -Dmpd=disabled -Dmpris=disabled -Dpulseaudio=disabled -Dsndio=disabled -Dman-pages=disabled -Dupower_glib=disabled -Dtests=disabled -Dgtk-layer-shell=disabled --wrap-mode=nopromote
 	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build

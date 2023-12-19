@@ -1,24 +1,22 @@
-version="3.4.2"
-deps=["zlib"]
+version="4.8.3"
+deps=["zstd"]
+makedeps=["zstd"]
 desc="A fast compiler cache."
 source=[
-	{url="http://samba.org/ftp/$name/$name-$version.tar.xz"},
+	{url="https://github.com/ccache/ccache/releases/download/v$version/ccache-$version.tar.xz"},
 	{url="ccache.conf"},
 	{url="ccache-sysusers.conf"},
 ]
 
 build='''
-	cd ccache-$version
-
-	./configure --prefix= --disable-static
-
-	make
-	make DESTDIR="$pkgdir" install
-
-	install -D ../ccache.conf "$pkgdir"/etc/ccache.conf
-	install -D ../ccache-sysusers.conf "$pkgdir"/lib/sysusers.d/ccache.conf
+	export CC=gcc
+	export CXX=g++
+	noname-cmake ccache-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	install -D ccache.conf "$pkgdir"/etc/ccache.conf
+	install -D ccache-sysusers.conf "$pkgdir"/lib/sysusers.d/ccache.conf
 	install -d "$pkgdir"/lib/ccache
-
 	for c in cc gcc g++ cpp c++ clang clang++; do
 		ln -s /bin/ccache "$pkgdir"/lib/ccache/$c
 		ln -s /bin/ccache "$pkgdir"/lib/ccache/$TARGET-$c

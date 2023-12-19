@@ -1,0 +1,13 @@
+version="3.15"
+desc='TCP, UDP, and SCTP network bandwidth measurement tool'
+deps=["openssl"]
+makedeps=["openssl"]
+source=[{url="https://downloads.es.net/pub/iperf/iperf-${version}.tar.gz"}]
+
+build='''
+  cd iperf-${version}
+  ./configure --prefix=/
+  make
+  make DESTDIR="${pkgdir}" install
+  install -Dm 644 contrib/iperf3.service -t "${pkgdir}/lib/systemd/system"
+'''

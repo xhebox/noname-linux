@@ -1,6 +1,7 @@
 version="1.21.3"
 makedeps=["bash"]
 deps=["git"]
+nostrip=true
 desc="The Go Programming Language"
 source=[
 	{url="https://storage.googleapis.com/golang/go${version}.src.tar.gz"},

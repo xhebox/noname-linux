@@ -1,0 +1,12 @@
+version="3.6"
+desc="A program for creating, destroying, resizing, checking and copying partitions"
+makedeps=["util-linux"]
+deps=["util-linux"]
+source=[{url="https://ftp.gnu.org/gnu/parted/parted-$version.tar.xz"}]
+
+build='''
+	cd parted-$version
+	./configure --prefix= --sbindir=/bin
+	make
+	make DESTDIR="${pkgdir}" install
+'''

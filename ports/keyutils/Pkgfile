@@ -1,0 +1,20 @@
+version="1.6.1"
+desc='Linux Key Management Utilities'
+#backup=('etc/request-key.conf')
+source=[
+	{url="https://people.redhat.com/~dhowells/keyutils/keyutils-$version.tar.bz2"},
+	{url="request-key.conf.patch"},
+	{url="reproducible.patch"},
+]
+
+ext='''
+  cd keyutils-$version
+  patch -Np0 -i ../request-key.conf.patch
+  patch -Np1 -i ../reproducible.patch
+'''
+
+build='''
+  cd keyutils-$version
+  make CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" SBINDIR='/bin' BINDIR='/bin'
+  make DESTDIR="${pkgdir}" SBINDIR='/bin' BINDIR='/bin' LIBDIR='/lib' USRLIBDIR='/lib' install
+'''

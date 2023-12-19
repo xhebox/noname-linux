@@ -1,0 +1,45 @@
+version="2.6.4"
+desc="Support programs for Network File Systems"
+deps=["rpcbind", "libevent", "sqlite", "util-linux", "keyutils"]
+makedeps=["rpcbind", "libevent", "sqlite", "util-linux", "keyutils", "rpcsvc-proto"]
+source=[
+	{url="https://www.kernel.org/pub/linux/utils/nfs-utils/${version}/nfs-utils-${version}.tar.xz"},
+	{url="exports"},
+	{url="sysusers.d"},
+	{url="fix.patch"},
+]
+
+ext='''
+	cd nfs-utils-$version
+	patch -Np1 -i ../fix.patch
+	sed -i "s|sbindir = /sbin|sbindir = /usr/bin|g" utils/*/Makefile.am
+  sed -i "s|sbin|bin|" utils/nfsidmap/id_resolver.conf
+  sed -i "s|libexec|bin|" tools/nfsrahead/99-nfs.rules
+  autoreconf -vfi
+'''
+
+build='''
+	cd nfs-utils-$version
+	export CFLAGS="$CFLAGS -Wno-format-nonliteral -Wno-implicit-function-declaration"
+  ./configure --prefix= \
+    --sbindir=/bin \
+    --sysconfdir=/etc \
+    --libexecdir=/bin \
+    --with-statedir=/var/lib/nfs \
+    --with-statdpath=/var/lib/nfs/statd \
+    --with-start-statd=/bin/start-statd \
+    --enable-nfsv4server \
+    --without-tcp-wrappers \
+    --enable-ipv6 \
+    --enable-libmount-mount \
+		--enable-nfsv4 \
+  	--enable-nfsv41 \
+    --enable-mountconfig \
+    --with-systemd \
+		--disable-gss
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  make
+  make DESTDIR="$pkgdir" install
+  install -D -m 644 ../exports "$pkgdir"/etc/exports
+	install -D -m 644 ../sysusers.d "${pkgdir}"/lib/sysusers.d/rpcuser.conf
+'''

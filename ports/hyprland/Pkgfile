@@ -15,21 +15,6 @@ build='''
 	export CXX=g++
 	patch -Np1 -i "$srcdir"/xwayland.patch
 
-#	make fixwlr
-#
-#	cd "./subprojects/wlroots/" && \
-#	noname-meson build/ --buildtype=release \
-#				-Dxwayland=disabled \
-#				-Drenderers="gles2" \
-#				-Dbackends="drm,libinput" \
-#	&& meson compile -C build/ && cd ../..
-#
-#	cd subprojects/udis86
-#	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -H./ -B./build -G Ninja
-#	cmake --build ./build --config Release --target all
-#	cd ../..
-#
-#	make protocols
 	noname-cmake . -Bbuild -DNO_XWAYLAND=true --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -G Ninja
 	cmake --build ./build --config Release --target all
 	cd ./hyprctl && make all && cd ..

@@ -1,0 +1,15 @@
+version="1.4.4"
+desc='rpcsvc protocol definitions from glibc'
+source=[{url="https://github.com/thkukuk/rpcsvc-proto/archive/v$version/rpcsvc-proto-$version.tar.gz"}]
+
+ext='''
+  cd rpcsvc-proto-$version
+  autoreconf -fi
+'''
+
+build='''
+  cd rpcsvc-proto-$version
+  ./configure --prefix=
+  make
+  make DESTDIR="$pkgdir" install
+'''

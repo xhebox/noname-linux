@@ -1,13 +1,13 @@
-version="git"
+version="2.2.1"
 desc="Modular text mode IRC client with Perl scripting"
 deps=["wayland"]
 makedeps=["wayland-protocols"]
 source=[
-	{protocol="git", url="https://github.com/bugaevc/wl-clipboard"},
+	{url="https://github.com/bugaevc/wl-clipboard/archive/refs/tags/v$version.tar.gz"},
 ]
 
 build='''
-	noname-meson wl-clipboard build
+	noname-meson wl-clipboard-$version build
 	ninja -C build
 	DESTDIR="$pkgdir" ninja -C build install
 '''

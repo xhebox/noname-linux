@@ -15,7 +15,6 @@ source = [
 	{ url = "lfs64.patch" },
 	{ url = "lfs64-2.patch" },
 	{ url = "res_init.patch" },
-	{ url = "ifunc.patch" },
 	{ url = "handle_aux_at_base.patch" },
 ]
 
