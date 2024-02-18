@@ -1,20 +1,20 @@
-version="1.17"
+version="1.25"
 makedeps=["elfutils"]
 deps=["elfutils"]
 desc="Pahole and other DWARF utils"
 source=[
 	{url="https://git.kernel.org/pub/scm/devel/pahole/pahole.git/snapshot/pahole-$version.tar.gz"},
-	{url="https://github.com/libbpf/libbpf/archive/v0.0.9.tar.gz"},
+	{url="https://github.com/libbpf/libbpf/archive/v1.3.0.tar.gz"},
 	{url="fix_always_inline.patch"},
 	{url="fix_limits.patch"},
-	{url="fix_mallinfo.patch"},
-	{url="fix_sysconf.patch"},
-	{url="fix_wordsize.patch"},
+	#{url="fix_mallinfo.patch"},
+	#{url="fix_sysconf.patch"},
+	#{url="fix_wordsize.patch"},
 ]
 
 ext='''
 	rm -rf pahole-$version/lib/bpf
-	cp -a libbpf-0.0.9 pahole-$version/lib/bpf
+	cp -a libbpf-* pahole-$version/lib/bpf
 	cd pahole-$version
 	for i in $source; do
 		case $i in

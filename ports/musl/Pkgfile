@@ -12,8 +12,6 @@ source = [
   { url = "getent.c" },
   { url = "styp.patch" },
 	{ url = "emoji.patch" },
-	{ url = "lfs64.patch" },
-	{ url = "lfs64-2.patch" },
 	{ url = "res_init.patch" },
 	{ url = "handle_aux_at_base.patch" },
 ]

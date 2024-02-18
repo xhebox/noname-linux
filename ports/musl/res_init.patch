@@ -1,12 +1,11 @@
 --- a/libgcompat/resolv.c	2022-10-30 05:39:20.000000000 +0800
 +++ b/libgcompat/resolv.c	2022-10-30 05:39:20.000000000 +0800
-@@ -12,6 +12,10 @@
+@@ -12,6 +12,9 @@
  
  #include "alias.h" /* weak_alias */
  
 +#include <fcntl.h>
 +#include <stdarg.h>
-+int fcntl64(int a, int b, ...) { va_list args; va_start(args, b); int f = fcntl(a,b,args); va_end(args); return f;};
 +int __res_init() { return res_init(); }
  int __res_ninit(res_state statp)
  {

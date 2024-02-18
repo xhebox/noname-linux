@@ -13,22 +13,3 @@
    <stringbundleset id="stringbundleset">
      <stringbundle id="bundle_brand" src="chrome://branding/locale/brand.properties"/>
      <stringbundle id="bundle_shell" src="chrome://browser/locale/shellservice.properties"/>
---- toolkit/components/remote/moz.build	2023-11-17 01:43:07.000000000 +0800
-+++ toolkit/components/remote/moz.build	2023-11-17 01:43:07.000000000 +0800
-@@ -25,6 +25,7 @@
-             "nsUnixRemoteServer.h",
-             "RemoteUtils.h",
-         ]
-+        CXXFLAGS += CONFIG["MOZ_DBUS_CFLAGS"]
-     else:
-         SOURCES += [
-             "nsGTKRemoteServer.cpp",
---- widget/gtk/moz.build	2023-11-22 10:02:42.063855084 +0800
-+++ widget/gtk/moz.build	2023-11-22 10:02:42.063855084 +0800
-@@ -175,5 +175,6 @@
-     UNIFIED_SOURCES += [
-         "AsyncDBus.cpp",
-     ]
-+    CXXFLAGS += CONFIG["MOZ_DBUS_CFLAGS"]
- 
- CXXFLAGS += ["-Werror=switch"]

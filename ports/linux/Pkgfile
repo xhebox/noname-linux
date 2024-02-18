@@ -1,14 +1,15 @@
-version="6.4.3"
+version="6.6.15"
 compiler_flags="CC=clang HOSTCC=clang LD=ld.lld LLVM=1 LLVM_IAS=1"
 _kernelname="noname"
 xanmod="1"
 desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/linux-${version%.*}.tar.xz"},
-	{url="https://github.com/xanmod/linux/releases/download/${version}-xanmod1/patch-${version}-xanmod1.xz"},
+	{url="http://downloads.sourceforge.net/project/xanmod/releases/main/6.6.15-xanmod1/patch-6.6.15-xanmod1.xz"},
 	{url="fix-musl-objtool.patch"},
 	{url="headers.patch"},
 	{url="linux.preset"},
+	{url="config"},
 ]
 makedeps=["bc", "bash", "inetutils", "elfutils", "pahole", "libarchive", "llvm"]
 deps=["kmod" , "linux-firmware", "coreutils"]
@@ -28,26 +29,12 @@ ext='''
 	patch -Np1 -i ../headers.patch
 	patch -Np1 -i ../patch-${version}-xanmod${xanmod} || true
 
-	cp -vf CONFIGS/xanmod/gcc/config_x86-64-v3 .config
+	cp -vf "$srcdir/config" .config
 
 	sed -i 's/\$(LIBS)/& $(LDFLAGS)/' tools/power/cpupower/bench/Makefile
 	sed -i 's/SIGCLD/SIGCHLD/g' tools/usb/usbip/src/usbipd.c
 	sed -i 's/cpio/bsdcpio/g' kernel/gen_kheaders.sh
 	sed -i 's/u_char/unsigned char/g' drivers/accessibility/speakup/utils.h
-
-#	scripts/config --enable LTO \
-#		--enable LTO_CLANG \
-#		--enable ARCH_SUPPORTS_LTO_CLANG \
-#		--enable ARCH_SUPPORTS_LTO_CLANG_THIN \
-#		--disable LTO_NONE \
-#		--enable HAS_LTO_CLANG \
-#		--disable LTO_CLANG_FULL \
-#		--enable LTO_CLANG_THIN \
-#		--enable HAVE_GCC_PLUGINS
-
-	scripts/config --enable CONFIG_STACK_VALIDATION
-  scripts/config --enable CONFIG_IKCONFIG --enable CONFIG_IKCONFIG_PROC
-	scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
 
 	make ${compiler_flags} olddefconfig
 	make -s kernelrelease > ../version

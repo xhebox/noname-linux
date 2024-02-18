@@ -1,4 +1,4 @@
-version="0.9.4"
+version="0.9.5"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
@@ -13,7 +13,6 @@ ext='''
 build='''
 	cd neovim-${version}
 	export CC=gcc
-
 	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=ON -DUSE_BUNDLED_LIBUV=OFF
 	cmake --build .deps
 	noname-cmake -H. -Bbuild

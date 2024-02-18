@@ -1,12 +1,12 @@
 name="firefox"
-version="120.0"
+version="122.0"
 desc="Firefox web browser"
 deps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
 makedeps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
-	{url="fix-fortify-system-wrappers.patch"},
+	#{url="fix-fortify-system-wrappers.patch"},
 	{url="mallinfo.patch"},
 	{url="sandbox-fork.patch"},
 	{url="sandbox-largefile.patch"},
@@ -17,7 +17,6 @@ source=[
 	{url="no-x11.patch"},
 	{url="python.patch"},
 	{url="libevent.patch"},
-	{url="webgpu.patch"},
 ]
 
 ext='''
@@ -103,7 +102,7 @@ build='''
 
 	env >> env
 
-	./mach build
+	./mach build -j8
 	DESTDIR="$pkgdir" ./mach install
 	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
 	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END
