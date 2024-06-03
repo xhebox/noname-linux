@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
 rustup_version = "1.26.0"
-version = "1.76.0"
-_rust_dist_version = "1.76.0"
+version = "1.80.0"
+_rust_dist_version = "1.79.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -31,11 +31,13 @@ source = [
   { url = "https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz" },
   { url = "https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz" },
   { url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
-  { url = "need-rpath.patch" },
   { url = "need-ssp_nonshared.patch" },
+  { url = "need-rpath.patch" },
   { url = "musl-fix-linux_musl_base.patch" },
-	#{url="lfs64-libc.patch.noauto"},
-	#{url="lfs64-rust.patch"},
+  { url = "no-export-ld-library-path.patch" },
+  { url = "system-wasm-ld.patch" },
+  { url = "bash.patch" },
+  { url = "libexecdir.patch" },
 ]
 
 ext = '''
@@ -56,11 +58,9 @@ ext = '''
 		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
-	#patch -Np1 -d vendor/libc-0.2.138 < "$srcdir"/lfs64-libc.patch.noauto
-	#patch -Np1 -d vendor/libc-0.2.140 < "$srcdir"/lfs64-libc.patch.noauto
-	for i in libc typenum cc target-lexicon; do
-		sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
-	done
+	#for i in libc typenum cc target-lexicon; do
+	#	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
+	#done
 
 	cat <<- EOF > config.toml
 change-id = 116881
@@ -76,7 +76,7 @@ sanitizers = false
 profiler = false
 wasi-root = "/lib/wasi"
 [build]
-tools=["cargo", "rls", "clippy", "rustfmt", "analysis", "src", "rust-demangler","rust-analyzer"]
+tools=["cargo", "clippy", "rustdoc", "rustfmt", "analysis", "rust-analyzer-proc-macro-srv", "src", "rust-demangler"]
 host=["$TARGET"]
 build="$TARGET"
 target=[
@@ -117,6 +117,7 @@ EOF
 '''
 
 build = '''
+	unset CFLAGS CXXFLAGS LDFLAGS
 	#cd "$srcdir/rustup-$rustup_version"
 	#cargo build --release --features no-self-update --bin rustup-init
 	#install -Dm755 "target/release/rustup-init" "${pkgdir}/bin/rustup"

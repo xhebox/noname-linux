@@ -1,6 +1,8 @@
-version="1.1.6"
+version="1.2.11"
 desc="ALSA utils"
-source=[{url="http://www.mirrorservice.org/sites/ftp.alsa-project.org/pub/utils/alsa-utils-$version.tar.bz2"}]
+source=[
+	{url="http://www.alsa-project.org/files/pub/utils/alsa-utils-$version.tar.bz2"},
+]
 makedeps=["alsa-lib", "fftw", "pciutils", "psmisc", "ncurses", "libsamplerate"]
 deps=["alsa-lib", "fftw", "pciutils", "psmisc", "ncurses", "libsamplerate"]
 

@@ -1,0 +1,13 @@
+version="2.0.2.3"
+desc="LDAC Bluetooth encoder library"
+makedeps=["musl"]
+deps=["musl"]
+source=[
+	{url="https://github.com/EHfive/ldacBT/releases/download/v$version/ldacBT-$version.tar.gz"},
+]
+
+build='''
+	noname-cmake ldacBT -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

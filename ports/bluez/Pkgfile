@@ -1,4 +1,4 @@
-version="5.64"
+version="5.77"
 makedeps=["dbus", "alsa-lib", "systemd"]
 deps=["dbus", "alsa-lib", "systemd"]
 source=[

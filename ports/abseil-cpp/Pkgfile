@@ -1,0 +1,13 @@
+version="20240116.2"
+desc="Collection of C++ library code designed to augment the C++ standard library"
+source=[{url="https://github.com/abseil/abseil-cpp/archive/$version/abseil-cpp-$version.tar.gz"}]
+
+build='''
+	noname-cmake abseil-cpp-$version -Bbuild \
+	  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_CXX_FLAGS="${CXXFLAGS} -DNDEBUG" \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DBUILD_SHARED_LIBS=ON
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

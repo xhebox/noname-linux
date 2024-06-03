@@ -1,10 +1,10 @@
-version="1.16.0"
+version="1.18.0"
 mesc="A 2D graphics library with support for multiple output devices"
-makedeps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo"]
-deps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo"]
+makedeps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppler"]
+deps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppler"]
 source=[
 	{url="https://cairographics.org/releases/cairo-$version.tar.xz"},
-	{url="no-poppler.patch"},
+	{url="no-ps.patch"},
 ]
 
 ext='''
@@ -18,28 +18,9 @@ ext='''
 '''
 
 build='''
-	cd cairo-$version
-	unset LDFLAGS
-	./configure \
-		--prefix= \
-		--libdir=/lib \
-		--libexecdir=/lib \
-		--enable-svg \
-		--enable-pdf \
-		--enable-tee \
-		--enable-ps \
-		--enable-gobject \
-		--disable-xlib \
-		--disable-xlib_xrender \
-		--disable-xcb \
-		--disable-qt \
-		--disable-xlib_xcb \
-		--disable-xcb_shm \
-		--disable-gl \
-		--disable-static \
-		--disable-gtk-doc
-#--enable-glesv2 \
-#--enable-glesv3 \
-	make
-	make DESTDIR="$pkgdir" install
+	export LDFLAGS="$LDFLAGS -lexecinfo"
+	noname-meson cairo-$version build -Dxcb=disabled -Dxlib=disabled -Dsymbol-lookup=disabled -Dtests=disabled -Dspectre=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

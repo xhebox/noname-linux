@@ -1,11 +1,10 @@
-version="6.6.15"
+version="6.10.2"
 compiler_flags="CC=clang HOSTCC=clang LD=ld.lld LLVM=1 LLVM_IAS=1"
 _kernelname="noname"
-xanmod="1"
 desc="Linux system kernel"
 source=[
 	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/linux-${version%.*}.tar.xz"},
-	{url="http://downloads.sourceforge.net/project/xanmod/releases/main/6.6.15-xanmod1/patch-6.6.15-xanmod1.xz"},
+	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/patch-${version}.xz"},
 	{url="fix-musl-objtool.patch"},
 	{url="headers.patch"},
 	{url="linux.preset"},
@@ -15,8 +14,6 @@ makedeps=["bc", "bash", "inetutils", "elfutils", "pahole", "libarchive", "llvm"]
 deps=["kmod" , "linux-firmware", "coreutils"]
 
 ext='''
-	unset CC
-	unset CXX
 	unset CFLAGS
 	unset CXXFLAGS
 	unset LDFLAGS
@@ -27,7 +24,7 @@ ext='''
 
 	patch -Np1 -i ../fix-musl-objtool.patch
 	patch -Np1 -i ../headers.patch
-	patch -Np1 -i ../patch-${version}-xanmod${xanmod} || true
+	patch -Np1 -i ../patch-${version} || true
 
 	cp -vf "$srcdir/config" .config
 
@@ -36,13 +33,11 @@ ext='''
 	sed -i 's/cpio/bsdcpio/g' kernel/gen_kheaders.sh
 	sed -i 's/u_char/unsigned char/g' drivers/accessibility/speakup/utils.h
 
-	make ${compiler_flags} olddefconfig
+	make ${compiler_flags} oldconfig
 	make -s kernelrelease > ../version
 '''
 
 build='''
-	unset CC
-	unset CXX
 	unset CFLAGS
 	unset CXXFLAGS
 	unset LDFLAGS

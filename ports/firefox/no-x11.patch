@@ -1,5 +1,5 @@
---- gfx/layers/AnimationHelper.h
-+++ gfx/layers/AnimationHelper.h
+--- a/gfx/layers/AnimationHelper.h
++++ b/gfx/layers/AnimationHelper.h
 @@ -7,6 +7,7 @@
  #ifndef mozilla_layers_AnimationHelper_h
  #define mozilla_layers_AnimationHelper_h
@@ -16,8 +16,8 @@
  #include <unordered_map>
  
  namespace mozilla {
---- widget/gtk/WindowSurfaceProvider.cpp	2022-01-14 06:26:17.000000000 +0800
-+++ widget/gtk/WindowSurfaceProvider.cpp	2022-01-18 14:48:29.193204284 +0800
+--- a/widget/gtk/WindowSurfaceProvider.cpp	2022-01-14 06:26:17.000000000 +0800
++++ b/widget/gtk/WindowSurfaceProvider.cpp	2022-01-18 14:48:29.193204284 +0800
 @@ -12,6 +12,7 @@
  #include "nsWindow.h"
  
@@ -26,8 +26,8 @@
  #  include "mozilla/StaticPrefs_widget.h"
  #  include "WindowSurfaceWaylandMultiBuffer.h"
  #endif
---- widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
-+++ widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
+--- a/widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
++++ b/widget/InProcessCompositorWidget.cpp	2022-01-24 15:35:11.376001012 +0800
 @@ -12,7 +12,7 @@
  
  // Platforms with no OOP compositor process support use
@@ -37,8 +37,8 @@
  /* static */
  RefPtr<CompositorWidget> CompositorWidget::CreateLocal(
      const CompositorWidgetInitData& aInitData,
---- widget/gtk/mozwayland/moz.build	2022-01-25 00:34:01.993828266 +0800
-+++ widget/gtk/mozwayland/moz.build	2022-01-25 00:34:01.993828266 +0800
+--- a/widget/gtk/mozwayland/moz.build	2022-01-25 00:34:01.993828266 +0800
++++ b/widget/gtk/mozwayland/moz.build	2022-01-25 00:34:01.993828266 +0800
 @@ -4,9 +4,6 @@
  # License, v. 2.0. If a copy of the MPL was not distributed with this
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -49,8 +49,8 @@
  EXPORTS.mozilla.widget += [
      "mozwayland.h",
  ]
---- widget/gtk/moz.build.orig	2022-01-25 11:04:49.650420160 +0800
-+++ widget/gtk/moz.build	2022-01-25 11:05:04.417401668 +0800
+--- a/widget/gtk/moz.build.orig	2022-01-25 11:04:49.650420160 +0800
++++ b/widget/gtk/moz.build	2022-01-25 11:05:04.417401668 +0800
 @@ -23,6 +23,7 @@
      DIRS += ["mozgtk"]
  

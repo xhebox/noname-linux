@@ -1,0 +1,53 @@
+force stat() instead of stat64() on 32-bit
+--
+--- a/xpcom/io/nsLocalFileUnix.h
++++ b/xpcom/io/nsLocalFileUnix.h
+@@ -21,7 +21,7 @@
+ 
+ // stat64 and lstat64 are deprecated on OS X. Normal stat and lstat are
+ // 64-bit by default on OS X 10.6+.
+-#if defined(HAVE_STAT64) && defined(HAVE_LSTAT64) && !defined(XP_DARWIN)
++#if 0 && defined(HAVE_STAT64) && defined(HAVE_LSTAT64) && !defined(XP_DARWIN)
+ #  if defined(AIX)
+ #    if defined STAT
+ #      undef STAT
+--- a/mozglue/baseprofiler/core/shared-libraries-linux.cc
++++ b/mozglue/baseprofiler/core/shared-libraries-linux.cc
+@@ -178,7 +178,7 @@
+       return false;
+     }
+ 
+-#if defined(__x86_64__) || defined(__aarch64__) || \
++#if 1 || defined(__x86_64__) || defined(__aarch64__) || \
+     (defined(__mips__) && _MIPS_SIM == _ABI64) ||  \
+     !(defined(GP_OS_linux) || defined(GP_OS_android))
+ 
+--- a/security/sandbox/linux/broker/SandboxBrokerUtils.h
++++ b/security/sandbox/linux/broker/SandboxBrokerUtils.h
+@@ -15,7 +15,7 @@
+ // calls. We'll intercept those and handle them in the stat functions
+ // but must be sure to use the right structure layout.
+ 
+-#if defined(__NR_stat64) || defined(__NR_fstatat64)
++#if 0 && (defined(__NR_stat64) || defined(__NR_fstatat64) )
+ typedef struct stat64 statstruct;
+ #  define statsyscall stat64
+ #  define lstatsyscall lstat64
+
+--- a/security/sandbox/linux/SandboxFilter.cpp	2020-11-23 22:41:14.556378950 +0100
++++ b/security/sandbox/linux/SandboxFilter.cpp	2020-11-23 22:40:23.595806444 +0100
+@@ -68,7 +68,13 @@
+
+ // The headers define O_LARGEFILE as 0 on x86_64, but we need the
+ // actual value because it shows up in file flags.
+-#define O_LARGEFILE_REAL 00100000
++#if defined(__x86_64__) || defined(__i386__) || defined(__mips__)
++#define O_LARGEFILE_REAL 0100000
++#elif defined(__powerpc__)
++#define O_LARGEFILE_REAL 0200000
++#else
++#define O_LARGEFILE_REAL O_LARGEFILE
++#endif
+
+ // Not part of UAPI, but userspace sees it in F_GETFL; see bug 1650751.
+ #define FMODE_NONOTIFY 0x4000000

@@ -1,0 +1,18 @@
+version="3.4.0"
+desc="Header-only TOML config file parser and serializer for C++17"
+makedeps=["meson", "cmake"]
+deps=["musl"]
+source=[
+	{url="https://github.com/marzer/tomlplusplus/archive/refs/tags/v$version.tar.gz"},
+]
+
+ext='''
+	cd tomlplusplus-$version
+'''
+
+build='''
+	noname-meson tomlplusplus-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

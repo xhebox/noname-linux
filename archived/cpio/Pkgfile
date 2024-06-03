@@ -1,0 +1,12 @@
+version="2.15"
+desc="GNU cpio"
+source=[
+	{url="https://ftp.gnu.org/gnu/cpio/cpio-$version.tar.gz"},
+]
+
+build='''
+	cd cpio-$version
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+'''

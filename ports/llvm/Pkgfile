@@ -1,5 +1,5 @@
-version="16.0.6"
-wasi_version="16.0"
+version="18.1.8"
+wasi_version="22.0"
 desc="LLVM compiler and its backend"
 deps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd"]
 makedeps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd", "flex", "bison", "python3"]
@@ -68,7 +68,7 @@ build='''
 		-DLLVM_APPEND_VC_REV=NO \
 		-DCLANG_DEFAULT_CXX_STDLIB=libc++ \
 		-DCLANG_DEFAULT_RTLIB=compiler-rt \
-		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;mlir;lld;openmp;pstl;compiler-rt" \
+		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;mlir;lld;pstl;compiler-rt" \
 		-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
 		-DCOMPILER_RT_BUILD_GWP_ASAN=OFF \
 		-DCOMPILER_RT_BUILD_XRAY=OFF \
@@ -77,11 +77,12 @@ build='''
 		-DLIBCXXABI_USE_LLVM_UNWINDER=ON \
 		-DLIBCXXABI_USE_COMPILER_RT=ON \
 		-DLIBUNWIND_USE_COMPILER_RT=ON \
+		-DLIBUNWIND_ENABLE_ASSERTIONS=OFF \
 		-DLIBUNWIND_INSTALL_HEADERS=ON \
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
 		-DLIBCXX_USE_COMPILER_RT=YES
 
-	cmake --build build -j12
+	cmake --build build -j8
 	DESTDIR="${pkgdir}" cmake --build build --target install install-runtimes
 
 	install -d "$pkgdir"/lib/bfd-plugins

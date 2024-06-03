@@ -1,7 +1,7 @@
-version="e61745a6b7add50d380cfd7d3883dd6c62fc2c71"
+version="1.1.0"
 desc="Generic-purpose lossless compression algorithm"
 makedeps=["cmake"]
-source=[{url="https://github.com/google/brotli/archive/e61745a6b7add50d380cfd7d3883dd6c62fc2c71.zip"}]
+source=[{url="https://github.com/google/brotli/archive/refs/tags/v$version.tar.gz"}]
 
 build='''
 	noname-cmake -B build -DCMAKE_BUILD_TYPE=None brotli-$version

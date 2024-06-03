@@ -1,10 +1,11 @@
-version="2.4.115"
+version="2.4.120"
 desc="Userspace interface to kernel DRM services"
 makedeps=["libpciaccess"]
 deps=["libpciaccess"]
 source=[
 	{url="http://dri.freedesktop.org/libdrm/libdrm-$version.tar.xz"},
 	{url="musl.patch"},
+	{url="libdrm.toml"},
 ]
 
 ext='''
@@ -20,4 +21,6 @@ build='''
 	meson configure --no-pager build
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
+
+	install -D -m0644 -t "$pkgdir"/${HOOKS#$ROOT} *.toml
 '''

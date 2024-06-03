@@ -1,0 +1,13 @@
+version="1.14.4"
+makedeps=["cairo", "libsigcpp"]
+deps=["cairo", "libsigcpp"]
+source=[
+	{url="https://www.cairographics.org/releases/cairomm-$version.tar.xz"},
+]
+
+build='''
+	noname-meson cairomm-$version build -Dmaintainer-mode=false -Dbuild-documentation=false --wrap-mode=nopromote -Dbuild-tests=false
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

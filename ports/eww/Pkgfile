@@ -1,0 +1,16 @@
+version="0.6.0"
+desc="Standalone widget system made in Rust"
+deps=["gtk3", "gtk-layer-shell", "dbusmenu-gtk3"]
+makedeps=["gtk3", "gtk-layer-shell", "dbusmenu-gtk3"]
+source=[
+	{url="https://github.com/elkowar/eww/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	cd eww-$version
+	export CARGO_HOME="$srcdir/.cargo"
+	cargo build $MAKEFLAGS --release --no-default-features --features=wayland
+	install -D -m755 "target/release/eww" "$pkgdir/bin/eww"
+	install -vd "$pkgdir/etc/xdg/eww/"
+	cp -vr examples/eww-bar "$pkgdir/etc/xdg/eww/"
+'''

@@ -1,5 +1,5 @@
---- security/sandbox/linux/SandboxFilter.cpp
-+++ security/sandbox/linux/SandboxFilter.cpp
+--- a/security/sandbox/linux/SandboxFilter.cpp
++++ b/security/sandbox/linux/SandboxFilter.cpp
 @@ -1694,13 +1694,13 @@
          return Trap(OpenTrap, mFiles);
  

@@ -3,18 +3,18 @@ desc="Library for passing menus over DBus'"
 makedeps=["gtk3", "gobject-introspection"]
 deps=["gtk3"]
 source=[
-	{url="nls.patch"},
 	{url="https://launchpad.net/libdbusmenu/${version%.?}/${version}/+download/libdbusmenu-${version}.tar.gz"},
 ]
 
 build='''
 	cd libdbusmenu-$version
-	sed -i '/INTLTOOL/d' configure.ac
 	export HAVE_VALGRIND_TRUE='#'
 	export HAVE_VALGRIND_FALSE=''
-	sed -i 's/-Werror//' libdbusmenu-*/Makefile.am libdbusmenu-*/Makefile.in
-	patch -Np1 -i ../nls.patch
-	autoreconf -fi
+	INTLTOOL_APPLIED_VERSION=0.35.0 \
+	INTLTOOL_UPDATE=$(which true) \
+	INTLTOOL_MERGE=$(which true) \
+	INTLTOOL_EXTRACT=$(which true) \
+	INTLTOOL_PERL=$(which true) \
 	./configure --prefix= \
 		--libexecdir=/lib \
 		--sysconfdir=/etc \
@@ -23,6 +23,8 @@ build='''
 		--disable-static \
 		--disable-tests \
 		--disable-vala \
+		--disable-nls \
+		--disable-gtk-doc \
 		--with-gtk=3
 	make
 	make DESTDIR="$pkgdir" install

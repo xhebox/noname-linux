@@ -1,0 +1,14 @@
+version="2024-01-08"
+desc="The Rust LSP"
+deps=["rust"]
+makedeps=["rust"]
+source=[
+	{url="https://github.com/rust-analyzer/rust-analyzer/archive/${version}.tar.gz"},
+]
+
+build='''
+	cd rust-analyzer-$version
+	export CARGO_HOME="$srcdir/.cargo"
+	cargo build $MAKEFLAGS --release --locked
+	install -Dt "$pkgdir"/bin target/release/rust-analyzer
+'''

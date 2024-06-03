@@ -1,5 +1,5 @@
---- python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
-+++ python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
+--- a/python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
++++ b/python/mach/mach/site.py	2022-04-12 06:05:07.000000000 +0800
 @@ -777,7 +777,7 @@
          sysconfig_paths = sysconfig.get_paths(scheme)
          data_path = Path(sysconfig_paths["data"])

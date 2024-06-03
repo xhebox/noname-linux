@@ -1,0 +1,14 @@
+version="0.5.0"
+desc="implementation library for the hypr config language"
+deps=["musl"]
+makedeps=["musl", "cmake"]
+source=[
+	{url="https://github.com/hyprwm/hyprlang/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	cd "$srcdir/hyprlang-$version"
+	noname-cmake -Bbuild
+	cmake --build ./build --target all
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

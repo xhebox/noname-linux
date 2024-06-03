@@ -1,0 +1,21 @@
+--- a/cmake.deps/cmake/BuildLuajit.cmake	2024-07-25 17:40:44.063348573 +0800
++++ b/cmake.deps/cmake/BuildLuajit.cmake	2024-07-25 17:40:44.063348573 +0800
+@@ -28,7 +28,7 @@
+   set(AMD64_ABI "")
+ endif()
+ set(BUILDCMD_UNIX ${MAKE_PRG} -j CFLAGS=-fPIC
+-                              CFLAGS+=-DLUA_USE_APICHECK
++                              CFLAGS+=-DLUA_USE_APICHECK LIBS=-lunwind TARGET_LIBS=-lunwind
+                               CFLAGS+=-funwind-tables
+                               ${NO_STACK_CHECK}
+                               ${AMD64_ABI}
+@@ -42,7 +42,8 @@
+ endif()
+ 
+ if(UNIX)
+-  BuildLuaJit(INSTALL_COMMAND ${BUILDCMD_UNIX}
++  BuildLuaJit(BUILD_COMMAND sed -i "s/-ldl/& -lunwind/g" etc/luajit.pc
++    INSTALL_COMMAND ${BUILDCMD_UNIX}
+     CC=${DEPS_C_COMPILER} PREFIX=${DEPS_INSTALL_DIR}
+     ${DEPLOYMENT_TARGET} install)
+ 

@@ -1,18 +1,18 @@
-version="4.4.4"
-common_version="0.51.1"
+version="4.9.3"
+common_version="0.57.4"
 image_version="5.24.2"
 shortnames_version="2023.02.20"
-skopeo_version="1.11.1"
-storage_version="1.45.4"
-catatonit_version="0.1.7"
-conmon_version="2.1.7"
-criu_version="3.17.1"
-crun_version="1.8.3"
+skopeo_version="1.14.2"
+storage_version="1.53.0"
+catatonit_version="0.2.0"
+conmon_version="2.1.10"
+criu_version="3.18"
+crun_version="1.14.4"
 podman_version="$version"
-fuse_version="1.11"
-cni_version="1.2.0"
-slirp_version="1.2.0"
-buildah_version="1.29.1"
+fuse_version="1.13"
+cni_version="1.4.0"
+slirp_version="1.2.3"
+buildah_version="1.34.1"
 desc='CLI tool for managing OCI compliant containers'
 nostrip=true
 deps=["libseccomp", "linux", "python3", "systemd", "libcap", "yajl", "fuse3", "libslirp", "iptables"]
@@ -24,7 +24,6 @@ source=[
 	{name="storage-${storage_version}.tar.gz",url="https://github.com/containers/storage/archive/v${storage_version}.tar.gz"},
 	{name="shortnames-${shortnames_version}.tar.gz",url="https://github.com/containers/shortnames/archive/refs/tags/v${shortnames_version}.tar.gz"},
 	{name="catatonit-${catatonit_version}.tar.xz",url="https://github.com/openSUSE/catatonit/releases/download/v${catatonit_version}/catatonit.tar.xz"},
-	{name="catatonit-${catatonit_version}.patch",url="https://github.com/openSUSE/catatonit/commit/99bb9048f532257f3a2c3856cfa19fe957ab6cec.patch"},
 	{name="conmon-${conmon_version}.tar.gz",url="https://github.com/containers/conmon/archive/refs/tags/v${conmon_version}.tar.gz"},
 	{name="criu-${criu_version}.tar.gz",url="https://github.com/checkpoint-restore/criu/archive/refs/tags/v${criu_version}.tar.gz"},
 	{name="crun-${crun_version}.tar.gz",url="https://github.com/containers/crun/releases/download/${crun_version}/crun-${crun_version}.tar.xz"},
@@ -48,6 +47,8 @@ build='''
 	export CGO_LDFLAGS="${LDFLAGS}"
 	export GOFLAGS="-buildmode=pie -trimpath"
 	export BUILDTAGS="containers_image_openpgp containers_image_ostree_stub seccomp systemd btrfs_noversion exclude_graphdriver_devicemapper exclude_graphdriver_btrfs"
+	export PATH=$PWD/bin:$PATH
+	GOBINPATH=$PWD/bin go install github.com/a8m/envsubst/cmd/envsubst@latest
 
 	# containers common
 	install -vdm 755 "$pkgdir/etc/containers/containers.conf.d/"
@@ -85,7 +86,7 @@ build='''
 	cd ..
 
 	cd catatonit-${catatonit_version}
-	patch -Np1 -i "$srcdir"/catatonit-${catatonit_version}.patch
+	#patch -Np1 -i "$srcdir"/catatonit-${catatonit_version}.patch
 	autoreconf -fiv
 	./configure --prefix=/
   make PREFIX= DESTDIR="$pkgdir" install

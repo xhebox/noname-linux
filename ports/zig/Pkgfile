@@ -1,19 +1,20 @@
-version="6780a6bbfa7bbd44036de3b1338011d1e5bb43f3"
+version="0.13.0"
 desc="general-purpose programming language and toolchain for maintaining robust, optimal and reusable software."
 nostrip=true
 deps=["llvm"]
 makedeps=["llvm", "cmake"]
 source=[
-	{url="https://github.com/ziglang/zig/archive/$version.zip", name="zig-$version.zip"},
-	{url="musl.patch"},
+	{url="https://github.com/ziglang/zig/archive/refs/tags/$version.zip"},
+	#{url="musl.patch"},
 ]
 
 ext='''
 	cd zig-$version
-	patch -Np1 -i ../musl.patch
+	#patch -Np1 -i ../musl.patch
 '''
 
 build='''
+	export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
 	noname-cmake zig-$version -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/ -DZIG_TARGET_MCPU=baseline -DZIG_SYSTEM_LIBCXX=c++ -DZIG_STATIC_ZLIB=on
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

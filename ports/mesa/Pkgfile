@@ -1,4 +1,4 @@
-version="23.2.0-rc2"
+version="24.1.4"
 makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
 deps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland"]
 desc="Mesa 3D Graphics Library"
@@ -25,12 +25,13 @@ build='''
 	python3 -m venv ss
 	. ./ss/bin/activate
 	pip install mako
+	ulimit -n 100000
 	noname-meson mesa-$version build \
 		-D b_ndebug=true \
 		-D platforms=wayland \
-		-D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,i915,zink \
-		-D vulkan-drivers=amd,intel,intel_hasvk,swrast,virtio \
-		-D vulkan-layers=device-select,intel-nullhw,overlay \
+		-D gallium-drivers=kmsro,radeonsi,virgl,svga,swrast,zink \
+		-D vulkan-drivers=amd,swrast \
+		-D vulkan-layers=device-select,overlay \
 		-D dri3=enabled \
 		-D egl=enabled \
 		-D cpp_rtti=false \
@@ -40,7 +41,9 @@ build='''
 		-D gallium-omx=disabled \
 		-D gallium-va=enabled \
 		-D gallium-xa=disabled \
+		-D gallium-opencl=disabled \
 		-D microsoft-clc=disabled \
+		-D intel-clc=auto \
 		-D android-libbacktrace=disabled \
 		-D gbm=enabled \
 		-D gles1=disabled \

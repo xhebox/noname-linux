@@ -1,0 +1,4 @@
+pattern=["share/libdrm"]
+script='''
+chown -R root:video /share/libdrm
+'''

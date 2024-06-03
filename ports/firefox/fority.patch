@@ -1,0 +1,14 @@
+The wrapper features.h gets pulled in by system headers causing thigns to
+break. We work around it by simply not wrap features.h
+
+diff --git a/config/system-headers.mozbuild b/config/system-headers.mozbuild
+index 07d48e7..d2ce2b2 100644
+--- a/config/system-headers.mozbuild
++++ b/config/system-headers.mozbuild
+@@ -227,3 +227,2 @@ system_headers = [
+     "fcntl.h",
+-    "features.h",
+     "fenv.h",
+
+
+

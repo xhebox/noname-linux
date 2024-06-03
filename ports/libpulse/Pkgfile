@@ -1,0 +1,70 @@
+version = "17.0"
+desc = "library for layout and rendering of text"
+source = [
+  { url = "http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$version.tar.xz" },
+]
+
+build = '''
+	noname-meson pulseaudio-$version pabuild \
+	-Dman=false \
+	-Dtests=false \
+	-Dgcov=false \
+	-Ddatabase=simple \
+	-Dalsa=disabled \
+	-Dasyncns=disabled \
+	-Davahi=disabled \
+	-Dbluez5=disabled \
+	-Dbluez5-native-headset=false \
+	-Dbluez5-ofono-headset=false \
+	-Ddbus=disabled \
+	-Dfftw=disabled \
+	-Dglib=disabled \
+	-Dgsettings=disabled \
+	-Dgtk=disabled \
+	-Dhal-compat=false \
+	-Dipv6=false \
+	-Djack=disabled \
+	-Dlirc=disabled \
+	-Dopenssl=disabled \
+	-Dorc=disabled \
+	-Dsamplerate=disabled \
+	-Delogind=disabled \
+	-Dconsolekit=disabled \
+	-Dtcpwrap=disabled \
+	-Ddoxygen=false \
+	-Dsoxr=disabled \
+	-Dspeex=disabled \
+	-Dsystemd=disabled \
+	-Dudev=disabled \
+	-Dx11=disabled \
+	-Dadrian-aec=true \
+	-Dvalgrind=disabled \
+	-Doss-output=disabled \
+	-Dbluez5-gstreamer=disabled \
+	-Dwebrtc-aec=disabled
+
+	meson configure --no-pager pabuild
+	ninja -C pabuild \
+		PulseAudioConfig.cmake \
+		src/utils/pactl
+
+	mkdir -p "$pkgdir"/lib/pkgconfig/
+	install -Dm644 pabuild/src/pulse/client.conf "$pkgdir"/etc/pulse/client.conf
+	rm -rf pabuild/src/*.so*.p pabuild/src/pulse/*.so*.p
+	for i in pabuild/src/*.so* pabuild/src/pulse/*.so*; do
+		mv $i "$pkgdir"/lib
+	done
+	for i in pabuild/*.pc; do
+		mv $i "$pkgdir"/lib/pkgconfig/
+	done
+	mkdir -p "$pkgdir"/lib/cmake/PulseAudio/
+	for i in pabuild/*.cmake; do
+		mv $i "$pkgdir"/lib/cmake/PulseAudio
+	done
+	install -Dm644 "$srcdir"/pulseaudio-$version/PulseAudioConfigVersion.cmake.in "$pkgdir"/lib/cmake/PulseAudioConfigVersion.cmake
+	mkdir -p "$pkgdir"/include/pulse/
+	for i in pulseaudio-$version/src/pulse/*.h; do
+		mv $i "$pkgdir"/include/pulse
+	done
+	mv pabuild/src/pulse/version.h "$pkgdir"/include/pulse
+'''

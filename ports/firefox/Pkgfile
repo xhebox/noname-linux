@@ -1,29 +1,27 @@
 name="firefox"
-version="122.0"
+version="126.0"
 desc="Firefox web browser"
 deps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
 makedeps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
 source=[
 	{url="https://archive.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz"},
 	{url="stab.h"},
-	#{url="fix-fortify-system-wrappers.patch"},
-	{url="mallinfo.patch"},
 	{url="sandbox-fork.patch"},
-	{url="sandbox-largefile.patch"},
 	{url="sandbox-sched_setscheduler.patch"},
-	{url="fix-musl.patch"},
-	{url="noname-fonts.patch"},
 	{url="no-gnome.patch"},
-	{url="no-x11.patch"},
 	{url="python.patch"},
-	{url="libevent.patch"},
+	{url="fority.patch"},
+	{url="rust.patch"},
+	{url="crash.patch"},
+	{url="lfs.patch"},
+	{url="hack.patch"},
 ]
 
 ext='''
 	cd firefox-${version%b*}
 	for i in $source; do
 		case $i in
-		*.patch) patch -Nbp0 -i ../$i;;
+		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
 
@@ -43,11 +41,9 @@ ac_add_options --enable-hardening
 ac_add_options --enable-linker=lld
 ac_add_options --enable-forkserver
 ac_add_options --enable-rust-simd
-ac_add_options --disable-elf-hack
 ac_add_options --with-wasi-sysroot=/lib/wasi
 ac_add_options --with-ccache=/bin/ccache
 ac_add_options --host=$TARGET
-ac_add_options --disable-bootstrap
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
 export CXX='clang++ --target=x86_64-pc-linux-musl'
@@ -77,19 +73,13 @@ ac_add_options --enable-alsa
 ac_add_options --disable-valgrind
 ac_add_options --disable-jack
 ac_add_options --disable-webrtc
-ac_add_options --disable-crashreporter
 ac_add_options --disable-tests
 ac_add_options --disable-profiling
+ac_add_options --disable-bootstrap
 ac_add_options --disable-jemalloc
 ac_add_options --disable-updater
 ac_add_options --enable-default-toolkit="cairo-gtk3-wayland"
 END
-
-	mkdir -p "$srcdir/.cargo"
-	cat > "$srcdir/.cargo/config" << EOF
-[net]
-git-fetch-with-cli = true
-EOF
 '''
 
 build='''
@@ -102,13 +92,16 @@ build='''
 
 	env >> env
 
-	./mach build -j8
+	./mach build -j6
 	DESTDIR="$pkgdir" ./mach install
 	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
 	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END
 pref("intl.locale.matchOS", true);
 pref("browser.shell.checkDefaultBrowser", false);
 pref("browser.tabs.remote.autostart", true);
+pref("browser.topsites.contile.enabled", false);
+pref("media.gmp-widevinecdm.visible", false);
+pref("media.gmp-widevinecdm.enabled", false);
 END
 
 	for i in 16 22 24 32 48 64 128 256; do

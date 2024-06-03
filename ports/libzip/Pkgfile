@@ -1,0 +1,15 @@
+version="1.10.1"
+desc="C library for reading, creating, and modifying zip archives"
+deps=["bzip2", "openssl", "zlib", "zstd"]
+makedeps=["bzip2", "openssl", "zlib", "zstd", "cmake"]
+source=[
+	{url="https://libzip.org/download/libzip-$version.tar.xz"},
+]
+
+build='''
+	export CC=gcc
+	export CXX=g++
+	noname-cmake libzip-$version -Bbuild -DCMAKE_INSTALL_PREFIX=/ -DCMAKE_BUILD_TYPE=None -Wno-dev
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

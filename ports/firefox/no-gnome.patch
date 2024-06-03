@@ -1,5 +1,5 @@
---- browser/base/content/browser-sets.inc	2020-10-15 01:20:16.000000000 +0800
-+++ browser/base/content/browser-sets.inc	2020-10-15 01:20:16.000000000 +0800
+--- a/browser/base/content/browser-sets.inc	2020-10-15 01:20:16.000000000 +0800
++++ b/browser/base/content/browser-sets.inc	2020-10-15 01:20:16.000000000 +0800
 @@ -3,12 +3,6 @@
  # License, v. 2.0. If a copy of the MPL was not distributed with this
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.

@@ -1,8 +1,8 @@
-version="31"
-busyboxver="1.27.2"
+version="39.2"
+busyboxver="1.36.1"
 desc="Next generation of initramfs creation"
 source=[
-	{url="https://sources.archlinux.org/other/mkinitcpio/mkinitcpio-$version.tar.gz"},
+	{url="https://sources.archlinux.org/other/mkinitcpio/mkinitcpio-$version.tar.xz"},
 	{url="https://busybox.net/downloads/busybox-$busyboxver.tar.bz2"},
 	{url="mkinitcpio.toml"},
 	{url="config"},

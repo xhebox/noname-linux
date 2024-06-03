@@ -1,0 +1,16 @@
+version="0.8.2"
+desc="Library to create Wayland desktop components using the Layer Shell protocol"
+url="https://github.com/wmww/gtk-layer-shell"
+deps=["gtk3", "wayland"]
+makedeps=["gtk3", "wayland-protocols", "gobject-introspection", "meson", "ninja"]
+source=[
+	{url="https://github.com/wmww/gtk-layer-shell/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-meson gtk-layer-shell-$version build \
+		-Dtests=false  -Ddocs=false -Dintrospection=true -Dvapi=false
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

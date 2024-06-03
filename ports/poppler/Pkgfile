@@ -1,0 +1,32 @@
+version="24.03.0"
+desc="Poppler is a PDF rendering library based on the xpdf-3.0 code base"
+makedeps=["libjpeg-turbo", "fontconfig", "openjpeg2", "lcms2", "icu", "python3", "glib", "gobject-introspection"]
+deps=["libjpeg-turbo", "fontconfig", "openjpeg2", "lcms2", "icu", "python3", "glib"]
+source=[
+	{url="https://poppler.freedesktop.org/poppler-${version}.tar.xz"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd poppler-$version
+	#patch -p1 -i ../musl.patch
+'''
+
+build='''
+	noname-cmake poppler-$version -Bbuild \
+	-DENABLE_GTK_DOC=OFF \
+	-DENABLE_LIBTIFF=OFF \
+	-DENABLE_QT5=OFF \
+	-DENABLE_QT6=OFF \
+	-DENABLE_NSS3=OFF \
+	-DENABLE_LIBCURL=OFF \
+	-DENABLE_BOOST=OFF \
+	-DBUILD_GTK_TESTS=OFF \
+	-DBUILD_QT5_TESTS=OFF \
+	-DBUILD_QT6_TESTS=OFF \
+	-DBUILD_CPP_TESTS=OFF \
+	-DBUILD_MANUAL_TESTS=OFF \
+	-DENABLE_GPGME=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

@@ -1,0 +1,17 @@
+version="103"
+desc="initframfs"
+deps=["bash", "coreutils", "filesystem", "findutils", "gawk", "grep", "kmod", "pkgconf", "procps-ng", "sed", "systemd", "util-linux", "e2fsprogs", "binutils", "cpio"]
+makedeps=["rust"]
+source=[{url="https://github.com/dracut-ng/dracut-ng/archive/refs/tags/$version.tar.gz"}]
+
+build='''
+	cd dracut-ng-$version
+	./configure --prefix= \
+		--sysconfdir=/etc \
+		--libexecdir=/lib \
+		--systemdsystemunitdir=/lib/systemd/system \
+		--disable-documentation \
+		--enable-dracut-cpio
+	make
+	make DESTDIR="$pkgdir" install 
+'''

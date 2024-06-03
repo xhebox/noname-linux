@@ -1,0 +1,22 @@
+--- a/meson.build	2023-09-23 22:18:32.000000000 +0800
++++ b/meson.build	2023-09-23 22:18:32.000000000 +0800
+@@ -235,7 +235,6 @@
+   fallback: ['libpng', 'libpng_dep']
+ )
+ if png_dep.found()
+-  feature_conf.set('CAIRO_HAS_SVG_SURFACE', 1)
+   feature_conf.set('CAIRO_HAS_PNG_FUNCTIONS', 1)
+   built_features += [
+     {
+@@ -242,11 +242,6 @@
+       'description': 'PNG functions',
+       'deps': [png_dep],
+     },
+-    {
+-      'name': 'cairo-svg',
+-      'description': 'SVG surface backend',
+-      'deps': [png_dep],
+-    }
+   ]
+ 
+   if png_dep.type_name() == 'internal'

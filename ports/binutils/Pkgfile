@@ -1,4 +1,4 @@
-version = "2.40"
+version = "2.42"
 desc = "The GNU Binutils are a collection of binary tools"
 makedeps = ["zlib"]
 deps = ["zlib"]

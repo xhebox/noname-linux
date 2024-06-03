@@ -48,6 +48,7 @@ build = '''
 		--enable-libarchive \
 		--enable-libmpv-shared \
 		--disable-cdda \
+		--disable-pulse \
 		--disable-dvdnav \
 		--disable-build-date \
 		--disable-caca
