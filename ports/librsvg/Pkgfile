@@ -1,0 +1,16 @@
+version="2.58.93"
+makedeps=["rust", "gobject-introspection", "glib", "pango", "gdk-pixbuf", "cairo", "freetype", "harfbuzz", "libxml2"]
+deps=["glib", "pango", "gdk-pixbuf", "cairo", "freetype", "harfbuzz", "libxml2"]
+desc="SVG rendering library"
+source=[{url="https://gitlab.gnome.org/GNOME/librsvg/-/archive/$version/librsvg-$version.tar.gz"}]
+
+build='''
+	export CARGO_HOME="$srcdir/.cargo"
+	export PATH="$srcdir/.cargo/bin:$PATH"
+	cargo install cargo-c
+	export LDFLAGS="$LDFLAGS -lunwind"
+	noname-meson librsvg-$version build -Ddocs=disabled -Dtests=false -Dvala=disabled -Davif=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -1,4 +1,4 @@
-version="255.4"
+version="255.10"
 desc="system and service manager"
 makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "hwdata"]
 nocache=true
@@ -109,7 +109,7 @@ build='''
 	-Dnss-myhostname=false \
 	-Dnss-mymachines=disabled \
 	-Dnss-systemd=false \
-	-Dresolve=false \
+	-Dresolve=true \
 	-Dhostnamed=false \
 	-Dtimedated=true \
 	-Dtimesyncd=true \

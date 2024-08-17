@@ -1,0 +1,14 @@
+version="2.0.1"
+desc="A lil' toml parser"
+deps=["python3"]
+makedeps=["python3"]
+source=[{url="https://github.com/hukkin/tomli/archive/${version}/tomli-${version}.tar.gz"}]
+
+build='''
+    cd tomli-${version}
+		python -m venv venv
+		. venv/bin/activate
+		pip install build installer flit-core
+    python -m build -wn --skip-dependency-check
+    python -m installer --prefix= -d "$pkgdir" dist/*.whl
+'''

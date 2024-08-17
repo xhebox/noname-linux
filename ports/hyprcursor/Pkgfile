@@ -1,18 +1,15 @@
-version="0.1.4"
+version="0.1.9"
 desc="The hyprland cursor format, library and utilities"
-deps=["hyprlang", "libzip", "cairo"]
-makedeps=["hyprlang", "libzip", "cairo", "cmake"]
+deps=["hyprlang", "libzip", "cairo", "librsvg"]
+makedeps=["hyprlang", "libzip", "cairo", "librsvg", "cmake"]
 source=[
 	{url="https://github.com/hyprwm/hyprcursor/archive/refs/tags/v$version.tar.gz"},
-	{url="norsvg.patch"},
 ]
 
 build='''
 	cd "$srcdir/hyprcursor-$version"
-	patch -Np1 -i "$srcdir"/norsvg.patch
-	export CC=gcc
-	export CXX=g++
+	sed -i 's/-std=gnu++2b//g' CMakeLists.txt
 	noname-cmake -Bbuild -G Ninja
 	cmake --build ./build --target all
-	cmake --build ./build --target install
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

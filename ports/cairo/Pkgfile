@@ -4,7 +4,6 @@ makedeps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppl
 deps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppler"]
 source=[
 	{url="https://cairographics.org/releases/cairo-$version.tar.xz"},
-	{url="no-ps.patch"},
 ]
 
 ext='''
