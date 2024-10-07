@@ -7,8 +7,6 @@ source=[
 ]
 
 build='''
-	export CC=gcc
-	export CXX=g++
 	noname-cmake libzip-$version -Bbuild -DCMAKE_INSTALL_PREFIX=/ -DCMAKE_BUILD_TYPE=None -Wno-dev
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install

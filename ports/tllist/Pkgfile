@@ -1,0 +1,13 @@
+version="1.1.0"
+desc="A typed linked list C header file only library"
+makedeps=["meson"]
+source=[
+	{url="https://codeberg.org/dnkl/tllist/releases/download/$version/tllist-$version.tar.gz"},
+]
+
+build='''
+	noname-meson tllist-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

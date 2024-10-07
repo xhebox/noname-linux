@@ -1,5 +1,5 @@
 name="firefox"
-version="126.0"
+version="131.0"
 desc="Firefox web browser"
 deps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip"]
 makedeps=["nss", "alsa-lib", "llvm", "dbus-glib", "gtk3", "libjpeg-turbo", "libogg", "libvorbis", "libvpx", "mesa", "python3", "sqlite", "zip", "rust", "pipewire", "inetutils", "wasi-sysroot", "unzip", "wayland-protocols", "nasm"]
@@ -11,10 +11,9 @@ source=[
 	{url="no-gnome.patch"},
 	{url="python.patch"},
 	{url="fority.patch"},
-	{url="rust.patch"},
-	{url="crash.patch"},
 	{url="lfs.patch"},
 	{url="hack.patch"},
+	{url="rust.patch"},
 ]
 
 ext='''
@@ -39,10 +38,9 @@ ac_add_options --enable-release
 ac_add_options --enable-optimize
 ac_add_options --enable-hardening
 ac_add_options --enable-linker=lld
-ac_add_options --enable-forkserver
 ac_add_options --enable-rust-simd
-ac_add_options --with-wasi-sysroot=/lib/wasi
 ac_add_options --with-ccache=/bin/ccache
+ac_add_options --with-wasi-sysroot=/lib/wasi
 ac_add_options --host=$TARGET
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
@@ -55,7 +53,9 @@ export RANLIB=llvm-ranlib
 # Branding
 ac_add_options --enable-official-branding
 ac_add_options --enable-update-channel=release
+ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --with-distribution-id=noname-linux
+ac_add_options --allow-addon-sideload
 
 # System libraries
 ac_add_options --with-system-jpeg
@@ -69,7 +69,9 @@ ac_add_options --with-system-nspr
 ac_add_options --with-system-nss
 
 # Features
-ac_add_options --enable-alsa
+ac_add_options --enable-necko-wifi
+ac_add_options --disable-alsa
+ac_add_options --enable-pulseaudio
 ac_add_options --disable-valgrind
 ac_add_options --disable-jack
 ac_add_options --disable-webrtc
@@ -85,10 +87,13 @@ END
 build='''
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.cargo/bin:$PATH"
-	cargo install --version 0.26.0 cbindgen
+	cargo install --version 0.27.0 cbindgen
 
 	cd firefox-${version%b*}
 	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
+	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
+
+	ulimit -n 4096
 
 	env >> env
 
@@ -96,10 +101,8 @@ build='''
 	DESTDIR="$pkgdir" ./mach install
 	mkdir -p "$pkgdir/lib/firefox/browser/defaults/preferences"
 	cat > "$pkgdir/lib/firefox/browser/defaults/preferences/vendor.js" << END
-pref("intl.locale.matchOS", true);
+pref("intl.locale.requested", "");
 pref("browser.shell.checkDefaultBrowser", false);
-pref("browser.tabs.remote.autostart", true);
-pref("browser.topsites.contile.enabled", false);
 pref("media.gmp-widevinecdm.visible", false);
 pref("media.gmp-widevinecdm.enabled", false);
 END

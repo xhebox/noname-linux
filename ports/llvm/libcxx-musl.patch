@@ -1,0 +1,12 @@
+--- a/libcxx/include/__config	2024-06-16 01:21:32.000000000 +0800
++++ b/libcxx/include/__config	2024-06-16 01:21:32.000000000 +0800
+@@ -891,9 +891,6 @@
+ #  define _LIBCPP_END_NAMESPACE_FILESYSTEM _LIBCPP_END_NAMESPACE_STD }}
+ // clang-format on
+ 
+-#  if __has_attribute(__enable_if__)
+-#    define _LIBCPP_PREFERRED_OVERLOAD __attribute__((__enable_if__(true, "")))
+-#  endif
+ 
+ #  if !defined(__SIZEOF_INT128__) || defined(_MSC_VER)
+ #    define _LIBCPP_HAS_NO_INT128

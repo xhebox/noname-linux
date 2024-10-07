@@ -59,3 +59,256 @@
      DIRS += ["wayland", "mozwayland"]
  
  EXPORTS += [
+
+--- /dev/null
++++ b/widget/gtk/MozContainerSurfaceLock.cpp
+@@ -0,0 +1,31 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "MozContainerSurfaceLock.h"
++#include "MozContainer.h"
++#include "WidgetUtilsGtk.h"
++
++using namespace mozilla::widget;
++
++MozContainerSurfaceLock::MozContainerSurfaceLock(MozContainer* aContainer) {
++#ifdef MOZ_WAYLAND
++  mContainer = aContainer;
++  if (GdkIsWaylandDisplay()) {
++    // mSurface can be nullptr if we lock hidden MozContainer and
++    // that's correct, MozContainer is still locked.
++    mSurface = moz_container_wayland_surface_lock(aContainer);
++  }
++#endif
++}
++
++MozContainerSurfaceLock::~MozContainerSurfaceLock() {
++#ifdef MOZ_WAYLAND
++  if (GdkIsWaylandDisplay()) {
++    moz_container_wayland_surface_unlock(mContainer, &mSurface);
++  }
++#endif
++}
++
++struct wl_surface* MozContainerSurfaceLock::GetSurface() { return mSurface; }
+diff --git a/widget/gtk/MozContainerSurfaceLock.h b/widget/gtk/MozContainerSurfaceLock.h
+new file mode 100644
+index 000000000000..f96893b3f5b9
+--- /dev/null
++++ b/widget/gtk/MozContainerSurfaceLock.h
+@@ -0,0 +1,28 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#ifndef widget_gtk_MozContainerSurfaceLock_h
++#define widget_gtk_MozContainerSurfaceLock_h
++
++struct wl_surface;
++struct _MozContainer;
++typedef struct _MozContainer MozContainer;
++
++class MozContainerSurfaceLock {
++ public:
++  explicit MozContainerSurfaceLock(MozContainer* aContainer);
++  ~MozContainerSurfaceLock();
++
++  // wl_surface can be nullptr if we lock hidden MozContainer.
++  struct wl_surface* GetSurface();
++
++ private:
++#ifdef MOZ_WAYLAND
++  MozContainer* mContainer = nullptr;
++#endif
++  struct wl_surface* mSurface = nullptr;
++};
++
++#endif  // widget_gtk_MozContainerSurfaceLock_h
+diff --git a/widget/gtk/MozContainerWayland.cpp b/widget/gtk/MozContainerWayland.cpp
+index 84c5e0a6642d..47e7cce6927b 100644
+--- a/widget/gtk/MozContainerWayland.cpp
++++ b/widget/gtk/MozContainerWayland.cpp
+@@ -87,23 +87,6 @@ static void moz_container_wayland_set_opaque_region_locked(
+     const MutexAutoLock& aProofOfLock, MozContainer* container,
+     const LayoutDeviceIntRegion&);
+ 
+-// Lock mozcontainer and get wayland surface of it. You need to pair with
+-// moz_container_wayland_surface_unlock() even
+-// if moz_container_wayland_surface_lock() fails and returns nullptr.
+-static struct wl_surface* moz_container_wayland_surface_lock(
+-    MozContainer* container);
+-static void moz_container_wayland_surface_unlock(MozContainer* container,
+-                                                 struct wl_surface** surface);
+-
+-MozContainerSurfaceLock::MozContainerSurfaceLock(MozContainer* aContainer) {
+-  mContainer = aContainer;
+-  mSurface = moz_container_wayland_surface_lock(aContainer);
+-}
+-MozContainerSurfaceLock::~MozContainerSurfaceLock() {
+-  moz_container_wayland_surface_unlock(mContainer, &mSurface);
+-}
+-struct wl_surface* MozContainerSurfaceLock::GetSurface() { return mSurface; }
+-
+ // Invalidate gtk wl_surface to commit changes to wl_subsurface.
+ // wl_subsurface changes are effective when parent surface is commited.
+ static void moz_container_wayland_invalidate(MozContainer* container) {
+diff --git a/widget/gtk/MozContainerWayland.h b/widget/gtk/MozContainerWayland.h
+index 6a33df264279..6b1b07316955 100644
+--- a/widget/gtk/MozContainerWayland.h
++++ b/widget/gtk/MozContainerWayland.h
+@@ -13,6 +13,7 @@
+ #include <vector>
+ #include "mozilla/Mutex.h"
+ #include "WindowSurface.h"
++#include "MozContainerSurfaceLock.h"
+ 
+ /*
+  * MozContainer
+@@ -61,15 +62,12 @@ struct _MozContainerClass;
+ typedef struct _MozContainer MozContainer;
+ typedef struct _MozContainerClass MozContainerClass;
+ 
+-class MozContainerSurfaceLock {
+-  MozContainer* mContainer;
+-  struct wl_surface* mSurface;
+-
+- public:
+-  explicit MozContainerSurfaceLock(MozContainer* aContainer);
+-  ~MozContainerSurfaceLock();
+-  struct wl_surface* GetSurface();
+-};
++// Lock mozcontainer and get wayland surface of it. You need to pair with
++// moz_container_wayland_surface_unlock() even
++// if moz_container_wayland_surface_lock() fails and returns nullptr.
++struct wl_surface* moz_container_wayland_surface_lock(MozContainer* container);
++void moz_container_wayland_surface_unlock(MozContainer* container,
++                                          struct wl_surface** surface);
+ 
+ void moz_container_wayland_map(GtkWidget*);
+ gboolean moz_container_wayland_map_event(GtkWidget*, GdkEventAny*);
+diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
+index 1567c006a457..6ced9be06e8f 100644
+--- a/widget/gtk/moz.build
++++ b/widget/gtk/moz.build
+@@ -33,6 +33,7 @@ if CONFIG["MOZ_ENABLE_V4L2"]:
+ 
+ EXPORTS += [
+     "MozContainer.h",
++    "MozContainerSurfaceLock.h",
+     "nsGTKToolkit.h",
+     "nsGtkUtils.h",
+     "nsImageToPixbuf.h",
+@@ -71,6 +72,7 @@ UNIFIED_SOURCES += [
+     "IMContextWrapper.cpp",
+     "InProcessGtkCompositorWidget.cpp",
+     "MozContainer.cpp",
++    "MozContainerSurfaceLock.cpp",
+     "MPRISServiceHandler.cpp",
+     "NativeKeyBindings.cpp",
+     "NativeMenuGtk.cpp",
+@@ -114,6 +116,7 @@ if CONFIG["MOZ_WAYLAND"]:
+         "WindowSurfaceWaylandMultiBuffer.cpp",
+     ]
+     EXPORTS.mozilla.widget += [
++        "MozContainerSurfaceLock.h",
+         "MozContainerWayland.h",
+         "nsWaylandDisplay.h",
+         "WaylandBuffer.h",
+
+
+--- a/widget/gtk/GtkCompositorWidget.cpp
++++ b/widget/gtk/GtkCompositorWidget.cpp
+@@ -211,5 +211,9 @@ bool GtkCompositorWidget::IsPopup() {
+ }
+ #endif
+ 
++UniquePtr<MozContainerSurfaceLock> GtkCompositorWidget::LockSurface() {
++  return mWidget->LockSurface();
++}
++
+ }  // namespace widget
+ }  // namespace mozilla
+diff --git a/widget/gtk/GtkCompositorWidget.h b/widget/gtk/GtkCompositorWidget.h
+index d4834247f16d..8d56f35a561c 100644
+--- a/widget/gtk/GtkCompositorWidget.h
++++ b/widget/gtk/GtkCompositorWidget.h
+@@ -10,6 +10,8 @@
+ #include "mozilla/DataMutex.h"
+ #include "mozilla/widget/CompositorWidget.h"
+ #include "WindowSurfaceProvider.h"
++#include "mozilla/UniquePtr.h"
++#include "MozContainerSurfaceLock.h"
+ 
+ class nsIWidget;
+ class nsWindow;
+@@ -96,6 +98,8 @@ class GtkCompositorWidget : public CompositorWidget,
+   void NotifyClientSizeChanged(const LayoutDeviceIntSize& aClientSize) override;
+   GtkCompositorWidget* AsGtkCompositorWidget() override { return this; }
+ 
++  UniquePtr<MozContainerSurfaceLock> LockSurface();
++
+  private:
+ #if defined(MOZ_WAYLAND)
+   void ConfigureWaylandBackend();
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+index b78ad4ca286b..40594a0e6f2f 100644
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -10276,3 +10276,10 @@ void nsWindow::SetDragSource(GdkDragContext* aSourceDragContext) {
+     }
+   }
+ }
++
++UniquePtr<MozContainerSurfaceLock> nsWindow::LockSurface() {
++  if (mIsDestroyed) {
++    return nullptr;
++  }
++  return MakeUnique<MozContainerSurfaceLock>(mContainer);
++}
+diff --git a/widget/gtk/nsWindow.h b/widget/gtk/nsWindow.h
+index 36b039cc5e58..ce57689fcc15 100644
+--- a/widget/gtk/nsWindow.h
++++ b/widget/gtk/nsWindow.h
+@@ -13,6 +13,7 @@
+ 
+ #include "CompositorWidget.h"
+ #include "MozContainer.h"
++#include "MozContainerSurfaceLock.h"
+ #include "VsyncSource.h"
+ #include "mozilla/EventForwards.h"
+ #include "mozilla/Maybe.h"
+@@ -421,6 +422,8 @@ class nsWindow final : public nsBaseWidget {
+ 
+   static nsWindow* GetFocusedWindow();
+ 
++  mozilla::UniquePtr<MozContainerSurfaceLock> LockSurface();
++
+ #ifdef MOZ_WAYLAND
+   // Use xdg-activation protocol to transfer focus from gFocusWindow to aWindow.
+   static void TransferFocusToWaylandWindow(nsWindow* aWindow);
+diff --git a/gfx/webrender_bindings/RenderCompositorEGL.cpp b/gfx/webrender_bindings/RenderCompositorEGL.cpp
+index ccabfd375f37..ba10c40657d9 100644
+--- a/gfx/webrender_bindings/RenderCompositorEGL.cpp
++++ b/gfx/webrender_bindings/RenderCompositorEGL.cpp
+@@ -154,6 +154,16 @@ RenderedFrameId RenderCompositorEGL::EndFrame(
+     }
+     gl()->SetDamage(bufferInvalid);
+   }
++
++#ifdef MOZ_WIDGET_GTK
++  // Rendering on Wayland has to be atomic (buffer attach + commit) and
++  // wayland surface is also used by main thread so lock it before
++  // we paint at SwapBuffers().
++  UniquePtr<MozContainerSurfaceLock> lock;
++  if (auto* gtkWidget = mWidget->AsGTK()) {
++    lock = gtkWidget->LockSurface();
++  }
++#endif
+   gl()->SwapBuffers();
+   return frameId;
+ }
+

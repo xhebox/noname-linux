@@ -1,6 +1,6 @@
-version="6.3"
+version="6.5"
 desc="A SystemV Release4.0 cursese mulation library"
-source=[{url="http://mirrors.ustc.edu.cn/gnu/ncurses/ncurses-$version.tar.gz"}]
+source=[{url="https://mirrors.ustc.edu.cn/gnu/ncurses/ncurses-$version.tar.gz"}]
 deps=["musl"]
 
 build='''

@@ -1,4 +1,4 @@
-version="1.5.0"
+version="1.7.0"
 desc="xkbcommon is a library to handle keyboard descriptions, including loading them from disk, parsing them and handling their state"
 makedeps=["wayland-protocols", "xkeyboard-config"]
 deps=["wayland", "xkeyboard-config"]

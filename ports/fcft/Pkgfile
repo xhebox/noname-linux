@@ -1,0 +1,14 @@
+version="3.1.8"
+desc="Simple library for font loading and glyph rasterization"
+makedeps=["freetype", "fontconfig", "harfbuzz", "libutf8proc", "pixman", "tllist"]
+deps=["freetype", "fontconfig", "harfbuzz", "libutf8proc", "pixman"]
+source=[
+	{url="https://codeberg.org/dnkl/fcft/releases/download/$version/fcft-$version.tar.gz"},
+]
+
+build='''
+	noname-meson fcft-$version build -Dgrapheme-shaping=enabled -Ddocs=disabled -Drun-shaping=enabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

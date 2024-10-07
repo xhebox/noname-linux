@@ -1,9 +1,9 @@
-version="1.14.2"
+version="1.28.1"
 desc="Userspace tools and conversion library for Video 4 Linux"
-makedeps=["alsa-lib", "sysfsutils", "libjpeg-turbo"]
-deps=["alsa-lib", "sysfsutils", "libjpeg-turbo"]
+makedeps=["alsa-lib", "sysfsutils", "libjpeg-turbo", "json-c"]
+deps=["alsa-lib", "sysfsutils", "libjpeg-turbo", "json-c"]
 source=[
-	{url="http://linuxtv.org/downloads/v4l-utils/${name}-${version}.tar.bz2"},
+	{url="http://linuxtv.org/downloads/v4l-utils/${name}-${version}.tar.xz"},
 	{url="musl.patch"},
 ]
 
@@ -13,10 +13,9 @@ ext='''
 '''
 
 build='''
-	CFLAGS="$CFLAGS -D__off_t=off_t -D__off64_t=off_t"
-	LDFLAGS="$LDFLAGS -largp"
-	cd v4l-utils-$version
-	./configure --prefix= --sysconfdir=/etc --sbindir=/bin --disable-qv4l2
-	make
-	make -j1 install DESTDIR="${pkgdir}/"
+	export LDFLAGS="$LDFLAGS -lexecinfo"
+	noname-meson v4l-utils-$version build -Ddoxygen-doc=disabled -Dqv4l2=disabled -Dqvidcap=disabled -Dgconv=disabled -Dbpf=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

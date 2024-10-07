@@ -1,6 +1,6 @@
-version="5.1.2"
-makedeps=["libgmp", "fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm", "nasm"]
-deps=["libgmp", "fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "x265", "xvidcore", "libmodplug", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "gsm"]
+version="7.0.2"
+makedeps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "nasm"]
+deps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2"]
 desc="Complete solution to record, convert and stream audio and video."
 source=[{url="https://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
@@ -19,7 +19,7 @@ build='''
 		--mandir=/share/man \
 		--disable-debug \
 		--enable-fontconfig \
-		--enable-gmp \
+		--disable-gmp \
 		--disable-gnutls \
 		--enable-gpl \
 		--disable-ladspa \
@@ -27,8 +27,8 @@ build='''
 		--enable-libass \
 		--enable-libfreetype \
 		--enable-libfribidi \
-		--enable-libgsm \
-		--enable-libmodplug \
+		--disable-libgsm \
+		--disable-libmodplug \
 		--enable-libmp3lame \
 		--enable-libopencore_amrnb \
 		--enable-libopencore_amrwb \
@@ -46,7 +46,7 @@ build='''
 		--enable-libvpx \
 		--enable-libwebp \
 		--enable-libx264 \
-		--enable-libx265 \
+		--disable-libx265 \
 		--enable-libxvid \
 		--enable-shared \
 		--enable-version3 \

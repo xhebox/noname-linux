@@ -1,11 +1,13 @@
-version="633f265f67f322cbe2c5fd11d3e46d968ac220f7"
+version="2.1"
 desc='Just-in-time compiler and drop-in replacement for Lua 5.1'
 deps=["musl"]
-source=[{url="https://repo.or.cz/luajit-2.0.git/snapshot/${version}.tar.gz"}]
+source=[{url="https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v$version.zip"}]
 
 build='''
-	cd luajit-2.0-*
-	make amalg PREFIX=/
+	cd LuaJIT-*
+	export LDFLAGS="$LDFLAGS -lunwind"
+	export CFLAGS="$CFLAGS -lunwind"
+	make CC=$CC CXX=$CXX amalg PREFIX=/
 	make install DESTDIR="$pkgdir" PREFIX=/
-ln -sf luajit-2.1.0-beta3 "/bin/luajit"
+  ln -srf "$pkgdir"/bin/luajit-* "$pkgdir/bin/luajit"
 '''

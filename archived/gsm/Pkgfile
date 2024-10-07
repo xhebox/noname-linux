@@ -1,0 +1,32 @@
+version="1.0.18"
+desc="Shared libraries for GSM 06.10 lossy speech compression"
+deps=["musl"]
+source=[
+	{url="http://www.quut.com/gsm/gsm-${version}.tar.gz"},
+	{url="gsm.patch"},
+]
+
+ext='''
+	cd gsm-${version%.*}-pl${version##*.}
+	patch -Nbp0 -i ../gsm.patch
+'''
+
+build='''
+	cd gsm-${version%.*}-pl${version##*.}
+	make \
+	CCFLAGS="${CFLAGS} -c -DNeedFunctionPrototypes=1" \
+	CC="$CC -Wno-error -ansi -pedantic -fPIC"
+
+	install -m755 -d "${pkgdir}"/bin
+	install -m755 -d "${pkgdir}"/lib
+	install -m755 -d "${pkgdir}"/include/gsm
+	install -m755 -d "${pkgdir}"/share/gsm
+	install -m755 -d "${pkgdir}"/share/man/man1
+	install -m755 -d "${pkgdir}"/share/man/man3
+
+	make -j1 INSTALL_ROOT="${pkgdir}" \
+			       GSM_INSTALL_INC="${pkgdir}/include/gsm" \
+			       GSM_INSTALL_MAN="${pkgdir}/share/man/man3" \
+			       TOAST_INSTALL_MAN="${pkgdir}/share/man/man1" \
+	install
+'''

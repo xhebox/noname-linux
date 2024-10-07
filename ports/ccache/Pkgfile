@@ -1,4 +1,4 @@
-version="4.8.3"
+version="4.10.2"
 deps=["zstd"]
 makedeps=["zstd"]
 desc="A fast compiler cache."
@@ -9,15 +9,15 @@ source=[
 ]
 
 build='''
-	export CC=gcc
-	export CXX=g++
-	noname-cmake ccache-$version -Bbuild
+	export HTTP_PROXY=socks5://192.168.2.98:1080
+	export HTTPS_PROXY=socks5://192.168.2.98:1080
+	noname-cmake ccache-$version -Bbuild -DREDIS_STORAGE_BACKEND=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	install -D ccache.conf "$pkgdir"/etc/ccache.conf
 	install -D ccache-sysusers.conf "$pkgdir"/lib/sysusers.d/ccache.conf
 	install -d "$pkgdir"/lib/ccache
-	for c in cc gcc g++ cpp c++ clang clang++; do
+	for c in cc cpp c++; do
 		ln -s /bin/ccache "$pkgdir"/lib/ccache/$c
 		ln -s /bin/ccache "$pkgdir"/lib/ccache/$TARGET-$c
 	done

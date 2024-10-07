@@ -1,17 +1,18 @@
-version = "1.2.4"
+version = "1.2.5"
 desc = "An implementation of the standard C library for Linux-based systems."
 deps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
 makedeps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
+libgcc_version="13.2.1_git20240309-r0"
 
 source = [
   { url = "https://musl.libc.org/releases/musl-$version.tar.gz" },
   { url = "https://git.adelielinux.org/adelie/gcompat/-/archive/current/gcompat-1.1.0.tar.gz" },
+	{ url = "https://mirrors.ustc.edu.cn/alpine/latest-stable/main/x86_64/libgcc-$libgcc_version.apk"},
   { url = "__stack_chk_fail_local.c" },
   { url = "getconf.c" },
   { url = "iconv.c" },
   { url = "getent.c" },
   { url = "styp.patch" },
-	{ url = "emoji.patch" },
 	{ url = "res_init.patch" },
 	{ url = "handle_aux_at_base.patch" },
 ]
@@ -20,6 +21,8 @@ ext = '''
 	cd gcompat-*
 	patch -Np1 -i "$srcdir"/res_init.patch
 	cd ..
+
+	tar xpf libgcc-*
 
 	cd musl-$version
 	for i in $source;do
@@ -49,7 +52,7 @@ build = '''
 
 			ln -srf "$pkgdir"/$OTARGET/ "$pkgdir"/$OTARGET/usr
 
-			$OTARGET-gcc -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+			$OTARGET-$CC -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
 			$OTARGET-ar r libssp_nonshared.a __stack_chk_fail_local.o
 			cp libssp_nonshared.a "$pkgdir"/$OTARGET/lib
 
@@ -72,7 +75,7 @@ build = '''
 	cd "$srcdir"/build
 
 	mkdir -p "$pkgdir"/bin "$pkgdir"/lib
-	gcc -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+	$CC -c "$srcdir"/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
 	ar r libssp_nonshared.a __stack_chk_fail_local.o
 	cp libssp_nonshared.a "$pkgdir"/lib
 
@@ -97,6 +100,8 @@ EOF
 	ln -s /lib/libc.so "$pkgdir"/bin/ldd
 
 	for i in getconf getent iconv ; do
-		gcc "$srcdir"/$i.c -o "$pkgdir"/bin/$i
+		$CC "$srcdir"/$i.c -o "$pkgdir"/bin/$i
 	done
+
+	cp "$srcdir"/usr/lib/libgcc*so* "$pkgdir"/lib/
 '''

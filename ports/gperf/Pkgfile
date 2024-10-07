@@ -2,10 +2,11 @@ version="3.1"
 makedeps=["texinfo"]
 deps=["musl"]
 desc="Perfect hashf unction generator"
-source=[{url="http://mirrors.ustc.edu.cn/gnu/gperf/gperf-$version.tar.gz"}]
+source=[{url="https://mirrors.ustc.edu.cn/gnu/gperf/gperf-$version.tar.gz"}]
 
 build='''
 	cd gperf-$version
+	export CXXFLAGS="$CXXFLAGS -Wno-register"
 	./configure --prefix=
 	make
 	make DESTDIR="$pkgdir" install

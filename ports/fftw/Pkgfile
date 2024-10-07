@@ -13,7 +13,7 @@ build='''
 
 	CONFIGURE="./configure --prefix=	\
 		--enable-shared --enable-threads \
-		--enable-openmp"
+		--disable-openmp"
 
 	cd fftw-${version}-double
 	$CONFIGURE --enable-sse2 --enable-avx

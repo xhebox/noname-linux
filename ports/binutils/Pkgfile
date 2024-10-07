@@ -51,10 +51,9 @@ build = '''
 		--enable-plugins \
 		--enable-threads \
 		--enable-ld=default \
-		--enable-pgo-build=lto \
     --enable-plugins \
 		--enable-relro \
-		--enable-gold \
+		--disable-gold \
 		--enable-shared \
 		--enable-deterministic-archives \
 		--with-system-zlib \

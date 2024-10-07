@@ -1,11 +1,10 @@
-version="1.0.5"
+version="1.1.8"
 makedeps=["cmake", "python3"]
 desc="Library for Open Chinese Convert"
 source=[{url="https://github.com/BYVoid/OpenCC/archive/ver.$version.tar.gz"}]
 
 build='''
-	cd OpenCC-ver.$version
-	noname-cmake -DBUILD_DOCUMENTATION=OFF
-	make
-	make DESTDIR="$pkgdir" install
+	noname-cmake OpenCC-ver.$version -Bbuild -DBUILD_DOCUMENTATION=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

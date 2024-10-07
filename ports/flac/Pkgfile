@@ -16,7 +16,6 @@ build='''
 	--enable-ogg \
 	--enable-sse \
 	--with-pic
-
-	make
+	make CC=$CC CXX=$CXX
 	make DESTDIR="$pkgdir" install
 '''

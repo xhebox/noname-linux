@@ -1,5 +1,5 @@
 name="marisa"
-version="0.2.5"
+version="0.2.6"
 desc="Static and space-efficient trie data structure library"
 source=[{url="https://github.com/s-yata/marisa-trie/archive/v$version.tar.gz"}]
 

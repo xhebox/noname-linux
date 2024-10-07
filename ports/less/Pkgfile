@@ -1,12 +1,12 @@
-version="530"
-makedeps=["ncurses", "libpcre"]
-deps=["musl", "ncurses", "libpcre"]
+version="661"
+makedeps=["ncurses", "pcre2"]
+deps=["musl", "ncurses", "pcre2"]
 desc="File pager"
 source=[{url="http://www.greenwoodsoftware.com/less/less-$version.tar.gz"}]
 
 build='''
 	cd less-$version
-	./configure --prefix= --sysconfdir=/etc --with-regex=pcre
+	./configure --prefix= --sysconfdir=/etc --with-regex=pcre2
 	make
 	make DESTDIR="$pkgdir" install
 '''

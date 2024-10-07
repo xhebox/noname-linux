@@ -1,7 +1,7 @@
 version="1.81.0"
 ver="`echo $version | tr . _`"
-deps=["icu", "zlib", "bzip2", "zstd", "python3-numpy"]
-makedeps=["icu", "zlib", "bzip2", "zstd", "python3-numpy"]
+deps=["icu", "zlib", "bzip2", "zstd"]
+makedeps=["icu", "zlib", "bzip2", "zstd"]
 desc="Free peer-reviewed portable C++ source libraries."
 source=[
 	{url="https://boostorg.jfrog.io/artifactory/main/release/${version}/source/boost_${ver}.tar.gz"},
@@ -19,10 +19,10 @@ build='''
 	JOBS=`echo $MAKEFLAGS | awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}'`
 	test -n "$JOBS" && export JOBS="-j $JOBS"
 
-	./bootstrap.sh --with-toolset=gcc --with-icu --with-python="python3"
+	./bootstrap.sh --with-toolset=clang --with-icu
 	./b2 install threading=multi link=shared,static debug-symbols=off variant=release \
 	runtime-link=shared \
-	toolset=gcc \
+	toolset=clang \
 	cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
 	cxxflags="${CPPFLAGS} ${CXXFLAGS} -fPIC -O3" \
 	linkflags="${LDFLAGS}" \

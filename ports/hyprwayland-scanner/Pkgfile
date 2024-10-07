@@ -1,0 +1,13 @@
+version="0.4.2"
+desc="A Hyprland implementation of wayland-scanner, in and for C++"
+deps=["pugixml"]
+makedeps=["pugixml"]
+source=[
+	{url="https://github.com/hyprwm/hyprwayland-scanner/archive/refs/tags/v${version}.tar.gz"},
+]
+
+build='''
+	noname-cmake -Bbuild hyprwayland-scanner-$version
+	cmake --build ./build --target all
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

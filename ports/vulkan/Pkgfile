@@ -1,8 +1,7 @@
 version = "1.3.240"
 desc = "Vulkan all in one"
-deps = ["spirv-tools", "glslang", "wayland"]
+deps = ["glslang", "wayland"]
 makedeps = [
-  "spirv-tools",
   "glslang",
   "wayland",
   "cmake",

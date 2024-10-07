@@ -103,7 +103,14 @@ func opt_download(name string, opts map[harg]bool) error {
 					},
 				}
 
-				resp, e := httpclient.Get(source["url"])
+				req, e := http.NewRequest("GET", source["url"], nil)
+				if e != nil {
+					os.Remove(spath)
+					return errors.Wrapf(e, "can not send a http request [%v]", source["url"])
+				}
+				req.Header.Add("User-Agent", "curl/7.16.3")
+
+				resp, e := httpclient.Do(req)
 				if e != nil {
 					os.Remove(spath)
 					return errors.Wrapf(e, "can not send a http request [%v]", source["url"])

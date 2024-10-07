@@ -1,9 +1,9 @@
-version="2.74.0"
+version="2.82.1"
 desc="Low-level data structure handling, portability wrappers, and interfaces for runtime functionality"
-makedeps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
-deps=["libpcre", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
+makedeps=["pcre2", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
+deps=["pcre2", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
 source=[
-	{url="http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz"},
+	{url="https://download.gnome.org/sources/glib/${version%.*}/glib-$version.tar.xz"},
 	{url="gio.toml"},
 	{url="glib-schemas.toml"},
 	{url="gobject_init_on_demand.patch"},
@@ -21,7 +21,7 @@ ext='''
 '''
 
 build='''
-	noname-meson glib-$version build -D selinux=disabled -D man=false
+	noname-meson glib-$version build -D selinux=disabled -Dman=false -Ddtrace=disabled -Dsystemtap=disabled -Dsysprof=disabled
 	ninja -C build
 	DESTDIR="$pkgdir" meson install -C build
 	python -m compileall -d /share/glib-2.0/codegen "$pkgdir/share/glib-2.0/codegen"

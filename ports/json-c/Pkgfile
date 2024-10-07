@@ -1,13 +1,11 @@
-version="0.13.1"
+version="0.18"
 deps=["musl"]
 desc="JSON implementation in C"
 keepla=true
 source=[{url="https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz"}]
 
 build='''
-	cd json-c-$version
-	CFLAGS="$CFLAGS -Wno-error"
-	./configure --prefix=/ --disable-static
-	make
-	make DESTDIR="$pkgdir" install
+	noname-cmake json-c-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

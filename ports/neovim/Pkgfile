@@ -4,7 +4,6 @@ makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
 source=[
         {url="https://github.com/neovim/neovim/archive/refs/tags/v$version.tar.gz"},
-				{url="luajit.patch"},
 ]
 
 ext='''
@@ -14,7 +13,7 @@ ext='''
 build='''
 	cd neovim-${version}
 	sed -i 's/LUA_USE_APICHECK/& LIBS=-lunwind TARGET_LIBS=-lunwind/g' cmake.deps/cmake/BuildLuajit.cmake
-	sed -i 's/INTERFACE -fstack-protector/INTERFACE -lunwind -fstack-protector/g' src/nvim/CMakeLists.txt
+  sed -i 's/INTERFACE -fstack-protector/INTERFACE -lunwind -fstack-protector/g' src/nvim/CMakeLists.txt
 	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=ON -DUSE_BUNDLED_LIBUV=OFF
 	cmake --build .deps
 	noname-cmake -H. -Bbuild

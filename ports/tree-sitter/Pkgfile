@@ -1,4 +1,4 @@
-version="0.20.8"
+version="0.23.2"
 desc="An incremental parsing system for programming tools"
 deps=["rust"]
 makedeps=["rust"]

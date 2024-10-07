@@ -1,0 +1,13 @@
+version="0.2.3"
+desc="Hyprland utilities library used across the ecosystem"
+deps=["pixman"]
+makedeps=["pixman"]
+source=[
+	{url="https://github.com/hyprwm/hyprutils/archive/refs/tags/v${version}.tar.gz"},
+]
+
+build='''
+	noname-cmake -Bbuild hyprutils-$version
+	cmake --build ./build --target all
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

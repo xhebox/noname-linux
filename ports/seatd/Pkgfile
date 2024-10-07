@@ -1,4 +1,4 @@
-version="0.6.3"
+version="0.8.0"
 desc="easy seat management"
 makedeps=["systemd"]
 deps=["systemd"]
@@ -7,6 +7,7 @@ source=[
 ]
 
 build='''
+	export CFLAGS="$CFLAGS -Wno-error"
 	noname-meson seatd-$version build -Dlibseat-logind=systemd -Dman-pages=disabled
 	meson configure --no-pager build
 	meson compile -C build

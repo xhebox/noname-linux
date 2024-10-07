@@ -1,8 +1,8 @@
-version="0.37.1"
+version="0.44.0"
 paper_version="0.4.0"
 desc="A dynamic tiling Wayland compositor based on wlroots that doesn't sacrifice on its looks."
-deps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "hyprcursor", "hyprlang", "tomlplusplus", "vulkan", "wayland"]
-makedeps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "hyprcursor", "hyprlang", "tomlplusplus", "vulkan-headers", "wayland-protocols", "meson"]
+deps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "hyprcursor", "hyprutils", "hyprlang", "tomlplusplus", "aquamarine", "vulkan", "wayland"]
+makedeps=["libdrm", "libcap", "seatd", "libinput", "libxkbcommon", "pixman", "glslang", "cairo", "pango", "mesa", "systemd", "libdisplay-info", "hyprcursor", "hyprutils", "hyprlang", "tomlplusplus", "aquamarine", "vulkan-headers", "wayland-protocols", "meson"]
 source=[
 	{url="https://github.com/hyprwm/hyprpaper/archive/refs/tags/v$paper_version.tar.gz"},
 	{url="https://github.com/hyprwm/Hyprland/releases/download/v${version}/source-v${version}.tar.gz"},
@@ -14,21 +14,17 @@ build='''
 	ln -sf "$srcdir/hyprland-source" $_archive
 	cd $_archive
 	sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -DNO_XWAYLAND=true -D/}' Makefile
-	sed -i 's;--reconfigure;;g' CMakeLists.txt
 	patch -Np1 -i "$srcdir"/xwayland.patch
-	rm -rf subprojects/wlroots/build
-
+	rm -rf src/managers/XCursorManager*
 	make release NO_XWAYLAND=1 
 
-	install -Dm755 "subprojects/wlroots/build/libwlroots.so.13032" -t "${pkgdir}/lib"
+	install -Dm0755 -t "$pkgdir/bin/" build/Hyprland build/hyprctl/hyprctl build/hyprpm/hyprpm
 
-	mkdir -p "${pkgdir}/share/wayland-sessions"
 	mkdir -p "${pkgdir}/share/hyprland"
-	install -Dm755 build/Hyprland -t "${pkgdir}/bin"
-	install -Dm755 build/hyprctl/hyprctl -t "${pkgdir}/bin"
 	install -Dm644 assets/*.png -t "${pkgdir}/share/hyprland"
-	install -Dm644 example/hyprland.desktop -t "${pkgdir}/share/wayland-sessions"
 	install -Dm644 example/hyprland.conf -t "${pkgdir}/share/hyprland"
+	mkdir -p "${pkgdir}/share/wayland-sessions"
+	install -Dm644 example/hyprland.desktop -t "${pkgdir}/share/wayland-sessions"
 
 	cd "$srcdir/hyprpaper-$paper_version"
 	make all

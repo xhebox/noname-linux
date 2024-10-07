@@ -13,6 +13,7 @@ ports/*/*msi*
 ports/*/*iso*
 ports/*/*xz
 ports/*/*gz
+ports/*/*apk
 archived/*/*.tar*
 archived/*/*.tgz*
 archived/*/*.rar*

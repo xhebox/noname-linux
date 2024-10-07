@@ -1,4 +1,4 @@
-version="1.36.0"
+version="1.37.0"
 desc="Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink."
 makedeps=["expat", "libgmp", "libxml2", "openssl", "sqlite", "libssh2"]
 deps=["expat", "libgmp", "libxml2", "openssl", "sqlite", "libssh2"]

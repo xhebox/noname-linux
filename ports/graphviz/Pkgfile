@@ -1,18 +1,16 @@
 name="graphviz"
-version="2.44.1"
+version="12.1.2"
 desc='Graph visualization software'
 deps=["libtool", "python3", "pango", "cairo", "zlib", "expat", "gd"]
 makedeps=["git", "perl", "libtool", "python3", "pango", "cairo", "zlib", "expat", "gd"]
 source=[
 	{url="https://gitlab.com/graphviz/graphviz/-/archive/$version/graphviz-$version.tar.gz"},
-	{url="0001-clone-nameclash.patch"},
 	{url="graphviz.toml"},
 ]
 
 ext='''
 	cd graphviz-$version
 	find . -name Makefile.am -exec sed -i 's/pdf_DATA = .\+/pdf_DATA = /g' {} \;
-	patch -Nbp1 -i ../0001-clone-nameclash.patch
 '''
 
 build='''

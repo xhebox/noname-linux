@@ -1,0 +1,14 @@
+version="0.4.1"
+desc="a very light linux rendering backend library"
+deps=["libdrm", "seatd", "libinput", "libxkbcommon", "pixman", "mesa", "systemd", "libdisplay-info", "pugixml", "vulkan", "wayland"]
+makedeps=["libdrm", "seatd", "libinput", "libxkbcommon", "pixman", "mesa", "systemd", "libdisplay-info", "pugixml", "vulkan-headers", "wayland-protocols", "hyprwayland-scanner", "meson"]
+source=[
+	{url="https://github.com/hyprwm/aquamarine/archive/refs/tags/v$version.tar.gz"},
+	#{url="xwayland.patch"},
+]
+
+build='''
+	noname-cmake aquamarine-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

@@ -1,11 +1,11 @@
-version="11.7.1"
+version="14.3.0"
 desc='OpenGL and OpenGL ES shader front end and validator'
 makedeps=["spirv-tools"]
 deps=["spirv-tools"]
 source=[{url="https://github.com/KhronosGroup/glslang/archive/${version}.tar.gz"}]
 
 build='''
-	noname-cmake glslang-$version -Bbuild
+	noname-cmake glslang-$version -Bbuild -DALLOW_EXTERNAL_SPIRV_TOOLS=ON
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 	cd "${pkgdir}"/lib

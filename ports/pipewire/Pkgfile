@@ -1,7 +1,6 @@
 version = "1.0.5"
 desc = "library for layout and rendering of text"
 deps = [
-  "gcc",
   "alsa-lib",
   "readline",
   "systemd",
@@ -18,7 +17,6 @@ deps = [
   "ldac",
 ]
 makedeps = [
-  "gcc",
   "systemd",
   "dbus",
   "alsa-lib",
@@ -56,8 +54,8 @@ build = '''
 		-Dx11=disabled \
 		-Droc=disabled \
 		-Dx11-xfixes=disabled \
-    -Drlimits-install=false \
-    -Dsession-managers=[] \
+		-Drlimits-install=false \
+		-Dsession-managers=[] \
 		-Djack=disabled \
 		-Dlibcanberra=disabled \
 		-Decho-cancel-webrtc=disabled \

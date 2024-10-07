@@ -1,14 +1,22 @@
---- a/toolkit/moz.configure
-+++ b/toolkit/moz.configure
-@@ -1517,7 +1517,7 @@ with only_when("--enable-compile-environ
-         # packed relative relocations rather than elfhack.
-         if android_version:
-             return android_version >= 30
--        return have_arc4random
-+        return have_arc4random or True
+--- a/gfx/graphite2/src/sources.mozbuild	2024-08-20 03:21:44.000000000 +0800
++++ b/gfx/graphite2/src/sources.mozbuild	2024-08-20 03:21:44.000000000 +0800
+@@ -44,9 +44,6 @@
+     # tell graphite2 not to export symbols, we'll be linking it directly with
+     # thebes
+     ('GRAPHITE2_STATIC', True),
+-    # provide a custom header that overrides malloc() and friends,
+-    # to ensure safe OOM handling.
+-    ('GRAPHITE2_CUSTOM_HEADER', '"MozGrMalloc.h"'),
+ ]
  
-     @depends(
-         c_compiler,
-
-
-
+ # disable features we don't need in the graphite2 code, to reduce code size
+--- a/build/moz.configure/toolchain.configure	2024-08-20 03:21:41.000000000 +0800
++++ b/build/moz.configure/toolchain.configure	2024-08-20 03:21:41.000000000 +0800
+@@ -2353,6 +2353,7 @@
+ 
+ @depends(target, build_environment)
+ def visibility_flags(target, env):
++    return ("-fvisibility=hidden", "-fvisibility-inlines-hidden")
+     if target.os != "WINNT":
+         if target.kernel == "Darwin":
+             return ("-fvisibility=hidden", "-fvisibility-inlines-hidden")

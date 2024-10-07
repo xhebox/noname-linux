@@ -6,8 +6,8 @@ build='''
 	cd lzo-$version
 	./configure --prefix=/ --enable-shared
 	make
-	gcc $CFLAGS -fpic -Iinclude/lzo -o minilzo/minilzo.o -c minilzo/minilzo.c
-	gcc $LDFLAGS -shared -o libminilzo.so.0 -Wl,-soname,libminilzo.so.0 minilzo/minilzo.o	
+	$CC $CFLAGS -fpic -Iinclude/lzo -o minilzo/minilzo.o -c minilzo/minilzo.c
+	$CC $LDFLAGS -shared -o libminilzo.so.0 -Wl,-soname,libminilzo.so.0 minilzo/minilzo.o	
 	make DESTDIR="$pkgdir" install
 	install -m 755 libminilzo.so.0 ${pkgdir}/lib
 	install -p -m 644 minilzo/minilzo.h ${pkgdir}/include/lzo

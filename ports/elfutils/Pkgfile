@@ -1,16 +1,7 @@
-version="0.180"
+version="0.191"
 desc="Libraries/utilities to handle ELF objects (drop in replacement for libelf)"
 source=[
 	{url="https://fedorahosted.org/releases/e/l/elfutils/${version}/elfutils-${version}.tar.bz2"},
-	{url="fix-uninitialized.patch"},
-	{url="musl-asm_ptrace_h.patch"},
-	{url="musl-cdefs.patch"},
-	{url="musl-fts-obstack.patch"},
-	{url="musl-macros.patch"},
-	{url="musl-qsort_r.patch"},
-	{url="musl-strerror_r.patch"},
-	{url="musl-strndupa.patch"},
-	{url="error.h"},
 ]
 makedeps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
 deps=["zlib", "xz", "bzip2", "libuargp", "musl-obstack", "musl-fts"]
@@ -23,18 +14,17 @@ ext='''
 		*.patch) patch -Nbp0 -i ../$i ;;
 		esac
 	done
-	cp ../error.h lib
-	cp ../error.h src
-	sed -i 's:-Werror::' */Makefile.in
-	autoreconf -fi
 '''
 
 build='''
-	export CFLAGS="$CFLAGS -Wno-error=null-dereference"
+	export CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0"
+	export CXXFLAGS="$CXXFLAGS -Wno-error -Wl,-z,stack-size=2097152"
 	cd elfutils-$version
 	./configure --prefix= \
 	--disable-debuginfod \
+	--disable-demangler \
 	--program-prefix=eu-
-	make
+	find . -name Makefile -exec sed -i 's;-std=c++11;;g' {} \;
+	make EXEEXT=eee -j12
 	make DESTDIR="$pkgdir" install
 '''

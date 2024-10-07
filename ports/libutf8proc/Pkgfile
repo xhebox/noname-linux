@@ -1,0 +1,11 @@
+version="2.9.0"
+desc="C library for processing UTF-8 encoded Unicode strings"
+deps=["cmake"]
+makedeps=["cmake"]
+source=[{url="https://github.com/JuliaStrings/utf8proc/releases/download/v$version/utf8proc-$version.tar.gz"}]
+
+build='''
+	noname-cmake utf8proc-$version -Bbuild 
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

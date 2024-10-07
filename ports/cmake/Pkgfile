@@ -1,4 +1,4 @@
-version="3.26.1"
+version="3.30.3"
 makedeps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 deps=["ncurses", "expat", "curl", "zlib", "bzip2", "xz", "libarchive", "libuv"]
 desc="CMake is a cross-platform open-source make system"
@@ -7,7 +7,6 @@ source=[
 	{url="cmake-isystem.patch"},
 	{url="opengl.patch"},
 	{url="use-egl.patch"},
-	{url="ninja.patch"},
 ]
 
 ext='''
@@ -15,19 +14,19 @@ ext='''
 	patch -p1 -i ../cmake-isystem.patch
 	patch -p1 -i ../use-egl.patch
 	patch -p1 -i ../opengl.patch
-	patch -p1 -i ../ninja.patch
 '''
 
 build='''
 	cd cmake-$version
 	sed -i 's/\/usr//' Tests/RunCMake/GNUInstallDirs/*
-	./configure \
+	./bootstrap \
 		--prefix= \
 		--docdir=/share/doc/cmake-${version%.*} \
-		--system-libs \
 		--no-system-jsoncpp \
-		--no-system-librhash
-	make
+		--no-system-cppdap \
+		--no-system-librhash \
+		--system-libs
+	make CC=$CC CXX=$CXX
 	make DESTDIR="$pkgdir" install
 	cat >> "$pkgdir/bin/noname-cmake" << "EOF"
 #!/bin/sh

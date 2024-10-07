@@ -1,12 +1,10 @@
 name="yaml-cpp"
-version="0.6.3"
+version="0.8.0"
 desc="YAML parser and emitter in C++, written around the YAML 1.2 spec"
-deps=["boost"]
-makedeps=["boost"]
-source=[{url="https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-$version.tar.gz"}]
+source=[{url="https://github.com/jbeder/yaml-cpp/archive/refs/tags/$version.tar.gz"}]
 
 build='''
-	noname-cmake yaml-cpp-yaml-cpp-$version -Bbuild
+	noname-cmake yaml-cpp-$version -Bbuild -DYAML_CPP_BUILD_TESTS=OFF
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

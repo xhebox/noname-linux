@@ -1,0 +1,20 @@
+--- a/C/hashes/hash.h	2023-03-03 20:16:28.000000000 +0800
++++ b/C/hashes/hash.h	2023-03-03 20:16:28.000000000 +0800
+@@ -42,16 +42,7 @@
+ 
+ #include "../7zTypes.h"
+ 
+-#ifndef _UINT32_T_DECLARED
+-typedef UInt32 uint32_t;
+-#define _UINT32_T_DECLARED
+-#endif
+-
+-#ifndef _UINT64_T_DECLARED
+-typedef UInt64 uint64_t;
+-#define _UINT64_T_DECLARED
+-#endif
+-
++#include <stdint.h>
+ //#include <stdint.h>
+ 
+ #ifndef min

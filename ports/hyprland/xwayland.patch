@@ -1,10 +1,136 @@
---- hyprland-source/CMakeLists.txt	2023-09-23 07:18:10.000000000 +0800
-+++ hyprland-source/CMakeLists.txt	2023-09-23 07:18:10.000000000 +0800
-@@ -200,7 +200,6 @@
- target_link_libraries(Hyprland
-         ${CMAKE_SOURCE_DIR}/subprojects/wlroots/build/libwlroots.so.12032 # wlroots is provided by us
-         OpenGL::EGL
--        OpenGL::GL
-         Threads::Threads
-         ${CMAKE_SOURCE_DIR}/subprojects/udis86/build/libudis86/liblibudis86.a
- )
+--- a/CMakeLists.txt	2024-10-07 16:23:08.540186163 +0800
++++ b/CMakeLists.txt	2024-10-07 16:23:08.540186163 +0800
+@@ -116,7 +116,6 @@
+   pango
+   pangocairo
+   pixman-1
+-  xcursor
+   libdrm
+   libinput
+   gbm
+@@ -271,7 +271,7 @@
+                  PRIVATE ${CMAKE_SOURCE_DIR}/protocols/wayland.hpp)
+ endfunction()
+ 
+-target_link_libraries(Hyprland OpenGL::EGL OpenGL::GL Threads::Threads)
++target_link_libraries(Hyprland OpenGL::EGL Threads::Threads)
+ 
+ pkg_check_modules(hyprland_protocols_dep hyprland-protocols>=0.2.0)
+ if(hyprland_protocols_dep_FOUND)
+--- a/src/managers/CursorManager.cpp	2024-10-06 19:22:49.000000000 +0800
++++ b/src/managers/CursorManager.cpp	2024-10-06 19:22:49.000000000 +0800
+@@ -68,7 +68,7 @@
+ 
+ CCursorManager::CCursorManager() {
+     m_pHyprcursor              = std::make_unique<Hyprcursor::CHyprcursorManager>(m_szTheme.empty() ? nullptr : m_szTheme.c_str(), hcLogger);
+-    m_pXcursor                 = std::make_unique<CXCursorManager>();
++    //m_pXcursor                 = std::make_unique<CXCursorManager>();
+     static auto PUSEHYPRCURSOR = CConfigValue<Hyprlang::INT>("cursor:enable_hyprcursor");
+ 
+     if (m_pHyprcursor->valid() && *PUSEHYPRCURSOR) {
+@@ -102,7 +102,7 @@
+ 
+     // since we fallback to xcursor always load it on startup. otherwise we end up with a empty theme if hyprcursor is enabled in the config
+     // and then later is disabled.
+-    m_pXcursor->loadTheme(getenv("XCURSOR_THEME") ? getenv("XCURSOR_THEME") : "default", m_iSize, m_fCursorScale);
++    //m_pXcursor->loadTheme(getenv("XCURSOR_THEME") ? getenv("XCURSOR_THEME") : "default", m_iSize, m_fCursorScale);
+ 
+     m_pAnimationTimer = makeShared<CEventLoopTimer>(std::nullopt, cursorAnimTimer, this);
+     g_pEventLoopManager->addTimer(m_pAnimationTimer);
+@@ -160,6 +160,7 @@
+ 
+     static auto PUSEHYPRCURSOR = CConfigValue<Hyprlang::INT>("cursor:enable_hyprcursor");
+ 
++		/*
+     auto        setXCursor = [this](auto const& name) {
+         float scale = std::ceil(m_fCursorScale);
+ 
+@@ -177,6 +178,7 @@
+ 
+         setAnimationTimer(frame, delay);
+     };
++		*/
+ 
+     auto setHyprCursor = [this](auto const& name) {
+         m_sCurrentCursorShapeData = m_pHyprcursor->getShape(name.c_str(), m_sCurrentStyleInfo);
+@@ -222,13 +224,15 @@
+     };
+ 
+     if (!m_pHyprcursor->valid() || !*PUSEHYPRCURSOR || !setHyprCursor(name))
+-        setXCursor(name);
++			;
++        //setXCursor(name);
+ }
+ 
+ void CCursorManager::tickAnimatedCursor() {
+     if (!m_bOurBufferConnected)
+         return;
+ 
++		/*
+     if (!m_pHyprcursor->valid() && m_currentXcursor->images.size() > 1) {
+         m_iCurrentAnimationFrame++;
+ 
+@@ -255,6 +259,7 @@
+         setCursorBuffer(buf, hotspot, m_fCursorScale);
+         setAnimationTimer(m_iCurrentAnimationFrame, m_sCurrentCursorShapeData.images[m_iCurrentAnimationFrame].delay);
+     }
++		*/
+ }
+ 
+ SCursorImageData CCursorManager::dataFor(const std::string& name) {
+@@ -277,10 +282,12 @@
+         g_pXWayland->setCursor(cairo_image_surface_get_data(CURSOR.surface), cairo_image_surface_get_stride(CURSOR.surface), {CURSOR.size, CURSOR.size},
+                                {CURSOR.hotspotX, CURSOR.hotspotY});
+     else {
++			/*
+         auto  xcursor = m_pXcursor->getShape("left_ptr", m_iSize, 1);
+         auto& icon    = xcursor->images.front();
+ 
+         g_pXWayland->setCursor((uint8_t*)icon.pixels.data(), icon.size.x * 4, icon.size, icon.hotspot);
++				*/
+     }
+ }
+ 
+@@ -329,10 +336,11 @@
+         m_pHyprcursor = std::make_unique<Hyprcursor::CHyprcursorManager>(m_szTheme.empty() ? nullptr : m_szTheme.c_str(), options);
+         if (!m_pHyprcursor->valid()) {
+             Debug::log(ERR, "Hyprcursor failed loading theme \"{}\", falling back to XCursor.", m_szTheme);
+-            m_pXcursor->loadTheme(m_szTheme.empty() ? xcursor_theme : m_szTheme, m_iSize, m_fCursorScale);
++            //m_pXcursor->loadTheme(m_szTheme.empty() ? xcursor_theme : m_szTheme, m_iSize, m_fCursorScale);
+         }
+     } else
+-        m_pXcursor->loadTheme(m_szTheme.empty() ? xcursor_theme : m_szTheme, m_iSize, m_fCursorScale);
++				;
++        //m_pXcursor->loadTheme(m_szTheme.empty() ? xcursor_theme : m_szTheme, m_iSize, m_fCursorScale);
+ 
+     updateTheme();
+ 
+@@ -340,5 +348,5 @@
+ }
+ 
+ void CCursorManager::syncGsettings() {
+-    m_pXcursor->syncGsettings();
++    //m_pXcursor->syncGsettings();
+ }
+--- a/src/managers/CursorManager.hpp	2024-10-06 19:22:49.000000000 +0800
++++ b/src/managers/CursorManager.hpp	2024-10-06 19:22:49.000000000 +0800
+@@ -8,7 +8,7 @@
+ #include "../helpers/memory/Memory.hpp"
+ #include "../macros.hpp"
+ #include "managers/eventLoop/EventLoopManager.hpp"
+-#include "managers/XCursorManager.hpp"
++//#include "managers/XCursorManager.hpp"
+ #include <aquamarine/buffer/Buffer.hpp>
+ 
+ class CWLSurface;
+@@ -62,8 +62,8 @@
+     std::vector<SP<CCursorBuffer>>                  m_vCursorBuffers;
+ 
+     std::unique_ptr<Hyprcursor::CHyprcursorManager> m_pHyprcursor;
+-    std::unique_ptr<CXCursorManager>                m_pXcursor;
+-    SP<SXCursors>                                   m_currentXcursor;
++    //std::unique_ptr<CXCursorManager>                m_pXcursor;
++    //SP<SXCursors>                                   m_currentXcursor;
+ 
+     std::string                                     m_szTheme      = "";
+     int                                             m_iSize        = 0;

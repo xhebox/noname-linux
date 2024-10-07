@@ -1,4 +1,4 @@
-version="3.3.15"
+version="4.0.4"
 makedeps=["ncurses", "systemd"]
 deps=["ncurses", "systemd"]
 desc="Utilities for monitoring your system and its processes"
@@ -15,7 +15,7 @@ ext='''
 
 build='''
 	cd procps-ng-$version
-	sed 's:<ncursesw/:<:g' -i watch.c
+	sed 's:<ncursesw/:<:g' -i src/watch.c
 	./configure --prefix= \
 		--sbindir=/bin \
 		--libexecdir=/lib \

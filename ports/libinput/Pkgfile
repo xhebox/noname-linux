@@ -1,4 +1,4 @@
-version="1.24.0"
+version="1.26.2"
 makedeps=["mtdev", "libevdev", "systemd"]
 deps=["mtdev", "libevdev", "systemd"]
 desc="Libinput translates evdev events into Wayland events"

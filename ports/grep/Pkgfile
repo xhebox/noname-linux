@@ -1,7 +1,7 @@
-version="3.1"
+version="3.11"
 desc="The GNU grep utility"
 makdeps=["texinfo"]
-deps=["musl", "libpcre"]
+deps=["musl", "pcre2"]
 source=[{url="http://ftp.gnu.org/pub/gnu/grep/grep-$version.tar.xz"}]
 
 build='''

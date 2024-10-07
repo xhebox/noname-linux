@@ -1,9 +1,9 @@
-version="1.22.3"
+version="1.23.0"
 makedeps=["perl"]
 deps=["perl", "musl"]
 desc="GNU troff text-formatting system"
 source=[
-	{url="http://mirrors.ustc.edu.cn/gnu/groff/groff-$version.tar.gz"},
+	{url="https://mirrors.ustc.edu.cn/gnu/groff/groff-$version.tar.gz"},
 	{url="site.tmac"}
 ]
 
