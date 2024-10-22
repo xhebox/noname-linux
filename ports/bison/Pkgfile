@@ -1,7 +1,6 @@
-version="3.2"
+version="3.8.2"
 desc="The GNU Project parser generator"
 source=[{url="https://mirrors.ustc.edu.cn/gnu/bison/bison-$version.tar.xz"}]
-makedeps=["help2man"]
 deps=["m4", "dash", "musl"]
 
 build='''

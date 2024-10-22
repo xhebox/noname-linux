@@ -1,0 +1,14 @@
+version="0.8.0"
+desc="stacking wayland compositor with look and feel from openbox"
+deps=["libpng", "librsvg", "pango", "seatd", "libxml2", "libinput", "wlroots", "wayland", "vulkan"]
+makedeps=["libpng", "librsvg", "pango", "seatd", "libxml2", "libinput", "wlroots", "wayland-protocols", "vulkan-headers", "meson"]
+source=[
+	{url="https://github.com/labwc/labwc/archive/${version}.tar.gz"},
+]
+
+build='''
+	noname-meson build labwc-$version -Dman-pages=disabled -Dxwayland=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -1,0 +1,9 @@
+--- a/platform/linuxbsd/detect.py	2024-08-15 07:00:16.000000000 +0800
++++ b/platform/linuxbsd/detect.py	2024-08-15 07:00:16.000000000 +0800
+@@ -511,6 +511,3 @@
+         env.Append(LINKFLAGS=["-static-libgcc", "-static-libstdc++"])
+         if env["use_llvm"] and platform.system() != "FreeBSD":
+             env["LINKCOM"] = env["LINKCOM"] + " -l:libatomic.a"
+-    else:
+-        if env["use_llvm"] and platform.system() != "FreeBSD":
+-            env.Append(LIBS=["atomic"])

@@ -1,0 +1,15 @@
+version="1.11.0"
+desc="wayland terminal"
+makedeps=["wayland-protocols", "pipewire", "pixman", "fcft", "systemd", "libyaml", "tllist"]
+deps=["wayland", "pipewire", "pixman", "fcft", "systemd", "libyaml"]
+source=[
+	{url="https://codeberg.org/dnkl/yambar/releases/download/$version/yambar-$version.tar.gz"},
+]
+
+build='''
+	sed -i "s;subdir('doc');;g" yambar-$version/meson.build
+	noname-meson yambar-$version build -Dbackend-x11=disabled -Dplugin-xkb=disabled -Dwerror=false
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

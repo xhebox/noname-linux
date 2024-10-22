@@ -1,0 +1,14 @@
+version="0.4.1"
+desc="Utility to manage outputs of a Wayland compositor"
+makedeps=["wayland-protocols", "meson"]
+deps=["wayland"]
+source=[
+	{url="https://git.sr.ht/~emersion/wlr-randr/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-meson wlr-randr-v$version build --wrap-mode=default
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

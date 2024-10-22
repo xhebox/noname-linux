@@ -8,8 +8,8 @@ source=[
 ]
 
 build='''
-	noname-meson gdk-pixbuf-$version build -Dbuiltin_loaders=all -Dx11=false -Drelocatable=true -Dinstalled_tests=false
+	noname-meson gdk-pixbuf-$version build -Dbuiltin_loaders=all -Drelocatable=true -Dinstalled_tests=false
 	ninja -C build
 	DESTDIR="$pkgdir" ninja -C build install
-	install -Dm644 ../gdk-pixbuf-loaders.toml "$pkgdir/${HOOKS#$ROOT}"/gdk-pixbuf-loaders.toml
+	install -Dm644 "$srcdir"/gdk-pixbuf-loaders.toml "$pkgdir/${HOOKS#$ROOT}"/gdk-pixbuf-loaders.toml
 '''

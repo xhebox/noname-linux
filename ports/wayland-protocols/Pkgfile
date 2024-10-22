@@ -1,4 +1,4 @@
-version="1.36"
+version="1.38"
 desc='Specifications of extended Wayland protocols'
 makedeps=["wayland"]
 source=[{url="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/$version/downloads/wayland-protocols-$version.tar.xz"}]

@@ -1,0 +1,9 @@
+version="4.3.3"
+desc="Collection of high-performance ray tracing kernels"
+source=[{url="https://github.com/embree/embree/archive/v${version}/embree-${version}.tar.gz"}]
+
+build='''
+	noname-cmake embree-$version -Bbuild -DEMBREE_TASKING_SYSTEM=INTERNAL -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX512SKX" -DEMBREE_BACKFACE_CULLING=OFF
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

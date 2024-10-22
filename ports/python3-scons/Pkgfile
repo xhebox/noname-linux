@@ -1,0 +1,15 @@
+version="4.8.1"
+desc="Extensible python-based build utility"
+deps=["python3"]
+makedeps=["python3"]
+source=[{url="https://downloads.sourceforge.net/project/scons/scons/$version/SCons-$version.tar.gz"}]
+
+build='''
+    cd scons-$version
+		python -m venv venv
+		. venv/bin/activate
+		pip install build installer wheel
+    python -m build -wn
+    python -m installer --prefix= -d "$pkgdir" dist/*.whl
+		find "$pkgdir"/bin -type f -exec sed -i "s;$PWD/venv/bin/python;/bin/python;g" {} \;
+'''

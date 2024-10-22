@@ -1,12 +1,13 @@
-version="4.0.10"
+version="4.7.0"
 desc="Library for manipulation of TIFF images"
-makedeps=["libjpeg-turbo", "zlib", "xz"]
-deps=["libjpeg-turbo", "zlib", "xz"]
+makedeps=["libjpeg-turbo", "zlib", "xz", "zstd"]
+deps=["libjpeg-turbo", "zlib", "xz", "zstd"]
 source=[{url="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"}]
 
 build='''
 	cd tiff-$version
-	./configure --prefix=
+	./configure --prefix= --enable-ld-version-script --disable-static
+	sed -i 's;-lwebp;& -lsharpyuv;g' configure
 	make
 	make DESTDIR="${pkgdir}" install
 '''

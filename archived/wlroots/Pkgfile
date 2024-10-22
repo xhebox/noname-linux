@@ -1,4 +1,4 @@
-version="0.15.1"
+version="0.18.1"
 desc='Modular Wayland compositor library'
 deps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "wayland"]
 makedeps=["libinput", "libxkbcommon", "pixman", "systemd", "libcap", "libdrm", "vulkan", "seatd", "vulkan-headers", "wayland-protocols"]
@@ -11,11 +11,13 @@ ext='''
 '''
 
 build='''
+	export CFLAGS="$CFLAGS -std=c17"
 	noname-meson "wlroots-$version" build \
 				-Dxwayland=disabled \
 				-Drenderers="gles2,vulkan" \
-				-Dbackends="drm,libinput"
-	meson configure build
+				-Dbackends="drm,libinput" \
+				-Dlibliftoff=disabled
+	meson configure build --no-pager
 	meson compile -C build
 	DESTDIR="$pkgdir" meson install -C build
 '''

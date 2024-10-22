@@ -1,11 +1,12 @@
 version="7.0.2"
-makedeps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2", "nasm"]
-deps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "libsoxr", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "vid.stab", "openjpeg2"]
+makedeps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2", "nasm"]
+deps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2"]
 desc="Complete solution to record, convert and stream audio and video."
 source=[{url="https://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
 build='''
 	cd ffmpeg-$version
+	export CFLAGS="$CFLAGS -Wno-incompatible-function-pointer-types"
 	sed -i configure -e "s;_cflags_speed='-O3';_cflags_speed='-O2';"
 	./configure \
 		--prefix=/ \
@@ -33,15 +34,17 @@ build='''
 		--enable-libopencore_amrnb \
 		--enable-libopencore_amrwb \
 		--enable-libopenjpeg \
+	  --cc=$CC \
+	  --cxx=$CXX \
 		--enable-libopus \
-		--enable-libsoxr \
+		--disable-libsoxr \
 		--enable-libspeex \
 		--disable-libssh \
 		--disable-rpath \
 		--disable-ffplay \
 		--enable-libtheora \
 		--enable-libv4l2 \
-		--enable-libvidstab \
+		--disable-libvidstab \
 		--enable-libvorbis \
 		--enable-libvpx \
 		--enable-libwebp \

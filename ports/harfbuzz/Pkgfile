@@ -1,7 +1,7 @@
-version = "3.2.0"
+version = "10.0.1"
 desc = "An OpenType text shaping engine"
-deps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2"]
-makedeps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "bzip2", "gobject-introspection"]
+deps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "graphite", "bzip2"]
+makedeps = ["freetype", "glib", "cairo", "icu", "zlib", "libpng", "graphite", "bzip2", "gobject-introspection"]
 source = [
   { url = "https://github.com/harfbuzz/harfbuzz/releases/download/$version/harfbuzz-$version.tar.xz" },
 ]

@@ -1,17 +1,11 @@
-version="1.0.0"
+version="1.4.0"
 makedeps=["libjpeg-turbo", "libpng", "libtiff", "giflib"]
 deps=["libjpeg-turbo", "libpng", "libtiff", "giflib"]
 desc="A library for a new image format comparable to JPEG."
-source=[{url="http://downloads.webmproject.org/releases/webp/${name}-${version}.tar.gz"}]
+source=[{url="http://downloads.webmproject.org/releases/webp/libwebp-${version}.tar.gz"}]
 
 build='''
-	cd libwebp-$version
-	./configure --prefix= \
-	--disable-static --enable-libwebpmux \
-	--enable-libwebpdemux --enable-libwebpdecoder \
-	--enable-libwebpextras \
-	--enable-swap-16bit-csp \
-	--enable-experimental
-	make
-	make DESTDIR="$pkgdir" install
+	noname-cmake libwebp-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

@@ -10,20 +10,11 @@
      endif()
 --- a/profiler/src/BackendWayland.cpp	2024-07-17 00:38:15.000000000 +0800
 +++ b/profiler/src/BackendWayland.cpp	2024-07-17 00:38:15.000000000 +0800
-@@ -770,6 +771,8 @@
+@@ -770,6 +771,7 @@
          s_fracSurf = wp_fractional_scale_manager_v1_get_fractional_scale( s_fractionalScale, s_surf );
          wp_fractional_scale_v1_add_listener( s_fracSurf, &fractionalListener, nullptr );
          s_viewport = wp_viewporter_get_viewport( s_viewporter, s_surf );
-+				wp_viewport_set_source( s_viewport, 0, 0, -1, -1);
-+				//wl_fixed_from_double( s_width * s_maxScale / 120. ), wl_fixed_from_double( s_height * s_maxScale / 120. ) );
++       wp_viewport_set_source( s_viewport, 0, 0, wl_fixed_from_double( s_width * s_maxScale / 120. ), wl_fixed_from_double( s_height * s_maxScale / 120. ) );
      }
  
      SetupCursor();
-@@ -918,7 +921,6 @@
-         wl_egl_window_resize( s_eglWin, s_width * s_maxScale / 120, s_height * s_maxScale / 120, 0, 0 );
-         if( s_fracSurf )
-         {
--            wp_viewport_set_source( s_viewport, 0, 0, wl_fixed_from_double( s_width * s_maxScale / 120. ), wl_fixed_from_double( s_height * s_maxScale / 120. ) );
-             wp_viewport_set_destination( s_viewport, s_width, s_height );
-         }
-     }

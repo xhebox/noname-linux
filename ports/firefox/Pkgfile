@@ -45,7 +45,7 @@ ac_add_options --host=$TARGET
 ac_add_options --target=$TARGET
 export CC='clang --target=x86_64-pc-linux-musl'
 export CXX='clang++ --target=x86_64-pc-linux-musl'
-export LDFLAGS='-Wl,-z,stack-size=2097152 -Wl,-rpath=/lib/firefox'
+export LDFLAGS='-Wl,-z,stack-size=2097152 -Wl,-rpath=/lib/firefox -Wl,--no-keep-memory'
 export AR=llvm-ar
 export NM=llvm-nm
 export RANLIB=llvm-ranlib
@@ -85,13 +85,13 @@ END
 '''
 
 build='''
+	export MOZBUILD_STATE_PATH="$srcdir/.mozbuild"
 	export CARGO_HOME="$srcdir/.cargo"
 	export PATH="$srcdir/.cargo/bin:$PATH"
 	cargo install --version 0.27.0 cbindgen
 
 	cd firefox-${version%b*}
 	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
-	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
 
 	ulimit -n 4096
 

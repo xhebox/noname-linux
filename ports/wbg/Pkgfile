@@ -1,0 +1,15 @@
+version="1.2.0"
+desc="Super simple wallpaper application for Wayland compositors implementing the layer-shell protocol"
+deps=["pixman", "libpng", "libjpeg-turbo", "libwebp", "wayland"]
+makedeps=["pixman", "libpng", "libjpeg-turbo", "libwebp", "wayland-protocols", "tllist"]
+source=[
+	{url="https://codeberg.org/dnkl/wbg/releases/download/$version/wbg-$version.tar.gz"},
+]
+
+build='''
+	export CFLAGS="$CFLAGS -Wno-error"
+	noname-meson wbg-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -1,0 +1,11 @@
+--- a/src/tools/run-make-support/src/external_deps/cc.rs
++++ b/src/tools/run-make-support/src/external_deps/cc.rs
+@@ -185,7 +185,7 @@
+         match &uname()[..] {
+             "Darwin" => vec!["-lc++"],
+             "FreeBSD" | "SunOS" | "OpenBSD" => vec![],
+-            _ => vec!["-lstdc++"],
++            _ => vec!["-lc++"],
+         }
+     }
+ }

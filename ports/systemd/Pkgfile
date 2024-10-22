@@ -32,7 +32,6 @@ source=[
 	{url="0022-avoid-missing-LOCK_EX-declaration.patch"},
 
 	{url="musl.patch"},
-	{url="vt_perm.patch"},
 
 	{url="initcpio-hook-udev"},
 	{url="initcpio-install-systemd"},

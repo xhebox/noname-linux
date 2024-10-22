@@ -1,0 +1,17 @@
+--- a/src/CMakeLists.txt	2020-04-01 10:53:13.000000000 +0800
++++ b/src/CMakeLists.txt	2020-04-01 10:53:13.000000000 +0800
+@@ -123,12 +123,12 @@
+         if (GRAPHITE2_SANITIZERS)
+             target_link_libraries(graphite2 c gcc_s)
+         else ()
+-            target_link_libraries(graphite2 c gcc)
++            target_link_libraries(graphite2 c unwind)
+         endif ()
+     endif()
+     include(Graphite)
+     if (BUILD_SHARED_LIBS)
+-        nolib_test(stdc++ $<TARGET_SONAME_FILE:graphite2>)
++        nolib_test(c++ $<TARGET_SONAME_FILE:graphite2>)
+     endif ()
+     set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "")
+     CREATE_LIBTOOL_FILE(graphite2 "/lib${LIB_SUFFIX}")

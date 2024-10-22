@@ -1,0 +1,14 @@
+version="1.7.0"
+desc="dynamic output management"
+makedeps=["libscfg", "wayland-protocols", "meson"]
+deps=["libscfg", "wayland"]
+source=[
+	{url="https://git.sr.ht/~emersion/kanshi/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-meson kanshi-v$version build --wrap-mode=default -Dman-pages=disabled -Dipc=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

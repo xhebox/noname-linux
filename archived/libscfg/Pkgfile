@@ -1,0 +1,13 @@
+version="0.1.1"
+desc="dynamic config"
+makedeps=["meson"]
+source=[
+	{url="https://git.sr.ht/~emersion/libscfg/archive/v$version.tar.gz"},
+]
+
+build='''
+	noname-meson libscfg-v$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

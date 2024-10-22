@@ -1,4 +1,4 @@
-version="1.8.0"
+version="2.3.0"
 desc="A system for managing library compile/link flags"
 deps=["musl", "dash"]
 source=[

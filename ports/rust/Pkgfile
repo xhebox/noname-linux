@@ -1,8 +1,8 @@
 name = "rust"
 nostrip = true
 rustup_version = "1.26.0"
-version = "1.80.0"
-_rust_dist_version = "1.79.0"
+version = "1.81.0"
+_rust_dist_version = "1.81.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -30,13 +30,14 @@ deps = [
 source = [
   { url = "https://static.rust-lang.org/dist/rust-${_rust_dist_version}-x86_64-unknown-linux-musl.tar.xz" },
   { url = "https://static.rust-lang.org/dist/rustc-${version}-src.tar.gz" },
-  { url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
+  #{ url = "https://github.com/rust-lang/rustup.rs/archive/${rustup_version}.tar.gz" },
   { url = "need-ssp_nonshared.patch" },
   { url = "need-rpath.patch" },
   { url = "musl-fix-linux_musl_base.patch" },
   { url = "no-export-ld-library-path.patch" },
   { url = "system-wasm-ld.patch" },
   { url = "bash.patch" },
+  { url = "noname.patch" },
   { url = "libexecdir.patch" },
 ]
 
@@ -58,9 +59,6 @@ ext = '''
 		*.patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
-	#for i in libc typenum cc target-lexicon; do
-	#	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$i/.cargo-checksum.json
-	#done
 
 	cat <<- EOF > config.toml
 change-id = 116881
@@ -68,6 +66,7 @@ change-id = 116881
 [target.$TARGET]
 crt-static = false
 llvm-config = "$ROOT/bin/llvm-config"
+llvm-libunwind = "system"
 [target.wasm32-unknown-unknown]
 sanitizers = false
 profiler = false
@@ -117,6 +116,7 @@ EOF
 '''
 
 build = '''
+	ln -srf /lib/libgcc_s.so.1 /lib/libgcc_s.so
 	unset CFLAGS CXXFLAGS LDFLAGS
 	#cd "$srcdir/rustup-$rustup_version"
 	#cargo build --release --features no-self-update --bin rustup-init
@@ -133,4 +133,5 @@ build = '''
 	rm -rf "$pkgdir"/lib/rustlib/manifest-*
 	rm -rf "$pkgdir/lib/rustlib/install.log"
 	rm -rf "$pkgdir/lib/rustlib/rust-installer-version"
+	rm -rf /lib/libgcc_s.so
 '''

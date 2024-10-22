@@ -1,4 +1,4 @@
-version="3.102"
+version="3.104"
 _version="`echo $version | tr . _`"
 desc="Mozilla Network Security Services (NSS)"
 makedeps=["nspr", "sqlite", "zlib", "perl", "python3"]

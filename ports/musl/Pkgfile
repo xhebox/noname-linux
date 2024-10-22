@@ -8,6 +8,7 @@ source = [
   { url = "https://musl.libc.org/releases/musl-$version.tar.gz" },
   { url = "https://git.adelielinux.org/adelie/gcompat/-/archive/current/gcompat-1.1.0.tar.gz" },
 	{ url = "https://mirrors.ustc.edu.cn/alpine/latest-stable/main/x86_64/libgcc-$libgcc_version.apk"},
+	{ url = "https://mirrors.ustc.edu.cn/alpine/latest-stable/main/x86_64/libstdc++-$libgcc_version.apk"},
   { url = "__stack_chk_fail_local.c" },
   { url = "getconf.c" },
   { url = "iconv.c" },
@@ -23,6 +24,7 @@ ext = '''
 	cd ..
 
 	tar xpf libgcc-*
+	tar xpf libstdc++-*
 
 	cd musl-$version
 	for i in $source;do
@@ -104,4 +106,5 @@ EOF
 	done
 
 	cp "$srcdir"/usr/lib/libgcc*so* "$pkgdir"/lib/
+	cp "$srcdir"/usr/lib/libstdc++*so* "$pkgdir"/lib/
 '''
