@@ -1,0 +1,996 @@
+diff --git a/doc/meson.build b/doc/meson.build
+index e5728ab..90a83ec 100644
+--- a/doc/meson.build
++++ b/doc/meson.build
+@@ -44,6 +44,12 @@ endif
+ if plugin_network_enabled
+   plugin_pages += ['yambar-modules-network.5.scd']
+ endif
++if plugin_niri_language_enabled
++  plugin_pages += ['yambar-modules-niri-language.5.scd']
++endif
++if plugin_niri_workspaces_enabled
++  plugin_pages += ['yambar-modules-niri-workspaces.5.scd']
++endif
+ if plugin_pipewire_enabled
+   plugin_pages += ['yambar-modules-pipewire.5.scd']
+ endif
+diff --git a/doc/yambar-modules-niri-language.5.scd b/doc/yambar-modules-niri-language.5.scd
+new file mode 100644
+index 0000000..befa41e
+--- /dev/null
++++ b/doc/yambar-modules-niri-language.5.scd
+@@ -0,0 +1,34 @@
++yambar-modules-niri-language(5)
++
++# NAME
++niri-language - This module provides information about niri's currently
++selected language.
++
++# TAGS
++
++[[ *Name*
++:[ *Type*
++:< *Description*
++|  language
++:  string
++:  The currently selected language.
++
++# CONFIGURATION
++
++No additional attributes supported, only the generic ones (see
++*GENERIC CONFIGURATION* in *yambar-modules*(5))
++
++# EXAMPLES
++
++```
++bar:
++  left:
++    - niri-language:
++        content:
++		  string: {text: "{language}"}
++```
++
++# SEE ALSO
++
++*yambar-modules*(5), *yambar-particles*(5), *yambar-tags*(5), *yambar-decorations*(5)
++
+diff --git a/doc/yambar-modules-niri-workspaces.5.scd b/doc/yambar-modules-niri-workspaces.5.scd
+new file mode 100644
+index 0000000..812bade
+--- /dev/null
++++ b/doc/yambar-modules-niri-workspaces.5.scd
+@@ -0,0 +1,60 @@
++yambar-modules-niri-workspaces(5)
++
++# NAME
++niri-workspaces - This module provides information about niri workspaces.
++
++# DESCRIPTION
++
++This module provides a map of each workspace present in niri.
++
++Each workspace has its _id_, _name_, and its status (_focused_,
++_active_, _empty_). The workspaces are sorted by their ids.
++
++This module will *only* track the monitor where yambar was launched.
++If you have a multi monitor setup, please launch yambar on each
++individual monitor to track its workspaces.
++
++# TAGS
++
++[[ *Name*
++:[ *Type*
++:< *Description*
++|  id
++:  int
++:  The workspace id.
++|  name
++:  string
++:  The name of the workspace.
++|  active
++:  bool
++:  True if the workspace is currently visible on the current output.
++|  focused
++:  bool
++:  True if the workspace is currently focused.
++|  empty
++:  bool
++:  True if the workspace contains no window.
++
++# CONFIGURATION
++
++No additional attributes supported, only the generic ones (see
++*GENERIC CONFIGURATION* in *yambar-modules*(5))
++
++# EXAMPLES
++
++```
++bar:
++  left:
++    - niri-workspaces:
++        content:
++		  map:
++		    default: {string: {text: "| {id}"}}
++			conditions:
++			  active: {string: {text: "-> {id}"}}
++			  ~empty: {string: {text: "@ {id}"}}
++```
++
++# SEE ALSO
++
++*yambar-modules*(5), *yambar-particles*(5), *yambar-tags*(5), *yambar-decorations*(5)
++
+diff --git a/doc/yambar-modules.5.scd b/doc/yambar-modules.5.scd
+index 765d06f..1ec4871 100644
+--- a/doc/yambar-modules.5.scd
++++ b/doc/yambar-modules.5.scd
+@@ -174,6 +174,10 @@ Available modules have their own pages:
+ 
+ *yambar-modules-sway*(5)
+ 
++*yambar-modules-niri-language*(5)
++
++*yambar-modules-niri-workspaces*(5)
++
+ *yambar-modules-xkb*(5)
+ 
+ *yambar-modules-xwindow*(5)
+diff --git a/meson.build b/meson.build
+index d9b1364..81af577 100644
+--- a/meson.build
++++ b/meson.build
+@@ -189,6 +189,8 @@ summary(
+     'River': plugin_river_enabled,
+     'Script': plugin_script_enabled,
+     'Sway XKB keyboard': plugin_sway_xkb_enabled,
++    'Niri language': plugin_niri_language_enabled,
++    'Niri workspaces': plugin_niri_workspaces_enabled,
+     'XKB keyboard (for X11)': plugin_xkb_enabled,
+     'XWindow (window tracking for X11)': plugin_xwindow_enabled,
+   },
+diff --git a/meson_options.txt b/meson_options.txt
+index a9aac05..9fd0dd5 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -44,6 +44,10 @@ option('plugin-script', type: 'feature', value: 'auto',
+        description: 'Script support')
+ option('plugin-sway-xkb', type: 'feature', value: 'auto',
+        description: 'keyboard support for Sway')
++option('plugin-niri-language', type: 'feature', value: 'auto',
++       description: 'language support for Niri')
++option('plugin-niri-workspaces', type: 'feature', value: 'auto',
++       description: 'workspaces support for Niri')
+ option('plugin-xkb', type: 'feature', value: 'auto',
+        description: 'keyboard support for X11')
+ option('plugin-xwindow', type: 'feature', value: 'auto',
+diff --git a/modules/meson.build b/modules/meson.build
+index e2ed56e..b54e9d7 100644
+--- a/modules/meson.build
++++ b/modules/meson.build
+@@ -45,6 +45,12 @@ plugin_script_enabled = get_option('plugin-script').allowed()
+ json_sway_xkb = dependency('json-c', required: get_option('plugin-sway-xkb'))
+ plugin_sway_xkb_enabled = json_sway_xkb.found()
+ 
++json_niri_language = dependency('json-c', required: get_option('plugin-niri-language'))
++plugin_niri_language_enabled = json_niri_language.found()
++
++json_niri_workspaces = dependency('json-c', required: get_option('plugin-niri-workspaces'))
++plugin_niri_workspaces_enabled = json_niri_workspaces.found()
++
+ xcb_xkb = dependency('xcb-xkb', required: get_option('plugin-xkb'))
+ plugin_xkb_enabled = backend_x11 and xcb_xkb.found()
+ 
+@@ -121,6 +127,14 @@ if plugin_sway_xkb_enabled
+   mod_data += {'sway-xkb': [['i3-common.c', 'i3-common.h'], [dynlist, json_sway_xkb]]}
+ endif
+ 
++if plugin_niri_language_enabled
++  mod_data += {'niri-language': [['niri-common.c', 'niri-common.h'], [dynlist, json_niri_language]]}
++endif
++
++if plugin_niri_workspaces_enabled
++  mod_data += {'niri-workspaces': [['niri-common.c', 'niri-common.h'], [dynlist, json_niri_workspaces]]}
++endif
++
+ if plugin_xkb_enabled
+   mod_data += {'xkb': [[], [xcb_stuff, xcb_xkb]]}
+ endif
+diff --git a/modules/niri-common.c b/modules/niri-common.c
+new file mode 100644
+index 0000000..759d213
+--- /dev/null
++++ b/modules/niri-common.c
+@@ -0,0 +1,374 @@
++#include <errno.h>
++#include <json-c/json.h>
++#include <poll.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <sys/eventfd.h>
++#include <sys/socket.h>
++#include <sys/types.h>
++#include <sys/un.h>
++#include <threads.h>
++#include <unistd.h>
++
++#include "../log.h"
++#include "niri-common.h"
++
++#define LOG_MODULE "niri:common"
++#define LOG_ENABLE_DBG 0
++
++static struct niri_socket instance;
++
++void
++workspace_free(struct niri_workspace *workspace)
++{
++    free(workspace->name);
++    free(workspace);
++}
++
++static void
++parser(char *response)
++{
++    enum json_tokener_error error = json_tokener_success;
++    struct json_object *json = json_tokener_parse_verbose(response, &error);
++    if (error != json_tokener_success) {
++        LOG_WARN("failed to parse niri socket's response");
++        return;
++    }
++
++    enum niri_event events = 0;
++    struct json_object_iterator it = json_object_iter_begin(json);
++    struct json_object_iterator end = json_object_iter_end(json);
++    while (!json_object_iter_equal(&it, &end)) {
++        char const *key = json_object_iter_peek_name(&it);
++
++        // "WorkspacesChanged": {
++        //   "workspaces": [
++        //     {
++        //       "id": 3,
++        //       "idx": 1,
++        //       "name": null,
++        //       "output": "DP-4",
++        //       "is_active": true,
++        //       "is_focused": true,
++        //       "active_window_id": 24
++        //     },
++        //     ...
++        //   ]
++        // }
++        if (strcmp(key, "WorkspacesChanged") == 0) {
++            mtx_lock(&instance.mtx);
++            tll_foreach(instance.workspaces, it) { tll_remove_and_free(instance.workspaces, it, workspace_free); }
++            mtx_unlock(&instance.mtx);
++
++            json_object *obj = json_object_iter_peek_value(&it);
++            json_object *workspaces = json_object_object_get(obj, "workspaces");
++
++            size_t length = json_object_array_length(workspaces);
++            for (size_t i = 0; i < length; ++i) {
++                json_object *ws_obj = json_object_array_get_idx(workspaces, i);
++
++                // only add workspaces on the current yambar's monitor
++                struct json_object *output = json_object_object_get(ws_obj, "output");
++                if (strcmp(instance.monitor, json_object_get_string(output)) != 0)
++                    continue;
++
++                struct niri_workspace *ws = calloc(1, sizeof(*ws));
++                ws->idx = json_object_get_int(json_object_object_get(ws_obj, "idx"));
++                ws->id = json_object_get_int(json_object_object_get(ws_obj, "id"));
++                ws->active = json_object_get_boolean(json_object_object_get(ws_obj, "is_active"));
++                ws->focused = json_object_get_boolean(json_object_object_get(ws_obj, "is_focused"));
++                ws->empty = json_object_get_int(json_object_object_get(ws_obj, "active_window_id")) == 0;
++
++                char const *name = json_object_get_string(json_object_object_get(ws_obj, "name"));
++                if (name)
++                    ws->name = strdup(name);
++
++                mtx_lock(&instance.mtx);
++                bool inserted = false;
++                tll_foreach(instance.workspaces, it)
++                {
++                    if (it->item->idx > ws->idx) {
++                        tll_insert_before(instance.workspaces, it, ws);
++                        inserted = true;
++                        break;
++                    }
++                }
++                if (!inserted)
++                    tll_push_back(instance.workspaces, ws);
++                mtx_unlock(&instance.mtx);
++
++                events |= workspaces_changed;
++            }
++        }
++
++        // "WorkspaceActivated": {
++        //   "id": 7,
++        //   "focused":true
++        // }
++        else if (strcmp(key, "WorkspaceActivated") == 0) {
++            json_object *obj = json_object_iter_peek_value(&it);
++            int id = json_object_get_int(json_object_object_get(obj, "id"));
++
++            mtx_lock(&instance.mtx);
++            tll_foreach(instance.workspaces, it)
++            {
++                bool b = it->item->id == id;
++                it->item->focused = b;
++                it->item->active = b;
++            }
++            mtx_unlock(&instance.mtx);
++
++            events |= workspace_activated;
++        }
++
++        // "WorkspaceActiveWindowChanged": {
++        //   "workspace_id": 3,
++        //   "active_window_id": 8
++        // }
++        else if (strcmp(key, "WorkspaceActiveWindowChanged") == 0) {
++            json_object *obj = json_object_iter_peek_value(&it);
++            int id = json_object_get_int(json_object_object_get(obj, "id"));
++            bool empty = json_object_get_int(json_object_object_get(obj, "active_window_id")) == 0;
++
++            mtx_lock(&instance.mtx);
++            tll_foreach(instance.workspaces, it)
++            {
++                if (it->item->id == id) {
++                    it->item->empty = empty;
++                    break;
++                }
++            }
++            mtx_unlock(&instance.mtx);
++
++            events |= workspace_active_window_changed;
++        }
++
++        //
++        // "KeyboardLayoutsChanged": {
++        //   "keyboard_layouts": {
++        //     "names": [
++        //       "English (US)",
++        //       "Russian"
++        //     ],
++        //     "current_idx": 0
++        //   }
++        // }
++        else if (strcmp(key, "KeyboardLayoutsChanged") == 0) {
++            tll_foreach(instance.keyboard_layouts, it) { tll_remove_and_free(instance.keyboard_layouts, it, free); }
++
++            json_object *obj = json_object_iter_peek_value(&it);
++            json_object *kb_layouts = json_object_object_get(obj, "keyboard_layouts");
++
++            instance.keyboard_layout_index = json_object_get_int(json_object_object_get(kb_layouts, "current_idx"));
++
++            json_object *names = json_object_object_get(kb_layouts, "names");
++            size_t names_length = json_object_array_length(names);
++            for (size_t i = 0; i < names_length; ++i) {
++                char const *name = json_object_get_string(json_object_array_get_idx(names, i));
++                tll_push_back(instance.keyboard_layouts, strdup(name));
++            }
++
++            events |= keyboard_layouts_changed;
++        }
++
++        // "KeyboardLayoutSwitched": {
++        //   "idx": 1
++        // }
++        else if (strcmp(key, "KeyboardLayoutSwitched") == 0) {
++            json_object *obj = json_object_iter_peek_value(&it);
++            instance.keyboard_layout_index = json_object_get_int(json_object_object_get(obj, "idx"));
++
++            events |= keyboard_layouts_switched;
++        }
++
++        json_object_iter_next(&it);
++    }
++
++    json_object_put(json);
++
++    mtx_lock(&instance.mtx);
++    tll_foreach(instance.subscribers, it)
++    {
++        if (it->item->events & events)
++            if (write(it->item->fd, &(uint64_t){1}, sizeof(uint64_t)) == -1)
++                LOG_ERRNO("failed to write");
++    }
++    mtx_unlock(&instance.mtx);
++}
++
++static int
++run(void *userdata)
++{
++    static char msg[] = "\"EventStream\"\n";
++    static char expected[] = "{\"Ok\":\"Handled\"}";
++
++    if (write(instance.fd, msg, sizeof(msg) / sizeof(msg[0])) == -1) {
++        LOG_ERRNO("failed to sent message to niri socket");
++        return thrd_error;
++    }
++
++    static char buffer[8192];
++    if (read(instance.fd, buffer, sizeof(buffer) / sizeof(buffer[0])) == -1) {
++        LOG_ERRNO("failed to read response of niri socket");
++        return thrd_error;
++    }
++
++    char *saveptr;
++    char *response = strtok_r(buffer, "\n", &saveptr);
++    if (response == NULL || strcmp(expected, response) != 0) {
++        // unexpected first response, something went wrong
++        LOG_ERR("unexpected response of niri socket");
++        return thrd_error;
++    }
++
++    while ((response = strtok_r(NULL, "\n", &saveptr)) != NULL)
++        parser(response);
++
++    while (true) {
++        struct pollfd fds[] = {
++            (struct pollfd){.fd = instance.abort_fd, .events = POLLIN},
++            (struct pollfd){.fd = instance.fd, .events = POLLIN},
++        };
++
++        if (poll(fds, sizeof(fds) / sizeof(fds[0]), -1) == -1) {
++            if (errno == EINTR)
++                continue;
++
++            LOG_ERRNO("failed to poll");
++            break;
++        }
++
++        if (fds[0].revents & POLLIN)
++            break;
++
++        static char buffer[8192];
++        ssize_t length = read(fds[1].fd, buffer, sizeof(buffer) / sizeof(buffer[0]));
++
++        if (length == 0)
++            break;
++
++        if (length == -1) {
++            if (errno == EAGAIN)
++                continue;
++
++            LOG_ERRNO("unable to read niri socket");
++            break;
++        }
++
++        buffer[length] = '\0';
++        saveptr = NULL;
++        response = strtok_r(buffer, "\n", &saveptr);
++        do {
++            parser(response);
++        } while ((response = strtok_r(NULL, "\n", &saveptr)) != NULL);
++    }
++
++    return thrd_success;
++}
++
++struct niri_socket *
++niri_socket_open(char const *monitor)
++{
++    if (instance.fd != 0)
++        return &instance;
++
++    char const *path = getenv("NIRI_SOCKET");
++    if (path == NULL) {
++        LOG_ERR("NIRI_SOCKET is empty");
++        return NULL;
++    }
++
++    if ((instance.fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
++        LOG_ERRNO("failed to create socket");
++        goto error;
++    }
++
++    struct sockaddr_un addr;
++    addr.sun_family = AF_UNIX;
++    addr.sun_path[sizeof(addr.sun_path) - 1] = '\0';
++    strncpy(addr.sun_path, path, sizeof(addr.sun_path) - 1);
++
++    if (connect(instance.fd, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
++        LOG_ERRNO("failed to connect to niri socket");
++        goto error;
++    }
++
++    if ((instance.abort_fd = eventfd(0, EFD_CLOEXEC)) == -1) {
++        LOG_ERRNO("failed to create abort_fd");
++        goto error;
++    }
++
++    if (mtx_init(&instance.mtx, mtx_plain) != thrd_success) {
++        LOG_ERR("failed to initialize mutex");
++        goto error;
++    }
++
++    if (thrd_create(&instance.thrd, run, NULL) != thrd_success) {
++        LOG_ERR("failed to create thread");
++        mtx_destroy(&instance.mtx);
++        goto error;
++    }
++
++    instance.monitor = monitor;
++
++    return &instance;
++
++error:
++    if (instance.fd > 0)
++        close(instance.fd);
++    if (instance.abort_fd > 0)
++        close(instance.abort_fd);
++    instance.fd = 0;
++    instance.abort_fd = 0;
++    instance.monitor = NULL;
++
++    return NULL;
++}
++
++static void
++socket_close(void)
++{
++    if (write(instance.abort_fd, &(uint64_t){1}, sizeof(uint64_t)) != sizeof(uint64_t))
++        LOG_ERRNO("failed to write to abort_fd");
++
++    thrd_join(instance.thrd, NULL);
++
++    close(instance.abort_fd);
++    close(instance.fd);
++    instance.abort_fd = 0;
++    instance.fd = 0;
++
++    mtx_destroy(&instance.mtx);
++
++    tll_free_and_free(instance.subscribers, free);
++    tll_free_and_free(instance.workspaces, workspace_free);
++    tll_free_and_free(instance.keyboard_layouts, free);
++}
++
++void
++niri_socket_close(void)
++{
++    static once_flag flag = ONCE_FLAG_INIT;
++    call_once(&flag, socket_close);
++}
++
++int
++niri_socket_subscribe(enum niri_event events)
++{
++    int fd = eventfd(0, EFD_CLOEXEC);
++    if (fd == -1) {
++        LOG_ERRNO("failed to create eventfd");
++        return 0;
++    }
++
++    struct niri_subscriber *subscriber = calloc(1, sizeof(*subscriber));
++    subscriber->events = events;
++    subscriber->fd = fd;
++
++    mtx_lock(&instance.mtx);
++    tll_push_back(instance.subscribers, subscriber);
++    mtx_unlock(&instance.mtx);
++
++    return subscriber->fd;
++}
+diff --git a/modules/niri-common.h b/modules/niri-common.h
+new file mode 100644
+index 0000000..11c6e6f
+--- /dev/null
++++ b/modules/niri-common.h
+@@ -0,0 +1,46 @@
++#pragma once
++
++#include <stdbool.h>
++#include <threads.h>
++#include <tllist.h>
++
++enum niri_event {
++    workspaces_changed = (1 << 0),
++    workspace_activated = (1 << 1),
++    workspace_active_window_changed = (1 << 2),
++    keyboard_layouts_changed = (1 << 3),
++    keyboard_layouts_switched = (1 << 4),
++};
++
++struct niri_subscriber {
++    int events;
++    int fd;
++};
++
++struct niri_workspace {
++    int id;
++    int idx;
++    char *name;
++    bool active;
++    bool focused;
++    bool empty;
++};
++void workspace_free(struct niri_workspace *workspace);
++
++struct niri_socket {
++    char const *monitor;
++    int abort_fd;
++    int fd;
++
++    tll(struct niri_subscriber *) subscribers;
++    tll(struct niri_workspace *) workspaces;
++    tll(char *) keyboard_layouts;
++    size_t keyboard_layout_index;
++
++    thrd_t thrd;
++    mtx_t mtx;
++};
++
++struct niri_socket *niri_socket_open(char const *monitor);
++void niri_socket_close(void);
++int niri_socket_subscribe(enum niri_event events);
+diff --git a/modules/niri-language.c b/modules/niri-language.c
+new file mode 100644
+index 0000000..4830156
+--- /dev/null
++++ b/modules/niri-language.c
+@@ -0,0 +1,160 @@
++#include <errno.h>
++#include <json-c/json.h>
++#include <poll.h>
++#include <string.h>
++#include <unistd.h>
++
++#define LOG_MODULE "niri-language"
++#define LOG_ENABLE_DBG 0
++#include "niri-common.h"
++
++#include "../log.h"
++#include "../particles/dynlist.h"
++#include "../plugin.h"
++
++struct private
++{
++    struct particle *label;
++    struct niri_socket *niri;
++};
++
++static void
++destroy(struct module *module)
++{
++    struct private *private = module->private;
++    private->label->destroy(private->label);
++
++    free(private);
++
++    module_default_destroy(module);
++}
++
++static const char *
++description(const struct module *module)
++{
++    return "niri-language";
++}
++
++static struct exposable *
++content(struct module *module)
++{
++    const struct private *private = module->private;
++
++    if (private->niri == NULL)
++        return dynlist_exposable_new(&((struct exposable *){0}), 0, 0, 0);
++
++    mtx_lock(&module->lock);
++    mtx_lock(&private->niri->mtx);
++
++    char *name = "???";
++    size_t i = 0;
++    tll_foreach(private->niri->keyboard_layouts, it)
++    {
++        if (i++ == private->niri->keyboard_layout_index)
++            name = it->item;
++    }
++
++    struct tag_set tags = {
++        .tags = (struct tag *[]){tag_new_string(module, "language", name)},
++        .count = 1,
++    };
++
++    struct exposable *exposable = private->label->instantiate(private->label, &tags);
++    tag_set_destroy(&tags);
++    mtx_unlock(&private->niri->mtx);
++    mtx_unlock(&module->lock);
++    return exposable;
++}
++
++static int
++run(struct module *module)
++{
++    struct private *private = module->private;
++
++    /* Ugly, but I didn't find better way for waiting
++     * the monitor's name to be set */
++    char const *monitor;
++    do {
++        monitor = module->bar->output_name(module->bar);
++        usleep(50);
++    } while (monitor == NULL);
++
++    private->niri = niri_socket_open(monitor);
++    if (private->niri == NULL)
++        return 1;
++
++    int fd = niri_socket_subscribe(keyboard_layouts_changed | keyboard_layouts_switched);
++    if (fd == 0) {
++        niri_socket_close();
++        return 1;
++    }
++
++    module->bar->refresh(module->bar);
++
++    while (true) {
++        struct pollfd fds[] = {
++            (struct pollfd){.fd = module->abort_fd, .events = POLLIN},
++            (struct pollfd){.fd = fd, .events = POLLIN},
++        };
++
++        if (poll(fds, sizeof(fds) / sizeof(fds[0]), -1) == -1) {
++            if (errno == EINTR)
++                continue;
++
++            LOG_ERRNO("failed to poll");
++            break;
++        }
++
++        if (fds[0].revents & POLLIN)
++            break;
++
++        if (read(fds[1].fd, &(uint64_t){0}, sizeof(uint64_t)) == -1)
++            LOG_ERRNO("failed to read from eventfd");
++
++        module->bar->refresh(module->bar);
++    }
++
++    niri_socket_close();
++    return 0;
++}
++
++static struct module *
++niri_language_new(struct particle *label)
++{
++    struct private *private = calloc(1, sizeof(struct private));
++    private->label = label;
++
++    struct module *module = module_common_new();
++    module->private = private;
++    module->run = &run;
++    module->destroy = &destroy;
++    module->content = &content;
++    module->description = &description;
++
++    return module;
++}
++
++static struct module *
++from_conf(struct yml_node const *node, struct conf_inherit inherited)
++{
++    struct yml_node const *content = yml_get_value(node, "content");
++    return niri_language_new(conf_to_particle(content, inherited));
++}
++
++static bool
++verify_conf(keychain_t *chain, const struct yml_node *node)
++{
++    static struct attr_info const attrs[] = {
++        MODULE_COMMON_ATTRS,
++    };
++    return conf_verify_dict(chain, node, attrs);
++}
++
++const struct module_iface module_niri_language_iface = {
++    .verify_conf = &verify_conf,
++    .from_conf = &from_conf,
++};
++
++#if defined(CORE_PLUGINS_AS_SHARED_LIBRARIES)
++extern const struct module_iface iface __attribute__((weak, alias("module_niri_language_iface")));
++#endif
+diff --git a/modules/niri-workspaces.c b/modules/niri-workspaces.c
+new file mode 100644
+index 0000000..9cdb16e
+--- /dev/null
++++ b/modules/niri-workspaces.c
+@@ -0,0 +1,163 @@
++#include <errno.h>
++#include <poll.h>
++#include <string.h>
++#include <unistd.h>
++
++#define LOG_MODULE "niri-workspaces"
++#define LOG_ENABLE_DBG 0
++#include "niri-common.h"
++
++#include "../log.h"
++#include "../particles/dynlist.h"
++#include "../plugin.h"
++
++struct private
++{
++    struct particle *label;
++    struct niri_socket *niri;
++};
++
++static void
++destroy(struct module *module)
++{
++    struct private *private = module->private;
++    private->label->destroy(private->label);
++
++    free(private);
++
++    module_default_destroy(module);
++}
++
++static const char *
++description(const struct module *module)
++{
++    return "niri-workspaces";
++}
++
++static struct exposable *
++content(struct module *module)
++{
++    struct private const *private = module->private;
++
++    if (private->niri == NULL)
++        return dynlist_exposable_new(&((struct exposable *){0}), 0, 0, 0);
++
++    mtx_lock(&module->lock);
++    mtx_lock(&private->niri->mtx);
++
++    size_t i = 0;
++    struct exposable *exposable[tll_length(private->niri->workspaces)];
++    tll_foreach(private->niri->workspaces, it)
++    {
++        struct tag_set tags = {
++            .tags = (struct tag*[]){
++                tag_new_int(module, "id", it->item->idx),
++                tag_new_string(module, "name", it->item->name),
++                tag_new_bool(module, "active", it->item->active),
++                tag_new_bool(module, "focused", it->item->focused),
++                tag_new_bool(module, "empty", it->item->empty),
++            },
++            .count = 5,
++        };
++
++        exposable[i++] = private->label->instantiate(private->label, &tags);
++        tag_set_destroy(&tags);
++    }
++
++    mtx_unlock(&private->niri->mtx);
++    mtx_unlock(&module->lock);
++    return dynlist_exposable_new(exposable, i, 0, 0);
++}
++
++static int
++run(struct module *module)
++{
++    struct private *private = module->private;
++
++    /* Ugly, but I didn't find better way for waiting
++     * the monitor's name to be set */
++    char const *monitor;
++    do {
++        monitor = module->bar->output_name(module->bar);
++        usleep(50);
++    } while (monitor == NULL);
++
++    private->niri = niri_socket_open(monitor);
++    if (private->niri == NULL)
++        return 1;
++
++    int fd = niri_socket_subscribe(workspaces_changed | workspace_activated | workspace_active_window_changed);
++    if (fd == 0) {
++        niri_socket_close();
++        return 1;
++    }
++
++    module->bar->refresh(module->bar);
++
++    while (true) {
++        struct pollfd fds[] = {
++            (struct pollfd){.fd = module->abort_fd, .events = POLLIN},
++            (struct pollfd){.fd = fd, .events = POLLIN},
++        };
++
++        if (poll(fds, sizeof(fds) / sizeof(fds[0]), -1) == -1) {
++            if (errno == EINTR)
++                continue;
++
++            LOG_ERRNO("failed to poll");
++            break;
++        }
++
++        if (fds[0].revents & POLLIN)
++            break;
++
++        if (read(fds[1].fd, &(uint64_t){0}, sizeof(uint64_t)) == -1)
++            LOG_ERRNO("failed to read from eventfd");
++
++        module->bar->refresh(module->bar);
++    }
++
++    niri_socket_close();
++    return 0;
++}
++
++static struct module *
++niri_workspaces_new(struct particle *label)
++{
++    struct private *private = calloc(1, sizeof(struct private));
++    private->label = label;
++
++    struct module *module = module_common_new();
++    module->private = private;
++    module->run = &run;
++    module->destroy = &destroy;
++    module->content = &content;
++    module->description = &description;
++
++    return module;
++}
++
++static struct module *
++from_conf(struct yml_node const *node, struct conf_inherit inherited)
++{
++    struct yml_node const *content = yml_get_value(node, "content");
++    return niri_workspaces_new(conf_to_particle(content, inherited));
++}
++
++static bool
++verify_conf(keychain_t *chain, const struct yml_node *node)
++{
++    static struct attr_info const attrs[] = {
++        MODULE_COMMON_ATTRS,
++    };
++    return conf_verify_dict(chain, node, attrs);
++}
++
++const struct module_iface module_niri_workspaces_iface = {
++    .verify_conf = &verify_conf,
++    .from_conf = &from_conf,
++};
++
++#if defined(CORE_PLUGINS_AS_SHARED_LIBRARIES)
++extern const struct module_iface iface __attribute__((weak, alias("module_niri_workspaces_iface")));
++#endif
+diff --git a/plugin.c b/plugin.c
+index 8e75389..b1e268b 100644
+--- a/plugin.c
++++ b/plugin.c
+@@ -84,6 +84,12 @@ EXTERN_MODULE(script);
+ #if defined(HAVE_PLUGIN_sway_xkb)
+ EXTERN_MODULE(sway_xkb);
+ #endif
++#if defined(HAVE_PLUGIN_niri_language)
++EXTERN_MODULE(niri_language);
++#endif
++#if defined(HAVE_PLUGIN_niri_workspaces)
++EXTERN_MODULE(niri_workspaces);
++#endif
+ #if defined(HAVE_PLUGIN_xkb)
+ EXTERN_MODULE(xkb);
+ #endif
+@@ -214,6 +220,12 @@ static void __attribute__((constructor)) init(void)
+ #if defined(HAVE_PLUGIN_sway_xkb)
+     REGISTER_CORE_MODULE(sway-xkb, sway_xkb);
+ #endif
++#if defined(HAVE_PLUGIN_niri_language)
++    REGISTER_CORE_MODULE(niri-language, niri_language);
++#endif
++#if defined(HAVE_PLUGIN_niri_workspaces)
++    REGISTER_CORE_MODULE(niri-workspaces, niri_workspaces);
++#endif
+ #if defined(HAVE_PLUGIN_xkb)
+     REGISTER_CORE_MODULE(xkb, xkb);
+ #endif
+

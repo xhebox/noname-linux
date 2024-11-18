@@ -4,7 +4,13 @@ makedeps=["wayland-protocols", "pipewire", "pixman", "fcft", "systemd", "libyaml
 deps=["wayland", "pipewire", "pixman", "fcft", "systemd", "libyaml"]
 source=[
 	{url="https://codeberg.org/dnkl/yambar/releases/download/$version/yambar-$version.tar.gz"},
+	{url="niri.patch"},
 ]
+
+ext='''
+	cd yambar-$version
+	patch -Np1 -i "$srcdir"/niri.patch
+'''
 
 build='''
 	sed -i "s;subdir('doc');;g" yambar-$version/meson.build

@@ -17,7 +17,6 @@ build='''
 		--with-random=/dev/urandom \
 		--disable-ldap \
 		--disable-ldaps \
-		--disable-manual \
 		--disable-versioned-symbols \
 		--enable-ipv6 \
 		--enable-manual \

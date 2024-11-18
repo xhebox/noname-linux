@@ -7,7 +7,6 @@ source=[{url="http://download.osgeo.org/libtiff/tiff-${version}.tar.gz"}]
 build='''
 	cd tiff-$version
 	./configure --prefix= --enable-ld-version-script --disable-static
-	sed -i 's;-lwebp;& -lsharpyuv;g' configure
 	make
 	make DESTDIR="${pkgdir}" install
 '''

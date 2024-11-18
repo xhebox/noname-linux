@@ -1,7 +1,7 @@
 version="0.1.9"
 desc="scrollable-tiling compositor"
-deps=["cairo", "glib", "pango", "systemd", "libinput", "pipewire", "libdisplay-info", "wayland", "vulkan"]
-makedeps=["cairo", "glib", "pango", "systemd", "libinput", "pipewire", "libdisplay-info", "wayland-protocols", "vulkan-headers"]
+deps=["cairo", "glib", "pango", "systemd", "seatd", "libinput", "pipewire", "libdisplay-info", "wayland", "vulkan"]
+makedeps=["cairo", "glib", "pango", "systemd", "seatd", "libinput", "pipewire", "libdisplay-info", "wayland-protocols", "vulkan-headers"]
 source=[
 	{url="https://github.com/YaLTeR/niri/archive/refs/tags/v${version}.tar.gz"},
 	{url="musl.patch"},
