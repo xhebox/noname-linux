@@ -1,0 +1,12 @@
+--- a/cldap_ping.h	2024-10-07 08:07:33.000000000 +0800
++++ a/cldap_ping.h	2024-10-07 08:07:33.000000000 +0800
+@@ -1,6 +1,9 @@
+ #ifndef _CLDAP_PING_H_
+ #define _CLDAP_PING_H_
+ 
++#include <sys/types.h>
++#include <time.h>
++
+ #define CLDAP_PING_NETWORK_ERROR -1
+ #define CLDAP_PING_TRYNEXT -2
+ #define CLDAP_PING_PARSE_ERROR_LDAP -3

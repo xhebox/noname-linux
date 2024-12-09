@@ -1,0 +1,5 @@
+pattern=["etc/dracut", "lib/modules"]
+operation=["install"]
+script='''
+dracut -H --force
+'''

@@ -1,0 +1,15 @@
+version="2.4.2"
+desc="Hierarchical pool based memory allocator with destructors"
+makedeps=["libbsd", "musl", "python"]
+deps=["libbsd", "musl"]
+source=[
+	{url="https://www.samba.org/ftp/talloc/talloc-$version.tar.gz"},
+]
+
+build='''
+	cd talloc-${version%-*}
+	./configure --prefix= --sysconfdir=/etc/samba --localstatedir=/var \
+											 --builtin-libraries=replace \
+											 --enable-talloc-compat1
+	make DESTDIR="$pkgdir" install
+'''

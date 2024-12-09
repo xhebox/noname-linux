@@ -1,4 +1,4 @@
-version="1.32"
+version="1.51"
 desc="Support library for libgcrypt"
 deps=["musl", "dash"]
 source=[
@@ -8,6 +8,7 @@ source=[
 build='''
   cd libgpg-error-$version
   ./configure --prefix=
+	truncate -s 0 src/gpg-error-config-test.sh
   make
   make DESTDIR="$pkgdir" install
 '''

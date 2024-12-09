@@ -1,8 +1,17 @@
-version="103"
+version="105"
 desc="initframfs"
 deps=["bash", "coreutils", "filesystem", "findutils", "gawk", "grep", "kmod", "pkgconf", "procps-ng", "sed", "systemd", "util-linux", "e2fsprogs", "binutils", "cpio"]
 makedeps=["rust"]
-source=[{url="https://github.com/dracut-ng/dracut-ng/archive/refs/tags/$version.tar.gz"}]
+source=[
+	{url="https://github.com/dracut-ng/dracut-ng/archive/refs/tags/$version.tar.gz"},
+	{url="noname.patch"},
+	{url="dracut.toml"},
+]
+
+ext='''
+	cd dracut-ng-$version
+	patch -Np1 -i $srcdir/noname.patch
+'''
 
 build='''
 	cd dracut-ng-$version
@@ -12,6 +21,7 @@ build='''
 		--systemdsystemunitdir=/lib/systemd/system \
 		--disable-documentation \
 		--enable-dracut-cpio
-	make
+	make prefix=/
 	make DESTDIR="$pkgdir" install 
+	install -Dm755 "$srcdir"/dracut.toml "$pkgdir/${HOOKS#$ROOT}"/dracut.toml
 '''

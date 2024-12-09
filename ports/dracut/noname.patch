@@ -1,0 +1,147 @@
+diff '--color=auto' -ru dracut-ng-105/modules.d/01systemd-networkd/99-wait-online-dracut.conf /lib/dracut/modules.d/01systemd-networkd/99-wait-online-dracut.conf
+--- dracut-ng-105/modules.d/01systemd-networkd/99-wait-online-dracut.conf	2024-10-13 20:10:54.000000000 +0800
++++ b/modules.d/01systemd-networkd/99-wait-online-dracut.conf	2025-01-07 17:35:40.925514834 +0800
+@@ -4,6 +4,8 @@
+ 
+ [Service]
+ TimeoutStartSec=120
++ExecStart=
++ExecStart=/lib/systemd/systemd-networkd-wait-online --any
+ 
+ [Install]
+ WantedBy=initrd.target
+diff '--color=auto' -ru dracut-ng-105/modules.d/95nvmf/nvmf-autoconnect.sh /lib/dracut/modules.d/95nvmf/nvmf-autoconnect.sh
+--- dracut-ng-105/modules.d/95nvmf/nvmf-autoconnect.sh	2024-10-13 20:10:54.000000000 +0800
++++ dracut/modules.d/95nvmf/nvmf-autoconnect.sh	2025-01-07 18:26:18.258298866 +0800
+@@ -6,6 +6,9 @@
+ 
+ [ "$RD_DEBUG" != yes ] || set -x
+ 
++type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
++need_shutdown
++
+ if [ "$1" = timeout ]; then
+     [ ! -f /sys/class/fc/fc_udev_device/nvme_discovery ] \
+         || echo add > /sys/class/fc/fc_udev_device/nvme_discovery
+@@ -9,7 +9,7 @@
+ if [ "$1" = timeout ]; then
+     [ ! -f /sys/class/fc/fc_udev_device/nvme_discovery ] \
+         || echo add > /sys/class/fc/fc_udev_device/nvme_discovery
+-    /usr/sbin/nvme connect-all
++    /usr/sbin/nvme connect-all -i 4
+     exit 0
+ fi
+ 
+@@ -32,7 +32,7 @@
+ fi
+ if [ "$NBFT_SUPPORTED" ] && [ -e /tmp/valid_nbft_entry_found ]; then
+     # prio 2: NBFT
+-    /usr/sbin/nvme connect-all --nbft
++    /usr/sbin/nvme connect-all --nbft -i 4
+     exit 0
+ fi
+ if [ -f /etc/nvme/discovery.conf ] || [ -f /etc/nvme/config.json ] \
+@@ -40,9 +40,9 @@
+     # prio 3: configuration from initrd and/or kernel command line
+     # We can get here even if "rd.nvmf.nonbft" was given, thus use --no-nbft
+     if [ "$NBFT_SUPPORTED" ]; then
+-        /usr/sbin/nvme connect-all --no-nbft
++        /usr/sbin/nvme connect-all --no-nbft -i 4
+     else
+-        /usr/sbin/nvme connect-all
++        /usr/sbin/nvme connect-all -i 4
+     fi
+     exit 0
+ fi
+diff '--color=auto' -ru dracut-ng-105/modules.d/95nvmf/parse-nvmf-boot-connections.sh /lib/dracut/modules.d/95nvmf/parse-nvmf-boot-connections.sh
+--- dracut-ng-105/modules.d/95nvmf/parse-nvmf-boot-connections.sh	2024-10-13 20:10:54.000000000 +0800
++++ b/modules.d/95nvmf/parse-nvmf-boot-connections.sh	2025-01-07 17:35:40.945513469 +0800
+@@ -236,9 +236,9 @@
+     done
+ fi
+ 
+-initqueue --onetime modprobe -b -q nvme_tcp
+-initqueue --onetime modprobe -b -q nvme_core
+-initqueue --onetime modprobe -b -q nvme_fabrics
++/sbin/initqueue --onetime modprobe -b -q nvme_tcp
++/sbin/initqueue --onetime modprobe -b -q nvme_core
++/sbin/initqueue --onetime modprobe -b -q nvme_fabrics
+ 
+ parse_nvmf_discover() {
+     traddr="none"
+--- dracut-ng-105/dracut.sh	2024-10-13 20:10:54.000000000 +0800
++++ dracut-ng-105/dracut.sh	2024-10-13 20:10:54.000000000 +0800
+@@ -902,7 +902,7 @@
+     debug=yes
+ }
+ 
+-[[ $dracutbasedir ]] || dracutbasedir="$dracutsysrootdir"/usr/lib/dracut
++[[ $dracutbasedir ]] || dracutbasedir="$dracutsysrootdir"/lib/dracut
+ 
+ # if we were not passed a config file, try the default one
+ if [[ -z $conffile ]]; then
+@@ -1071,7 +1071,7 @@
+ [[ $use_fstab_l ]] && use_fstab=$use_fstab_l
+ [[ $mdadmconf_l ]] && mdadmconf=$mdadmconf_l
+ [[ $lvmconf_l ]] && lvmconf=$lvmconf_l
+-[[ $dracutbasedir ]] || dracutbasedir="$dracutsysrootdir"/usr/lib/dracut
++[[ $dracutbasedir ]] || dracutbasedir="$dracutsysrootdir"/lib/dracut
+ [[ $fw_dir ]] || {
+     fw_path_para=$(< /sys/module/firmware_class/parameters/path)
+     fw_dir="${fw_path_para:+$dracutsysrootdir$fw_path_para:}$dracutsysrootdir/lib/firmware/updates/$kernel:$dracutsysrootdir/lib/firmware/updates:$dracutsysrootdir/lib/firmware/$kernel:$dracutsysrootdir/lib/firmware"
+@@ -1479,7 +1479,7 @@
+ }
+ 
+ # dbus global variables
+-set_global_var "dbus" "dbus" "/usr/share/dbus-1"
++set_global_var "dbus" "dbus" "/share/dbus-1"
+ set_global_var "dbus" "dbusconfdir" "/etc/dbus-1"
+ set_global_var "dbus" "dbusinterfaces" "${dbus}/interfaces"
+ set_global_var "dbus" "dbusinterfacesconfdir" "${dbusconfdir}/interfaces"
+@@ -1499,14 +1499,14 @@
+ set_global_var "udev" "udevrulesconfdir" "${udevconfdir}/rules.d"
+ 
+ # systemd global variables
+-set_global_var "systemd" "prefix:systemdprefix" "/usr"
++set_global_var "systemd" "prefix:systemdprefix" "/"
+ set_global_var "systemd" "systemdutildir" "/lib/systemd:/lib/systemd/systemd-udevd" "/usr/lib/systemd:/usr/lib/systemd/systemd-udevd"
+ set_global_var "systemd" "systemdutilconfdir" "/etc/systemd"
+-set_global_var "systemd" "environment" "/usr/lib/environment.d"
++set_global_var "systemd" "environment" "/lib/environment.d"
+ set_global_var "systemd" "environmentconfdir" "/etc/environment.d"
+-set_global_var "systemd" "modulesload" "/usr/lib/modules-load.d"
++set_global_var "systemd" "modulesload" "/lib/modules-load.d"
+ set_global_var "systemd" "modulesloadconfdir" "/etc/modules-load.d"
+-set_global_var "systemd" "sysctld" "/usr/lib/sysctl.d"
++set_global_var "systemd" "sysctld" "/lib/sysctl.d"
+ set_global_var "systemd" "sysctlconfdir" "/etc/sysctl.d"
+ set_global_var "systemd" "systemdcatalog" "${systemdutildir}/catalog"
+ set_global_var "systemd" "systemdnetwork" "${systemdutildir}/network"
+@@ -1519,13 +1519,13 @@
+ set_global_var "systemd" "systemdsystemconfdir" "${systemdutilconfdir}/system"
+ set_global_var "systemd" "systemduser" "${systemdutildir}/user"
+ set_global_var "systemd" "systemduserconfdir" "${systemdutilconfdir}/user"
+-set_global_var "systemd" "sysusers" "/usr/lib/sysusers.d"
++set_global_var "systemd" "sysusers" "/lib/sysusers.d"
+ set_global_var "systemd" "sysusersconfdir" "/etc/sysusers.d"
+-set_global_var "systemd" "tmpfilesdir" "/lib/tmpfiles.d" "/usr/lib/tmpfiles.d"
++set_global_var "systemd" "tmpfilesdir" "/lib/tmpfiles.d" "/lib/tmpfiles.d"
+ set_global_var "systemd" "tmpfilesconfdir" "/etc/tmpfiles.d"
+ 
+ # libkmod global variables
+-set_global_var "libkmod" "depmodd" "/usr/lib/depmod.d"
++set_global_var "libkmod" "depmodd" "/lib/depmod.d"
+ set_global_var "libkmod" "depmodconfdir" "/etc/depmod.d"
+ 
+ if [[ $no_kernel != yes ]] && [[ -d $srcmods ]]; then
+--- a/modules.d/01systemd-networkd/networkd-config.sh	2025-01-07 20:55:34.048564106 +0800
++++ b/modules.d/01systemd-networkd/networkd-config.sh	2025-01-07 20:55:34.048564106 +0800
+@@ -19,6 +19,8 @@
+         echo "RequestOptions=59 60"
+     } >> "$f"
+ 
++    sed -i 's;DHCP=ipv4;&\nKeepConfiguration=yes;g' "$f"
++
+     # Remove the default network if at least one was generated
+     rm -f "$systemdnetworkconfdir"/zzzz-dracut-default.network
+ done

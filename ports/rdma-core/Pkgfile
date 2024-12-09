@@ -1,0 +1,40 @@
+version="55.0"
+perf_version="24.10.0-0.66.gf53ce12"
+desc="RDMA core userspace libraries and daemons"
+makedeps=["systemd", "libnl", "musl", "perl", "libdrm", "cmake"]
+deps=["systemd", "libnl", "musl", "perl"]
+source=[
+	{url="https://github.com/linux-rdma/rdma-core/archive/v$version/rdma-core-$version.tar.gz"},
+	{url="https://github.com/linux-rdma/perftest/releases/download/${perf_version%.*}/perftest-$perf_version.tar.gz"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd perftest-${perf_version%-*}
+	patch -Np1 -i ../musl.patch
+	cd ..
+
+	cd rdma-core-$version
+	find redhat -type f -exec sed --in-place \
+			 --expression='s|/usr/libexec|/usr/lib/rdma|g' \
+			 --expression='s|/usr/sbin|/usr/bin|g' \
+			 --expression='s|/sbin|/usr/bin|g' \
+			 '{}' '+'
+	sed -e 's|"drm"|"libdrm"|' -i CMakeLists.txt
+'''
+
+build='''
+	cd perftest-${perf_version%-*}
+	./configure --prefix=/
+	make
+	make DESTDIR="$pkgdir" install
+	cd ..
+
+	export CFLAGS="$CFLAGS -fPIC"
+	export CXXFLAGS="$CXXFLAGS -fPIC"
+	noname-cmake rdma-core-$version -Bbuild -DNO_MAN_PAGES=1 -DCMAKE_INSTALL_LIBEXECDIR=/lib/rdma
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+	rm -rf "$pkgdir"/lib/udev
+	rm -rf "$pkgdir"/lib/systemd
+'''

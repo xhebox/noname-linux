@@ -1,0 +1,21 @@
+version="2.11"
+desc="NVME utils"
+makedeps=["libnvme", "systemd"]
+deps=["libnvme", "systemd", "util-linux"]
+source=[
+	{url="https://github.com/linux-nvme/nvme-cli/archive/v${version}.tar.gz"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd nvme-cli-$version
+	sed -i 's;LC_MEASUREMENT;LC_ALL;g' *.c
+	patch -Np1 -i ../musl.patch
+'''
+
+build='''
+	noname-meson nvme-cli-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

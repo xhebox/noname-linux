@@ -1,0 +1,18 @@
+version="1.0.4"
+desc="Provides a standard for creating app stores across distributions"
+makedeps=["systemd", "glib", "libxml2", "libyaml", "zstd", "curl", "gobject-introspection"]
+deps=["systemd", "glib", "libxml2", "libyaml", "zstd", "curl"]
+source=[
+	{url="https://github.com/ximion/appstream/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	sed -i \
+	-e 's;subdir.*data.*;;g' \
+	-e 's;subdir.*docs.*;;g' \
+	appstream-$version/meson.build
+	noname-meson appstream-$version build -Dstemming=false --wrap-mode default
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

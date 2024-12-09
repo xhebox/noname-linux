@@ -1,12 +1,12 @@
-version="3.4"
+version="3.10"
 deps=["musl"]
+makedeps=["musl"]
 desc="Low-level cryptographic library"
 source=[{url="http://mirrors.ustc.edu.cn/gnu/nettle/nettle-$version.tar.gz"}]
 
 build='''
 	cd nettle-$version
-	./configure --prefix=/ --disable-static \
-	--disable-documentation
+	./configure --prefix=/ --disable-static --disable-documentation
 	make
 	make DESTDIR="$pkgdir" install
 '''

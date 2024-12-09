@@ -1,18 +1,18 @@
-version="8.30"
+version="9.5"
 desc="A collection of core GNU utilities"
 deps=[
 	"attr",
 	"libgmp",
 	"acl",
 	"libcap",
-	"libressl"
+	"openssl"
 ]
 makedeps=[
 	"attr",
 	"libgmp",
 	"acl",
 	"libcap",
-	"libressl"
+	"openssl"
 ]
 source=[
 	{url="http://mirrors.ustc.edu.cn/gnu/coreutils/coreutils-$version.tar.xz"},

@@ -1,4 +1,4 @@
-version="1.44.4"
+version="1.47.2"
 desc="ext utils"
 makedeps=["util-linux"]
 deps=["util-linux", "dash"]
@@ -9,7 +9,6 @@ source=[
 
 ext='''
 	cd e2fsprogs-$version
-	patch -p0 -i ../fix-glibcism.patch
 	sed -i '/init\.d/s|^|#|' misc/Makefile.in
 '''
 

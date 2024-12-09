@@ -9,7 +9,7 @@ ext='''
 
 build='''
   cd rpcsvc-proto-$version
-  ./configure --prefix=
+  CXX=clang++ ./configure --prefix=
   make
   make DESTDIR="$pkgdir" install
 '''

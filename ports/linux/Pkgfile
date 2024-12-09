@@ -1,5 +1,5 @@
-version="6.10.6"
-compiler_flags="CC=clang HOSTCC=clang LD=ld.lld LLVM=1 LLVM_IAS=1"
+version="6.12.7"
+compiler_flags="LLVM=1"
 _kernelname="noname"
 desc="Linux system kernel"
 source=[
@@ -44,14 +44,14 @@ build='''
 
 	cd linux-${version%.*}
 
-	make ${compiler_flags} all
+	KBUILD_BUILD_TIMESTAMP='' make ${compiler_flags} all
 
-	install -Dm644 `make -s image_name` "${pkgdir}/boot/vmlinuz-${_kernelname}"
+	install -Dm644 `make -s image_name` "${pkgdir}/boot/vmlinuz-${version}-${_kernelname}"
 
 	kernver=`cat ../version`
 	modulesdir="${pkgdir}/lib/modules/${kernver}"
 	mkdir -p "${modulesdir}"
-	make INSTALL_MOD_PATH="$pkgdir" INSTALL_MOD_STRIP=1 modules_install
+	make $compiler_flags INSTALL_MOD_PATH="$pkgdir" INSTALL_MOD_STRIP=1 modules_install
 
 	extramodules="extramodules-$_kernelname"
 	extradir="$pkgdir/lib/modules/$extramodules"
@@ -104,7 +104,7 @@ build='''
 	ln -srf "$builddir" "$pkgdir/src/$version-$_kernelname"
 
 	#patch -Np1 -i ../headers.patch
-	make headers
+	make $compiler_flags headers
 	find usr/include -type f -not -name '*.h' -exec rm -rf {} \;
 	find usr/include -type d -empty -delete
 	cp -rv usr/include "$pkgdir"

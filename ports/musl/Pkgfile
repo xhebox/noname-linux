@@ -97,6 +97,7 @@ build = '''
 	cat >>  "$pkgdir"/etc/ld-musl-$ARCH.path << EOF
 /lib
 /lib/$ARCH-unknown-linux-musl
+/lib/systemd
 EOF
 
 	ln -s /lib/libc.so "$pkgdir"/bin/ldd

@@ -1,0 +1,10 @@
+version="18.1.8"
+desc="Library requirements of the OpenCL C programming language"
+source=[{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.src.tar.xz"}]
+
+build='''
+	cd llvm-project-$version.src
+	cmake libclc -Bbuild -DCMAKE_INSTALL_PREFIX=
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

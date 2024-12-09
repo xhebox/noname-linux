@@ -1,4 +1,4 @@
-version="1.14.2"
+version="1.16.0"
 deps=["expat", "util-linux", "systemd"]
 makedeps=["expat", "util-linux", "python3", "systemd"]
 desc="Freedesktop.org message bus system"
@@ -18,24 +18,10 @@ ext='''
 '''
 
 build='''
-	cd dbus-$version
-	./configure --prefix= --disable-static \
-	--sysconfdir=/etc \
-	--libdir=/lib \
-	--libexecdir=/lib/dbus-1.0 \
-	--runstatedir=/run \
-	--with-dbus-user=81 \
-	--with-system-socket=/run/dbus/system_bus_socket \
-	--with-console-auth-dir=/run/console/ \
-	--disable-xml-docs \
-	--disable-verbose-mode \
-	--enable-inotify \
-	--disable-apparmor \
-	--enable-user-session \
-	--without-x \
-	--disable-tests \
-	--disable-asserts 
-	make
-	make -j1 DESTDIR="$pkgdir" install
-	install -Dm644 ../dbus.sysusers "$pkgdir"/lib/sysusers.d/dbus.conf
+	noname-meson dbus-$version build -Dapparmor=disabled -Ddbus_user=dbus -Dkqueue=disabled -Dlaunchd=disabled -Drelocation=disabled -Dselinux=disabled -Dx11_autolaunch=disabled \
+	-Dxml_docs=disabled -Ddoxygen_docs=disabled -Dducktype_docs=disabled -Dqt_help=disabled -Dlibaudit=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 "$srcdir"/dbus.sysusers "$pkgdir"/lib/sysusers.d/dbus.conf
 '''

@@ -7,7 +7,6 @@ source=[
 	{url="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${wasi_version%.*}/libclang_rt.builtins-wasm32-wasi-${wasi_version}.tar.gz"},
 	{url="https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.src.tar.xz"},
 	{url="clang-libexec.patch"},
-	{url="libcxx-musl.patch"},
 ]
 
 ext='''
@@ -65,6 +64,7 @@ build='''
 		-DLLVM_ENABLE_TERMINFO=YES \
 		-DLLVM_ENABLE_LIBEDIT=YES \
 		-DLLVM_ENABLE_ZLIB=YES \
+		-DLLVM_ENABLE_RTTI=YES \
 		-DLLVM_ENABLE_ZSTD=YES \
 		-DLLVM_APPEND_VC_REV=NO \
 		-DCLANG_DEFAULT_CXX_STDLIB=libc++ \
@@ -92,4 +92,5 @@ build='''
 	cp -a "$srcdir/lib/wasi" "$pkgdir"/lib/clang/*/lib/
 	ln -srf "$pkgdir"/bin/clang "$pkgdir"/bin/cc
 	ln -srf "$pkgdir"/bin/clang++ "$pkgdir"/bin/c++
+	ln -srf "$pkgdir"/bin/clang-cpp "$pkgdir"/bin/cpp
 '''

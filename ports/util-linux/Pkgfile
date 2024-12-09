@@ -1,9 +1,9 @@
-version="2.36"
+version="2.40.2"
 desc="Miscellaneous system utilities for Linux"
-makedeps=["python3", "libcap-ng"] 
+makedeps=["python3", "libcap-ng", "meson"] 
 deps=["coreutils", "libcap-ng", "pam", "shadow"]
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/utils/util-linux/v$version/util-linux-$version.tar.xz"},
+	{url="https://www.kernel.org/pub/linux/utils/util-linux/v${version%.*}/util-linux-$version.tar.xz"},
 	{url="60-rfkill.rules"},
 	{url="util-linux.sysusers"},
 	{url="fix-musl.patch"},
@@ -33,10 +33,11 @@ build='''
 		--sbindir=/bin \
 		--localstatedir=/var \
 		--enable-fs-paths-extra=/usr/bin \
-		--enable-raw \
+		--disable-raw \
 		--enable-vipw \
 		--enable-newgrp \
 		--enable-write \
+		--enable-hardlink \
 		--enable-chfn-chsh \
 		--enable-mesg \
 		--with-python=3

@@ -1,0 +1,13 @@
+version="1.10.0"
+makedeps=["glib"]
+deps=["glib"]
+source=[
+	{url="https://gitlab.gnome.org/GNOME/json-glib/-/archive/$version/json-glib-$version.tar.gz"},
+]
+
+build='''
+	noname-meson json-glib-$version build -Dtests=false -Ddocumentation=disabled -Dgtk_doc=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -1,0 +1,14 @@
+version="1.11.1"
+desc="NVME lib"
+makedeps=["dbus", "json-c", "keyutils", "openssl", "systemd", "meson"]
+deps=["dbus", "json-c", "keyutils", "openssl"]
+source=[
+	{url="https://github.com/linux-nvme/libnvme/archive/v${version}.tar.gz"},
+]
+
+build='''
+	noname-meson libnvme-$version build -Dpython=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

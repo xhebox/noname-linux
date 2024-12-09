@@ -1,6 +1,6 @@
 version="24.1.4"
-makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
-deps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland"]
+makedeps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
+deps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://archive.mesa3d.org/mesa-$version.tar.xz"},
@@ -19,29 +19,34 @@ ext='''
 		*patch)	patch -Nbp1 -i "$srcdir"/$i ;;
 		esac
 	done
+	for i in src/intel/genxml src/intel/vulkan/grl/include; do
+		cp /lib/clang/*/include/opencl-c-base.h \
+			/lib/clang/*/include/opencl-c.h \
+			$i 
+	done
 '''
 
 build='''
 	python3 -m venv ss
 	. ./ss/bin/activate
-	pip install mako
+	pip install mako ply
 	ulimit -n 100000
 	noname-meson mesa-$version build \
 		-D b_ndebug=true \
 		-D platforms=wayland \
-		-D gallium-drivers=kmsro,radeonsi,virgl,svga,swrast,zink \
-		-D vulkan-drivers=amd,swrast \
+		-D gallium-drivers=i915,iris,radeonsi,kmsro,virgl \
+		-D vulkan-drivers=amd,intel,virtio \
 		-D vulkan-layers=device-select,overlay \
 		-D dri3=enabled \
 		-D egl=enabled \
-		-D cpp_rtti=false \
+		-D intel-rt=enabled \
 		-D gallium-extra-hud=true \
 		-D gallium-nine=false \
 		-D gallium-vdpau=disabled \
 		-D gallium-omx=disabled \
 		-D gallium-va=enabled \
 		-D gallium-xa=disabled \
-		-D gallium-opencl=disabled \
+		-D gallium-opencl=icd \
 		-D microsoft-clc=disabled \
 		-D intel-clc=auto \
 		-D android-libbacktrace=disabled \
@@ -57,7 +62,10 @@ build='''
 		-D valgrind=disabled \
 		-D zstd=enabled \
 		-D xlib-lease=disabled \
-		-D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
+		-D video-codecs=all
+		#-D cpp_rtti=false \
+		#-D intel-clc=enabled \
+		#vc1dec,h264dec,h264enc,h265dec,h265enc
 
 	meson configure --no-pager build
 	meson compile -C build
