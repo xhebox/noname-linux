@@ -1,6 +1,26 @@
---- a/src/tools/run-make-support/src/external_deps/cc.rs
-+++ b/src/tools/run-make-support/src/external_deps/cc.rs
-@@ -185,7 +185,7 @@
+--- a/src/bootstrap/bootstrap.py	2025-03-04 19:38:32.537812654 +0800
++++ a/src/bootstrap/bootstrap.py	2025-03-04 19:38:32.537812654 +0800
+@@ -1023,17 +1023,6 @@
+             del env["CARGO_BUILD_TARGET"]
+         env["CARGO_TARGET_DIR"] = build_dir
+         env["RUSTC"] = self.rustc()
+-        env["LD_LIBRARY_PATH"] = (
+-            os.path.join(self.bin_root(), "lib") + (os.pathsep + env["LD_LIBRARY_PATH"])
+-            if "LD_LIBRARY_PATH" in env
+-            else ""
+-        )
+-        env["DYLD_LIBRARY_PATH"] = (
+-            os.path.join(self.bin_root(), "lib")
+-            + (os.pathsep + env["DYLD_LIBRARY_PATH"])
+-            if "DYLD_LIBRARY_PATH" in env
+-            else ""
+-        )
+         env["LIBRARY_PATH"] = (
+             os.path.join(self.bin_root(), "lib") + (os.pathsep + env["LIBRARY_PATH"])
+             if "LIBRARY_PATH" in env
+--- a/src/tools/run-make-support/src/external_deps/c_cxx_compiler/extras.rs	2025-02-18 02:17:27.000000000 +0800
++++ b/src/tools/run-make-support/src/external_deps/c_cxx_compiler/extras.rs	2025-02-18 02:17:27.000000000 +0800
+@@ -91,7 +91,7 @@
          match &uname()[..] {
              "Darwin" => vec!["-lc++"],
              "FreeBSD" | "SunOS" | "OpenBSD" => vec![],
@@ -9,3 +29,14 @@
          }
      }
  }
+--- a/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_musl.rs	2025-06-24 03:24:54.000000000 +0800
++++ b/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_musl.rs	2025-06-24 03:24:54.000000000 +0800
+@@ -17,7 +17,7 @@
+         | SanitizerSet::THREAD;
+     base.supports_xray = true;
+     // FIXME(compiler-team#422): musl targets should be dynamically linked by default.
+-    base.crt_static_default = true;
++    base.crt_static_default = false;
+ 
+     Target {
+         llvm_target: "x86_64-unknown-linux-musl".into(),

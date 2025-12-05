@@ -1,0 +1,16 @@
+version="1.8.12"
+desc="X client library"
+makedeps=["xorgproto", "libxcb", "xtrans", "util-macros"]
+deps=["xorgproto", "libxcb"]
+source=[{url="https://xorg.freedesktop.org/releases/individual/lib/libX11-$version.tar.xz"}]
+
+build='''
+	cd libX11-$version
+
+	./configure --prefix= \
+	--enable-ipv6 --enable-xlocaledir --without-xmlto \
+	--disable-secure-rpc --disable-static --enable-malloc0returnsnul
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

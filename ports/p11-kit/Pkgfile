@@ -1,4 +1,4 @@
-version="0.24.0"
+version="0.25.5"
 desc="Provides a way to load and enumerate PKCS#11 modules"
 makedeps=["libffi", "libtasn1"]
 deps=["libffi", "libtasn1"]
@@ -8,8 +8,8 @@ source=[
 
 build='''
 	noname-meson p11-kit-$version build \
-		-Denable_docs=false \
 		-Dgtk_doc=false \
+		-Dtest=false \
 		-Dman=false \
 		-Dbash_completion=disabled \
 		-Dtrust_paths=/etc/ca-certificates/trust-source:/share/ca-certificates/trust-source

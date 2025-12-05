@@ -1,19 +1,20 @@
 #!/bin/sh
 set -e
 export PKG_CONFIG=`pwd`/package_files/config
-export SYSROOT=`pwd`/noname
+export SYSROOT=$HOME/noname-rootfs
 
 # clean
-umount -R ./noname/* ./noname/etc/resolv.conf >/dev/null 2>&1 || true
-rm -rf ./noname
+#umount -R ./noname/* ./noname/etc/resolv.conf >/dev/null 2>&1 || true
+#rm -rf ./noname
 
 # install noname
 echo ":: building rootfs"
 cat lists_of_base | while read i; do
-	yes | pkg --root $SYSROOT --config $PKG_CONFIG -S $i || exit
+	yes | sudo pkg --root $SYSROOT --config $PKG_CONFIG -S $i
+done
+cat lists_of_dev | while read i; do
+	yes | sudo pkg --root $SYSROOT --config $PKG_CONFIG -S $i
 done
 
-tar czf noname_`date +%Y%m`.tar.gz noname
-
-# clear
-rm -rf ./noname
+#tar czf noname_`date +%Y%m`.tar.gz noname
+#rm -rf ./noname

@@ -1,0 +1,10 @@
+version = "1.4.313.0"
+desc="Meta loader for Vulkan API"
+makedeps=["cmake", "vulkan-headers"]
+source=[{url="https://github.com/zeux/volk/archive/refs/tags/vulkan-sdk-$version.tar.gz"}]
+
+build='''
+	noname-cmake volk-vulkan-sdk-$version -Bbuild -DCMAKE_SKIP_RPATH=True -D VOLK_INSTALL=ON
+	cmake --build build
+	DESTDIR="$pkgdir" cmake --install build
+'''

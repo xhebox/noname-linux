@@ -1,4 +1,4 @@
-version="1.3"
+version="2.0"
 desc="Bluetooth Subband Codec (SBC) library"
 source=[{url="http://www.kernel.org/pub/linux/bluetooth/sbc-$version.tar.xz"}]
 

@@ -33,7 +33,7 @@ build='''
     --enable-ipv6 \
     --enable-libmount-mount \
 		--enable-nfsv4 \
-  	--enable-nfsv41 \
+  	--disable-nfsv41 \
     --enable-mountconfig \
     --with-systemd \
 		--disable-gss

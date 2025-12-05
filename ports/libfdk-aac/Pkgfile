@@ -1,0 +1,18 @@
+version="2.0.3"
+desc="Fraunhofer FDK AAC codec library"
+makedeps=["musl"]
+deps=["musl"]
+source=[
+	{url="https://github.com/mstorsjo/fdk-aac/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	cd fdk-aac-$version
+	./autogen.sh
+	./configure --prefix= \
+		--sysconfdir=/etc \
+		--libexecdir=/lib \
+		--disable-static
+	make
+	make DESTDIR="$pkgdir" install 
+'''

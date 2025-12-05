@@ -1,15 +1,16 @@
-version = "1.3.240"
+version = "1.4.313"
 desc = "Vulkan all in one"
-deps = ["glslang", "wayland"]
+deps = ["glslang", "wayland", "vulkan-loader"]
 makedeps = [
   "glslang",
   "wayland",
   "cmake",
   "wayland-protocols",
   "vulkan-headers",
+  "vulkan-utility-libraries",
+  "volk",
 ]
 source = [
-  { url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/v${version}.tar.gz", name = "loader-v${version}.tar.gz" },
   { url = "https://github.com/KhronosGroup/Vulkan-Tools/archive/v${version}.tar.gz", name = "tools-v${version}.tar.gz" },
   { url = "https://github.com/KhronosGroup/Vulkan-ValidationLayers/archive/v${version}.tar.gz", name = "validation-v${version}.tar.gz" },
   { url = "cmake.patch" },
@@ -18,21 +19,9 @@ source = [
 ext = '''
 	cd $srcdir/Vulkan-Tools-$version
 	patch -Nbp0 -i ../cmake.patch
-
-	cd $srcdir/Vulkan-ValidationLayers-$version
 '''
 
 build = '''
-	noname-cmake Vulkan-Loader-$version -Bbuild1 \
-		-DCMAKE_SKIP_RPATH=True \
-		-DBUILD_TESTS=Off \
-		-DBUILD_WSI_XCB_SUPPORT=OFF \
-		-DBUILD_WSI_XLIB_SUPPORT=OFF \
-		-DBUILD_WSI_WAYLAND_SUPPORT=On \
-		-DCMAKE_BUILD_TYPE=Release
-	cmake --build build1
-	DESTDIR="$pkgdir" cmake --build build1 --target install
-
 	noname-cmake Vulkan-Tools-$version -Bbuild2 \
 		-DCMAKE_SKIP_RPATH=True \
 		-DBUILD_WSI_WAYLAND_SUPPORT=On \
@@ -42,8 +31,7 @@ build = '''
 		-DBUILD_CUBE=ON \
 		-DBUILD_VULKANINFO=ON \
 		-DBUILD_ICD=OFF \
-		-DGLSLANG_INSTALL_DIR=/ \
-		-DCMAKE_BUILD_TYPE=Release
+		-DGLSLANG_INSTALL_DIR=/
 	cmake --build build2
 	DESTDIR="$pkgdir" cmake --build build2 --target install
 
@@ -55,11 +43,10 @@ build = '''
 		-DGLSLANG_INSTALL_DIR=/ \
 		-DCMAKE_SKIP_RPATH=True \
 		-DBUILD_TESTS=Off \
-		-DUSE_ROBIN_HOOD_HASHING=Off \
+		-DUSE_CUSTOM_HASH_MAP=Off \
 		-DBUILD_WSI_XCB_SUPPORT=Off \
 		-DBUILD_WSI_XLIB_SUPPORT=Off \
-		-DBUILD_WSI_WAYLAND_SUPPORT=Off \
-		-DCMAKE_BUILD_TYPE=Release
+		-DBUILD_WSI_WAYLAND_SUPPORT=ON
 	cmake --build build3
 	DESTDIR="$pkgdir" cmake --build build3 --target install
 '''

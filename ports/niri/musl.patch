@@ -22,11 +22,11 @@
                          }
 --- niri-0.1.9/Cargo.toml	2024-09-14 16:55:52.000000000 +0800
 +++ niri-0.1.9/Cargo.toml	2024-09-14 16:55:52.000000000 +0800
-@@ -81,6 +81,7 @@
- tracing-subscriber.workspace = true
- tracing.workspace = true
- tracy-client.workspace = true
+@@ -50,6 +50,7 @@
+ keywords = ["wayland", "compositor", "tiling", "smithay", "wm"]
+ 
+ [dependencies]
 +syscalls = { version = "0.6", default-features = false }
- url = { version = "2.5.2", optional = true }
- wayland-backend = "0.3.7"
- wayland-scanner = "0.31.5"
+ anyhow.workspace = true
+ arrayvec = "0.7.6"
+ async-channel = "2.3.1"

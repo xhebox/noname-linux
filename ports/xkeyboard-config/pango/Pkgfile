@@ -1,0 +1,14 @@
+version="1.56.1"
+desc="library for layout and rendering of text"
+makedeps=["fribidi", "fontconfig", "harfbuzz", "glib", "cairo", "gobject-introspection"]
+deps=["fribidi", "fontconfig", "harfbuzz", "glib", "cairo"]
+source=[
+	{url="https://download.gnome.org/sources/pango/${version%.*}/pango-$version.tar.xz"},
+]
+
+build='''
+	noname-meson pango-$version build -Dlibthai=disabled -Dxft=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -209,7 +209,7 @@ func pkg_cpfiles(pkg *Pkgfile) error {
 						attr = strings.TrimLeft(attr, "SCHILY.xattr.")
 
 						if e := xattr.FSet(dstfd, attr, []byte(attrval)); e != nil {
-							return errors.Errorf("%s: can not set capability [%s] for file %s [%v]", hdr.Name, attr, dst, pkg.Tarball)
+							return errors.Errorf("%s: can not set capability [%s] for file %s [%v]\n%+v\n", hdr.Name, attr, dst, pkg.Tarball, e)
 						}
 					}
 				}

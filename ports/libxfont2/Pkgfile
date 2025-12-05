@@ -1,0 +1,12 @@
+version="2.0.7"
+desc="X11 font rasterisation library"
+makedeps=["xorgproto", "freetype", "zlib", "libfontenc", "xtrans", "util-macros"]
+deps=["xorgproto", "freetype", "zlib", "libfontenc"]
+source=[{url="https://www.x.org/pub/individual/lib/libXfont2-$version.tar.xz"}]
+
+build='''
+	cd libXfont2-$version
+	./configure --prefix= --sysconfdir=/etc --localstatedir=/var --disable-static 
+	make
+	make DESTDIR="$pkgdir" install
+'''

@@ -1,4 +1,4 @@
-version="1.6.0"
+version="1.9.2"
 desc='High productivity build system'
 makedeps=["python3", "ninja"]
 deps=["python3", "python3-tomli", "ninja"]
@@ -6,10 +6,8 @@ source=[{url="https://github.com/mesonbuild/meson/releases/download/${version}/m
 
 build='''
 	cd meson-$version
-	python3 setup.py build
-	python3 setup.py install \
-		--prefix= \
-		--root="$pkgdir"
+	python -m build -wn --skip-dependency-check
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 	cat >> "$pkgdir"/bin/noname-meson << "EOF"
 #!/bin/sh
 meson setup \

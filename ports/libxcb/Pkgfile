@@ -1,0 +1,17 @@
+version="1.17.0"
+desc="X11 client-side library"
+makedeps=["xorgproto", "xcb-proto", "libxau", "python3"]
+deps=["xcb-proto", "libxau"]
+source=[{url="https://xorg.freedesktop.org/archive/individual/lib/libxcb-$version.tar.xz"}]
+
+build='''
+	cd libxcb-$version
+
+	./configure --prefix= --disable-static --without-doxygen \
+		--sysconfdir=/etc \
+		--enable-xinput \
+		--localstatedir=/var 
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

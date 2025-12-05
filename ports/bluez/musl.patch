@@ -22,3 +22,22 @@ Remove <linux/if_bridge.h> to fix musl build.
  enum {
  	MODE_LISTEN,
  	MODE_CONNECT,
+--- gdbus/object.c	2024-11-02 03:25:15.000000000 +0800
++++ gdbus/object.c	2024-11-02 03:25:15.000000000 +0800
+@@ -15,6 +15,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdbool.h>
++#include <limits.h>
+ 
+ #include <glib.h>
+ #include <dbus/dbus.h>
+@@ -135,7 +136,7 @@
+ static void g_dbus_debug(const char *format, ...)
+ {
+ 	va_list va;
+-	char str[MAX_INPUT];
++	char str[_POSIX_MAX_INPUT];
+ 
+ 	if (!format || !debug.func)
+ 		return;

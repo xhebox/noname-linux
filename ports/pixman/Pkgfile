@@ -1,4 +1,4 @@
-version="0.42.2"
+version="0.46.4"
 desc="Pixel manipulation library"
 source=[
 	{url="https://www.x.org/archive/individual/lib/pixman-$version.tar.gz"},
@@ -7,8 +7,17 @@ deps=["libpng"]
 makedeps=["libpng"]
 
 build='''
-	cd pixman-$version
-	./configure --prefix= --disable-static
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson pixman-$version build  \
+	-Dloongson-mmi=disabled \
+	-Dvmx=disabled \
+	-D arm-simd=disabled \
+	-D neon=disabled \
+	-D a64-neon=disabled \
+	-D rvv=disabled \
+	-D mips-dspr2=disabled \
+	-D openmp=disabled \
+	-D gtk=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

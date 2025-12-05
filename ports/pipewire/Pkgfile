@@ -1,26 +1,27 @@
-version = "1.0.5"
+version = "1.4.2"
 desc = "library for layout and rendering of text"
 deps = [
   "alsa-lib",
   "readline",
   "systemd",
   "dbus",
-  "gst-plugins-base",
+  "gstreamer",
   "ncurses",
   "libsndfile",
   "tinycompress",
   "vulkan",
   "bluez",
-  "sbc",
-  "libfreeaptx",
-  "libpulse",
+  "liblc3",
+  "libfdk-aac",
   "ldac",
+  "sbc",
+  "libpulse",
 ]
 makedeps = [
   "systemd",
   "dbus",
   "alsa-lib",
-  "gst-plugins-base",
+  "gstreamer",
   "ncurses",
   "libsndfile",
   "tinycompress",
@@ -28,10 +29,11 @@ makedeps = [
   "vulkan-headers",
   "readline",
   "bluez",
-  "sbc",
-  "libfreeaptx",
-  "libpulse",
+  "liblc3",
+  "libfdk-aac",
   "ldac",
+  "sbc",
+  "libpulse",
 ]
 source = [
   { url = "https://github.com/PipeWire/pipewire/archive/refs/tags/$version.tar.gz" },
@@ -43,13 +45,15 @@ build = '''
 		-Dman=disabled \
 		-Dgstreamer=enabled -Dgstreamer-device-provider=enabled \
 		-Dbluez5-codec-ldac=enabled \
-		-Dbluez5-codec-aac=disabled \
-		-Dbluez5-codec-lc3=disabled \
+		-Dbluez5-codec-aac=enabled \
+		-Dbluez5-codec-lc3=enabled \
 		-Dbluez5-codec-lc3plus=disabled \
-		-Dbluez5-codec-aptx=enabled \
+		-Dbluez5-codec-aptx=disabled \
 		-Dcompress-offload=enabled \
 		-Dlibmysofa=disabled \
+		-Debur128=disabled \
 		-Davahi=disabled \
+		-Dsnap=disabled \
 		-Dselinux=disabled \
 		-Dx11=disabled \
 		-Droc=disabled \

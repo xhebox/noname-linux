@@ -1,10 +1,9 @@
-version="6.12.7"
+version="6.14.4"
 compiler_flags="LLVM=1"
 _kernelname="noname"
 desc="Linux system kernel"
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/linux-${version%.*}.tar.xz"},
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/patch-${version}.xz"},
+	{url="https://cdn.kernel.org/pub/linux/kernel/v${version%%.*}.x/linux-${version}.tar.xz"},
 	{url="fix-musl-objtool.patch"},
 	{url="headers.patch"},
 	{url="linux.preset"},
@@ -18,13 +17,12 @@ ext='''
 	unset CXXFLAGS
 	unset LDFLAGS
 
-	cd linux-${version%.*}
+	cd linux-${version}
 	touch ./localversion.10-pkgrel
 	echo "-$_kernelname" > ./localversion.20-pkgname
 
 	patch -Np1 -i ../fix-musl-objtool.patch
 	patch -Np1 -i ../headers.patch
-	patch -Np1 -i ../patch-${version} || true
 
 	cp -vf "$srcdir/config" .config
 
@@ -42,7 +40,7 @@ build='''
 	unset CXXFLAGS
 	unset LDFLAGS
 
-	cd linux-${version%.*}
+	cd linux-${version}
 
 	KBUILD_BUILD_TIMESTAMP='' make ${compiler_flags} all
 

@@ -1,0 +1,776 @@
+I 20:08:00.587293         pw.context ../pipewire-1.4.2/src/pipewire/pipewire.c:581:pw_init: version 1.4.2
+I 20:08:00.587932         pw.context ../pipewire-1.4.2/src/pipewire/context.c:388:pw_context_new: 0x7f7e223b0160: parsed 0 context.properties items
+I 20:08:00.587964         pw.context ../pipewire-1.4.2/src/pipewire/context.c:269:setup_data_loops: created data loop 'data-loop.0'
+I 20:08:00.587967         pw.context ../pipewire-1.4.2/src/pipewire/context.c:272:setup_data_loops: created 1 data-loops
+I 20:08:00.588407         pw.context ../pipewire-1.4.2/src/pipewire/context.c:481:pw_context_new: 0x7f7e223b0160: parsed 0 context.spa-libs items
+I 20:08:00.588410         pw.context ../pipewire-1.4.2/src/pipewire/context.c:485:pw_context_new: 0x7f7e223b0160: parsed 0 context.modules items
+I 20:08:00.588413         pw.context ../pipewire-1.4.2/src/pipewire/context.c:490:pw_context_new: 0x7f7e223b0160: parsed 0 context.objects items
+I 20:08:00.588415         pw.context ../pipewire-1.4.2/src/pipewire/context.c:493:pw_context_new: 0x7f7e223b0160: parsed 0 context.exec items
+W 20:08:00.589563             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:330:translate_error: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+W 20:08:00.589568             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:995:do_rtkit_setup: RTKit does not give us MaxRealtimePriority, using 1
+W 20:08:00.589818             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:330:translate_error: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+W 20:08:00.589826             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:1000:do_rtkit_setup: RTKit does not give us MinNiceLevel, using 0
+N 20:08:00.589976 wp-internal-comp-l ../wireplumber-0.5.8/lib/wp/private/internal-comp-loader.c:945:wp_internal_comp_loader_load: Loading profile 'main'
+W 20:08:00.590080             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:330:translate_error: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+W 20:08:00.590104             mod.rt ../pipewire-1.4.2/src/modules/module-rt.c:1005:do_rtkit_setup: RTKit does not give us RTTimeUSecMax, using -1
+D 20:08:00.594998    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/common-utils.lua
+I 20:08:00.595138         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.595145         pw.context ../pipewire-1.4.2/src/pipewire/context.c:284:data_loop_start: starting data loop data-loop.0
+I 20:08:00.595248         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192707654871
+D 20:08:00.595798    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/linking-utils.lua
+D 20:08:00.596840    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/device-info-cache.lua
+D 20:08:00.598128    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/node-utils.lua
+D 20:08:00.598678    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/filter-utils.lua
+I 20:08:00.604429         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.604437         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192716945855
+I 20:08:00.604879         s-monitors alsa.lua:574:createMonitor: Activating ALSA monitor
+I 20:08:00.606578    m-lua-scripting filter-utils.lua:292:rescanFilters: rescanning filters...
+I 20:08:00.609221         s-monitors alsa.lua:488:chunk: Enabling the use of ACP on alsa_card.pci-0000_04_00.0
+I 20:08:00.610446         s-monitors alsa.lua:488:chunk: Enabling the use of ACP on alsa_card.pci-0000_14_00.6
+I 20:08:00.611298         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.611305         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192723814075
+I 20:08:00.725302         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.725312         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192837821692
+I 20:08:00.796317         s-monitors bluez.lua:550:startStopMonitor: <WpLogind:0x7f7e2199aad0> Seat state changed: active
+I 20:08:00.796330         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796335         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192908844010
+I 20:08:00.796669         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796674         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909183404
+D 20:08:00.796761  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.aac
+D 20:08:00.796766  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec aac from api.codec.bluez5.media.aac, endpoint:aac
+D 20:08:00.796769  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec aac_eld from api.codec.bluez5.media.aac, endpoint:aac
+I 20:08:00.796775         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796778         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909287601
+I 20:08:00.796784  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:89:load_media_codecs_from: Bluetooth codec plugin api.codec.bluez5.media.aptx not available
+I 20:08:00.796790         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796793         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909302830
+D 20:08:00.796829  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.faststream
+D 20:08:00.796833  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec faststream from api.codec.bluez5.media.faststream, endpoint:faststream
+D 20:08:00.796836  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec faststream_duplex from api.codec.bluez5.media.faststream, endpoint:faststream_duplex
+I 20:08:00.796841         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796843         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909353226
+D 20:08:00.796943  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.ldac
+D 20:08:00.796947  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec ldac from api.codec.bluez5.media.ldac, endpoint:ldac
+I 20:08:00.796951         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.796954         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909463916
+D 20:08:00.796987  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.sbc
+D 20:08:00.796990  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec sbc from api.codec.bluez5.media.sbc, endpoint:sbc
+D 20:08:00.796993  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec sbc_xq from api.codec.bluez5.media.sbc, endpoint:sbc
+I 20:08:00.796998         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.797001         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909510434
+I 20:08:00.797006  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:89:load_media_codecs_from: Bluetooth codec plugin api.codec.bluez5.media.lc3plus not available
+I 20:08:00.797012         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.797015         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909525172
+D 20:08:00.797091  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.opus
+D 20:08:00.797094  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_05 from api.codec.bluez5.media.opus, endpoint:opus_05
+D 20:08:00.797098  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_05_51 from api.codec.bluez5.media.opus, endpoint:opus_05
+D 20:08:00.797100  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_05_71 from api.codec.bluez5.media.opus, endpoint:opus_05
+D 20:08:00.797103  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_05_duplex from api.codec.bluez5.media.opus, endpoint:opus_05_duplex
+D 20:08:00.797106  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_05_pro from api.codec.bluez5.media.opus, endpoint:opus_05_duplex
+I 20:08:00.797111         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.797114         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909623929
+D 20:08:00.797150  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.opus-g
+D 20:08:00.797153  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec opus_g from api.codec.bluez5.media.opus-g, endpoint:opus_g
+I 20:08:00.797158         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.797161         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909670257
+D 20:08:00.797194  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.lc3
+D 20:08:00.797197  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec lc3 from api.codec.bluez5.media.lc3, endpoint:lc3
+I 20:08:00.797201         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.797204         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192909714030
+D 20:08:00.797234  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:93:load_media_codecs_from: loading codecs from api.codec.bluez5.media.g722
+D 20:08:00.797237  spa.bluez5.codecs ../pipewire-1.4.2/spa/plugins/bluez5/codec-loader.c:135:load_media_codecs_from: loaded media codec g722 from api.codec.bluez5.media.g722, endpoint:g722
+D 20:08:00.797247  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:193:load_conf: loading /share/spa-0.2/bluez5/bluez-hardware.conf
+D 20:08:00.797552         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec lc3
+D 20:08:00.797556         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec ldac
+D 20:08:00.797559         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec aac
+D 20:08:00.797561         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_g
+D 20:08:00.797563         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec sbc
+D 20:08:00.797565         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec sbc_xq
+D 20:08:00.797567         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec faststream
+D 20:08:00.797569         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec faststream_duplex
+D 20:08:00.797571         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_05
+D 20:08:00.797573         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_05_51
+D 20:08:00.797575         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_05_71
+D 20:08:00.797577         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_05_duplex
+D 20:08:00.797580         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec opus_05_pro
+D 20:08:00.797582         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec aac_eld
+D 20:08:00.797584         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6538:parse_codec_array: enabling codec g722
+I 20:08:00.797589         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5284:register_media_application: Registering DBus media object manager: /MediaEndpoint
+I 20:08:00.797593         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5292:register_media_application: Registering DBus media object manager: /MediaEndpointLE
+I 20:08:00.797596         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpointLE/BAPSource/lc3
+I 20:08:00.797600         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpointLE/BAPSink/lc3
+I 20:08:00.797604         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpointLE/BAPBroadcastSource/lc3
+I 20:08:00.797607         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpointLE/BAPBroadcastSink/lc3
+I 20:08:00.797611         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/ldac
+I 20:08:00.797614         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/aac
+I 20:08:00.797618         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSink/aac
+I 20:08:00.797621         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/opus_g
+I 20:08:00.797625         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSink/opus_g
+I 20:08:00.797628         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/sbc
+I 20:08:00.797632         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSink/sbc
+I 20:08:00.797635         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/faststream
+I 20:08:00.797639         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/faststream_duplex
+I 20:08:00.797643         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/opus_05
+I 20:08:00.797646         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSink/opus_05
+I 20:08:00.797650         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSource/opus_05_duplex
+I 20:08:00.797653         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5263:register_media_endpoint: Registering DBus media endpoint: /MediaEndpoint/A2DPSink/opus_05_duplex
+E 20:08:00.799078            default ../pipewire-1.4.2/spa/plugins/bluez5/upower.c:55:upower_get_percentage_properties_reply: Failed to get percentage from UPower: org.freedesktop.DBus.Error.NameHasNoOwner
+I 20:08:00.800108         s-monitors alsa-midi.lua:39:chunk: activated Midi bridge
+I 20:08:00.800583         s-monitors bluez-midi.lua:145:startStopMonitor: <WpLogind:0x7f7e2199aad0> Seat state changed: active
+I 20:08:00.800598         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.800606         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192913114547
+D 20:08:00.801268    spa.bluez5.midi ../pipewire-1.4.2/spa/plugins/bluez5/midi-enum.c:673:export_profile: MIDI GATT Profile exported, path=/midi/profile
+I 20:08:00.801439         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.801470         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192913978705
+I 20:08:00.801476         pw.context ../pipewire-1.4.2/src/pipewire/context.c:741:pw_context_release_loop: release name:'data-loop.0' class:'data.rt' last_used:11192913978705
+I 20:08:00.801482         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:08:00.801487         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192913995807
+D 20:08:00.801539 spa.bluez5.midi.se ../pipewire-1.4.2/spa/plugins/bluez5/midi-server.c:332:export_service: MIDI GATT Service exported, path=/midiserver0/service
+D 20:08:00.801591 spa.bluez5.midi.se ../pipewire-1.4.2/spa/plugins/bluez5/midi-server.c:294:export_chr: MIDI GATT Characteristic exported, path=/midiserver0/service/chr
+D 20:08:00.801618 spa.bluez5.midi.se ../pipewire-1.4.2/spa/plugins/bluez5/midi-server.c:126:export_dsc: MIDI GATT Descriptor exported, path=/midiserver0/service/chr/dsc
+I 20:08:00.801745         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:08:00.801773         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192914281659
+I 20:08:00.801859         pw.context ../pipewire-1.4.2/src/pipewire/context.c:1526:pw_context_recalc_graph: 0x7f7e223b0160: busy:0 reason:register active node
+D 20:08:00.802085         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.802147         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez, interface org.bluez.AgentManager1
+D 20:08:00.802152         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez, interface org.bluez.ProfileManager1
+D 20:08:00.802156         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5455:reselect_backend: re-selecting HFP/HSP backend
+I 20:08:00.802160         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5437:switch_backend: Switching to HFP/HSP backend native
+D 20:08:00.802165  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:3536:register_profile: Registering Profile /Profile/HFPAG 0000111f-0000-1000-8000-00805f9b34fb
+D 20:08:00.802203  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:3536:register_profile: Registering Profile /Profile/HFPHF 0000111e-0000-1000-8000-00805f9b34fb
+D 20:08:00.802240  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2959:sco_listen: doing listen
+D 20:08:00.802246         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.802250         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.Adapter1
+D 20:08:00.802291         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1371:adapter_init_modalias: adapter 0x7f7e21b0ddb0: usb vendor:0e8d product:7925
+D 20:08:00.802299         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: Address=FC:70:2E:88:63:D0
+D 20:08:00.802304         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: AddressType=public
+D 20:08:00.802308         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: Name=BlueZ 5.82
+D 20:08:00.802311         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: Alias=BlueZ 5.82
+D 20:08:00.802315         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: Class=260
+D 20:08:00.802319         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1196:adapter_update_props: adapter 0x7f7e21b0ddb0: Connectable=0
+D 20:08:00.802322         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1196:adapter_update_props: adapter 0x7f7e21b0ddb0: Powered=1
+D 20:08:00.802326         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: PowerState=on
+D 20:08:00.802330         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1196:adapter_update_props: adapter 0x7f7e21b0ddb0: Discoverable=0
+D 20:08:00.802333         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: DiscoverableTimeout=180
+D 20:08:00.802337         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1196:adapter_update_props: adapter 0x7f7e21b0ddb0: Pairable=1
+D 20:08:00.802340         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: PairableTimeout=0
+D 20:08:00.802343         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1196:adapter_update_props: adapter 0x7f7e21b0ddb0: Discovering=0
+D 20:08:00.802349         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1223:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=00002bc9-0000-1000-8000-00805f9b34fb
+D 20:08:00.802352         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1225:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=00002bcb-0000-1000-8000-00805f9b34fb
+D 20:08:00.802356         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1227:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=00001852-0000-1000-8000-00805f9b34fb
+D 20:08:00.802359         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1229:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=00001851-0000-1000-8000-00805f9b34fb
+D 20:08:00.802366         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1157:adapter_update_props: adapter 0x7f7e21b0ddb0: Modalias=usb:v1D6Bp0246d0552
+D 20:08:00.802371         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1177:adapter_update_props: adapter 0x7f7e21b0ddb0: Modalias=usb:v1D6Bp0246d0552 ignored: No such device or address
+D 20:08:00.802375         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1236:adapter_update_props: adapter 0x7f7e21b0ddb0: unhandled key Roles
+D 20:08:00.802379         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1236:adapter_update_props: adapter 0x7f7e21b0ddb0: unhandled key ExperimentalFeatures
+D 20:08:00.802383         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1236:adapter_update_props: adapter 0x7f7e21b0ddb0: unhandled key Manufacturer
+D 20:08:00.802386         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1236:adapter_update_props: adapter 0x7f7e21b0ddb0: unhandled key Version
+D 20:08:00.802390         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.freedesktop.DBus.Properties
+D 20:08:00.802394         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.BatteryProviderManager1
+D 20:08:00.802397         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.GattManager1
+D 20:08:00.802400         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.AdvertisementMonitorManager1
+D 20:08:00.802403         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.Media1
+I 20:08:00.802407         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1276:adapter_media_update_props: Adapter /org/bluez/hci0: LE Audio supported
+I 20:08:00.802410         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1283:adapter_media_update_props: Adapter /org/bluez/hci0: LE Broadcast Audio supported
+I 20:08:00.802414         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1283:adapter_media_update_props: Adapter /org/bluez/hci0: LE Broadcast Audio supported
+D 20:08:00.802419         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5395:adapter_register_application: Registering bluez5 A2DP media application on adapter /org/bluez/hci0
+D 20:08:00.802446         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5395:adapter_register_application: Registering bluez5 LE Audio media application on adapter /org/bluez/hci0
+D 20:08:00.802469         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.NetworkServer1
+D 20:08:00.802473         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0, interface org.bluez.LEAdvertisingManager1
+D 20:08:00.802477         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_AF, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.802481         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_AF, interface org.bluez.Device1
+I 20:08:00.802494         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5664:interface_added: Created Bluetooth device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:08:00.802498         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8020: Address=24:12:31:B5:51:AF
+D 20:08:00.802502         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8020: AddressType=public
+D 20:08:00.802506         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8020: Name=Moondrop-LEA
+D 20:08:00.802510         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8020: Alias=Moondrop-LEA
+D 20:08:00.802513         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2400:device_update_props: device 0x7f7e21ad8020: Appearance=2369
+D 20:08:00.802517         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Paired=1
+D 20:08:00.802522         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Bonded=1
+D 20:08:00.802525         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Trusted=0
+D 20:08:00.802529         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Blocked=0
+D 20:08:00.802533         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: LegacyPairing=0
+D 20:08:00.802536         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Connected=0
+D 20:08:00.802548         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8020: Adapter=/org/bluez/hci0
+D 20:08:00.802552         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad8020: unhandled key ServiceData type 97
+D 20:08:00.802556         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: ServicesResolved=0
+D 20:08:00.802559         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad8020: unhandled key AdvertisingFlags type 97
+D 20:08:00.802564         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad8020: unhandled key AdvertisingData type 97
+D 20:08:00.802973         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:00.802978         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_AF, interface org.freedesktop.DBus.Properties
+D 20:08:00.802982         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_06_20_B5_95_67, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.802986         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_06_20_B5_95_67, interface org.bluez.Device1
+I 20:08:00.802992         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5664:interface_added: Created Bluetooth device /org/bluez/hci0/dev_24_06_20_B5_95_67
+D 20:08:00.802996         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad84d0: Address=24:06:20:B5:95:67
+D 20:08:00.803000         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad84d0: AddressType=public
+D 20:08:00.803004         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad84d0: Name=Moondrop-LEA
+D 20:08:00.803009         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad84d0: Alias=Moondrop-LEA
+D 20:08:00.803013         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2400:device_update_props: device 0x7f7e21ad84d0: Appearance=2369
+D 20:08:00.803016         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Paired=1
+D 20:08:00.803020         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Bonded=1
+D 20:08:00.803024         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Trusted=0
+D 20:08:00.803027         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Blocked=0
+D 20:08:00.803030         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: LegacyPairing=0
+D 20:08:00.803033         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Connected=0
+D 20:08:00.803045         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad84d0: Adapter=/org/bluez/hci0
+D 20:08:00.803050         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad84d0: unhandled key ServiceData type 97
+D 20:08:00.803060         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: ServicesResolved=0
+D 20:08:00.803063         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad84d0: unhandled key AdvertisingFlags type 97
+D 20:08:00.803068         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2471:device_update_props: device 0x7f7e21ad84d0: unhandled key AdvertisingData type 97
+D 20:08:00.803379         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:00.803387         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_06_20_B5_95_67, interface org.freedesktop.DBus.Properties
+D 20:08:00.803392         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.803396         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA, interface org.bluez.Device1
+I 20:08:00.803402         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5664:interface_added: Created Bluetooth device /org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:08:00.803438         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: Address=24:12:31:B5:51:FA
+D 20:08:00.803442         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: AddressType=public
+D 20:08:00.803445         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: Name=Moondrop Golden Ages
+D 20:08:00.803448         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: Alias=Moondrop Golden Ages
+D 20:08:00.803451         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2390:device_update_props: device 0x7f7e21ad8970: Class=00240404
+D 20:08:00.803454         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: Icon=audio-headset
+D 20:08:00.803457         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Paired=1
+D 20:08:00.803460         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Bonded=1
+D 20:08:00.803463         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Trusted=1
+D 20:08:00.803465         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Blocked=0
+D 20:08:00.803468         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: LegacyPairing=0
+D 20:08:00.803470         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Connected=0
+D 20:08:00.803474         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2457:device_update_props: device 0x7f7e21ad8970: add UUID=0000110b-0000-1000-8000-00805f9b34fb
+D 20:08:00.803478         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2457:device_update_props: device 0x7f7e21ad8970: add UUID=0000111e-0000-1000-8000-00805f9b34fb
+D 20:08:00.803481         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2349:device_update_props: device 0x7f7e21ad8970: Adapter=/org/bluez/hci0
+D 20:08:00.803483         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: ServicesResolved=0
+D 20:08:00.803777         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+I 20:08:00.803840         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.803845         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192916354138
+D 20:08:00.803894  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1774:set_initial_profile: initial profile off
+I 20:08:00.803925         s-monitors bluez.lua:389:chunk: <WpSpaDevice:0x7f7e21e228f0> 2, Moondrop Golden Ages (24:12:31:B5:51:FA): disconnected
+D 20:08:00.804037         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1980:device_start_timer: device 0x7f7e21ad8970: start timer
+D 20:08:00.804047         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA, interface org.freedesktop.DBus.Properties
+D 20:08:00.804051         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA, interface org.bluez.MediaControl1
+D 20:08:00.804054         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5455:reselect_backend: re-selecting HFP/HSP backend
+D 20:08:00.804160         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5065:object_manager_handler: dbus: path=/MediaEndpoint, interface=org.freedesktop.DBus.ObjectManager, member=GetManagedObjects
+I 20:08:00.804170         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec ldac: /MediaEndpoint/A2DPSource/ldac
+D 20:08:00.804396 spa.bluez5.codecs. ../pipewire-1.4.2/spa/plugins/bluez5/a2dp-codec-aac.c:69:eld_supported: FDK-AAC AAC-ELD support:1
+I 20:08:00.804401         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec aac: /MediaEndpoint/A2DPSink/aac
+I 20:08:00.804408         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec aac: /MediaEndpoint/A2DPSource/aac
+I 20:08:00.804415         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec opus_g: /MediaEndpoint/A2DPSink/opus_g
+I 20:08:00.804422         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec opus_g: /MediaEndpoint/A2DPSource/opus_g
+I 20:08:00.804428         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec sbc: /MediaEndpoint/A2DPSink/sbc
+I 20:08:00.804434         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec sbc: /MediaEndpoint/A2DPSource/sbc
+I 20:08:00.804440         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec faststream: /MediaEndpoint/A2DPSource/faststream
+I 20:08:00.804446         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec faststream_duplex: /MediaEndpoint/A2DPSource/faststream_duplex
+I 20:08:00.804452         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec opus_05: /MediaEndpoint/A2DPSink/opus_05
+I 20:08:00.804458         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec opus_05: /MediaEndpoint/A2DPSource/opus_05
+I 20:08:00.804465         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec opus_05_duplex: /MediaEndpoint/A2DPSink/opus_05_duplex
+I 20:08:00.804472         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec opus_05_duplex: /MediaEndpoint/A2DPSource/opus_05_duplex
+D 20:08:00.804490         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5065:object_manager_handler: dbus: path=/MediaEndpointLE, interface=org.freedesktop.DBus.ObjectManager, member=GetManagedObjects
+I 20:08:00.804497         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5124:object_manager_handler: register media sink codec lc3: /MediaEndpointLE/BAPSink/lc3
+I 20:08:00.804505         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5139:object_manager_handler: register media source codec lc3: /MediaEndpointLE/BAPSource/lc3
+I 20:08:00.804512         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5155:object_manager_handler: register media source codec lc3: /MediaEndpointLE/BAPBroadcastSource/lc3
+I 20:08:00.804518         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5170:object_manager_handler: register broadcast media sink codec lc3: /MediaEndpointLE/BAPBroadcastSink/lc3
+D 20:08:00.804623    spa.bluez5.midi ../pipewire-1.4.2/spa/plugins/bluez5/midi-enum.c:501:manager_register_application: org.bluez.GattManager1.RegisterApplication(/midi) on /org/bluez/hci0
+D 20:08:00.804679 spa.bluez5.midi.se ../pipewire-1.4.2/spa/plugins/bluez5/midi-server.c:388:manager_register_application: org.bluez.GattManager1.RegisterApplication(/midiserver0) on /org/bluez/hci0
+I 20:08:00.805509           s-device find-best-profile.lua:69:chunk: <WpDevice:42:0x7f7e21b576b0> Found best profile 'output:iec958-stereo+input:analog-stereo' (4) for device 'alsa_card.pci-0000_14_00.6'
+I 20:08:00.805688           s-device apply-profile.lua:47:chunk: <WpDevice:42:0x7f7e21b576b0> Setting profile output:iec958-stereo+input:analog-stereo on alsa_card.pci-0000_14_00.6
+D 20:08:00.806100    m-lua-scripting ../wireplumber-0.5.8/modules/module-lua-scripting/module.c:54:wp_lua_scripting_package_searcher: Executing script /usr/share/wireplumber/scripts/lib/monitor-utils.lua
+I 20:08:00.806616         s-monitors alsa.lua:252:chunk: Creating node alsa_output.pci-0000_14_00.6.iec958-stereo
+I 20:08:00.806634         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.806642         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192919150509
+I 20:08:00.806959         s-monitors alsa.lua:252:chunk: Creating node alsa_input.pci-0000_14_00.6.analog-stereo
+I 20:08:00.806974         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.806981         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192919490414
+D 20:08:00.807351         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:08:00.807361         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/pac_bcast0, interface org.freedesktop.DBus.Introspectable
+D 20:08:00.807365         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/pac_bcast0, interface org.bluez.MediaEndpoint1
+D 20:08:00.807370         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e219beeb0: UUID=00001851-0000-1000-8000-00805f9b34fb
+D 20:08:00.807375         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2731:remote_endpoint_update_props: remote_endpoint 0x7f7e219beeb0: Codec=06
+D 20:08:00.807379         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e219beeb0: Device=/org/bluez/hci0
+D 20:08:00.807383         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2788:remote_endpoint_update_props: remote_endpoint 0x7f7e219beeb0: unhandled key Locations
+D 20:08:00.807389         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/pac_bcast0, interface org.freedesktop.DBus.Properties
+I 20:08:00.808523           s-device select-routes.lua:92:chunk: <WpDevice:42:0x7f7e21b576b0> restore routes for profile(output:iec958-stereo+input:analog-stereo) of device(alsa_card.pci-0000_14_00.6)
+D 20:08:00.809083           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21ae5890> setting route(iec958-stereo-output) on for device(alsa_card.pci-0000_14_00.6)(<WpDevice:0x7f7e21b576b0>):
+  Object: size 160, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 4
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 64, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool false
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.064000
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool false
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 5
+
+N 20:08:00.809221    wp-pw-obj-mixin ../wireplumber-0.5.8/lib/wp/private/pipewire-object-mixin.c:303:wp_pw_object_mixin_set_param: <WpNode:0x7f7e21a64580> ignoring set_param on already destroyed objects
+I 20:08:00.809946           s-device find-best-profile.lua:69:chunk: <WpDevice:45:0x7f7e21b57590> Found best profile 'output:hdmi-stereo' (0) for device 'alsa_card.pci-0000_04_00.0'
+I 20:08:00.810087           s-device apply-profile.lua:47:chunk: <WpDevice:45:0x7f7e21b57590> Setting profile output:hdmi-stereo on alsa_card.pci-0000_04_00.0
+I 20:08:00.810439         s-monitors alsa.lua:252:chunk: Creating node alsa_output.pci-0000_04_00.0.hdmi-stereo
+I 20:08:00.810452         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.810458         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192922967324
+I 20:08:00.811228         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.811235         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192923743897
+I 20:08:00.811918         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:08:00.811925         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11192924434015
+N 20:08:00.811932          wp-device ../wireplumber-0.5.8/lib/wp/device.c:711:wp_spa_device_new_from_spa_factory: SPA handle 'api.libcamera.enum.manager' could not be loaded; is it installed?
+N 20:08:00.811937 s-monitors-libcame enumerate-device.lua:30:chunk: PipeWire's libcamera SPA plugin is missing or broken. Some camera types may not be supported.
+I 20:08:00.815791           s-device select-routes.lua:92:chunk: <WpDevice:45:0x7f7e21b57590> restore routes for profile(off) of device(alsa_card.pci-0000_04_00.0)
+I 20:08:00.816101           s-device state-routes.lua:120:chunk: <WpDevice:45:0x7f7e21b57590> No routes selected to set on alsa_card.pci-0000_04_00.0
+D 20:08:00.816403         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.816412         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1219:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=0000110b-0000-1000-8000-00805f9b34fb
+D 20:08:00.816415         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1219:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=0000111f-0000-1000-8000-00805f9b34fb
+D 20:08:00.816418         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1219:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=0000110a-0000-1000-8000-00805f9b34fb
+D 20:08:00.816421         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1219:adapter_update_props: adapter 0x7f7e21b0ddb0: add UUID=0000111e-0000-1000-8000-00805f9b34fb
+I 20:08:00.818185           s-device state-routes.lua:225:chunk: <WpDevice:42:0x7f7e21b576b0> new active route(iec958-stereo-output) found of device(alsa_card.pci-0000_14_00.6)
+D 20:08:00.818478           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21adc1c0> setting route(iec958-stereo-output) on for device(alsa_card.pci-0000_14_00.6)(<WpDevice:0x7f7e21b576b0>):
+  Object: size 160, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 4
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 64, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool false
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.064000
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool false
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 5
+
+I 20:08:00.819956           s-device select-routes.lua:92:chunk: <WpDevice:45:0x7f7e21b57590> restore routes for profile(output:hdmi-stereo) of device(alsa_card.pci-0000_04_00.0)
+I 20:08:00.820121           s-device state-routes.lua:60:chunk: <WpDevice:45:0x7f7e21b57590> restoring route for device ID 4
+I 20:08:00.820128           s-device state-routes.lua:81:chunk: <WpDevice:45:0x7f7e21b57590> found stored route: hdmi-output-0
+D 20:08:00.820471           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21b88d00> setting route(hdmi-output-0) on for device(alsa_card.pci-0000_04_00.0)(<WpDevice:0x7f7e21b57590>):
+  Object: size 240, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 0
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 144, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool true
+        Prop: key Spa:Pod:Object:Param:Props:latencyOffsetNsec (65550), flags 00000000
+          Long 0
+        Prop: key Spa:Pod:Object:Param:Props:channelMap (65547), flags 00000000
+          Array: child.size 4, child.type Spa:Id
+            Id 3        (Spa:Enum:AudioChannel:FL)
+            Id 4        (Spa:Enum:AudioChannel:FR)
+        Prop: key Spa:Pod:Object:Param:Props:iec958Codecs (65553), flags 00000000
+          Array: child.size 0, child.type Spa:None
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.314507
+            Float 0.314507
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool true
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 4
+
+I 20:08:00.822034    m-lua-scripting filter-utils.lua:292:rescanFilters: rescanning filters...
+I 20:08:00.826849           s-device state-routes.lua:225:chunk: <WpDevice:45:0x7f7e21b57590> new active route(hdmi-output-0) found of device(alsa_card.pci-0000_04_00.0)
+D 20:08:00.827396           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21adc300> setting route(hdmi-output-0) on for device(alsa_card.pci-0000_04_00.0)(<WpDevice:0x7f7e21b57590>):
+  Object: size 240, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 0
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 144, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool true
+        Prop: key Spa:Pod:Object:Param:Props:latencyOffsetNsec (65550), flags 00000000
+          Long 0
+        Prop: key Spa:Pod:Object:Param:Props:channelMap (65547), flags 00000000
+          Array: child.size 4, child.type Spa:Id
+            Id 3        (Spa:Enum:AudioChannel:FL)
+            Id 4        (Spa:Enum:AudioChannel:FR)
+        Prop: key Spa:Pod:Object:Param:Props:iec958Codecs (65553), flags 00000000
+          Array: child.size 0, child.type Spa:None
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.314507
+            Float 0.314507
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool true
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 4
+
+I 20:08:00.830490    m-lua-scripting filter-utils.lua:292:rescanFilters: rescanning filters...
+D 20:08:00.909941         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.909953         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: Class=4194564
+D 20:08:00.915659         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.918561         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.918568         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: Class=6291716
+D 20:08:00.924584         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.927544         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.927549         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: Class=6816004
+D 20:08:00.933462         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.936537         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.936543         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1185:adapter_update_props: adapter 0x7f7e21b0ddb0: Class=7078148
+D 20:08:00.942644         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:00.948598         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6015:filter_cb: Properties changed in adapter /org/bluez/hci0
+D 20:08:02.804316         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1957:device_timer_event: device 0x7f7e21ad8970: timeout 00000084 00000000
+D 20:08:02.804329         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2008:device_stop_timer: device 0x7f7e21ad8970: stop timer
+D 20:08:05.394228         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:08:05.394242         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Connected=1
+D 20:08:05.394250  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property sysname=Linux
+D 20:08:05.394255  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property release=6.14.4-noname
+D 20:08:05.394258  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property version=#1 SMP PREEMPT_DYNAMIC Sun Apr 27 16:25:31 CST 2025
+D 20:08:05.394446  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:309:get_features: kernel quirks:00000000
+D 20:08:05.394452  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property vendor-id=usb:0e8d
+D 20:08:05.394454  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property product-id=7925
+D 20:08:05.394458  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property bus-type=usb
+D 20:08:05.394462  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=fc:70:2e:88:63:d0
+D 20:08:05.394469  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:336:get_features: adapter quirks:00000004
+D 20:08:05.394473  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property name=Moondrop-LEA
+D 20:08:05.394476  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=24:12:31:b5:51:af
+D 20:08:05.394547  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:365:get_features: device quirks:00000000
+D 20:08:05.394550  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:406:spa_bt_quirks_log_features: features:fffffffb
+D 20:08:05.394555         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8020: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:08:05.394727         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:05.738231         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_06_20_B5_95_67
+D 20:08:05.738248         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: Connected=1
+D 20:08:05.738254  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property sysname=Linux
+D 20:08:05.738259  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property release=6.14.4-noname
+D 20:08:05.738262  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property version=#1 SMP PREEMPT_DYNAMIC Sun Apr 27 16:25:31 CST 2025
+D 20:08:05.738491  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:309:get_features: kernel quirks:00000000
+D 20:08:05.738498  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property vendor-id=usb:0e8d
+D 20:08:05.738502  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property product-id=7925
+D 20:08:05.738505  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property bus-type=usb
+D 20:08:05.738509  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=fc:70:2e:88:63:d0
+D 20:08:05.738514  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:336:get_features: adapter quirks:00000004
+D 20:08:05.738517  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property name=Moondrop-LEA
+D 20:08:05.738520  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=24:06:20:b5:95:67
+D 20:08:05.738592  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:365:get_features: device quirks:00000000
+D 20:08:05.738595  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:406:spa_bt_quirks_log_features: features:fffffffb
+D 20:08:05.738600         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad84d0: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:08:05.738806         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:07.040351         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:08:07.040367         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: ServicesResolved=1
+D 20:08:07.040375         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8020: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:08:07.040640         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:07.480352         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_06_20_B5_95_67
+D 20:08:07.480369         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad84d0: ServicesResolved=1
+D 20:08:07.480377         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad84d0: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:08:07.480649         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:08:37.896017         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:08:37.896045         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: ServicesResolved=0
+D 20:08:37.896052         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Connected=0
+D 20:08:37.896348         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:09:19.084221         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:09:19.084236         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Connected=1
+D 20:09:19.084243  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property sysname=Linux
+D 20:09:19.084246  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property release=6.14.4-noname
+D 20:09:19.084249  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property version=#1 SMP PREEMPT_DYNAMIC Sun Apr 27 16:25:31 CST 2025
+D 20:09:19.084449  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:309:get_features: kernel quirks:00000000
+D 20:09:19.084456  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property vendor-id=usb:0e8d
+D 20:09:19.084459  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property product-id=7925
+D 20:09:19.084462  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property bus-type=usb
+D 20:09:19.084465  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=fc:70:2e:88:63:d0
+D 20:09:19.084470  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:336:get_features: adapter quirks:00000004
+D 20:09:19.084474  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property name=Moondrop-LEA
+D 20:09:19.084477  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=24:12:31:b5:51:af
+D 20:09:19.084566  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:365:get_features: device quirks:00000000
+D 20:09:19.084569  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:406:spa_bt_quirks_log_features: features:fffffffb
+D 20:09:19.084574         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8020: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:09:19.084778         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:09:20.800315         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:09:20.800329         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: ServicesResolved=1
+D 20:09:20.800337         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8020: profiles 00000000 00000000 connectable:0000078f added:0 all:1 dir:0 set:1
+D 20:09:20.800588         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:09:23.915092         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_AF
+D 20:09:23.915106         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: ServicesResolved=0
+D 20:09:23.915112         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8020: Connected=0
+D 20:09:23.915392         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:09:30.490998         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:30.491013         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: Connected=1
+D 20:09:30.491019  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property sysname=Linux
+D 20:09:30.491022  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property release=6.14.4-noname
+D 20:09:30.491026  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property version=#1 SMP PREEMPT_DYNAMIC Sun Apr 27 16:25:31 CST 2025
+D 20:09:30.491383  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:309:get_features: kernel quirks:00000000
+D 20:09:30.491391  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property vendor-id=usb:0e8d
+D 20:09:30.491394  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property product-id=7925
+D 20:09:30.491397  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property bus-type=usb
+D 20:09:30.491400  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=fc:70:2e:88:63:d0
+D 20:09:30.491405  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:336:get_features: adapter quirks:00000004
+D 20:09:30.491408  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property name=Moondrop Golden Ages
+D 20:09:30.491411  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:266:log_props: quirk property address=24:12:31:b5:51:fa
+D 20:09:30.491496  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:365:get_features: device quirks:00000000
+D 20:09:30.491498  spa.bluez5.quirks ../pipewire-1.4.2/spa/plugins/bluez5/quirks.c:406:spa_bt_quirks_log_features: features:fffffffb
+D 20:09:30.491503         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8970: profiles 00000084 00000000 connectable:0000078f added:1 all:0 dir:0 set:1
+D 20:09:30.491691         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef
+D 20:09:30.874049  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:3475:profile_handler: dbus: path=/Profile/HFPAG, interface=org.bluez.Profile1, member=NewConnection
+D 20:09:30.874256  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:3319:profile_new_connection: NewConnection path=/org/bluez/hci0/dev_24_12_31_B5_51_FA, fd=46, profile /Profile/HFPAG
+D 20:09:30.949984  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+BRSF=671
+D 20:09:30.950048  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 42 52 53 46 3d 36 37 31 0d 
+D 20:09:30.950074  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+BRSF=671
+I 20:09:30.950327  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:732:device_supports_codec: bluez-monitor/hardware.conf: alt6:1 alt1/5:1
+D 20:09:30.955431  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:750:device_supports_codec: adapter /org/bluez/hci0: has msbc/esco transport
+D 20:09:30.955446  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:897:rfcomm_hfp_ag: RFCOMM features = 671, codec negotiation supported by headset
+D 20:09:30.955451  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> +BRSF: 3584
+D 20:09:30.955458  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:30.970080         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:09:30.970097         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep1, interface org.freedesktop.DBus.Introspectable
+D 20:09:30.970102         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep1, interface org.bluez.MediaEndpoint1
+D 20:09:30.970107         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: UUID=0000110b-0000-1000-8000-00805f9b34fb
+D 20:09:30.970111         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2731:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: Codec=00
+D 20:09:30.970116         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2758:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: Capabilities=4
+D 20:09:30.970121         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2759:remote_endpoint_update_props:   0x7f7e220781f4: ff ff 02 35 
+D 20:09:30.970125         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: Device=/org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:30.970128         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2699:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: device -> 0x7f7e21ad8970
+D 20:09:30.970131         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2720:remote_endpoint_update_props: remote_endpoint 0x7f7e21ef6550: DelayReporting=1
+I 20:09:30.970136  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1415:profiles_changed: profiles changed to 00000084 00000000 (change 00000000) switching_codec:0
+D 20:09:30.970977         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep1, interface org.freedesktop.DBus.Properties
+D 20:09:30.971361         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:09:30.971370         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep2, interface org.freedesktop.DBus.Introspectable
+D 20:09:30.971373         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep2, interface org.bluez.MediaEndpoint1
+D 20:09:30.971377         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: UUID=0000110b-0000-1000-8000-00805f9b34fb
+D 20:09:30.971381         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2731:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: Codec=02
+D 20:09:30.971384         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2758:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: Capabilities=6
+D 20:09:30.971388         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2759:remote_endpoint_update_props:   0x7f7e220781f4: 80 ff 8c 80 00 00 
+D 20:09:30.971392         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: Device=/org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:30.971394         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2699:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: device -> 0x7f7e21ad8970
+D 20:09:30.971397         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2720:remote_endpoint_update_props: remote_endpoint 0x7f7e21de8890: DelayReporting=1
+I 20:09:30.971401  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1415:profiles_changed: profiles changed to 00000084 00000000 (change 00000000) switching_codec:0
+D 20:09:30.972155         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep2, interface org.freedesktop.DBus.Properties
+D 20:09:30.972169         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:09:30.972173         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5, interface org.freedesktop.DBus.Introspectable
+D 20:09:30.972176         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5, interface org.bluez.MediaEndpoint1
+D 20:09:30.972180         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: UUID=0000110b-0000-1000-8000-00805f9b34fb
+D 20:09:30.972184         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2731:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: Codec=ff
+D 20:09:30.972188         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2758:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: Capabilities=8
+D 20:09:30.972193         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2759:remote_endpoint_update_props:   0x7f7e21acf114: 2d 01 00 00 aa 00 35 07 
+D 20:09:30.972196         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2679:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: Device=/org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:30.972200         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2699:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: device -> 0x7f7e21ad8970
+D 20:09:30.972203         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2720:remote_endpoint_update_props: remote_endpoint 0x7f7e2203be60: DelayReporting=1
+I 20:09:30.972207  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1415:profiles_changed: profiles changed to 00000084 00000000 (change 00000000) switching_codec:0
+D 20:09:30.972919         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5, interface org.freedesktop.DBus.Properties
+D 20:09:31.049316  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+BAC=1,2
+D 20:09:31.049361  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 42 41 43 3d 31 2c 32 0d 
+D 20:09:31.049378  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+BAC=1,2
+D 20:09:31.049397  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:932:rfcomm_hfp_ag: RFCOMM AT+BAC found codec 1
+D 20:09:31.049413  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:932:rfcomm_hfp_ag: RFCOMM AT+BAC found codec 2
+I 20:09:31.049709  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:732:device_supports_codec: bluez-monitor/hardware.conf: alt6:1 alt1/5:1
+D 20:09:31.051555  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:750:device_supports_codec: adapter /org/bluez/hci0: has msbc/esco transport
+D 20:09:31.051577  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:945:rfcomm_hfp_ag: mSBC codec is supported
+D 20:09:31.051595  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.055823         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:4821:endpoint_handler: dbus: path=/MediaEndpoint/A2DPSource/ldac, interface=org.bluez.MediaEndpoint1, member=SelectConfiguration
+I 20:09:31.055849         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:625:endpoint_select_configuration: 0x7f7e21b03038: /MediaEndpoint/A2DPSource/ldac select conf 8
+D 20:09:31.055857         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:626:endpoint_select_configuration:   0x7f7e22078104: 2d 01 00 00 aa 00 35 07 
+D 20:09:31.055864         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:634:endpoint_select_configuration: 0x7f7e21b03038: /MediaEndpoint/A2DPSource/ldac codec:ldac
+D 20:09:31.055871         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:655:endpoint_select_configuration:   0x7fffa84aba60: 2d 01 00 00 aa 00 10 01 
+D 20:09:31.106610  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+CIND=?
+D 20:09:31.106679  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 43 49 4e 44 3d 3f 0d 
+D 20:09:31.106725  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+CIND=?
+D 20:09:31.106772  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> +CIND:("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("callheld",(0-2)),("signal",(0-5)),("roam",(0-1)),("battchg",(0-5))
+D 20:09:31.106842  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.107117         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:09:31.107198         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5/fd2, interface org.freedesktop.DBus.Introspectable
+D 20:09:31.107274         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5/fd2, interface org.bluez.MediaTransport1
+D 20:09:31.107333         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5/fd2, interface org.freedesktop.DBus.Properties
+D 20:09:31.107423         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:4821:endpoint_handler: dbus: path=/MediaEndpoint/A2DPSource/ldac, interface=org.bluez.MediaEndpoint1, member=SetConfiguration
+D 20:09:31.107486         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3337:transport_update_props: transport 0x7f7e21abd7f0: Device=/org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:31.107546         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3337:transport_update_props: transport 0x7f7e21abd7f0: UUID=0000110a-0000-1000-8000-00805f9b34fb
+D 20:09:31.107605         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3419:transport_update_props: transport 0x7f7e21abd7f0: Codec=ff
+D 20:09:31.107652         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3434:transport_update_props: transport 0x7f7e21abd7f0: Configuration=8
+D 20:09:31.107699         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3435:transport_update_props:   0x7f7e220781dc: 2d 01 00 00 aa 00 10 01 
+D 20:09:31.109174         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3337:transport_update_props: transport 0x7f7e21abd7f0: State=idle
+D 20:09:31.109181         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3484:transport_update_props: transport 0x7f7e21abd7f0: Delay=0
+D 20:09:31.109185         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3454:transport_update_props: transport 0x7f7e21abd7f0: Volume=40
+D 20:09:31.109201         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3337:transport_update_props: transport 0x7f7e21abd7f0: Endpoint=/org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5
+D 20:09:31.109207         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:4720:endpoint_set_configuration: 0x7f7e21b03038: /MediaEndpoint/A2DPSource/ldac codec:ldac
+I 20:09:31.109211         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:4749:endpoint_set_configuration: 0x7f7e21b03038: /MediaEndpoint/A2DPSource/ldac validate conf channels:2
+D 20:09:31.109217         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8970: profiles 00000084 00000004 connectable:0000078f added:1 all:0 dir:0 set:1
+D 20:09:31.109220         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:1980:device_start_timer: device 0x7f7e21ad8970: start timer
+I 20:09:31.109228  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1415:profiles_changed: profiles changed to 00000084 00000004 (change 00000004) switching_codec:0
+D 20:09:31.111849         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6078:filter_cb: Properties changed in transport /org/bluez/hci0/dev_24_12_31_B5_51_FA/sep5/fd2
+D 20:09:31.111903         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3484:transport_update_props: transport 0x7f7e21abd7f0: Delay=2800
+D 20:09:31.183092  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+CIND?
+D 20:09:31.183106  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 43 49 4e 44 3f 0d 
+D 20:09:31.183110  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+CIND?
+D 20:09:31.183115  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> +CIND: 0,0,0,0,0,0,0
+D 20:09:31.183131  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.296431  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+CMER=3,0,0,1
+D 20:09:31.296452  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 43 4d 45 52 3d 33 2c 30 2c 30 2c 31 0d 
+D 20:09:31.296457  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+CMER=3,0,0,1
+D 20:09:31.296462  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.296472  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:973:rfcomm_hfp_ag: RFCOMM initial codec setup
+D 20:09:31.296475  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> +BCS: 2
+D 20:09:31.296479  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:3196:codec_switch_start_timer: rfcomm 0x7f7e22077f20: start timer
+D 20:09:31.309228         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:3229:spa_bt_transport_volume_changed: transport 0x7f7e21abd7f0: volume changed 40(0.031244) 
+D 20:09:31.349748  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+CLIP=1AT+BCS=2
+D 20:09:31.349761  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 43 4c 49 50 3d 31 0d 41 54 2b 42 43 53 
+D 20:09:31.349765  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac260: 3d 32 0d 
+D 20:09:31.349769  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+CLIP=1
+D 20:09:31.349775  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.349781  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+BCS=2
+D 20:09:31.349793  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:1019:rfcomm_hfp_ag: RFCOMM selected_codec = 2
+D 20:09:31.349800         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8970: profiles 00000084 000000a4 connectable:0000078f added:1 all:1 dir:1 set:1
+D 20:09:31.349804         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2008:device_stop_timer: device 0x7f7e21ad8970: stop timer
+D 20:09:31.349813  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1506:device_connected: 0x7f7e215d52e8: connected: 1
+D 20:09:31.349816  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1264:emit_remove_nodes: 0x7f7e215d52e8: remove nodes
+D 20:09:31.350633  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1774:set_initial_profile: initial profile off
+D 20:09:31.350837  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1264:emit_remove_nodes: 0x7f7e215d52e8: remove nodes
+I 20:09:31.350929         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:09:31.350936         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283463444561
+D 20:09:31.351711  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1774:set_initial_profile: initial profile off
+I 20:09:31.351741         s-monitors bluez.lua:389:chunk: <WpSpaDevice:0x7f7e21e228f0> 2, Moondrop Golden Ages (24:12:31:B5:51:FA): connected
+I 20:09:31.351843  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1415:profiles_changed: profiles changed to 00000084 00000084 (change 00000080) switching_codec:0
+D 20:09:31.352557  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:481:rfcomm_emit_volume_changed: volume changed -1
+D 20:09:31.352562  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.352592  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1042:device_set_update: 0x7f7e21f33458: /org/bluez/hci0/dev_24_12_31_B5_51_FA belongs to set /org/bluez/hci0/dev_24_12_31_B5_51_FA leader:1
+D 20:09:31.352719  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1042:device_set_update: 0x7f7e21f33458: /org/bluez/hci0/dev_24_12_31_B5_51_FA belongs to set /org/bluez/hci0/dev_24_12_31_B5_51_FA leader:1
+I 20:09:31.354068           s-device find-best-profile.lua:69:chunk: <WpDevice:65:0x7f7e219d9590> Found best profile 'a2dp-sink' (131080) for device 'bluez_card.24_12_31_B5_51_FA'
+I 20:09:31.354171           s-device apply-profile.lua:47:chunk: <WpDevice:65:0x7f7e219d9590> Setting profile a2dp-sink on bluez_card.24_12_31_B5_51_FA
+D 20:09:31.354320  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2805:impl_set_param: 0x7f7e21f33458: setting profile 2 codec:8 save:0
+D 20:09:31.354329  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1264:emit_remove_nodes: 0x7f7e21f33458: remove nodes
+D 20:09:31.354337  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1372:codec_switched: codec switched (status 0)
+D 20:09:31.354340  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1264:emit_remove_nodes: 0x7f7e21f33458: remove nodes
+D 20:09:31.354344  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:1042:device_set_update: 0x7f7e21f33458: /org/bluez/hci0/dev_24_12_31_B5_51_FA belongs to set /org/bluez/hci0/dev_24_12_31_B5_51_FA leader:1
+D 20:09:31.354348  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:654:emit_node: 0x7f7e21f33458: node, transport:0x7f7e21abd7f0 id:00000001 factory:api.bluez5.a2dp.sink
+I 20:09:31.354391         s-monitors bluez.lua:306:chunk: Create node: bluez_output.24_12_31_B5_51_FA.1: api.bluez5.a2dp.sink 1
+I 20:09:31.354423         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:09:31.354428         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283466937173
+I 20:09:31.354470         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:09:31.354474         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283466983511
+I 20:09:31.354478         pw.context ../pipewire-1.4.2/src/pipewire/context.c:741:pw_context_release_loop: release name:'data-loop.0' class:'data.rt' last_used:11283466983511
+I 20:09:31.354491         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.354495         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467004741
+I 20:09:31.354655         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.354660         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467169484
+I 20:09:31.354739         pw.context ../pipewire-1.4.2/src/pipewire/context.c:1526:pw_context_recalc_graph: 0x7f7e223b0160: busy:0 reason:register active node
+D 20:09:31.354848  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:756:init_dummy_input_node: 0x7f7e21f33458: node, id:00000000
+I 20:09:31.354949         s-monitors bluez.lua:498:checkProfiles: create SCO loopback node: 24:12:31:B5:51:FA
+I 20:09:31.355210         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:09:31.355216         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467725718
+I 20:09:31.355220         pw.context ../pipewire-1.4.2/src/pipewire/context.c:741:pw_context_release_loop: release name:'data-loop.0' class:'data.rt' last_used:11283467725718
+I 20:09:31.355228         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.355234         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467743121
+I 20:09:31.355281         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.355286         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467795010
+I 20:09:31.355416         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'(null)' class:'(null)'
+I 20:09:31.355421         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467930266
+I 20:09:31.355425         pw.context ../pipewire-1.4.2/src/pipewire/context.c:741:pw_context_release_loop: release name:'data-loop.0' class:'data.rt' last_used:11283467930266
+I 20:09:31.355438         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.355442         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283467951186
+I 20:09:31.355560         pw.context ../pipewire-1.4.2/src/pipewire/context.c:718:pw_context_acquire_loop: 0x7f7e223b0160: looking for name:'data-loop.0' class:'(null)'
+I 20:09:31.355565         pw.context ../pipewire-1.4.2/src/pipewire/context.c:696:acquire_data_loop: 0x7f7e223b0160: using name:'data-loop.0' class:'data.rt' last_used:11283468074219
+I 20:09:31.357352           s-device select-routes.lua:92:chunk: <WpDevice:65:0x7f7e219d9590> restore routes for profile(off) of device(bluez_card.24_12_31_B5_51_FA)
+I 20:09:31.357703           s-device state-routes.lua:120:chunk: <WpDevice:65:0x7f7e219d9590> No routes selected to set on bluez_card.24_12_31_B5_51_FA
+I 20:09:31.361277           s-device select-routes.lua:92:chunk: <WpDevice:65:0x7f7e219d9590> restore routes for profile(a2dp-sink) of device(bluez_card.24_12_31_B5_51_FA)
+I 20:09:31.361429           s-device state-routes.lua:60:chunk: <WpDevice:65:0x7f7e219d9590> restoring route for device ID 1
+I 20:09:31.361437           s-device state-routes.lua:81:chunk: <WpDevice:65:0x7f7e219d9590> found stored route: headset-output
+D 20:09:31.361742           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21b87f20> setting route(headset-output) on for device(bluez_card.24_12_31_B5_51_FA)(<WpDevice:0x7f7e219d9590>):
+  Object: size 216, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 1
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 120, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:latencyOffsetNsec (65550), flags 00000000
+          Long 0
+        Prop: key Spa:Pod:Object:Param:Props:channelMap (65547), flags 00000000
+          Array: child.size 4, child.type Spa:Id
+            Id 3        (Spa:Enum:AudioChannel:FL)
+            Id 4        (Spa:Enum:AudioChannel:FR)
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.031244
+            Float 0.031244
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool false
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool true
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 1
+
+I 20:09:31.361951  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2673:node_set_latency_offset: node 1 latency offset 0 nsec
+I 20:09:31.361963  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2642:node_set_mute: node 1 mute 0
+I 20:09:31.361970  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2603:node_set_volume: node 1 volume 0.031244
+D 20:09:31.361975  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2617:node_set_volume: node 1 hardware volume 0.031244
+I 20:09:31.363994           s-device state-routes.lua:225:chunk: <WpDevice:65:0x7f7e219d9590> new active route(headset-input) found of device(bluez_card.24_12_31_B5_51_FA)
+I 20:09:31.364015           s-device state-routes.lua:225:chunk: <WpDevice:65:0x7f7e219d9590> new active route(headset-output) found of device(bluez_card.24_12_31_B5_51_FA)
+D 20:09:31.364312           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e219c4680> setting route(headset-input) on for device(bluez_card.24_12_31_B5_51_FA)(<WpDevice:0x7f7e219d9590>):
+  Object: size 160, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 0
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 64, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool false
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 1.000000
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool false
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 0
+
+D 20:09:31.364353           s-device apply-routes.lua:89:chunk: <WpSpaPod:0x7f7e21b87f20> setting route(headset-output) on for device(bluez_card.24_12_31_B5_51_FA)(<WpDevice:0x7f7e219d9590>):
+  Object: size 216, type Spa:Pod:Object:Param:Route (262153), id Spa:Enum:ParamId:Route (13)
+    Prop: key Spa:Pod:Object:Param:Route:index (1), flags 00000000
+      Int 1
+    Prop: key Spa:Pod:Object:Param:Route:props (10), flags 00000000
+      Object: size 120, type Spa:Pod:Object:Param:Props (262146), id Spa:Enum:ParamId:Route (13)
+        Prop: key Spa:Pod:Object:Param:Props:latencyOffsetNsec (65550), flags 00000000
+          Long 0
+        Prop: key Spa:Pod:Object:Param:Props:channelMap (65547), flags 00000000
+          Array: child.size 4, child.type Spa:Id
+            Id 3        (Spa:Enum:AudioChannel:FL)
+            Id 4        (Spa:Enum:AudioChannel:FR)
+        Prop: key Spa:Pod:Object:Param:Props:channelVolumes (65544), flags 00000000
+          Array: child.size 4, child.type Spa:Float
+            Float 0.031244
+            Float 0.031244
+        Prop: key Spa:Pod:Object:Param:Props:mute (65540), flags 00000000
+          Bool false
+    Prop: key Spa:Pod:Object:Param:Route:save (13), flags 00000000
+      Bool true
+    Prop: key Spa:Pod:Object:Param:Route:device (3), flags 00000000
+      Int 1
+
+I 20:09:31.364603  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2642:node_set_mute: node 0 mute 0
+I 20:09:31.364610  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2603:node_set_volume: node 0 volume 1.000000
+I 20:09:31.364650  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2673:node_set_latency_offset: node 1 latency offset 0 nsec
+I 20:09:31.364660  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2642:node_set_mute: node 1 mute 0
+I 20:09:31.364665  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2603:node_set_volume: node 1 volume 0.031244
+D 20:09:31.364671  spa.bluez5.device ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-device.c:2617:node_set_volume: node 1 hardware volume 0.031244
+I 20:09:31.365465         pw.context ../pipewire-1.4.2/src/pipewire/context.c:1526:pw_context_recalc_graph: 0x7f7e223b0160: busy:0 reason:node flags changed
+I 20:09:31.366613         pw.context ../pipewire-1.4.2/src/pipewire/context.c:1526:pw_context_recalc_graph: 0x7f7e223b0160: busy:0 reason:node flags changed
+I 20:09:31.368101         pw.context ../pipewire-1.4.2/src/pipewire/context.c:1526:pw_context_recalc_graph: 0x7f7e223b0160: busy:0 reason:node flags changed
+I 20:09:31.369548           s-device state-routes.lua:237:chunk: <WpDevice:65:0x7f7e219d9590> storing route(headset-output) props of device(bluez_card.24_12_31_B5_51_FA)
+I 20:09:31.372679    m-lua-scripting filter-utils.lua:292:rescanFilters: rescanning filters...
+D 20:09:31.396596  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+XAPL=000D-0001-0101,2
+D 20:09:31.396627  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 58 41 50 4c 3d 30 30 30 44 2d 30 30 30 
+D 20:09:31.396632  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac260: 31 2d 30 31 30 31 2c 32 0d 
+D 20:09:31.396635  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+XAPL=000D-0001-0101,2
+D 20:09:31.396642  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> +XAPL=iPhone,2
+D 20:09:31.396658  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.403110  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+BIA=0,1,1,1,0,0,0
+D 20:09:31.403121  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 42 49 41 3d 30 2c 31 2c 31 2c 31 2c 30 
+D 20:09:31.403124  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac260: 2c 30 2c 30 0d 
+D 20:09:31.403127  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+BIA=0,1,1,1,0,0,0
+D 20:09:31.403130  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.423090  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+VGM=9
+D 20:09:31.423101  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 56 47 4d 3d 39 0d 
+D 20:09:31.423104  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+VGM=9
+D 20:09:31.423108  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:481:rfcomm_emit_volume_changed: volume changed 9
+D 20:09:31.423111  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.436416  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+VGS=7
+D 20:09:31.436429  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 56 47 53 3d 37 0d 
+D 20:09:31.436433  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+VGS=7
+D 20:09:31.436438  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:481:rfcomm_emit_volume_changed: volume changed 7
+D 20:09:31.436442  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.503066  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2462:rfcomm_event: RFCOMM << AT+IPHONEACCEV=1,1,9
+D 20:09:31.503083  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac250: 41 54 2b 49 50 48 4f 4e 45 41 43 43 45 56 3d 31 
+D 20:09:31.503087  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2463:rfcomm_event:   0x7fffa84ac260: 2c 31 2c 39 0d 
+D 20:09:31.503090  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:2430:rfcomm_process_events: RFCOMM event: AT+IPHONEACCEV=1,1,9
+D 20:09:31.503097  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:797:process_iphoneaccev_indicator: key:1 value:9
+D 20:09:31.503099  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:803:process_iphoneaccev_indicator: battery level: 100%
+D 20:09:31.503756  spa.bluez5.native ../pipewire-1.4.2/spa/plugins/bluez5/backend-native.c:424:rfcomm_send_reply: RFCOMM >> OK
+D 20:09:31.503810         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:400:on_battery_provider_registered: Registered Battery Provider
+D 20:09:31.504066         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:381:battery_create: Created virtual battery for 24:12:31:B5:51:FA
+D 20:09:31.504167         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5962:filter_cb: interfaces added /
+D 20:09:31.504175         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:5617:interface_added: Found object /org/bluez/hci0/dev_24_12_31_B5_51_FA, interface org.bluez.Battery1
+D 20:09:31.555805         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:6031:filter_cb: Properties changed in device /org/bluez/hci0/dev_24_12_31_B5_51_FA
+D 20:09:31.555819         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2420:device_update_props: device 0x7f7e21ad8970: ServicesResolved=1
+D 20:09:31.555828         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2059:spa_bt_device_check_profiles: device 0x7f7e21ad8970: profiles 00000084 000000a4 connectable:0000078f added:1 all:1 dir:1 set:1
+D 20:09:31.556105         spa.bluez5 ../pipewire-1.4.2/spa/plugins/bluez5/bluez5-dbus.c:2125:device_update_hw_volume_profiles: hw-volume-profiles:000007ef

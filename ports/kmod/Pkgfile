@@ -1,38 +1,21 @@
-version="29"
+version="34"
 desc="Kernel module utilities and library"
 deps=["zlib", "xz", "zstd"]
 makedeps=["zlib", "xz", "zstd"]
 source=[
-	{url="http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"},
+	{url="https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"},
 	{url="depmod-search.conf"},
 	{url="depmod.toml"},
 ]
 
 build='''
-	cd kmod-$version
-
-	./configure --prefix= \
-		--with-xz \
-		--with-zlib \
-		--with-zstd \
-		--enable-tools \
-		--bindir=/bin \
-		--sysconfdir=/etc 
-
-	make
-	make DESTDIR="$pkgdir" install
+	noname-meson kmod-$version build -Dmanpages=false
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 
 	install -d "$pkgdir"/etc/modprobe.d
 	install -d "$pkgdir"/etc/depmod.d
-	install -d "$pkgdir"/bin
-	ln -s kmod "$pkgdir"/bin/modinfo
-	ln -s kmod "$pkgdir"/bin/depmod
-	ln -s kmod "$pkgdir"/bin/insmod
-	ln -s kmod "$pkgdir"/bin/rmmod
-	ln -s kmod "$pkgdir"/bin/modprobe
-	ln -s kmod "$pkgdir"/bin/lsmod
-
-	install -Dm755 ../depmod.toml "$pkgdir/${HOOKS#$ROOT}"/depmod.toml
-
+	install -Dm755 "$srcdir"/depmod.toml "$pkgdir/${HOOKS#$ROOT}"/depmod.toml
 	install -Dm644 "$srcdir/depmod-search.conf" "$pkgdir/lib/depmod.d/search.conf"
 '''

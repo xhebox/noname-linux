@@ -1,7 +1,7 @@
 version="2.82.1"
 desc="Low-level data structure handling, portability wrappers, and interfaces for runtime functionality"
 makedeps=["pcre2", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus", "meson"]
-deps=["pcre2", "libffi", "python3", "elfutils", "zlib", "util-linux", "dbus"]
+deps=["pcre2", "libffi", "elfutils", "zlib", "util-linux", "dbus"]
 source=[
 	{url="https://download.gnome.org/sources/glib/${version%.*}/glib-$version.tar.xz"},
 	{url="gio.toml"},

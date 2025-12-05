@@ -24,8 +24,8 @@ build='''
 	sed -i "s|-O2|${CFLAGS}|g" Makefile-libbz2_so
 	sed -i -e "s:1\.0\.4:$version:" bzip2.1 bzip2.txt Makefile-libbz2_so manual.*
 
-	make -f Makefile-libbz2_so all
-	make bzip2 bzip2recover
+	make CC=$CC -f Makefile-libbz2_so all
+	make CC=$CC bzip2 bzip2recover
 
 	install -dm755 $pkgdir/bin $pkgdir/lib $pkgdir/include $pkgdir/share/man/man1 
 	install -m755 bzip2-shared $pkgdir/bin/bzip2

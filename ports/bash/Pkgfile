@@ -1,4 +1,4 @@
-version="5.0"
+version="5.2.37"
 desc="An sh-compatible command language interpreter"
 makedeps=["ncurses", "readline"]
 deps=["ncurses", "readline", "musl"]
@@ -13,11 +13,6 @@ source=[
 
 ext='''
 	cd bash-$version
-	url="http://ftp.gnu.org/gnu/bash/bash-$version-patches"
-	for p in $(seq -w 001 007); do
-		curl "$url/bash`echo $version | tr -d '.'`-${p}" | patch -p0 -i -
-	done
-
 	for i in $source; do
 		case $i in
 		*memleak*.patch) patch -p1 -i "$srcdir/$i";;

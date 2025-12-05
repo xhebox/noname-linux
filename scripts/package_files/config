@@ -1,16 +1,17 @@
-arch64 = "x86_64"
-arch32 = "i386"
-target64 = "x86_64-pc-linux-musl"
-target32 = "i386-pc-linux-musl"
+arch = "x86_64"
+target = "x86_64-unknown-linux-musl"
+other_targets = []
 color = true
 ccache = true
 root = "/"
+buildroot = "/home/xhe/.cache/pkg"
 database = "/var/db/npkg"
 hooks = "/etc/pkg/hooks"
-ports = [
-	"/noname-linux/ports"
-]
-
-CFLAGS = "-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -fdata-sections -ffunction-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack"
-CXXFLAGS = "-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -fdata-sections -ffunction-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack"
-LDFLAGS = "-Wl,--gc-sections -Wl,-O1,--sort-common,--as-needed,-z,relro"
+ports = "/home/xhe/project/noname-linux/ports"
+CFLAGS = "-march=haswell -mtune=znver2 -O2 -pipe -fno-plt -D_LARGEFILE64_SOURCE"
+CXXFLAGS = "-march=haswell -mtune=znver2 -O2 -pipe -fno-plt -D_LARGEFILE64_SOURCE"
+CC = "clang"
+CXX = "clang++"
+LDFLAGS = "-Wl,--as-needed,-z,relro"
+MAKEFLAGS = 12
+CMAKE_GENERATOR = "ninja"

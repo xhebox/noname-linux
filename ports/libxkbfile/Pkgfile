@@ -1,0 +1,12 @@
+version="1.1.3"
+desc="X11 keyboard file manipulation library"
+makedeps=["xorgproto", "libx11", "util-macros", "meson"]
+deps=["xorgproto", "libx11"]
+source=[{url="https://www.x.org/pub/individual/lib/libxkbfile-$version.tar.xz"}]
+
+build='''
+	noname-meson libxkbfile-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

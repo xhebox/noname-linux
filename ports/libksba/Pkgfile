@@ -1,0 +1,17 @@
+version="1.6.7"
+makedeps=["libgpg-error"]
+deps=["libgpg-error"]
+desc="Library for working with X.509 certificates, CMS data and related objects"
+source=[
+  {url="https://gnupg.org/ftp/gcrypt/libksba/libksba-${version}.tar.bz2"}
+]
+
+build='''
+  cd libksba-$version
+  ./configure \
+    --prefix= \
+    --disable-static \
+    --disable-padlock-support
+  make
+  make DESTDIR="$pkgdir" install
+'''

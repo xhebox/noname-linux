@@ -1,7 +1,10 @@
-version="2.4.48"
+version="2.5.2"
 desc="Extented attributes library"
 deps=["musl"]
-source=[{url="http://download-mirror.savannah.gnu.org/releases/attr/attr-$version.tar.gz"}]
+source=[
+	{url="http://download-mirror.savannah.gnu.org/releases/attr/attr-$version.tar.gz"},
+	{url="attr-basename.patch"},
+]
 
 ext='''
 	cd attr-$version

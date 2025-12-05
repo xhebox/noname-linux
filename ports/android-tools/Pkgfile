@@ -1,6 +1,6 @@
 version="34.0.5"
 desc="Android platform tools"
-deps=["python3", "pcre2", "libusb", "protobuf", "zstd", "lz4", "brotli"]
+deps=["pcre2", "libusb", "protobuf", "zstd", "lz4", "brotli", "python3"]
 makedeps=["pcre2", "libusb", "go", "perl", "protobuf", "zstd", "lz4", "brotli", "gtest", "cmake"]
 source=[
 	{url="https://github.com/nmeum/android-tools/releases/download/$version/android-tools-$version.tar.xz"},
@@ -13,8 +13,7 @@ build='''
 	export GOTMPDIR="$srcdir"
 	export GOMODCACHE="$srcdir/go"
 	#-DCMAKE_CXX_FLAGS="$CXXFLAGS" -DCMAKE_C_FLAGS="$CFLAGS" \
-	cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release \
-																									-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON -Dprotobuf_MODULE_COMPATIBLE=ON  -S android-tools-$version
+	cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON -Dprotobuf_MODULE_COMPATIBLE=ON  -S android-tools-$version
 	cmake --build build
 	DESTDIR="$pkgdir" cmake --install build
 	install -Dm 644 51-android.rules "$pkgdir"/lib/udev/rules.d/51-android.rules

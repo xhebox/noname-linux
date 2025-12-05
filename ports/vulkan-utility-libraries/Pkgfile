@@ -1,0 +1,19 @@
+version = "1.4.313.0"
+desc = "Vulkan utility libraries"
+deps = ["vulkan-loader"]
+makedeps = [
+  "vulkan-loader",
+  "cmake",
+  "vulkan-headers",
+]
+source = [
+  { url = "https://github.com/KhronosGroup/Vulkan-Utility-Libraries/archive/refs/tags/vulkan-sdk-$version.tar.gz"},
+]
+
+build = '''
+	noname-cmake Vulkan-Utility-Libraries-vulkan-sdk-$version -Bbuild1 \
+		-DCMAKE_SKIP_RPATH=True \
+		-DBUILD_TESTS=Off
+	cmake --build build1
+	DESTDIR="$pkgdir" cmake --build build1 --target install
+'''

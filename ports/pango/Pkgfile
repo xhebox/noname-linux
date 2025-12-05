@@ -1,14 +1,10 @@
-version="1.50.3"
+version="1.56.1"
 desc="library for layout and rendering of text"
-makedeps=["expat", "fontconfig", "harfbuzz", "glib", "cairo", "gobject-introspection"]
-deps=["expat", "fontconfig", "harfbuzz", "glib", "cairo"]
+makedeps=["fribidi", "fontconfig", "harfbuzz", "glib", "cairo", "gobject-introspection"]
+deps=["fribidi", "fontconfig", "harfbuzz", "glib", "cairo"]
 source=[
 	{url="https://download.gnome.org/sources/pango/${version%.*}/pango-$version.tar.xz"},
 ]
-
-ext='''
-	cd pango-$version
-'''
 
 build='''
 	noname-meson pango-$version build -Dlibthai=disabled -Dxft=disabled

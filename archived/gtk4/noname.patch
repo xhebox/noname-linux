@@ -1,0 +1,74 @@
+--- gtk+-3.24.1/gdk/wayland/gdkwaylanddisplay.h	2018-02-18 06:30:46.000000000 +0800
++++ gtk+-3.24.1/gdk/wayland/gdkwaylanddisplay.h	2018-02-18 06:30:46.000000000 +0800
+@@ -39,6 +39,7 @@
+ #define GDK_WAYLAND_DISPLAY(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WAYLAND_DISPLAY, GdkWaylandDisplay))
+ #define GDK_WAYLAND_DISPLAY_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WAYLAND_DISPLAY, GdkWaylandDisplayClass))
+ #define GDK_IS_WAYLAND_DISPLAY(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WAYLAND_DISPLAY))
++#define GDK_IS_X11_DISPLAY(object)            (false)
+ #define GDK_IS_WAYLAND_DISPLAY_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_WAYLAND_DISPLAY))
+ #define GDK_WAYLAND_DISPLAY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WAYLAND_DISPLAY, GdkWaylandDisplayClass))
+ 
+--- a/gsk/gl/fp16.c	2025-03-06 22:30:46.982953933 +0800
++++ a/gsk/gl/fp16.c	2025-03-06 22:30:46.982953933 +0800
+@@ -128,49 +128,36 @@
+ 
+ #else
+ 
+-void float_to_half4 (const float f[4], guint16 h[4]) __attribute__((ifunc ("resolve_float_to_half4")));
+-void half_to_float4 (const guint16 h[4], float f[4]) __attribute__((ifunc ("resolve_half_to_float4")));
+-void float_to_half (const float *f, guint16 *h, int n) __attribute__((ifunc ("resolve_float_to_half")));
+-void half_to_float (const guint16 *h, float *f, int n) __attribute__((ifunc ("resolve_half_to_float")));
+-
+-static void * __attribute__ ((no_sanitize_address)) G_GNUC_UNUSED
+-resolve_float_to_half4 (void)
+-{
++void float_to_half4 (const float f[4], guint16 h[4]) {
+   __builtin_cpu_init ();
+   if (__builtin_cpu_supports ("f16c"))
+-    return float_to_half4_f16c;
++    return float_to_half4_f16c(f, h);
+   else
+-    return float_to_half4_c;
++    return float_to_half4_c(f, h);
+ }
+ 
+-static void * __attribute__ ((no_sanitize_address)) G_GNUC_UNUSED
+-resolve_half_to_float4 (void)
+-{
++void half_to_float4 (const guint16 h[4], float f[4]) {
+   __builtin_cpu_init ();
+   if (__builtin_cpu_supports ("f16c"))
+-    return half_to_float4_f16c;
++    return half_to_float4_f16c(h, f);
+   else
+-    return half_to_float4_c;
++    return half_to_float4_c(h, f);
+ }
+ 
+-static void * __attribute__ ((no_sanitize_address)) G_GNUC_UNUSED
+-resolve_float_to_half (void)
+-{
++void float_to_half (const float *f, guint16 *h, int n) {
+   __builtin_cpu_init ();
+   if (__builtin_cpu_supports ("f16c"))
+-    return float_to_half_f16c;
++    return float_to_half_f16c(f, h, n);
+   else
+-    return float_to_half_c;
++    return float_to_half_c(f, h, n);
+ }
+ 
+-static void * __attribute__ ((no_sanitize_address)) G_GNUC_UNUSED
+-resolve_half_to_float (void)
+-{
++void half_to_float (const guint16 *h, float *f, int n) {
+   __builtin_cpu_init ();
+   if (__builtin_cpu_supports ("f16c"))
+-    return half_to_float_f16c;
++    return half_to_float_f16c(h, f, n);
+   else
+-    return half_to_float_c;
++    return half_to_float_c(h, f, n);
+ }
+ 
+ #endif

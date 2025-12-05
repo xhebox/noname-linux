@@ -1,6 +1,6 @@
-version="24.1.4"
-makedeps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
-deps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libglvnd", "vulkan", "wayland"]
+version="25.1.5"
+makedeps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
+deps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://archive.mesa3d.org/mesa-$version.tar.xz"},
@@ -27,38 +27,32 @@ ext='''
 '''
 
 build='''
-	python3 -m venv ss
+	python3 -m venv --system-site-packages ss
 	. ./ss/bin/activate
-	pip install mako ply
+	pip install mako ply PyYAML
 	ulimit -n 100000
 	noname-meson mesa-$version build \
 		-D b_ndebug=true \
-		-D platforms=wayland \
-		-D gallium-drivers=i915,iris,radeonsi,kmsro,virgl \
-		-D vulkan-drivers=amd,intel,virtio \
-		-D vulkan-layers=device-select,overlay \
-		-D dri3=enabled \
+		-D platforms=x11,wayland \
+		-D gallium-drivers=i915,crocus,iris,zink,nouveau,radeonsi,llvmpipe,softpipe \
+		-D vulkan-drivers=swrast,amd,intel,intel_hasvk,virtio \
+		-D vulkan-layers=device-select,overlay,intel-nullhw \
 		-D egl=enabled \
 		-D intel-rt=enabled \
 		-D gallium-extra-hud=true \
-		-D gallium-nine=false \
 		-D gallium-vdpau=disabled \
-		-D gallium-omx=disabled \
 		-D gallium-va=enabled \
-		-D gallium-xa=disabled \
-		-D gallium-opencl=icd \
 		-D microsoft-clc=disabled \
 		-D intel-clc=auto \
 		-D android-libbacktrace=disabled \
 		-D gbm=enabled \
 		-D gles1=disabled \
 		-D gles2=enabled \
-		-D glx=disabled \
-		-D glvnd=true \
+		-D glx=dri \
+		-D glvnd=enabled \
 		-D llvm=enabled \
 		-D libunwind=disabled \
 		-D lmsensors=enabled \
-		-D shared-glapi=enabled \
 		-D valgrind=disabled \
 		-D zstd=enabled \
 		-D xlib-lease=disabled \

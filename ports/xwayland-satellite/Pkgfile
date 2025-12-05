@@ -1,0 +1,14 @@
+version="0.8"
+desc="xwayland-satellite grants rootless Xwayland integration to any Wayland compositor implementing xdg_wm_base and viewporter."
+makedeps=["rust", "xwayland", "libxcb", "xcb-util-cursor"]
+deps=["rust", "xwayland", "libxcb", "xcb-util-cursor"]
+source=[
+	{url="https://github.com/Supreeeme/xwayland-satellite/archive/refs/tags/v$version.tar.gz"},
+]
+
+build='''
+	cd xwayland-satellite-$version
+	export CARGO_HOME="$srcdir/.cargo"
+	cargo build $MAKEFLAGS --release --verbose
+	install -vDm 755 target/release/xwayland-satellite -t "$pkgdir/bin/"
+'''

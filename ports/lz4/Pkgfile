@@ -1,7 +1,6 @@
-version="1.8.3"
+version="1.10.0"
 desc="fast lossless compression algorithm"
 source=[{url="https://github.com/lz4/lz4/archive/v$version.tar.gz"}]
-deps=["musl"]
 
 build='''
 	cd lz4-$version

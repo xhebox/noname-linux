@@ -1,0 +1,12 @@
+version="0.3.10"
+makedeps=["libxcb"]
+deps=["libxcb"]
+desc="XCB utilities library"
+source=[{url="https://xcb.freedesktop.org/dist/xcb-util-renderutil-$version.tar.xz"}]
+
+build='''
+	cd xcb-util-renderutil-$version
+	./configure --prefix=/ --disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

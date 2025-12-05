@@ -1,0 +1,14 @@
+version="1.8.0"
+desc="wayland notification"
+makedeps=["wayland-protocols", "fontconfig", "libpng", "fcft", "tllist"]
+deps=["wayland", "fontconfig", "libpng", "fcft"]
+source=[
+	{url="https://codeberg.org/dnkl/fnott/releases/download/$version/fnott-$version.tar.gz"},
+]
+
+build='''
+	noname-meson fnott-$version build -Ddocs=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

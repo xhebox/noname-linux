@@ -1,6 +1,6 @@
-version="20210119"
-nss_version="3.66"
-nss_versions="`echo $version | tr . _`"
+version="20240618"
+nss_version="3.108"
+nss_versions="`echo $nss_version | tr . _`"
 desc="Common CA certificate"
 source=[
 	{url="https://archive.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${nss_versions}_RTM/src/nss-${nss_version}.tar.gz"},
@@ -34,7 +34,7 @@ build='''
 
 # Compatiblity link for legacy bundle
 	ln -sr "$pkgdir/etc/ca-certificates/extracted/tls-ca-bundle.pem" "$pkgdir/etc/ssl/certs/ca-certificates.crt"
-	install -Dm644 ../ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
+	install -Dm644 "$srcdir"/ca-certs.toml "$pkgdir/${HOOKS#$ROOT}"/ca-certs.toml
 
 	cd nss-${nss_version}
   mkdir certs

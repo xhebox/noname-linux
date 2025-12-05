@@ -1,8 +1,8 @@
-version="4.6.0"
+version="4.10.0"
 makedeps=["texinfo"]
 deps=["dash", "musl"]
 desc="Basic directory searching utilities"
-source=[{url="http://ftp.gnu.org/pub/gnu/findutils/findutils-$version.tar.gz"}]
+source=[{url="https://ftp.gnu.org/pub/gnu/findutils/findutils-$version.tar.xz"}]
 
 build='''
 	cd findutils-$version

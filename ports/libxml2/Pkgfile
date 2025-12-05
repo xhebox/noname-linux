@@ -1,12 +1,12 @@
 version="2.9.8"
 desc="XML library version 2"
-makedeps=["python3", "icu", "ncurses", "readline", "xz", "zlib"]
-deps=["icu", "ncurses", "readline", "xz", "zlib"]
+makedeps=["ncurses", "readline", "xz", "zlib"]
+deps=["ncurses", "readline", "xz", "zlib"]
 source=[{url="http://xmlsoft.org/sources/libxml2-$version.tar.gz"}]
 
 build='''
 	cd libxml2-$version 
-	./configure --prefix= --with-python=/bin/python3 --with-threads --with-history
+	./configure --prefix= --without-python --without-icu --with-threads --with-history
 	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
 	PYTHONHASHSEED=0 make
 	find doc -type f -exec chmod 0644 {} +

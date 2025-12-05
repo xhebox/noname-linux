@@ -1,0 +1,10 @@
+version="0.7.1"
+desc="BSD compatibility headers (cdefs, queue, tree)"
+source=[
+	{url="http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-cdefs.h"},
+	{url="http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-queue.h"},
+	{url="http://git.alpinelinux.org/cgit/aports/plain/main/libc-dev/sys-tree.h"},
+]
+
+build='''
+'''

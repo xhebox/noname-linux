@@ -1,0 +1,15 @@
+version="1.13.1"
+desc="wayland launcher"
+makedeps=["wayland-protocols", "libxkbcommon", "libpng", "librsvg", "cairo", "fcft", "tllist"]
+deps=["wayland", "libxkbcommon", "libpng", "librsvg", "cairo", "fcft"]
+source=[
+	{url="https://codeberg.org/dnkl/fuzzel/releases/download/$version/fuzzel-$version.tar.gz"},
+]
+
+build='''
+	sed -i "s;subdir('doc');;" fuzzel-$version/meson.build
+	noname-meson fuzzel-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

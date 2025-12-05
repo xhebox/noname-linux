@@ -1,0 +1,20 @@
+version = "7.349.0"
+desc = 'Reusable library for GPU-accelerated video/image rendering primitives'
+deps = ["vulkan", "glslang", "shaderc", "libglvnd", "lcms2", "xxhash"]
+makedeps = ["vulkan-headers", "glslang", "shaderc", "libglvnd", "lcms2", "xxhash", "vulkan-headers", "meson", "python3"]
+source = [
+	{protocol="git", url="https://github.com/haasn/libplacebo"},
+]
+
+  #{url="https://github.com/haasn/libplacebo/archive/refs/tags/v$version.tar.gz"},
+ext = '''
+	cd libplacebo
+	git submodule update --init --depth=1
+'''
+
+build = '''
+	noname-meson libplacebo build -Dunwind=disabled -Dd3d11=disabled -Ddovi=disabled -Ddemos=false -Dlibdovi=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

@@ -6,9 +6,6 @@ source=[{url="https://github.com/hukkin/tomli/archive/${version}/tomli-${version
 
 build='''
     cd tomli-${version}
-		python -m venv venv
-		. venv/bin/activate
-		pip install build installer flit-core
     python -m build -wn --skip-dependency-check
     python -m installer --prefix= -d "$pkgdir" dist/*.whl
 '''

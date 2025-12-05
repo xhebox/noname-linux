@@ -1,0 +1,39 @@
+version="4.17.5"
+desc="A multi-platform toolkit for creating graphical user interfaces"
+makedeps=["cairo", "graphene", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "libglvnd", "librsvg", "wayland-protocols", "vulkan-headers", "gobject-introspection"]
+deps=["cairo", "graphene", "gdk-pixbuf", "pixman", "pango", "libepoxy", "expat", "adwaita-icon-theme", "libglvnd", "wayland", "librsvg", "vulkan"]
+source=[
+	{url="https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/gtk-$version.tar.gz"},
+	{url="modules.toml"},
+	{url="icon.toml"},
+	{url="noname.patch"},
+]
+
+ext='''
+	cd gtk-$version
+	for i in $source;do
+		case $i in
+		test.patch) patch -Nbp0 -i "$srcdir/$i" ;;
+		*.patch) patch -Np1 -i "$srcdir/$i" ;;
+		esac
+	done
+'''
+
+build='''
+	export CFLAGS="$CFLAGS -D__clang__"
+	noname-meson gtk-$version build \
+		-Dx11-backend=false \
+		-Dwayland-backend=true \
+		-Dbuild-tests=false \
+		-Dbuild-testsuite=false \
+		-Dcolord=disabled \
+		-Dprint-cpdb=disabled \
+		-Dprint-cups=disabled \
+		-Dmedia-gstreamer=disabled \
+		-Dintrospection=enabled --wrap-mode default
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+	install -Dm644 icon.toml "$pkgdir/${HOOKS#$ROOT}"/gtk4-icon.toml
+	install -Dm644 modules.toml "$pkgdir/${HOOKS#$ROOT}"/gtk4-modules.toml
+'''

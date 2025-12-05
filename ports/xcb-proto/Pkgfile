@@ -1,0 +1,11 @@
+version="1.17.0"
+desc="XCB X protocol descriptions"
+makedeps=["python3"]
+source=[{url="https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-$version.tar.xz"}]
+
+build='''
+	 cd xcb-proto-$version
+	 ./configure --prefix=/ 
+	 make 
+	 make DESTDIR="$pkgdir" install 
+'''

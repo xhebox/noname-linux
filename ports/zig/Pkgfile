@@ -1,10 +1,10 @@
-version="0.13.0"
+version="0.15.2"
 desc="general-purpose programming language and toolchain for maintaining robust, optimal and reusable software."
 nostrip=true
 deps=["llvm"]
 makedeps=["llvm", "cmake"]
 source=[
-	{url="https://github.com/ziglang/zig/archive/refs/tags/$version.zip"},
+	{url="https://github.com/ziglang/zig/archive/refs/tags/$version.tar.gz"},
 	#{url="musl.patch"},
 ]
 

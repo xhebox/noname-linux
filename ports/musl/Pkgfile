@@ -1,7 +1,5 @@
 version = "1.2.5"
 desc = "An implementation of the standard C library for Linux-based systems."
-deps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
-makedeps = ["filesystem", "libc-dev", "fortify-headers", "pthread-stubs", "libucontext"]
 libgcc_version="13.2.1_git20240309-r0"
 
 source = [
@@ -16,6 +14,13 @@ source = [
   { url = "styp.patch" },
 	{ url = "res_init.patch" },
 	{ url = "handle_aux_at_base.patch" },
+	{url="sys-cdefs.h"},
+	{url="sys-queue.h"},
+	{url="sys-tree.h"},
+	{url="stat.patch"},
+	{url="http://xcb.freedesktop.org/dist/libpthread-stubs-0.3.tar.bz2"},
+	{url="http://dl.2f30.org/releases/fortify-headers-0.9.tar.gz"},
+	{url="https://github.com/kaniini/libucontext/archive/refs/tags/v1.3.3.tar.gz"},
 ]
 
 ext = '''
@@ -40,6 +45,23 @@ build = '''
 	unset LDFLAGS
 	unset CXXFLAGS
 	unset CFLAGS
+
+	for i in sys*.h; do
+		sed '/#warning/d' "$i" | install -D /dev/stdin "$pkgdir/include/sys/${i#sys-}"
+	done
+
+	cd "$srcdir"/libpthread-stubs-0.3
+	./configure --prefix=
+	make
+	make DESTDIR="$pkgdir" install
+
+	cd "$srcdir"/fortify-headers-0.9
+	make PREFIX= DESTDIR="$pkgdir" install
+
+	cd "$srcdir"/libucontext-1.3.3
+	sed -i 's|/usr|/|g' Makefile
+	make ARCH=$ARCH
+	make ARCH=$ARCH PREFIX=/ DESTDIR=$pkgdir install
 
 	cd "$srcdir"/gcompat-*
 	sed -i 's/__count/_count/g' libgcompat/pthread.c
@@ -107,5 +129,6 @@ EOF
 	done
 
 	cp "$srcdir"/usr/lib/libgcc*so* "$pkgdir"/lib/
+	ln -srf "$pkgdir"/lib/libgcc_s.so.1 "$pkgdir"/lib/libgcc_s.so
 	cp "$srcdir"/usr/lib/libstdc++*so* "$pkgdir"/lib/
 '''

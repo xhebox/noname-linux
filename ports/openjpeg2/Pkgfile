@@ -9,12 +9,7 @@ ext='''
 '''
 
 build='''
-	cd openjpeg-$version
-	mkdir build
-	cd build
-
-	noname-cmake .. -DBUILD_DOC=on
-
-	make
-	make DESTDIR="${pkgdir}" install
+	noname-cmake openjpeg-$version -Bbuild
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

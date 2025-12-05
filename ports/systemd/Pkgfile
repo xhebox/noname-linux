@@ -1,37 +1,10 @@
-version="255.10"
+version="musl-v257.8-split-usr"
 desc="system and service manager"
-makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "hwdata"]
+makedeps=["acl", "gperf", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "p11-kit", "hwdata"]
 nocache=true
-deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "cryptsetup", "p11-kit", "hwdata"]
+deps=["acl", "lz4", "xz", "pam", "elfutils", "nftables", "kmod", "libcap", "util-linux", "musl", "shadow", "gnu-efi-libs", "libseccomp", "pcre2", "libxkbcommon", "p11-kit", "hwdata"]
 source=[
-	{url="https://github.com/systemd/systemd-stable/archive/refs/tags/v$version.tar.gz"},
-	{url="0001-Use-Arch-Linux-device-access-groups.patch"},
-	{url="0001-missing_type.h-add-comparison_fn_t.patch"},
-	{url="0002-add-fallback-parse_printf_format-implementation.patch"},
-	{url="0002-binfmt-Don-t-install-dependency-links-at-install-tim.patch"},
-	{url="0003-src-basic-missing.h-check-for-missing-strndupa.patch"},
-	{url="0004-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch"},
-	{url="0005-add-missing-FTW_-macros-for-musl.patch"},
-	{url="0006-Use-uintmax_t-for-handling-rlim_t.patch"},
-	{url="0007-don-t-pass-AT_SYMLINK_NOFOLLOW-flag-to-faccessat.patch"},
-	{url="0008-Define-glibc-compatible-basename-for-non-glibc-syste.patch"},
-	{url="0008-implment-systemd-sysv-install-for-OE.patch"},
-	{url="0009-Do-not-disable-buffering-when-writing-to-oom_score_a.patch"},
-	{url="0010-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch"},
-	{url="0011-avoid-redefinition-of-prctl_mm_map-structure.patch"},
-	{url="0012-do-not-disable-buffer-in-writing-files.patch"},
-	{url="0013-Handle-__cpu_mask-usage.patch"},
-	{url="0014-Handle-missing-gshadow.patch"},
-	{url="0015-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch"},
-	{url="0016-pass-correct-parameters-to-getdents64.patch"},
-	{url="0017-Adjust-for-musl-headers.patch"},
-	{url="0018-test-bus-error-strerror-is-assumed-to-be-GNU-specifi.patch"},
-	{url="0019-errno-util-Make-STRERROR-portable-for-musl.patch"},
-	{url="0020-sd-event-Make-malloc_trim-conditional-on-glibc.patch"},
-	{url="0021-shared-Do-not-use-malloc_info-on-musl.patch"},
-	{url="0022-avoid-missing-LOCK_EX-declaration.patch"},
-
-	{url="musl.patch"},
+	{url="https://gitlab.postmarketos.org/postmarketOS/systemd/-/archive/$version/systemd-$version.tar.gz"},
 	{url="noname.patch"},
 
 	{url="initcpio-hook-udev"},
@@ -56,24 +29,28 @@ baks=[
 ]
 
 ext='''
-	cd systemd-stable-$version
+	cd systemd-$version
 	for i in $source; do
 		echo "#### $i"
 		case $i in
 		*patch) patch -Nbp1 -i ../$i;;
 		esac
 	done
+	sed -i \
+	-e 's;CAP_BPF;;g' \
+	units/*.service.in
 '''
 
 build='''
 	python3 -m venv ss
 	. ./ss/bin/activate
-	pip install jinja2 pyelftools
-	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0"
-	noname-meson systemd-stable-$version build \
+	pip install jinja2 pyelftools pefile
+	export CFLAGS="$CFLAGS -D__UAPI_DEF_ETHHDR=0 -Wno-incompatible-pointer-types-discards-qualifiers"
+	noname-meson systemd-$version build \
 	-Dutmp=false \
 	-Dman=disabled \
 	-Dldconfig=false \
+	-Dtests=false \
 	-Defi=true \
 	-Dbpf-framework=disabled \
 	-Dpwquality=disabled \
@@ -97,11 +74,13 @@ build='''
 	-Dlibfido2=disabled \
 	-Dtpm=false \
 	-Dtpm2=disabled \
+	-Dsplit-usr=true \
+	-Dsplit-bin=false \
 	-Dmicrohttpd=disabled \
 	-Dgshadow=false \
 	-Dlocaled=true \
 	-Duserdb=true \
-	-Dukify=false \
+	-Dukify=enabled \
 	-Dhomed=disabled \
 	-Dremote=disabled \
 	-Dbinfmt=true \
@@ -116,7 +95,6 @@ build='''
 	-Dlz4=enabled \
 	-Dpolkit=disabled \
 	-Ddbuspolicydir=/share/dbus-1/system.d \
-	-Ddefault-hierarchy=hybrid \
 	-Ddefault-locale=C \
 	-Ddefault-kill-user-processes=false \
 	-Dfallback-hostname='PC' \

@@ -16,6 +16,6 @@ ext='''
 
 build='''
 	cd libcap-$version
-	make KERNEL_HEADERS="$ROOT"/include lib=/lib
-	make RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib SBINDIR=/bin install
+	make CC=$CC KERNEL_HEADERS="$ROOT"/include lib=/lib
+	make CC=$CC RAISE_SETFCAP=no DESTDIR="$pkgdir" prefix= lib=/lib SBINDIR=/bin install
 '''

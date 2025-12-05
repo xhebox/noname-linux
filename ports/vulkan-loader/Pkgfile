@@ -1,0 +1,24 @@
+version = "1.4.313"
+desc = "Vulkan all in one"
+deps = ["wayland"]
+makedeps = [
+  "wayland",
+  "cmake",
+  "wayland-protocols",
+  "vulkan-headers",
+  "volk",
+]
+source = [
+  { url = "https://github.com/KhronosGroup/Vulkan-Loader/archive/v${version}.tar.gz", name = "loader-v${version}.tar.gz" },
+]
+
+build = '''
+	noname-cmake Vulkan-Loader-$version -Bbuild1 \
+		-DCMAKE_SKIP_RPATH=True \
+		-DBUILD_TESTS=Off \
+		-DBUILD_WSI_XCB_SUPPORT=OFF \
+		-DBUILD_WSI_XLIB_SUPPORT=OFF \
+		-DBUILD_WSI_WAYLAND_SUPPORT=On
+	cmake --build build1
+	DESTDIR="$pkgdir" cmake --build build1 --target install
+'''

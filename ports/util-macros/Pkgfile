@@ -1,0 +1,12 @@
+version="1.20.2"
+desc="xorg m4 macros"
+source=[{url="https://xorg.freedesktop.org/releases/individual/util/util-macros-$version.tar.xz"}]
+
+build='''
+	cd util-macros-$version
+
+	./configure --prefix= 
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

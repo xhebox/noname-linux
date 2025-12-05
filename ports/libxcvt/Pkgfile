@@ -1,0 +1,11 @@
+version="0.1.3"
+desc="library providing a standalone version of the X server implementation of the VESA CVT standard timing modelines generator"
+makedeps=["meson"]
+source=[{url="https://xorg.freedesktop.org/releases/individual/lib/libxcvt-$version.tar.xz"}]
+
+build='''
+	noname-meson libxcvt-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

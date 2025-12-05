@@ -1,4 +1,4 @@
-version="1.18.0"
+version="1.18.2"
 mesc="A 2D graphics library with support for multiple output devices"
 makedeps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppler"]
 deps=["libpng", "pixman", "libjpeg-turbo", "glib", "lzo", "execinfo", "poppler"]

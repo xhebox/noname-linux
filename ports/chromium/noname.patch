@@ -1,0 +1,99 @@
+--- a/build/config/compiler/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
++++ a/build/config/compiler/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
+@@ -631,7 +631,6 @@
+     # TODO(crbug.com/376278218): This causes segfault on Linux ARM builds.
+     if (is_linux && !llvm_android_mainline && current_cpu != "arm" &&
+         default_toolchain != "//build/toolchain/cros:target") {
+-      cflags += [ "-Wa,--crel,--allow-experimental-crel" ]
+     }
+   }
+ 
+--- a/build/config/gcc/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
++++ a/build/config/gcc/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
+@@ -32,7 +32,6 @@
+ # See http://gcc.gnu.org/wiki/Visibility
+ config("symbol_visibility_hidden") {
+   cflags = [ "-fvisibility=hidden" ]
+-  rustflags = [ "-Zdefault-visibility=hidden" ]
+ 
+   # Visibility attribute is not supported on AIX.
+   if (current_os != "aix") {
+--- a/third_party/llvm/llvm/utils/gn/secondary/llvm/tools/llvm-config/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
++++ a/third_party/llvm/llvm/utils/gn/secondary/llvm/tools/llvm-config/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
+@@ -54,9 +54,6 @@
+     }
+     if (llvm_enable_threads) {
+       system_libs += " -llibpthreads"
+-      if (host_os == "linux") {
+-        system_libs += " -latomic"
+-      }
+     }
+   }
+   if (llvm_enable_libxml2) {
+--- a/third_party/rust-src/src/llvm-project/llvm/utils/gn/secondary/llvm/tools/llvm-config/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
++++ b/third_party/rust-src/src/llvm-project/llvm/utils/gn/secondary/llvm/tools/llvm-config/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
+@@ -54,9 +54,6 @@
+     }
+     if (llvm_enable_threads) {
+       system_libs += " -llibpthreads"
+-      if (host_os == "linux") {
+-        system_libs += " -latomic"
+-      }
+     }
+   }
+   if (llvm_enable_libxml2) {
+--- a/base/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
++++ b/base/BUILD.gn	2025-02-26 03:55:16.000000000 +0800
+@@ -1089,7 +1089,7 @@
+   # building inside the cros_sdk environment - use host_toolchain as a
+   # more robust check for this.
+   if (!use_sysroot && (is_android || is_chromeos || (is_linux && !is_castos)) &&
+-      host_toolchain != "//build/toolchain/cros:host") {
++      host_toolchain != "//build/toolchain/cros:host" && !is_clang) {
+     libs += [ "atomic" ]
+   }
+ 
+--- a/chrome/browser/compose/compose_session.cc	2025-02-26 03:55:16.000000000 +0800
++++ b/chrome/browser/compose/compose_session.cc	2025-02-26 03:55:16.000000000 +0800
+@@ -550,7 +550,7 @@
+   // execution in case request fails.
+   compose::LogComposeRequestReason(request_reason);
+ 
+-  optimization_guide::ModelExecutionSessionCallbackWithLogging callback =
++  optimization_guide::ModelExecutionSessionCallbackWithLogging<optimization_guide::proto::ComposeLoggingData> callback =
+       base::BindRepeating(&ComposeSession::ModelExecutionCallback,
+                           weak_ptr_factory_.GetWeakPtr(),
+                           std::move(request_timer), request_id_, request_reason,
+--- a/components/media_router/common/providers/cast/channel/enum_table.h	2025-02-26 03:55:16.000000000 +0800
++++ a/components/media_router/common/providers/cast/channel/enum_table.h	2025-02-26 03:55:16.000000000 +0800
+@@ -368,7 +368,7 @@
+ 
+  private:
+ #ifdef ARCH_CPU_64_BITS
+-  alignas(std::hardware_destructive_interference_size)
++  alignas(64)
+ #endif
+       std::initializer_list<Entry> data_;
+   bool is_sorted_;
+--- a/pdf/pdfium/pdfium_api_wrappers.cc	2025-02-26 03:55:16.000000000 +0800
++++ b/pdf/pdfium/pdfium_api_wrappers.cc	2025-02-26 03:55:16.000000000 +0800
+@@ -147,7 +147,7 @@
+ 
+   // Number of characters, including the NUL.
+   const size_t expected_size = base::checked_cast<size_t>(buflen_bytes / 2);
+-  PDFiumAPIStringBufferAdapter adapter(&name, expected_size,
++  PDFiumAPIStringBufferAdapter<std::u16string> adapter(&name, expected_size,
+                                        /*check_expected_size=*/true);
+   unsigned long actual_buflen_bytes = 0;  // NOLINT(runtime/int)
+   bool result =
+--- a/buildtools/third_party/libc++/__config_site
++++ b/buildtools/third_party/libc++/__config_site
+@@ -25,7 +25,7 @@
+ #define _LIBCPP_HAS_THREADS 1
+ #define _LIBCPP_HAS_MONOTONIC_CLOCK 1
+ #define _LIBCPP_HAS_TERMINAL 1
+-#define _LIBCPP_HAS_MUSL_LIBC 0
++#define _LIBCPP_HAS_MUSL_LIBC 1
+ 
+ #ifdef _WIN32
+ #define _LIBCPP_HAS_THREAD_API_PTHREAD 0

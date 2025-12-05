@@ -1,13 +1,22 @@
-version="1.18.1"
+version="1.25"
 desc="GNU dbm is a set of database routines that use extensible hashing"
-source=[{url="http://mirrors.ustc.edu.cn/gnu/gdbm/gdbm-$version.tar.gz"}]
 deps=["dash", "musl"]
+source=[
+	{url="http://mirrors.ustc.edu.cn/gnu/gdbm/gdbm-$version.tar.gz"},
+	{url="musl.patch"},
+]
+
+ext='''
+	cd gdbm-$version
+	patch -Np1 -i "$srcdir"/musl.patch
+'''
 
 build='''
 	cd gdbm-$version
+	export CFLAGS="$CFLAGS -Wno-implicit-int"
 	./configure \
 		--prefix= \
-		--enable-libgdbm-compat
+		--enable-libgdbm-compat --disable-rpath
 	make
 	make DESTDIR="$pkgdir" install
 

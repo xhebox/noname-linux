@@ -1,0 +1,15 @@
+version="2.4.7"
+deps=["openssl", "libgpg-error", "libassuan", "libusb", "sqlite", "zlib", "libksba", "libgcrypt", "npth"]
+makedeps=["openssl", "libgpg-error", "libassuan", "libusb", "sqlite", "zlib", "libksba", "libgcrypt", "npth", "perl"]
+source=[
+	{url="https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-$version.tar.bz2"},
+]
+
+build='''
+	cd gnupg-$version
+
+	./configure --prefix= --disable-fd-passing --disable-static \
+              --disable-gpgsm-test
+	make
+	make DESTDIR="$pkgdir" install
+'''

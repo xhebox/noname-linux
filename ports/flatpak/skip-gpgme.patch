@@ -1,0 +1,19 @@
+--- a/meson.build	2024-12-09 11:53:05.173542234 +0800
++++ b/meson.build	2024-12-09 11:53:05.173542234 +0800
+@@ -468,6 +468,8 @@
+     default_options : [
+       'program_prefix=flatpak-',
+       'tests=false',
++      'selinux=disabled',
++      'man=disabled',
+     ],
+   )
+ endif
+@@ -481,6 +481,7 @@
+       'warning_level=1',
+       'program_prefix=flatpak-',
+       'tests=false',
++      'man=disabled',
+     ],
+   )
+ endif

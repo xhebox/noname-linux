@@ -1,23 +1,59 @@
---- a/src/basic/constants.h	2024-07-25 00:28:16.000000000 +0800
-+++ b/src/basic/constants.h	2024-07-25 00:28:16.000000000 +0800
-@@ -64,12 +64,14 @@
- #define CONF_PATHS_NULSTR(n)                    \
-         "/etc/" n "\0"                          \
-         "/run/" n "\0"                          \
-+        "/lib/" n "\0"                          \
-         "/usr/local/lib/" n "\0"                \
-         "/usr/lib/" n "\0"
+--- systemd-stable-255.4/src/basic/user-util.c	2024-02-28 01:26:04.000000000 +0800
++++ systemd-stable-255.4/src/basic/user-util.c	2024-02-28 01:26:04.000000000 +0800
+@@ -989,9 +989,6 @@
  
- #define CONF_PATHS_USR(n)                       \
-         "/etc/" n,                              \
-         "/run/" n,                              \
-+        "/lib/" n,                              \
-         "/usr/local/lib/" n,                    \
-         "/usr/lib/" n
+         errno = 0;
+         struct passwd *p = fgetpwent(stream);
+-        if (!p && !IN_SET(errno, 0, ENOENT))
+-                return -errno;
+-
+         *pw = p;
+         return !!p;
+ }
+@@ -1002,9 +999,6 @@
  
---- a/src/boot/efi/meson.build	2024-07-25 00:28:16.000000000 +0800
-+++ a/src/boot/efi/meson.build	2024-07-25 00:28:16.000000000 +0800
-@@ -150,7 +150,6 @@
+         errno = 0;
+         struct spwd *s = fgetspent(stream);
+-        if (!s && !IN_SET(errno, 0, ENOENT))
+-                return -errno;
+-
+         *sp = s;
+         return !!s;
+ }
+@@ -1015,9 +1009,6 @@
+ 
+         errno = 0;
+         struct group *g = fgetgrent(stream);
+-        if (!g && !IN_SET(errno, 0, ENOENT))
+-                return -errno;
+-
+         *gr = g;
+         return !!g;
+ }
+@@ -1029,9 +1020,6 @@
+ 
+         errno = 0;
+         struct sgrp *s = fgetsgent(stream);
+-        if (!s && !IN_SET(errno, 0, ENOENT))
+-                return -errno;
+-
+         *sg = s;
+         return !!s;
+ }
+--- a/src/basic/recurse-dir.c	2025-08-13 20:32:22.000000000 +0800
++++ b/src/basic/recurse-dir.c	2025-08-13 20:32:22.000000000 +0800
+@@ -56,7 +56,7 @@
+                 bs = MIN(MALLOC_SIZEOF_SAFE(de) - offsetof(DirectoryEntries, buffer), (size_t) SSIZE_MAX);
+                 assert(bs > de->buffer_size);
+ 
+-                n = getdents64(dir_fd, (uint8_t*) de->buffer + de->buffer_size, bs - de->buffer_size);
++                n = getdents64(dir_fd, (struct dirent*)((uint8_t*) de->buffer + de->buffer_size), bs - de->buffer_size);
+                 if (n < 0)
+                         return -errno;
+                 if (n == 0)
+--- a/src/boot/meson.build	2025-08-13 20:32:22.000000000 +0800
++++ b/src/boot/meson.build	2025-08-13 20:32:22.000000000 +0800
+@@ -152,7 +152,6 @@
  endif
  
  efi_c_ld_args = [
@@ -25,3 +61,13 @@
          '-nostdlib',
          '-static-pie',
          '-Wl,--entry=efi_main',
+--- a/src/vmspawn/vmspawn-register.c	2025-08-13 20:32:22.000000000 +0800
++++ b/src/vmspawn/vmspawn-register.c	2025-08-13 20:32:22.000000000 +0800
+@@ -1,5 +1,7 @@
+ /* SPDX-License-Identifier: LGPL-2.1-or-later */
+ 
++#include <unistd.h>
++
+ #include "sd-bus.h"
+ #include "sd-id128.h"
+ #include "sd-json.h"

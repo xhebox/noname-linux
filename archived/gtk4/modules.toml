@@ -1,0 +1,4 @@
+pattern=["immodules"]
+script='''
+gtk4-querymodules --update-cache
+'''

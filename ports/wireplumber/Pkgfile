@@ -1,6 +1,6 @@
-version="0.4.13"
-makedeps=["gobject-introspection", "graphviz", "meson", "pipewire", "systemd"]
-deps=["gobject-introspection", "graphviz", "meson", "pipewire", "systemd"]
+version="0.5.8"
+makedeps=["gobject-introspection", "meson", "pipewire", "systemd"]
+deps=["gobject-introspection", "meson", "pipewire", "systemd"]
 source=[
 	{url="https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/wireplumber-$version.tar.gz"},
 ]

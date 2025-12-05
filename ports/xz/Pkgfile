@@ -1,5 +1,4 @@
-version="5.2.4"
-deps=["dash"]
+version="5.8.0"
 desc="Compression utility using the lzma algorithm, successor of lzma-utils"
 source=[
 	{url="http://tukaani.org/xz/xz-$version.tar.gz"},

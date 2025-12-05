@@ -1,5 +1,5 @@
 name="libedit"
-version="20191231-3.1"
+version="20250104-3.1"
 desc='Command line editor library providing generic line editing, history, and tokenization functions'
 makedeps=["ncurses"]
 deps=["ncurses"]
@@ -9,9 +9,9 @@ source=[
 
 build='''
 	cd libedit-$version
+	export CFLAGS="$CFLAGS -D__STDC_ISO_10646__=201103L"
 	./configure --prefix=/
 	make
 	make prefix="${pkgdir}" install
-	rm "${pkgdir}"/share/man/man3/history.3
 	cp "${pkgdir}"/share/man/man3/editline.3 "${pkgdir}"/share/man/man3/el.3
 '''

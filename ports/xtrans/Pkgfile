@@ -1,0 +1,13 @@
+version="1.6.0"
+makedeps=["util-macros"]
+desc="Library of code to handle network protocol transport"
+source=[{url="https://xorg.freedesktop.org/releases/individual/lib/xtrans-$version.tar.xz"}]
+
+build='''
+	cd xtrans-$version
+
+	./configure --prefix= --disable-static
+
+	make
+	make DESTDIR="$pkgdir" install
+'''

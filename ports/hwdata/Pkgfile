@@ -1,4 +1,4 @@
-version="0.368"
+version="0.394"
 desc="hardware identification databases"
 source=[{url="https://github.com/vcrhonek/hwdata/archive/refs/tags/v$version.tar.gz"}]
 

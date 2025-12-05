@@ -1,6 +1,6 @@
 version="7.0.2"
-makedeps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2", "nasm"]
-deps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "sdl2", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2"]
+makedeps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2", "nasm"]
+deps=["fontconfig", "openssl", "libomxil-bellagio", "libva", "opus", "libvpx", "speex", "celt", "x264", "libvorbis", "fontconfig", "bzip2", "xvidcore", "lame", "libwebp", "v4l-utils", "fribidi", "libtheora", "opencore-amr", "libass", "openjpeg2"]
 desc="Complete solution to record, convert and stream audio and video."
 source=[{url="https://ffmpeg.org/releases/ffmpeg-$version.tar.bz2"}]
 
@@ -19,6 +19,7 @@ build='''
 		--pkgconfigdir=/lib/pkgconfig \
 		--mandir=/share/man \
 		--disable-debug \
+		--disable-sdl2 \
 		--enable-fontconfig \
 		--disable-gmp \
 		--disable-gnutls \
@@ -44,6 +45,7 @@ build='''
 		--disable-ffplay \
 		--enable-libtheora \
 		--enable-libv4l2 \
+		--enable-openssl \
 		--disable-libvidstab \
 		--enable-libvorbis \
 		--enable-libvpx \

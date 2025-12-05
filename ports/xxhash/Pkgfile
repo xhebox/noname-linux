@@ -1,0 +1,10 @@
+version="0.8.3"
+desc='Extremely fast non-cryptographic hash algorithm'
+deps=["musl"]
+makedeps=["musl"]
+source=[{url="https://github.com/Cyan4973/xxHash/archive/refs/tags/v$version.tar.gz"}]
+
+build='''
+	make PREFIX=/ DISPATCH=1 -C xxHash-$version
+	make PREFIX=/ DISPATCH=1 DESTDIR="${pkgdir}" -C xxHash-$version install
+'''

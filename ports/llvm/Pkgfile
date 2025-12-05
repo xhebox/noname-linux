@@ -1,5 +1,5 @@
-version="18.1.8"
-wasi_version="22.0"
+version="20.1.7"
+wasi_version="25.0"
 desc="LLVM compiler and its backend"
 deps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd"]
 makedeps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd", "flex", "bison", "python3"]
@@ -83,13 +83,14 @@ build='''
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
 		-DLIBCXX_USE_COMPILER_RT=YES
 
-	cmake --build build -j8
+	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install install-runtimes
 
 	install -d "$pkgdir"/lib/bfd-plugins
 	ln -s ../LLVMgold.so "$pkgdir"/lib/bfd-plugins/LLVMgold.so
 
-	cp -a "$srcdir/lib/wasi" "$pkgdir"/lib/clang/*/lib/
+	mkdir -p "$pkgdir"/lib/clang/*/lib/wasi
+	cp -a "$srcdir/libclang_rt.builtins-wasm32-wasi-$wasi_version"/* "$pkgdir"/lib/clang/*/lib/wasi
 	ln -srf "$pkgdir"/bin/clang "$pkgdir"/bin/cc
 	ln -srf "$pkgdir"/bin/clang++ "$pkgdir"/bin/c++
 	ln -srf "$pkgdir"/bin/clang-cpp "$pkgdir"/bin/cpp

@@ -1,0 +1,22 @@
+version="2024.4"
+desc="Collection of tools, libraries and tests for shader compilation"
+deps=["spirv-tools", "glslang"]
+makedeps=["spirv-tools", "glslang", "cmake"]
+source=[{url="https://github.com/google/shaderc/archive/refs/tags/v$version.tar.gz"}]
+
+ext='''
+	cd shaderc-$version
+  sed '/examples/d;/third_party/d' -i CMakeLists.txt
+  sed '/build-version/d' -i glslc/CMakeLists.txt
+	 cat <<- EOF > glslc/src/build-version.inc
+"${version}\\n"
+"$(pkg -Q spirv-tools | grep version | cut -d ' ' -f 2)\\n"
+"$(pkg -Q glslang | grep version | cut -d ' ' -f 2)\\n"
+EOF
+'''
+
+build='''
+	noname-cmake shaderc-$version -Bbuild -DSHADERC_SKIP_TESTS=ON -Dglslang_SOURCE_DIR=/include/glslang  -DCMAKE_CXX_FLAGS="$CXXFLAGS -ffat-lto-objects"
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
+'''

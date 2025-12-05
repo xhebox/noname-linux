@@ -1,7 +1,8 @@
-version="2.2.6"
+version="2.7.0"
+_version="`echo $version | tr '.' '_'`"
 deps=["musl"]
 desc="A fast, non-validating, stream-oriented XML parsing library"
-source=[{url="http://download.sourceforge.net/expat/expat-$version.tar.bz2"}]
+source=[{url="https://github.com/libexpat/libexpat/releases/download/R_$_version/expat-$version.tar.gz"}]
 
 build='''
 	 cd expat-$version

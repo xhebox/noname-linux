@@ -1,0 +1,12 @@
+version="24.1.9"
+desc="The Xwayland package is an Xorg server running on top of the wayland server."
+makedeps=["xorgproto", "libxau", "libepoxy", "libtirpc", "libdrm", "mesa", "pixman", "libxcvt", "libx11", "xtrans", "libxkbfile", "libxfont2", "libxshmfence", "wayland", "wayland-protocols"]
+deps=["xorgproto", "libxau", "libepoxy", "libtirpc", "libdrm", "mesa", "pixman", "libxcvt", "libx11", "xtrans", "libxkbfile", "libxfont2", "libxshmfence", "wayland", "xkeyboard-config", "xorg-xcomp"]
+source=[{url="https://www.x.org/pub/individual/xserver/xwayland-$version.tar.xz"}]
+
+build='''
+	noname-meson xwayland-$version build -Dxdmcp=false
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

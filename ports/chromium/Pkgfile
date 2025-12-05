@@ -1,0 +1,179 @@
+version="134.0.6998.35"
+nostrip=true
+makedeps=["alsa-lib", "bzip2", "pciutils", "dbus", "gperf", "mesa", "python3", "ninja", "flac", "libva", "libjpeg-turbo", "libpng", "libwebp", "gtk3", "libevent", "nodejs", "gn", "llvm", "nss", "wayland-protocols", "vulkan-headers", "rust-bindgen", "rust"]
+deps=["alsa-lib", "bzip2", "pciutils", "dbus", "mesa", "flac", "libva", "libjpeg-turbo", "libpng", "libwebp", "gtk3", "libevent", "nss", "wayland", "vulkan"]
+desc="The open-source project behind Google Chrome"
+source=[
+	{url="fix-perfetto-GetThreadName-musl.patch"},
+	{url="build-support-musl.patch"},
+	{url="musl-no-execinfo.patch"},
+	{url="musl-no-mallinfo.patch"},
+	{url="musl-partition-atfork.patch"},
+	{url="musl-sandbox.patch"},
+	{url="musl-tid-caching.patch"},
+	{url="no-getcontext.patch"},
+	{url="no-res-ninit-nclose.patch"},
+	{url="musl-auxv.patch"},
+	{url="no-sandbox-settls.patch"},
+	{url="chromium-system-nodejs.patch"},
+	{url="fc-cache-version.patch"},
+	{url="remove-sys-cdefs-includes.patch"},
+
+	{url="noname.patch"},
+	{url="compiler-rt-adjust-paths.patch"},
+	{url="use-oauth2-client-switches-as-default.patch"},
+
+	{url="chromium.sh"},
+	{url="chromium.desktop"},
+	{url="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$version.tar.xz"},
+]
+
+build='''
+	cd chromium-$version
+
+	for i in $source; do
+		case $i in
+		*.patch|*.diff) patch -Nbp1 -i ../$i || true;;
+		esac
+	done
+
+	sed -i 's,^update_readme$,#update_readme,' third_party/libvpx/generate_gni.sh
+
+	sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' -e '1i #include <cstdlib>' \
+		third_party/blink/renderer/core/xml/*.cc \
+		third_party/blink/renderer/core/xml/parser/xml_document_parser.cc \
+		third_party/libxml/chromium/*.cc
+
+	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
+
+	mkdir -p third_party/node/linux/node-linux-x64/bin
+	ln -sf /bin/node third_party/node/linux/node-linux-x64/bin/
+	mkdir -p bin
+	ln -sf /bin/bindgen bin
+
+	_system_libs="brotli flac fontconfig freetype libdrm libjpeg libwebp libpng"
+	for _lib in $_system_libs; do
+		if [ "$_lib" = "libjpeg" ]; then
+			_lib="libjpeg_turbo"
+		fi
+		find "third_party/$_lib" -type f \
+		\! -path "third_party/$_lib/chromium/*" \
+		\! -path "third_party/$_lib/google/*" \
+		\! -path 'third_party/harfbuzz-ng/utils/hb_scoped.h' \
+		\! -regex '.*\.\(gn\|gni\|isolate\)' \
+		-delete || true
+	done
+	if ! find /lib/rustlib | grep -q adler2; then
+    # Rust 1.86 ships adler2 but we need to change it to adler when
+    # using older Rust versions (idea for this borrowed from Gentoo)
+    sed -i 's/adler2/adler/' build/rust/std/BUILD.gn
+  fi
+	python build/linux/unbundle/replace_gn_files.py --system-libraries ${_system_libs}
+	third_party/libaddressinput/chromium/tools/update-strings.py
+
+	# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
+	# To be honest, i am too poor to get a complete set of keys..
+	# you can get your own keys, and put them here...
+	# or set env vars like GOOGLE_API_KEY, uppercase, same as the followings...
+	#-Dgoogle_api_key=
+	#-Dgoogle_default_client_id=
+	#-Dgoogle_default_client_secret="
+	export CCACHE_SLOPPINESS="include_file_mtime time_macros"
+	export CC=clang
+	export CXX=clang++
+	export AR=ar
+	export NM=nm
+	export BUILD_CC=clang
+	export BUILD_CXX=clang++
+	export BUILD_AR=ar
+	export BUILD_NM=nm
+	export CFLAGS="$CFLAGS -Wno-builtin-macro-redefined -Wno-unknown-warning-option -Wno-shorten-64-to-32"
+	export CXXFLAGS="$CXXFLAGS -Wno-builtin-macro-redefined -Wno-unknown-warning-option -Wno-shorten-64-to-32"
+  export CPPFLAGS="$CPPFLAGS -D__DATE__=  -D__TIME__=  -D__TIMESTAMP__="
+	export LDFLAGS="$LDFLAGS -lunwind"
+	
+	sed -i 's/use_atk = .*/use_atk = false/g' build/config/ui.gni
+
+	clang_version=$(llvm-config --version)
+	_args="
+enable_nacl=false
+symbol_level=0
+enable_stripping=false
+clang_base_path=\"/usr\"
+clang_use_chrome_plugins=false
+clang_version=\"${clang_version%%.*}\"
+rust_sysroot_absolute=\"/usr\"
+rust_bindgen_root=\"/usr\"
+rustc_version=\"$(rustc --version)\"
+is_official_build=true
+is_debug=false
+fatal_linker_warnings=false
+treat_warnings_as_errors=false
+ffmpeg_branding=\"Chrome\"
+v8_enable_drumbrake=false
+disable_fieldtrial_testing_config=true
+blink_enable_generated_code_formatting=false
+proprietary_codecs=true
+link_pulseaudio=true
+is_musl=true
+use_cups=false
+use_kerberos=false
+use_pulseaudio=true
+use_sysroot=false
+host_pkg_config=\"/bin/pkg-config\"
+enable_widevine=true
+use_system_libffi=true
+ozone_platform_x11=false
+custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
+host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+rtc_use_pipewire=true
+rtc_link_pipewire=true
+is_cfi=false
+use_cfi_icall=false
+use_lld=true
+use_thin_lto=true
+chrome_pgo_phase=0"
+	args=$(echo "$_args" | tr '\n' ' ')
+	gn gen out/Release --args="$args"
+	ninja -C out/Release chrome chrome_sandbox chrome_crashpad_handler chromedriver.unstripped
+	
+	install -D out/Release/chrome "$pkgdir/lib/chromium/chromium"
+
+	install -Dm4755 out/Release/chrome_sandbox "$pkgdir/lib/chromium/chrome-sandbox"
+	install -Dm4755 out/Release/chrome_crashpad_handler "$pkgdir/lib/chromium/chrome-crashpad_handler"
+
+	[ -e "out/Release/chromedriver.unstripped" ] && install -D out/Release/chromedriver.unstripped "$pkgdir/lib/chromium/chromedriver"
+
+	cp -a out/Release/*.pak out/Release/*.bin out/Release/locales "$pkgdir/lib/chromium/"
+	for i in out/Release/*.so; do
+		[ "$i" != "out/Release/*.so" ] && cp -a "$i" "$pkgdir/lib/chromium/"
+	done
+	[ -e "out/Release/icudtl.dat" ] && cp -a out/Release/icudtl.dat "$pkgdir/lib/chromium/"
+	[ -e "out/Release/resources" ] && cp -a out/Release/resources "$pkgdir/lib/chromium/"
+	[ -e "out/Release/swiftshader" ] && cp -a out/Release/swiftshader "$pkgdir/lib/chromium/"
+
+	install -Dm644 chrome/app/resources/manpage.1.in "$pkgdir/share/man/man1/chromium.1"
+	install -Dm644 "$srcdir/chromium.desktop" "$pkgdir/share/applications/chromium.desktop"
+
+	sed -i \
+	-e "s/@@MENUNAME@@/Chromium/g" \
+	-e "s/@@PACKAGE@@/chromium/g" \
+	-e "s/@@USR_BIN_SYMLINK_NAME@@/chromium/g" \
+	"$pkgdir/share/applications/chromium.desktop" \
+	"$pkgdir/share/man/man1/chromium.1"
+
+	install -Dm755 "$srcdir/chromium.sh" \
+	"$pkgdir/bin/chromium"
+
+	for size in 24 48 64 128 256; do
+		install -Dm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	for size in 16 32; do
+		install -Dm644 "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+		"$pkgdir/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+	done
+
+	ln -s /lib/chromium/chromedriver "$pkgdir/bin/chromedriver"
+'''

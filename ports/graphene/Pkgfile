@@ -1,0 +1,14 @@
+version="1.10.8"
+desc="Thin layer of graphic data types"
+makedeps=["glib", "gobject-introspection"]
+deps=["glib"]
+source=[
+	{url="https://github.com/ebassi/graphene/archive/refs/tags/$version.tar.gz"},
+]
+
+build='''
+	noname-meson graphene-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

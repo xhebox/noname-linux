@@ -1,4 +1,4 @@
-version="2024-01-08"
+version="2025-07-14"
 desc="The Rust LSP"
 deps=["rust"]
 makedeps=["rust"]

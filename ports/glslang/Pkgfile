@@ -1,4 +1,4 @@
-version="14.3.0"
+version="15.1.0"
 desc='OpenGL and OpenGL ES shader front end and validator'
 makedeps=["spirv-tools"]
 deps=["spirv-tools"]

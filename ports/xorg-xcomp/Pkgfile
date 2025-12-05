@@ -1,0 +1,12 @@
+version="1.5.0"
+desc="X Keyboard description compiler"
+makedeps=["libx11", "libx11", "util-macros"]
+deps=["libx11", "libx11"]
+source=[{url="https://www.x.org/archive/individual/app/xkbcomp-$version.tar.xz"}]
+
+build='''
+	cd xkbcomp-$version
+	./configure --prefix= --sysconfdir=/etc --localstatedir=/var --disable-static 
+	make
+	make DESTDIR="$pkgdir" install
+'''

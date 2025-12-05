@@ -1,21 +1,22 @@
-version="2023.1"
-hdrver="sdk-1.3.239.0"
+version="1.4.313.0"
 desc="API and commands for processing SPIR-V modules"
 deps=["musl"]
 makedeps=["python3"]
 source=[
-	{url="https://github.com/KhronosGroup/SPIRV-Tools/archive/v${version}.tar.gz"},
-	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/${hdrver}.tar.gz"},
+	{url="https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/vulkan-sdk-${version}.tar.gz",name="tools-$version.tar.gz"},
+	{url="https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-${version}.tar.gz",name="headers-$version.tar.gz"},
 ]
 
 build='''
-	noname-cmake SPIRV-Headers-$hdrver -Bbu
+	noname-cmake SPIRV-Headers-vulkan-sdk-$version -Bbu
 	cmake --build bu
 	DESTDIR="${pkgdir}" cmake --build bu --target install
 
-	noname-cmake SPIRV-Tools-$version -Bbuild \
+	noname-cmake SPIRV-Tools-vulkan-sdk-$version -Bbuild \
 		-DSPIRV_WERROR=Off \
-		-DSPIRV-Headers_SOURCE_DIR="${srcdir}"/SPIRV-Headers-$hdrver
+		-DBUILD_SHARED_LIBS=ON \
+		-DSPIRV_TOOLS_BUILD_STATIC=OFF \
+		-DSPIRV-Headers_SOURCE_DIR="${srcdir}"/SPIRV-Headers-vulkan-sdk-$version
 	cmake --build build
 	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

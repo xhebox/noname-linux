@@ -1,18 +1,14 @@
-version="2.29"
+version="2.46"
 desc="X keyboard configuration database"
+makedeps=["meson", "python3"]
 source=[
-	{url="http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-$version.tar.bz2"},
+	{url="https://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-$version.tar.xz"},
 ]
 
 build='''
-	cd xkeyboard-config-$version
-
-	./configure --prefix= \
-		--disable-runtime-deps \
-		--with-xkb-base=/share/xkb
-
-	make -j1
-	make DESTDIR="$pkgdir" install
-
+	noname-meson xkeyboard-config-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 	ln -s /var/lib/xkb "$pkgdir"/share/xkb/compiled
 '''

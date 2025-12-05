@@ -1,0 +1,15 @@
+version="1.8"
+desc="The new GNU portable threads library"
+source=[
+  {url="https://gnupg.org/ftp/gcrypt/npth/npth-${version}.tar.bz2"}
+]
+
+build='''
+  cd npth-$version
+  ./configure \
+    --prefix= \
+    --disable-static \
+    --disable-padlock-support
+  make
+  make DESTDIR="$pkgdir" install
+'''

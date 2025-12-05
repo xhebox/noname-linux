@@ -1,0 +1,12 @@
+version="6.0.2"
+makedeps=["libx11", "xorgproto", "util-macros"]
+deps=["libx11"]
+desc="X Fixes extension client library"
+source=[{url="https://xorg.freedesktop.org/releases/individual/lib/libXfixes-$version.tar.xz"}]
+
+build='''
+	cd libXfixes-$version
+	./configure --prefix= --disable-static
+	make
+	make DESTDIR="$pkgdir" install
+'''

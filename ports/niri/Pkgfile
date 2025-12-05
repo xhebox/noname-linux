@@ -1,4 +1,4 @@
-version="0.1.9"
+version="25.11"
 desc="scrollable-tiling compositor"
 deps=["cairo", "glib", "pango", "systemd", "seatd", "libinput", "pipewire", "libdisplay-info", "wayland", "vulkan"]
 makedeps=["cairo", "glib", "pango", "systemd", "seatd", "libinput", "pipewire", "libdisplay-info", "wayland-protocols", "vulkan-headers"]
@@ -9,7 +9,7 @@ source=[
 
 ext='''
 	cd niri-$version
-	patch -Np1 -i "$srcdir"/musl.patch
+	#patch -Np1 -i "$srcdir"/musl.patch
 '''
 
 build='''

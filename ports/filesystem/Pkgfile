@@ -18,6 +18,8 @@ source=[
 	{url="profile"},
 	{url="resolv.conf"},
 	{url="ldconfig"},
+	{url="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml"},
+	{url="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml"},
 ]
 baks=[
 	"etc/passwd",

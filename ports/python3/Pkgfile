@@ -1,15 +1,25 @@
-version="3.10.10"
-sversion="67.6.0"
-pversion="23.0.1"
-wversion="0.38.4"
+version="3.12.12"
+pip_version="25.3"
+wheel_version="0.45.1"
+build_version="1.3.0"
+installer_version="0.7.0"
+packaging_version="25.0"
+setuptools_version="80.9.0"
+flitcore_version="3.12.0"
+pyproject_hooks_version="1.2.0"
 desc="A high-level scripting language(3.x)"
 deps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
 makedeps=["bzip2", "expat", "gdbm", "libffi", "sqlite", "openssl", "zlib", "mpdecimal"]
 source=[
 	{url="https://www.python.org/ftp/python/$version/Python-$version.tar.xz", name="python-$version.tar.xz"},
-	{url="https://files.pythonhosted.org/packages/source/s/setuptools/setuptools-${sversion}.tar.gz", name="setuptools-$sversion.tar.gz"},
-	{url="https://pypi.io/packages/source/p/pip/pip-${pversion}.tar.gz"},
-	{url="https://pypi.io/packages/source/w/wheel/wheel-$wversion.tar.gz"},
+	{url="https://pypi.io/packages/source/p/pip/pip-${pip_version}.tar.gz"},
+	{url="https://pypi.io/packages/source/b/build/build-${build_version}.tar.gz"},
+	{url="https://pypi.io/packages/source/i/installer/installer-${installer_version}.tar.gz"},
+	{url="https://pypi.io/packages/source/w/wheel/wheel-$wheel_version.tar.gz"},
+	{url="https://pypi.io/packages/source/s/setuptools/setuptools-$setuptools_version.tar.gz"},
+	{url="https://pypi.io/packages/source/f/flit_core/flit_core-$flitcore_version.tar.gz"},
+	{url="https://pypi.io/packages/source/p/pyproject_hooks/pyproject_hooks-$pyproject_hooks_version.tar.gz"},
+	{url="https://pypi.io/packages/source/p/packaging/packaging-$packaging_version.tar.gz"},
 ]
 
 build='''
@@ -62,28 +72,41 @@ build='''
 	ln -s python${version%.*}.1 "${pkgdir}"/share/man/man1/python.1
 	ln -s python-${version%.*}.pc  "${pkgdir}"/lib/pkgconfig/python3.pc
 
-	cd ../setuptools-$sversion
-	export SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0
+	python3 -m venv venv
+	. venv/bin/activate
+	pip install build installer flit_core wheel
 
-  # https://github.com/pypa/setuptools/issues/2466
-  sed -i '/ignore:lib2to3 package is deprecated:DeprecationWarning/a \    ignore:Creating a LegacyVersion has been deprecated and will be removed in the next major release:DeprecationWarning' pytest.ini
-  # Remove post-release tag since we are using stable tags
-	sed -e '/tag_build = .post/d' -e '/tag_date = 1/d' -i setup.cfg
+	cd ../setuptools-$setuptools_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 
+	cd ../wheel-$wheel_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 
-	python3 setup.py install \
-		--prefix= \
-		--root=$pkgdir
+	cd ../pip-$pip_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 
-	cd ../pip-$pversion
-	python3 setup.py install \
-		--prefix= \
-		--root=$pkgdir
+	cd ../build-$build_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
+
+	cd ../installer-$installer_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
+
+	cd ../flit_core-$flitcore_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 	
-	cd ../wheel-$wversion
-	python3 setup.py install \
-		--prefix= \
-		--root=$pkgdir
+	cd ../pyproject_hooks-$pyproject_hooks_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
+
+	cd ../packaging-$packaging_version
+	python -m build -wn
+	python -m installer --prefix= -d "$pkgdir" dist/*.whl
 
 	sed -i "s;$pkgdir;/;g" "$pkgdir"/bin/pip*
 '''

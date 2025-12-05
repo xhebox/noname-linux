@@ -1,13 +1,14 @@
-version = "0.35.1"
+version = "0.39.0"
 desc = 'a free, open source, and cross-platform media player'
-waf_version = "2.0.23"
 deps = [
   "libdrm",
   "pipewire",
   "ffmpeg",
   "libarchive",
+  "libplacebo",
   "mesa",
   "libglvnd",
+  "luajit",
   "lcms2",
   "libjpeg-turbo",
   "libva",
@@ -20,43 +21,25 @@ makedeps = [
   "pipewire",
   "ffmpeg",
   "libarchive",
+  "libplacebo",
   "mesa",
   "libglvnd",
+  "luajit",
   "lcms2",
   "libjpeg-turbo",
   "libva",
   "vulkan-headers",
   "wayland-protocols",
   "zlib",
-  "python3",
+	"meson",
 ]
 source = [
   { url = "https://github.com/mpv-player/mpv/archive/refs/tags/v${version}.tar.gz" },
-  { url = "https://waf.io/waf-${waf_version}"},
 ]
 
 build = '''
-	cd mpv-$version
-
-	python -m venv ss
-	. ./ss/bin/activate
-	pip install docutils
-
-	python ../waf-${waf_version} configure --prefix=/ \
-		--confdir=/etc/mpv \
-		--enable-dvb \
-		--enable-libarchive \
-		--enable-libmpv-shared \
-		--disable-cdda \
-		--disable-pulse \
-		--disable-dvdnav \
-		--disable-build-date \
-		--disable-caca
-
-	python ../waf-${waf_version} build
-	python ../waf-${waf_version} install --destdir="$pkgdir"
-
-	install -m0644 DOCS/encoding.rst "$pkgdir"/share/doc/mpv
-	install -m0644 DOCS/tech-overview.txt "$pkgdir"/share/doc/mpv
-	#install -m0644 TOOLS/lua/* -D -t "$pkgdir"/share/mpv/scripts
+	noname-meson mpv-$version build --auto-features auto -Dgpl=true -Dmanpage-build=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
 '''

@@ -1,0 +1,14 @@
+version="0.71.1"
+desc='Automatically generates Rust FFI bindings to C (and some C++) libraries'
+makedeps=["rust"]
+deps=["rust"]
+source=[{url="https://github.com/rust-lang/rust-bindgen/archive/v$version.tar.gz"}]
+
+build='''
+	export CARGO_HOME="$srcdir/.cargo"
+	_name=rust-bindgen
+  cd $_name-$version
+
+  cargo build --release
+  install -Dm755 "target/release/bindgen" "$pkgdir"/bin/bindgen
+'''
