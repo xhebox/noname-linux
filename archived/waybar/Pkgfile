@@ -1,4 +1,4 @@
-version="0.9.24"
+version="0.14.0"
 desc="Highly customizable Wayland bar for Sway and Wlroots based compositors"
 deps=["wayland", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "wireplumber", "libnl", "dbusmenu-gtk3", "jsoncpp"]
 makedeps=["wayland-protocols", "libxkbcommon", "systemd", "gtkmm3", "pipewire", "wireplumber", "libnl", "dbusmenu-gtk3", "jsoncpp", "meson", "gobject-introspection"]
