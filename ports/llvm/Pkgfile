@@ -1,4 +1,4 @@
-version="20.1.7"
+version="21.1.8"
 wasi_version="25.0"
 desc="LLVM compiler and its backend"
 deps=["libffi", "libxml2", "libedit", "ncurses", "wasi-sysroot", "zstd"]
@@ -83,7 +83,7 @@ build='''
 		-DLIBCXX_HAS_MUSL_LIBC=YES \
 		-DLIBCXX_USE_COMPILER_RT=YES
 
-	cmake --build build
+	cmake --build build -j6
 	DESTDIR="${pkgdir}" cmake --build build --target install install-runtimes
 
 	install -d "$pkgdir"/lib/bfd-plugins
@@ -94,4 +94,8 @@ build='''
 	ln -srf "$pkgdir"/bin/clang "$pkgdir"/bin/cc
 	ln -srf "$pkgdir"/bin/clang++ "$pkgdir"/bin/c++
 	ln -srf "$pkgdir"/bin/clang-cpp "$pkgdir"/bin/cpp
+
+	cmake libclc -Bbuild -DCMAKE_INSTALL_PREFIX=
+	cmake --build build
+	DESTDIR="${pkgdir}" cmake --build build --target install
 '''

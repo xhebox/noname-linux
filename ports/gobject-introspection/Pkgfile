@@ -1,8 +1,8 @@
-version="1.74.0"
+version="1.86.0"
 makedeps=["python3"]
 deps=["glib", "libffi"]
 desc="Introspection system for GObject-based libraries"
-source=[{url="http://download.gnome.org/sources/gobject-introspection/${version%.*}/gobject-introspection-$version.tar.xz"}]
+source=[{url="https://download.gnome.org/sources/gobject-introspection/${version%.*}/gobject-introspection-$version.tar.xz"}]
 
 build='''
 	noname-meson gobject-introspection-$version build -Dcairo=disabled -Ddoctool=disabled -Dgtk_doc=false

@@ -1,0 +1,18 @@
+version="2.3.1"
+makedeps=["git", "go"]
+desc="Framework for dark-mode and light-mode transitions on Linux desktop"
+source=[
+	{url="https://gitlab.com/WhyNotHugo/darkman/-/archive/v$version/darkman-v$version.tar.gz"},
+]
+
+build='''
+	cd darkman-v$version
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export GOFLAGS="-buildmode=pie -trimpath -modcacherw -ldflags=-linkmode=external"
+	export GOPROXY="direct"
+	make build
+	make DESTDIR="$pkgdir" PREFIX=/ install
+'''

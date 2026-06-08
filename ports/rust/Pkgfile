@@ -1,7 +1,7 @@
 name = "rust"
 nostrip = true
-version = "1.88.0"
-_rust_dist_version = "1.88.0"
+version = "1.92.0"
+_rust_dist_version = "1.92.0"
 makedeps = [
   "libffi",
   "ncurses",
@@ -110,7 +110,7 @@ compression-formats = ["gz"]
 compression-profile = "fast"
 
 [llvm]
-link-shared = true
+link-shared = false
 static-libstdcpp = false
 use-libcxx = true
 download-ci-llvm=false

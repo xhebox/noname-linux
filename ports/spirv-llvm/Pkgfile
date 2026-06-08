@@ -1,4 +1,4 @@
-version="20.1.4"
+version="21.1.6"
 desc="Tool and a library for bi-directional translation between SPIR-V and LLVM IR"
 deps=["spirv-tools", "llvm"]
 makedeps=["spirv-tools", "llvm"]

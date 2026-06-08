@@ -1,0 +1,16 @@
+version="1.2.1"
+makedeps=["xmlto", "docbook-xsl", "lynx"]
+deps=["file"]
+desc="Tools to assist applications with various desktop integration tasks"
+source=[
+	{url="https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v$version/xdg-utils-v$version.tar.gz"},
+]
+
+build='''
+	cd xdg-utils-v$version
+	sed -i "s:chromium-browser:chromium:" scripts/xdg-open.in
+	./configure --prefix= --with-fop
+	make
+	make DESTDIR="${pkgdir}" install
+	install -dm755 $pkgdir/share/desktop-directories
+'''

@@ -1,0 +1,656 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 54f256abac..f1db1aae3b 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -845,7 +845,7 @@ zed_actions = { codegen-units = 1 }
+ 
+ [profile.release]
+ debug = "limited"
+-lto = "thin"
++lto = false
+ codegen-units = 1
+ 
+ [profile.release.package]
+diff --git a/crates/audio/Cargo.toml b/crates/audio/Cargo.toml
+index 2aee764007..9727d55902 100644
+--- a/crates/audio/Cargo.toml
++++ b/crates/audio/Cargo.toml
+@@ -28,5 +28,5 @@ smol.workspace = true
+ thiserror.workspace = true
+ util.workspace = true
+ 
+-[target.'cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))'.dependencies]
++[target.'cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl")))'.dependencies]
+ libwebrtc = { rev = "5f04705ac3f356350ae31534ffbc476abc9ea83d", git = "https://github.com/zed-industries/livekit-rust-sdks" }
+diff --git a/crates/audio/src/audio.rs b/crates/audio/src/audio.rs
+index 2c1f770530..4aa3875051 100644
+--- a/crates/audio/src/audio.rs
++++ b/crates/audio/src/audio.rs
+@@ -3,7 +3,7 @@ use collections::HashMap;
+ use gpui::{App, BackgroundExecutor, BorrowAppContext, Global};
+ use log::info;
+ 
+-#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl" )))]
+ mod non_windows_and_freebsd_deps {
+     pub(super) use gpui::AsyncApp;
+     pub(super) use libwebrtc::native::apm;
+@@ -13,7 +13,7 @@ mod non_windows_and_freebsd_deps {
+     pub(super) use std::sync::Arc;
+ }
+ 
+-#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl" )))]
+ use non_windows_and_freebsd_deps::*;
+ 
+ use rodio::{
+@@ -81,7 +81,7 @@ impl Sound {
+ pub struct Audio {
+     output_handle: Option<OutputStream>,
+     output_mixer: Option<Mixer>,
+-    #[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++    #[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd",  target_env = "musl" )))]
+     pub echo_canceller: Arc<Mutex<apm::AudioProcessingModule>>,
+     source_cache: HashMap<Sound, Buffered<Decoder<Cursor<Vec<u8>>>>>,
+     replays: replays::Replays,
+@@ -94,7 +94,8 @@ impl Default for Audio {
+             output_mixer: Default::default(),
+             #[cfg(not(any(
+                 all(target_os = "windows", target_env = "gnu"),
+-                target_os = "freebsd"
++                target_os = "freebsd",
++                target_env = "musl"
+             )))]
+             echo_canceller: Arc::new(Mutex::new(apm::AudioProcessingModule::new(
+                 true, false, false, false,
+@@ -128,12 +129,14 @@ impl Audio {
+                 // The webrtc apm is not yet compiling for windows & freebsd
+                 #[cfg(not(any(
+                     any(all(target_os = "windows", target_env = "gnu")),
+-                    target_os = "freebsd"
++                    target_os = "freebsd",
++                    target_env = "musl"
+                 )))]
+                 let echo_canceller = Arc::clone(&self.echo_canceller);
+                 #[cfg(not(any(
+                     any(all(target_os = "windows", target_env = "gnu")),
+-                    target_os = "freebsd"
++                    target_os = "freebsd",
++                    target_env = "musl"
+                 )))]
+                 let source = source.inspect_buffer::<BUFFER_SIZE, _>(move |buffer| {
+                     let mut buf: [i16; _] = buffer.map(|s| s.to_sample());
+@@ -163,7 +166,7 @@ impl Audio {
+         self.replays.replays_to_tar(executor)
+     }
+ 
+-    #[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++    #[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl")))]
+     pub fn open_microphone(voip_parts: VoipParts) -> anyhow::Result<impl Source> {
+         let stream = rodio::microphone::MicrophoneBuilder::new()
+             .default_device()?
+@@ -293,14 +296,14 @@ impl Audio {
+     }
+ }
+ 
+-#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl" )))]
+ pub struct VoipParts {
+     echo_canceller: Arc<Mutex<apm::AudioProcessingModule>>,
+     replays: replays::Replays,
+     legacy_audio_compatible: bool,
+ }
+ 
+-#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd")))]
++#[cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl" )))]
+ impl VoipParts {
+     pub fn new(cx: &AsyncApp) -> anyhow::Result<Self> {
+         let (apm, replays) = cx.try_read_default_global::<Audio, _>(|audio, _| {
+diff --git a/crates/call/Cargo.toml b/crates/call/Cargo.toml
+index ff034f914b..997a4817dd 100644
+--- a/crates/call/Cargo.toml
++++ b/crates/call/Cargo.toml
+@@ -40,6 +40,8 @@ settings.workspace = true
+ telemetry.workspace = true
+ util.workspace = true
+ gpui_tokio.workspace = true
++
++[target.'cfg(not(any(all(target_os = "windows", target_env = "gnu"), target_os = "freebsd", target_env = "musl")))'.dependencies]
+ livekit_client.workspace = true
+ 
+ [dev-dependencies]
+diff --git a/crates/call/src/call_impl/mod.rs b/crates/call/src/call_impl/mod.rs
+index b4fcdb2552..3670471694 100644
+--- a/crates/call/src/call_impl/mod.rs
++++ b/crates/call/src/call_impl/mod.rs
+@@ -15,6 +15,7 @@ use project::Project;
+ use room::Event;
+ use std::sync::Arc;
+ 
++#[cfg(not(target_env = "musl"))]
+ pub use livekit_client::{RemoteVideoTrack, RemoteVideoTrackView, RemoteVideoTrackViewEvent};
+ pub use participant::ParticipantLocation;
+ pub use room::Room;
+diff --git a/crates/call/src/call_impl/participant.rs b/crates/call/src/call_impl/participant.rs
+index 6fb6a2eb79..16db5e1e3e 100644
+--- a/crates/call/src/call_impl/participant.rs
++++ b/crates/call/src/call_impl/participant.rs
+@@ -2,11 +2,14 @@ use anyhow::{Context as _, Result};
+ use client::{ParticipantIndex, User, proto};
+ use collections::HashMap;
+ use gpui::WeakEntity;
++#[cfg(not(target_env = "musl"))]
+ use livekit_client::AudioStream;
+ use project::Project;
+ use std::sync::Arc;
+ 
++#[cfg(not(target_env = "musl"))]
+ pub use livekit_client::TrackSid;
++#[cfg(not(target_env = "musl"))]
+ pub use livekit_client::{RemoteAudioTrack, RemoteVideoTrack};
+ 
+ #[derive(Copy, Clone, Debug, Eq, PartialEq)]
+@@ -58,11 +61,18 @@ pub struct RemoteParticipant {
+     pub participant_index: ParticipantIndex,
+     pub muted: bool,
+     pub speaking: bool,
++    #[cfg(not(target_env = "musl"))]
+     pub video_tracks: HashMap<TrackSid, RemoteVideoTrack>,
++    #[cfg(not(target_env = "musl"))]
+     pub audio_tracks: HashMap<TrackSid, (RemoteAudioTrack, AudioStream)>,
+ }
+ 
+ impl RemoteParticipant {
++    #[cfg(target_env = "musl")]
++    pub fn has_video_tracks(&self) -> bool {
++        false
++    }
++    #[cfg(not(target_env = "musl"))]
+     pub fn has_video_tracks(&self) -> bool {
+         !self.video_tracks.is_empty()
+     }
+diff --git a/crates/call/src/call_impl/room.rs b/crates/call/src/call_impl/room.rs
+index ccc8c067c2..00a449c84b 100644
+--- a/crates/call/src/call_impl/room.rs
++++ b/crates/call/src/call_impl/room.rs
+@@ -18,7 +18,9 @@ use gpui::{
+ };
+ use gpui_tokio::Tokio;
+ use language::LanguageRegistry;
++#[cfg(not(target_env = "musl"))]
+ use livekit::{LocalTrackPublication, ParticipantIdentity, RoomEvent};
++#[cfg(not(target_env = "musl"))]
+ use livekit_client::{self as livekit, AudioStream, TrackSid};
+ use postage::{sink::Sink, stream::Stream, watch};
+ use project::Project;
+@@ -40,6 +42,7 @@ pub enum Event {
+         participant_id: proto::PeerId,
+     },
+     RemoteVideoTrackUnsubscribed {
++        #[cfg(not(target_env = "musl"))]
+         sid: TrackSid,
+     },
+     RemoteAudioTracksChanged {
+@@ -67,6 +70,7 @@ pub enum Event {
+ pub struct Room {
+     id: u64,
+     channel_id: Option<ChannelId>,
++    #[cfg(not(target_env = "musl"))]
+     live_kit: Option<LiveKitRoom>,
+     status: RoomStatus,
+     shared_projects: HashSet<WeakEntity<Project>>,
+@@ -100,6 +104,7 @@ impl Room {
+         !self.shared_projects.is_empty()
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_connected(&self, _: &App) -> bool {
+         if let Some(live_kit) = self.live_kit.as_ref() {
+             live_kit.room.connection_state() == livekit::ConnectionState::Connected
+@@ -111,11 +116,13 @@ impl Room {
+     fn new(
+         id: u64,
+         channel_id: Option<ChannelId>,
++        #[cfg(not(target_env = "musl"))]
+         livekit_connection_info: Option<proto::LiveKitConnectionInfo>,
+         client: Arc<Client>,
+         user_store: Entity<UserStore>,
+         cx: &mut Context<Self>,
+     ) -> Self {
++        #[cfg(not(target_env = "musl"))]
+         spawn_room_connection(livekit_connection_info, cx);
+ 
+         let maintain_connection = cx.spawn({
+@@ -134,6 +141,7 @@ impl Room {
+         Self {
+             id,
+             channel_id,
++            #[cfg(not(target_env = "musl"))]
+             live_kit: None,
+             status: RoomStatus::Online,
+             shared_projects: Default::default(),
+@@ -176,6 +184,7 @@ impl Room {
+                 let mut room = Self::new(
+                     room_proto.id,
+                     None,
++                    #[cfg(not(target_env = "musl"))]
+                     response.live_kit_connection_info,
+                     client,
+                     user_store,
+@@ -281,6 +290,7 @@ impl Room {
+             Self::new(
+                 room_proto.id,
+                 response.channel_id.map(ChannelId),
++                #[cfg(not(target_env = "musl"))]
+                 response.live_kit_connection_info,
+                 client,
+                 user_store,
+@@ -305,6 +315,7 @@ impl Room {
+ 
+     pub(crate) fn leave(&mut self, cx: &mut Context<Self>) -> Task<Result<()>> {
+         cx.notify();
++        #[cfg(not(target_env = "musl"))]
+         self.emit_video_track_unsubscribed_events(cx);
+         self.leave_internal(cx)
+     }
+@@ -348,11 +359,13 @@ impl Room {
+         self.pending_participants.clear();
+         self.participant_user_ids.clear();
+         self.client_subscriptions.clear();
++        #[cfg(not(target_env = "musl"))]
+         self.live_kit.take();
+         self.pending_room_update.take();
+         self.maintain_connection.take();
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     fn emit_video_track_unsubscribed_events(&self, cx: &mut Context<Self>) {
+         for participant in self.remote_participants.values() {
+             for sid in participant.video_tracks.keys() {
+@@ -533,6 +546,7 @@ impl Room {
+         self.id
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn room_id(&self) -> impl Future<Output = Option<String>> + 'static {
+         let room = self.live_kit.as_ref().map(|lk| lk.room.clone());
+         async move {
+@@ -543,6 +557,65 @@ impl Room {
+         }
+     }
+ 
++    #[cfg(target_env = "musl")]
++    pub fn room_id(&self) -> impl Future<Output = Option<String>> + 'static {
++      async move { None }
++    }
++    #[cfg(target_env = "musl")]
++    pub fn share_microphone(&mut self, cx: &mut Context<Self>) -> Task<Result<()>> {
++      return Task::ready(Err(anyhow!("live-kit was not initialized")));
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_deafened(&self) -> Option<bool> {
++      None
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_speaking(&self) -> bool {
++      false
++    }
++    #[cfg(target_env = "musl")]
++    pub fn share_screen(
++        &mut self,
++        _source: Rc<dyn ScreenCaptureSource>,
++        _cx: &mut Context<Self>,
++    ) -> Task<Result<()>> {
++      return Task::ready(Err(anyhow!("live-kit was not initialized")));
++    }
++    #[cfg(target_env = "musl")]
++    pub fn toggle_mute(&mut self, _cx: &mut Context<Self>) {
++    }
++    #[cfg(target_env = "musl")]
++    pub fn toggle_deafen(&mut self, _cx: &mut Context<Self>) {
++    }
++    #[cfg(target_env = "musl")]
++    pub fn unshare_screen(&mut self, play_sound: bool, cx: &mut Context<Self>) -> Result<()> {
++      Ok(())
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_sharing_screen(&self) -> bool {
++      false
++    }
++    #[cfg(target_env = "musl")]
++    pub fn shared_screen_id(&self) -> Option<u64> {
++      None
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_sharing_mic(&self) -> bool {
++      false
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_muted(&self) -> bool {
++      false
++    }
++    #[cfg(target_env = "musl")]
++    pub fn muted_by_user(&self) -> bool {
++      false
++    }
++    #[cfg(target_env = "musl")]
++    pub fn is_connected(&self, _: &App) -> bool {
++      false
++    }
++
+     pub fn status(&self) -> RoomStatus {
+         self.status
+     }
+@@ -739,6 +812,7 @@ impl Room {
+                                 }
+                             }
+                             this.local_participant.projects.clear();
++                            #[cfg(not(target_env = "musl"))]
+                             if let Some(livekit_room) = &mut this.live_kit {
+                                 livekit_room.stop_publishing(cx);
+                             }
+@@ -757,11 +831,13 @@ impl Room {
+                     this.local_participant.projects.clear();
+                 }
+ 
++                #[cfg(not(target_env = "musl"))]
+                 let livekit_participants = this
+                     .live_kit
+                     .as_ref()
+                     .map(|live_kit| live_kit.room.remote_participants());
+ 
++                #[cfg(not(target_env = "musl"))]
+                 if let Some(participants) = remote_participants.log_err() {
+                     for (participant, user) in room.participants.into_iter().zip(participants) {
+                         let Some(peer_id) = participant.peer_id else {
+@@ -859,6 +935,7 @@ impl Room {
+                                 }
+                             }
+ 
++                            #[cfg(not(target_env = "musl"))]
+                             if let Some(livekit_participants) = &livekit_participants
+                                 && let Some(livekit_participant) = livekit_participants
+                                     .get(&ParticipantIdentity(user.id.to_string()))
+@@ -950,6 +1027,7 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     fn livekit_room_updated(&mut self, event: RoomEvent, cx: &mut Context<Self>) -> Result<()> {
+         log::trace!(
+             "client {:?}. livekit event: {:?}",
+@@ -1281,12 +1359,14 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_sharing_screen(&self) -> bool {
+         self.live_kit
+             .as_ref()
+             .is_some_and(|live_kit| !matches!(live_kit.screen_track, LocalTrack::None))
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn shared_screen_id(&self) -> Option<u64> {
+         self.live_kit.as_ref().and_then(|lk| match lk.screen_track {
+             LocalTrack::Published { ref _stream, .. } => {
+@@ -1296,12 +1376,14 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_sharing_mic(&self) -> bool {
+         self.live_kit
+             .as_ref()
+             .is_some_and(|live_kit| !matches!(live_kit.microphone_track, LocalTrack::None))
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_muted(&self) -> bool {
+         self.live_kit.as_ref().is_some_and(|live_kit| {
+             matches!(live_kit.microphone_track, LocalTrack::None)
+@@ -1310,18 +1392,21 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn muted_by_user(&self) -> bool {
+         self.live_kit
+             .as_ref()
+             .is_some_and(|live_kit| live_kit.muted_by_user)
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_speaking(&self) -> bool {
+         self.live_kit
+             .as_ref()
+             .is_some_and(|live_kit| live_kit.speaking)
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn is_deafened(&self) -> Option<bool> {
+         self.live_kit.as_ref().map(|live_kit| live_kit.deafened)
+     }
+@@ -1343,6 +1428,7 @@ impl Room {
+         }
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     #[track_caller]
+     pub fn share_microphone(&mut self, cx: &mut Context<Self>) -> Task<Result<()>> {
+         if self.status.is_offline() {
+@@ -1418,6 +1504,7 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn share_screen(
+         &mut self,
+         source: Rc<dyn ScreenCaptureSource>,
+@@ -1489,6 +1576,7 @@ impl Room {
+         })
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn toggle_mute(&mut self, cx: &mut Context<Self>) {
+         if let Some(live_kit) = self.live_kit.as_mut() {
+             // When unmuting, undeafen if the user was deafened before.
+@@ -1515,6 +1603,7 @@ impl Room {
+         }
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn toggle_deafen(&mut self, cx: &mut Context<Self>) {
+         if let Some(live_kit) = self.live_kit.as_mut() {
+             // When deafening, mute the microphone if it was not already muted.
+@@ -1531,6 +1620,7 @@ impl Room {
+         }
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     pub fn unshare_screen(&mut self, play_sound: bool, cx: &mut Context<Self>) -> Result<()> {
+         anyhow::ensure!(!self.status.is_offline(), "room is offline");
+ 
+@@ -1564,6 +1654,7 @@ impl Room {
+         }
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     fn set_deafened(&mut self, deafened: bool, cx: &mut Context<Self>) -> Option<()> {
+         {
+             let live_kit = self.live_kit.as_mut()?;
+@@ -1580,6 +1671,7 @@ impl Room {
+         None
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     fn set_mute(&mut self, should_mute: bool, cx: &mut Context<Room>) -> Option<Task<Result<()>>> {
+         let live_kit = self.live_kit.as_mut()?;
+         cx.notify();
+@@ -1616,6 +1708,7 @@ impl Room {
+     }
+ }
+ 
++#[cfg(not(target_env = "musl"))]
+ fn spawn_room_connection(
+     livekit_connection_info: Option<proto::LiveKitConnectionInfo>,
+     cx: &mut Context<Room>,
+@@ -1664,6 +1757,7 @@ fn spawn_room_connection(
+     }
+ }
+ 
++#[cfg(not(target_env = "musl"))]
+ struct LiveKitRoom {
+     room: Rc<livekit::Room>,
+     screen_track: LocalTrack<dyn ScreenCaptureStream>,
+@@ -1676,6 +1770,7 @@ struct LiveKitRoom {
+     _handle_updates: Task<()>,
+ }
+ 
++#[cfg(not(target_env = "musl"))]
+ impl LiveKitRoom {
+     fn stop_publishing(&mut self, cx: &mut Context<Room>) {
+         let mut tracks_to_unpublish = Vec::new();
+@@ -1713,6 +1808,7 @@ enum LocalTrack<Stream: ?Sized> {
+         publish_id: usize,
+     },
+     Published {
++        #[cfg(not(target_env = "musl"))]
+         track_publication: LocalTrackPublication,
+         _stream: Box<Stream>,
+     },
+diff --git a/crates/crashes/src/crashes.rs b/crates/crashes/src/crashes.rs
+index 4c601c3930..63484e811d 100644
+--- a/crates/crashes/src/crashes.rs
++++ b/crates/crashes/src/crashes.rs
+@@ -1,3 +1,4 @@
++#[cfg(not(target_env = "musl"))]
+ use crash_handler::{CrashEventResult, CrashHandler};
+ use log::info;
+ use minidumper::{Client, LoopAction, MinidumpBinary};
+@@ -104,6 +105,7 @@ pub async fn init(crash_init: InitCrashHandler) {
+         .unwrap();
+ 
+     let client = Arc::new(client);
++    #[cfg(not(target_env = "musl"))]
+     let handler = CrashHandler::attach(unsafe {
+         let client = client.clone();
+         crash_handler::make_crash_event(move |crash_context: &crash_handler::CrashContext| {
+@@ -128,11 +130,13 @@ pub async fn init(crash_init: InitCrashHandler) {
+     })
+     .expect("failed to attach signal handler");
+ 
+-    #[cfg(target_os = "linux")]
++    #[cfg(all(target_os = "linux", not(target_env = "musl")))]
+     {
+         handler.set_ptracer(Some(server_pid));
+     }
++    #[cfg(not(target_env = "musl"))]
+     CRASH_HANDLER.set(client.clone()).ok();
++    #[cfg(not(target_env = "musl"))]
+     std::mem::forget(handler);
+     info!("crash handler registered");
+ 
+diff --git a/crates/gpui/Cargo.toml b/crates/gpui/Cargo.toml
+index 40376f476b..bceeb9d97f 100644
+--- a/crates/gpui/Cargo.toml
++++ b/crates/gpui/Cargo.toml
+@@ -56,6 +56,7 @@ wayland = [
+     "filedescriptor",
+     "xkbcommon",
+     "open",
++    "scap?/wayland",
+ ]
+ x11 = [
+     "blade-graphics",
+@@ -225,7 +226,6 @@ x11rb = { version = "0.13.1", features = [
+ ], optional = true }
+ xkbcommon = { version = "0.8.0", features = [
+     "wayland",
+-    "x11",
+ ], optional = true }
+ # WARNING: If you change this, you must also publish a new version of zed-xim to crates.io
+ xim = { git = "https://github.com/zed-industries/xim-rs.git", rev = "16f35a2c881b815a2b6cdfd6687988e84f8447d8" , features = [
+diff --git a/crates/livekit_client/Cargo.toml b/crates/livekit_client/Cargo.toml
+index a7766b5ba5..7308561184 100644
+--- a/crates/livekit_client/Cargo.toml
++++ b/crates/livekit_client/Cargo.toml
+@@ -26,7 +26,7 @@ audio.workspace = true
+ collections.workspace = true
+ cpal.workspace = true
+ futures.workspace = true
+-gpui = { workspace = true, features = ["screen-capture", "x11", "wayland", "windows-manifest"] }
++gpui = { workspace = true, features = ["screen-capture",  "wayland", "windows-manifest"] }
+ gpui_tokio.workspace = true
+ http_client_tls.workspace = true
+ image.workspace = true
+diff --git a/crates/workspace/src/workspace.rs b/crates/workspace/src/workspace.rs
+index eb0debc929..e816e23f13 100644
+--- a/crates/workspace/src/workspace.rs
++++ b/crates/workspace/src/workspace.rs
+@@ -10,6 +10,7 @@ mod path_list;
+ mod persistence;
+ pub mod searchable;
+ mod security_modal;
++#[cfg(not(target_env = "musl"))]
+ pub mod shared_screen;
+ mod status_bar;
+ pub mod tasks;
+@@ -92,6 +93,7 @@ use session::AppSession;
+ use settings::{
+     CenteredPaddingSettings, Settings, SettingsLocation, SettingsStore, update_settings_file,
+ };
++#[cfg(not(target_env = "musl"))]
+ use shared_screen::SharedScreen;
+ use sqlez::{
+     bindable::{Bind, Column, StaticColumnCount},
+@@ -3843,6 +3845,7 @@ impl Workspace {
+         window: &mut Window,
+         cx: &mut Context<Self>,
+     ) {
++        #[cfg(not(target_env = "musl"))]
+         if let Some(shared_screen) =
+             self.shared_screen_for_peer(peer_id, &self.active_pane, window, cx)
+         {
+@@ -5389,14 +5392,17 @@ impl Workspace {
+             {
+                 item_to_activate = Some((item.location, item.view.boxed_clone()));
+             }
+-        } else if let Some(shared_screen) =
+-            self.shared_screen_for_peer(peer_id, &state.center_pane, window, cx)
+-        {
+-            item_to_activate = Some((None, Box::new(shared_screen)));
++        } else {
++            #[cfg(not(target_env = "musl"))]
++            if let Some(shared_screen) = self.shared_screen_for_peer(peer_id, &state.center_pane, window, cx)
++            {
++                item_to_activate = Some((None, Box::new(shared_screen)));
++            }
+         }
+         item_to_activate
+     }
+ 
++    #[cfg(not(target_env = "musl"))]
+     fn shared_screen_for_peer(
+         &self,
+         peer_id: PeerId,
+@@ -5415,7 +5421,6 @@ impl Workspace {
+                 return Some(item);
+             }
+         }
+-
+         Some(cx.new(|cx| SharedScreen::new(track, peer_id, user.clone(), room.clone(), window, cx)))
+     }
+ 
+diff --git a/crates/zed/Cargo.toml b/crates/zed/Cargo.toml
+index 5c5d359446..687b048d9c 100644
+--- a/crates/zed/Cargo.toml
++++ b/crates/zed/Cargo.toml
+@@ -67,7 +67,6 @@ go_to_line.workspace = true
+ system_specs.workspace = true
+ gpui = { workspace = true, features = [
+     "wayland",
+-    "x11",
+     "font-kit",
+     "windows-manifest",
+ ] }

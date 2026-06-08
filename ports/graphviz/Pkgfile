@@ -1,0 +1,41 @@
+name="graphviz"
+version="14.1.4"
+desc='Graph visualization software'
+deps=["libtool", "pango", "librsvg", "cairo", "zlib", "expat"]
+makedeps=["git", "libtool", "pango", "librsvg", "cairo", "zlib", "expat", "python3"]
+source=[
+	{url="https://gitlab.com/graphviz/graphviz/-/archive/$version/graphviz-$version.tar.gz"},
+	{url="graphviz.toml"},
+]
+
+ext='''
+	cd graphviz-$version
+	find . -name Makefile.am -exec sed -i 's/pdf_DATA = .\+/pdf_DATA = /g' {} \;
+	chmod +x lib/common/*.py
+'''
+
+build=''' cd graphviz-$version
+	export CFLAGS="$CFLAGS"
+	export CXXFLAGS="$CXXFLAGS -fPIC -fpermissive"
+	export LIBPOSTFIX=/
+	./autogen.sh NOCONFIG
+	./configure --prefix=/ \
+		--without-gdk-pixbuf \
+		--enable-ltdl \
+		--enable-sharp=no \
+		--enable-go=no \
+		--enable-guile=no \
+		--enable-java=no \
+		--enable-lua=no \
+		--enable-ocaml=no \
+		--enable-perl=no \
+		--enable-php=no \
+		--enable-python=no \
+		--enable-r=no \
+		--enable-ruby=no \
+		--enable-tcl=no
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool # Fix overlinking
+	make -j1
+	make -j1 DESTDIR="$pkgdir" pkgconfigdir=/lib/pkgconfig install
+	install -Dm644 ../graphviz.toml "$pkgdir/${HOOKS#$ROOT}"/graphviz.toml
+'''

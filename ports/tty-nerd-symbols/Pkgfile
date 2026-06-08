@@ -1,0 +1,8 @@
+version="3.4.0"
+desc="nerd font"
+source=[{url="https://github.com/ryanoasis/nerd-fonts/releases/download/v$version/NerdFontsSymbolsOnly.tar.xz"}]
+
+build='''
+	install -m755 -d "${pkgdir}/share/fonts/ttf-nerd-symbols"
+	install -m644 -t "${pkgdir}/share/fonts/ttf-nerd-symbols" *.ttf
+'''

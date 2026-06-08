@@ -1,0 +1,24 @@
+version="7.5"
+desc="Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives"
+makedeps=["libcap-ng", "systemd"]
+deps=["libcap-ng", "systemd", "bash"]
+source=[
+	{url="https://nchc.dl.sourceforge.net/sourceforge/smartmontools/smartmontools-${version}.tar.gz"},
+]
+
+build='''
+	cd smartmontools-$version
+	./configure --prefix= \
+		--sbindir=/bin \
+		--sysconfdir=/etc \
+		--with-drivedbdir \
+		--with-libcap-ng=yes \
+		--with-libsystemd=yes \
+    --with-systemdsystemunitdir=/lib/systemd/system \
+    --with-systemdenvfile=/etc/conf.d/smartd \
+		--with-smartdscriptdir=/share/smartmontools \
+		--with-smartdplugindir=/share/smartmontools/smartd_warning.d
+
+	make
+	make DESTDIR="${pkgdir}" install
+'''

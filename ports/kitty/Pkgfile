@@ -1,0 +1,18 @@
+version="0.45.0"
+desc="A modern, hackable, featureful, OpenGL based terminal emulator"
+deps=["python3", "freetype", "fontconfig", "zlib", "libpng", "harfbuzz", "openssl", "wayland", "xxhash"]
+makedeps=["python3", "freetype", "fontconfig", "zlib", "libpng", "harfbuzz", "openssl", "wayland-protocols", "xxhash", "tty-nerd-symbols", "simde", "go"]
+source=[
+	{url="https://github.com/kovidgoyal/kitty/archive/v$version.tar.gz"},
+	{url="musl.patch"},
+]
+
+build='''
+	cd kitty-$version
+	mkdir -p docs/_build/html
+	patch -p1 -i "$srcdir"/musl.patch
+	export GOPROXY=goproxy.cn,direct
+  python3 setup.py linux-package
+	cd linux-package
+	cp -r bin share lib $pkgdir/
+'''

@@ -1,0 +1,14 @@
+version="1.20.3"
+desc="desktop integration portal"
+makedeps=["gstreamer", "gdk-pixbuf", "fuse3", "glib", "systemd", "json-glib", "dbus", "pipewire", "flatpak", "gobject-introspection"]
+deps=["gstreamer", "gdk-pixbuf", "fuse3", "glib", "systemd", "json-glib", "dbus", "pipewire"]
+source=[
+	{url="https://github.com/flatpak/xdg-desktop-portal/archive/refs/tags/$version.tar.gz"},
+]
+
+build='''
+	noname-meson xdg-desktop-portal-$version build -Ddocumentation=disabled -Dman-pages=disabled -Dgeoclue=disabled -Dgudev=disabled -Dtests=disabled -Dsandboxed-image-validation=disabled -Dsandboxed-sound-validation=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

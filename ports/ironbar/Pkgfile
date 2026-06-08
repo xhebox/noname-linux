@@ -1,0 +1,21 @@
+version="222f5c5"
+desc="Customisable Wayland GTK4 bar written in Rust"
+makedeps=["gtk4-layer-shell", "libinput", "pipewire", "openssl", "dbus", "rust"]
+deps=["gtk4-layer-shell", "libinput", "pipewire", "openssl", "dbus"]
+source=[
+	{url="https://github.com/JakeStanger/ironbar/archive/$version.zip"},
+]
+
+build='''
+	#cd ironbar-$version
+	cd ironbar-*
+	export CARGO_HOME="$srcdir/.cargo"
+	cargo build $MAKEFLAGS --release --no-default-features --features battery,bindmode+all,bluetooth,cli,clipboard,clock,config+all,custom,focused,http,ipc,keyboard+all,launcher,label,menu,music+all,network_manager,notifications,script,sys_info,tray,volume,workspaces+all,extras
+	./target/release/ironbar --print-completions bash > ./bash
+  ./target/release/ironbar --print-completions zsh > ./zsh
+  ./target/release/ironbar --print-completions fish > ./fish
+	install -Dm755 ./bash "$pkgdir/share/bash-completion/completions/ironbar.bash"
+	install -Dm755 ./zsh "$pkgdir/share/zsh/site-functions/_ironbar"
+	install -Dm755 ./fish  "$pkgdir/share/fish/vendor_completions.d/ironbar.fish"
+  install -Dm 755 ./target/release/ironbar "$pkgdir/bin/ironbar"
+'''

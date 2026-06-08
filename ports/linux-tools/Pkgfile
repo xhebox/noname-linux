@@ -1,27 +1,27 @@
-version="6.4.3"
+version="6.14.4"
 xanmod="1"
 desc="Linux kernel tools"
 source=[
-	{url="http://mirrors.ustc.edu.cn/kernel.org/linux/kernel/v${version%%.*}.x/linux-${version%.*}.tar.xz"},
-	{url="https://github.com/xanmod/linux/releases/download/${version}-xanmod1/patch-${version}-xanmod1.xz"},
+	{url="https://cdn.kernel.org/pub/linux/kernel/v${version%%.*}.x/linux-${version}.tar.xz"},
 	{url="musl.patch"},
 ]
 makedeps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils", "libtraceevent"]
 deps=["perl", "python3", "pciutils", "glib", "sysfsutils", "elfutils", "zlib", "systemd", "openssl", "xz", "binutils", "libtraceevent"]
 
 ext='''
-	cd linux-${version%.*}
-	patch -Np1 -i ../patch-${version}-xanmod${xanmod}
+	cd linux-${version}
 	patch -p0 -i ../musl.patch
 '''
 
 build='''
-	cd linux-${version%.*}
+	cd linux-${version}
+
+	compiler_flags="LLVM=1"
 
 	echo 'tmon'
 	cd tools/thermal/tmon
-	make
-	make install BINDIR=bin INSTALL_ROOT="$pkgdir"
+	make $compiler_flags
+	make $compiler_flags install BINDIR=bin INSTALL_ROOT="$pkgdir"
 	cd -
 
 	echo 'perf'
@@ -30,7 +30,9 @@ build='''
 	prefix=/ \
 	lib=lib/perf \
 	perfexecdir=lib/perf \
+	$compiler_flags \
 	EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=implicit-function-declaration -Wno-error=switch-enum' \
+	NO_LIBBPF=1 \
 	NO_SDT=1 \
 	all
 
@@ -39,15 +41,18 @@ build='''
 	prefix=/ \
 	lib=lib/perf \
 	perfexecdir=lib/perf \
+	$compiler_flags \
 	EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=implicit-function-declaration -Wno-error=switch-enum' \
+	NO_LIBBPF=1 \
 	NO_SDT=1 \
 	install
 	cd -
 
 	echo 'cpupower'
 	cd tools/power/cpupower
-	make VERSION=$version
+	make VERSION=$version $compiler_flags
 	make \
+	$compiler_flags \
 	DESTDIR="$pkgdir" \
 	bindir='/bin' \
 	sbindir='/bin' \
@@ -60,33 +65,11 @@ build='''
 	install install-man
 	cd -
 
-	echo 'x86_energy_perf_policy'
-	cd tools/power/x86/x86_energy_perf_policy
-	make
-	install -Dm 755 x86_energy_perf_policy "$pkgdir/bin/x86_energy_perf_policy"
-	install -Dm 644 x86_energy_perf_policy.8 "$pkgdir/share/man/man8/x86_energy_perf_policy.8"
-	cd -
-
 	echo 'usbip'
 	cd tools/usb/usbip
 	./autogen.sh
 	./configure --prefix=/ --sbindir=/bin
-	make
-	make install DESTDIR="$pkgdir"
-	cd -
-
-	echo 'cgroup_event_listener'
-	cd tools/cgroup
-	make
-	install -Dm755 cgroup_event_listener "$pkgdir/bin/cgroup_event_listener"
-	cd -
-
-	echo 'turbostat'
-	sed '/time.h/a #include <limits.h>' -i tools/power/x86/turbostat/turbostat.c
-	cd tools/power/x86/turbostat
-	make
-	make \
-	PREFIX= \
-	install DESTDIR="$pkgdir"
+	make $compiler_flags
+	make $compiler_flags install DESTDIR="$pkgdir"
 	cd -
 '''

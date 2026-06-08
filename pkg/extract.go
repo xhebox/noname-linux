@@ -150,16 +150,12 @@ func opt_extract(name string, opts map[harg]bool) error {
 				} else if exist("/bin/pbzip2") || exist("/usr/bin/pbzip2") {
 					command = "pbzip2 -dkc " + spath + " > " + filepath.Join(pkg.Srcdir, strings.TrimSuffix(source["name"], ".bz2"))
 				}
-			default:
+			}
+			if source["skip"] != "" || len(command) == 0 {
 				if _, e := copyFile(spath, filepath.Join(pkg.Srcdir, source["name"])); e != nil {
 					return errors.Wrapf(e, "can not copy [%v]", source["url"])
 				}
-
 				continue
-			}
-
-			if len(command) == 0 {
-				return errors.Errorf("no tools to extract [%v]", source["url"])
 			}
 
 			cmd := exec.Command("/bin/sh")

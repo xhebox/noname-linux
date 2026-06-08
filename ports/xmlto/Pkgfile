@@ -1,0 +1,13 @@
+version="0.0.29"
+desc="Convert xml to many other formats"
+source=[{url="https://releases.pagure.org/xmlto/xmlto-${version}.tar.gz"}]
+makedeps=["libxslt", "docbook-xsl"]
+deps=["libxslt"]
+
+build='''
+	cd xmlto-${version}
+	autoreconf -fi
+	./configure BASH=/bin/bash --prefix=
+	make
+	make DESTDIR="${pkgdir}" install
+'''

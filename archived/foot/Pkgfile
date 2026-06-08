@@ -1,0 +1,14 @@
+version="1.25.0"
+desc="wayland terminal"
+makedeps=["wayland-protocols", "libxkbcommon", "freetype", "fcft", "ncurses", "tllist"]
+deps=["wayland", "libxkbcommon", "freetype", "fcft", "ncurses"]
+source=[
+	{url="https://codeberg.org/dnkl/foot/releases/download/$version/foot-$version.tar.gz"},
+]
+
+build='''
+	noname-meson foot-$version build -Dtests=false -Dterminfo=enabled -Ddocs=disabled -Dgrapheme-clustering=enabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

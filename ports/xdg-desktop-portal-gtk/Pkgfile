@@ -1,0 +1,14 @@
+version="1.15.3"
+desc="desktop integration portal"
+makedeps=["fontconfig", "gdk-pixbuf", "glib", "gtk3", "xdg-desktop-portal", "meson"]
+deps=["fontconfig", "gdk-pixbuf", "glib", "gtk3", "xdg-desktop-portal"]
+source=[
+	{url="https://github.com/flatpak/xdg-desktop-portal-gtk/archive/refs/tags/$version.tar.gz"},
+]
+
+build='''
+	noname-meson xdg-desktop-portal-gtk-$version build -Dwallpaper=disabled -Dsettings=disabled -Dlockdown=disabled
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

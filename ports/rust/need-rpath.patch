@@ -32,15 +32,15 @@ Hacky hacky!
              static_position_independent_executables: false,
 --- a/compiler/rustc_target/src/spec/json.rs
 +++ b/compiler/rustc_target/src/spec/json.rs
-@@ -574,6 +574,7 @@ macro_rules! key {
-         key!(default_dwarf_version, u32);
-         key!(allows_weak_linkage, bool);
-         key!(has_rpath, bool);
-+        key!(need_rpath, bool);
-         key!(no_default_libraries, bool);
-         key!(position_independent_executables, bool);
-         key!(static_position_independent_executables, bool);
-@@ -749,6 +750,7 @@ macro_rules! target_option_val {
+@@ -155,6 +155,7 @@
+         forward!(default_dwarf_version);
+         forward!(allows_weak_linkage);
+         forward!(has_rpath);
++        forward!(need_rpath);
+         forward!(no_default_libraries);
+         forward!(position_independent_executables);
+         forward!(static_position_independent_executables);
+@@ -345,6 +346,7 @@
          target_option_val!(default_dwarf_version);
          target_option_val!(allows_weak_linkage);
          target_option_val!(has_rpath);
@@ -48,6 +48,14 @@ Hacky hacky!
          target_option_val!(no_default_libraries);
          target_option_val!(position_independent_executables);
          target_option_val!(static_position_independent_executables);
+@@ -564,6 +566,7 @@
+     default_dwarf_version: Option<u32>,
+     allows_weak_linkage: Option<bool>,
+     has_rpath: Option<bool>,
++    need_rpath: Option<bool>,
+     no_default_libraries: Option<bool>,
+     position_independent_executables: Option<bool>,
+     static_position_independent_executables: Option<bool>,
 --- a/compiler/rustc_codegen_ssa/src/back/link.rs
 +++ b/compiler/rustc_codegen_ssa/src/back/link.rs
 @@ -2166,7 +2166,10 @@ fn add_rpath_args(

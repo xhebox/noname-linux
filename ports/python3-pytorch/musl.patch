@@ -1,0 +1,15 @@
+--- a/torch/headeronly/macros/Macros.h	2026-03-24 02:40:49.000000000 +0800
++++ b/torch/headeronly/macros/Macros.h	2026-03-24 02:40:49.000000000 +0800
+@@ -465,12 +465,6 @@
+     // exactly how it is in glibc in case parts of the program are compiled with
+     // different NDEBUG settings. Otherwise we might get 'ambiguous declaration'
+     // error. Note: On ROCm - this declaration serves for host side compilation.
+-    void
+-    __assert_fail(
+-        const char* assertion,
+-        const char* file,
+-        unsigned int line,
+-        const char* function) noexcept __attribute__((__noreturn__));
+ 
+ #endif // __SYCL_DEVICE_ONLY__
+ }

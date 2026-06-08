@@ -1,0 +1,20 @@
+--- a/setup.py	2025-12-24 11:54:17.000000000 +0800
++++ b/setup.py	2025-12-24 11:54:17.000000000 +0800
+@@ -1029,7 +1029,7 @@
+ 
+ 
+ def compile_glfw(compilation_database: CompilationDatabase, build_dsym: bool = False) -> None:
+-    modules = 'cocoa' if is_macos else 'x11 wayland'
++    modules = 'cocoa' if is_macos else 'wayland'
+     for module in modules.split():
+         try:
+             genv = glfw.init_env(env, pkg_config, pkg_version, at_least_version, test_compile, module)
+@@ -1490,7 +1490,7 @@
+     base = Path(ddir)
+     in_src_launcher = base / (f'{libdir_name}/kitty/kitty/launcher/kitty')
+     launcher = base / 'bin/kitty'
+-    skip_docs = False
++    skip_docs = True
+     if not os.path.exists('docs/_build/html'):
+         kitten_exe = os.path.join(os.path.dirname(str(launcher)), 'kitten')
+         if os.path.exists(kitten_exe):

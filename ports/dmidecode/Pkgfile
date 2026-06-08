@@ -1,0 +1,14 @@
+version = "3.7"
+desc = "Desktop Management Interface table related utilities"
+deps = ["musl"]
+
+source = [
+  { url = "https://download.savannah.gnu.org/releases/dmidecode/dmidecode-$version.tar.xz" },
+]
+
+build = '''
+	cd dmidecode-$version
+	sed -i "s:sbin:bin:g" Makefile
+	make
+	make prefix=/ DESTDIR="$pkgdir" install
+'''

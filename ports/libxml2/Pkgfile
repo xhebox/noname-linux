@@ -1,8 +1,8 @@
-version="2.9.8"
+version="2.15.1"
 desc="XML library version 2"
 makedeps=["ncurses", "readline", "xz", "zlib"]
 deps=["ncurses", "readline", "xz", "zlib"]
-source=[{url="http://xmlsoft.org/sources/libxml2-$version.tar.gz"}]
+source=[{url="https://download.gnome.org/sources/libxml2/${version%.*}/libxml2-$version.tar.xz"}]
 
 build='''
 	cd libxml2-$version 

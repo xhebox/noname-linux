@@ -1,10 +1,10 @@
-version="25.1.5"
-makedeps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
-deps=["expat", "libdrm", "elfutils", "llvm", "libclc", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland"]
+version="26.0.5"
+makedeps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland-protocols", "vulkan-headers"]
+deps=["expat", "libdrm", "elfutils", "llvm", "lm_sensors", "libva", "zstd", "spirv-llvm", "libx11", "libxcb", "libxext", "libxshmfence", "libxfixes", "libxxf86vm", "libglvnd", "vulkan", "wayland"]
 desc="Mesa 3D Graphics Library"
 source=[
 	{url="https://archive.mesa3d.org/mesa-$version.tar.xz"},
-	{url="no-isystem.patch"},
+	#{url="no-isystem.patch"},
 	{url="musl.patch"},
 	{url="musl-stacksize.patch"},
 	{url="musl-endian.patch"},
@@ -19,7 +19,7 @@ ext='''
 		*patch)	patch -Nbp1 -i "$srcdir"/$i ;;
 		esac
 	done
-	for i in src/intel/genxml src/intel/vulkan/grl/include; do
+	for i in src/intel/genxml; do
 		cp /lib/clang/*/include/opencl-c-base.h \
 			/lib/clang/*/include/opencl-c.h \
 			$i 
@@ -29,7 +29,7 @@ ext='''
 build='''
 	python3 -m venv --system-site-packages ss
 	. ./ss/bin/activate
-	pip install mako ply PyYAML
+	pip install mako ply PyYAML -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 	ulimit -n 100000
 	noname-meson mesa-$version build \
 		-D b_ndebug=true \
@@ -40,10 +40,9 @@ build='''
 		-D egl=enabled \
 		-D intel-rt=enabled \
 		-D gallium-extra-hud=true \
-		-D gallium-vdpau=disabled \
 		-D gallium-va=enabled \
+		-D gallium-mediafoundation=disabled \
 		-D microsoft-clc=disabled \
-		-D intel-clc=auto \
 		-D android-libbacktrace=disabled \
 		-D gbm=enabled \
 		-D gles1=disabled \

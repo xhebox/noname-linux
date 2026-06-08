@@ -1,0 +1,60 @@
+version="1.79.2"
+desc='XML stylesheets for Docbook-xml transformations'
+deps=["libxml2", "libxslt", "sed", "docbook-xml"]
+source=[
+	{url="https://github.com/docbook/xslt10-stylesheets/releases/download/release ${version}/docbook-xsl-nons-$version.tar.gz"},
+	{url="765567_non-recursive_string_subst.patch"},
+]
+
+ext='''
+	cd docbook-xsl-nons-$version
+	patch -Np2 -i ../765567_non-recursive_string_subst.patch
+'''
+
+build='''
+	cd docbook-xsl-nons-$version
+	_pkgroot="${pkgdir}/share/xml/docbook/xsl-stylesheets-${version}"
+
+	mkdir -p "$pkgdir"/etc/xml
+	xmlcatalog --noout --create "$pkgdir"/etc/xml/docbook-xsl
+	xmlcatalog --noout --add "rewriteSystem" \
+        	"http://cdn.docbook.org/release/xsl/${version}" \
+	        "/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteURI" \
+		"http://cdn.docbook.org/release/xsl/${version}" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteSystem" \
+		"http://cdn.docbook.org/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteURI" \
+		"http://cdn.docbook.org/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteSystem" \
+		"http://docbook.sourceforge.net/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	xmlcatalog --noout --add "rewriteURI" \
+		"http://docbook.sourceforge.net/release/xsl/current" \
+		"/share/xml/docbook/xsl-stylesheets-${version}" \
+		"$pkgdir"/etc/xml/docbook-xsl
+
+	install -dm755 "${_pkgroot}"
+	install -m644 VERSION VERSION.xsl "${_pkgroot}"
+
+	for fn in assembly common eclipse epub epub3 fo highlighting html htmlhelp javahelp lib \
+									manpages params profiling roundtrip template website xhtml xhtml-1_1 xhtml5; do
+		install -d "${_pkgroot}/${fn}"
+		for i in "${fn}"/*.xml "$fn"/*.xsl "$fn"/*.dtd "$fn"/*.ent; do
+			[ -e "$i" ] && install -m644 "$i" "${_pkgroot}/${fn}" || true
+		done
+	done
+'''

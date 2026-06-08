@@ -1,4 +1,4 @@
-version="2.9.0"
+version="2.11.3"
 desc="C library for processing UTF-8 encoded Unicode strings"
 deps=["cmake"]
 makedeps=["cmake"]

@@ -1,0 +1,10 @@
+version="0.8.2"
+desc="Implementations of SIMD instruction sets for systems which don't natively support them"
+source=[{url="https://github.com/simd-everywhere/simde/archive/refs/tags/v$version.tar.gz"}]
+
+build='''
+	noname-meson simde-$version build
+	meson configure --no-pager build
+	meson compile -C build
+	DESTDIR="$pkgdir" meson install -C build
+'''

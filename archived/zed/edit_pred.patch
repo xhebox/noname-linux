@@ -1,0 +1,605 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 4536e74c93..93272aa78f 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -4792,11 +4792,18 @@ name = "deepseek"
+ version = "0.1.0"
+ dependencies = [
+  "anyhow",
++ "edit_prediction_context",
++ "edit_prediction_types",
+  "futures 0.3.31",
++ "gpui",
+  "http_client",
++ "language",
++ "log",
+  "schemars",
+  "serde",
+  "serde_json",
++ "smol",
++ "text",
+ ]
+ 
+ [[package]]
+@@ -20824,6 +20831,7 @@ dependencies = [
+  "debug_adapter_extension",
+  "debugger_tools",
+  "debugger_ui",
++ "deepseek",
+  "diagnostics",
+  "edit_prediction",
+  "edit_prediction_ui",
+diff --git a/crates/agent_ui/src/agent_ui.rs b/crates/agent_ui/src/agent_ui.rs
+index 401b506b30..47416ae009 100644
+--- a/crates/agent_ui/src/agent_ui.rs
++++ b/crates/agent_ui/src/agent_ui.rs
+@@ -321,6 +321,7 @@ fn update_command_palette_filter(cx: &mut App) {
+                 }
+                 EditPredictionProvider::Zed
+                 | EditPredictionProvider::Codestral
++                | EditPredictionProvider::Deepseek
+                 | EditPredictionProvider::Experimental(_) => {
+                     filter.show_namespace("edit_prediction");
+                     filter.hide_namespace("copilot");
+diff --git a/crates/deepseek/Cargo.toml b/crates/deepseek/Cargo.toml
+index 25e8f2f25c..0ece858dd1 100644
+--- a/crates/deepseek/Cargo.toml
++++ b/crates/deepseek/Cargo.toml
+@@ -9,7 +9,7 @@ license = "GPL-3.0-or-later"
+ workspace = true
+ 
+ [lib]
+-path = "src/deepseek.rs"
++path = "src/lib.rs"
+ 
+ [features]
+ default = []
+@@ -17,8 +17,15 @@ schemars = ["dep:schemars"]
+ 
+ [dependencies]
+ anyhow.workspace = true
++edit_prediction_types.workspace = true
++edit_prediction_context.workspace = true
+ futures.workspace = true
++gpui.workspace = true
+ http_client.workspace = true
++language.workspace = true
++log.workspace = true
+ schemars = { workspace = true, optional = true }
+ serde.workspace = true
+ serde_json.workspace = true
++smol.workspace = true
++text.workspace = true
+diff --git a/crates/deepseek/src/edit_prediction_provider.rs b/crates/deepseek/src/edit_prediction_provider.rs
+new file mode 100644
+index 0000000000..ff8632c9da
+--- /dev/null
++++ b/crates/deepseek/src/edit_prediction_provider.rs
+@@ -0,0 +1,241 @@
++use anyhow::{Context as _, Result};
++use edit_prediction_context::{EditPredictionExcerpt, EditPredictionExcerptOptions};
++use edit_prediction_types::{EditPrediction, EditPredictionDelegate, interpolate_edits};
++use futures::AsyncReadExt;
++use gpui::{App, Context, Entity, Task};
++use http_client::{AsyncBody, HttpClient, Method, Request as HttpRequest};
++use language::{language_settings::all_language_settings, Anchor, Buffer, BufferSnapshot, EditPreview, ToPoint};
++use serde_json::Value;
++use std::{
++    ops::Range,
++    sync::Arc,
++    time::Duration,
++};
++use text::ToOffset;
++
++pub const DEBOUNCE_TIMEOUT: Duration = Duration::from_millis(150);
++
++const EXCERPT_OPTIONS: EditPredictionExcerptOptions = EditPredictionExcerptOptions {
++    max_bytes: 1050,
++    min_bytes: 525,
++    target_before_cursor_over_total_bytes: 0.66,
++};
++
++/// Represents a completion that has been received and processed from DeepSeek.
++#[derive(Clone)]
++struct CurrentCompletion {
++    snapshot: BufferSnapshot,
++    edits: Arc<[(Range<Anchor>, Arc<str>)]>,
++    edit_preview: EditPreview,
++}
++
++impl CurrentCompletion {
++    fn interpolate(&self, new_snapshot: &BufferSnapshot) -> Option<Vec<(Range<Anchor>, Arc<str>)>> {
++        interpolate_edits(&self.snapshot, new_snapshot, &self.edits)
++    }
++}
++
++pub struct DeepseekEditPredictionProvider {
++    http_client: Arc<dyn HttpClient>,
++    pending_request: Option<Task<Result<()>>>,
++    current_completion: Option<CurrentCompletion>,
++    api_url: String,
++    model_name: String,
++    api_key: String,
++}
++
++impl DeepseekEditPredictionProvider {
++    pub fn new(http_client: Arc<dyn HttpClient>, api_url: &str, model_name: &str, api_key: &str) -> Self {
++        Self {
++            http_client,
++            pending_request: None,
++            current_completion: None,
++            api_url: api_url.to_string(),
++            api_key: api_key.to_string(),
++            model_name: match model_name {
++                "" => "deepseek-chat".into(),
++                _ => model_name.to_string(),
++            },
++        }
++    }
++
++    async fn fetch_completion(
++        http_client: Arc<dyn HttpClient>,
++        api_key: &str,
++        prompt: String,
++        suffix: String,
++        model: String,
++        max_tokens: Option<u32>,
++        api_url: String,
++    ) -> Result<String> {
++        let body = serde_json::json!({
++            "model": model,
++            "prompt": prompt,
++            "suffix": if suffix.is_empty() { None } else { Some(suffix) },
++            "max_tokens": max_tokens.unwrap_or(350),
++            "temperature": 0.2,
++        });
++
++        let request = HttpRequest::builder()
++            .method(Method::POST)
++            .uri(format!("{}/completions", api_url))
++            .header("Content-Type", "application/json")
++            .header("Authorization", format!("Bearer {}", api_key))
++            .body(AsyncBody::from(body.to_string()))?;
++
++        let mut response = http_client.send(request).await?;
++        let mut body = String::new();
++        response.body_mut().read_to_string(&mut body).await?;
++
++        let data: Value = serde_json::from_str(&body)?;
++        let text = &data["choices"][0]["text"];
++        Ok(text.as_str().unwrap_or("").to_string())
++    }
++}
++
++impl EditPredictionDelegate for DeepseekEditPredictionProvider {
++    fn name() -> &'static str {
++        "deepseek"
++    }
++
++    fn display_name() -> &'static str {
++        "DeepSeek"
++    }
++
++    fn show_predictions_in_menu() -> bool {
++        true
++    }
++
++    fn is_refreshing(&self, _cx: &App) -> bool {
++        self.pending_request.is_some() && self.current_completion.is_none()
++    }
++
++    fn is_enabled(&self, _buffer: &Entity<Buffer>, _cursor_position: Anchor, _cx: &App) -> bool {
++        !self.api_key.is_empty()
++    }
++
++    fn refresh(
++        &mut self,
++        buffer: Entity<Buffer>,
++        cursor_position: language::Anchor,
++        debounce: bool,
++        cx: &mut Context<Self>,
++    ) {
++        let snapshot = buffer.read(cx).snapshot();
++
++        // Check if current completion is still valid
++        if let Some(current_completion) = self.current_completion.as_ref() {
++            if current_completion.interpolate(&snapshot).is_some() {
++                return;
++            }
++        }
++
++        let http_client = self.http_client.clone();
++        let api_key = self.api_key.clone();
++        let model = self.model_name.clone();
++        let api_url = self.api_url.clone();
++        let max_tokens = all_language_settings(None, cx)
++            .edit_predictions
++            .deepseek
++            .max_tokens;
++
++        self.pending_request = Some(cx.spawn(async move |this, cx| {
++            if debounce {
++                cx.background_executor().timer(DEBOUNCE_TIMEOUT).await;
++            }
++
++            let cursor_offset = cursor_position.to_offset(&snapshot);
++            let cursor_point = cursor_offset.to_point(&snapshot);
++            let excerpt = EditPredictionExcerpt::select_from_buffer(
++                cursor_point,
++                &snapshot,
++                &EXCERPT_OPTIONS,
++            )
++            .context("Line containing cursor doesn't fit in excerpt max bytes")?;
++
++            let excerpt_text = excerpt.text(&snapshot);
++            let cursor_within_excerpt = cursor_offset
++                .saturating_sub(excerpt.range.start)
++                .min(excerpt_text.body.len());
++            let prompt = excerpt_text.body[..cursor_within_excerpt].to_string();
++            let suffix = excerpt_text.body[cursor_within_excerpt..].to_string();
++
++            let completion_text = match Self::fetch_completion(
++                http_client,
++                &api_key,
++                prompt,
++                suffix,
++                model,
++                max_tokens,
++                api_url,
++            )
++            .await
++            {
++                Ok(text) => text,
++                Err(e) => {
++                    log::error!("DeepSeek: Failed to fetch completion: {}", e);
++                    this.update(cx, |this, cx| {
++                        this.pending_request = None;
++                        cx.notify();
++                    })?;
++                    return Err(e);
++                }
++            };
++
++            if completion_text.trim().is_empty() {
++                this.update(cx, |this, cx| {
++                    this.pending_request = None;
++                    cx.notify();
++                })?;
++                return Ok(());
++            }
++
++            let edits: Arc<[(Range<Anchor>, Arc<str>)]> =
++                vec![(cursor_position..cursor_position, completion_text.clone().into())].into();
++            let edit_preview = buffer
++                .read_with(cx, |buffer, cx| buffer.preview_edits(edits.clone(), cx))?
++                .await;
++
++            this.update(cx, |this, cx| {
++                this.current_completion = Some(CurrentCompletion {
++                    snapshot,
++                    edits,
++                    edit_preview,
++                });
++                this.pending_request = None;
++                cx.notify();
++            })?;
++
++            Ok(())
++        }));
++    }
++
++    fn accept(&mut self, _cx: &mut Context<Self>) {
++        self.pending_request = None;
++        self.current_completion = None;
++    }
++
++    fn discard(&mut self, _cx: &mut Context<Self>) {
++        self.pending_request = None;
++        self.current_completion = None;
++    }
++
++    fn suggest(
++        &mut self,
++        buffer: &Entity<Buffer>,
++        _cursor_position: Anchor,
++        cx: &mut Context<Self>,
++    ) -> Option<EditPrediction> {
++        let current_completion = self.current_completion.as_ref()?;
++        let buffer = buffer.read(cx);
++        let edits = current_completion.interpolate(&buffer.snapshot())?;
++        if edits.is_empty() {
++            return None;
++        }
++        Some(EditPrediction::Local {
++            id: None,
++            edits,
++            edit_preview: Some(current_completion.edit_preview.clone()),
++        })
++    }
++}
+diff --git a/crates/deepseek/src/lib.rs b/crates/deepseek/src/lib.rs
+new file mode 100644
+index 0000000000..3ecfe850d9
+--- /dev/null
++++ b/crates/deepseek/src/lib.rs
+@@ -0,0 +1,5 @@
++mod deepseek;
++mod edit_prediction_provider;
++
++pub use deepseek::*;
++pub use edit_prediction_provider::*;
+diff --git a/crates/edit_prediction_ui/Cargo.toml b/crates/edit_prediction_ui/Cargo.toml
+index 6c4bf735e7..388db65d50 100644
+--- a/crates/edit_prediction_ui/Cargo.toml
++++ b/crates/edit_prediction_ui/Cargo.toml
+@@ -31,6 +31,7 @@ futures.workspace = true
+ gpui.workspace = true
+ indoc.workspace = true
+ language.workspace = true
++language_model.workspace = true
+ markdown.workspace = true
+ menu.workspace = true
+ multi_buffer.workspace = true
+diff --git a/crates/edit_prediction_ui/src/edit_prediction_button.rs b/crates/edit_prediction_ui/src/edit_prediction_button.rs
+index ca9864753c..4afd721359 100644
+--- a/crates/edit_prediction_ui/src/edit_prediction_button.rs
++++ b/crates/edit_prediction_ui/src/edit_prediction_button.rs
+@@ -293,6 +293,55 @@ impl Render for EditPredictionButton {
+                         .with_handle(self.popover_menu_handle.clone()),
+                 )
+             }
++
++            EditPredictionProvider::Deepseek => {
++                let dscfg = &all_language_settings.edit_predictions.deepseek;
++                let usable = dscfg.api_url.is_some() && dscfg.api_key.is_some();
++                let this = cx.weak_entity();
++
++                let tooltip_meta = if usable {
++                    "Powered by Deepseek"
++                } else {
++                    "Missing API key for Deepseek"
++                };
++
++                div().child(
++                    PopoverMenu::new("deepseek")
++                        .menu(move |window, cx| {
++                            this.update(cx, |this, cx| {
++                                this.build_deepseek_context_menu(window, cx)
++                            })
++                            .ok()
++                        })
++                        .anchor(Corner::BottomRight)
++                        .trigger_with_tooltip(
++                            IconButton::new("deepseek-icon", IconName::AiDeepSeek)
++                                .shape(IconButtonShape::Square)
++                                .when(!usable, |this| {
++                                    this.indicator(Indicator::dot().color(Color::Error))
++                                        .indicator_border_color(Some(
++                                            cx.theme().colors().status_bar_background,
++                                        ))
++                                })
++                                .when(usable, |this| {
++                                    this.indicator(Indicator::dot().color(Color::Ignored))
++                                        .indicator_border_color(Some(
++                                            cx.theme().colors().status_bar_background,
++                                        ))
++                                }),
++                            move |_window, cx| {
++                                Tooltip::with_meta(
++                                    "Edit Prediction",
++                                    Some(&ToggleMenu),
++                                    tooltip_meta,
++                                    cx,
++                                )
++                            },
++                        )
++                        .with_handle(self.popover_menu_handle.clone()),
++                )
++            }
++
+             provider @ (EditPredictionProvider::Experimental(_) | EditPredictionProvider::Zed) => {
+                 let enabled = self.editor_enabled.unwrap_or(true);
+ 
+@@ -522,6 +571,7 @@ impl EditPredictionButton {
+         let mut providers = Vec::new();
+ 
+         providers.push(EditPredictionProvider::Zed);
++        providers.push(EditPredictionProvider::Deepseek);
+ 
+         if cx.has_flag::<Zeta2FeatureFlag>() {
+             providers.push(EditPredictionProvider::Experimental(
+@@ -595,6 +645,7 @@ impl EditPredictionButton {
+                     EditPredictionProvider::Copilot => "GitHub Copilot",
+                     EditPredictionProvider::Supermaven => "Supermaven",
+                     EditPredictionProvider::Codestral => "Codestral",
++                    EditPredictionProvider::Deepseek => "Deepseek",
+                     EditPredictionProvider::Experimental(
+                         EXPERIMENTAL_SWEEP_EDIT_PREDICTION_PROVIDER_NAME,
+                     ) => "Sweep",
+@@ -982,6 +1033,20 @@ impl EditPredictionButton {
+         })
+     }
+ 
++    fn build_deepseek_context_menu(
++        &self,
++        window: &mut Window,
++        cx: &mut Context<Self>,
++    ) -> Entity<ContextMenu> {
++        ContextMenu::build(window, cx, |menu, window, cx| {
++            let menu = self.build_language_settings_menu(menu, window, cx);
++            let menu =
++                self.add_provider_switching_section(menu, EditPredictionProvider::Deepseek, cx);
++
++            menu
++        })
++    }
++
+     fn build_edit_prediction_context_menu(
+         &self,
+         provider: EditPredictionProvider,
+diff --git a/crates/language/src/language_settings.rs b/crates/language/src/language_settings.rs
+index cd2219b18e..40ebe4e01d 100644
+--- a/crates/language/src/language_settings.rs
++++ b/crates/language/src/language_settings.rs
+@@ -389,6 +389,8 @@ pub struct EditPredictionSettings {
+     pub copilot: CopilotSettings,
+     /// Settings specific to Codestral.
+     pub codestral: CodestralSettings,
++    /// Settings specific to Deepseek.
++    pub deepseek: DeepseekSettings,
+     /// Whether edit predictions are enabled in the assistant panel.
+     /// This setting has no effect if globally disabled.
+     pub enabled_in_text_threads: bool,
+@@ -435,6 +437,14 @@ pub struct CodestralSettings {
+     pub api_url: Option<String>,
+ }
+ 
++#[derive(Clone, Debug, Default)]
++pub struct DeepseekSettings {
++    pub model: Option<String>,
++    pub max_tokens: Option<u32>,
++    pub api_url: Option<String>,
++    pub api_key: Option<String>,
++}
++
+ impl AllLanguageSettings {
+     /// Returns the [`LanguageSettings`] for the language with the specified name.
+     pub fn language<'a>(
+@@ -661,6 +671,14 @@ impl settings::Settings for AllLanguageSettings {
+             api_url: codestral.api_url,
+         };
+ 
++        let deepseek = edit_predictions.deepseek.unwrap_or_default();
++        let deepseek_settings = DeepseekSettings {
++            model: deepseek.model,
++            max_tokens: deepseek.max_tokens,
++            api_url: deepseek.api_url,
++            api_key: deepseek.api_key,
++        };
++
+         let enabled_in_text_threads = edit_predictions.enabled_in_text_threads.unwrap();
+ 
+         let mut file_types: FxHashMap<Arc<str>, (GlobSet, Vec<String>)> = FxHashMap::default();
+@@ -699,6 +717,7 @@ impl settings::Settings for AllLanguageSettings {
+                 mode: edit_predictions_mode,
+                 copilot: copilot_settings,
+                 codestral: codestral_settings,
++                deepseek: deepseek_settings,
+                 enabled_in_text_threads,
+                 examples_dir: edit_predictions.examples_dir,
+             },
+diff --git a/crates/language_model/src/language_model.rs b/crates/language_model/src/language_model.rs
+index 56a9704044..78ba40323e 100644
+--- a/crates/language_model/src/language_model.rs
++++ b/crates/language_model/src/language_model.rs
+@@ -46,6 +46,9 @@ pub const ANTHROPIC_PROVIDER_ID: LanguageModelProviderId =
+ pub const ANTHROPIC_PROVIDER_NAME: LanguageModelProviderName =
+     LanguageModelProviderName::new("Anthropic");
+ 
++pub const DEEPSEEK_PROVIDER_ID: LanguageModelProviderId = LanguageModelProviderId::new("deepseek");
++pub const DEEPSEEK_PROVIDER_NAME: LanguageModelProviderName = LanguageModelProviderName::new("DeepSeek");
++
+ pub const GOOGLE_PROVIDER_ID: LanguageModelProviderId = LanguageModelProviderId::new("google");
+ pub const GOOGLE_PROVIDER_NAME: LanguageModelProviderName =
+     LanguageModelProviderName::new("Google AI");
+diff --git a/crates/settings/src/settings_content/language.rs b/crates/settings/src/settings_content/language.rs
+index 47e6da5d7b..0694219dd0 100644
+--- a/crates/settings/src/settings_content/language.rs
++++ b/crates/settings/src/settings_content/language.rs
+@@ -76,6 +76,7 @@ pub enum EditPredictionProvider {
+     Supermaven,
+     Zed,
+     Codestral,
++    Deepseek,
+     Experimental(&'static str),
+ }
+ 
+@@ -96,6 +97,7 @@ impl<'de> Deserialize<'de> for EditPredictionProvider {
+             Supermaven,
+             Zed,
+             Codestral,
++            Deepseek,
+             Experimental(String),
+         }
+ 
+@@ -105,6 +107,7 @@ impl<'de> Deserialize<'de> for EditPredictionProvider {
+             Content::Supermaven => EditPredictionProvider::Supermaven,
+             Content::Zed => EditPredictionProvider::Zed,
+             Content::Codestral => EditPredictionProvider::Codestral,
++            Content::Deepseek => EditPredictionProvider::Deepseek,
+             Content::Experimental(name)
+                 if name == EXPERIMENTAL_SWEEP_EDIT_PREDICTION_PROVIDER_NAME =>
+             {
+@@ -144,6 +147,7 @@ impl EditPredictionProvider {
+             | EditPredictionProvider::Copilot
+             | EditPredictionProvider::Supermaven
+             | EditPredictionProvider::Codestral
++            | EditPredictionProvider::Deepseek
+             | EditPredictionProvider::Experimental(_) => false,
+         }
+     }
+@@ -164,6 +168,8 @@ pub struct EditPredictionSettingsContent {
+     pub copilot: Option<CopilotSettingsContent>,
+     /// Settings specific to Codestral.
+     pub codestral: Option<CodestralSettingsContent>,
++    /// Settings specific to Deepseek.
++    pub deepseek: Option<DeepseekSettingsContent>,
+     /// Whether edit predictions are enabled in the assistant prompt editor.
+     /// This has no effect if globally disabled.
+     pub enabled_in_text_threads: Option<bool>,
+@@ -205,6 +211,15 @@ pub struct CodestralSettingsContent {
+     pub api_url: Option<String>,
+ }
+ 
++#[with_fallible_options]
++#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, MergeFrom, PartialEq)]
++pub struct DeepseekSettingsContent {
++    pub model: Option<String>,
++    pub max_tokens: Option<u32>,
++    pub api_url: Option<String>,
++    pub api_key: Option<String>,
++}
++
+ /// The mode in which edit predictions should be displayed.
+ #[derive(
+     Copy,
+diff --git a/crates/zed/Cargo.toml b/crates/zed/Cargo.toml
+index 687b048d9c..e2e97f826a 100644
+--- a/crates/zed/Cargo.toml
++++ b/crates/zed/Cargo.toml
+@@ -47,6 +47,7 @@ crashes.workspace = true
+ dap_adapters.workspace = true
+ db.workspace = true
+ debug_adapter_extension.workspace = true
++deepseek.workspace = true
+ debugger_tools.workspace = true
+ debugger_ui.workspace = true
+ diagnostics.workspace = true
+diff --git a/crates/zed/src/zed/edit_prediction_registry.rs b/crates/zed/src/zed/edit_prediction_registry.rs
+index 51327bfc9a..2aaee3da16 100644
+--- a/crates/zed/src/zed/edit_prediction_registry.rs
++++ b/crates/zed/src/zed/edit_prediction_registry.rs
+@@ -2,6 +2,7 @@ use client::{Client, UserStore};
+ use codestral::CodestralEditPredictionDelegate;
+ use collections::HashMap;
+ use copilot::{Copilot, CopilotEditPredictionDelegate};
++use deepseek::DeepseekEditPredictionProvider;
+ use edit_prediction::{SweepFeatureFlag, ZedEditPredictionDelegate, Zeta2FeatureFlag};
+ use editor::Editor;
+ use feature_flags::FeatureFlagAppExt;
+@@ -186,6 +187,15 @@ fn assign_edit_prediction_provider(
+             let provider = cx.new(|_| CodestralEditPredictionDelegate::new(http_client));
+             editor.set_edit_prediction_provider(Some(provider), window, cx);
+         }
++        EditPredictionProvider::Deepseek => {
++          let dscfg = &all_language_settings(None, cx).edit_predictions.deepseek;
++          if let Some((api_url, api_key)) = dscfg.api_url.clone().map(|x| (x, dscfg.api_key.clone().unwrap_or("".into()))) {
++            let model_name = dscfg.model.clone().unwrap_or("".into());
++            let http_client = client.http_client();
++            let provider = cx.new(|_| DeepseekEditPredictionProvider::new(http_client, api_url.as_str(), model_name.as_str(), api_key.as_str()));
++            editor.set_edit_prediction_provider(Some(provider), window, cx);
++          }
++        }
+         value @ (EditPredictionProvider::Experimental(_) | EditPredictionProvider::Zed) => {
+             let ep_store = edit_prediction::EditPredictionStore::global(client, &user_store, cx);
+ 

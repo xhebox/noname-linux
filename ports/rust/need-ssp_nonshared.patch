@@ -6,16 +6,17 @@ diff --git a/library/std/src/sys/unix/mod.rs b/library/std/src/sys/unix/mod.rs
 index 68c9520..63f8a48 100644
 --- a/library/std/src/sys/pal/unix/mod.rs
 +++ b/library/std/src/sys/pal/unix/mod.rs
-@@ -374,6 +374,9 @@
-         #[link(name = "dl", cfg(not(target_feature = "crt-static")))]
-         #[link(name = "log", cfg(not(target_feature = "crt-static")))]
+@@ -422,6 +422,10 @@
+         #[link(name = "dl")]
          unsafe extern "C" {}
-+    } else if #[cfg(all(target_os = "linux", target_env = "musl"))] {
+     }
++    all(target_os = "linux", target_env = "musl") => {
 +        #[link(name = "ssp_nonshared", kind = "static")]
 +        unsafe extern "C" {}
-     } else if #[cfg(target_os = "freebsd")] {
-         #[link(name = "execinfo")]
-         #[link(name = "pthread")]
++    }
+     target_os = "vita" => {
+         #[link(name = "pthread", kind = "static", modifiers = "-bundle")]
+         unsafe extern "C" {}
 --- a/compiler/rustc_llvm/build.rs
 +++ b/compiler/rustc_llvm/build.rs
 @@ -111,6 +111,8 @@

@@ -1,0 +1,35 @@
+version="0.217.3"
+makedeps=["fontconfig", "libxkbcommon", "sqlite", "openssl", "zlib", "zstd", "curl", "wayland-protocols", "vulkan-headers"]
+deps=["fontconfig", "libxkbcommon", "sqlite", "openssl", "zlib", "zstd", "curl", "wayland", "vulkan"]
+desc="A high-performance, multiplayer code editor from the creators of Atom and Tree-sitte"
+source=[
+	{url="https://github.com/zed-industries/zed/archive/refs/tags/v$version.tar.gz"},
+	{url="noname.patch"},
+]
+
+build='''
+	appid=dev.zed.Zed
+	export CARGO_HOME="$srcdir/.cargo"
+	export PATH="$srcdir/.cargo/bin:$PATH"
+	mkdir -p $CARGO_HOME
+	cat >> $CARGO_HOME/config.toml << EOF
+[target.'cfg(target_os = "linux")']
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+EOF
+
+	cd zed-$version
+	patch -Np1 -i "$srcdir/noname.patch"
+	sed \
+		-e 's;$DO_STARTUP_NOTIFY;true;g' \
+	  -e 's;$APP_ICON;zed;g' \
+	  -e 's;$APP_NAME;Zed;g' \
+	  -e 's;$APP_CLI;zed;g' \
+	  -e "s;$APP_ID;${appid};g" \
+	  -e 's;$APP_ARGS;%U;g' \
+	crates/zed/resources/zed.desktop.in > $appid.desktop
+	cargo build --release -j8
+	install -Dm0755 target/release/zed "$pkgdir"/bin/zed
+	strip "$pkgdir"/bin/zed
+	install -Dm0644 -t "$pkgdir/share/applications/" "$appid.desktop"
+	install -Dm0644 crates/zed/resources/app-icon.png "$pkgdir/usr/share/icons/zed.png"
+'''

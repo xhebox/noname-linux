@@ -1,0 +1,24 @@
+desc="Text-based web browser."
+version="2.9.2"
+makedeps=["ncurses", "openssl", "zlib"]
+deps=["ncurses", "openssl", "zlib"]
+source=[
+	{url="https://invisible-mirror.net/archives/lynx/tarballs/lynx${version}.tar.bz2"},
+]
+
+build='''
+	cd lynx$version
+	./configure \
+		--prefix= \
+		--enable-color-style \
+		--enable-ipv6 \
+		--with-ssl=/lib \
+		--without-libidn \
+		--with-zlib
+
+	make
+	make -j1 DESTDIR=$pkgdir install
+	sed -i -e "s|^HELPFILE.*$|HELPFILE:file:///share/doc/lynx/lynx_help/lynx_help_main.html|" ${pkgdir}/etc/lynx.cfg
+	install -d ${pkgdir}/share/doc/lynx
+	cp -rf lynx_help ${pkgdir}/share/doc/lynx
+'''

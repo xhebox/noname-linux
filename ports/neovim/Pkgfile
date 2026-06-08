@@ -1,17 +1,13 @@
-version="0.11.0"
+version="2026-01-08"
 desc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 makedeps=["libuv", "gperf", "cmake"]
 deps=["libuv"]
 source=[
-        {url="https://github.com/neovim/neovim/archive/refs/tags/v$version.tar.gz"},
+        {name="v$version.tar.gz", url="https://github.com/neovim/neovim/archive/refs/tags/nightly.tar.gz"},
 ]
 
-ext='''
-	cd neovim-${version}
-'''
-
 build='''
-	cd neovim-${version}
+	cd neovim*
 	sed -i 's/LUA_USE_APICHECK/& LIBS=-lunwind TARGET_LIBS=-lunwind/g' cmake.deps/cmake/BuildLuajit.cmake
   sed -i 's/INTERFACE -fstack-protector/INTERFACE -lunwind -fstack-protector/g' src/nvim/CMakeLists.txt
 	noname-cmake -Hcmake.deps -B.deps -DUSE_BUNDLED=ON -DUSE_BUNDLED_LIBUV=OFF
